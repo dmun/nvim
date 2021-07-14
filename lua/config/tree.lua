@@ -10,3 +10,27 @@ vim.g.nvim_tree_bindings = {
 	{ key = "h", cb = tree_cb("close_node") },
 	{ key = "<CR>", cb = tree_cb("cd") },
 }
+
+local tree = {}
+local view_status_ok, view = pcall(require, "nvim-tree.view")
+if not view_status_ok then
+  return
+end
+tree.toggle_tree = function()
+  if view.win_open() then
+    require("nvim-tree").close()
+    if package.loaded["bufferline.state"] then
+      require("bufferline.state").set_offset(0)
+    end
+  else
+    if package.loaded["bufferline.state"] then
+      -- require'bufferline.state'.set_offset(31, 'File Explorer')
+      require("bufferline.state").set_offset(31, "")
+    end
+    require("nvim-tree").find_file(true)
+  end
+end
+
+vim.cmd [[nnoremap <silent><leader>e :lua require'config.tree'.toggle_tree()<CR>]]
+
+return tree

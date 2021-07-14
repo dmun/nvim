@@ -20,7 +20,7 @@ return require('packer').startup(
 	--	Appearance
 		use 'kyazdani42/nvim-web-devicons'
 		use { 'glepnir/galaxyline.nvim', branch = 'main' }
-		use 'akinsho/nvim-bufferline.lua'
+		use 'romgrk/barbar.nvim'
 
 	--	Misc
 		use 'folke/which-key.nvim'

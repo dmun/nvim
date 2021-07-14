@@ -1,5 +1,5 @@
 vim.cmd('source $HOME/.config/nvim/lua/config/coc.vim')
-require('config.bufferline')
+require('config.barbar')
 require('config.colorizer')
 require('config.galaxyline')
 require('config.gitgutter')
