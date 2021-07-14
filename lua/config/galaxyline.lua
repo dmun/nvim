@@ -70,8 +70,8 @@ gls.left[3] = {
 
 gls.left[5] = {
 	FileName = {
-		-- provider = 'FileName',
-		provider = current_file_name_provider,
+		provider = 'FileName',
+		-- provider = current_file_name_provider,
 		separator = ' ',
 		separator_highlight = {'NONE',colors.bg},
 		condition = condition.buffer_not_empty,
@@ -190,25 +190,53 @@ gls.right[9] = {
 	},
 }
 
+-- gls.short_line_left[1] = {
+-- 	RainbowRed = {
+-- 		provider = function() return ' ' end,
+-- 		highlight = {colors.blue,colors.bg}
+-- 	},
+-- }
+-- gls.short_line_left[2] = {
+-- 	BufferType = {
+-- 		provider = 'FileTypeName',
+-- 		separator = ' ',
+-- 		separator_highlight = {'NONE',colors.bg},
+-- 		highlight = {colors.blue,colors.bg,'bold'}
+-- 	}
+-- }
+--
+-- gls.short_line_left[3] = {
+-- 	SFileName = {
+-- 		provider = 'SFileName',
+-- 		condition = condition.buffer_not_empty,
+-- 		highlight = {colors.fg,colors.bg,'bold'}
+-- 	}
+-- }
+
 gls.short_line_left[1] = {
-	RainbowRed = {
-		provider = function() return ' ' end,
-		highlight = {colors.blue,colors.bg}
+	ViModeInactive = {
+		provider = function() return '▊ ' end,
+		highlight = {'#696969',colors.bg,'bold'},
 	},
 }
+
 gls.short_line_left[2] = {
-	BufferType = {
-		provider = 'FileTypeName',
+	FileSizeInactive = {
+		provider = 'FileSize',
 		separator = ' ',
 		separator_highlight = {'NONE',colors.bg},
-		highlight = {colors.blue,colors.bg,'bold'}
+		condition = condition.buffer_not_empty,
+		highlight = {'#696969',colors.bg}
 	}
 }
 
 gls.short_line_left[3] = {
-	SFileName = {
-		provider = 'SFileName',
+	FileNameInactive = {
+		provider = 'FileName',
+		-- provider = current_file_name_provider,
+		separator = ' ',
+		separator_highlight = {'NONE',colors.bg},
 		condition = condition.buffer_not_empty,
-		highlight = {colors.fg,colors.bg,'bold'}
+		highlight = {'#696969',colors.bg,'bold'}
 	}
 }
