@@ -1,4 +1,5 @@
 vim.cmd('source $HOME/.config/nvim/lua/config/coc.vim')
+vim.cmd('source $HOME/.config/nvim/lua/config/startify.vim')
 require('config.barbar')
 require('config.colorizer')
 require('config.galaxyline')
