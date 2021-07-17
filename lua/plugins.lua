@@ -1,6 +1,6 @@
 vim.cmd('packadd packer.nvim')
 
-return require('packer').startup(
+return require('packer').startup({
 	function ()
 		use 'wbthomason/packer.nvim'
 
@@ -23,6 +23,7 @@ return require('packer').startup(
 		use 'romgrk/barbar.nvim'
 
 	--	Misc
+		use 'folke/zen-mode.nvim'
 		use 'folke/which-key.nvim'
 		use 'kyazdani42/nvim-tree.lua'
 		use 'mhinz/vim-startify'
@@ -31,5 +32,12 @@ return require('packer').startup(
 		use 'nvim-lua/popup.nvim'
 		use 'nvim-lua/plenary.nvim'
 		use 'nvim-telescope/telescope.nvim'
-	end
-)
+	end,
+	config = {
+		display = {
+			open_fn = function ()
+				return require('packer.util').float({ border = 'single' })
+			end
+		}
+	}
+})
