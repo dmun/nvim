@@ -1,1 +1,1 @@
-vim.cmd('nnoremap <silent> <leader>lg :LazyGit<CR>')
+map('n', '<leader>lg', ':LazyGit<CR>', { silent = true })

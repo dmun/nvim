@@ -1,8 +1,7 @@
-vim.cmd [[
-nnoremap <silent><leader>e :NvimTreeToggle<CR>
-let g:nvim_tree_highlight_opened_files = 1
-let g:nvim_tree_hide_dotfiles = 1
-]]
+map('n', '<leader>e', [[:lua require'config.tree'.toggle_tree()<CR>]], { silent = true })
+
+vim.g.nvim_tree_highlight_opened_files = 1
+vim.g.nvim_tree_hide_dotfiles = 1
 
 local tree_cb = require'nvim-tree.config'.nvim_tree_callback
 vim.g.nvim_tree_bindings = {
@@ -30,7 +29,5 @@ tree.toggle_tree = function()
     require("nvim-tree").find_file(true)
   end
 end
-
-vim.cmd [[nnoremap <silent><leader>e :lua require'config.tree'.toggle_tree()<CR>]]
 
 return tree
