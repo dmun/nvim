@@ -33,9 +33,10 @@ require("which-key").setup {
 }
 
 require('which-key').register({
-	e = { name = 'Tree' },
-	f = { name = 'Telescope' },
-	h = { name = 'GitGutter Hunk' },
+	e = { name = 'Explorer' },
+	f = { name = 'Finder' },
+	h = { name = 'Hunk (GitGutter)' },
 	l = { name = 'LazyGit' },
+	t = { name = 'Terminal' },
 	p = { name = 'Packer' }
 }, { prefix = '<leader>' })

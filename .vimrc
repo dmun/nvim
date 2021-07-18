@@ -30,8 +30,8 @@ noremap <silent><M-s> <C-w>s
 noremap <silent><M-q> <C-w>q
 
 " Navigating windows
-nnoremap <silent><M-j> <C-w>w
-nnoremap <silent><M-k> <C-w>W
+nnoremap <silent><M-j> <C-w>j
+nnoremap <silent><M-k> <C-w>k
 nnoremap <silent><M-h> <C-w>h
 nnoremap <silent><M-l> <C-w>l
 
@@ -47,3 +47,6 @@ nnoremap <silent><M-C-j> :resize +3<CR>
 nnoremap <silent><M-C-k> :resize -3<CR>
 nnoremap <silent><M-C-h> :vertical resize -5<CR>
 nnoremap <silent><M-C-l> :vertical resize +5<CR>
+
+" Open terminal
+nnoremap <silent><leader>t :exec 'term' \| setlocal nonu nornu <CR>
