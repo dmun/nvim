@@ -35,6 +35,11 @@ nnoremap <silent><M-k> <C-w>k
 nnoremap <silent><M-h> <C-w>h
 nnoremap <silent><M-l> <C-w>l
 
+tnoremap <silent><M-j> <C-\><C-n><C-w>j
+tnoremap <silent><M-k> <C-\><C-n><C-w>k
+tnoremap <silent><M-h> <C-\><C-n><C-w>h
+tnoremap <silent><M-l> <C-\><C-n><C-w>l
+
 " Moving windows
 nnoremap <silent><M-r> <C-w>r
 nnoremap <silent><M-J> <C-w>J
