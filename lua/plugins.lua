@@ -7,7 +7,7 @@ return require('packer').startup({
 	--	Colors
 		use 'dmun/nvcode-color-schemes.vim'
 		use 'norcalli/nvim-colorizer.lua'
-		use 'dmun/doom-one.nvim'
+		use { 'dmun/doom-one.nvim', branch = 'personal' }
 
 	--	Git
 		use 'airblade/vim-gitgutter'
