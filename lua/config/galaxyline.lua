@@ -4,8 +4,20 @@ local condition = require('galaxyline.condition')
 local gls = gl.section
 gl.short_line_list = {'NvimTree','vista','dbui','packer'}
 
-colors.fg = '#d4d4d4'
-colors.bg = '#2d2d2d'
+--colors.fg = '#d4d4d4'
+--colors.bg = '#2d2d2d'
+
+colors.fg = '#BBC2CF'
+colors.bg = '#21242B'
+colors.fg_inactive = '#5B6268'
+
+colors.red = '#ff6c6b'
+colors.orange = '#da8548'
+colors.green = '#98be65'
+colors.yellow = '#ECBE7B'
+colors.blue = '#51afef'
+colors.dark_blue = '#2257A0'
+colors.magenta = '#c678dd'
 
 local get_filename = function()
 	return vim.fn.expand("%:h:t") .. "/" .. vim.fn.expand("%:t")
@@ -84,7 +96,7 @@ gls.left[6] = {
 		provider = 'LineColumn',
 		separator = ' ',
 		separator_highlight = {'NONE',colors.bg},
-		highlight = {'#696969',colors.bg},
+		highlight = {colors.fg_inactive,colors.bg},
 	},
 }
 
@@ -93,7 +105,7 @@ gls.left[7] = {
 		provider = 'LinePercent',
 		separator = ' ',
 		separator_highlight = {'NONE',colors.bg},
-		highlight = {'#696969',colors.bg,'bold'},
+		highlight = {colors.fg_inactive,colors.bg,'bold'},
 	}
 }
 
@@ -142,7 +154,7 @@ gls.right[1] = {
 		condition = condition.hide_in_width,
 		separator = ' ',
 		separator_highlight = {'NONE',colors.bg},
-		highlight = {'#696969',colors.bg}
+		highlight = {colors.fg_inactive,colors.bg}
 	}
 }
 
@@ -152,7 +164,7 @@ gls.right[2] = {
 		condition = condition.hide_in_width,
 		separator = ' ',
 		separator_highlight = {'NONE',colors.bg},
-		highlight = {'#696969',colors.bg}
+		highlight = {colors.fg_inactive,colors.bg}
 	}
 }
 
@@ -162,7 +174,7 @@ gls.right[3] = {
 		condition = condition.check_git_workspace,
 		separator = ' ',
 		separator_highlight = {'NONE',colors.bg},
-		highlight = {'#92BD64',colors.bg},
+		highlight = {colors.green,colors.bg},
 	}
 }
 
@@ -170,7 +182,7 @@ gls.right[4] = {
 	GitBranch = {
 		provider = 'GitBranch',
 		condition = condition.check_git_workspace,
-		highlight = {'#92BD64',colors.bg},
+		highlight = {colors.green,colors.bg},
 	}
 }
 
@@ -216,7 +228,7 @@ gls.right[9] = {
 gls.short_line_left[1] = {
 	ViModeInactive = {
 		provider = function() return '▊ ' end,
-		highlight = {'#696969',colors.bg,'bold'},
+		highlight = {colors.fg_inactive,colors.bg,'bold'},
 	},
 }
 
@@ -226,7 +238,7 @@ gls.short_line_left[2] = {
 		separator = ' ',
 		separator_highlight = {'NONE',colors.bg},
 		condition = condition.buffer_not_empty,
-		highlight = {'#696969',colors.bg}
+		highlight = {colors.fg_inactive,colors.bg}
 	}
 }
 
@@ -237,6 +249,6 @@ gls.short_line_left[3] = {
 		separator = ' ',
 		separator_highlight = {'NONE',colors.bg},
 		condition = condition.buffer_not_empty,
-		highlight = {'#696969',colors.bg,'bold'}
+		highlight = {colors.fg_inactive,colors.bg,'bold'}
 	}
 }
