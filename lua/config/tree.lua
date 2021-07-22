@@ -3,6 +3,18 @@ map('n', '<leader>e', [[:lua require'config.tree'.toggle_tree()<CR>]], { silent 
 vim.g.nvim_tree_highlight_opened_files = 1
 vim.g.nvim_tree_hide_dotfiles = 1
 
+vim.g.nvim_tree_icons = {
+    default = '',
+    git = {
+      unstaged = '',
+      staged = '',
+      unmerged = '',
+      renamed = '',
+      untracked = '',
+      deleted = '',
+    },
+}
+
 local tree_cb = require'nvim-tree.config'.nvim_tree_callback
 vim.g.nvim_tree_bindings = {
 	{ key = "l", cb = tree_cb("edit") },
