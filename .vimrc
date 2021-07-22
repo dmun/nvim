@@ -12,11 +12,12 @@ set cursorline
 set showtabline=2
 
 set guifont=monospace,Symbols\ Nerd\ Font:h19
+set fillchars+=vert:▕
 
 " Color settings
 syntax on
 set termguicolors
-colorscheme nvcode
+colorscheme doom-one
 set background=dark
 
 " Navigating buffers
@@ -54,4 +55,4 @@ nnoremap <silent><M-C-h> :vertical resize -5<CR>
 nnoremap <silent><M-C-l> :vertical resize +5<CR>
 
 " Open terminal
-nnoremap <silent><leader>t :exec 'term' \| setlocal nonu nornu <CR>
+nnoremap <silent><leader>t :exec 'term' \| setlocal nonu nornu \| setlocal nocul<CR>
