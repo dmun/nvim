@@ -51,6 +51,13 @@ local current_file_name_provider = function()
 	return file .. " "
 end
 
+gls.left[1] = {
+	LineActive = {
+		provider = function() return '▍ ' end,
+		highlight = {colors.blue,colors.bg,'bold'},
+	},
+}
+
 gls.left[2] = {
 	ViMode = {
 		provider = function()
@@ -64,8 +71,9 @@ gls.left[2] = {
 				rm = colors.cyan, ['r?'] = colors.cyan,
 				['!'] = colors.red,t = colors.red}
 			vim.api.nvim_command('hi GalaxyViMode guifg='..mode_color[vim.fn.mode()])
-			return '▊ '
+			return '●  '
 		end,
+		condition = condition.buffer_not_empty,
 		highlight = {colors.red,colors.bg,'bold'},
 	},
 }
@@ -93,7 +101,12 @@ gls.left[5] = {
 
 gls.left[6] = {
 	LineInfo = {
-		provider = 'LineColumn',
+		provider = function ()
+			local line = vim.fn.line('.')
+			local column = vim.fn.col('.')
+			return line .. ':' .. column
+		end,
+		condition = condition.buffer_not_empty,
 		separator = ' ',
 		separator_highlight = {'NONE',colors.bg},
 		highlight = {colors.fg_inactive,colors.bg},
@@ -105,7 +118,7 @@ gls.left[7] = {
 		provider = 'LinePercent',
 		separator = ' ',
 		separator_highlight = {'NONE',colors.bg},
-		highlight = {colors.fg_inactive,colors.bg,'bold'},
+		highlight = {colors.fg_inactive,colors.bg},
 	}
 }
 
@@ -171,7 +184,7 @@ gls.right[2] = {
 gls.right[3] = {
 	GitIcon = {
 		provider = function() return '  ' end,
-		condition = condition.check_git_workspace,
+		condition = condition.check_git_workspace and condition.hide_in_width,
 		separator = ' ',
 		separator_highlight = {'NONE',colors.bg},
 		highlight = {colors.green,colors.bg},
@@ -181,7 +194,7 @@ gls.right[3] = {
 gls.right[4] = {
 	GitBranch = {
 		provider = 'GitBranch',
-		condition = condition.check_git_workspace,
+		condition = condition.check_git_workspace and condition.hide_in_width,
 		highlight = {colors.green,colors.bg},
 	}
 }
@@ -191,64 +204,63 @@ gls.right[8] = {
 		provider = 'FileTypeName',
 		separator = ' ',
 		separator_highlight = {'NONE',colors.bg},
+		condition = condition.buffer_not_empty and condition.hide_in_width,
 		highlight = {colors.fg,colors.bg,'bold'}
 	}
 }
 
 gls.right[9] = {
-	RainbowRed = {
+	WhiteSpace = {
 		provider = function() return ' ' end,
+		condition = condition.buffer_not_empty and condition.hide_in_width,
 		highlight = {colors.blue,colors.bg}
 	},
 }
 
--- gls.short_line_left[1] = {
--- 	RainbowRed = {
--- 		provider = function() return ' ' end,
--- 		highlight = {colors.blue,colors.bg}
--- 	},
--- }
--- gls.short_line_left[2] = {
--- 	BufferType = {
--- 		provider = 'FileTypeName',
--- 		separator = ' ',
--- 		separator_highlight = {'NONE',colors.bg},
--- 		highlight = {colors.blue,colors.bg,'bold'}
--- 	}
--- }
---
--- gls.short_line_left[3] = {
--- 	SFileName = {
--- 		provider = 'SFileName',
--- 		condition = condition.buffer_not_empty,
--- 		highlight = {colors.fg,colors.bg,'bold'}
--- 	}
--- }
+function condition.buffer_types()
+	local types = { 'NvimTree', 'startify' }
+	for _,v in ipairs(types) do
+		if vim.bo.filetype == v then
+			return false
+		end
+	end
+
+	return true
+end
 
 gls.short_line_left[1] = {
-	ViModeInactive = {
-		provider = function() return '▊ ' end,
+	LineInactive = {
+		provider = function() return '▍ ' end,
+		condition = condition.buffer_types,
 		highlight = {colors.fg_inactive,colors.bg,'bold'},
 	},
 }
 
 gls.short_line_left[2] = {
+	ViModeInactive = {
+		provider = function() return '●  ' end,
+		condition = condition.buffer_types,
+		highlight = {colors.fg_inactive,colors.bg,'bold'},
+	},
+}
+
+gls.short_line_left[3] = {
 	FileSizeInactive = {
 		provider = 'FileSize',
 		separator = ' ',
 		separator_highlight = {'NONE',colors.bg},
-		condition = condition.buffer_not_empty,
+		condition = condition.buffer_types,
 		highlight = {colors.fg_inactive,colors.bg}
 	}
 }
 
-gls.short_line_left[3] = {
+gls.short_line_left[4] = {
 	FileNameInactive = {
 		provider = 'FileName',
 		-- provider = current_file_name_provider,
 		separator = ' ',
 		separator_highlight = {'NONE',colors.bg},
-		condition = condition.buffer_not_empty,
-		highlight = {colors.fg_inactive,colors.bg,'bold'}
+		condition = condition.buffer_types,
+		highlight = {colors.fg_inactive,colors.bg}
 	}
 }

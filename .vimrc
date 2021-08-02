@@ -10,7 +10,8 @@ set relativenumber
 set nowrap
 set cursorline
 set showtabline=2
-set so=5
+set scrolloff=5
+set noshowmode
 
 set guifont=monospace,Symbols\ Nerd\ Font:h19
 set fillchars+=vert:▕
