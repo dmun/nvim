@@ -18,9 +18,9 @@ require("which-key").setup {
 		group = "+",
 	},
 	window = {
-		border = "single", -- none, single, double, shadow
+		border = "none", -- none, single, double, shadow
 		position = "bottom",
-		margin = { 1, 1, 1, 1 },
+		margin = { 0, 0, 1, 0 },
 		padding = { 2, 2, 2, 2 },
 	},
 	layout = {
