@@ -17,6 +17,8 @@ return require('packer').startup({
 		use 'neoclide/coc.nvim' --, {'branch': 'release'}
 		use 'nvim-treesitter/nvim-treesitter'
 		use 'tpope/vim-surround'
+		use 'kyazdani42/nvim-tree.lua'
+		use 'nvim-telescope/telescope.nvim'
 
 	--	Appearance
 		use 'kyazdani42/nvim-web-devicons'
@@ -26,13 +28,11 @@ return require('packer').startup({
 	--	Misc
 		use 'folke/zen-mode.nvim'
 		use 'folke/which-key.nvim'
-		use 'kyazdani42/nvim-tree.lua'
 		use 'mhinz/vim-startify'
 		use 'airblade/vim-rooter'
 		use 'iamcco/markdown-preview.nvim' --, { 'do': 'cd app && yarn install'  }
 		use 'nvim-lua/popup.nvim'
 		use 'nvim-lua/plenary.nvim'
-		use 'nvim-telescope/telescope.nvim'
 	end,
 	config = {
 		display = {
