@@ -19,38 +19,6 @@ colors.blue = '#51afef'
 colors.dark_blue = '#2257A0'
 colors.magenta = '#c678dd'
 
-local get_filename = function()
-	return vim.fn.expand("%:h:t") .. "/" .. vim.fn.expand("%:t")
-end
-
-local file_readonly = function(readonly_icon)
-	if vim.bo.filetype == "help" then
-		return ""
-	end
-	local icon = readonly_icon or ""
-	if vim.bo.readonly == true then
-		return " " .. icon .. " "
-	end
-	return ""
-end
-
-local current_file_name_provider = function()
-	local file = get_filename()
-	if vim.fn.empty(file) == 1 then
-		return ""
-	end
-	if string.len(file_readonly()) ~= 0 then
-		return file .. file_readonly()
-	end
-	local icon = ""
-	if vim.bo.modifiable then
-		if vim.bo.modified then
-			return file .. " " .. icon .. " "
-		end
-	end
-	return file .. " "
-end
-
 gls.left[1] = {
 	LineActive = {
 		provider = function() return '▍ ' end,
@@ -71,21 +39,11 @@ gls.left[2] = {
 				rm = colors.cyan, ['r?'] = colors.cyan,
 				['!'] = colors.red,t = colors.red}
 			vim.api.nvim_command('hi GalaxyViMode guifg='..mode_color[vim.fn.mode()])
-			return '●  '
+			return '   '
 		end,
 		condition = condition.buffer_not_empty,
 		highlight = {colors.red,colors.bg,'bold'},
 	},
-}
-
-gls.left[3] = {
-	FileSize = {
-		provider = 'FileSize',
-		separator = ' ',
-		separator_highlight = {'NONE',colors.bg},
-		condition = condition.buffer_not_empty,
-		highlight = {colors.fg,colors.bg}
-	}
 }
 
 gls.left[5] = {
@@ -119,45 +77,6 @@ gls.left[7] = {
 		separator = ' ',
 		separator_highlight = {'NONE',colors.bg},
 		highlight = {colors.fg_inactive,colors.bg},
-	}
-}
-
-gls.left[8] = {
-	DiagnosticError = {
-		provider = 'DiagnosticError',
-		icon = '  ',
-		separator = ' ',
-		separator_highlight = {'NONE',colors.bg},
-		highlight = {colors.red,colors.bg}
-	}
-}
-gls.left[9] = {
-	DiagnosticWarn = {
-		provider = 'DiagnosticWarn',
-		icon = '  ',
-		separator = ' ',
-		separator_highlight = {'NONE',colors.bg},
-		highlight = {colors.yellow,colors.bg},
-	}
-}
-
-gls.left[10] = {
-	DiagnosticHint = {
-		provider = 'DiagnosticHint',
-		icon = '  ',
-		separator = ' ',
-		separator_highlight = {'NONE',colors.bg},
-		highlight = {colors.cyan,colors.bg},
-	}
-}
-
-gls.left[11] = {
-	DiagnosticInfo = {
-		provider = 'DiagnosticInfo',
-		icon = '  ',
-		separator = ' ',
-		separator_highlight = {'NONE',colors.bg},
-		highlight = {colors.blue,colors.bg},
 	}
 }
 
@@ -218,7 +137,7 @@ gls.right[9] = {
 }
 
 function condition.buffer_types()
-	local types = { 'NvimTree', 'startify' }
+	local types = { 'NvimTree', 'startify', 'Gitty' }
 	for _,v in ipairs(types) do
 		if vim.bo.filetype == v then
 			return false
@@ -238,20 +157,10 @@ gls.short_line_left[1] = {
 
 gls.short_line_left[2] = {
 	ViModeInactive = {
-		provider = function() return '●  ' end,
+		provider = function() return '   ' end,
 		condition = condition.buffer_types,
 		highlight = {colors.fg_inactive,colors.bg,'bold'},
 	},
-}
-
-gls.short_line_left[3] = {
-	FileSizeInactive = {
-		provider = 'FileSize',
-		separator = ' ',
-		separator_highlight = {'NONE',colors.bg},
-		condition = condition.buffer_types,
-		highlight = {colors.fg_inactive,colors.bg}
-	}
 }
 
 gls.short_line_left[4] = {

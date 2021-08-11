@@ -10,7 +10,7 @@ return require('packer').startup({
 		use { 'dmun/doom-one.nvim', branch = 'personal' }
 
 	--	Git
-		use 'airblade/vim-gitgutter'
+		use 'lewis6991/gitsigns.nvim'
 		use 'kdheepak/lazygit.nvim'
 
 	--	IDE like

@@ -13,4 +13,5 @@ map('n', '<M-P>', ':BufferMovePrevious<CR>', { silent = true })
 
 for i = 1, 10, 1 do
 	map('n', '<M-' .. i .. '>', ':BufferGoto ' .. i .. '<CR>', { silent = true })
+	map('i', '<M-' .. i .. '>', '<ESC>:BufferGoto ' .. i .. '<CR>', { silent = true })
 end
