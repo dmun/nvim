@@ -13,8 +13,13 @@ return require('packer').startup({
 		use 'lewis6991/gitsigns.nvim'
 		use 'kdheepak/lazygit.nvim'
 
+	--	LSP
+		use 'neovim/nvim-lspconfig'
+		use 'kabouzeid/nvim-lspinstall'
+		use 'hrsh7th/nvim-compe'
+		use 'onsails/lspkind-nvim'
+
 	--	IDE like
-		use 'neoclide/coc.nvim' --, {'branch': 'release'}
 		use 'nvim-treesitter/nvim-treesitter'
 		use 'tpope/vim-surround'
 		use 'kyazdani42/nvim-tree.lua'
