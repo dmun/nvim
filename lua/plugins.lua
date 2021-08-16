@@ -5,7 +5,6 @@ return require('packer').startup({
 		use 'wbthomason/packer.nvim'
 
 	--	Colors
-		use 'dmun/nvcode-color-schemes.vim'
 		use 'norcalli/nvim-colorizer.lua'
 		use { 'dmun/doom-one.nvim', branch = 'personal' }
 
@@ -24,6 +23,7 @@ return require('packer').startup({
 		use 'tpope/vim-surround'
 		use 'kyazdani42/nvim-tree.lua'
 		use 'nvim-telescope/telescope.nvim'
+		use 'steelsojka/pears.nvim'
 
 	--	Appearance
 		use 'kyazdani42/nvim-web-devicons'
