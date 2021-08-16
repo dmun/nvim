@@ -59,4 +59,6 @@ nnoremap <silent><M-C-h> :vertical resize -5<CR>
 nnoremap <silent><M-C-l> :vertical resize +5<CR>
 
 " Open terminal
-nnoremap <silent><leader>t :exec 'term' \| setlocal nonu nornu \| setlocal nocul<CR>
+nnoremap <silent><leader>t :term<CR>
+autocmd TermOpen * startinsert | setlocal nonu nornu nocul scl=no
+autocmd FocusGained,BufEnter,BufWinEnter,WinEnter term://* startinsert
