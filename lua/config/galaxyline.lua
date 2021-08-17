@@ -54,7 +54,6 @@ gls.left[2] = {
 			vim.api.nvim_command('hi GalaxyViMode guifg='..mode_color[vim.fn.mode()])
 			return '●  '
 		end,
-		condition = condition.buffer_not_empty,
 		highlight = {colors.red,colors.bg,'bold'},
 	},
 }
@@ -96,6 +95,7 @@ gls.left[6] = {
 gls.left[7] = {
 	Percent = {
 		provider = 'LinePercent',
+		condition = condition.buffer_not_empty,
 		separator = ' ',
 		separator_highlight = {'NONE',colors.bg},
 		highlight = {colors.fg,colors.bg},
@@ -107,44 +107,68 @@ gls.left[7] = {
 -- Right {{{
 
 gls.right[1] = {
+	FileFormat = {
+		provider = 'FileFormat',
+		condition = condition.buffer_not_empty,
+		highlight = {colors.fg,colors.bg}
+	}
+}
+
+gls.right[2] = {
+	WhiteSpace = {
+		provider = function() return ' ' end,
+		condition = condition.buffer_not_empty,
+		highlight = {colors.fg,colors.bg}
+	}
+}
+
+gls.right[3] = {
+	FileEncode = {
+		provider = 'FileEncode',
+		condition = condition.buffer_not_empty,
+		highlight = {colors.fg,colors.bg}
+	}
+}
+
+gls.right[4] = {
 	BufferType = {
 		provider = function () return vim.bo.filetype end,
-		separator = ' ',
+		separator = '  ',
 		separator_highlight = {'NONE',colors.bg},
 		condition = condition.buffer_not_empty,
 		highlight = {colors.blue,colors.bg,'bold'}
 	}
 }
 
-gls.right[2] = {
+gls.right[5] = {
 	GitIcon = {
-		provider = function() return '  ' end,
-		condition = condition.check_git_workspace,
-		separator = ' ',
+	 	provider = function() return '' end,
+		separator = '  ',
 		separator_highlight = {'NONE',colors.bg},
+		condition = condition.buffer_not_empty,
 		highlight = {colors.green,colors.bg},
 	}
 }
 
-gls.right[3] = {
+gls.right[6] = {
 	GitBranch = {
 		provider = 'GitBranch',
-		condition = condition.check_git_workspace,
+		separator = ' ',
+		separator_highlight = {'NONE',colors.bg},
+		condition = condition.buffer_not_empty,
 		highlight = {colors.green,colors.bg,'bold'},
 	}
 }
 
-gls.right[4] = {
-	WhiteSpace = {
-		provider = function() return ' ' end,
-		condition = condition.buffer_not_empty,
-		highlight = {colors.blue,colors.bg}
-	},
+gls.right[7] = {
+	WhiteSpace = {}
 }
 
-gls.right[5] = {
+gls.right[8] = {
 	LspActivity = {
-		provider = function () return '    ' end,
+		provider = function () return ' ' end,
+		separator = ' ',
+		separator_highlight = {'NONE',colors.bg},
 		condition = function ()
 			local buf_ft = vim.api.nvim_buf_get_option(0,'filetype')
 			local clients = vim.lsp.get_active_clients()
@@ -159,7 +183,7 @@ gls.right[5] = {
 			end
 			return false
 		end,
-		highlight = {colors.green,colors.bg}
+		highlight = {colors.green,colors.bg,'bold'}
 	}
 }
 
@@ -171,13 +195,25 @@ gls.short_line_left[1] = {
 	LineNC = {
 		provider = function() return '▍ ' end,
 		condition = condition.hidden_types,
-		highlight = {colors.fg,colors.bg_inactive,'bold'},
+		highlight = {colors.fg_inactive,colors.bg_inactive,'bold'},
 	},
 }
 
 gls.short_line_left[2] = {
 	ViModeNC = {
-		provider = function () return '●  ' end,
+		provider = function()
+			-- auto change color according the vim mode
+			local mode_color = {n = colors.green, i = colors.blue,v=colors.orange,
+				[''] = colors.orange,V=colors.orange,
+				c = colors.magenta,no = colors.red,s = colors.orange,
+				S=colors.orange,[''] = colors.orange,
+				ic = colors.yellow,R = colors.violet,Rv = colors.violet,
+				cv = colors.red,ce=colors.red, r = colors.cyan,
+				rm = colors.cyan, ['r?'] = colors.cyan,
+				['!'] = colors.red,t = colors.red}
+			vim.api.nvim_command('hi GalaxyViMode guifg='..mode_color[vim.fn.mode()])
+			return '●  '
+		end,
 		condition = condition.hidden_types,
 		highlight = {colors.fg_inactive,colors.bg_inactive,'bold'},
 	},
@@ -186,9 +222,9 @@ gls.short_line_left[2] = {
 gls.short_line_left[3] = {
 	FileSizeNC = {
 		provider = 'FileSize',
-		condition = condition.hidden_types,
 		separator = ' ',
 		separator_highlight = {'NONE',colors.bg_inactive},
+		condition = condition.buffer_not_empty and condition.hidden_types,
 		highlight = {colors.fg_inactive,colors.bg_inactive}
 	}
 }
@@ -196,9 +232,9 @@ gls.short_line_left[3] = {
 gls.short_line_left[5] = {
 	FileNameNC = {
 		provider = 'FileName',
-		condition = condition.hidden_types,
 		separator = ' ',
 		separator_highlight = {'NONE',colors.bg_inactive},
+		condition = condition.buffer_not_empty and condition.hidden_types,
 		highlight = {colors.fg_inactive,colors.bg_inactive,'bold'}
 	}
 }
@@ -210,7 +246,7 @@ gls.short_line_left[6] = {
 			local column = vim.fn.col('.')
 			return line .. ':' .. column
 		end,
-		condition = condition.hidden_types,
+		condition = condition.buffer_not_empty and condition.hidden_types,
 		separator = ' ',
 		separator_highlight = {'NONE',colors.bg_inactive},
 		highlight = {colors.fg_inactive,colors.bg_inactive},
@@ -220,7 +256,7 @@ gls.short_line_left[6] = {
 gls.short_line_left[7] = {
 	PercentNC = {
 		provider = 'LinePercent',
-		condition = condition.hidden_types,
+		condition = condition.buffer_not_empty and condition.hidden_types,
 		separator = ' ',
 		separator_highlight = {'NONE',colors.bg_inactive},
 		highlight = {colors.fg_inactive,colors.bg_inactive},
@@ -232,44 +268,68 @@ gls.short_line_left[7] = {
 -- Right Inactive {{{
 
 gls.short_line_right[1] = {
+	FileFormatNC = {
+		provider = 'FileFormat',
+		condition = condition.buffer_not_empty and condition.hidden_types,
+		highlight = {colors.fg_inactive,colors.bg_inactive}
+	}
+}
+
+gls.short_line_right[2] = {
+	WhiteSpaceNC = {
+		provider = function() return ' ' end,
+		condition = condition.buffer_not_empty and condition.hidden_types,
+		highlight = {colors.fg_inactive,colors.bg_inactive}
+	}
+}
+
+gls.short_line_right[3] = {
+	FileEncodeNC = {
+		provider = 'FileEncode',
+		condition = condition.buffer_not_empty and condition.hidden_types,
+		highlight = {colors.fg_inactive,colors.bg_inactive}
+	}
+}
+
+gls.short_line_right[4] = {
 	BufferTypeNC = {
 		provider = function () return vim.bo.filetype end,
-		separator = ' ',
+		separator = '  ',
 		separator_highlight = {'NONE',colors.bg_inactive},
 		condition = condition.buffer_not_empty and condition.hidden_types,
 		highlight = {colors.fg_inactive,colors.bg_inactive,'bold'}
 	}
 }
 
-gls.short_line_right[2] = {
+gls.short_line_right[5] = {
 	GitIconNC = {
-		provider = function() return '  ' end,
-		condition = condition.check_git_workspace and condition.hidden_types,
-		separator = ' ',
+	 	provider = function() return '' end,
+		separator = '  ',
 		separator_highlight = {'NONE',colors.bg_inactive},
+		condition = condition.buffer_not_empty and condition.hidden_types,
 		highlight = {colors.fg_inactive,colors.bg_inactive},
 	}
 }
 
-gls.short_line_right[3] = {
+gls.short_line_right[6] = {
 	GitBranchNC = {
 		provider = 'GitBranch',
-		condition = condition.check_git_workspace and condition.hidden_types,
+		separator = ' ',
+		separator_highlight = {'NONE',colors.bg_inactive},
+		condition = condition.buffer_not_empty and condition.hidden_types,
 		highlight = {colors.fg_inactive,colors.bg_inactive,'bold'},
 	}
 }
 
-gls.short_line_right[4] = {
-	WhiteSpaceNC = {
-		provider = function() return ' ' end,
-		condition = condition.buffer_not_empty and condition.hidden_types,
-		highlight = {colors.fg_inactive,colors.bg_inactive}
-	},
+gls.short_line_right[7] = {
+	WhiteSpaceNC = {}
 }
 
-gls.short_line_right[5] = {
+gls.short_line_right[8] = {
 	LspActivityNC = {
-		provider = function () return '    ' end,
+		provider = function () return ' ' end,
+		separator = ' ',
+		separator_highlight = {'NONE',colors.bg_inactive},
 		condition = function ()
 			local buf_ft = vim.api.nvim_buf_get_option(0,'filetype')
 			local clients = vim.lsp.get_active_clients()
@@ -284,7 +344,7 @@ gls.short_line_right[5] = {
 			end
 			return false
 		end and condition.hidden_types,
-		highlight = {colors.fg_inactive,colors.bg_inactive}
+		highlight = {colors.fg_inactive,colors.bg_inactive,'bold'}
 	}
 }
 
