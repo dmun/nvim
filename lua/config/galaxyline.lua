@@ -1,15 +1,16 @@
+-- vim:fdm=marker
+
 local gl = require('galaxyline')
 local colors = require('galaxyline.theme').default
 local condition = require('galaxyline.condition')
 local gls = gl.section
 gl.short_line_list = {'NvimTree','vista','dbui','packer','startify'}
-
---colors.fg = '#d4d4d4'
---colors.bg = '#2d2d2d'
+gl.hidden_list = {'NvimTree','startify'}
 
 colors.fg = '#BBC2CF'
-colors.bg = '#21242B'
+colors.bg = '#1D2026'
 colors.fg_inactive = '#5B6268'
+colors.bg_inactive = '#21242B'
 
 colors.red = '#ff6c6b'
 colors.orange = '#da8548'
@@ -19,8 +20,20 @@ colors.blue = '#51afef'
 colors.dark_blue = '#2257A0'
 colors.magenta = '#c678dd'
 
+function condition.hidden_types()
+	for _,v in ipairs(gl.hidden_list) do
+		if vim.bo.filetype == v then
+			return false
+		end
+	end
+
+	return true
+end
+
+-- Left {{{
+
 gls.left[1] = {
-	LineActive = {
+	Line = {
 		provider = function() return '▍ ' end,
 		highlight = {colors.blue,colors.bg,'bold'},
 	},
@@ -39,17 +52,26 @@ gls.left[2] = {
 				rm = colors.cyan, ['r?'] = colors.cyan,
 				['!'] = colors.red,t = colors.red}
 			vim.api.nvim_command('hi GalaxyViMode guifg='..mode_color[vim.fn.mode()])
-			return '   '
+			return '●  '
 		end,
 		condition = condition.buffer_not_empty,
 		highlight = {colors.red,colors.bg,'bold'},
 	},
 }
 
+gls.left[3] = {
+	FileSize = {
+		provider = 'FileSize',
+		separator = ' ',
+		separator_highlight = {'NONE',colors.bg},
+		condition = condition.buffer_not_empty,
+		highlight = {colors.fg,colors.bg}
+	}
+}
+
 gls.left[5] = {
 	FileName = {
 		provider = 'FileName',
-		-- provider = current_file_name_provider,
 		separator = ' ',
 		separator_highlight = {'NONE',colors.bg},
 		condition = condition.buffer_not_empty,
@@ -67,109 +89,203 @@ gls.left[6] = {
 		condition = condition.buffer_not_empty,
 		separator = ' ',
 		separator_highlight = {'NONE',colors.bg},
-		highlight = {colors.fg_inactive,colors.bg},
+		highlight = {colors.fg,colors.bg},
 	},
 }
 
 gls.left[7] = {
-	PerCent = {
+	Percent = {
 		provider = 'LinePercent',
 		separator = ' ',
 		separator_highlight = {'NONE',colors.bg},
-		highlight = {colors.fg_inactive,colors.bg},
+		highlight = {colors.fg,colors.bg},
 	}
 }
 
+-- }}}
+
+-- Right {{{
+
 gls.right[1] = {
-	FileEncode = {
-		provider = 'FileEncode',
-		condition = condition.hide_in_width,
+	BufferType = {
+		provider = function () return vim.bo.filetype end,
 		separator = ' ',
 		separator_highlight = {'NONE',colors.bg},
-		highlight = {colors.fg_inactive,colors.bg}
+		condition = condition.buffer_not_empty,
+		highlight = {colors.blue,colors.bg,'bold'}
 	}
 }
 
 gls.right[2] = {
-	FileFormat = {
-		provider = 'FileFormat',
-		condition = condition.hide_in_width,
+	GitIcon = {
+		provider = function() return '  ' end,
+		condition = condition.check_git_workspace,
 		separator = ' ',
 		separator_highlight = {'NONE',colors.bg},
-		highlight = {colors.fg_inactive,colors.bg}
+		highlight = {colors.green,colors.bg},
 	}
 }
 
 gls.right[3] = {
-	GitIcon = {
-		provider = function() return '  ' end,
-		condition = condition.check_git_workspace and condition.hide_in_width,
-		separator = ' ',
-		separator_highlight = {'NONE',colors.bg},
-		highlight = {colors.green,colors.bg},
+	GitBranch = {
+		provider = 'GitBranch',
+		condition = condition.check_git_workspace,
+		highlight = {colors.green,colors.bg,'bold'},
 	}
 }
 
 gls.right[4] = {
-	GitBranch = {
-		provider = 'GitBranch',
-		condition = condition.check_git_workspace and condition.hide_in_width,
-		highlight = {colors.green,colors.bg},
-	}
-}
-
-gls.right[8] = {
-	BufferType = {
-		provider = 'FileTypeName',
-		separator = ' ',
-		separator_highlight = {'NONE',colors.bg},
-		condition = condition.buffer_not_empty and condition.hide_in_width,
-		highlight = {colors.fg,colors.bg,'bold'}
-	}
-}
-
-gls.right[9] = {
 	WhiteSpace = {
 		provider = function() return ' ' end,
-		condition = condition.buffer_not_empty and condition.hide_in_width,
+		condition = condition.buffer_not_empty,
 		highlight = {colors.blue,colors.bg}
 	},
 }
 
-function condition.buffer_types()
-	local types = { 'NvimTree', 'startify', 'Gitty' }
-	for _,v in ipairs(types) do
-		if vim.bo.filetype == v then
+gls.right[5] = {
+	LspActivity = {
+		provider = function () return '    ' end,
+		condition = function ()
+			local buf_ft = vim.api.nvim_buf_get_option(0,'filetype')
+			local clients = vim.lsp.get_active_clients()
+			if next(clients) == nil then
+				return false
+			end
+			for _,client in ipairs(clients) do
+				local filetypes = client.config.filetypes
+				if filetypes and vim.fn.index(filetypes,buf_ft) ~= -1 then
+					return true
+				end
+			end
 			return false
-		end
-	end
+		end,
+		highlight = {colors.green,colors.bg}
+	}
+}
 
-	return true
-end
+-- }}}
+
+-- Left Inactive {{{
 
 gls.short_line_left[1] = {
-	LineInactive = {
+	LineNC = {
 		provider = function() return '▍ ' end,
-		condition = condition.buffer_types,
-		highlight = {colors.fg_inactive,colors.bg,'bold'},
+		condition = condition.hidden_types,
+		highlight = {colors.fg,colors.bg_inactive,'bold'},
 	},
 }
 
 gls.short_line_left[2] = {
-	ViModeInactive = {
-		provider = function() return '   ' end,
-		condition = condition.buffer_types,
-		highlight = {colors.fg_inactive,colors.bg,'bold'},
+	ViModeNC = {
+		provider = function () return '●  ' end,
+		condition = condition.hidden_types,
+		highlight = {colors.fg_inactive,colors.bg_inactive,'bold'},
 	},
 }
 
-gls.short_line_left[4] = {
-	FileNameInactive = {
-		provider = 'FileName',
-		-- provider = current_file_name_provider,
+gls.short_line_left[3] = {
+	FileSizeNC = {
+		provider = 'FileSize',
+		condition = condition.hidden_types,
 		separator = ' ',
-		separator_highlight = {'NONE',colors.bg},
-		condition = condition.buffer_types,
-		highlight = {colors.fg_inactive,colors.bg}
+		separator_highlight = {'NONE',colors.bg_inactive},
+		highlight = {colors.fg_inactive,colors.bg_inactive}
 	}
 }
+
+gls.short_line_left[5] = {
+	FileNameNC = {
+		provider = 'FileName',
+		condition = condition.hidden_types,
+		separator = ' ',
+		separator_highlight = {'NONE',colors.bg_inactive},
+		highlight = {colors.fg_inactive,colors.bg_inactive,'bold'}
+	}
+}
+
+gls.short_line_left[6] = {
+	LineInfoNC = {
+		provider = function ()
+			local line = vim.fn.line('.')
+			local column = vim.fn.col('.')
+			return line .. ':' .. column
+		end,
+		condition = condition.hidden_types,
+		separator = ' ',
+		separator_highlight = {'NONE',colors.bg_inactive},
+		highlight = {colors.fg_inactive,colors.bg_inactive},
+	},
+}
+
+gls.short_line_left[7] = {
+	PercentNC = {
+		provider = 'LinePercent',
+		condition = condition.hidden_types,
+		separator = ' ',
+		separator_highlight = {'NONE',colors.bg_inactive},
+		highlight = {colors.fg_inactive,colors.bg_inactive},
+	}
+}
+
+-- }}}
+
+-- Right Inactive {{{
+
+gls.short_line_right[1] = {
+	BufferTypeNC = {
+		provider = function () return vim.bo.filetype end,
+		separator = ' ',
+		separator_highlight = {'NONE',colors.bg_inactive},
+		condition = condition.buffer_not_empty and condition.hidden_types,
+		highlight = {colors.fg_inactive,colors.bg_inactive,'bold'}
+	}
+}
+
+gls.short_line_right[2] = {
+	GitIconNC = {
+		provider = function() return '  ' end,
+		condition = condition.check_git_workspace and condition.hidden_types,
+		separator = ' ',
+		separator_highlight = {'NONE',colors.bg_inactive},
+		highlight = {colors.fg_inactive,colors.bg_inactive},
+	}
+}
+
+gls.short_line_right[3] = {
+	GitBranchNC = {
+		provider = 'GitBranch',
+		condition = condition.check_git_workspace and condition.hidden_types,
+		highlight = {colors.fg_inactive,colors.bg_inactive,'bold'},
+	}
+}
+
+gls.short_line_right[4] = {
+	WhiteSpaceNC = {
+		provider = function() return ' ' end,
+		condition = condition.buffer_not_empty and condition.hidden_types,
+		highlight = {colors.fg_inactive,colors.bg_inactive}
+	},
+}
+
+gls.short_line_right[5] = {
+	LspActivityNC = {
+		provider = function () return '    ' end,
+		condition = function ()
+			local buf_ft = vim.api.nvim_buf_get_option(0,'filetype')
+			local clients = vim.lsp.get_active_clients()
+			if next(clients) == nil then
+				return false
+			end
+			for _,client in ipairs(clients) do
+				local filetypes = client.config.filetypes
+				if filetypes and vim.fn.index(filetypes,buf_ft) ~= -1 then
+					return true
+				end
+			end
+			return false
+		end and condition.hidden_types,
+		highlight = {colors.fg_inactive,colors.bg_inactive}
+	}
+}
+
+-- }}}

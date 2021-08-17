@@ -12,7 +12,7 @@ set cursorline
 set showtabline=2
 set scrolloff=5
 set noshowmode
-set completeopt=menuone,noinsert
+set completeopt=menuone,noselect
 set signcolumn=yes
 
 set guifont=monospace,Symbols\ Nerd\ Font:h19
