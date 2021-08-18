@@ -109,7 +109,6 @@ gls.left[7] = {
 gls.right[1] = {
 	FileFormat = {
 		provider = 'FileFormat',
-		condition = condition.buffer_not_empty,
 		highlight = {colors.fg,colors.bg}
 	}
 }
@@ -117,7 +116,6 @@ gls.right[1] = {
 gls.right[2] = {
 	WhiteSpace = {
 		provider = function() return ' ' end,
-		condition = condition.buffer_not_empty,
 		highlight = {colors.fg,colors.bg}
 	}
 }
@@ -125,17 +123,20 @@ gls.right[2] = {
 gls.right[3] = {
 	FileEncode = {
 		provider = 'FileEncode',
-		condition = condition.buffer_not_empty,
 		highlight = {colors.fg,colors.bg}
 	}
 }
 
 gls.right[4] = {
 	BufferType = {
-		provider = function () return vim.bo.filetype end,
+		provider = function ()
+			if vim.bo.filetype ~= '' then
+				return vim.bo.filetype:gsub('^%l', string.upper)
+			end
+			return 'File'
+		end,
 		separator = '  ',
 		separator_highlight = {'NONE',colors.bg},
-		condition = condition.buffer_not_empty,
 		highlight = {colors.blue,colors.bg,'bold'}
 	}
 }
@@ -145,8 +146,8 @@ gls.right[5] = {
 	 	provider = function() return '' end,
 		separator = '  ',
 		separator_highlight = {'NONE',colors.bg},
-		condition = condition.buffer_not_empty,
-		highlight = {colors.green,colors.bg},
+		condition = condition.check_git_workspace,
+		highlight = {colors.green,colors.bg,'bold'},
 	}
 }
 
@@ -155,19 +156,39 @@ gls.right[6] = {
 		provider = 'GitBranch',
 		separator = ' ',
 		separator_highlight = {'NONE',colors.bg},
-		condition = condition.buffer_not_empty,
+		condition = condition.check_git_workspace,
 		highlight = {colors.green,colors.bg,'bold'},
 	}
 }
 
 gls.right[7] = {
-	WhiteSpace = {}
-}
+	LspStatus = {
+		provider = function ()
+			-- Diagnostics will show in the following order.
+			-- It will only show the first type with 1 or more diagnostics.
+			local diagnostics = {
+				{ type = 'Error', color = colors.red, icon = ' ' },
+				{ type = 'Warning', color = colors.yellow, icon = ' ' },
+				{ type = 'Hint', color = colors.blue, icon = ' ' },
+				{ type = 'Information', color = colors.blue, icon = ' ' },
+			}
 
-gls.right[8] = {
-	LspActivity = {
-		provider = function () return ' ' end,
-		separator = ' ',
+			local active_clients = vim.lsp.get_active_clients()
+			if active_clients then
+				local buffer = vim.api.nvim_get_current_buf()
+				for _, v in ipairs(diagnostics) do
+					for _, client in ipairs(active_clients) do
+						if vim.lsp.diagnostic.get_count(buffer,v.type,client.id) ~= 0 then
+							vim.cmd('hi GalaxyLspStatus guifg=' .. v.color)
+							return v.icon .. vim.lsp.diagnostic.get_count(buffer,v.type,client.id)
+						end
+					end
+				end
+			end
+			vim.cmd('hi GalaxyLspStatus guifg=' .. colors.green)
+			return ''
+		end,
+		separator = '  ',
 		separator_highlight = {'NONE',colors.bg},
 		condition = function ()
 			local buf_ft = vim.api.nvim_buf_get_option(0,'filetype')
@@ -187,6 +208,13 @@ gls.right[8] = {
 	}
 }
 
+gls.right[8], gls.right[9] = {
+	WhiteSpace = {}
+},
+{
+	WhiteSpace = {}
+}
+
 -- }}}
 
 -- Left Inactive {{{
@@ -195,7 +223,7 @@ gls.short_line_left[1] = {
 	LineNC = {
 		provider = function() return '▍ ' end,
 		condition = condition.hidden_types,
-		highlight = {colors.fg_inactive,colors.bg_inactive,'bold'},
+		highlight = {colors.fg,colors.bg_inactive,'bold'},
 	},
 }
 
@@ -235,7 +263,7 @@ gls.short_line_left[5] = {
 		separator = ' ',
 		separator_highlight = {'NONE',colors.bg_inactive},
 		condition = condition.buffer_not_empty and condition.hidden_types,
-		highlight = {colors.fg_inactive,colors.bg_inactive,'bold'}
+		highlight = {colors.fg_inactive,colors.bg_inactive}
 	}
 }
 
@@ -293,11 +321,16 @@ gls.short_line_right[3] = {
 
 gls.short_line_right[4] = {
 	BufferTypeNC = {
-		provider = function () return vim.bo.filetype end,
+		provider = function ()
+			if vim.bo.filetype ~= '' then
+				return vim.bo.filetype:gsub('^%l', string.upper)
+			end
+			return 'File'
+		end,
 		separator = '  ',
 		separator_highlight = {'NONE',colors.bg_inactive},
-		condition = condition.buffer_not_empty and condition.hidden_types,
-		highlight = {colors.fg_inactive,colors.bg_inactive,'bold'}
+		condition = condition.hidden_types,
+		highlight = {colors.fg_inactive,colors.bg_inactive}
 	}
 }
 
@@ -317,18 +350,36 @@ gls.short_line_right[6] = {
 		separator = ' ',
 		separator_highlight = {'NONE',colors.bg_inactive},
 		condition = condition.buffer_not_empty and condition.hidden_types,
-		highlight = {colors.fg_inactive,colors.bg_inactive,'bold'},
+		highlight = {colors.fg_inactive,colors.bg_inactive},
 	}
 }
 
 gls.short_line_right[7] = {
-	WhiteSpaceNC = {}
-}
+	LspStatusNC = {
+		provider = function ()
+			-- Diagnostics will show in the following order.
+			-- It will only show the first type with 1 or more diagnostics.
+			local diagnostics = {
+				{ type = 'Error', icon = ' ' },
+				{ type = 'Warning', icon = ' ' },
+				{ type = 'Hint', icon = ' ' },
+				{ type = 'Information', icon = ' ' },
+			}
 
-gls.short_line_right[8] = {
-	LspActivityNC = {
-		provider = function () return ' ' end,
-		separator = ' ',
+			local active_clients = vim.lsp.get_active_clients()
+			if active_clients then
+				local buffer = vim.api.nvim_get_current_buf()
+				for _, v in ipairs(diagnostics) do
+					for _, client in ipairs(active_clients) do
+						if vim.lsp.diagnostic.get_count(buffer,v.type,client.id) ~= 0 then
+							return v.icon .. vim.lsp.diagnostic.get_count(buffer,v.type,client.id)
+						end
+					end
+				end
+			end
+			return ''
+		end,
+		separator = '  ',
 		separator_highlight = {'NONE',colors.bg_inactive},
 		condition = function ()
 			local buf_ft = vim.api.nvim_buf_get_option(0,'filetype')
@@ -343,9 +394,16 @@ gls.short_line_right[8] = {
 				end
 			end
 			return false
-		end and condition.hidden_types,
-		highlight = {colors.fg_inactive,colors.bg_inactive,'bold'}
+		end,
+		highlight = {colors.fg_inactive,colors.bg_inactive}
 	}
+}
+
+gls.short_line_right[8], gls.short_line_right[9] = {
+	WhiteSpaceNC = {}
+},
+{
+	WhiteSpaceNC = {}
 }
 
 -- }}}
