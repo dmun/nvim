@@ -339,7 +339,7 @@ gls.short_line_right[5] = {
 	 	provider = function() return '' end,
 		separator = '  ',
 		separator_highlight = {'NONE',colors.bg_inactive},
-		condition = condition.buffer_not_empty and condition.hidden_types,
+		condition = condition.check_git_workspace and condition.hidden_types,
 		highlight = {colors.fg_inactive,colors.bg_inactive},
 	}
 }
@@ -349,7 +349,7 @@ gls.short_line_right[6] = {
 		provider = 'GitBranch',
 		separator = ' ',
 		separator_highlight = {'NONE',colors.bg_inactive},
-		condition = condition.buffer_not_empty and condition.hidden_types,
+		condition = condition.check_git_workspace and condition.hidden_types,
 		highlight = {colors.fg_inactive,colors.bg_inactive},
 	}
 }

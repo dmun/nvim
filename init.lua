@@ -26,3 +26,13 @@ require('config.packer')
 require('config.pears')
 require('config.whichkey')
 require('config.zen')
+
+local types = { 'NvimTree', 'startify', 'NeogitStatus' }
+local ifs = ''
+for i,type in ipairs(types) do
+	ifs = ifs .. '&filetype != "' .. type .. '"'
+	if next(types, i) ~= nil then
+		ifs = ifs .. ' && '
+	end
+end
+vim.cmd("autocmd BufEnter * if " .. ifs .. " | setlocal winhl=Normal:NormalBuffer")
