@@ -9,6 +9,11 @@ for _, server in pairs(servers) do
 					globals = {
 						'vim',
 						'use',
+						'awesome',
+						'client',
+						'root',
+						'keys',
+						'hotkey_popup',
 					}
 				}
 			}

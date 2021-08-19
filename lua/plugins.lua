@@ -11,6 +11,7 @@ return require('packer').startup({
 	--	Git
 		use 'lewis6991/gitsigns.nvim'
 		use 'kdheepak/lazygit.nvim'
+		use 'TimUntersberger/neogit'
 
 	--	LSP
 		use 'neovim/nvim-lspconfig'

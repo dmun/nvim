@@ -30,6 +30,13 @@ function condition.hidden_types()
 	return true
 end
 
+function condition.help()
+	if vim.bo.buftype == 'help' then
+		return true
+	end
+	return false
+end
+
 -- Left {{{
 
 gls.left[1] = {

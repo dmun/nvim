@@ -18,6 +18,7 @@ require('config.lazygit')
 require('config.lspconfig')
 require('config.lspinstall')
 require('config.lspkind')
+require('config.neogit')
 require('config.startify')
 require('config.telescope')
 require('config.treesitter')
@@ -27,12 +28,4 @@ require('config.pears')
 require('config.whichkey')
 require('config.zen')
 
-local types = { 'NvimTree', 'startify', 'NeogitStatus' }
-local ifs = ''
-for i,type in ipairs(types) do
-	ifs = ifs .. '&filetype != "' .. type .. '"'
-	if next(types, i) ~= nil then
-		ifs = ifs .. ' && '
-	end
-end
-vim.cmd("autocmd BufEnter * if " .. ifs .. " | setlocal winhl=Normal:NormalBuffer")
+vim.cmd('autocmd BufEnter * if &bt != "nofile" | setlocal winhl=Normal:NormalBuffer')
