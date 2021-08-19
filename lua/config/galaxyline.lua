@@ -83,33 +83,20 @@ gls.left[2] = {
 
 gls.left[3] = {
 	FileSize = {
-		provider = function () return fileinfo.get_file_size() end,
+		provider = function ()
+			local file_size = fileinfo.get_file_size()
+			if file_size == '' then
+				return 0 .. ' '
+			end
+			return file_size
+		end,
 		separator = ' ',
 		separator_highlight = {'NONE',colors.bg},
-		condition = condition.buffer_not_empty and condition.file_not_empty,
 		highlight = {colors.fg,colors.bg}
 	}
 }
 
-function FileNameOnly()
-	local file = vim.fn.expand('%:t')
-			if vim.bo.readonly then
-				vim.cmd('hi GalaxyFileStatus guifg=' .. colors.yellow)
-				return ' '
-			end
-			if vim.bo.modifiable then
-				if vim.bo.modified then
-					vim.cmd('hi GalaxyFileStatus guifg=' .. colors.red)
-					return ' '
-				end
-			end
-	if vim.fn.empty(file) == 1 then
-		return '*new*'
-	end
-	return file
-end
-
-gls.left[5] = {
+gls.left[4] = {
 	FileStatus = {
 		provider = function ()
 			if vim.bo.readonly then
@@ -127,7 +114,7 @@ gls.left[5] = {
 	}
 }
 
-gls.left[6] = {
+gls.left[5] = {
 	FileName = {
 		provider = function ()
 			local file = vim.fn.expand('%:t')
@@ -148,7 +135,7 @@ gls.left[6] = {
 	}
 }
 
-gls.left[7] = {
+gls.left[6] = {
 	LineInfo = {
 		provider = function ()
 			local line = vim.fn.line('.')
@@ -156,20 +143,18 @@ gls.left[7] = {
 			return line .. ':' .. column
 		end,
 		condition = condition.buffer_not_empty,
-		--separator = ' ',
-		--separator_highlight = {'NONE',colors.bg},
 		highlight = {colors.fg,colors.bg},
 	},
 }
 
-gls.left[8] = {
+gls.left[7] = {
 	WhiteSpace = {
 		provider = function() return ' ' end,
 		highlight = {colors.fg,colors.bg}
 	}
 }
 
-gls.left[9] = {
+gls.left[8] = {
 	Percent = {
 		provider = 'LinePercent',
 		condition = condition.buffer_not_empty,
@@ -183,26 +168,26 @@ gls.left[9] = {
 
 -- Right {{{
 
-gls.right[1] = {
-	FileFormat = {
-		provider = 'FileFormat',
-		highlight = {colors.fg,colors.bg}
-	}
-}
-
-gls.right[2] = {
-	WhiteSpace = {
-		provider = function() return ' ' end,
-		highlight = {colors.fg,colors.bg}
-	}
-}
-
-gls.right[3] = {
-	FileEncode = {
-		provider = 'FileEncode',
-		highlight = {colors.fg,colors.bg}
-	}
-}
+--gls.right[1] = {
+--	FileFormat = {
+--		provider = 'FileFormat',
+--		highlight = {colors.fg,colors.bg}
+--	}
+--}
+--
+--gls.right[2] = {
+--	WhiteSpace = {
+--		provider = function() return ' ' end,
+--		highlight = {colors.fg,colors.bg}
+--	}
+--}
+--
+--gls.right[3] = {
+--	FileEncode = {
+--		provider = 'FileEncode',
+--		highlight = {colors.fg,colors.bg}
+--	}
+--}
 
 gls.right[4] = {
 	BufferType = {
@@ -285,10 +270,14 @@ gls.right[7] = {
 	}
 }
 
-gls.right[8], gls.right[9] = {
-	WhiteSpace = {}
-},
-{
+gls.right[8] = {
+	WhiteSpace = {
+		provider = function() return ' ' end,
+		highlight = {colors.fg,colors.bg}
+	}
+}
+
+gls.right[9] = {
 	WhiteSpace = {}
 }
 
@@ -306,19 +295,7 @@ gls.short_line_left[1] = {
 
 gls.short_line_left[2] = {
 	ViModeNC = {
-		provider = function()
-			-- auto change color according the vim mode
-			local mode_color = {n = colors.green, i = colors.blue,v=colors.orange,
-				[''] = colors.orange,V=colors.orange,
-				c = colors.magenta,no = colors.red,s = colors.orange,
-				S=colors.orange,[''] = colors.orange,
-				ic = colors.yellow,R = colors.violet,Rv = colors.violet,
-				cv = colors.red,ce=colors.red, r = colors.cyan,
-				rm = colors.cyan, ['r?'] = colors.cyan,
-				['!'] = colors.red,t = colors.red}
-			vim.api.nvim_command('hi GalaxyViMode guifg='..mode_color[vim.fn.mode()])
-			return '●  '
-		end,
+		provider = function() return '●  ' end,
 		condition = condition.hidden_types,
 		highlight = {colors.fg_inactive,colors.bg_inactive,'bold'},
 	},
@@ -326,21 +303,56 @@ gls.short_line_left[2] = {
 
 gls.short_line_left[3] = {
 	FileSizeNC = {
-		provider = 'FileSize',
+		provider = function ()
+			local file_size = fileinfo.get_file_size()
+			if file_size == '' then
+				return 0 .. ' '
+			end
+			return file_size
+		end,
 		separator = ' ',
 		separator_highlight = {'NONE',colors.bg_inactive},
-		condition = condition.buffer_not_empty and condition.hidden_types,
+		condition = condition.hidden_types,
+		highlight = {colors.fg_inactive,colors.bg_inactive}
+	}
+}
+
+gls.short_line_left[4] = {
+	FileStatusNC = {
+		provider = function ()
+			if vim.bo.readonly then
+				return ' '
+			end
+			if vim.bo.modifiable then
+				if vim.bo.modified then
+					return ' '
+				end
+			end
+		end,
+		condition = condition.hidden_types,
 		highlight = {colors.fg_inactive,colors.bg_inactive}
 	}
 }
 
 gls.short_line_left[5] = {
 	FileNameNC = {
-		provider = 'FileName',
-		separator = ' ',
+		provider = function ()
+			local file = vim.fn.expand('%:t')
+			vim.cmd('hi GalaxyFileName guifg=' .. colors.fg)
+			if vim.bo.modifiable then
+				if vim.bo.modified then
+					vim.cmd('hi GalaxyFileName guifg=' .. colors.red)
+				end
+			end
+			if vim.fn.empty(file) == 1 then
+				return '*new*'
+			end
+			return file
+		end,
+		condition = condition.hidden_types,
+		separator = '  ',
 		separator_highlight = {'NONE',colors.bg_inactive},
-		condition = condition.buffer_not_empty and condition.hidden_types,
-		highlight = {colors.fg_inactive,colors.bg_inactive}
+		highlight = {colors.fg_inactive,colors.bg_inactive,'bold'}
 	}
 }
 
@@ -352,13 +364,19 @@ gls.short_line_left[6] = {
 			return line .. ':' .. column
 		end,
 		condition = condition.buffer_not_empty and condition.hidden_types,
-		separator = ' ',
-		separator_highlight = {'NONE',colors.bg_inactive},
 		highlight = {colors.fg_inactive,colors.bg_inactive},
 	},
 }
 
 gls.short_line_left[7] = {
+	WhiteSpaceNC = {
+		provider = function() return ' ' end,
+		condition = condition.buffer_not_empty and condition.hidden_types,
+		highlight = {colors.fg_inactive,colors.bg_inactive}
+	}
+}
+
+gls.short_line_left[8] = {
 	PercentNC = {
 		provider = 'LinePercent',
 		condition = condition.buffer_not_empty and condition.hidden_types,
@@ -372,29 +390,29 @@ gls.short_line_left[7] = {
 
 -- Right Inactive {{{
 
-gls.short_line_right[1] = {
-	FileFormatNC = {
-		provider = 'FileFormat',
-		condition = condition.buffer_not_empty and condition.hidden_types,
-		highlight = {colors.fg_inactive,colors.bg_inactive}
-	}
-}
-
-gls.short_line_right[2] = {
-	WhiteSpaceNC = {
-		provider = function() return ' ' end,
-		condition = condition.buffer_not_empty and condition.hidden_types,
-		highlight = {colors.fg_inactive,colors.bg_inactive}
-	}
-}
-
-gls.short_line_right[3] = {
-	FileEncodeNC = {
-		provider = 'FileEncode',
-		condition = condition.buffer_not_empty and condition.hidden_types,
-		highlight = {colors.fg_inactive,colors.bg_inactive}
-	}
-}
+--gls.short_line_right[1] = {
+--	FileFormatNC = {
+--		provider = 'FileFormat',
+--		condition = condition.buffer_not_empty and condition.hidden_types,
+--		highlight = {colors.fg_inactive,colors.bg_inactive}
+--	}
+--}
+--
+--gls.short_line_right[2] = {
+--	WhiteSpaceNC = {
+--		provider = function() return ' ' end,
+--		condition = condition.buffer_not_empty and condition.hidden_types,
+--		highlight = {colors.fg_inactive,colors.bg_inactive}
+--	}
+--}
+--
+--gls.short_line_right[3] = {
+--	FileEncodeNC = {
+--		provider = 'FileEncode',
+--		condition = condition.buffer_not_empty and condition.hidden_types,
+--		highlight = {colors.fg_inactive,colors.bg_inactive}
+--	}
+--}
 
 gls.short_line_right[4] = {
 	BufferTypeNC = {
@@ -476,10 +494,14 @@ gls.short_line_right[7] = {
 	}
 }
 
-gls.short_line_right[8], gls.short_line_right[9] = {
-	WhiteSpaceNC = {}
-},
-{
+gls.short_line_right[8] = {
+	WhiteSpaceNC = {
+		provider = function() return ' ' end,
+		condition = condition.buffer_not_empty and condition.hidden_types,
+		highlight = {colors.fg_inactive,colors.bg_inactive}
+	}
+}
+gls.short_line_right[9] = {
 	WhiteSpaceNC = {}
 }
 
