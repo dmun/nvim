@@ -3,6 +3,7 @@
 local gl = require('galaxyline')
 local colors = require('galaxyline.theme').default
 local condition = require('galaxyline.condition')
+local fileinfo = require('galaxyline.provider_fileinfo')
 local gls = gl.section
 gl.short_line_list = {'NvimTree','vista','dbui','packer','startify'}
 gl.hidden_list = {'NvimTree','startify'}
@@ -19,6 +20,8 @@ colors.yellow = '#ECBE7B'
 colors.blue = '#51afef'
 colors.dark_blue = '#2257A0'
 colors.magenta = '#c678dd'
+
+-- Custom conditions {{{
 
 function condition.hidden_types()
 	for _,v in ipairs(gl.hidden_list) do
@@ -37,6 +40,15 @@ function condition.help()
 	return false
 end
 
+function condition.file_not_empty()
+	if fileinfo.get_file_size() == '' then
+		return false
+	end
+	return true
+end
+
+-- }}}
+
 -- Left {{{
 
 gls.left[1] = {
@@ -50,15 +62,19 @@ gls.left[2] = {
 	ViMode = {
 		provider = function()
 			-- auto change color according the vim mode
-			local mode_color = {n = colors.green, i = colors.blue,v=colors.orange,
-				[''] = colors.orange,V=colors.orange,
-				c = colors.magenta,no = colors.red,s = colors.orange,
-				S=colors.orange,[''] = colors.orange,
-				ic = colors.yellow,R = colors.violet,Rv = colors.violet,
-				cv = colors.red,ce=colors.red, r = colors.cyan,
-				rm = colors.cyan, ['r?'] = colors.cyan,
-				['!'] = colors.red,t = colors.red}
-			vim.api.nvim_command('hi GalaxyViMode guifg='..mode_color[vim.fn.mode()])
+			local mode_color = {
+				n = colors.green,
+				i = colors.blue,
+				v=colors.yellow,
+				[''] = colors.yellow,
+				V=colors.yellow,
+				R = colors.red,
+			}
+			for k,v in pairs(mode_color) do
+				if vim.fn.mode() == k then
+					vim.cmd('hi GalaxyViMode guifg=' .. v)
+				end
+			end
 			return '●  '
 		end,
 		highlight = {colors.red,colors.bg,'bold'},
@@ -67,25 +83,72 @@ gls.left[2] = {
 
 gls.left[3] = {
 	FileSize = {
-		provider = 'FileSize',
+		provider = function () return fileinfo.get_file_size() end,
 		separator = ' ',
 		separator_highlight = {'NONE',colors.bg},
-		condition = condition.buffer_not_empty,
+		condition = condition.buffer_not_empty and condition.file_not_empty,
 		highlight = {colors.fg,colors.bg}
 	}
 }
 
+function FileNameOnly()
+	local file = vim.fn.expand('%:t')
+			if vim.bo.readonly then
+				vim.cmd('hi GalaxyFileStatus guifg=' .. colors.yellow)
+				return ' '
+			end
+			if vim.bo.modifiable then
+				if vim.bo.modified then
+					vim.cmd('hi GalaxyFileStatus guifg=' .. colors.red)
+					return ' '
+				end
+			end
+	if vim.fn.empty(file) == 1 then
+		return '*new*'
+	end
+	return file
+end
+
 gls.left[5] = {
-	FileName = {
-		provider = 'FileName',
-		separator = ' ',
-		separator_highlight = {'NONE',colors.bg},
-		condition = condition.buffer_not_empty,
-		highlight = {colors.fg,colors.bg,'bold'}
+	FileStatus = {
+		provider = function ()
+			if vim.bo.readonly then
+				vim.cmd('hi GalaxyFileStatus guifg=' .. colors.yellow)
+				return ' '
+			end
+			if vim.bo.modifiable then
+				if vim.bo.modified then
+					vim.cmd('hi GalaxyFileStatus guifg=' .. colors.red)
+					return ' '
+				end
+			end
+		end,
+		highlight = {colors.fg,colors.bg}
 	}
 }
 
 gls.left[6] = {
+	FileName = {
+		provider = function ()
+			local file = vim.fn.expand('%:t')
+			vim.cmd('hi GalaxyFileName guifg=' .. colors.fg)
+			if vim.bo.modifiable then
+				if vim.bo.modified then
+					vim.cmd('hi GalaxyFileName guifg=' .. colors.red)
+				end
+			end
+			if vim.fn.empty(file) == 1 then
+				return '*new*'
+			end
+			return file
+		end,
+		separator = '  ',
+		separator_highlight = {'NONE',colors.bg},
+		highlight = {colors.fg,colors.bg,'bold'}
+	}
+}
+
+gls.left[7] = {
 	LineInfo = {
 		provider = function ()
 			local line = vim.fn.line('.')
@@ -93,13 +156,20 @@ gls.left[6] = {
 			return line .. ':' .. column
 		end,
 		condition = condition.buffer_not_empty,
-		separator = ' ',
-		separator_highlight = {'NONE',colors.bg},
+		--separator = ' ',
+		--separator_highlight = {'NONE',colors.bg},
 		highlight = {colors.fg,colors.bg},
 	},
 }
 
-gls.left[7] = {
+gls.left[8] = {
+	WhiteSpace = {
+		provider = function() return ' ' end,
+		highlight = {colors.fg,colors.bg}
+	}
+}
+
+gls.left[9] = {
 	Percent = {
 		provider = 'LinePercent',
 		condition = condition.buffer_not_empty,
