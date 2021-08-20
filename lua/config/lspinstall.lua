@@ -10,10 +10,11 @@ for _, server in pairs(servers) do
 						'vim',
 						'use',
 						'awesome',
+						'screen',
 						'client',
 						'root',
 						'keys',
-						'hotkey_popup',
+						'hotkeys_popup',
 					}
 				}
 			}
