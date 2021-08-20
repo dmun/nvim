@@ -54,7 +54,7 @@ end
 gls.left[1] = {
 	Line = {
 		provider = function() return '▍ ' end,
-		highlight = {colors.blue,colors.bg,'bold'},
+		highlight = {colors.blue,colors.bg},
 	},
 }
 
@@ -69,6 +69,7 @@ gls.left[2] = {
 				[''] = colors.yellow,
 				V=colors.yellow,
 				R = colors.red,
+				t = colors.blue,
 			}
 			for k,v in pairs(mode_color) do
 				if vim.fn.mode() == k then
@@ -99,11 +100,10 @@ gls.left[3] = {
 gls.left[4] = {
 	FileStatus = {
 		provider = function ()
-			if vim.bo.readonly then
+			if vim.bo.readonly or not vim.bo.modifiable then
 				vim.cmd('hi GalaxyFileStatus guifg=' .. colors.yellow)
 				return ' '
-			end
-			if vim.bo.modifiable then
+			else
 				if vim.bo.modified then
 					vim.cmd('hi GalaxyFileStatus guifg=' .. colors.red)
 					return ' '
@@ -289,7 +289,7 @@ gls.short_line_left[1] = {
 	LineNC = {
 		provider = function() return '▍ ' end,
 		condition = condition.hidden_types,
-		highlight = {colors.fg,colors.bg_inactive,'bold'},
+		highlight = {colors.fg,colors.bg_inactive},
 	},
 }
 
@@ -297,7 +297,7 @@ gls.short_line_left[2] = {
 	ViModeNC = {
 		provider = function() return '●  ' end,
 		condition = condition.hidden_types,
-		highlight = {colors.fg_inactive,colors.bg_inactive,'bold'},
+		highlight = {colors.fg_inactive,colors.bg_inactive},
 	},
 }
 
@@ -320,10 +320,9 @@ gls.short_line_left[3] = {
 gls.short_line_left[4] = {
 	FileStatusNC = {
 		provider = function ()
-			if vim.bo.readonly then
+			if vim.bo.readonly or not vim.bo.modifiable then
 				return ' '
-			end
-			if vim.bo.modifiable then
+			else
 				if vim.bo.modified then
 					return ' '
 				end
@@ -338,12 +337,6 @@ gls.short_line_left[5] = {
 	FileNameNC = {
 		provider = function ()
 			local file = vim.fn.expand('%:t')
-			vim.cmd('hi GalaxyFileName guifg=' .. colors.fg)
-			if vim.bo.modifiable then
-				if vim.bo.modified then
-					vim.cmd('hi GalaxyFileName guifg=' .. colors.red)
-				end
-			end
 			if vim.fn.empty(file) == 1 then
 				return '*new*'
 			end
@@ -352,7 +345,7 @@ gls.short_line_left[5] = {
 		condition = condition.hidden_types,
 		separator = '  ',
 		separator_highlight = {'NONE',colors.bg_inactive},
-		highlight = {colors.fg_inactive,colors.bg_inactive,'bold'}
+		highlight = {colors.fg_inactive,colors.bg_inactive}
 	}
 }
 
