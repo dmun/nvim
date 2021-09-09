@@ -25,6 +25,10 @@ set termguicolors
 colorscheme doom-one
 set background=dark
 
+" Save
+nnoremap <silent><C-s> :w!<CR>
+inoremap <silent><C-s> <C-o>:w!<CR>
+
 " Navigating buffers
 nnoremap <silent><M-n> :bnext<CR>
 nnoremap <silent><M-p> :bprev<CR>

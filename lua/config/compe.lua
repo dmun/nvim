@@ -1,4 +1,4 @@
-vim.api.nvim_set_keymap("i", "<TAB>", "compe#confirm({ 'keys': '<TAB>', 'select': v:true })", { expr = true })
+vim.api.nvim_set_keymap("i", "<TAB>", "compe#confirm({ 'keys': '<TAB>', 'select': v:true })", { silent = true, expr = true })
 
 require'compe'.setup {
 	enabled = true;

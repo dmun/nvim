@@ -33,6 +33,7 @@ require("which-key").setup {
 }
 
 require('which-key').register({
+	['<space>'] = { name = 'Find File' },
 	e = { name = 'Explorer' },
 	f = { name = 'Finder' },
 	h = { name = 'Hunk (GitGutter)' },
