@@ -30,6 +30,9 @@ set background=dark
 nnoremap <silent><C-s> :w!<CR>
 inoremap <silent><C-s> <C-o>:w!<CR>
 
+" Clear
+nnoremap <silent><C-l> <C-l>:nohl<CR>
+
 " Navigating buffers
 nnoremap <silent><M-n> :bnext<CR>
 nnoremap <silent><M-p> :bprev<CR>
@@ -39,6 +42,7 @@ nnoremap <silent><M-w> :bd<CR>
 noremap <silent><M-v> <C-w>v
 noremap <silent><M-s> <C-w>s
 noremap <silent><M-q> <C-w>q
+inoremap <silent><M-q> <ESC><C-w>q
 
 " Navigating windows
 nnoremap <silent><M-j> <C-w>j
