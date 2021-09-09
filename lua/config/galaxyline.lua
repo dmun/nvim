@@ -13,6 +13,13 @@ colors.bg = '#1D2026'
 colors.fg_inactive = '#5B6268'
 colors.bg_inactive = '#21242B'
 
+if vim.opt.background:get() == 'light' then
+	colors.fg = '#383a42'
+	colors.bg = '#dfdfdf'
+	colors.fg_inactive = '#a190a7'
+	colors.bg_inactive = '#e3e3e3'
+end
+
 colors.red = '#ff6c6b'
 colors.orange = '#da8548'
 colors.green = '#98be65'
@@ -494,8 +501,13 @@ gls.short_line_right[8] = {
 		highlight = {colors.fg_inactive,colors.bg_inactive}
 	}
 }
+
 gls.short_line_right[9] = {
-	WhiteSpaceNC = {}
+	WhiteSpaceNC = {
+		provider = function() return ' ' end,
+		condition = condition.buffer_not_empty and condition.hidden_types,
+		highlight = {colors.fg_inactive,colors.bg_inactive}
+	}
 }
 
 -- }}}
