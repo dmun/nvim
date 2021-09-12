@@ -25,6 +25,7 @@ return require('packer').startup({
 		use 'kyazdani42/nvim-tree.lua'
 		use 'nvim-telescope/telescope.nvim'
 		use 'steelsojka/pears.nvim'
+		use 'lervag/vimtex'
 
 	--	Appearance
 		use 'kyazdani42/nvim-web-devicons'
