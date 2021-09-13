@@ -8,7 +8,9 @@ set softtabstop=4
 set mouse=a
 set number
 set relativenumber
-set nowrap
+set wrap
+set lbr
+set breakindent
 set cursorline
 set showtabline=2
 set scrolloff=5
@@ -26,6 +28,12 @@ syntax on
 set termguicolors
 colorscheme doom-one
 set background=dark
+
+nnoremap <expr> j v:count ? (v:count > 5 ? "m'" . v:count : '') . 'j' : 'gj'
+nnoremap <expr> k v:count ? (v:count > 5 ? "m'" . v:count : '') . 'k' : 'gk'
+nnoremap 0 g0
+nnoremap $ g$
+nnoremap Y y$
 
 " Save
 nnoremap <silent><C-s> :w!<CR>
