@@ -4,7 +4,7 @@ let maplocalleader=","
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
-" set expandtab
+set expandtab
 set mouse=a
 set number
 set relativenumber
@@ -36,8 +36,8 @@ nnoremap $ g$
 nnoremap Y y$
 
 " Save
-nnoremap <silent><C-s> :w!<CR>
-inoremap <silent><C-s> <C-o>:w!<CR>
+nnoremap <silent><C-s> :w!<CR><C-l>
+inoremap <silent><C-s> <C-o>:w!<CR><C-o><C-l>
 
 " Clear
 nnoremap <silent><C-l> <C-l>:nohl<CR>

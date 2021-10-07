@@ -24,7 +24,8 @@ return require('packer').startup({
 		use 'tpope/vim-surround'
 		use 'kyazdani42/nvim-tree.lua'
 		use 'nvim-telescope/telescope.nvim'
-		use 'steelsojka/pears.nvim'
+		use 'windwp/nvim-autopairs'
+        use 'mhartington/formatter.nvim'
 		use 'lervag/vimtex'
 
 	--	Appearance
