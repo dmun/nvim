@@ -30,7 +30,7 @@ return require('packer').startup({
 
 	--	Appearance
 		use 'kyazdani42/nvim-web-devicons'
-		use { 'glepnir/galaxyline.nvim', branch = 'main' }
+		use { 'NTBBloodbath/galaxyline.nvim', branch = 'main' }
 		use 'romgrk/barbar.nvim'
 
 	--	Misc

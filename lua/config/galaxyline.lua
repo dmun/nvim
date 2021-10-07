@@ -1,9 +1,9 @@
 -- vim:fdm=marker
 
 local gl = require('galaxyline')
-local colors = require('galaxyline.theme').default
+local colors = require('galaxyline.themes.colors').default
 local condition = require('galaxyline.condition')
-local fileinfo = require('galaxyline.provider_fileinfo')
+local fileinfo = require('galaxyline.providers.fileinfo')
 local gls = gl.section
 gl.short_line_list = {'NvimTree','vista','dbui','packer','startify'}
 gl.hidden_list = {'NvimTree','startify'}
