@@ -10,7 +10,7 @@ vim.cmd('source $HOME/.config/nvim/.vimrc')
 -- Plugin settings
 require('config.barbar')
 require('config.colorizer')
-require('config.compe')
+require('config.cmp')
 require('config.formatter')
 require('config.galaxyline')
 require('config.gitgutter')
