@@ -16,8 +16,15 @@ return require('packer').startup({
 	--	LSP
 		use 'neovim/nvim-lspconfig'
 		use 'kabouzeid/nvim-lspinstall'
-		use 'hrsh7th/nvim-compe'
 		use 'onsails/lspkind-nvim'
+
+    --  Autocomplete
+		use 'hrsh7th/nvim-cmp'
+		use 'hrsh7th/cmp-buffer'
+		use 'hrsh7th/cmp-nvim-lua'
+		use 'hrsh7th/cmp-nvim-lsp'
+		use 'L3MON4D3/LuaSnip'
+        use 'saadparwaiz1/cmp_luasnip'
 
 	--	IDE like
 		use 'nvim-treesitter/nvim-treesitter'
