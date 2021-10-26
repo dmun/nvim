@@ -186,6 +186,7 @@ cmp.setup({
 		{ name = "nvim_lsp" },
 		{ name = "luasnip" }, -- For vsnip users.
 		{ name = "nvim_lua" },
+		{ name = "cmp_tabnine" },
 		{ name = "buffer" },
 	}),
 	formatting = {

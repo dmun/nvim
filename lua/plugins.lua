@@ -26,6 +26,7 @@ return require('packer').startup({
 		use 'L3MON4D3/LuaSnip'
         use 'saadparwaiz1/cmp_luasnip'
         use 'rafamadriz/friendly-snippets'
+        use {'tzachar/cmp-tabnine', run='./install.sh', requires = 'hrsh7th/nvim-cmp'}
 
 	--	IDE like
 		use 'nvim-treesitter/nvim-treesitter'
