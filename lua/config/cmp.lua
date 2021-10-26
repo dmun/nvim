@@ -183,10 +183,9 @@ cmp.setup({
 		completeopt = "menu,menuone",
 	},
 	sources = cmp.config.sources({
-		{ name = "nvim_lua" },
 		{ name = "nvim_lsp" },
 		{ name = "luasnip" }, -- For vsnip users.
-	}, {
+		{ name = "nvim_lua" },
 		{ name = "buffer" },
 	}),
 	formatting = {
