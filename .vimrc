@@ -18,6 +18,7 @@ set sidescrolloff=10
 set noshowmode
 set noshowcmd
 set noswapfile
+set clipboard=unnamedplus
 set completeopt=menuone,noselect
 set signcolumn=yes
 
