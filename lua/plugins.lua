@@ -7,6 +7,7 @@ return require('packer').startup({
 	--	Colors
 		use 'norcalli/nvim-colorizer.lua'
 		use { 'dmun/doom-one.nvim', branch = 'personal' }
+        use 'projekt0n/github-nvim-theme'
 
 	--	Git
 		use 'lewis6991/gitsigns.nvim'
@@ -39,7 +40,7 @@ return require('packer').startup({
 
 	--	Appearance
 		use 'kyazdani42/nvim-web-devicons'
-		use { 'NTBBloodbath/galaxyline.nvim', branch = 'main' }
+        use 'nvim-lualine/lualine.nvim'
 		use 'romgrk/barbar.nvim'
 
 	--	Misc

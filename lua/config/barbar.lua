@@ -1,6 +1,7 @@
 vim.g.bufferline = {
-	icon_separator_inactive = '▏',
-	maximum_padding = 1,
+    auto_hide = true,
+    icon_separator_inactive = ' ',
+    animation = false,
 }
 
 map('n', '<M-n>', ':BufferNext<CR>', { silent = true })

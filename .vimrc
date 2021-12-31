@@ -28,7 +28,6 @@ set fillchars+=vert:▕
 " Color settings
 syntax on
 set termguicolors
-colorscheme doom-one
 set background=dark
 
 nnoremap <expr> j v:count ? (v:count > 5 ? "m'" . v:count : '') . 'j' : 'gj'
