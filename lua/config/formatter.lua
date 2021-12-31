@@ -1,4 +1,4 @@
-map("n", "<C-A-l>", ":Format<CR>", { silent = true })
+map("n", "<C-I>", ":Format<CR>", { silent = true })
 
 require("formatter").setup({
 	filetype = {
