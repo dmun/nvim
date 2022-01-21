@@ -4,4 +4,8 @@ map('n', '<leader>,', [[:lua require('telescope.builtin').buffers()<CR>]], { sil
 map('n', '<leader>.', [[:lua require('telescope.builtin').file_browser()<CR>]], { silent = true })
 map('n', '<leader>fh', [[:lua require('telescope.builtin').help_tags()<CR>]], { silent = true })
 
-require'telescope'.setup()
+require'telescope'.setup {
+    defaults = {
+        file_ignore_patterns = { 'node_modules' }
+    }
+}

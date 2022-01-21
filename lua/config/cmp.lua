@@ -144,11 +144,13 @@ cmp.setup({
 		["<C-Space>"] = cmp.mapping.complete(),
 		["<C-e>"] = cmp.mapping.close(),
 		["<C-y>"] = cmp.config.disable, -- If you want to remove the default `<C-y>` mapping, You can specify `cmp.config.disable` value.
-		["<TAB>"] = cmp.mapping.confirm({
+        ["<C-k>"] = cmp.mapping.select_prev_item(),
+        ["<C-j>"] = cmp.mapping.select_next_item(),
+		["<CR>"] = cmp.mapping.confirm({
 			--behavior = cmp.ConfirmBehavior.Replace,
 			select = true,
 		}),
-		["<Tab>"] = cmp.mapping(function(fallback)
+		["<TAB>"] = cmp.mapping(function(fallback)
 			if cmp.visible() then
 				cmp.confirm({ select = true })
 			elseif luasnip.expandable() then
@@ -183,8 +185,8 @@ cmp.setup({
 		completeopt = "menu,menuone",
 	},
 	sources = cmp.config.sources({
+		{ name = "luasnip" },
 		{ name = "nvim_lsp" },
-		{ name = "luasnip" }, -- For vsnip users.
 		{ name = "nvim_lua" },
 		{ name = "cmp_tabnine" },
 		{ name = "buffer" },

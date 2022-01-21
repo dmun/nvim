@@ -8,6 +8,7 @@ return require('packer').startup({
 		use 'norcalli/nvim-colorizer.lua'
 		use { 'dmun/doom-one.nvim', branch = 'personal' }
         use 'projekt0n/github-nvim-theme'
+        use 'rmehri01/onenord.nvim'
 
 	--	Git
 		use 'lewis6991/gitsigns.nvim'
@@ -25,9 +26,9 @@ return require('packer').startup({
 		use 'hrsh7th/cmp-nvim-lua'
 		use 'hrsh7th/cmp-nvim-lsp'
 		use 'L3MON4D3/LuaSnip'
-        use 'saadparwaiz1/cmp_luasnip'
-        use { 'rafamadriz/friendly-snippets', config = require("luasnip/loaders/from_vscode").lazy_load() }
-        --use {'tzachar/cmp-tabnine', run='./install.sh', requires = 'hrsh7th/nvim-cmp'}
+    use 'saadparwaiz1/cmp_luasnip'
+    use { 'rafamadriz/friendly-snippets', config = require("luasnip/loaders/from_vscode").lazy_load() }
+    --use {'tzachar/cmp-tabnine', run='./install.sh', requires = 'hrsh7th/nvim-cmp'}
 
 	--	IDE like
 		use 'nvim-treesitter/nvim-treesitter'
@@ -40,7 +41,7 @@ return require('packer').startup({
 
 	--	Appearance
 		use 'kyazdani42/nvim-web-devicons'
-        use 'nvim-lualine/lualine.nvim'
+    use 'nvim-lualine/lualine.nvim'
 		use 'romgrk/barbar.nvim'
 
 	--	Misc
@@ -55,7 +56,7 @@ return require('packer').startup({
 	config = {
 		display = {
 			open_fn = function ()
-				return require('packer.util').float({ border = 'none' })
+				return require('packer.util').float({ border = 'rounded' })
 			end
 		}
 	}
