@@ -19,6 +19,7 @@ return require('packer').startup({
 		use 'neovim/nvim-lspconfig'
 		use 'williamboman/nvim-lsp-installer'
 		use 'onsails/lspkind-nvim'
+        use 'jose-elias-alvarez/null-ls.nvim'
 
     --  Autocomplete
 		use 'hrsh7th/nvim-cmp'
@@ -36,7 +37,6 @@ return require('packer').startup({
 		use 'kyazdani42/nvim-tree.lua'
 		use 'nvim-telescope/telescope.nvim'
 		use 'windwp/nvim-autopairs'
-        use 'mhartington/formatter.nvim'
 		use 'lervag/vimtex'
 
 	--	Appearance
