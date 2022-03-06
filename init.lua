@@ -8,7 +8,7 @@ require('plugins')
 vim.cmd('source $HOME/.config/nvim/.vimrc')
 
 -- Plugin settings
-require('config.barbar')
+--require('config.barbar')
 require('config.colorizer')
 require('config.cmp')
 require('config.gitgutter')
@@ -30,6 +30,8 @@ require('config.tree')
 require('config.vimtex')
 require('config.whichkey')
 require('config.zen')
+
+map('n', '<M-S-f>', ':lua vim.lsp.buf.formatting()<CR>', {})
 
 vim.cmd('color doom-one')
 vim.cmd('autocmd BufEnter * if &bt != "nofile" | setlocal winhl=Normal:NormalBuffer')

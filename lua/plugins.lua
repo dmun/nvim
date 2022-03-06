@@ -26,9 +26,9 @@ return require('packer').startup({
 		use 'hrsh7th/cmp-nvim-lua'
 		use 'hrsh7th/cmp-nvim-lsp'
 		use 'L3MON4D3/LuaSnip'
-    use 'saadparwaiz1/cmp_luasnip'
-    use { 'rafamadriz/friendly-snippets', config = require("luasnip/loaders/from_vscode").lazy_load() }
-    --use {'tzachar/cmp-tabnine', run='./install.sh', requires = 'hrsh7th/nvim-cmp'}
+        use 'saadparwaiz1/cmp_luasnip'
+        use { 'rafamadriz/friendly-snippets', config = require("luasnip/loaders/from_vscode").lazy_load() }
+        --use {'tzachar/cmp-tabnine', run='./install.sh', requires = 'hrsh7th/nvim-cmp'}
 
 	--	IDE like
 		use 'nvim-treesitter/nvim-treesitter'
@@ -36,12 +36,13 @@ return require('packer').startup({
 		use 'kyazdani42/nvim-tree.lua'
 		use 'nvim-telescope/telescope.nvim'
 		use 'windwp/nvim-autopairs'
+        use 'prettier/vim-prettier'
 		use 'lervag/vimtex'
 
 	--	Appearance
 		use 'kyazdani42/nvim-web-devicons'
         use 'nvim-lualine/lualine.nvim'
-		use 'romgrk/barbar.nvim'
+		--use 'romgrk/barbar.nvim'
 
 	--	Misc
 		use 'folke/zen-mode.nvim'

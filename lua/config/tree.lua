@@ -1,4 +1,4 @@
-map('n', '<leader>e', [[:lua require'config.tree'.toggle_tree()<CR>]], { silent = true })
+map('n', '<leader>e', ':NvimTreeToggle<CR>', { silent = true })
 
 local tree_cb = require'nvim-tree.config'.nvim_tree_callback
 require'nvim-tree'.setup {
@@ -39,25 +39,3 @@ require'nvim-tree'.setup {
     }
   }
 }
-
-local tree = {}
-local view_status_ok, view = pcall(require, "nvim-tree.view")
-if not view_status_ok then
-  return
-end
-tree.toggle_tree = function()
-  if view.win_open() then
-    vim.cmd("NvimTreeClose")
-    if package.loaded["bufferline.state"] then
-      require("bufferline.state").set_offset(0)
-    end
-  else
-    if package.loaded["bufferline.state"] then
-      -- require'bufferline.state'.set_offset(31, 'File Explorer')
-      require("bufferline.state").set_offset(31, "")
-    end
-    require("nvim-tree").open()
-  end
-end
-
-return tree

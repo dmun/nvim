@@ -12,7 +12,7 @@ set wrap
 set lbr
 set breakindent
 set cursorline
-set showtabline=2
+set showtabline=0
 set scrolloff=5
 set sidescrolloff=10
 set noshowmode

@@ -1,4 +1,4 @@
-map("n", "<C-I>", ":Format<CR>", { silent = true })
+map("n", "<leader>mf", ":Format<CR>", { silent = false })
 
 require("formatter").setup({
 	filetype = {
