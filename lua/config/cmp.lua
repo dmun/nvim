@@ -146,13 +146,13 @@ cmp.setup({
 		["<C-y>"] = cmp.config.disable, -- If you want to remove the default `<C-y>` mapping, You can specify `cmp.config.disable` value.
         ["<C-k>"] = cmp.mapping.select_prev_item(),
         ["<C-j>"] = cmp.mapping.select_next_item(),
-		["<CR>"] = cmp.mapping.confirm({
-			--behavior = cmp.ConfirmBehavior.Replace,
-			select = true,
-		}),
+		-- ["<CR>"] = cmp.mapping.confirm({
+		-- 	--behavior = cmp.ConfirmBehavior.Replace,
+		-- 	select = true,
+		-- }),
 		["<TAB>"] = cmp.mapping(function(fallback)
 			if cmp.visible() then
-				cmp.confirm({ select = true })
+			cmp.confirm({ select = true })
 			elseif luasnip.expandable() then
 				luasnip.expand()
 			elseif jumpable() then
