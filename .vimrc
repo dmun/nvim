@@ -32,9 +32,9 @@ set background=dark
 
 nnoremap <expr> j v:count ? (v:count > 5 ? "m'" . v:count : '') . 'j' : 'gj'
 nnoremap <expr> k v:count ? (v:count > 5 ? "m'" . v:count : '') . 'k' : 'gk'
-nnoremap 0 g0
-nnoremap $ g$
-nnoremap Y y$
+nnoremap <expr> 0 &wrap == 1 ? 'g0' : '0'
+nnoremap <expr> $ &wrap == 1 ? 'g$' : '$'
+nnoremap <expr> Y &wrap == 1 ? 'y$' : 'y'
 
 " Save
 nnoremap <silent><C-s> :w!<CR><C-l>
