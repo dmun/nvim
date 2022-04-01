@@ -11,7 +11,6 @@ return require('packer').startup({
 
 	--	Git
 		use 'lewis6991/gitsigns.nvim'
-		use 'kdheepak/lazygit.nvim'
 		use 'TimUntersberger/neogit'
 
 	--	LSP
@@ -35,7 +34,8 @@ return require('packer').startup({
 		use 'tpope/vim-surround'
 		use 'kyazdani42/nvim-tree.lua'
 		use 'nvim-telescope/telescope.nvim'
-        use { "nvim-telescope/telescope-file-browser.nvim" }
+        use 'nvim-telescope/telescope-file-browser.nvim'
+        use 'ahmedkhalf/project.nvim'
 		use 'windwp/nvim-autopairs'
         use 'prettier/vim-prettier'
 		use 'lervag/vimtex'

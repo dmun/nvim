@@ -5,6 +5,7 @@ map('n', '<leader>,', [[:lua require('telescope.builtin').buffers()<CR>]], { sil
 map('n', '<leader>.', [[:lua require('telescope.builtin').file_browser()<CR>]], { silent = true })
 map('n', '<leader>fh', [[:lua require('telescope.builtin').help_tags()<CR>]], { silent = true })
 map('n', '<leader>fr', ':Telescope oldfiles<CR>', { silent = true })
+map('n', '<leader>pp', ':Telescope projects<CR>', { silent = true })
 map('n', '<M-x>', ':Telescope keymaps<CR>', { silent = true })
 
 local actions = require('telescope.actions')
@@ -52,7 +53,17 @@ require'telescope'.setup {
         qflist_previewer = require("telescope.previewers").vim_buffer_qflist.new,
         -- Developer configurations: Not meant for general override
         buffer_previewer_maker = require("telescope.previewers").buffer_previewer_maker,
+    },
+    pickers = {
+        find_files = {
+            hidden = true
+        },
+        projects = {
+            hidden = true
+        }
     }
 }
 
 require('telescope').load_extension "file_browser"
+require('project_nvim').setup()
+require('telescope').load_extension "projects"
