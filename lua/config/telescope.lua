@@ -3,9 +3,18 @@ map('n', '<leader>/', [[:lua require('telescope.builtin').live_grep()<CR>]], { s
 map('n', '<leader>,', [[:lua require('telescope.builtin').buffers()<CR>]], { silent = true })
 map('n', '<leader>.', [[:lua require('telescope.builtin').file_browser()<CR>]], { silent = true })
 map('n', '<leader>fh', [[:lua require('telescope.builtin').help_tags()<CR>]], { silent = true })
+map('n', '<leader>fr', ':Telescope oldfiles<CR>', { silent = true })
 
+local actions =require('telescope.actions')
 require'telescope'.setup {
     defaults = {
+        mappings = {
+            i = {
+                ["<ESC>"] = actions.close,
+                ["<C-j>"] = actions.move_selection_next,
+                ["<C-k>"] = actions.move_selection_previous,
+            }
+        },
         file_ignore_patterns = { 'node_modules' },
         prompt_prefix = "   ",
         selection_caret = "  ",
@@ -32,7 +41,7 @@ require'telescope'.setup {
         path_display = { "truncate" },
         winblend = 0,
         border = {},
-        borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
+        borderchars = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
         color_devicons = true,
         use_less = true,
         set_env = { ["COLORTERM"] = "truecolor" }, -- default = nil,

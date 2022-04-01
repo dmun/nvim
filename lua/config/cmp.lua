@@ -184,6 +184,7 @@ cmp.setup({
 	completion = {
 		completeopt = "menu,menuone",
 	},
+    preselect = cmp.PreselectMode.None,
 	sources = cmp.config.sources({
 		{ name = "luasnip" },
 		{ name = "nvim_lsp" },
