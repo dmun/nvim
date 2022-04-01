@@ -35,6 +35,7 @@ return require('packer').startup({
 		use 'tpope/vim-surround'
 		use 'kyazdani42/nvim-tree.lua'
 		use 'nvim-telescope/telescope.nvim'
+        use { "nvim-telescope/telescope-file-browser.nvim" }
 		use 'windwp/nvim-autopairs'
         use 'prettier/vim-prettier'
 		use 'lervag/vimtex'
