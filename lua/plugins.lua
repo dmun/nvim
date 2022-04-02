@@ -18,6 +18,12 @@ return require('packer').startup({
 		use 'williamboman/nvim-lsp-installer'
 		use 'onsails/lspkind-nvim'
         use 'jose-elias-alvarez/null-ls.nvim'
+        use {
+            'numToStr/Comment.nvim',
+            config = function()
+                require('Comment').setup()
+            end
+        }
 
     --  Autocomplete
 		use 'hrsh7th/nvim-cmp'
