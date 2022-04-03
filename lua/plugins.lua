@@ -54,7 +54,6 @@ return require('packer').startup({
 	--	Misc
 		use 'folke/zen-mode.nvim'
 		use 'folke/which-key.nvim'
-		use 'mhinz/vim-startify'
 		use 'airblade/vim-rooter'
 		use 'iamcco/markdown-preview.nvim' --, { 'do': 'cd app && yarn install'  }
 		use 'nvim-lua/popup.nvim'
