@@ -64,13 +64,29 @@ local config = {
 }
 
 local function ins_left(component)
+    local inactive = {}
+    for key, value in pairs(component) do
+        if key == 'inactive_color' then
+            inactive['color'] = value
+        elseif key ~= 'color' then
+            inactive[key] = value
+        end
+    end
     table.insert(config.sections.lualine_a, component)
-    table.insert(config.inactive_sections.lualine_a, component)
+    table.insert(config.inactive_sections.lualine_a, inactive)
 end
 
 local function ins_right(component)
+    local inactive = {}
+    for key, value in pairs(component) do
+        if key == 'inactive_color' then
+            inactive['color'] = value
+        elseif key ~= 'color' then
+            inactive[key] = value
+        end
+    end
     table.insert(config.sections.lualine_x, component)
-    table.insert(config.inactive_sections.lualine_x, component)
+    table.insert(config.inactive_sections.lualine_x, inactive)
 end
 
 -- Left components
@@ -79,6 +95,7 @@ ins_left {
         return '▍'
     end,
     color = { fg = colors.blue },
+    inactive_color = { fg = colors.fg },
     padding = { left = 0 },
 }
 
