@@ -44,6 +44,7 @@ inoremap <silent><C-s> <C-o>:w!<CR><C-o><C-l>
 
 " Clear
 nnoremap <silent><C-l> <C-l>:nohl<CR>
+nnoremap <silent><ESC> <C-l>:nohl<CR>
 
 " Navigating buffers
 nnoremap <silent><M-n> :bnext<CR>
