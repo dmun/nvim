@@ -58,9 +58,6 @@ require'telescope'.setup {
         find_files = {
             hidden = true
         },
-        projects = {
-            hidden = true
-        }
     }
 }
 
