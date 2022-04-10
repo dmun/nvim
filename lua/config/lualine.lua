@@ -114,18 +114,43 @@ ins_left {
 }
 
 ins_left {
-    'filesize',
-    cond = conditions.buffer_not_empty,
+    function()
+        local size = vim.fn.wordcount().bytes
+        local suffixes = { '', 'k', 'm', 'g' }
+        local i = 1
+        while size > 1024 and i < #suffixes do
+            size = size / 1024
+            i = i + 1
+        end
+        if size / 10 >= 1 or i == 1 then
+            return string.format('%d%s', size, suffixes[i])
+        else
+            return string.format('%.1f%s', size, suffixes[i])
+        end
+    end,
 }
 
 ins_left {
-    'filename',
-    cond = conditions.buffer_not_empty,
+    function()
+        local file = vim.fn.expand('%:t')
+        if vim.fn.empty(file) == 1 then
+            return '*new*'
+        end
+        return file
+    end,
     color = { gui = 'bold' }
 }
 
 ins_left {
-    'location',
+    function()
+        return '%l:%v'
+    end,
+}
+
+ins_left {
+    function()
+        return '%p%%'
+    end,
 }
 
 -- Right components
