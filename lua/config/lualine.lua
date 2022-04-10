@@ -63,7 +63,7 @@ local config = {
   extensions = { 'nvim-tree' }
 }
 
-local function ins_left(component)
+local function get_inactive(component)
     local inactive = {}
     for key, value in pairs(component) do
         if key == 'inactive_color' then
@@ -72,21 +72,17 @@ local function ins_left(component)
             inactive[key] = value
         end
     end
+    return inactive
+end
+
+local function ins_left(component)
     table.insert(config.sections.lualine_a, component)
-    table.insert(config.inactive_sections.lualine_a, inactive)
+    table.insert(config.inactive_sections.lualine_a, get_inactive(component))
 end
 
 local function ins_right(component)
-    local inactive = {}
-    for key, value in pairs(component) do
-        if key == 'inactive_color' then
-            inactive['color'] = value
-        elseif key ~= 'color' then
-            inactive[key] = value
-        end
-    end
     table.insert(config.sections.lualine_x, component)
-    table.insert(config.inactive_sections.lualine_x, inactive)
+    table.insert(config.inactive_sections.lualine_x, get_inactive(component))
 end
 
 -- Left components
