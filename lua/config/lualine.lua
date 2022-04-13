@@ -133,12 +133,38 @@ ins_left {
 ins_left {
     function()
         local file = vim.fn.expand('%:t')
-        if vim.fn.empty(file) == 1 then
-            return '*new*'
-        end
-        return file
+        return vim.fn.empty(file) == 1 and ''
+            or vim.bo.modified and ''
+            or vim.bo.readonly and ''
+            or ''
     end,
-    color = { gui = 'bold' }
+    color = function()
+        local file = vim.fn.expand('%:t')
+        return {
+            gui = 'bold',
+            fg = vim.fn.empty(file) == 1 and colors.fg
+              or vim.bo.modified and colors.red
+              or vim.bo.readonly and colors.orange
+              or colors.fg
+        }
+    end,
+    padding = { left = 1, right = 0 }
+}
+
+ins_left {
+    function()
+        local file = vim.fn.expand('%:t')
+        return vim.fn.empty(file) == 1 and '*new*' or file
+    end,
+    color = function()
+        local file = vim.fn.expand('%:t')
+        return {
+            gui = 'bold',
+            fg = vim.fn.empty(file) == 1 and colors.fg
+              or vim.bo.modified and colors.red
+              or colors.fg
+        }
+    end
 }
 
 ins_left {
