@@ -181,6 +181,14 @@ ins_left {
 
 -- Right components
 ins_right {
+    function()
+        return '$'
+    end,
+    color = { fg = colors.bg },
+    inactive_color = { fg = colors.bg },
+}
+
+ins_right {
     'bo:filetype',
     color = { fg = colors.blue, gui = 'bold' },
 }
