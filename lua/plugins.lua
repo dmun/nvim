@@ -49,6 +49,7 @@ return require('packer').startup({
 	--	Appearance
 		use 'kyazdani42/nvim-web-devicons'
         use 'nvim-lualine/lualine.nvim'
+        use 'lukas-reineke/indent-blankline.nvim'
 		--use 'romgrk/barbar.nvim'
 
 	--	Misc

@@ -29,6 +29,7 @@ require('config.tree')
 require('config.vimtex')
 require('config.whichkey')
 require('config.zen')
+require('config.indentline')
 
 map('n', '<M-S-f>', ':lua vim.lsp.buf.formatting()<CR>', {})
 

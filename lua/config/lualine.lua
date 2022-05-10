@@ -115,7 +115,15 @@ ins_left {
 
 ins_left {
     function()
-        local size = vim.fn.wordcount().bytes
+        local file = vim.fn.expand('%:p')
+        if file == nil or #file == 0 then
+          return ''
+        end
+        local size = vim.fn.getfsize(file)
+        if size <= 0 then
+          return ''
+        end
+        -- local size = vim.fn.wordcount().bytes
         local suffixes = { '', 'k', 'm', 'g' }
         local i = 1
         while size > 1024 and i < #suffixes do
