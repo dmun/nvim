@@ -195,4 +195,7 @@ cmp.setup({
 	formatting = {
 		format = require("lspkind").cmp_format(),
 	},
+    experimental = {
+        ghost_text = true,
+    },
 })
