@@ -1,5 +1,5 @@
 map('n', '<leader><leader>', [[:lua require('config.util').find_project_files()<CR>]], { silent = true })
-map('n', '<leader>ff', ':Telescope file_browser<CR>', { silent = true })
+-- map('n', '<leader>ff', ':Telescope file_browser<CR>', { silent = true })
 map('n', '<leader>/', [[:lua require('telescope.builtin').live_grep()<CR>]], { silent = true })
 map('n', '<leader>,', [[:lua require('telescope.builtin').buffers()<CR>]], { silent = true })
 map('n', '<leader>.', [[:lua require('telescope.builtin').file_browser()<CR>]], { silent = true })
@@ -44,7 +44,7 @@ require'telescope'.setup {
         path_display = { "truncate" },
         winblend = 0,
         border = {},
-        borderchars = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
+        -- borderchars = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
         color_devicons = true,
         use_less = true,
         set_env = { ["COLORTERM"] = "truecolor" }, -- default = nil,
@@ -61,6 +61,6 @@ require'telescope'.setup {
     }
 }
 
-require('telescope').load_extension "file_browser"
+-- require('telescope').load_extension "file_browser"
 require('project_nvim').setup()
 require('telescope').load_extension "projects"

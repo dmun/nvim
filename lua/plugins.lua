@@ -4,16 +4,17 @@ return require('packer').startup({
 	function ()
 		use 'wbthomason/packer.nvim'
 
-	--	Colors
+        --	Colors
 		use 'norcalli/nvim-colorizer.lua'
 		use { 'dmun/doom-one.nvim', branch = 'personal' }
-        use 'projekt0n/github-nvim-theme'
+        -- use 'projekt0n/github-nvim-theme'
+        -- use 'navarasu/onedark.nvim'
 
-	--	Git
+        --	Git
 		use 'lewis6991/gitsigns.nvim'
-		use 'TimUntersberger/neogit'
+		-- use 'TimUntersberger/neogit'
 
-	--	LSP
+        --	LSP
 		use 'neovim/nvim-lspconfig'
 		use 'williamboman/nvim-lsp-installer'
 		use 'onsails/lspkind-nvim'
@@ -25,7 +26,7 @@ return require('packer').startup({
             end
         }
 
-    --  Autocomplete
+        --  Autocomplete
 		use 'hrsh7th/nvim-cmp'
 		use 'hrsh7th/cmp-buffer'
 		use 'hrsh7th/cmp-nvim-lua'
@@ -35,28 +36,28 @@ return require('packer').startup({
         use { 'rafamadriz/friendly-snippets', config = require("luasnip/loaders/from_vscode").lazy_load() }
         --use {'tzachar/cmp-tabnine', run='./install.sh', requires = 'hrsh7th/nvim-cmp'}
 
-	--	IDE like
+        --	IDE like
 		use 'nvim-treesitter/nvim-treesitter'
-		use 'tpope/vim-surround'
+		-- use 'tpope/vim-surround'
 		use 'kyazdani42/nvim-tree.lua'
 		use 'nvim-telescope/telescope.nvim'
-        use 'nvim-telescope/telescope-file-browser.nvim'
+        -- use 'nvim-telescope/telescope-file-browser.nvim'
         use 'ahmedkhalf/project.nvim'
 		use 'windwp/nvim-autopairs'
-        use 'prettier/vim-prettier'
-		use 'lervag/vimtex'
+        -- use 'prettier/vim-prettier'
+		-- use 'lervag/vimtex'
 
-	--	Appearance
+        --	Appearance
 		use 'kyazdani42/nvim-web-devicons'
         use 'nvim-lualine/lualine.nvim'
         use 'lukas-reineke/indent-blankline.nvim'
 		--use 'romgrk/barbar.nvim'
 
-	--	Misc
-		use 'folke/zen-mode.nvim'
-		use 'folke/which-key.nvim'
+        --	Misc
+		-- use 'folke/zen-mode.nvim'
+		-- use 'folke/which-key.nvim'
 		use 'airblade/vim-rooter'
-		use 'iamcco/markdown-preview.nvim' --, { 'do': 'cd app && yarn install'  }
+		-- use 'iamcco/markdown-preview.nvim' --, { 'do': 'cd app && yarn install'  }
 		use 'nvim-lua/popup.nvim'
 		use 'nvim-lua/plenary.nvim'
 	end,

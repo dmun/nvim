@@ -5,7 +5,15 @@ local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protoco
 -- Alternatively, you may also register handlers on specific server instances instead (see example below).
 lsp_installer.on_server_ready(function(server)
     local opts = {
-        capabilities = capabilities
+        capabilities = capabilities,
+        settings = {
+            latex = {
+                language = "nl"
+            }
+        },
+        flags = {
+            debounce_text_changes = 500,
+        },
     }
 
     -- (optional) Customize the options passed to the server
