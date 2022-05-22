@@ -2,6 +2,7 @@ vim.g.doom_one_cursor_coloring = 1
 map = vim.api.nvim_set_keymap
 
 -- Plugins
+require("impatient")
 require('plugins')
 
 -- Vim settings
@@ -10,6 +11,7 @@ vim.cmd('source $HOME/.config/nvim/.vimrc')
 -- Plugin settings
 --require('config.barbar')
 require('config.colorizer')
+require('config.lspkind')
 require('config.cmp')
 require('config.gitgutter')
 require('config.gitsigns')

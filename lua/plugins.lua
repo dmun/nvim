@@ -3,6 +3,7 @@ vim.cmd('packadd packer.nvim')
 return require('packer').startup({
 	function ()
 		use 'wbthomason/packer.nvim'
+        use 'lewis6991/impatient.nvim'
 
         --	Colors
 		use 'norcalli/nvim-colorizer.lua'
@@ -60,6 +61,17 @@ return require('packer').startup({
 		-- use 'iamcco/markdown-preview.nvim' --, { 'do': 'cd app && yarn install'  }
 		use 'nvim-lua/popup.nvim'
 		use 'nvim-lua/plenary.nvim'
+        -- use {'nvim-orgmode/orgmode', config = function()
+        --         require('orgmode').setup{}
+        -- end
+        use {
+            "nvim-neorg/neorg",
+            config = function()
+                require('neorg').setup {
+                    -- ... -- check out setup part...
+                }
+            end,
+        }
 	end,
 	config = {
 		display = {
