@@ -1,14 +1,14 @@
-local null_ls = require("null-ls")
+local null_ls = require "null-ls"
 
 local formatting = null_ls.builtins.formatting
 local diagnostics = null_ls.builtins.diagnostics
 
-null_ls.setup({
-    sources = {
-        formatting.black,
-        formatting.prettier,
-        formatting.stylua,
-        diagnostics.eslint,
-        diagnostics.flake8,
-    },
-})
+null_ls.setup {
+	sources = {
+		formatting.black,
+		formatting.prettier,
+		formatting.stylua,
+		diagnostics.eslint,
+		diagnostics.flake8,
+	},
+}

@@ -1,5 +1,5 @@
-require("lspkind").init({
-    mode = "symbol",
+require("lspkind").init {
+	mode = "symbol",
 	symbol_map = {
 		Text = "",
 		Method = "",
@@ -25,6 +25,6 @@ require("lspkind").init({
 		Struct = "פּ",
 		Event = "",
 		Operator = "",
-		TypeParameter = ""
+		TypeParameter = "",
 	},
-})
+}

@@ -1,6 +1,6 @@
 map("n", "<leader>mf", ":Format<CR>", { silent = false })
 
-require("formatter").setup({
+require("formatter").setup {
 	filetype = {
 		haskell = {
 			function()
@@ -13,4 +13,4 @@ require("formatter").setup({
 			end,
 		},
 	},
-})
+}
