@@ -1,12 +1,11 @@
-map("n", "<leader><leader>", [[:lua require('config.util').find_project_files()<CR>]], { silent = true })
--- map('n', '<leader>ff', ':Telescope file_browser<CR>', { silent = true })
-map("n", "<leader>/", [[:lua require('telescope.builtin').live_grep()<CR>]], { silent = true })
-map("n", "<leader>,", [[:lua require('telescope.builtin').buffers()<CR>]], { silent = true })
-map("n", "<leader>.", [[:lua require('telescope.builtin').file_browser()<CR>]], { silent = true })
-map("n", "<leader>fh", [[:lua require('telescope.builtin').help_tags()<CR>]], { silent = true })
-map("n", "<leader>fr", ":Telescope oldfiles<CR>", { silent = true })
-map("n", "<leader>pp", ":Telescope projects<CR>", { silent = true })
-map("n", "<M-x>", ":Telescope keymaps<CR>", { silent = true })
+vim.keymap.set("n", "<leader><leader>", [[:lua require('core.util').find_project_files()<CR>]], { silent = true })
+vim.keymap.set("n", "<leader>/", [[:lua require('telescope.builtin').live_grep()<CR>]], { silent = true })
+vim.keymap.set("n", "<leader>,", [[:lua require('telescope.builtin').buffers()<CR>]], { silent = true })
+vim.keymap.set("n", "<leader>.", [[:lua require('telescope.builtin').file_browser()<CR>]], { silent = true })
+vim.keymap.set("n", "<leader>fh", [[:lua require('telescope.builtin').help_tags()<CR>]], { silent = true })
+vim.keymap.set("n", "<leader>fr", ":Telescope oldfiles<CR>", { silent = true })
+vim.keymap.set("n", "<leader>pp", ":Telescope projects<CR>", { silent = true })
+vim.keymap.set("n", "<M-x>", ":Telescope keymaps<CR>", { silent = true })
 
 local actions = require "telescope.actions"
 require("telescope").setup {
