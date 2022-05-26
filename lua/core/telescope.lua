@@ -1,4 +1,10 @@
-vim.keymap.set("n", "<leader><leader>", [[:lua require('core.util').find_project_files()<CR>]], { silent = true })
+vim.keymap.set("n", "<leader><leader>", function()
+	if vim.fn.isdirectory ".git" ~= 0 then
+		require("telescope.builtin").find_files()
+	else
+		vim.cmd "Telescope projects"
+	end
+end, { silent = true })
 vim.keymap.set("n", "<leader>/", [[:lua require('telescope.builtin').live_grep()<CR>]], { silent = true })
 vim.keymap.set("n", "<leader>,", [[:lua require('telescope.builtin').buffers()<CR>]], { silent = true })
 vim.keymap.set("n", "<leader>.", [[:lua require('telescope.builtin').file_browser()<CR>]], { silent = true })
