@@ -39,11 +39,11 @@ return require("packer").startup {
         use "nvim-telescope/telescope.nvim"
         use "ahmedkhalf/project.nvim"
         use "windwp/nvim-autopairs"
+        use "dstein64/nvim-scrollview"
 
         --	Appearance
         use "kyazdani42/nvim-web-devicons"
         use "nvim-lualine/lualine.nvim"
-        use "lukas-reineke/indent-blankline.nvim"
 
         --	Misc
         use "airblade/vim-rooter"

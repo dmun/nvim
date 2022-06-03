@@ -13,7 +13,7 @@ set lbr
 set breakindent
 set cursorline
 set showtabline=0
-" set scrolloff=5
+set scrolloff=5
 set sidescrolloff=10
 set noshowmode
 set noshowcmd
@@ -21,6 +21,7 @@ set noswapfile
 set clipboard=unnamedplus
 set completeopt=menuone,noselect
 set signcolumn=yes
+set inccommand=split
 
 set guifont=monospace,Symbols\ Nerd\ Font:h19
 set fillchars+=vert:▕
