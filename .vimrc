@@ -22,9 +22,16 @@ set clipboard=unnamedplus
 set completeopt=menuone,noselect
 set signcolumn=yes
 set inccommand=split
+set lazyredraw
 
 set guifont=monospace,Symbols\ Nerd\ Font:h19
 set fillchars+=vert:▕
+
+augroup ActiveWindowCursorline
+    autocmd!
+    autocmd WinEnter * set cursorline
+    autocmd WinLeave * set nocursorline
+augroup END
 
 " Color settings
 syntax on
