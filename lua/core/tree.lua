@@ -15,4 +15,9 @@ require("neo-tree").setup {
             },
         },
     },
+    window = {
+        mappings = {
+            ["<Tab>"] = "toggle_node",
+        },
+    },
 }
