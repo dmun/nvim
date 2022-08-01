@@ -23,6 +23,8 @@ set completeopt=menuone,noselect
 set signcolumn=yes
 set inccommand=split
 set lazyredraw
+set termguicolors
+set t_Co=256
 
 set guifont=monospace,Symbols\ Nerd\ Font:h19
 set fillchars+=vert:▕
@@ -58,6 +60,9 @@ nnoremap <silent><ESC> <C-l>:nohl<CR>
 nnoremap <silent><M-n> :bnext<CR>
 nnoremap <silent><M-p> :bprev<CR>
 nnoremap <silent><M-w> :bd<CR>
+nnoremap <silent><leader>bn :bnext<CR>
+nnoremap <silent><leader>bp :bprev<CR>
+nnoremap <silent><leader>bd :bd<CR>
 
 " Split/close window
 noremap <silent><M-v> <C-w>v
@@ -88,6 +93,10 @@ nnoremap <silent><M-C-j> :resize +3<CR>
 nnoremap <silent><M-C-k> :resize -3<CR>
 nnoremap <silent><M-C-h> :vertical resize -5<CR>
 nnoremap <silent><M-C-l> :vertical resize +5<CR>
+
+" Run code
+nnoremap <silent><localleader><localleader> :!make -s run<CR>
+nnoremap <silent><leader>ff :Ex<CR>
 
 " Open terminal
 nnoremap <silent><leader>t :term<CR>

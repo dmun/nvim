@@ -42,7 +42,7 @@ local config = {
 		},
 		component_separators = { left = "", right = "" },
 		--section_sep earators = { left = '', right = ''},
-		disabled_filetypes = { "NvimTree", "startify" },
+		disabled_filetypes = { "NvimTree", "neo-tree", "startify" },
 		always_divide_middle = true,
 	},
 	sections = {
