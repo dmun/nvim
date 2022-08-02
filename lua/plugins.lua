@@ -48,6 +48,8 @@ return require("packer").startup {
         use "ahmedkhalf/project.nvim"
         use "windwp/nvim-autopairs"
         use "dstein64/nvim-scrollview"
+        use {'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async'}
+        use { "j-hui/fidget.nvim", config = require"fidget".setup{} }
 
         --	Appearance
         use "kyazdani42/nvim-web-devicons"
