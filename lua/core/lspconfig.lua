@@ -16,20 +16,20 @@ vim.keymap.set("n", "<space>d", "<cmd>lua vim.diagnostic.open_float()<CR>")
 vim.keymap.set("n", "[d", "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>")
 vim.keymap.set("n", "]d", "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>")
 vim.keymap.set("n", "<space>q", "<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>")
-vim.keymap.set("n", "<M-S-f>", "<cmd>lua vim.lsp.buf.format { async = true }<CR>")
+vim.keymap.set("n", "<leader>bf", "<cmd>lua vim.lsp.buf.format { async = true }<CR>")
 
 vim.diagnostic.config {
-	virtual_text = false,
-	signs = true,
-	float = {
-		border = "single",
-		format = function(diagnostic)
-			return string.format(
-				"%s (%s) [%s]",
-				diagnostic.message,
-				diagnostic.source,
-				diagnostic.code or diagnostic.user_data.lsp.code
-			)
-		end,
-	},
+    virtual_text = false,
+    signs = false,
+    float = {
+        border = "single",
+        format = function(diagnostic)
+            return string.format(
+                "%s (%s) [%s]",
+                diagnostic.message,
+                diagnostic.source,
+                diagnostic.code or diagnostic.user_data.lsp.code
+            )
+        end,
+    },
 }
