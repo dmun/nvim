@@ -23,7 +23,7 @@ require("telescope").setup {
                 ["<C-k>"] = actions.move_selection_previous,
             },
         },
-        file_ignore_patterns = { "node_modules", ".git", ".aux" },
+        file_ignore_patterns = { "node_modules", ".git", ".aux", ".log", ".toc", ".gz", ".fls", ".pygtex" },
         -- prompt_prefix = "   ",
         selection_caret = "  ",
         entry_prefix = "  ",
