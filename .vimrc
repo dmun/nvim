@@ -1,6 +1,6 @@
 " Vim settings
 let mapleader=" "
-let maplocalleader=","
+let maplocalleader="\\"
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
@@ -25,9 +25,12 @@ set inccommand=split
 set lazyredraw
 set termguicolors
 set t_Co=256
+" set cmdheight=0
+" set laststatus=3
 
 set guifont=monospace,Symbols\ Nerd\ Font:h19
 set fillchars+=vert:▕
+set fillchars+=eob:\ 
 
 augroup ActiveWindowCursorline
     autocmd!

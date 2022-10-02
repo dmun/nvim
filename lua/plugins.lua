@@ -7,7 +7,7 @@ return require("packer").startup {
 
         --	Colors
         use "norcalli/nvim-colorizer.lua"
-        use { "dmun/doom-one.nvim", branch = "personal" }
+        use 'B4mbus/oxocarbon-lua.nvim'
 
         --	Git
         use "lewis6991/gitsigns.nvim"
@@ -23,6 +23,7 @@ return require("packer").startup {
                 require("Comment").setup()
             end,
         }
+        use { "jalvesaq/Nvim-R", branch = "stable" }
 
         --  Autocomplete
         use "hrsh7th/nvim-cmp"
@@ -49,7 +50,6 @@ return require("packer").startup {
         use "windwp/nvim-autopairs"
         use "dstein64/nvim-scrollview"
         use {'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async'}
-        use { "j-hui/fidget.nvim", config = require"fidget".setup{} }
 
         --	Appearance
         use "kyazdani42/nvim-web-devicons"

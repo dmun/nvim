@@ -12,7 +12,7 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 })
 
 -- Choose colorscheme.
-vim.cmd "color doom-one"
+vim.cmd "color oxocarbon-lua"
 
 -- Add support for commandline color
 vim.cmd "autocmd BufEnter * if &bt != 'nofile' | setlocal winhl=Normal:NormalBuffer"
