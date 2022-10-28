@@ -7,7 +7,7 @@ return require("packer").startup {
 
         --	Colors
         use "norcalli/nvim-colorizer.lua"
-        use 'B4mbus/oxocarbon-lua.nvim'
+        use "~/Development/oxocarbon-lua.nvim"
 
         --	Git
         use "lewis6991/gitsigns.nvim"

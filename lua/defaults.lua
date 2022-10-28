@@ -15,4 +15,4 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 vim.cmd "color oxocarbon-lua"
 
 -- Add support for commandline color
-vim.cmd "autocmd BufEnter * if &bt != 'nofile' | setlocal winhl=Normal:NormalBuffer"
+-- vim.cmd "autocmd BufEnter * if &bt != 'nofile' | setlocal winhl=Normal:NormalBuffer"

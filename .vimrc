@@ -1,4 +1,5 @@
 " Vim settings
+let R_assign = 0
 let mapleader=" "
 let maplocalleader="\\"
 set tabstop=4
@@ -29,14 +30,14 @@ set t_Co=256
 " set laststatus=3
 
 set guifont=monospace,Symbols\ Nerd\ Font:h19
-set fillchars+=vert:▕
+" set fillchars+=vert:▕
 set fillchars+=eob:\ 
 
-augroup ActiveWindowCursorline
-    autocmd!
-    autocmd WinEnter * set cursorline
-    autocmd WinLeave * set nocursorline
-augroup END
+" augroup ActiveWindowCursorline
+"     autocmd!
+"     autocmd WinEnter * set cursorline
+"     autocmd WinLeave * set nocursorline
+" augroup END
 
 " Color settings
 syntax on
@@ -105,3 +106,16 @@ nnoremap <silent><leader>ff :Ex<CR>
 nnoremap <silent><leader>t :term<CR>
 autocmd TermOpen * startinsert | setlocal nonu nornu nocul scl=no
 autocmd FocusGained,BufEnter,BufWinEnter,WinEnter term://* startinsert
+
+function! s:customNvimRMappings()
+   nmap <buffer> <Leader>sr <Plug>RStart
+   imap <buffer> <Leader>sr <Plug>RStart
+   vmap <buffer> <Leader>sr <Plug>RStart
+   nmap <buffer> <S-CR> <Plug>RDSendLine
+   imap <buffer> <S-CR> <Plug>RDSendLine
+   vmap <buffer> <S-CR> <Plug>RDSendSelection
+endfunction
+augroup myNvimR
+   au!
+   autocmd filetype r call s:customNvimRMappings()
+augroup end

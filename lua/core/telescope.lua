@@ -30,25 +30,11 @@ require("telescope").setup {
         initial_mode = "insert",
         selection_strategy = "reset",
         sorting_strategy = "ascending",
-        layout_strategy = "horizontal",
-        -- layout_config = {
-        -- 	horizontal = {
-        -- 		prompt_position = "top",
-        -- 		preview_width = 0.55,
-        -- 		results_width = 0.8,
-        -- 	},
-        -- 	vertical = {
-        -- 		mirror = false,
-        -- 	},
-        -- 	width = 0.87,
-        -- 	height = 0.80,
-        -- 	preview_cutoff = 120,
-        -- },
         file_sorter = require("telescope.sorters").get_fuzzy_file,
         generic_sorter = require("telescope.sorters").get_generic_fuzzy_sorter,
         path_display = { "truncate" },
         winblend = 0,
-        border = {},
+        -- border = {},
         -- borderchars = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
         -- borderchars = {
         --     results = { "▔", "▕", "▁", "▏", "🭽", "🭾", "🭿", "🭼" },
@@ -66,37 +52,37 @@ require("telescope").setup {
     },
     pickers = {
         find_files = {
-            border = false,
+            previewer = false,
             hidden = true,
-            theme = 'ivy',
+            theme = 'dropdown',
         },
         live_grep = {
-            border = false,
+            previewer = false,
             hidden = true,
-            theme = 'ivy',
+            theme = 'dropdown',
         },
         buffers = {
-            border = false,
+            previewer = false,
             hidden = true,
-            theme = 'ivy',
+            theme = 'dropdown',
         },
         oldfiles = {
-            border = false,
+            previewer = false,
             hidden = true,
-            theme = 'ivy',
+            theme = 'dropdown',
         },
         file_browser = {
-            border = false,
+            previewer = false,
             hidden = true,
-            theme = 'ivy',
+            theme = 'dropdown',
         },
         help_tags = {
-            border = false,
-            theme = 'ivy',
+            previewer = false,
+            theme = 'dropdown',
         },
         keymaps = {
-            border = false,
-            theme = 'ivy',
+            previewer = false,
+            theme = 'dropdown',
         },
     },
 }

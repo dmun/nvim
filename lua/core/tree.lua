@@ -5,10 +5,10 @@ require("neo-tree").setup {
         indent = {
             with_markers = false,
         },
-        icon = {
-            folder_closed = "",
-            folder_open = "",
-        },
+        -- icon = {
+        --     folder_closed = "",
+        --     folder_open = "",
+        -- },
         git_status = {
             symbols = {
                 -- untracked = "",
