@@ -1,0 +1,105 @@
+# glossary reference
+snippet gls gls{}
+	\gls{$1}
+
+snippet Gls Gls{}
+	\Gls{$1}
+
+# hyperref
+snippet href hyperref
+	\href{$1}{$2}
+
+# verb
+snippet verb verbatim
+	\verb|$1|
+
+# template
+snippet paper Paper template
+	\documentclass[letterpaper]{article}
+
+	\usepackage[dutch]{babel}
+	\usepackage{lipsum}
+	\usepackage{geometry}
+	\usepackage{xcolor}
+	\usepackage[colorlinks=true, allcolors=YellowOrange]{hyperref}
+	\usepackage{listings}
+	\usepackage{caption}
+	\usepackage{minted}
+	\usepackage{titlesec}
+	\usepackage{graphicx}
+	\usepackage{array}
+	\usepackage{tabularx}
+	\usepackage{todonotes}
+	\usepackage{enumitem}
+	\usepackage{apalike}
+	\usepackage{multicol}
+	\usepackage{longtable}
+	\usepackage[utf8]{inputenc}
+	\usepackage[acronym]{glossaries}
+	\usepackage[automake]{glossaries-extra}
+
+	\graphicspath{ {./images/} }
+
+	\titleformat{\paragraph}
+	{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
+	\titlespacing*{\paragraph}
+	{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+
+	\DeclareCaptionFormat{custom}
+	{%
+		\textbf{#1#2}\textit{\small #3}
+	}
+	\captionsetup{format=custom}
+
+	\definecolor{backcolor}{rgb}{0.97,0.97,0.96}
+	\definecolor{codegreen}{rgb}{0,0.6,0}
+	\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+	\definecolor{codepurple}{rgb}{0.58,0,0.82}
+	\setminted{
+		style=borland,
+		fontfamily=txtt,
+		% fontsize=\footnotesize,
+		xleftmargin=20pt,
+		breaklines=true,
+		linenos,
+		bgcolor=backcolor
+	}
+
+	\title{${1:Title}}
+	\author{${2:David van Munster} (${3:622085})}
+	\date{\today}
+
+	\begin{document}
+
+	\begin{center}
+	\thispagestyle{empty}
+	\parskip=14pt
+	\vspace*{64px}
+
+	\huge{$1}
+
+	\normalsize{${4:School}}
+
+	\normalsize{$2 ($3)}
+
+	\normalsize{${5:People}}
+
+	\today
+
+	\end{center}
+
+	\newpage
+
+	\tableofcontents
+
+	\newpage
+
+	\include{gls}
+
+	% your sections
+
+	\bibliographystyle{apalike}
+	\bibliography{reference}
+
+	\end{document}
+

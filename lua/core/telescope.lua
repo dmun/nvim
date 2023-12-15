@@ -1,9 +1,9 @@
 vim.keymap.set("n", "<leader><leader>", function()
-    if vim.fn.isdirectory ".git" ~= 0 then
+    -- if vim.fn.isdirectory ".git" ~= 0 then
         require("telescope.builtin").find_files()
-    else
-        vim.cmd "Telescope projects"
-    end
+    -- else
+    --     vim.cmd "Telescope projects"
+    -- end
 end, { silent = true })
 vim.keymap.set("n", "<leader>/", [[:lua require('telescope.builtin').live_grep()<CR>]], { silent = true })
 vim.keymap.set("n", "<leader>,", [[:lua require('telescope.builtin').buffers()<CR>]], { silent = true })
@@ -23,7 +23,7 @@ require("telescope").setup {
                 ["<C-k>"] = actions.move_selection_previous,
             },
         },
-        file_ignore_patterns = { "node_modules", ".git", ".aux", ".log", ".toc", ".gz", ".fls", ".pygtex" },
+        -- file_ignore_patterns = { "node_modules", ".git", ".aux", ".log", ".toc", ".gz", ".fls", ".pygtex" },
         -- prompt_prefix = "   ",
         selection_caret = "  ",
         entry_prefix = "  ",
@@ -34,8 +34,8 @@ require("telescope").setup {
         generic_sorter = require("telescope.sorters").get_generic_fuzzy_sorter,
         path_display = { "truncate" },
         winblend = 0,
-        -- border = {},
-        -- borderchars = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
+        border = {},
+        borderchars = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
         -- borderchars = {
         --     results = { "▔", "▕", "▁", "▏", "🭽", "🭾", "🭿", "🭼" },
         --     prompt = { "▔", "▕", " ", "▏", "🭽", "🭾", "▕", "▏" },

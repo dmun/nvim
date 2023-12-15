@@ -1,6 +1,7 @@
 require("lualine").setup({
     options = {
-        theme = "modus-vivendi",
+        -- theme = "modus-vivendi",
+        theme = 'auto',
         component_separators = { left = '', right = ''},
         section_separators = { left = '', right = ''},
 		disabled_filetypes = { "NvimTree", "neo-tree", "startify", "nofile" },
@@ -10,7 +11,7 @@ require("lualine").setup({
         lualine_a = {'mode'},
         lualine_b = {'branch', 'diff', 'diagnostics'},
         lualine_c = {'filename'},
-        lualine_x = {'encoding', 'fileformat', 'filetype'},
+        lualine_x = {},
         lualine_y = {'progress'},
         lualine_z = {'location'}
     },
@@ -18,7 +19,7 @@ require("lualine").setup({
         lualine_a = {'mode'},
         lualine_b = {'branch', 'diff', 'diagnostics'},
         lualine_c = {'filename'},
-        lualine_x = {'encoding', 'fileformat', 'filetype'},
+        lualine_x = {},
         lualine_y = {'progress'},
         lualine_z = {'location'}
     },

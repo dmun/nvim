@@ -31,13 +31,9 @@ set t_Co=256
 
 set guifont=monospace,Symbols\ Nerd\ Font:h19
 " set fillchars+=vert:▕
-set fillchars+=eob:\ 
-
-" augroup ActiveWindowCursorline
-"     autocmd!
-"     autocmd WinEnter * set cursorline
-"     autocmd WinLeave * set nocursorline
-" augroup END
+set fillchars+=vert:▏
+" se fillchars+=eob:\ 
+let g:tex_flavor = "latex"
 
 " Color settings
 syntax on
