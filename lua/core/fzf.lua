@@ -1,4 +1,11 @@
-require('fzf-lua').setup({'fzf-native'})
+require('fzf-lua').setup({
+    winopts = {
+        preview = {
+            default = "bat",
+        }
+    },
+})
+
 vim.keymap.set("n", "<leader><leader>", ":FzfLua files<CR>", { silent = true })
 vim.keymap.set("n", "<leader>/", ":FzfLua live_grep_resume<CR>", { silent = true })
 vim.keymap.set("n", "<leader>,", ":FzfLua buffers<CR>", { silent = true })
