@@ -12,6 +12,7 @@ require('neorg').setup {
         ["core.autocommands"] = {},
         ["core.integrations.treesitter"] = {},
         ["core.esupports.indent"] = {},
+        ["core.concealer"] = {},
     }
 }
 

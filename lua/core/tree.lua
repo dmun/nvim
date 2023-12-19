@@ -1,4 +1,4 @@
-vim.keymap.set("n", "<leader>e", ":NeoTreeFocusToggle<CR>", { silent = true })
+vim.keymap.set("n", "<leader>e", ":Neotree toggle<CR>", { silent = true })
 
 require("neo-tree").setup {
     enable_git_status = true,

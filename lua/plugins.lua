@@ -7,12 +7,9 @@ return require("packer").startup {
 
         --	Colors
         use "norcalli/nvim-colorizer.lua"
-        use { "~/Development/nvim", as = "catppuccin" }
-		use { "rktjmp/lush.nvim" }
-		use { "metalelf0/jellybeans-nvim" }
         use "EdenEast/nightfox.nvim" -- Packer
         use "dotsilas/darcubox-nvim"
-        -- use { "catppuccin/nvim", as = "catppuccin" }
+        use { "catppuccin/nvim", as = "catppuccin" }
         use "jacoborus/tender.vim"
         use "shaunsingh/nord.nvim"
         use "bluz71/vim-moonfly-colors"
@@ -33,9 +30,13 @@ return require("packer").startup {
         }
         use { "jalvesaq/Nvim-R", branch = "stable" }
 		-- use { "rhysd/vim-grammarous" }
+        use { "ibhagwan/fzf-lua",
+            -- optional for icon support
+            requires = { "nvim-tree/nvim-web-devicons" }
+        }
 
         --  Autocomplete
-        use { "hrsh7th/nvim-cmp", commit = "1cad30f"}
+        use { "hrsh7th/nvim-cmp", commit = "1cad30f" }
         -- use "hrsh7th/nvim-c p"
         use "hrsh7th/cmp-buffer"
         use "hrsh7th/cmp-nvim-lua"
@@ -43,7 +44,6 @@ return require("packer").startup {
         use "L3MON4D3/LuaSnip"
         use "saadparwaiz1/cmp_luasnip"
         use { "rafamadriz/friendly-snippets", config = require("luasnip/loaders/from_vscode").lazy_load() }
-		-- use "github/copilot.vim"
 
         --	IDE like
         use "nvim-treesitter/nvim-treesitter"
@@ -62,7 +62,7 @@ return require("packer").startup {
         --	Appearance
         use "kyazdani42/nvim-web-devicons"
         use "nvim-lualine/lualine.nvim"
-        use {'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async'}
+        use { 'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async' }
 
         --	Misc
         use "airblade/vim-rooter"
@@ -73,9 +73,9 @@ return require("packer").startup {
             config = function()
                 require('neorg').setup {
                     load = {
-                        ["core.defaults"] = {}, -- Loads default behaviour
+                        ["core.defaults"] = {},  -- Loads default behaviour
                         ["core.concealer"] = {}, -- Adds pretty icons to your documents
-                        ["core.dirman"] = { -- Manages Neorg workspaces
+                        ["core.dirman"] = {      -- Manages Neorg workspaces
                             config = {
                                 workspaces = {
                                     notes = "~/notes",

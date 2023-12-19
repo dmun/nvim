@@ -5,7 +5,7 @@ require("mason-lspconfig").setup_handlers({
         require("lspconfig")[server_name].setup {
 		  settings = {
 			ltex = {
-                language = "nl",
+                language = "en",
                 filetype = { "norg" }
 			}
 		  },
