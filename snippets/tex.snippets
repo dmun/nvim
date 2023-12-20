@@ -1,4 +1,4 @@
-# glossary reference
+# glossary
 snippet gls gls{}
 	\gls{$1}
 
@@ -7,6 +7,13 @@ snippet Gls Gls{}
 
 snippet acr acrshort{}
 	\acrshort{$1}
+
+snippet newgls newglossaryentry{}
+	\newglossaryentry{$1}
+	{
+		name={$2},
+		description={$3}
+	}
 
 # hyperref
 snippet href hyperref
