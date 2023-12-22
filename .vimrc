@@ -26,6 +26,7 @@ set inccommand=split
 set lazyredraw
 set termguicolors
 set t_Co=256
+set autochdir
 " set cmdheight=0
 " set laststatus=3
 
