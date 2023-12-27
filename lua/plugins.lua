@@ -7,12 +7,7 @@ return require("packer").startup {
 
         --	Colors
         use "norcalli/nvim-colorizer.lua"
-        use "EdenEast/nightfox.nvim" -- Packer
-        use "dotsilas/darcubox-nvim"
         use { "catppuccin/nvim", as = "catppuccin" }
-        use "jacoborus/tender.vim"
-        use "shaunsingh/nord.nvim"
-        use "bluz71/vim-moonfly-colors"
 
         --	Git
         use "lewis6991/gitsigns.nvim"
@@ -28,16 +23,10 @@ return require("packer").startup {
                 require("Comment").setup()
             end,
         }
-        use { "jalvesaq/Nvim-R", branch = "stable" }
-		-- use { "rhysd/vim-grammarous" }
-        use { "ibhagwan/fzf-lua",
-            -- optional for icon support
-            requires = { "nvim-tree/nvim-web-devicons" }
-        }
+        use { "ibhagwan/fzf-lua" }
 
         --  Autocomplete
-        use { "hrsh7th/nvim-cmp", commit = "1cad30f" }
-        -- use "hrsh7th/nvim-c p"
+        use "hrsh7th/nvim-cmp"
         use "hrsh7th/cmp-buffer"
         use "hrsh7th/cmp-nvim-lua"
         use "hrsh7th/cmp-nvim-lsp"
@@ -56,17 +45,14 @@ return require("packer").startup {
             },
         }
         use "nvim-telescope/telescope.nvim"
-        use "ahmedkhalf/project.nvim"
         use "windwp/nvim-autopairs"
 
         --	Appearance
         use "kyazdani42/nvim-web-devicons"
         use "nvim-lualine/lualine.nvim"
-        use { 'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async' }
 
         --	Misc
         use "airblade/vim-rooter"
-        use "nvim-lua/popup.nvim"
         use "nvim-lua/plenary.nvim"
         use {
             "nvim-neorg/neorg",

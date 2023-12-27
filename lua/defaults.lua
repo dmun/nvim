@@ -12,12 +12,7 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 })
 
 -- Choose colorscheme.
-vim.cmd "color catppuccin"
-
--- Add support for commandline color
--- vim.cmd "hi NormalBuffer guibg=#2B353C"
--- vim.cmd "hi Normal guibg=#212A2E"
--- vim.cmd "autocmd BufEnter * if &bt != 'nofile' | setlocal winhl=Normal:NormalBuffer"
+-- vim.cmd "color catppuccin"
 
 vim.fn.sign_define("DiagnosticSignError",
     { text = " ", texthl = "DiagnosticSignError" })

@@ -9,12 +9,12 @@ require("catppuccin").setup({
             NeoTreeCursorLine = { bg = colors.surface0 },
             EndOfBuffer = { fg = colors.surface0 },
             NeoTreeEndOfBuffer = { fg = colors.base },
-            Folded = { bg = colors.none },
-            UfoFoldedEllipsis = { fg = colors.overlay1, bg = colors.surface0 },
+            FzfLuaBorder = { fg = colors.blue },
         }
     end
 })
 
+vim.cmd "color catppuccin"
 
 -- rosewater = "#f5e0dc",
 -- flamingo = "#f2cdcd",
