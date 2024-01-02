@@ -23,7 +23,7 @@ vim.keymap.set("n", "<leader>D", function() require("trouble").toggle("lsp_type_
 vim.keymap.set("n", "gr", function() require("trouble").toggle("lsp_references") end)
 
 vim.diagnostic.config {
-    virtual_text = true,
+    virtual_text = false,
     signs = false,
     float = {
         border = "single",
