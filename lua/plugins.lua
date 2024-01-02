@@ -5,7 +5,17 @@ return require("packer").startup {
         use "wbthomason/packer.nvim"
         use "lewis6991/impatient.nvim"
 
-        --	Colors
+        -- Motion
+        use {
+            "ggandor/leap.nvim",
+            config = require("leap").create_default_mappings()
+        }
+        use {
+            'nacro90/numb.nvim',
+            config = require "numb".setup()
+        }
+
+        -- Colors
         use "norcalli/nvim-colorizer.lua"
         use { "catppuccin/nvim", as = "catppuccin" }
 
@@ -24,6 +34,17 @@ return require("packer").startup {
             end,
         }
         use { "ibhagwan/fzf-lua" }
+        use { "folke/trouble.nvim",
+            config = require("trouble").setup({
+                padding = false,
+                indent_lines = false,
+                use_diagnostic_signs = true,
+            })
+        }
+        use {
+            "j-hui/fidget.nvim",
+            config = require("fidget").setup()
+        }
 
         --  Autocomplete
         use "hrsh7th/nvim-cmp"
@@ -33,6 +54,7 @@ return require("packer").startup {
         use "L3MON4D3/LuaSnip"
         use "saadparwaiz1/cmp_luasnip"
         use { "rafamadriz/friendly-snippets", config = require("luasnip/loaders/from_vscode").lazy_load() }
+        use "lukas-reineke/cmp-under-comparator"
 
         --	IDE like
         use "nvim-treesitter/nvim-treesitter"
@@ -40,15 +62,15 @@ return require("packer").startup {
             "nvim-neo-tree/neo-tree.nvim",
             requires = {
                 "nvim-lua/plenary.nvim",
-                "kyazdani42/nvim-web-devicons", -- not strictly required, but recommended
                 "MunifTanjim/nui.nvim",
             },
         }
         use "nvim-telescope/telescope.nvim"
         use "windwp/nvim-autopairs"
+        use "RRethy/vim-illuminate"
 
         --	Appearance
-        use "kyazdani42/nvim-web-devicons"
+        use "nvim-tree/nvim-web-devicons"
         use "nvim-lualine/lualine.nvim"
 
         --	Misc
@@ -74,6 +96,10 @@ return require("packer").startup {
             run = ":Neorg sync-parsers",
             requires = "nvim-lua/plenary.nvim",
         }
+        use({
+            'Wansmer/treesj',
+            requires = { 'nvim-treesitter/nvim-treesitter' },
+        })
     end,
     config = {
         display = {

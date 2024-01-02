@@ -8,7 +8,7 @@ set softtabstop=4
 set expandtab
 set mouse=a
 set number
-set relativenumber
+" set relativenumber
 set nowrap
 set lbr
 set breakindent
@@ -103,6 +103,12 @@ nnoremap <silent><leader>ff :Ex<CR>
 nnoremap <silent><leader>t :term<CR>
 autocmd TermOpen * startinsert | setlocal nonu nornu nocul scl=no
 autocmd FocusGained,BufEnter,BufWinEnter,WinEnter term://* startinsert
+
+augroup CursorLine
+    au!
+    au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
+    au WinLeave * setlocal nocursorline
+augroup END
 
 function! s:customNvimRMappings()
    nmap <buffer> <Leader>sr <Plug>RStart

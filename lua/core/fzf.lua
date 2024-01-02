@@ -2,8 +2,11 @@ require('fzf-lua').setup({
     winopts = {
         preview = {
             -- delay = 0,
-        }
+        },
     },
+    fzf_opts = {
+        ["--info"] = "default",
+    }
 })
 
 vim.keymap.set("n", "<leader><leader>", ":FzfLua files<CR>", { silent = true })

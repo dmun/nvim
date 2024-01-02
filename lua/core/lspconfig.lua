@@ -11,12 +11,16 @@ vim.keymap.set("n", "<space>rn", "<cmd>lua vim.lsp.buf.rename()<CR>")
 -- vim.keymap.set("n", "L", "<cmd>lua vim.lsp.buf.code_action()<CR>")
 vim.keymap.set("n", "<space>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>")
 vim.keymap.set("n", "<M-CR>", ":Telescope lsp_code_actions theme=cursor<CR>")
-vim.keymap.set("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>")
-vim.keymap.set("n", "<space>d", "<cmd>lua vim.diagnostic.open_float()<CR>")
+-- vim.keymap.set("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>")
+-- vim.keymap.set("n", "<space>d", "<cmd>lua vim.diagnostic.open_float()<CR>")
 vim.keymap.set("n", "[d", "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>")
 vim.keymap.set("n", "]d", "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>")
 vim.keymap.set("n", "<space>q", "<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>")
 vim.keymap.set("n", "<leader>bf", "<cmd>lua vim.lsp.buf.format { async = true }<CR>")
+
+vim.keymap.set("n", "<leader>d", function() require("trouble").toggle() end)
+vim.keymap.set("n", "<leader>D", function() require("trouble").toggle("lsp_type_definitions") end)
+vim.keymap.set("n", "gr", function() require("trouble").toggle("lsp_references") end)
 
 vim.diagnostic.config {
     virtual_text = true,
