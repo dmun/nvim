@@ -8,7 +8,7 @@ set softtabstop=4
 set expandtab
 set mouse=a
 set number
-" set relativenumber
+set relativenumber
 set nowrap
 set lbr
 set breakindent

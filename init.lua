@@ -1,5 +1,5 @@
 -- Optimize startup time.
-pcall(require, "impatient")
+vim.loader.enable()
 
 -- Load Neovim defaults.
 require "defaults"
