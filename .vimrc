@@ -30,7 +30,7 @@ set autochdir
 " set cmdheight=0
 " set laststatus=3
 
-set guifont=monospace,Symbols\ Nerd\ Font:h19
+" set guifont=monospace,Symbols\ Nerd\ Font:h19
 " set fillchars+=vert:▕
 set fillchars+=vert:▏
 " se fillchars+=eob:\ 
@@ -40,6 +40,18 @@ let g:tex_flavor = "latex"
 syntax on
 set termguicolors
 set background=dark
+
+" Readline
+inoremap <C-a> <C-o>0
+inoremap <C-e> <C-o>$
+inoremap <C-f> <C-o>l
+inoremap <C-b> <C-o>h
+inoremap <C-d> <C-o>x
+inoremap <C-k> <C-o>D
+inoremap <C-u> <C-o>dd
+inoremap <M-d> <C-o>dw
+inoremap <M-f> <C-o>w
+inoremap <M-b> <C-o>b
 
 nnoremap <expr> j v:count ? (v:count > 5 ? "m'" . v:count : '') . 'j' : 'gj'
 nnoremap <expr> k v:count ? (v:count > 5 ? "m'" . v:count : '') . 'k' : 'gk'
