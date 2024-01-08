@@ -29,6 +29,8 @@ set t_Co=256
 set autochdir
 " set cmdheight=0
 " set laststatus=3
+set shm+=I
+let g:rooter_silent_chdir = 1
 
 " set guifont=monospace,Symbols\ Nerd\ Font:h19
 " set fillchars+=vert:▕
@@ -37,7 +39,7 @@ set fillchars+=vert:▏
 let g:tex_flavor = "latex"
 
 " Color settings
-syntax on
+" syntax on
 set termguicolors
 set background=dark
 
@@ -70,67 +72,16 @@ nnoremap <silent><C-l> <C-l>:nohl<CR>
 nnoremap <silent><ESC> <C-l>:nohl<CR>
 
 " Navigating buffers
-nnoremap <silent><M-n> :bnext<CR>
-nnoremap <silent><M-p> :bprev<CR>
-nnoremap <silent><M-w> :bd<CR>
 nnoremap <silent><leader>bn :bnext<CR>
 nnoremap <silent><leader>bp :bprev<CR>
 nnoremap <silent><leader>bd :bd<CR>
-
-" Split/close window
-noremap <silent><M-v> <C-w>v
-noremap <silent><M-s> <C-w>s
-noremap <silent><M-q> <C-w>q
-inoremap <silent><M-q> <ESC><C-w>q
-
-" Navigating windows
-nnoremap <silent><M-j> <C-w>j
-nnoremap <silent><M-k> <C-w>k
-nnoremap <silent><M-h> <C-w>h
-nnoremap <silent><M-l> <C-w>l
-
-tnoremap <silent><M-j> <C-\><C-n><C-w>j
-tnoremap <silent><M-k> <C-\><C-n><C-w>k
-tnoremap <silent><M-h> <C-\><C-n><C-w>h
-tnoremap <silent><M-l> <C-\><C-n><C-w>l
-
-" Moving windows
-nnoremap <silent><M-r> <C-w>r
-nnoremap <silent><M-J> <C-w>J
-nnoremap <silent><M-H> <C-w>H
-nnoremap <silent><M-K> <C-w>K
-nnoremap <silent><M-L> <C-w>L
-
-" Resizing windows
-nnoremap <silent><M-C-j> :resize +3<CR>
-nnoremap <silent><M-C-k> :resize -3<CR>
-nnoremap <silent><M-C-h> :vertical resize -5<CR>
-nnoremap <silent><M-C-l> :vertical resize +5<CR>
 
 " Run code
 nnoremap <silent><localleader><localleader> :!make -s run<CR>
 nnoremap <silent><leader>ff :Ex<CR>
 
-" Open terminal
-nnoremap <silent><leader>t :term<CR>
-autocmd TermOpen * startinsert | setlocal nonu nornu nocul scl=no
-autocmd FocusGained,BufEnter,BufWinEnter,WinEnter term://* startinsert
-
-augroup CursorLine
-    au!
-    au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
-    au WinLeave * setlocal nocursorline
-augroup END
-
-function! s:customNvimRMappings()
-   nmap <buffer> <Leader>sr <Plug>RStart
-   imap <buffer> <Leader>sr <Plug>RStart
-   vmap <buffer> <Leader>sr <Plug>RStart
-   nmap <buffer> <S-CR> <Plug>RDSendLine
-   imap <buffer> <S-CR> <Plug>RDSendLine
-   vmap <buffer> <S-CR> <Plug>RDSendSelection
-endfunction
-augroup myNvimR
-   au!
-   autocmd filetype r call s:customNvimRMappings()
-augroup end
+" augroup CursorLine
+"     au!
+"     au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
+"     au WinLeave * setlocal nocursorline
+" augroup END
