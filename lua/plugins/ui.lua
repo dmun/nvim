@@ -21,8 +21,14 @@ return {
                     -- EndOfBuffer = { fg = colors.surface0 },
                     NeoTreeEndOfBuffer = { fg = colors.base },
                     FzfLuaBorder = { fg = colors.blue },
+                    -- FzfLuaHeaderBind = { fg = colors.blue },
+                    FzfLuaHeaderText = { fg = colors.blue },
                     TroubleText = {},
                     TroubleCount = { fg = colors.green },
+                    -- GitSignsAdd = { fg = "#4d6257" },
+                    -- GitSignsAdd = { fg = "#8bbc8b" },
+                    -- GitSignsChange = { fg = "#97bbfa" },
+                    -- GitSignsDelete = { fg = "#c87591" },
                 }
             end,
         },
@@ -35,27 +41,35 @@ return {
         "nvim-lualine/lualine.nvim",
         opts = {
             options = {
-                theme = "auto",
+                -- theme = "auto",
                 component_separators = { left = "", right = "" },
                 section_separators = { left = "", right = "" },
-                disabled_filetypes = { "NvimTree", "neo-tree", "startify", "nofile" },
+                disabled_filetypes = {
+                    "NvimTree",
+                    "neo-tree",
+                    "startify",
+                    "nofile",
+                    "NeogitPopup",
+                    "DiffviewFiles",
+                    "fzf",
+                },
                 always_divide_middle = true,
             },
             sections = {
-                lualine_a = { "mode" },
-                lualine_b = { "branch", "diff", "diagnostics" },
-                lualine_c = { "filename" },
-                lualine_x = {},
-                lualine_y = { "progress" },
-                lualine_z = { "location" },
+                lualine_a = {},
+                lualine_b = {},
+                lualine_c = { "mode", "filename" },
+                lualine_x = { "progress", "location" },
+                lualine_y = {},
+                lualine_z = {},
             },
             inactive_sections = {
-                lualine_a = { "mode" },
-                lualine_b = { "branch", "diff", "diagnostics" },
-                lualine_c = { "filename" },
-                lualine_x = {},
-                lualine_y = { "progress" },
-                lualine_z = { "location" },
+                lualine_a = {},
+                lualine_b = {},
+                lualine_c = { "mode", "filename" },
+                lualine_x = { "progress", "location" },
+                lualine_y = {},
+                lualine_z = {},
             },
         },
     },
@@ -90,10 +104,10 @@ return {
                 },
                 git_status = {
                     symbols = {
-                        added = "", -- or "✚", but this is redundant info if you use git_status_colors on the name
+                        added = "",    -- or "✚", but this is redundant info if you use git_status_colors on the name
                         modified = "", -- or "", but this is redundant info if you use git_status_colors on the name
-                        deleted = "", -- this can only be used in the git_status source
-                        renamed = "", -- this can only be used in the git_status source
+                        deleted = "",  -- this can only be used in the git_status source
+                        renamed = "",  -- this can only be used in the git_status source
                         untracked = "",
                         ignored = "",
                         unstaged = "",

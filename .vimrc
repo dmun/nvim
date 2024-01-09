@@ -31,6 +31,7 @@ set autochdir
 " set laststatus=3
 set shm+=I
 let g:rooter_silent_chdir = 1
+set splitkeep=topline
 
 " set guifont=monospace,Symbols\ Nerd\ Font:h19
 " set fillchars+=vert:▕

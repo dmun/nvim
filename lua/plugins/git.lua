@@ -1,8 +1,23 @@
+vim.keymap.set("n", "<leader>gg", function()
+    require("neogit").open()
+end, { silent = true })
+
 return {
+    {
+        "NeogitOrg/neogit",
+        lazy = true,
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+            "sindrets/diffview.nvim",
+            "ibhagwan/fzf-lua",
+        },
+        opts = {},
+    },
     {
         "lewis6991/gitsigns.nvim",
         event = { "BufReadPre", "BufNewFile" },
         opts = {
+            attach_to_untracked = false,
             signs = {
                 add = { text = "▎" },
                 change = { text = "▎" },

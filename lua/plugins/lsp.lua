@@ -36,7 +36,7 @@ vim.fn.sign_define("DiagnosticSignHint", { text = "󰌵", texthl = "DiagnosticSi
 return {
     {
         "nvim-treesitter/nvim-treesitter",
-        event = { "BufReadPre", "BufNewFile" },
+        -- event = { "BufReadPre", "BufNewFile" },
         opts = {
             highlight = { enable = true },
             indent = { enable = true },
@@ -45,11 +45,11 @@ return {
             },
         },
     },
-    {
-        "nvim-treesitter/nvim-treesitter-context",
-        event = { "BufReadPre", "BufNewFile" },
-        dependencies = { "nvim-treesitter/nvim-treesitter" },
-    },
+    -- {
+    --     "nvim-treesitter/nvim-treesitter-context",
+    --     event = { "BufReadPre", "BufNewFile" },
+    --     dependencies = { "nvim-treesitter/nvim-treesitter" },
+    -- },
     {
         "neovim/nvim-lspconfig",
         event = { "BufReadPre", "BufNewFile" },

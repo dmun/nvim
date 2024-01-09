@@ -2,6 +2,13 @@ return {
     {
         "RRethy/vim-illuminate",
         event = { "BufReadPre", "BufNewFile" },
+        config = function()
+            require("illuminate").configure({
+                filetypes_denylist = {
+                    "NeogitStatus",
+                },
+            })
+        end,
     },
     "windwp/nvim-autopairs",
     {
