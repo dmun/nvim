@@ -25,6 +25,7 @@ return {
                     FzfLuaHeaderText = { fg = colors.blue },
                     TroubleText = {},
                     TroubleCount = { fg = colors.green },
+                    FzfLuaNormal = { bg = colors.mantle },
                     -- GitSignsAdd = { fg = "#4d6257" },
                     -- GitSignsAdd = { fg = "#8bbc8b" },
                     -- GitSignsChange = { fg = "#97bbfa" },

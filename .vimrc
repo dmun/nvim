@@ -32,6 +32,7 @@ set autochdir
 set shm+=I
 let g:rooter_silent_chdir = 1
 set splitkeep=topline
+set conceallevel=3
 
 " set guifont=monospace,Symbols\ Nerd\ Font:h19
 " set fillchars+=vert:▕
@@ -69,7 +70,7 @@ nnoremap <silent><C-s> :w!<CR><C-l>
 inoremap <silent><C-s> <C-o>:w!<CR><C-o><C-l>
 
 " Clear
-nnoremap <silent><C-l> <C-l>:nohl<CR>
+" nnoremap <silent><C-l> <C-l>:nohl<CR>
 nnoremap <silent><ESC> <C-l>:nohl<CR>
 
 " Navigating buffers

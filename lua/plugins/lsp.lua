@@ -98,7 +98,12 @@ return {
     },
     {
         "williamboman/mason.nvim",
-        opts = {},
+        opts = {
+            ui = {
+                width = 1,
+                height = 1,
+            },
+        },
     },
     {
         "folke/trouble.nvim",

@@ -32,3 +32,9 @@
        crust = "#11111b",
    }
    @end
+
+** TODO
+
+   - Add cmd highlight group
+   - Fzf full cursorline
+   - Color plugin
