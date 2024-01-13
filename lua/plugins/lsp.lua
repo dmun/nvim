@@ -36,12 +36,16 @@ vim.fn.sign_define("DiagnosticSignHint", { text = "󰌵", texthl = "DiagnosticSi
 return {
     {
         "nvim-treesitter/nvim-treesitter",
-        -- event = { "BufReadPre", "BufNewFile" },
+        event = { "BufReadPre", "BufNewFile" },
         opts = {
             highlight = { enable = true },
             indent = { enable = true },
             ensure_installed = {
                 "lua",
+                "vim",
+                "vimdoc",
+                "luadoc",
+                "norg",
             },
         },
     },
@@ -276,5 +280,10 @@ return {
                 },
             })
         end,
+    },
+    {
+        "windwp/nvim-ts-autotag",
+        event = { "BufReadPre", "BufNewFile" },
+        opts = {},
     },
 }
