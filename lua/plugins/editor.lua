@@ -15,6 +15,7 @@ return {
         "ggandor/leap.nvim",
         config = function()
             require("leap").create_default_mappings()
+            require("leap").add_repeat_mappings(';', ',')
         end,
     },
     {
