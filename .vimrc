@@ -65,22 +65,25 @@ nnoremap <expr> $ &wrap ? 'g$' : '$'
 
 nnoremap <silent><leader>tw :set wrap!<CR>
 
+nnoremap <silent><C-d> <C-d>zz<CR>
+nnoremap <silent><C-u> <C-u>zz<CR>
+
 " Save
-nnoremap <silent><C-s> :w!<CR><C-l>
-inoremap <silent><C-s> <C-o>:w!<CR><C-o><C-l>
+" nnoremap <silent><C-s> :w!<CR><C-l>
+" inoremap <silent><C-s> <C-o>:w!<CR><C-o><C-l>
 
 " Clear
 " nnoremap <silent><C-l> <C-l>:nohl<CR>
-nnoremap <silent><ESC> <C-l>:nohl<CR>
+nnoremap <silent><ESC> <CMD>nohl<CR>
 
 " Navigating buffers
-nnoremap <silent><leader>bn :bnext<CR>
-nnoremap <silent><leader>bp :bprev<CR>
-nnoremap <silent><leader>bd :bd<CR>
+" nnoremap <silent><leader>bn :bnext<CR>
+" nnoremap <silent><leader>bp :bprev<CR>
+" nnoremap <silent><leader>bd :bd<CR>
 
 " Run code
 nnoremap <silent><localleader><localleader> :!make -s run<CR>
-nnoremap <silent><leader>ff :Ex<CR>
+" nnoremap <silent><leader>ff :Ex<CR>
 
 " augroup CursorLine
 "     au!

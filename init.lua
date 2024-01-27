@@ -11,7 +11,6 @@ if not vim.loop.fs_stat(lazypath) then
     })
 end
 
-
 local hotpotpath = vim.fn.stdpath("data") .. "/lazy/hotpot.nvim"
 if not vim.loop.fs_stat(hotpotpath) then
     vim.notify("Bootstrapping hotpot.nvim...", vim.log.levels.INFO)

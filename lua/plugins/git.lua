@@ -1,4 +1,4 @@
-vim.keymap.set("n", "<leader>gg", function()
+vim.keymap.set("n", "<leader>g", function()
     require("neogit").open()
 end, { silent = true })
 
