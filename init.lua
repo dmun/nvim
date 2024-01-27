@@ -34,4 +34,7 @@ require("lazy").setup("plugins", {
     change_detection = {
         notify = false,
     },
+    ui = {
+        size = { width = 1, height = 1 },
+    },
 })

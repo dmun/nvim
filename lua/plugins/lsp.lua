@@ -281,4 +281,5 @@ return {
         event = { "BufReadPre", "BufNewFile" },
         opts = {},
     },
+    "bakpakin/fennel.vim",
 }
