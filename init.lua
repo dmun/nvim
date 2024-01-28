@@ -30,10 +30,31 @@ vim.opt.rtp:prepend({ hotpotpath, lazypath })
 
 require("defaults")
 
-require("lazy").setup("plugins", {
-    change_detection = {
-        notify = false,
+require("hotpot")
+
+local plugins = {
+    {
+        "rktjmp/hotpot.nvim",
     },
+}
+
+local plugins_path = vim.fn.stdpath("config") .. "/fnl/plugins"
+if vim.loop.fs_stat(plugins_path) then
+    for file in vim.fs.dir(plugins_path) do
+        file = file:match("^(.*)%.fnl$")
+        table.insert(plugins, require("plugins." .. file))
+    end
+end
+
+plugins_path = vim.fn.stdpath("config") .. "/lua/plugins"
+if vim.loop.fs_stat(plugins_path) then
+    for file in vim.fs.dir(plugins_path) do
+        file = file:match("^(.*)%.lua$")
+        table.insert(plugins, require("plugins." .. file))
+    end
+end
+
+require("lazy").setup(plugins, {
     ui = {
         size = { width = 1, height = 1 },
     },

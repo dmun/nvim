@@ -4,7 +4,8 @@ vim.keymap.set("n", "<C-g>", "<cmd>lua require('fzf-lua').grep()<CR>", { silent 
 vim.keymap.set("n", "<C-l>", "<cmd>lua require('fzf-lua').live_grep_native()<CR>", { silent = true })
 vim.keymap.set("n", "<A-l>", "<cmd>lua require('fzf-lua').live_grep_resume()<CR>", { silent = true })
 vim.keymap.set("n", "<C-\\>", "<cmd>lua require('fzf-lua').buffers()<CR>", { silent = true })
-vim.keymap.set("n", "<A-y>", "<cmd>lua require('fzf-lua').lsp_code_actions()<CR>", { silent = true })
+vim.keymap.set("n", "<C-h>", "<cmd>lua require('fzf-lua').builtin()<CR>", { silent = true })
+vim.keymap.set("n", "L", "<cmd>lua require('fzf-lua').lsp_code_actions()<CR>", { silent = true })
 
 return {
     {

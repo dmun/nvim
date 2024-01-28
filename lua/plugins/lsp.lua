@@ -269,6 +269,7 @@ return {
                     formatting.black,
                     formatting.prettier,
                     formatting.stylua,
+                    formatting.fnlfmt,
                     diagnostics.eslint,
                     diagnostics.luacheck,
                     diagnostics.flake8,

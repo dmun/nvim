@@ -82,7 +82,7 @@ nnoremap <silent><ESC> <CMD>nohl<CR>
 " nnoremap <silent><leader>bd :bd<CR>
 
 " Run code
-nnoremap <silent><localleader><localleader> :!make -s run<CR>
+nnoremap <silent><A-r> :!make -s run<CR>
 " nnoremap <silent><leader>ff :Ex<CR>
 
 " augroup CursorLine
