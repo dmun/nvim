@@ -13,6 +13,7 @@ return {
                     FzfLuaHeaderText = { fg = colors.blue },
                     TroubleText = {},
                     TroubleCount = { fg = colors.green },
+                    CursorLine = { bg = colors.base },
                 }
             end,
         },
@@ -36,6 +37,7 @@ return {
                     "NeogitPopup",
                     "DiffviewFiles",
                     "fzf",
+                    "Trouble",
                 },
                 always_divide_middle = true,
             },
@@ -43,15 +45,34 @@ return {
                 lualine_a = {},
                 lualine_b = {},
                 lualine_c = { "mode", "filename" },
-                lualine_x = { "progress", "location" },
+                lualine_x = {
+                    {
+                        "fileformat",
+                        icons_enabled = false,
+                    },
+                    "progress",
+                    "location",
+                },
                 lualine_y = {},
                 lualine_z = {},
             },
             inactive_sections = {
                 lualine_a = {},
                 lualine_b = {},
-                lualine_c = { "mode", "filename" },
-                lualine_x = { "progress", "location" },
+                lualine_c = {
+                    function()
+                        return "      "
+                    end,
+                    "filename",
+                },
+                lualine_x = {
+                    {
+                        "fileformat",
+                        icons_enabled = false,
+                    },
+                    "progress",
+                    "location",
+                },
                 lualine_y = {},
                 lualine_z = {},
             },

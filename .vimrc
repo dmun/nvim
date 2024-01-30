@@ -1,7 +1,7 @@
 " Vim settings
 let R_assign = 0
 let mapleader=" "
-let maplocalleader="\\"
+let maplocalleader=","
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
@@ -32,7 +32,9 @@ set autochdir
 set shm+=I
 let g:rooter_silent_chdir = 1
 set splitkeep=topline
+set splitbelow
 set conceallevel=3
+set nottimeout
 
 " set guifont=monospace,Symbols\ Nerd\ Font:h19
 " set fillchars+=vert:▕
@@ -74,7 +76,7 @@ nnoremap <silent><C-u> <C-u>zz<CR>
 
 " Clear
 " nnoremap <silent><C-l> <C-l>:nohl<CR>
-nnoremap <silent><ESC> <CMD>nohl<CR>
+nnoremap <silent><ESC> <CMD>echo <Bar> nohl<CR>
 
 " Navigating buffers
 " nnoremap <silent><leader>bn :bnext<CR>
@@ -85,8 +87,10 @@ nnoremap <silent><ESC> <CMD>nohl<CR>
 nnoremap <silent><A-r> :!make -s run<CR>
 " nnoremap <silent><leader>ff :Ex<CR>
 
-" augroup CursorLine
-"     au!
-"     au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
-"     au WinLeave * setlocal nocursorline
-" augroup END
+augroup CursorLine
+    au!
+    au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
+    au WinLeave * setlocal nocursorline
+augroup END
+
+" au CmdlineChanged * 

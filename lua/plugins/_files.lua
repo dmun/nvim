@@ -7,13 +7,13 @@ vim.keymap.set("n", "<leader>3", function() require('harpoon.ui').nav_file(3) en
 vim.keymap.set("n", "<leader>4", function() require('harpoon.ui').nav_file(4) end, { silent = true })
 
 return {
-    {
-        "stevearc/oil.nvim",
-        opts = {},
-        dependencies = { "nvim-tree/nvim-web-devicons" },
-    },
-    {
-        "ThePrimeagen/harpoon",
-        lazy = true,
-    },
+    -- {
+    --     "stevearc/oil.nvim",
+    --     opts = {},
+    --     dependencies = { "nvim-tree/nvim-web-devicons" },
+    -- },
+    -- {
+    --     "ThePrimeagen/harpoon",
+    --     lazy = true,
+    -- },
 }
