@@ -28,7 +28,7 @@ end
 
 vim.opt.rtp:prepend({ hotpotpath, lazypath })
 
-require("defaults")
+vim.cmd.source "$HOME/.config/nvim/.vimrc"
 
 _G.packages = {
     {

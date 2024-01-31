@@ -27,6 +27,15 @@
     (tset spec 1 uri)
     (table.insert _G.packages spec)))
 
+;; yank highlight
+(let [hi-group (vim.api.nvim_create_augroup :YankHighlight {:clear true})]
+  (vim.api.nvim_create_autocmd :TextYankPost
+                               {:callback (fn [] (vim.highlight.on_yank)
+                                            :group
+                                            hi-group
+                                            :pattern
+                                            "*")}))
+
 ;; auto-save
 (map :<leader>as (cmd :ASToggle))
 
@@ -40,6 +49,17 @@
 (map :<Leader><LocalLeader> "<CMD>FzfLua buffers<CR>")
 (map :<Leader>bi "<CMD>FzfLua builtin<CR>")
 (map :<C-l> "<CMD>FzfLua lsp_code_actions<CR>")
+
+;; oil
+(map :<leader>e (cmd :Oil))
+
+;; harpoon
+(map :<leader>m (cmd :lua "require('harpoon.mark').add_file()"))
+(map :<leader>q (cmd :lua "require('harpoon.ui').toggle_quick_menu()"))
+(map :<leader>1 (cmd :lua "require('harpoon.ui').nav_file(1)"))
+(map :<leader>2 (cmd :lua "require('harpoon.ui').nav_file(2)"))
+(map :<leader>3 (cmd :lua "require('harpoon.ui').nav_file(3)"))
+(map :<leader>4 (cmd :lua "require('harpoon.ui').nav_file(4)"))
 
 ;; nvim-surround
 (remap :Q :ysiw)
