@@ -133,10 +133,11 @@ return {
             "hrsh7th/cmp-buffer",
             "hrsh7th/cmp-nvim-lua",
             "hrsh7th/cmp-nvim-lsp",
+            "PaterJason/cmp-conjure",
             "lukas-reineke/cmp-under-comparator",
             {
                 "saadparwaiz1/cmp_luasnip",
-                dependenceies = { "L3MON4D3/LuaSnip" },
+                dependencies = { "L3MON4D3/LuaSnip" },
             },
         },
         opts = function()
@@ -221,6 +222,7 @@ return {
                 },
                 preselect = cmp.PreselectMode.None,
                 sources = cmp.config.sources({
+                    { name = "conjure" },
                     { name = "luasnip" },
                     { name = "nvim_lsp" },
                     { name = "nvim_lua" },

@@ -36,11 +36,13 @@ set splitkeep=topline
 set splitbelow
 set conceallevel=3
 set nottimeout
+set sms
 
-" set guifont=monospace,Symbols\ Nerd\ Font:h19
+" let &stc='%=%{v:relnum?v:relnum:v:lnum} '
+set guifont=Iosevka\ Term,Symbols\ Nerd\ Font:h19
 " set fillchars+=vert:▕
 set fillchars+=vert:▏
-" se fillchars+=eob:\ 
+" set fillchars+=eob:\ 
 let g:tex_flavor = "latex"
 
 " Color settings
@@ -68,8 +70,9 @@ nnoremap <expr> $ &wrap ? 'g$' : '$'
 
 nnoremap <silent><leader>tw :set wrap!<CR>
 
-nnoremap <silent><C-d> <C-d>zz<CR>
-nnoremap <silent><C-u> <C-u>zz<CR>
+set sol
+" nnoremap <silent><C-d> <C-d>zz<CR>
+" nnoremap <silent><C-u> <C-u>zz<CR>
 
 " Save
 " nnoremap <silent><C-s> :w!<CR><C-l>

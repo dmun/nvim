@@ -13,7 +13,9 @@ return {
                     FzfLuaHeaderText = { fg = colors.blue },
                     TroubleText = {},
                     TroubleCount = { fg = colors.green },
-                    CursorLine = { bg = colors.base },
+                    CursorLine = { bg = "#2A2B3E" },
+                    CursorLineNr = { bg = "#2A2B3E" },
+                    CursorLineSign = { bg = "#2A2B3E" },
                 }
             end,
         },
@@ -38,6 +40,7 @@ return {
                     "DiffviewFiles",
                     "fzf",
                     "Trouble",
+                    "oil",
                 },
                 always_divide_middle = true,
             },

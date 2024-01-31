@@ -1,3 +1,5 @@
+vim.loader.enable()
+
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 
 if not vim.loop.fs_stat(lazypath) then
@@ -28,7 +30,7 @@ end
 
 vim.opt.rtp:prepend({ hotpotpath, lazypath })
 
-vim.cmd.source "$HOME/.config/nvim/.vimrc"
+vim.cmd.source("$HOME/.config/nvim/.vimrc")
 
 _G.packages = {
     {
@@ -36,13 +38,29 @@ _G.packages = {
     },
 }
 
-require("hotpot")
+-- require("hotpot")
+
+require("hotpot").setup({
+   enable_hotpot_diagnostics = true,
+   provide_require_fennel = true,
+   compiler = {
+       modules = {
+           correlate = true,
+       },
+       macros = {
+           allowGlobals = true,
+           compilerEnv = "_G",
+           env = "_COMPILER",
+       },
+   },
+})
+
 local plugins_path = vim.fn.stdpath("config") .. "/fnl/plugins"
 if vim.loop.fs_stat(plugins_path) then
-  for file in vim.fs.dir(plugins_path) do
-      file = file:match("^(.*)%.fnl$")
-      require("plugins." .. file)
-  end
+    for file in vim.fs.dir(plugins_path) do
+        file = file:match("^(.*)%.fnl$")
+        require("plugins." .. file)
+    end
 end
 
 plugins_path = vim.fn.stdpath("config") .. "/lua/plugins"
