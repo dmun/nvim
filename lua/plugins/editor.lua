@@ -39,7 +39,12 @@ return {
         opts = {
             load = {
                 ["core.defaults"] = {}, -- Loads default behaviour
-                ["core.concealer"] = {}, -- Adds pretty icons to your documents
+                ["core.concealer"] = {
+                    config = {
+                        folds = false,
+                        icon_preset = "diamond",
+                    },
+                },                  -- Adds pretty icons to your documents
                 ["core.dirman"] = { -- Manages Neorg workspaces
                     config = {
                         workspaces = {
@@ -63,6 +68,12 @@ return {
                 ["core.autocommands"] = {},
                 ["core.integrations.treesitter"] = {},
                 ["core.esupports.indent"] = {},
+                ["core.esupports.metagen"] = {},
+                ["core.completion"] = {
+                    config = {
+                        engine = "nvim-cmp",
+                    },
+                },
             },
         },
         build = ":Neorg sync-parsers",
