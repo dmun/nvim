@@ -1,4 +1,23 @@
-(import-macros {: def- : map : remap : cmd : package!} :macros)
+;; (import-macros {: davina : map : remap : cmd : package!} :macros)
+
+(macro def [opt value]
+  `(vim.cmd (string.format "set %s=%s" ,opt ,value)))
+
+(macro map [lhs rhs]
+  `(vim.keymap.set :n ,lhs ,rhs {:silent true}))
+
+(macro remap [lhs rhs]
+  `(vim.keymap.set :n ,lhs ,rhs {:silent true :remap true}))
+
+(macro cmd [command ...]
+  `(let [args# (table.concat (icollect [_# v# (ipairs [,...])]
+                               (.. " " v#)))]
+     (.. :<CMD> ,command (or args# "") :<CR>)))
+
+(macro package! [uri ?opts]
+  `(let [spec# (or ,?opts {})]
+     (tset spec# 1 ,uri)
+     (table.insert _G.packages spec#)))
 
 ;; yank highlight
 (let [hi-group (vim.api.nvim_create_augroup :YankHighlight {:clear true})]
@@ -16,15 +35,16 @@
 (map :<leader>tc (cmd :ColorizerToggle))
 
 ;; fzf-lua
-(map :<Leader><Leader> (cmd :FzfLua :files))
-(map :<Leader>fr (cmd :FzfLua :oldfiles))
-(map :<Leader>/ (cmd :FzfLua :live_grep_resume))
-(map :<Leader><LocalLeader> "<CMD>FzfLua buffers<CR>")
-(map :<Leader>bi "<CMD>FzfLua builtin<CR>")
+(map :<leader><leader> (cmd :FzfLua :files))
+(map :<leader>fr (cmd :FzfLua :oldfiles))
+(map :<leader>/ (cmd :FzfLua :live_grep_native))
+(map :<leader>? (cmd :FzfLua :live_grep_resume))
+(map :<leader><localleader> "<CMD>FzfLua buffers<CR>")
+(map :<leader>bi "<CMD>FzfLua builtin<CR>")
 (map :<C-l> "<CMD>FzfLua lsp_code_actions<CR>")
 
 ;; oil
-(map :<leader>e (cmd :bo :Oil))
+(map :<leader>e (cmd :Oil))
 
 ;; harpoon
 (map :<leader>m (cmd :lua "require('harpoon.mark').add_file()"))
@@ -38,8 +58,20 @@
 (remap :Q :ysiw)
 (remap :M :ysiW)
 
-(macrodebug (package! :miguelcrespo/scratch-buffer.nvim
-                      {:event :VimEnter :opts {} :dependencies [:Olical/conjure]}))
+;; hop
+(map ";" (cmd :HopLineStart))
+
+(package! :miguelcrespo/scratch-buffer.nvim
+          {:enabled false
+           :dependencies [:Olical/conjure]
+           :event :VimEnter
+           :opts {:filetype :fennel
+                  :with_lsp false
+                  ; :heading "\n"
+                  :with_neovim_version false}})
+
+(package! :ggandor/flit.nvim {:opts {}})
+(package! :smoka7/hop.nvim {:opts {}})
 
 (package! :luukvbaal/statuscol.nvim
           {:enabled false
@@ -51,14 +83,20 @@
 (package! :xiyaowong/virtcolumn.nvim
           {:enabled false
            :config (fn []
-                     (def- :cc 80))})
+                     (def :cc 80))})
 
 (package! :okuuva/auto-save.nvim {:opts {}})
 (package! :kylechui/nvim-surround {:version "*" :event :VeryLazy :opts {}})
 (package! :gpanders/nvim-parinfer)
 (package! :jghauser/mkdir.nvim)
 (package! :stevearc/oil.nvim
-          {:opts {} :dependencies [:nvim-tree/nvim-web-devicons]})
+          {:opts {:columns [; {1 :permissions :highlight :Comment}
+                            {1 :mtime
+                             :highlight :Comment
+                             :format "%d %b %H:%M "}
+                            :icon]
+                  :win_options {:signcolumn :yes}}
+           :dependencies [:nvim-tree/nvim-web-devicons]})
 
 (package! :ThePrimeagen/harpoon {:lazy true})
 (package! :tpope/vim-repeat)

@@ -9,7 +9,7 @@ set expandtab
 set mouse=a
 set number
 set relativenumber
-" set nornu nonu
+set nornu nonu
 set nowrap
 set lbr
 set breakindent
