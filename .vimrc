@@ -98,6 +98,7 @@ augroup CursorLine
     au!
     au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
     au WinLeave * setlocal nocursorline
+    au FileType TelescopePrompt* setlocal nocursorline
 augroup END
 
 " au CmdlineChanged * 

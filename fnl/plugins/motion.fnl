@@ -153,7 +153,7 @@
            :opts {:winopts {:preview {:hidden :hidden
                                       :layout :horizontal
                                       :horizontal "right:50%"}}
-                            ; :split "bo split new"}
+                  ; :split "bo split new"}
                   :defaults {:git_icons false
                              :file_icons false
                              :fzf_opts {:--info :inline-right}}
