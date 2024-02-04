@@ -1,7 +1,10 @@
 ;; (import-macros {: davina : map : remap : cmd : package!} :macros)
 
-(macro def [opt value]
-  `(vim.cmd (string.format "set %s=%s" ,opt ,value)))
+(macro set- [opt value]
+  `(tset vim.o ,opt ,value))
+
+(macro setg- [opt value]
+  `(tset vim.g ,opt ,value))
 
 (macro map [lhs rhs]
   `(vim.keymap.set :n ,lhs ,rhs {:silent true}))
@@ -14,11 +17,34 @@
                                (.. " " v#)))]
      (.. :<CMD> ,command (or args# "") :<CR>)))
 
+(macro hl [group opts]
+  `(let [opts# (icollect [k# v# (pairs ,opts)]
+                 (string.format "%s=%s" k# v#))]
+     (vim.cmd.highlight ,group (.. (unpack opts#)))))
+
+(macro setup [package opts]
+  `(let [module# (require ,package)]
+     (module#.setup ,opts)))
+
 (macro package! [uri ?opts]
   `(let [spec# (or ,?opts {})]
      (tset spec# 1 ,uri)
      (table.insert _G.packages spec#)))
 
+;; sets
+; (setg- "conjure#mapping#doc_word" false)
+(setg- "conjure#filetypes" [:clojure
+                            :fennel
+                            :janet
+                            :hy
+                            :julia
+                            :racket
+                            :scheme
+                            ; :lua
+                            :lisp
+                            :python
+                            :rust
+                            :sql])
 ;; yank highlight
 (let [hi-group (vim.api.nvim_create_augroup :YankHighlight {:clear true})]
   (vim.api.nvim_create_autocmd :TextYankPost
@@ -44,22 +70,25 @@
 (map :<C-l> "<CMD>FzfLua lsp_code_actions<CR>")
 
 ;; oil
-(map :<leader>e (cmd :Oil))
+(map :<leader>e ":Oil<CR>")
 
 ;; harpoon
-(map :<leader>m (cmd :lua "require('harpoon.mark').add_file()"))
-(map :<leader>q (cmd :lua "require('harpoon.ui').toggle_quick_menu()"))
-(map :<leader>1 (cmd :lua "require('harpoon.ui').nav_file(1)"))
-(map :<leader>2 (cmd :lua "require('harpoon.ui').nav_file(2)"))
-(map :<leader>3 (cmd :lua "require('harpoon.ui').nav_file(3)"))
-(map :<leader>4 (cmd :lua "require('harpoon.ui').nav_file(4)"))
+(map :<leader>m ":lua require('harpoon.mark').add_file()<CR>")
+(map :<leader>q ":lua require('harpoon.ui').toggle_quick_menu()<CR>")
+(map :<leader>1 ":lua require('harpoon.ui').nav_file(1)<CR>")
+(map :<leader>2 ":lua require('harpoon.ui').nav_file(2)<CR>")
+(map :<leader>3 ":lua require('harpoon.ui').nav_file(3)<CR>")
+(map :<leader>4 ":lua require('harpoon.ui').nav_file(4)<CR>")
 
 ;; nvim-surround
 (remap :Q :ysiw)
 (remap :M :ysiW)
 
 ;; hop
-(map ";" (cmd :HopLineStart))
+(map ";" ":HopLineStart<CR>")
+
+;; mason
+(map :<leader>m ":Mason<CR>")
 
 (package! :miguelcrespo/scratch-buffer.nvim
           {:enabled false
@@ -80,10 +109,11 @@
                        (statuscol.setup)))})
 
 (package! :Olical/conjure)
+
 (package! :xiyaowong/virtcolumn.nvim
           {:enabled false
            :config (fn []
-                     (def :cc 80))})
+                     (set- :cc 80))})
 
 (package! :okuuva/auto-save.nvim {:opts {}})
 (package! :kylechui/nvim-surround {:version "*" :event :VeryLazy :opts {}})
@@ -105,12 +135,33 @@
           {:lazy true
            :cmd :FzfLua
            :dependencies [:nvim-tree/nvim-web-devicons]
-           :opts {:winopts {:preview {:hidden :hidden
-                                      :layout :horizontal
-                                      :horizontal "right:50%"}
-                            :split "bo 10split new"}
+           :opts {:winopts {:preview {}}; :hidden :hidden
+                                      ; :layout :horizontal
+                                      ; :horizontal "right:50%"}}
+                            ; :split "bo 10split new"}
                   :defaults {:git_icons false
                              :file_icons false
                              :fzf_opts {:--info :inline-right}}
                   :files {:fzf_opts {:--header false}}
                   :oldfiles {:fd_opts "--exclude '/nvim/runtime/doc/*.txt'"}}})
+
+(package! :folke/which-key.nvim
+          {:event :VeryLazy
+           :init (fn [] (set- :timeout true)
+                   (set- :timeoutlen 300))
+           :opts {:key_labels {:<space> :SPC :<cr> :RET :<tab> :TAB}}})
+
+(package! :folke/neodev.nvim {:opts {}})
+
+(package! :folke/trouble.nvim
+          {:lazy true
+           :opts {:padding false
+                  :indent_lines false
+                  :use_diagnostic_signs true
+                  :icons false
+                  :fold_open "-"
+                  :fold_closed "+"}
+           :config (fn [_ opts]
+                     (setup :trouble opts)
+                     (hl :TroubleText {:guibg :none})
+                     (hl :TroubleFoldIcon {:guibg :none}))})

@@ -36,7 +36,6 @@ set splitkeep=topline
 set splitbelow
 set conceallevel=3
 set nottimeout
-set sms
 
 " let &stc='%=%{v:relnum?v:relnum:v:lnum} '
 set guifont=Iosevka\ Term,Symbols\ Nerd\ Font:h19

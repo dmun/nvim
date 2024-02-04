@@ -28,10 +28,10 @@ vim.keymap.set("n", "gr", function()
     require("trouble").toggle("lsp_references")
 end)
 
-vim.fn.sign_define("DiagnosticSignError", { text = " ", texthl = "DiagnosticSignError" })
-vim.fn.sign_define("DiagnosticSignWarn", { text = " ", texthl = "DiagnosticSignWarn" })
-vim.fn.sign_define("DiagnosticSignInfo", { text = " ", texthl = "DiagnosticSignInfo" })
-vim.fn.sign_define("DiagnosticSignHint", { text = "󰌵", texthl = "DiagnosticSignHint" })
+vim.fn.sign_define("DiagnosticSignError", { text = "❖", texthl = "DiagnosticSignError" })
+vim.fn.sign_define("DiagnosticSignWarn", { text = "◆", texthl = "DiagnosticSignWarn" })
+vim.fn.sign_define("DiagnosticSignInfo", { text = "•", texthl = "DiagnosticSignInfo" })
+vim.fn.sign_define("DiagnosticSignHint", { text = "•", texthl = "DiagnosticSignHint" })
 
 return {
     {
@@ -46,6 +46,7 @@ return {
                 "vimdoc",
                 "luadoc",
                 "norg",
+                "fennel",
             },
         },
     },
@@ -60,8 +61,8 @@ return {
         },
         config = function()
             vim.diagnostic.config({
-                virtual_text = false,
-                signs = false,
+                -- virtual_text = false,
+                -- signs = false,
                 float = {
                     border = "single",
                     format = function(diagnostic)
@@ -104,15 +105,15 @@ return {
             },
         },
     },
-    {
-        "folke/trouble.nvim",
-        lazy = true,
-        opts = {
-            padding = false,
-            indent_lines = false,
-            use_diagnostic_signs = true,
-        },
-    },
+    -- {
+    --     "folke/trouble.nvim",
+    --     lazy = true,
+    --     opts = {
+    --         padding = false,
+    --         indent_lines = false,
+    --         use_diagnostic_signs = true,
+    --     },
+    -- },
     "onsails/lspkind-nvim",
     {
         "numToStr/Comment.nvim",
@@ -140,7 +141,7 @@ return {
                 dependencies = { "L3MON4D3/LuaSnip" },
             },
         },
-        opts = function()
+        config = function()
             local cmp = require("cmp")
             local luasnip = require("luasnip")
             require("luasnip.loaders.from_snipmate").lazy_load()
@@ -241,11 +242,11 @@ return {
                 },
                 sorting = {
                     comparators = {
-                        cmp.config.compare.offset,
+                        cmp.config.compare.kind,
                         cmp.config.compare.exact,
                         cmp.config.compare.score,
+                        cmp.config.compare.offset,
                         require("cmp-under-comparator").under,
-                        cmp.config.compare.kind,
                         cmp.config.compare.sort_text,
                         cmp.config.compare.length,
                         cmp.config.compare.order,
@@ -253,9 +254,9 @@ return {
                 },
             })
         end,
-        config = function(_, opts)
-            require("cmp").setup(opts)
-        end,
+        -- config = function(_, opts)
+        --     require("cmp").setup(opts)
+        -- end,
     },
     {
         "nvimtools/none-ls.nvim",

@@ -9,14 +9,16 @@ return {
             custom_highlights = function(colors)
                 return {
                     NeoTreeEndOfBuffer = { fg = colors.base },
-                    FzfLuaBorder = { fg = colors.blue },
+                    -- FzfLuaBorder = { fg = colors.blue },
                     FzfLuaHeaderText = { fg = colors.blue },
-                    TroubleText = {},
+                    -- TroubleText = {},
                     TroubleCount = { fg = colors.green },
-                    CursorLine = { bg = colors.base },
-                    -- CursorLine = { bg = "#2A2B3E" },
-                    -- CursorLineNr = { bg = "#2A2B3E" },
-                    -- CursorLineSign = { bg = "#2A2B3E" },
+                    -- CursorLine = { bg = colors.base },
+                    CursorLine = { bg = "#2A2B3E" },
+                    CursorLineNr = { bg = "#2A2B3E" },
+                    CursorLineSign = { bg = "#2A2B3E" },
+                    TroubleText = { bg = colors.none },
+                    TroubleFoldIcon = { bg = colors.none },
                 }
             end,
         },
