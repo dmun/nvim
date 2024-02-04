@@ -37,6 +37,10 @@ set splitbelow
 set conceallevel=3
 set nottimeout
 
+" autocmd! FileType fzf
+" autocmd FileType fzf set laststatus=0 noshowmode noruler 
+"     \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
+
 " let &stc='%=%{v:relnum?v:relnum:v:lnum} '
 set guifont=Iosevka\ Term,Symbols\ Nerd\ Font:h19
 " set fillchars+=vert:▕

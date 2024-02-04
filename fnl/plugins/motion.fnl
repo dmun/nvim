@@ -45,6 +45,7 @@
                             :python
                             :rust
                             :sql])
+
 ;; yank highlight
 (let [hi-group (vim.api.nvim_create_augroup :YankHighlight {:clear true})]
   (vim.api.nvim_create_autocmd :TextYankPost
@@ -53,6 +54,20 @@
                                             hi-group
                                             :pattern
                                             "*")}))
+
+; (vim.api.nvim_create_autocmd :FileType
+;                              {:pattern :fzf
+;                               :callback (fn []
+;                                           (set- :laststatus 0)
+;                                           (set- :showmode false)
+;                                           (set- :ruler false))})
+;
+; (vim.api.nvim_create_autocmd :BufLeave
+;                              {:buffer (vim.fn.bufnr)
+;                               :callback (fn []
+;                                           (set- :laststatus 2)
+;                                           (set- :showmode true)
+;                                           (set- :ruler true))})
 
 ;; auto-save
 (map :<leader>as (cmd :ASToggle))
@@ -135,10 +150,10 @@
           {:lazy true
            :cmd :FzfLua
            :dependencies [:nvim-tree/nvim-web-devicons]
-           :opts {:winopts {:preview {}}; :hidden :hidden
-                                      ; :layout :horizontal
-                                      ; :horizontal "right:50%"}}
-                            ; :split "bo 10split new"}
+           :opts {:winopts {:preview {:hidden :hidden
+                                      :layout :horizontal
+                                      :horizontal "right:50%"}}
+                            ; :split "bo split new"}
                   :defaults {:git_icons false
                              :file_icons false
                              :fzf_opts {:--info :inline-right}}
