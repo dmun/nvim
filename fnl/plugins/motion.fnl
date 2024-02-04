@@ -1,5 +1,13 @@
-(import-macros {: set- : setg- : map : remap : cmd : hl : setup : package!}
-               :macros)
+(import-macros {: set-
+                : setg-
+                : nmap
+                : imap
+                : vmap
+                : remap
+                : cmd
+                : hl
+                : setup
+                : package!} :macros)
 
 (macro set- [opt value]
   (tset `vim.o opt value))
@@ -98,7 +106,7 @@
 (vmap ";" :<CMD>HopLineStart<CR>)
 
 ;; mason
-(nmap :<leader>m ":Mason<CR>")
+; (nmap :<leader>m ":Mason<CR>")
 
 (package! :miguelcrespo/scratch-buffer.nvim
           {:enabled false
@@ -175,3 +183,9 @@
                      (setup :trouble opts)
                      (hl :TroubleText {:guibg :none})
                      (hl :TroubleFoldIcon {:guibg :none}))})
+
+(package! :nvim-treesitter/nvim-treesitter-context)
+(package! :ray-x/go.nvim)
+(package! :kevinhwang91/nvim-ufo
+          {:dependencies [:kevinhwang91/promise-async]
+           :opts {:provider_selector (fn [] [:treesitter :indent])}})

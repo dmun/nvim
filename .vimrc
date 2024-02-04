@@ -9,7 +9,7 @@ set expandtab
 set mouse=a
 set number
 set relativenumber
-set nornu nonu
+set nornu
 set nowrap
 set lbr
 set breakindent
@@ -36,6 +36,10 @@ set splitkeep=topline
 set splitbelow
 set conceallevel=3
 set nottimeout
+set foldcolumn=0
+set foldlevel=99
+set foldlevelstart=99
+set foldenable
 
 " autocmd! FileType fzf
 " autocmd FileType fzf set laststatus=0 noshowmode noruler 

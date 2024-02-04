@@ -4,8 +4,17 @@
 (fn setg- [opt value]
   (tset `vim.go opt value))
 
-(fn map [lhs rhs]
-  `(vim.keymap.set :n ,lhs ,rhs {:silent true}))
+(fn map [mode lhs rhs]
+  `(vim.keymap.set ,mode ,lhs ,rhs {:silent true}))
+
+(fn nmap [lhs rhs]
+  (map :n lhs rhs))
+
+(fn imap [lhs rhs]
+  (map :i lhs rhs))
+
+(fn vmap [lhs rhs]
+  (map :v lhs rhs))
 
 (fn remap [lhs rhs]
   `(vim.keymap.set :n ,lhs ,rhs {:silent true :remap true}))
@@ -31,7 +40,9 @@
 
 {: set-
  : setg-
- : map
+ : nmap
+ : imap
+ : vmap
  : remap
  : cmd
  : hl

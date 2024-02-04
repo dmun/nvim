@@ -18,6 +18,7 @@ return {
                     CursorLine = { bg = "#2A2B3E" },
                     CursorLineNr = { bg = "#2A2B3E" },
                     CursorLineSign = { bg = "#2A2B3E" },
+                    TreesitterContext = { bg = colors.surface0 },
                     TroubleText = { bg = colors.none },
                     TroubleFoldIcon = { bg = colors.none },
                 }
