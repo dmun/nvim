@@ -1,13 +1,23 @@
-;; (import-macros {: davina : map : remap : cmd : package!} :macros)
+(import-macros {: set- : setg- : map : remap : cmd : hl : setup : package!}
+               :macros)
 
 (macro set- [opt value]
-  `(tset vim.o ,opt ,value))
+  (tset `vim.o opt value))
 
 (macro setg- [opt value]
-  `(tset vim.g ,opt ,value))
+  (tset `vim.g opt value))
 
-(macro map [lhs rhs]
-  `(vim.keymap.set :n ,lhs ,rhs {:silent true}))
+(macro map [mode lhs rhs]
+  `(vim.keymap.set ,mode ,lhs ,rhs {:silent true}))
+
+(macro nmap [lhs rhs]
+  `(map :n ,lhs ,rhs))
+
+(macro imap [lhs rhs]
+  `(map :i ,lhs ,rhs))
+
+(macro vmap [lhs rhs]
+  `(map :v ,lhs ,rhs))
 
 (macro remap [lhs rhs]
   `(vim.keymap.set :n ,lhs ,rhs {:silent true :remap true}))
@@ -31,8 +41,6 @@
      (tset spec# 1 ,uri)
      (table.insert _G.packages spec#)))
 
-;; sets
-; (setg- "conjure#mapping#doc_word" false)
 (setg- "conjure#filetypes" [:clojure
                             :fennel
                             :janet
@@ -55,55 +63,42 @@
                                             :pattern
                                             "*")}))
 
-; (vim.api.nvim_create_autocmd :FileType
-;                              {:pattern :fzf
-;                               :callback (fn []
-;                                           (set- :laststatus 0)
-;                                           (set- :showmode false)
-;                                           (set- :ruler false))})
-;
-; (vim.api.nvim_create_autocmd :BufLeave
-;                              {:buffer (vim.fn.bufnr)
-;                               :callback (fn []
-;                                           (set- :laststatus 2)
-;                                           (set- :showmode true)
-;                                           (set- :ruler true))})
-
 ;; auto-save
-(map :<leader>as (cmd :ASToggle))
+(nmap :<leader>as ":ASToggle<CR>")
 
 ;; colorizer
-(map :<leader>tc (cmd :ColorizerToggle))
+(nmap :<leader>tc (cmd :ColorizerToggle))
 
 ;; fzf-lua
-(map :<leader><leader> (cmd :FzfLua :files))
-(map :<leader>fr (cmd :FzfLua :oldfiles))
-(map :<leader>/ (cmd :FzfLua :live_grep_native))
-(map :<leader>? (cmd :FzfLua :live_grep_resume))
-(map :<leader><localleader> "<CMD>FzfLua buffers<CR>")
-(map :<leader>bi "<CMD>FzfLua builtin<CR>")
-(map :<C-l> "<CMD>FzfLua lsp_code_actions<CR>")
+(nmap :<leader><leader> (cmd :FzfLua :files))
+(nmap :<leader>fr (cmd :FzfLua :oldfiles))
+(nmap :<leader>/ (cmd :FzfLua :live_grep_native))
+(nmap :<leader>? (cmd :FzfLua :live_grep_resume))
+(nmap :<leader><localleader> "<CMD>FzfLua buffers<CR>")
+(nmap :<leader>bi "<CMD>FzfLua builtin<CR>")
+(nmap :<C-l> "<CMD>FzfLua lsp_code_actions<CR>")
 
 ;; oil
-(map :<leader>e ":Oil<CR>")
+(nmap :<leader>e ":Oil<CR>")
 
 ;; harpoon
-(map :<leader>m ":lua require('harpoon.mark').add_file()<CR>")
-(map :<leader>q ":lua require('harpoon.ui').toggle_quick_menu()<CR>")
-(map :<leader>1 ":lua require('harpoon.ui').nav_file(1)<CR>")
-(map :<leader>2 ":lua require('harpoon.ui').nav_file(2)<CR>")
-(map :<leader>3 ":lua require('harpoon.ui').nav_file(3)<CR>")
-(map :<leader>4 ":lua require('harpoon.ui').nav_file(4)<CR>")
+(nmap :<leader>m ":lua require('harpoon.mark').add_file()<CR>")
+(nmap :<leader>q ":lua require('harpoon.ui').toggle_quick_menu()<CR>")
+(nmap :<leader>1 ":lua require('harpoon.ui').nav_file(1)<CR>")
+(nmap :<leader>2 ":lua require('harpoon.ui').nav_file(2)<CR>")
+(nmap :<leader>3 ":lua require('harpoon.ui').nav_file(3)<CR>")
+(nmap :<leader>4 ":lua require('harpoon.ui').nav_file(4)<CR>")
 
 ;; nvim-surround
 (remap :Q :ysiw)
 (remap :M :ysiW)
 
 ;; hop
-(map ";" ":HopLineStart<CR>")
+(nmap ";" :<CMD>HopLineStart<CR>)
+(vmap ";" :<CMD>HopLineStart<CR>)
 
 ;; mason
-(map :<leader>m ":Mason<CR>")
+(nmap :<leader>m ":Mason<CR>")
 
 (package! :miguelcrespo/scratch-buffer.nvim
           {:enabled false
