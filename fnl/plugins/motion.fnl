@@ -149,14 +149,18 @@
                   :win_options {:signcolumn :yes}}
            :dependencies [:nvim-tree/nvim-web-devicons]})
 
-(package! :ThePrimeagen/harpoon {:lazy true})
+(package! :ThePrimeagen/harpoon
+          {:lazy true :dependencies [:nvim-lua/plenary.nvim]})
+
 (package! :tpope/vim-repeat)
 
 (package! :ibhagwan/fzf-lua
           {:lazy true
            :cmd :FzfLua
            :dependencies [:nvim-tree/nvim-web-devicons]
-           :opts {:winopts {:preview {:hidden :hidden
+           :opts {:winopts {:height 10
+                            :width 60
+                            :preview {:hidden :hidden
                                       :layout :horizontal
                                       :horizontal "right:50%"}}
                   ; :split "bo split new"}

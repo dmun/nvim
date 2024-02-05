@@ -9,7 +9,7 @@ set expandtab
 set mouse=a
 set number
 set relativenumber
-set nornu
+set nornu nonu
 set nowrap
 set lbr
 set breakindent
@@ -41,8 +41,8 @@ set foldlevel=99
 set foldlevelstart=99
 set foldenable
 
-" autocmd! FileType fzf
-" autocmd FileType fzf set laststatus=0 noshowmode noruler 
+" autocmd! FileType Trouble,NeogitPopup
+" autocmd FileType Trouble,NeogitPopup set laststatus=0 noshowmode noruler 
 "     \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
 
 " let &stc='%=%{v:relnum?v:relnum:v:lnum} '
