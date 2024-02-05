@@ -133,15 +133,18 @@
            :config (fn []
                      (set- :cc 80))})
 
-(package! :okuuva/auto-save.nvim {:opts {}})
+(package! :okuuva/auto-save.nvim
+          {:opts {:condition (fn [buf]
+                               (not= (vim.fn.getbufvar buf :&buftype) :acwrite))}})
+
 (package! :kylechui/nvim-surround {:version "*" :event :VeryLazy :opts {}})
 (package! :gpanders/nvim-parinfer)
 (package! :jghauser/mkdir.nvim)
 (package! :stevearc/oil.nvim
           {:opts {:columns [; {1 :permissions :highlight :Comment}
-                            {1 :mtime
-                             :highlight :Comment
-                             :format "%d %b %H:%M "}
+                            ; {1 :mtime
+                            ;  :highlight :Comment
+                            ;  :format "%d %b %H:%M "}
                             :icon]
                   :win_options {:signcolumn :yes}}
            :dependencies [:nvim-tree/nvim-web-devicons]})
