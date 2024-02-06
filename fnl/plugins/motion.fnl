@@ -217,3 +217,6 @@
                           :callback (fn []
                                       (hl :Cursor {:blend 0})
                                       (vim.opt.guicursor:remove ["a:Cursor/lCursor"]))}))})
+
+(hl :LeapLabelPrimary {:guifg "#FF007C"})
+(hl :LeapMatch {:guifg "#FF007C" :gui "underline,nocombine"})
