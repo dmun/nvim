@@ -196,3 +196,24 @@
 (package! :kevinhwang91/nvim-ufo
           {:dependencies [:kevinhwang91/promise-async]
            :opts {:provider_selector (fn [] [:treesitter :indent])}})
+
+; (package! :nvim-telescope/telescope.nvim
+;           {:dependencies [:nvim-lua/plenary.nvim] :tag :0.1.5})
+
+(macro au [group opts]
+  `(vim.api.nvim_create_autocmd ,group ,opts))
+
+(package! :ggandor/leap.nvim
+          {:enabled true
+           :config (fn []
+                     ((. (require :leap) :create_default_mappings))
+                     (au :User
+                         {:pattern :LeapEnter
+                          :callback (fn []
+                                      (hl :Cursor {:blend 100})
+                                      (vim.opt.guicursor:append ["a:Cursor/lCursor"]))})
+                     (au :User
+                         {:pattern :LeapLeave
+                          :callback (fn []
+                                      (hl :Cursor {:blend 0})
+                                      (vim.opt.guicursor:remove ["a:Cursor/lCursor"]))}))})
