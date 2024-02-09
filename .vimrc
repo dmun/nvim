@@ -40,6 +40,8 @@ set foldcolumn=0
 set foldlevel=99
 set foldlevelstart=99
 set foldenable
+set noshowmode
+set noruler
 
 " autocmd! FileType Trouble,NeogitPopup
 " autocmd FileType Trouble,NeogitPopup set laststatus=0 noshowmode noruler 

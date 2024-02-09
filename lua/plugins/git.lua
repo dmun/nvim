@@ -11,7 +11,9 @@ return {
             "sindrets/diffview.nvim",
             "ibhagwan/fzf-lua",
         },
-        opts = {},
+        opts = {
+            disable_hint = true,
+        },
     },
     {
         "lewis6991/gitsigns.nvim",
