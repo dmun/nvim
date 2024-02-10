@@ -147,6 +147,7 @@ return {
             "hrsh7th/cmp-buffer",
             "hrsh7th/cmp-nvim-lua",
             "hrsh7th/cmp-nvim-lsp",
+            "hrsh7th/cmp-nvim-lsp-signature-help",
             "PaterJason/cmp-conjure",
             "lukas-reineke/cmp-under-comparator",
             {
@@ -241,6 +242,7 @@ return {
                     { name = "nvim_lsp" },
                     { name = "nvim_lua" },
                     { name = "buffer" },
+                    { name = "nvim_lsp_signature_help" },
                 }),
                 formatting = {
                     fields = { "kind", "abbr", "menu" },
