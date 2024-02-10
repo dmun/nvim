@@ -82,7 +82,7 @@
 (nmap :<leader>fr (cmd :FzfLua :oldfiles))
 (nmap :<leader>/ (cmd :FzfLua :live_grep_native))
 (nmap :<leader>? (cmd :FzfLua :live_grep_resume))
-(nmap :<leader><localleader> "<CMD>FzfLua buffers<CR>")
+(nmap "<leader>," "<CMD>FzfLua buffers<CR>")
 (nmap :<leader>bi "<CMD>FzfLua builtin<CR>")
 (nmap :<C-l> "<CMD>FzfLua lsp_code_actions<CR>")
 
