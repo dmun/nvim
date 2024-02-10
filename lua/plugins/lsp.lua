@@ -2,7 +2,7 @@ vim.keymap.set("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>")
 vim.keymap.set("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>")
 vim.keymap.set("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>")
 vim.keymap.set("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>")
-vim.keymap.set("n", "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>")
+-- vim.keymap.set("n", "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>")
 vim.keymap.set("n", "<space>wa", "<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>")
 vim.keymap.set("n", "<space>wr", "<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>")
 vim.keymap.set("n", "<space>wl", "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>")
@@ -82,7 +82,15 @@ return {
                         require("lspconfig")[ls].setup({
                             autostart = ls ~= "ltex",
                             settings = {
-                                lua = {
+                                fennel = {
+                                    workspace = {
+                                        library = vim.api.nvim_list_runtime_paths(),
+                                    },
+                                    diagnostics = {
+                                        globals = { "vim" },
+                                    },
+                                },
+                                Lua = {
                                     diagnostics = {
                                         globals = { "vim" },
                                     },

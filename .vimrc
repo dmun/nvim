@@ -74,6 +74,9 @@ set background=dark
 " inoremap <M-f> <C-o>w
 " inoremap <M-b> <C-o>b
 
+vnoremap J :m '>+1<CR>gv=gv
+vnoremap K :m '<-2<CR>gv=gv
+
 nnoremap <expr> j v:count ? (v:count > 5 ? "m'" . v:count : '') . 'j' : 'gj'
 nnoremap <expr> k v:count ? (v:count > 5 ? "m'" . v:count : '') . 'k' : 'gk'
 nnoremap <expr> 0 &wrap ? 'g0' : '0'
