@@ -102,11 +102,18 @@
 (remap :M :ysiW)
 
 ;; hop
-(nmap ";" :<CMD>HopLineStart<CR>)
-(vmap ";" :<CMD>HopLineStart<CR>)
+; (nmap ";" :<CMD>HopLineStart<CR>)
+; (vmap ";" :<CMD>HopLineStart<CR>)
 
 ;; mason
 ; (nmap :<leader>m ":Mason<CR>")
+
+(nmap :f :<Plug>Sneak_f)
+(nmap :F :<Plug>Sneak_F)
+(nmap :t :<Plug>Sneak_t)
+(nmap :T :<Plug>Sneak_T)
+
+(package! :justinmk/vim-sneak)
 
 (package! :miguelcrespo/scratch-buffer.nvim
           {:enabled false
@@ -117,8 +124,8 @@
                   ; :heading "\n"
                   :with_neovim_version false}})
 
-(package! :ggandor/flit.nvim {:opts {}})
-(package! :smoka7/hop.nvim {:opts {}})
+(package! :ggandor/flit.nvim {:enabled false :opts {}})
+; (package! :smoka7/hop.nvim {:opts {}})
 
 (package! :luukvbaal/statuscol.nvim
           {:enabled false
@@ -171,7 +178,8 @@
                   :oldfiles {:fd_opts "--exclude '/nvim/runtime/doc/*.txt'"}}})
 
 (package! :folke/which-key.nvim
-          {:event :VeryLazy
+          {:enabled false
+           :event :VeryLazy
            :init (fn [] (set- :timeout true)
                    (set- :timeoutlen 300))
            :opts {:key_labels {:<space> :SPC :<cr> :RET :<tab> :TAB}}})
@@ -204,7 +212,7 @@
   `(vim.api.nvim_create_autocmd ,group ,opts))
 
 (package! :ggandor/leap.nvim
-          {:enabled true
+          {:enabled false
            :config (fn []
                      ((. (require :leap) :create_default_mappings))
                      (au :User

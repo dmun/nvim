@@ -1,7 +1,7 @@
 " Vim settings
 let R_assign = 0
-let mapleader=" "
-let maplocalleader=","
+let mapleader="\<Space>"
+let maplocalleader="\<C-Space>"
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
@@ -13,7 +13,7 @@ set nornu nonu
 set nowrap
 set lbr
 set breakindent
-set cursorline
+set nocursorline
 set showtabline=0
 set scrolloff=5
 set sidescrolloff=10
@@ -42,6 +42,9 @@ set foldlevelstart=99
 set foldenable
 set noshowmode
 set noruler
+set ignorecase
+set smartcase
+let g:sneak#use_ic_scs = 1
 
 " autocmd! FileType Trouble,NeogitPopup
 " autocmd FileType Trouble,NeogitPopup set laststatus=0 noshowmode noruler 
@@ -94,17 +97,17 @@ nnoremap <silent><ESC> <CMD>echo <Bar> nohl<CR>
 " Navigating buffers
 " nnoremap <silent><leader>bn :bnext<CR>
 " nnoremap <silent><leader>bp :bprev<CR>
-" nnoremap <silent><leader>bd :bd<CR>
+" nnoremap <silent><leader>sd :bd<CR>
 
 " Run code
 nnoremap <silent><A-r> :!make -s run<CR>
 " nnoremap <silent><leader>ff :Ex<CR>
 
-augroup CursorLine
-    au!
-    au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
-    au WinLeave * setlocal nocursorline
-    au FileType TelescopePrompt* setlocal nocursorline
-augroup END
+" augroup CursorLine
+"     au!
+"     au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
+"     au WinLeave * setlocal nocursorline
+"     au FileType TelescopePrompt* setlocal nocursorline
+" augroup END
 
 " au CmdlineChanged * 
