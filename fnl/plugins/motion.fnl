@@ -86,6 +86,14 @@
 (nmap :<leader>bi "<CMD>FzfLua builtin<CR>")
 (nmap :<C-l> "<CMD>FzfLua lsp_code_actions<CR>")
 
+;; telescope
+; (nmap :<leader><leader> "<CMD>Telescope find_files<CR>")
+; (nmap :<leader>fr "<CMD>Telescope oldfiles<CR>")
+; (nmap :<leader>/ "<CMD>Telescope live_grep<CR>")
+; (nmap "<leader>," "<CMD>Telescope buffers<CR>")
+; (nmap :<leader>bi :<CMD>Telescope<CR>)
+; (nmap :<C-l> "<CMD>FzfLua lsp_code_actions<CR>")
+
 ;; oil
 (nmap :<leader>e ":Oil<CR>")
 
@@ -98,8 +106,8 @@
 (nmap :<leader>4 ":lua require('harpoon.ui').nav_file(4)<CR>")
 
 ;; nvim-surround
-(remap :Q :ysiw)
-(remap :M :ysiW)
+; (remap :Q :ysiw)
+; (remap :M :ysiW)
 
 ;; hop
 ; (nmap ";" :<CMD>HopLineStart<CR>)
@@ -141,7 +149,9 @@
                      (set- :cc 80))})
 
 (package! :okuuva/auto-save.nvim
-          {:opts {:condition (fn [buf]
+          {:enabled false
+           :opts {:execution_message {:message (fn [] "")}
+                  :condition (fn [buf]
                                (not= (vim.fn.getbufvar buf :&buftype) :acwrite))}})
 
 (package! :kylechui/nvim-surround {:version "*" :event :VeryLazy :opts {}})
@@ -160,17 +170,19 @@
           {:lazy true :dependencies [:nvim-lua/plenary.nvim]})
 
 (package! :tpope/vim-repeat)
+(package! :tpope/vim-rsi)
 
 (package! :ibhagwan/fzf-lua
-          {:lazy true
+          {:enabled true
+           :lazy true
            :cmd :FzfLua
            :dependencies [:nvim-tree/nvim-web-devicons]
            :opts {:winopts {:height 10
                             :width 60
                             :preview {:hidden :hidden
                                       :layout :horizontal
-                                      :horizontal "right:50%"}}
-                  ; :split "bo split new"}
+                                      :horizontal "right:50%"}
+                            :split "bo 10split new"}
                   :defaults {:git_icons false
                              :file_icons false
                              :fzf_opts {:--info :inline-right}}
@@ -205,11 +217,19 @@
           {:dependencies [:kevinhwang91/promise-async]
            :opts {:provider_selector (fn [] [:treesitter :indent])}})
 
-; (package! :nvim-telescope/telescope.nvim
-;           {:dependencies [:nvim-lua/plenary.nvim] :tag :0.1.5})
+(package! :nvim-telescope/telescope.nvim
+          {:enabled false
+           :dependencies [:nvim-lua/plenary.nvim]
+           :tag :0.1.5
+           :opts {:theme :dropdown}})
 
 (macro au [group opts]
   `(vim.api.nvim_create_autocmd ,group ,opts))
+
+(package! :bluz71/vim-moonfly-colors
+          {:enabled false
+           :priority 1000
+           :config (fn [] (vim.cmd.colorscheme :moonfly))})
 
 (package! :ggandor/leap.nvim
           {:enabled false
@@ -226,5 +246,4 @@
                                       (hl :Cursor {:blend 0})
                                       (vim.opt.guicursor:remove ["a:Cursor/lCursor"]))}))})
 
-(hl :LeapLabelPrimary {:guifg "#FF007C"})
-(hl :LeapMatch {:guifg "#FF007C" :gui "underline,nocombine"})
+(hl :Sneak {:guifg "#FF007C" :gui "underline,nocombine"})

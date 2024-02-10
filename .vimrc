@@ -45,16 +45,16 @@ set noruler
 set ignorecase
 set smartcase
 let g:sneak#use_ic_scs = 1
+set undofile
 
-" autocmd! FileType Trouble,NeogitPopup
-" autocmd FileType Trouble,NeogitPopup set laststatus=0 noshowmode noruler 
-"     \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
+autocmd! FileType fzf,NeogitPopup,Trouble
+autocmd FileType fzf,NeogitPopup,Trouble set laststatus=0
+    \| autocmd BufLeave <buffer> set laststatus=2
 
-" let &stc='%=%{v:relnum?v:relnum:v:lnum} '
 set guifont=Iosevka\ Term,Symbols\ Nerd\ Font:h19
 " set fillchars+=vert:▕
 set fillchars+=vert:▏
-" set fillchars+=eob:\ 
+set fillchars+=eob:\ 
 let g:tex_flavor = "latex"
 
 " Color settings
@@ -63,16 +63,16 @@ set termguicolors
 set background=dark
 
 " Readline
-inoremap <C-a> <C-o>0
-inoremap <C-e> <C-o>$
-inoremap <C-f> <C-o>l
-inoremap <C-b> <C-o>h
-inoremap <C-d> <C-o>x
-inoremap <C-k> <C-o>D
-inoremap <C-u> <C-o>dd
-inoremap <M-d> <C-o>dw
-inoremap <M-f> <C-o>w
-inoremap <M-b> <C-o>b
+" inoremap <C-a> <C-o>0
+" inoremap <C-e> <C-o>$
+" inoremap <C-f> <C-o>l
+" inoremap <C-b> <C-o>h
+" inoremap <C-d> <C-o>x
+" inoremap <C-k> <C-o>D
+" inoremap <C-u> <C-o>dd
+" inoremap <M-d> <C-o>dw
+" inoremap <M-f> <C-o>w
+" inoremap <M-b> <C-o>b
 
 nnoremap <expr> j v:count ? (v:count > 5 ? "m'" . v:count : '') . 'j' : 'gj'
 nnoremap <expr> k v:count ? (v:count > 5 ? "m'" . v:count : '') . 'k' : 'gk'

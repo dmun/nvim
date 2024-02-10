@@ -1,6 +1,7 @@
 return {
     {
         "catppuccin/nvim",
+        -- enabled = false,
         lazy = false,
         name = "catppuccin",
         priority = 1000,
@@ -37,16 +38,16 @@ return {
                 theme = "auto",
                 component_separators = { left = "", right = "" },
                 section_separators = { left = "", right = "" },
-                disabled_filetypes = {
-                    "NvimTree",
-                    "neo-tree",
-                    "startify",
-                    "nofile",
-                    "NeogitPopup",
-                    "DiffViewFiles",
-                    "fzf",
-                    "Trouble",
-                },
+                -- disabled_filetypes = {
+                --     "NvimTree",
+                --     "neo-tree",
+                --     "startify",
+                --     "nofile",
+                --     "NeogitPopup",
+                --     "DiffViewFiles",
+                --     "fzf",
+                --     "Trouble",
+                -- },
                 always_divide_middle = true,
             },
             sections = {
@@ -54,6 +55,7 @@ return {
                 lualine_b = {},
                 lualine_c = { "mode", "filename" },
                 lualine_x = {
+                    "diagnostics",
                     {
                         "fileformat",
                         icons_enabled = false,
@@ -74,6 +76,7 @@ return {
                     "filename",
                 },
                 lualine_x = {
+                    "diagnostics",
                     {
                         "fileformat",
                         icons_enabled = false,

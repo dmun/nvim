@@ -82,6 +82,11 @@ return {
                         require("lspconfig")[ls].setup({
                             autostart = ls ~= "ltex",
                             settings = {
+                                lua = {
+                                    diagnostics = {
+                                        globals = { "vim" },
+                                    },
+                                },
                                 ltex = {
                                     language = "nl",
                                     filetype = { "norg" },
