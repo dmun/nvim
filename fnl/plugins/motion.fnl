@@ -163,10 +163,12 @@
                      (hl :TroubleText {:guibg :none})
                      (hl :TroubleFoldIcon {:guibg :none}))})
 
-(package! :nvim-treesitter/nvim-treesitter-context)
+; (package! :nvim-treesitter/nvim-treesitter-context)
 (package! :ray-x/go.nvim)
+(package! :bakpakin/fennel.vim)
+
 (package! :kevinhwang91/nvim-ufo
-          {:dependencies [:kevinhwang91/promise-async]
+          {:dependencies [:nvim-treesitter/nvim-treesitter :kevinhwang91/promise-async]
            :opts {:provider_selector (fn [] [:treesitter :indent])}})
 
 (package! :nvim-telescope/telescope.nvim
@@ -199,3 +201,84 @@
                                       (vim.opt.guicursor:remove ["a:Cursor/lCursor"]))}))})
 
 (hl :Sneak {:guifg "#FF007C" :gui "underline,nocombine"})
+
+(package! :nvim-treesitter/nvim-treesitter
+          {:event [:BufReadPre :BufNewFile]
+           :opts {:highlight {:enable true}
+                  :indent {:enable true}
+                  :ensure_installed [:lua :vim :vimdoc :luadoc :norg :fennel]}})
+
+;; fnlfmt: skip
+(package! :neovim/nvim-lspconfig
+          {:event [:BufReadPre :BufNewFile]
+           :dependencies [{1 :williamboman/mason-lspconfig.nvim
+                           :dependencies [:williamboman/mason.nvim]}]
+           :config (fn []
+                     (vim.diagnostic.config {:float {:border :single}})
+                     (setup :mason-lspconfig
+                            {:handlers [(fn [ls]
+                                          (if (= ls :lua_ls) (setup :neodev))
+                                          ((. (. (require :lspconfig) ls)
+                                              :setup) {:autostart (not= ls :ltex)
+                                                       :settings {:fennel {:workspace {:library (vim.api.nvim_list_runtime_paths)}
+                                                                           :diagnostics {:globals [:vim]}}
+                                                                  :Lua {:completion {:completion {:callSnippet :Replace}}
+                                                                        :diagnostics {:globals [:vim]}}
+                                                                  :ltex {:language :nl
+                                                                         :filetype [:norg]
+                                                                         :additionalRules {:enablePickyRules true}}}}))]}))})
+
+(package! :williamboman/mason.nvim {:opts {:ui {:width 1 :height 1}}})
+(package! :numToStr/Comment.nvim {:opts {}})
+(package! :HiPhish/rainbow-delimiters.nvim {:enabled false})
+
+(package! :L3MON4D3/LuaSnip
+          {:lazy true
+           :version :v2.*
+           :dependencies [:rafamadriz/friendly-snippets]
+           :opts {}
+           :config (fn []
+                     ((. (require :luasnip.loaders.from_vscode) :lazy_load))
+                     ((. (require :luasnip.loaders.from_snipmate) :lazy_load)))
+           :build "make install_jsregexp"})
+
+(package! :windwp/nvim-ts-autotag {:event [:BufReadPre :BufNewFile] :opts {}})
+
+(package! :hrsh7th/nvim-cmp
+          {:event :InsertEnter
+           :dependencies [:hrsh7th/cmp-buffer
+                          :hrsh7th/cmp-nvim-lua
+                          :hrsh7th/cmp-nvim-lsp
+                          :hrsh7th/cmp-nvim-lsp-signature-help
+                          :PaterJason/cmp-conjure
+                          :lukas-reineke/cmp-under-comparator
+                          {1 :saadparwaiz1/cmp_luasnip
+                           :dependencies [:L3MON4D3/LuaSnip]}]
+           :config (fn []
+                     (let [cmp (require :cmp)
+                           luasnip (require :luasnip)]
+                       (cmp.setup {:snippet {:expand (fn [args]
+                                                       (luasnip.lsp_expand args.body))}
+                                   :mapping (cmp.mapping.preset.insert {:<C-b> (cmp.mapping.scroll_docs -4)
+                                                                        :<C-f> (cmp.mapping.scroll_docs 4)
+                                                                        :<C-Space> (cmp.mapping.complete)
+                                                                        :<C-e> (cmp.mapping.abort)
+                                                                        :<CR> (cmp.mapping.confirm {:select true})})
+                                   :completion {:completeopt "menu,menuone"}
+                                   :preselect cmp.PreselectMode.None
+                                   :experimental {:ghost_text true}
+                                   :sources (cmp.config.sources [{:name :conjure}
+                                                                 {:name :luasnip}
+                                                                 {:name :nvim_lsp}
+                                                                 {:name :nvim_lua}
+                                                                 {:name :nvim_lsp_signature_help}
+                                                                 {:name :buffer}])
+                                   :sorting {:comparators [cmp.config.compare.offset
+                                                           cmp.config.compare.kind
+                                                           cmp.config.compare.exact
+                                                           cmp.config.compare.score
+                                                           (. (require :cmp-under-comparator)
+                                                              :under)
+                                                           cmp.config.compare.sort_text
+                                                           cmp.config.compare.length
+                                                           cmp.config.compare.order]}})))})

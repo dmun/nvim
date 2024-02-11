@@ -23,6 +23,8 @@ return {
                     TreesitterContext = { bg = colors.surface0 },
                     TroubleText = { bg = colors.none },
                     TroubleFoldIcon = { bg = colors.none },
+                    ["@neorg.todo_items.pending"] = { style = { "altfont" } },
+                    ["@neorg.todo_items.on_hold"] = { fg = colors.blue, bg = colors.none },
                 }
             end,
         },
