@@ -168,7 +168,8 @@
 (package! :bakpakin/fennel.vim)
 
 (package! :kevinhwang91/nvim-ufo
-          {:dependencies [:nvim-treesitter/nvim-treesitter :kevinhwang91/promise-async]
+          {:dependencies [:nvim-treesitter/nvim-treesitter
+                          :kevinhwang91/promise-async]
            :opts {:provider_selector (fn [] [:treesitter :indent])}})
 
 (package! :nvim-telescope/telescope.nvim
@@ -207,6 +208,18 @@
            :opts {:highlight {:enable true}
                   :indent {:enable true}
                   :ensure_installed [:lua :vim :vimdoc :luadoc :norg :fennel]}})
+
+(package! :mfussenegger/nvim-lint
+          {:config (fn []
+                     (let [lint (require :lint)]
+                       (set lint.linters_by_ft
+                            {:markdown [:vale] :lua [:luacheck]})
+                       (vim.api.nvim_create_autocmd [:BufWritePost]
+                                                    {:callback (fn []
+                                                                 (lint.try_lint))})))})
+
+(package! :stevearc/conform.nvim
+          {:opts {:formatters_by_ft {:lua [:stylua] :fennel [:fnlfmt]}}})
 
 ;; fnlfmt: skip
 (package! :neovim/nvim-lspconfig
@@ -284,3 +297,4 @@
                                                            cmp.config.compare.sort_text
                                                            cmp.config.compare.length
                                                            cmp.config.compare.order]}})))})
+
