@@ -1,7 +1,7 @@
 " Vim settings
 let R_assign = 0
 let mapleader="\<Space>"
-let maplocalleader="\<C-Space>"
+let maplocalleader="\<Space>m"
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
@@ -30,7 +30,6 @@ set t_Co=256
 set autochdir
 " set cmdheight=0
 " set laststatus=3
-set shm+=I
 let g:rooter_silent_chdir = 1
 set splitkeep=topline
 set splitbelow
@@ -46,6 +45,9 @@ set ignorecase
 set smartcase
 let g:sneak#use_ic_scs = 1
 set undofile
+set shm+=I
+set shm+=a
+set shm-=t
 
 autocmd! FileType fzf,NeogitPopup,Trouble
 autocmd FileType fzf,NeogitPopup,Trouble set laststatus=0

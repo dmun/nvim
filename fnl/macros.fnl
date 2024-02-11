@@ -1,8 +1,8 @@
 (fn set- [opt value]
-  (tset `vim.o opt value))
+  `(tset vim.o ,opt ,value))
 
 (fn setg- [opt value]
-  (tset `vim.go opt value))
+  `(tset vim.g ,opt ,value))
 
 (fn map [mode lhs rhs]
   `(vim.keymap.set ,mode ,lhs ,rhs {:silent true}))
@@ -40,6 +40,7 @@
 
 {: set-
  : setg-
+ : map
  : nmap
  : imap
  : vmap

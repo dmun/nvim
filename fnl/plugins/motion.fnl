@@ -1,53 +1,4 @@
-(import-macros {: set-
-                : setg-
-                : nmap
-                : imap
-                : vmap
-                : remap
-                : cmd
-                : hl
-                : setup
-                : package!} :macros)
-
-(macro set- [opt value]
-  (tset `vim.o opt value))
-
-(macro setg- [opt value]
-  (tset `vim.g opt value))
-
-(macro map [mode lhs rhs]
-  `(vim.keymap.set ,mode ,lhs ,rhs {:silent true}))
-
-(macro nmap [lhs rhs]
-  `(map :n ,lhs ,rhs))
-
-(macro imap [lhs rhs]
-  `(map :i ,lhs ,rhs))
-
-(macro vmap [lhs rhs]
-  `(map :v ,lhs ,rhs))
-
-(macro remap [lhs rhs]
-  `(vim.keymap.set :n ,lhs ,rhs {:silent true :remap true}))
-
-(macro cmd [command ...]
-  `(let [args# (table.concat (icollect [_# v# (ipairs [,...])]
-                               (.. " " v#)))]
-     (.. :<CMD> ,command (or args# "") :<CR>)))
-
-(macro hl [group opts]
-  `(let [opts# (icollect [k# v# (pairs ,opts)]
-                 (string.format "%s=%s" k# v#))]
-     (vim.cmd.highlight ,group (.. (unpack opts#)))))
-
-(macro setup [package opts]
-  `(let [module# (require ,package)]
-     (module#.setup ,opts)))
-
-(macro package! [uri ?opts]
-  `(let [spec# (or ,?opts {})]
-     (tset spec# 1 ,uri)
-     (table.insert _G.packages spec#)))
+(import-macros {: set- : setg- : nmap : cmd : hl : setup : package!} :macros)
 
 (setg- "conjure#filetypes" [:clojure
                             :fennel
@@ -84,7 +35,8 @@
 (nmap :<leader>? (cmd :FzfLua :live_grep_resume))
 (nmap "<leader>," "<CMD>FzfLua buffers<CR>")
 (nmap :<leader>bi "<CMD>FzfLua builtin<CR>")
-(nmap :<C-l> "<CMD>FzfLua lsp_code_actions<CR>")
+(nmap :<M-x> "<CMD>FzfLua commands<CR>")
+(nmap :<leader>ca "<CMD>FzfLua lsp_code_actions<CR>")
 
 ;; telescope
 ; (nmap :<leader><leader> "<CMD>Telescope find_files<CR>")

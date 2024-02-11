@@ -38,21 +38,19 @@ _G.packages = {
     },
 }
 
--- require("hotpot")
-
 require("hotpot").setup({
-   enable_hotpot_diagnostics = true,
-   provide_require_fennel = true,
-   compiler = {
-       modules = {
-           correlate = true,
-       },
-       macros = {
-           allowGlobals = true,
-           compilerEnv = "_G",
-           env = "_COMPILER",
-       },
-   },
+    enable_hotpot_diagnostics = true,
+    provide_require_fennel = true,
+    compiler = {
+        modules = {
+            correlate = true,
+        },
+        macros = {
+            allowGlobals = true,
+            -- compilerEnv = "_G",
+            env = "_COMPILER",
+        },
+    },
 })
 
 local plugins_path = vim.fn.stdpath("config") .. "/fnl/plugins"
