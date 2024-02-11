@@ -244,6 +244,8 @@
 
 (package! :windwp/nvim-ts-autotag {:event [:BufReadPre :BufNewFile] :opts {}})
 
+(package! :vidocqh/auto-indent.nvim {:opts {}})
+
 (package! :hrsh7th/nvim-cmp
           {:event :InsertEnter
            :dependencies [:hrsh7th/cmp-buffer
