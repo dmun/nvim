@@ -93,7 +93,7 @@
                      (let [statuscol (require :statuscol)]
                        (statuscol.setup)))})
 
-(package! :Olical/conjure)
+(package! :Olical/conjure {:ft :fennel})
 
 (package! :xiyaowong/virtcolumn.nvim
           {:enabled false
