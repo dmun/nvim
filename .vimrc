@@ -49,6 +49,7 @@ set shm+=I
 set shm+=a
 set shm-=t
 set gcr=n-v-c-sm:block-Cursor,i-ci:block-CursorInsert
+set textwidth=80
 
 autocmd! FileType fzf,NeogitPopup,Trouble
 autocmd FileType fzf,NeogitPopup,Trouble set laststatus=0
