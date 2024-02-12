@@ -77,6 +77,9 @@
 
 (package! :justinmk/vim-sneak)
 
+(package! :echasnovski/mini.starter
+          {:opts {:silent true :header "" :footer ""}})
+
 (package! :miguelcrespo/scratch-buffer.nvim
           {:enabled false
            :dependencies [:Olical/conjure]
@@ -112,7 +115,8 @@
 (package! :gpanders/nvim-parinfer)
 (package! :jghauser/mkdir.nvim)
 (package! :stevearc/oil.nvim
-          {:opts {:columns [; {1 :permissions :highlight :Comment}
+          {:cmd :Oil
+           :opts {:columns [; {1 :permissions :highlight :Comment}
                             ; {1 :mtime
                             ;  :highlight :Comment
                             ;  :format "%d %b %H:%M "}
@@ -150,7 +154,7 @@
                    (set- :timeoutlen 300))
            :opts {:key_labels {:<space> :SPC :<cr> :RET :<tab> :TAB}}})
 
-(package! :folke/neodev.nvim {:opts {}})
+(package! :folke/neodev.nvim {:lazy true :opts {}})
 
 (package! :folke/trouble.nvim
           {:lazy true
@@ -166,11 +170,11 @@
                      (hl :TroubleFoldIcon {:guibg :none}))})
 
 ; (package! :nvim-treesitter/nvim-treesitter-context)
-(package! :ray-x/go.nvim)
-(package! :bakpakin/fennel.vim)
+(package! :ray-x/go.nvim {:ft :go})
 
 (package! :kevinhwang91/nvim-ufo
-          {:dependencies [:nvim-treesitter/nvim-treesitter
+          {:lazy true
+           :dependencies [:nvim-treesitter/nvim-treesitter
                           :kevinhwang91/promise-async]
            :opts {:provider_selector (fn [] [:treesitter :indent])}})
 
@@ -251,7 +255,8 @@
                                                                          :filetype [:norg]
                                                                          :additionalRules {:enablePickyRules true}}}}))]}))})
 
-(package! :williamboman/mason.nvim {:opts {:ui {:width 1 :height 1}}})
+(package! :williamboman/mason.nvim
+          {:lazy true :opts {:ui {:width 1 :height 1}}})
 (package! :numToStr/Comment.nvim {:opts {}})
 (package! :HiPhish/rainbow-delimiters.nvim {:enabled false})
 

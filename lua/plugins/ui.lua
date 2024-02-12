@@ -95,7 +95,6 @@ return {
     },
     {
         "j-hui/fidget.nvim",
-        lazy = false,
         opts = {},
     },
     "norcalli/nvim-colorizer.lua",
