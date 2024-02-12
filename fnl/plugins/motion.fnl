@@ -22,6 +22,8 @@
                                             :pattern
                                             "*")}))
 
+(package! :m-demare/hlargs.nvim {:opts {}})
+
 ;; auto-save
 (nmap :<leader>as ":ASToggle<CR>")
 
@@ -205,9 +207,17 @@
 
 (package! :nvim-treesitter/nvim-treesitter
           {:event [:BufReadPre :BufNewFile]
-           :opts {:highlight {:enable true}
-                  :indent {:enable true}
-                  :ensure_installed [:lua :vim :vimdoc :luadoc :norg :fennel]}})
+           :build ":TSUpdate"
+           :config (fn []
+                     (let [configs (require :nvim-treesitter.configs)]
+                       (configs.setup {:highlight {:enable true}
+                                       :indent {:enable true}
+                                       :ensure_installed [:lua
+                                                          :vim
+                                                          :vimdoc
+                                                          :luadoc
+                                                          :norg
+                                                          :fennel]})))})
 
 (package! :mfussenegger/nvim-lint
           {:config (fn []
