@@ -78,7 +78,7 @@
 (package! :justinmk/vim-sneak)
 
 (package! :echasnovski/mini.starter
-          {:opts {:silent true :header "" :footer ""}})
+          {:opts {:silent true :header nil :footer ""}})
 
 (package! :miguelcrespo/scratch-buffer.nvim
           {:enabled false
