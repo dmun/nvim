@@ -1,8 +1,10 @@
 (lambda vim-set [scope opt ?val]
   (assert-compile (sym? opt) "expected symbol" opt)
-  (let [opt (tostring opt)
-        val (if (= ?val nil) true ?val)]
-    `(tset (. vim ,scope) ,opt ,val)))
+  (let [(opt num) (string.gsub (tostring opt) :^no "")]
+    (let [val (if (= num 1) false
+                  (= ?val nil) true
+                  ?val)]
+      `(tset (. vim ,scope) ,opt ,val))))
 
 (lambda se [opt ?val]
   (vim-set :o opt ?val))

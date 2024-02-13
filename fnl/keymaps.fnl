@@ -1,4 +1,4 @@
-(import-macros {: nmap : cmd} :macros)
+(import-macros {: nmap} :macros)
 
 ;; auto-save
 (nmap <leader>as :<CMD>ASToggle<CR>)

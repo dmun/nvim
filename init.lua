@@ -32,11 +32,7 @@ vim.opt.rtp:prepend({ hotpotpath, lazypath })
 
 vim.cmd.source("$HOME/.config/nvim/.vimrc")
 
-_G.packages = {
-    {
-        "rktjmp/hotpot.nvim",
-    },
-}
+_G.packages = { { "rktjmp/hotpot.nvim" } }
 
 require("hotpot").setup({
     enable_hotpot_diagnostics = true,
@@ -52,6 +48,8 @@ require("hotpot").setup({
         },
     },
 })
+
+require("options")
 
 local plugins_path = vim.fn.stdpath("config") .. "/fnl/plugins"
 if vim.loop.fs_stat(plugins_path) then
@@ -69,10 +67,6 @@ if vim.loop.fs_stat(plugins_path) then
     end
 end
 
-require("lazy").setup(_G.packages, {
-    ui = {
-        size = { width = 1, height = 1 },
-    },
-})
+require("lazy").setup(_G.packages, { ui = { size = { width = 1, height = 1 } } })
 
 require("keymaps")

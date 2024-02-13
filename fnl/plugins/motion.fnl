@@ -1,17 +1,4 @@
-(import-macros {: se : setg : hl : au : setup : package!} :macros)
-
-(setg conjure#filetypes [:clojure
-                         :fennel
-                         :janet
-                         :hy
-                         :julia
-                         :racket
-                         :scheme
-                         ; :lua
-                         :lisp
-                         :python
-                         :rust
-                         :sql])
+(import-macros {: se : hl : au : setup : package!} :macros)
 
 ;; yank highlight
 (let [hi-group (vim.api.nvim_create_augroup :YankHighlight {:clear true})]
