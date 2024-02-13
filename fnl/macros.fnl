@@ -15,7 +15,7 @@
 
 (fn vim-keymap-set [mode lhs rhs]
   (assert-compile (sym? lhs) "expected symbol" lhs)
-  (let [lhs (tostring lhs)]
+  (let [lhs (string.gsub (tostring lhs) :<comma> ",")]
     `(vim.keymap.set ,mode ,lhs ,rhs {:silent true})))
 
 (fn nmap [lhs rhs]
