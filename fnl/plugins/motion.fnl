@@ -1,17 +1,17 @@
-(import-macros {: set- : setg- : nmap : cmd : hl : setup : package!} :macros)
+(import-macros {: se : setg : nmap : cmd : hl : au : setup : package!} :macros)
 
-(setg- "conjure#filetypes" [:clojure
-                            :fennel
-                            :janet
-                            :hy
-                            :julia
-                            :racket
-                            :scheme
-                            ; :lua
-                            :lisp
-                            :python
-                            :rust
-                            :sql])
+(setg conjure#filetypes [:clojure
+                         :fennel
+                         :janet
+                         :hy
+                         :julia
+                         :racket
+                         :scheme
+                         ; :lua
+                         :lisp
+                         :python
+                         :rust
+                         :sql])
 
 ;; yank highlight
 (let [hi-group (vim.api.nvim_create_augroup :YankHighlight {:clear true})]
@@ -59,17 +59,6 @@
 (nmap :<leader>3 ":lua require('harpoon.ui').nav_file(3)<CR>")
 (nmap :<leader>4 ":lua require('harpoon.ui').nav_file(4)<CR>")
 
-;; nvim-surround
-; (remap :Q :ysiw)
-; (remap :M :ysiW)
-
-;; hop
-; (nmap ";" :<CMD>HopLineStart<CR>)
-; (vmap ";" :<CMD>HopLineStart<CR>)
-
-;; mason
-; (nmap :<leader>m ":Mason<CR>")
-
 (nmap :f :<Plug>Sneak_f)
 (nmap :F :<Plug>Sneak_F)
 (nmap :t :<Plug>Sneak_t)
@@ -78,7 +67,7 @@
 (package! :justinmk/vim-sneak)
 
 (package! :echasnovski/mini.starter
-          {:opts {:silent true :header nil :footer ""}})
+          {:enabled false :opts {:silent true :header nil :footer ""}})
 
 (package! :miguelcrespo/scratch-buffer.nvim
           {:enabled false
@@ -103,7 +92,7 @@
 (package! :xiyaowong/virtcolumn.nvim
           {:enabled false
            :config (fn []
-                     (set- :cc 80))})
+                     (se cc 80))})
 
 (package! :okuuva/auto-save.nvim
           {:enabled false
@@ -150,8 +139,8 @@
 (package! :folke/which-key.nvim
           {:enabled false
            :event :VeryLazy
-           :init (fn [] (set- :timeout true)
-                   (set- :timeoutlen 300))
+           :init (fn [] (se timeout)
+                   (se timeoutlen 300))
            :opts {:key_labels {:<space> :SPC :<cr> :RET :<tab> :TAB}}})
 
 (package! :folke/neodev.nvim {:lazy true :opts {}})
@@ -166,8 +155,8 @@
                   :fold_closed "+"}
            :config (fn [_ opts]
                      (setup :trouble opts)
-                     (hl :TroubleText {:guibg :none})
-                     (hl :TroubleFoldIcon {:guibg :none}))})
+                     (hl TroubleText {:guibg :none})
+                     (hl TroubleFoldIcon {:guibg :none}))})
 
 ; (package! :nvim-treesitter/nvim-treesitter-context)
 (package! :ray-x/go.nvim {:ft :go})
@@ -184,9 +173,6 @@
            :tag :0.1.5
            :opts {:theme :dropdown}})
 
-(macro au [group opts]
-  `(vim.api.nvim_create_autocmd ,group ,opts))
-
 (package! :bluz71/vim-moonfly-colors
           {:enabled false
            :priority 1000
@@ -199,15 +185,15 @@
                      (au :User
                          {:pattern :LeapEnter
                           :callback (fn []
-                                      (hl :Cursor {:blend 100})
+                                      (hl Cursor {:blend 100})
                                       (vim.opt.guicursor:append ["a:Cursor/lCursor"]))})
                      (au :User
                          {:pattern :LeapLeave
                           :callback (fn []
-                                      (hl :Cursor {:blend 0})
+                                      (hl Cursor {:blend 0})
                                       (vim.opt.guicursor:remove ["a:Cursor/lCursor"]))}))})
 
-(hl :Sneak {:guifg "#FF007C" :gui "underline,nocombine"})
+(hl Sneak {:guifg "#FF007C" :gui "underline,nocombine"})
 
 (package! :nvim-treesitter/nvim-treesitter
           {:event [:BufReadPre :BufNewFile]
@@ -257,6 +243,7 @@
 
 (package! :williamboman/mason.nvim
           {:lazy true :opts {:ui {:width 1 :height 1}}})
+
 (package! :numToStr/Comment.nvim {:opts {}})
 (package! :HiPhish/rainbow-delimiters.nvim {:enabled false})
 

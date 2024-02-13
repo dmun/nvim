@@ -1,20 +1,29 @@
-(fn set- [opt value]
-  `(tset vim.o ,opt ,value))
+(lambda vim-set [scope opt ?val]
+  (assert-compile (sym? opt) "expected symbol" opt)
+  (let [opt (tostring opt)
+        val (if (= ?val nil) true ?val)]
+    `(tset (. vim ,scope) ,opt ,val)))
 
-(fn setg- [opt value]
-  `(tset vim.g ,opt ,value))
+(lambda se [opt ?val]
+  (vim-set :o opt ?val))
 
-(fn map [mode lhs rhs]
+(lambda setg [opt ?val]
+  (vim-set :g opt ?val))
+
+(lambda setl [opt ?val]
+  (vim-set :bo opt ?val))
+
+(fn vim-keymap-set [mode lhs rhs]
   `(vim.keymap.set ,mode ,lhs ,rhs {:silent true}))
 
 (fn nmap [lhs rhs]
-  (map :n lhs rhs))
+  (vim-keymap-set :n lhs rhs))
 
 (fn imap [lhs rhs]
-  (map :i lhs rhs))
+  (vim-keymap-set :i lhs rhs))
 
 (fn vmap [lhs rhs]
-  (map :v lhs rhs))
+  (vim-keymap-set :v lhs rhs))
 
 (fn remap [lhs rhs]
   `(vim.keymap.set :n ,lhs ,rhs {:silent true :remap true}))
@@ -24,10 +33,12 @@
                                (.. " " v#)))]
      (.. :<CMD> ,command (or args# "") :<CR>)))
 
-(fn hl [group opts]
-  `(let [opts# (icollect [k# v# (pairs ,opts)]
-                 (string.format "%s=%s" k# v#))]
-     (vim.cmd.highlight ,group (.. (unpack opts#)))))
+(lambda hl [group opts]
+  (assert-compile (sym? group) "expected symbol" group)
+  (let [group (tostring group)
+        opts (icollect [k v (pairs opts)]
+               (string.format "%s=%s" k v))]
+    `(vim.cmd.highlight ,group ,(.. (unpack opts)))))
 
 (fn setup [package opts]
   `(let [module# (require ,package)]
@@ -38,14 +49,8 @@
      (tset spec# 1 ,uri)
      (table.insert _G.packages spec#)))
 
-{: set-
- : setg-
- : map
- : nmap
- : imap
- : vmap
- : remap
- : cmd
- : hl
- : setup
- : package!}
+(fn au [group opts]
+  `(vim.api.nvim_create_autocmd ,group ,opts))
+
+{: se : setg : nmap : imap : vmap : remap : cmd : hl : au : setup : package!}
+
