@@ -1,4 +1,4 @@
-(import-macros {: se : setg : nmap : cmd : hl : au : setup : package!} :macros)
+(import-macros {: se : setg : hl : au : setup : package!} :macros)
 
 (setg conjure#filetypes [:clojure
                          :fennel
@@ -23,46 +23,6 @@
                                             "*")}))
 
 (package! :m-demare/hlargs.nvim {:opts {}})
-
-;; auto-save
-(nmap :<leader>as ":ASToggle<CR>")
-
-;; colorizer
-(nmap :<leader>tc (cmd :ColorizerToggle))
-
-;; fzf-lua
-(nmap :<leader><leader> (cmd :FzfLua :files))
-(nmap :<leader>fr (cmd :FzfLua :oldfiles))
-(nmap :<leader>/ (cmd :FzfLua :live_grep_native))
-(nmap :<leader>? (cmd :FzfLua :live_grep_resume))
-(nmap "<leader>," "<CMD>FzfLua buffers<CR>")
-(nmap :<leader>bi "<CMD>FzfLua builtin<CR>")
-(nmap :<M-x> "<CMD>FzfLua commands<CR>")
-(nmap :<leader>ca "<CMD>FzfLua lsp_code_actions<CR>")
-
-;; telescope
-; (nmap :<leader><leader> "<CMD>Telescope find_files<CR>")
-; (nmap :<leader>fr "<CMD>Telescope oldfiles<CR>")
-; (nmap :<leader>/ "<CMD>Telescope live_grep<CR>")
-; (nmap "<leader>," "<CMD>Telescope buffers<CR>")
-; (nmap :<leader>bi :<CMD>Telescope<CR>)
-; (nmap :<C-l> "<CMD>FzfLua lsp_code_actions<CR>")
-
-;; oil
-(nmap :<leader>e ":Oil<CR>")
-
-;; harpoon
-(nmap :<leader>m ":lua require('harpoon.mark').add_file()<CR>")
-(nmap :<leader>q ":lua require('harpoon.ui').toggle_quick_menu()<CR>")
-(nmap :<leader>1 ":lua require('harpoon.ui').nav_file(1)<CR>")
-(nmap :<leader>2 ":lua require('harpoon.ui').nav_file(2)<CR>")
-(nmap :<leader>3 ":lua require('harpoon.ui').nav_file(3)<CR>")
-(nmap :<leader>4 ":lua require('harpoon.ui').nav_file(4)<CR>")
-
-(nmap :f :<Plug>Sneak_f)
-(nmap :F :<Plug>Sneak_F)
-(nmap :t :<Plug>Sneak_t)
-(nmap :T :<Plug>Sneak_T)
 
 (package! :justinmk/vim-sneak)
 

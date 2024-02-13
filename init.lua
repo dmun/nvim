@@ -74,3 +74,5 @@ require("lazy").setup(_G.packages, {
         size = { width = 1, height = 1 },
     },
 })
+
+require("keymaps")
