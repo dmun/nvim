@@ -14,7 +14,9 @@
   (vim-set :bo opt ?val))
 
 (fn vim-keymap-set [mode lhs rhs]
-  `(vim.keymap.set ,mode ,lhs ,rhs {:silent true}))
+  (assert-compile (sym? lhs) "expected symbol" lhs)
+  (let [lhs (tostring lhs)]
+    `(vim.keymap.set ,mode ,lhs ,rhs {:silent true})))
 
 (fn nmap [lhs rhs]
   (vim-keymap-set :n lhs rhs))
