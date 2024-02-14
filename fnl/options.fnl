@@ -1,5 +1,7 @@
 (import-macros {: se : setg} :macros)
 
+(vim.cmd.source :$HOME/.config/nvim/.vimrc)
+
 ;; leader keys
 (setg mapleader " ")
 (setg maplocalleader " m")
@@ -7,6 +9,7 @@
 ;; global options
 (setg rooter_silent_chdir 1)
 (setg sneak#use_ic_scs 1)
+(setg tex_flavor :latex)
 (setg conjure#filetypes [:clojure
                          :fennel
                          :hy
@@ -46,7 +49,9 @@
 ; (se relativenumber)
 
 ;; visual
+(se background :dark)
 (se conceallevel 3)
+(se fillchars "vert:▏,eob: ")
 (se gcr "n-v-c-sm:block-Cursor,i-ci:block-CursorInsert")
 (se lazyredraw)
 (se nocursorline)

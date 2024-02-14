@@ -30,8 +30,6 @@ end
 
 vim.opt.rtp:prepend({ hotpotpath, lazypath })
 
-vim.cmd.source("$HOME/.config/nvim/.vimrc")
-
 _G.packages = { { "rktjmp/hotpot.nvim" } }
 
 require("hotpot").setup({
@@ -50,6 +48,8 @@ require("hotpot").setup({
 })
 
 require("options")
+
+-- require("autocommands")
 
 local plugins_path = vim.fn.stdpath("config") .. "/fnl/plugins"
 if vim.loop.fs_stat(plugins_path) then

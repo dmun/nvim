@@ -1,10 +1,22 @@
-(import-macros {: nmap} :macros)
+(import-macros {: nmap : vmap} :macros)
 
-;; auto-save
-(nmap <leader>as :<CMD>ASToggle<CR>)
+;; general
+(nmap <ESC> :<CMD>echo<bar>nohl<CR>)
+(nmap <localleader>r "<CMD>!make -s run<CR>")
+(vmap <localleader>s ":'<,'>!sort<CR>")
 
-;; colorizer
+(vmap J ":m '>+1<CR>gv=gv")
+(vmap K ":m '<-2<CR>gv=gv")
+
+; (nmap j "v:count ? (v:count > 5 ? 'm\'' . v:count : '') . 'j' : 'gj'")
+; (nmap k "v:count ? (v:count > 5 ? 'm\'' . v:count : '') . 'k' : 'gk'")
+; (nmap 0 &wrap ? 'g0' : '0')
+; (nmap $ &wrap ? 'g$' : '$')
+
+;; toggles
 (nmap <leader>tc :<CMD>ColorizerToggle<CR>)
+(nmap <leader>ts :<CMD>ASToggle<CR>)
+(nmap <leader>tw "<CMD>set wrap!<CR>")
 
 ;; fzf-lua
 (nmap <leader><leader> "<CMD>FzfLua files<CR>")
