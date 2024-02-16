@@ -35,8 +35,8 @@
 (nmap <leader>m "<CMD>lua require('harpoon.mark').add_file()<CR>")
 (nmap <leader>q "<CMD>lua require('harpoon.ui').toggle_quick_menu()<CR>")
 
-(for [i 1 5]
-  (->> i (nmap <leader><?> "<CMD>lua require('harpoon.ui').nav_file(<?>)<CR>")))
+(for [n 1 5]
+  (->> n (nmap <leader><?> "<CMD>lua require('harpoon.ui').nav_file(<?>)<CR>")))
 
 ;; sneak
 (nmap f :<Plug>Sneak_f)
