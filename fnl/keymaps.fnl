@@ -34,10 +34,9 @@
 ;; harpoon
 (nmap <leader>m "<CMD>lua require('harpoon.mark').add_file()<CR>")
 (nmap <leader>q "<CMD>lua require('harpoon.ui').toggle_quick_menu()<CR>")
-(nmap <leader>1 "<CMD>lua require('harpoon.ui').nav_file(1)<CR>")
-(nmap <leader>2 "<CMD>lua require('harpoon.ui').nav_file(2)<CR>")
-(nmap <leader>3 "<CMD>lua require('harpoon.ui').nav_file(3)<CR>")
-(nmap <leader>4 "<CMD>lua require('harpoon.ui').nav_file(4)<CR>")
+
+(for [i 1 5]
+  (->> i (nmap <leader><?> "<CMD>lua require('harpoon.ui').nav_file(<?>)<CR>")))
 
 ;; sneak
 (nmap f :<Plug>Sneak_f)

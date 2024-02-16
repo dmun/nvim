@@ -1,3 +1,6 @@
+(fn str? [val]
+  (if (= (type val) :string) true false))
+
 (lambda vim-set [scope opt ?val]
   (assert-compile (sym? opt) "expected symbol" opt)
   (let [(opt num) (string.gsub (tostring opt) :^no "")]
@@ -15,13 +18,22 @@
 (lambda setl [opt ?val]
   (vim-set :bo opt ?val))
 
-(fn vim-keymap-set [mode lhs rhs]
+(fn parse-comma [input]
+  (pick-values 1 (string.gsub input :<comma> ",")))
+
+(fn parse-format [input val]
+  `(string.format ,(string.gsub input "<%?>" "%%s") ,val))
+
+(fn vim-keymap-set [mode lhs rhs ?key]
   (assert-compile (sym? lhs) "expected symbol" lhs)
-  (let [lhs (string.gsub (tostring lhs) :<comma> ",")]
+  (let [lhs (-> (tostring lhs)
+                (parse-comma)
+                (parse-format ?key))
+        rhs (parse-format rhs ?key)]
     `(vim.keymap.set ,mode ,lhs ,rhs {:silent true})))
 
-(fn nmap [lhs rhs]
-  (vim-keymap-set :n lhs rhs))
+(fn nmap [lhs rhs ?key]
+  (vim-keymap-set :n lhs rhs ?key))
 
 (fn imap [lhs rhs]
   (vim-keymap-set :i lhs rhs))
@@ -56,5 +68,16 @@
 (fn au [group opts]
   `(vim.api.nvim_create_autocmd ,group ,opts))
 
-{: se : setg : nmap : imap : vmap : remap : cmd : hl : au : setup : package!}
+{: str?
+ : se
+ : setg
+ : nmap
+ : imap
+ : vmap
+ : remap
+ : cmd
+ : hl
+ : au
+ : setup
+ : package!}
 
