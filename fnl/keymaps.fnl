@@ -41,12 +41,11 @@
 
 ;; lsp
 (nmap K "<cmd>lua vim.lsp.buf.hover()<CR>")
-(nmap "[d" "<cmd>lua vim.diagnostic.goto_prev()<CR>")
-(nmap "]d" "<cmd>lua vim.diagnostic.goto_next()<CR>")
 (nmap gD "<cmd>lua vim.lsp.buf.declaration()<CR>")
 (nmap gd "<cmd>lua vim.lsp.buf.definition()<CR>")
 (nmap gi "<cmd>lua vim.lsp.buf.implementation()<CR>")
-
+(nmap "[d" "<cmd>lua vim.diagnostic.goto_prev()<CR>")
+(nmap "]d" "<cmd>lua vim.diagnostic.goto_next()<CR>")
 (nmap <leader>bf "<cmd>lua require('conform').format({ async = true })<CR>")
 (nmap <space>rn "<cmd>lua vim.lsp.buf.rename()<CR>")
 (nmap <space>wa "<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>")
