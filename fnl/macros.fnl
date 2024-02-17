@@ -25,7 +25,6 @@
   `(string.format ,(string.gsub input "<%?>" "%%s") ,val))
 
 (fn vim-keymap-set [mode lhs rhs ?key]
-  (assert-compile (sym? lhs) "expected symbol" lhs)
   (let [lhs (-> (tostring lhs)
                 (parse-comma)
                 (parse-format ?key))
@@ -60,13 +59,16 @@
   `(let [module# (require ,package)]
      (module#.setup ,opts)))
 
-(fn package! [uri ?opts]
+(fn plug [uri ?opts]
   `(let [spec# (or ,?opts {})]
      (tset spec# 1 ,uri)
      (table.insert _G.packages spec#)))
 
 (fn au [group opts]
   `(vim.api.nvim_create_autocmd ,group ,opts))
+
+(fn aug [group opts]
+  `(vim.api.nvim_create_augroup ,group ,opts))
 
 {: str?
  : se
@@ -78,6 +80,7 @@
  : cmd
  : hl
  : au
+ : aug
  : setup
- : package!}
+ : plug}
 

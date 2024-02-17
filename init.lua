@@ -49,7 +49,7 @@ require("hotpot").setup({
 
 require("options")
 
--- require("autocommands")
+require("autocommands")
 
 local plugins_path = vim.fn.stdpath("config") .. "/fnl/plugins"
 if vim.loop.fs_stat(plugins_path) then
