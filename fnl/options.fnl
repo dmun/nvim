@@ -1,4 +1,4 @@
-(import-macros {: se : setg} :macros)
+(import-macros {: se : se+ : setg} :macros)
 
 (vim.cmd.source :$HOME/.config/nvim/.vimrc)
 
@@ -60,6 +60,7 @@
 (se noshowmode)
 (se showtabline 0)
 (se termguicolors)
+(se+ shm :Iq)
 
 ;; window
 (se inccommand :split)

@@ -31,3 +31,8 @@
 
 (plug :norcalli/nvim-colorizer.lua)
 
+(plug :bluz71/vim-moonfly-colors
+      {:enabled false
+       :priority 1000
+       :config (fn [] (vim.cmd.colorscheme :moonfly))})
+

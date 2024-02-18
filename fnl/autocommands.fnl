@@ -17,3 +17,9 @@
                                  :pattern
                                  "*")}))
 
+;; auto-save
+(au [:BufLeave :FocusLost]
+    {:callback (fn []
+                 (if (= vim.bo.buftype "")
+                     (vim.cmd "silent update")))})
+
