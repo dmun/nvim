@@ -6,7 +6,7 @@
 (plug :tpope/vim-repeat)
 
 ; (plug :justinmk/vim-sneak)
-(plug :ggandor/flit.nvim {:opts {}})
+(plug :ggandor/flit.nvim {:opts {:labeled_modes ""}})
 (plug :ggandor/leap.nvim
       {:config (fn []
                  ((. (require :leap) :create_default_mappings))
