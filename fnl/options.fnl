@@ -4,11 +4,12 @@
 
 ;; leader keys
 (setg mapleader " ")
-(setg maplocalleader " m")
+(setg maplocalleader ",")
 
 ;; global options
 (setg rooter_silent_chdir 1)
 (setg sneak#use_ic_scs 1)
+(setg sneak#s_next 1)
 (setg tex_flavor :latex)
 (setg conjure#filetypes [:clojure
                          :fennel
@@ -70,7 +71,7 @@
 ;; keys
 (se ignorecase)
 (se nottimeout)
-(se scrolloff 5)
+(se scrolloff 0)
 (se sidescrolloff 10)
 (se smartcase)
 

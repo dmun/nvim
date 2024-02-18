@@ -27,17 +27,17 @@
 (nmap <leader>e :<CMD>Oil<CR>)
 
 ;; harpoon
-(nmap <localleader>m "<CMD>lua require('harpoon.mark').add_file()<CR>")
+(nmap <leader>m "<CMD>lua require('harpoon.mark').add_file()<CR>")
 (nmap <leader>q "<CMD>lua require('harpoon.ui').toggle_quick_menu()<CR>")
 
 (for [n 1 5]
   (->> n (nmap <leader><?> "<CMD>lua require('harpoon.ui').nav_file(<?>)<CR>")))
 
 ;; sneak
-; (nmap f :<Plug>Sneak_f)
-; (nmap F :<Plug>Sneak_F)
-; (nmap t :<Plug>Sneak_t)
-; (nmap T :<Plug>Sneak_T)
+(nmap f :<Plug>Sneak_f)
+(nmap F :<Plug>Sneak_F)
+(nmap t :<Plug>Sneak_t)
+(nmap T :<Plug>Sneak_T)
 
 ;; lsp
 (nmap K "<cmd>lua vim.lsp.buf.hover()<CR>")
