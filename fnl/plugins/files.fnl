@@ -1,5 +1,7 @@
 (import-macros {: se : hl : au : setup : plug} :macros)
 
+(plug "airblade/vim-rooter")
+
 (plug :jghauser/mkdir.nvim)
 
 (plug :ThePrimeagen/harpoon {:lazy true} :dependencies [:nvim-lua/plenary.nvim])
