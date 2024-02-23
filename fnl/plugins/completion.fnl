@@ -25,12 +25,22 @@
                        luasnip (require :luasnip)]
                    (cmp.setup {:snippet {:expand (fn [args]
                                                    (luasnip.lsp_expand args.body))}
-                               :mapping (cmp.mapping.preset.insert {:<C-b> (cmp.mapping.scroll_docs -4)
-                                                                    :<C-f> (cmp.mapping.scroll_docs 4)
-                                                                    :<C-Space> (cmp.mapping.complete)
-                                                                    :<C-e> (cmp.mapping.abort)
-                                                                    ; :<CR> (cmp.mapping.confirm {:select true})
-                                                                    :<TAB> (cmp.mapping.confirm {:select true})})
+                               :mapping {:<C-b> (cmp.mapping.scroll_docs -4)
+                                         :<C-f> (cmp.mapping.scroll_docs 4)
+                                         :<C-Space> (cmp.mapping.complete)
+                                         :<C-e> (cmp.mapping.abort)
+                                         :<C-j> (cmp.mapping.select_next_item)
+                                         :<C-k> (cmp.mapping.select_prev_item)
+                                         :<TAB> (cmp.mapping (fn [fallback]
+                                                               (if (cmp.visible)
+                                                                   (cmp.confirm {:select true})
+                                                                   (luasnip.expand_or_jumpable)
+                                                                   (luasnip.expand_or_jump)
+                                                                   (fallback))) [:i :s])
+                                         :<S-TAB> (cmp.mapping (fn [fallback]
+                                                                 (if (luasnip.jumpable -1)
+                                                                     (luasnip.jump -1)
+                                                                     (fallback))) [:i :s])}
                                :completion {:completeopt "menu,menuone"}
                                :preselect cmp.PreselectMode.None
                                :experimental {:ghost_text true}

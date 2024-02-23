@@ -8,7 +8,8 @@
        :config (fn []
                  (let [configs (require :nvim-treesitter.configs)]
                    (configs.setup {:highlight {:enable true}
-                                   :indent {:enable true}
+                                   :indent {:enable true
+                                            :disable [:markdown]}
                                    :ensure_installed [:lua
                                                       :vim
                                                       :vimdoc

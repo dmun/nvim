@@ -1,9 +1,15 @@
-(import-macros {: nmap : vmap} :macros)
+(import-macros {: nmap : imap : vmap} :macros)
 
 ;; general
-(nmap <ESC> :<CMD>echo<bar>nohl<CR>)
+(nmap <ESC> "<CMD>echo<bar>nohl<bar>silent update<CR>")
 (nmap <localleader>r "<CMD>!make -s run<CR>")
 (vmap <localleader>s ":'<,'>!sort<CR>")
+; (nmap <leader>w "<CMD>silent update<CR>")
+
+(imap <C-n> "<CMD>norm j<CR>")
+(imap <C-p> "<CMD>norm k<CR>")
+(imap <C-k> "<CMD>norm dd<CR>")
+(imap <C-x><C-u> "<CMD>norm u<CR>")
 
 (vmap J ":m '>+1<CR>gv=gv")
 (vmap K ":m '<-2<CR>gv=gv")
@@ -34,10 +40,10 @@
   (->> n (nmap <leader><?> "<CMD>lua require('harpoon.ui').nav_file(<?>)<CR>")))
 
 ;; sneak
-(nmap f :<Plug>Sneak_f)
-(nmap F :<Plug>Sneak_F)
-(nmap t :<Plug>Sneak_t)
-(nmap T :<Plug>Sneak_T)
+; (nmap f :<Plug>Sneak_f)
+; (nmap F :<Plug>Sneak_F)
+; (nmap t :<Plug>Sneak_t)
+; (nmap T :<Plug>Sneak_T)
 
 ;; lsp
 (nmap K "<cmd>lua vim.lsp.buf.hover()<CR>")

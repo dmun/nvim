@@ -1,6 +1,6 @@
 (import-macros {: se : hl : au : setup : plug} :macros)
 
-(hl Sneak {:guifg "#FF007C" :gui "underline,nocombine"})
+; (hl Sneak {:guifg "#FF007C" :gui "underline,nocombine"})
 
 ;; fnlfmt: skip
 (plug :catppuccin/nvim

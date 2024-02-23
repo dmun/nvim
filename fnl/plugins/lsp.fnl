@@ -24,7 +24,7 @@
 (plug :mfussenegger/nvim-lint
       {:config (fn []
                  (let [lint (require :lint)]
-                   (set lint.linters_by_ft {:markdown [:vale] :lua [:luacheck]})
+                   (set lint.linters_by_ft {:lua [:luacheck]})
                    (vim.api.nvim_create_autocmd [:BufWritePost]
                                                 {:callback (fn []
                                                              (lint.try_lint))})))})
