@@ -1,6 +1,6 @@
 (import-macros {: plug : se} :macros)
 
-(plug "Eandrju/cellular-automaton.nvim")
+(plug :Eandrju/cellular-automaton.nvim)
 
 (plug :folke/which-key.nvim
       {:enabled false
@@ -8,4 +8,6 @@
        :init (fn [] (se timeout)
                (se timeoutlen 300))
        :opts {:key_labels {:<space> :SPC :<cr> :RET :<tab> :TAB}}})
+
+(plug :tpope/vim-fugitive)
 

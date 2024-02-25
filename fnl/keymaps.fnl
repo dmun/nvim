@@ -4,15 +4,16 @@
 (nmap <ESC> "<CMD>echo<bar>nohl<bar>silent update<CR>")
 (nmap <localleader>r "<CMD>!make -s run<CR>")
 (vmap <localleader>s ":'<,'>!sort<CR>")
-; (nmap <leader>w "<CMD>silent update<CR>")
 
 (imap <C-n> "<CMD>norm j<CR>")
 (imap <C-p> "<CMD>norm k<CR>")
 (imap <C-k> "<CMD>norm dd<CR>")
 (imap <C-x><C-u> "<CMD>norm u<CR>")
 
-(vmap J ":m '>+1<CR>gv=gv")
-(vmap K ":m '<-2<CR>gv=gv")
+(nmap <C-h> :<C-w>h)
+(nmap <C-j> :<C-w>j)
+(nmap <C-k> :<C-w>k)
+(nmap <C-l> :<C-w>l)
 
 ;; toggles
 (nmap <leader>tc :<CMD>ColorizerToggle<CR>)
@@ -44,6 +45,9 @@
 ; (nmap F :<Plug>Sneak_F)
 ; (nmap t :<Plug>Sneak_t)
 ; (nmap T :<Plug>Sneak_T)
+
+; fugitive
+(nmap <leader>g :<CMD>Git<CR>)
 
 ;; lsp
 (nmap K "<cmd>lua vim.lsp.buf.hover()<CR>")

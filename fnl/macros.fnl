@@ -57,6 +57,9 @@
 (fn vmap [lhs rhs]
   (vim-map :v lhs rhs))
 
+(fn tmap [lhs rhs]
+  (vim-map :t lhs rhs))
+
 (fn remap [lhs rhs]
   `(vim.keymap.set :n ,lhs ,rhs {:silent true :remap true}))
 
@@ -91,9 +94,11 @@
  : se
  : se+
  : setg
+ : setl
  : nmap
  : imap
  : vmap
+ : tmap
  : remap
  : cmd
  : hl

@@ -71,7 +71,7 @@
 ;; keys
 (se ignorecase)
 (se nottimeout)
-(se scrolloff 0)
+(se scrolloff 5)
 (se sidescrolloff 10)
 (se smartcase)
 

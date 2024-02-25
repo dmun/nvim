@@ -1,20 +1,20 @@
-vim.keymap.set("n", "<leader>g", function()
-    require("neogit").open()
-end, { silent = true })
+-- vim.keymap.set("n", "<leader>g", function()
+--     require("neogit").open()
+-- end, { silent = true })
 
 return {
-    {
-        "NeogitOrg/neogit",
-        lazy = true,
-        dependencies = {
-            "nvim-lua/plenary.nvim",
-            "sindrets/diffview.nvim",
-            "ibhagwan/fzf-lua",
-        },
-        opts = {
-            disable_hint = true,
-        },
-    },
+    -- {
+    --     "NeogitOrg/neogit",
+    --     lazy = true,
+    --     dependencies = {
+    --         "nvim-lua/plenary.nvim",
+    --         "sindrets/diffview.nvim",
+    --         "ibhagwan/fzf-lua",
+    --     },
+    --     opts = {
+    --         disable_hint = true,
+    --     },
+    -- },
     {
         "lewis6991/gitsigns.nvim",
         event = { "BufReadPre", "BufNewFile" },

@@ -29,8 +29,8 @@
                                          :<C-f> (cmp.mapping.scroll_docs 4)
                                          :<C-Space> (cmp.mapping.complete)
                                          :<C-e> (cmp.mapping.abort)
-                                         :<C-j> (cmp.mapping.select_next_item)
-                                         :<C-k> (cmp.mapping.select_prev_item)
+                                         :<C-n> (cmp.mapping.select_next_item)
+                                         :<C-p> (cmp.mapping.select_prev_item)
                                          :<TAB> (cmp.mapping (fn [fallback]
                                                                (if (cmp.visible)
                                                                    (cmp.confirm {:select true})

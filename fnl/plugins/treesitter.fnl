@@ -1,6 +1,6 @@
 (import-macros {: se : hl : au : setup : plug} :macros)
 
-(plug :nvim-treesitter/nvim-treesitter-context)
+; (plug :nvim-treesitter/nvim-treesitter-context)
 
 (plug :nvim-treesitter/nvim-treesitter
       {:event [:BufReadPre :BufNewFile]
