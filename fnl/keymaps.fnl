@@ -8,7 +8,6 @@
 (imap <C-n> "<CMD>norm j<CR>")
 (imap <C-p> "<CMD>norm k<CR>")
 (imap <C-k> "<CMD>norm dd<CR>")
-(imap <C-x><C-u> "<CMD>norm u<CR>")
 
 (nmap <C-h> :<C-w>h)
 (nmap <C-j> :<C-w>j)
@@ -47,20 +46,22 @@
 ; (nmap T :<Plug>Sneak_T)
 
 ;; lsp
-(nmap K "<cmd>lua vim.lsp.buf.hover()<CR>")
-(nmap gD "<cmd>lua vim.lsp.buf.declaration()<CR>")
-(nmap gd "<cmd>lua vim.lsp.buf.definition()<CR>")
-(nmap gi "<cmd>lua vim.lsp.buf.implementation()<CR>")
-(nmap "[d" "<cmd>lua vim.diagnostic.goto_prev()<CR>")
-(nmap "]d" "<cmd>lua vim.diagnostic.goto_next()<CR>")
-(nmap <leader>bf "<cmd>lua require('conform').format({ async = true })<CR>")
-(nmap <space>rn "<cmd>lua vim.lsp.buf.rename()<CR>")
-(nmap <leader>wa "<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>")
+(nmap K vim.lsp.buf.hover)
+(nmap gD vim.lsp.buf.declaration)
+(nmap gd vim.lsp.buf.definition)
+(nmap gi vim.lsp.buf.implementation)
+(nmap "[d" vim.diagnostic.goto_prev)
+(nmap "]d" vim.diagnostic.goto_next)
+(nmap <space>rn vim.lsp.buf.rename)
+(nmap <leader>wa vim.lsp.buf.add_workspace_folder)
+(nmap <leader>wr vim.lsp.buf.remove_workspace_folder)
 (nmap <leader>wl "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>")
-(nmap <leader>wr "<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>")
 
-(let [trouble (require :trouble)]
-  (nmap <leader>d (#$.toggle trouble))
-  (nmap <leader>D (#$.toggle trouble :lsp_type_definitions))
-  (nmap gr (#$.toggle trouble :lsp_references)))
+;; conform
+(nmap <leader>bf (partial (#$.format (require :conform) {:async true})))
+
+;; trouble
+(nmap <leader>d "<CMD>TroubleToggle<CR>")
+(nmap <leader>D "<CMD>TroubleToggle lsp_definitions<CR>")
+(nmap gr "<CMD>TroubleToggle lsp_references<CR>")
 

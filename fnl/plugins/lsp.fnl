@@ -41,6 +41,7 @@
 (plug :ray-x/go.nvim {:ft :go})
 (plug :folke/trouble.nvim
       {:lazy true
+       :cmd :TroubleToggle
        :opts {:padding false
               :indent_lines false
               :use_diagnostic_signs true

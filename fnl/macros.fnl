@@ -47,7 +47,9 @@
                 (parse-format ?key))
         rhs (case (type rhs)
               :string (parse-format rhs ?key)
-              :table rhs
+              :table (do
+                       (if ?key (table.insert rhs ?key))
+                       rhs)
               _ rhs)]
     `(vim.keymap.set ,mode ,lhs ,rhs {:silent true})))
 
