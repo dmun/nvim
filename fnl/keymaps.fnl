@@ -46,9 +46,6 @@
 ; (nmap t :<Plug>Sneak_t)
 ; (nmap T :<Plug>Sneak_T)
 
-; fugitive
-(nmap <leader>g :<CMD>Git<CR>)
-
 ;; lsp
 (nmap K "<cmd>lua vim.lsp.buf.hover()<CR>")
 (nmap gD "<cmd>lua vim.lsp.buf.declaration()<CR>")

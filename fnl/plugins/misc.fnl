@@ -9,5 +9,3 @@
                (se timeoutlen 300))
        :opts {:key_labels {:<space> :SPC :<cr> :RET :<tab> :TAB}}})
 
-(plug :tpope/vim-fugitive)
-
