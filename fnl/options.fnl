@@ -1,4 +1,4 @@
-(import-macros {: se : se+ : setg} :macros)
+(import-macros {: se : se+ : setg : sign} :macros)
 
 (vim.cmd.source :$HOME/.config/nvim/.vimrc)
 
@@ -53,7 +53,6 @@
 (se background :dark)
 (se conceallevel 3)
 (se fillchars "vert:▏,eob: ")
-(se gcr "n-v-c-sm:block-Cursor,i-ci:block-CursorInsert")
 (se lazyredraw)
 (se nocursorline)
 (se noruler)
@@ -61,6 +60,7 @@
 (se noshowmode)
 (se showtabline 0)
 (se termguicolors)
+(se+ gcr "n:blinkwait1400-blinkoff400-blinkon250")
 (se+ shm :Iq)
 
 ;; window
@@ -83,3 +83,8 @@
 (se autochdir)
 (se clipboard :unnamedplus)
 
+;; signs
+(sign DiagnosticSignError {:text "•" :texthl :DiagnosticSignError})
+(sign DiagnosticSignWarn {:text "•" :texthl :DiagnosticSignWarn})
+(sign DiagnosticSignInfo {:text "•" :texthl :DiagnosticSignInfo})
+(sign DiagnosticSignHint {:text "•" :texthl :DiagnosticSignHint})

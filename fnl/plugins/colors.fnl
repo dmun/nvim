@@ -22,9 +22,9 @@
                                     :TreesitterContext {:bg colors.mantle}
                                     :TroubleText {:bg colors.none}
                                     :TroubleFoldIcon {:bg colors.none}
-                                    :CursorInsert {:bg colors.green}
-                                    :Cursor {:bg colors.rosewater}
-                                    :Cursor {:bg colors.rosewater}
+                                    ; :CursorInsert {:bg colors.green}
+                                    ; :Cursor {:bg colors.rosewater}
+                                    ; :Cursor {:style [:reverse]}
                                     "@neorg.todo_items.pending" {:style [:altfont]}
                                     "@neorg.todo_items.on_hold" {:fg colors.blue
                                                                   :bg colors.none}})}})

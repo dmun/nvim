@@ -1,4 +1,4 @@
-(import-macros {: se : se+ : hl : au : setup : plug} :macros)
+(import-macros {: se : se+ : se- : hl : au : setup : plug} :macros)
 
 (plug :kylechui/nvim-surround {:version "*" :event :VeryLazy :opts {}})
 
@@ -20,5 +20,5 @@
                      {:pattern :LeapLeave
                       :callback (fn []
                                   (hl Cursor {:blend 0})
-                                  (se+ guicursor "a:Cursor/lCursor"))}))})
+                                  (se- guicursor "a:Cursor/lCursor"))}))})
 

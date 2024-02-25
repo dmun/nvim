@@ -58,7 +58,12 @@
 (nmap "]d" "<cmd>lua vim.diagnostic.goto_next()<CR>")
 (nmap <leader>bf "<cmd>lua require('conform').format({ async = true })<CR>")
 (nmap <space>rn "<cmd>lua vim.lsp.buf.rename()<CR>")
-(nmap <space>wa "<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>")
-(nmap <space>wl "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>")
-(nmap <space>wr "<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>")
+(nmap <leader>wa "<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>")
+(nmap <leader>wl "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>")
+(nmap <leader>wr "<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>")
+
+(let [trouble (require :trouble)]
+  (nmap <leader>d (#$.toggle trouble))
+  (nmap <leader>D (#$.toggle trouble :lsp_type_definitions))
+  (nmap gr (#$.toggle trouble :lsp_references)))
 

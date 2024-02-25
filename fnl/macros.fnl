@@ -45,7 +45,10 @@
   (let [lhs (-> (tostring lhs)
                 (parse-comma)
                 (parse-format ?key))
-        rhs (parse-format rhs ?key)]
+        rhs (case (type rhs)
+              :string (parse-format rhs ?key)
+              :table rhs
+              _ rhs)]
     `(vim.keymap.set ,mode ,lhs ,rhs {:silent true})))
 
 (fn nmap [lhs rhs ?key]
@@ -75,6 +78,10 @@
                (string.format "%s=%s" k v))]
     `(vim.cmd.highlight ,group ,(.. (unpack opts)))))
 
+(fn sign [sign opts]
+  (assert-compile (sym? sign) "expected symbol" sign)
+  `(vim.fn.sign_define ,(tostring sign) ,opts))
+
 (fn setup [package opts]
   `(let [module# (require ,package)]
      (module#.setup ,opts)))
@@ -93,6 +100,7 @@
 {: str?
  : se
  : se+
+ : se-
  : setg
  : setl
  : nmap
@@ -104,6 +112,7 @@
  : hl
  : au
  : aug
+ : sign
  : setup
  : plug}
 
