@@ -1,5 +1,7 @@
 (import-macros {: plug : se} :macros)
 
+(plug "nacro90/numb.nvim")
+
 (plug :Eandrju/cellular-automaton.nvim)
 
 (plug :folke/which-key.nvim

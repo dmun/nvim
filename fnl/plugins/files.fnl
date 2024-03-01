@@ -1,6 +1,8 @@
 (import-macros {: se : hl : au : setup : plug} :macros)
 
-(plug "airblade/vim-rooter")
+(plug "windwp/nvim-autopairs")
+
+(plug :airblade/vim-rooter)
 
 (plug :jghauser/mkdir.nvim)
 
@@ -13,6 +15,7 @@
                         ;  :highlight :Comment
                         ;  :format "%d %b %H:%M "}
                         :icon]
+              :keymaps {:<C-p> false}
               :win_options {:signcolumn :yes}}
        :dependencies [:nvim-tree/nvim-web-devicons]})
 

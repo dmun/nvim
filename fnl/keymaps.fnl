@@ -32,6 +32,9 @@
 ;; oil
 (nmap <leader>e :<CMD>Oil<CR>)
 
+;; lazy
+(nmap <leader>l :<CMD>Lazy<CR>)
+
 ;; harpoon
 (nmap <leader>m "<CMD>lua require('harpoon.mark').add_file()<CR>")
 (nmap <leader>q "<CMD>lua require('harpoon.ui').toggle_quick_menu()<CR>")

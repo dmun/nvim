@@ -8,8 +8,7 @@
        :config (fn []
                  (let [configs (require :nvim-treesitter.configs)]
                    (configs.setup {:highlight {:enable true}
-                                   :indent {:enable true
-                                            :disable [:markdown]}
+                                   :indent {:enable true :disable [:markdown]}
                                    :ensure_installed [:lua
                                                       :vim
                                                       :vimdoc
@@ -25,3 +24,8 @@
 
 (plug :windwp/nvim-ts-autotag {:event [:BufReadPre :BufNewFile] :opts {}})
 
+(plug :RRethy/vim-illuminate
+      {:event [:BufReadPre :BufNewFile]
+       :config (fn []
+                 (let [illuminate (require :illuminate)]
+                   (illuminate.configure {:filetypes_denylist [:NeogitStatus]})))})
