@@ -1,6 +1,24 @@
 (import-macros {: se : hl : au : setup : plug} :macros)
 
-; (plug :nvim-treesitter/nvim-treesitter-context)
+;; fnlfmt: skip
+(plug :nvim-treesitter/nvim-treesitter-textobjects
+      {:dependencies [:nvim-treesitter/nvim-treesitter]
+       :config (fn [_ opts]
+                 (setup :nvim-treesitter.configs opts))
+       :opts {:textobjects {:select {:enable true
+                                     :lookahead true
+                                     :keymaps {:af "@function.outer"
+                                               :if "@function.inner"
+                                               :ac "@class.outer"
+                                               :ic {:query "@class.inner"
+                                                    :desc "Select inner part of a class region"}
+                                               :as {:query "@scope"
+                                                    :query_group :locals
+                                                    :desc "Select language scope"}}
+                                     :selection_modes {"@parameter.outer" :v
+                                                       "@function.outer" :V
+                                                       "@class.outer" :<c-v>}
+                                     :include_surrounding_whitespace true}}}})
 
 (plug :nvim-treesitter/nvim-treesitter
       {:event [:BufReadPre :BufNewFile]
@@ -29,3 +47,4 @@
        :config (fn []
                  (let [illuminate (require :illuminate)]
                    (illuminate.configure {:filetypes_denylist [:NeogitStatus]})))})
+
