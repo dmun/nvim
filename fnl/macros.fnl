@@ -1,6 +1,17 @@
 (fn str? [val]
   (if (= (type val) :string) true false))
 
+(fn str->tbl [str]
+  (let [tbl {}]
+    (for [i 1 (length str)]
+      (table.insert tbl (string.sub str i i)))
+    tbl))
+
+(fn table.merge [tbl1 tbl2]
+  (for [i 1 (length tbl2)]
+    (table.insert tbl1 (. tbl2 i)))
+  tbl1)
+
 (fn parse-operation [scope opt ?operator]
   (let [scope (case scope
                 :g :g
@@ -41,20 +52,21 @@
 (fn parse-format [input val]
   `(string.format ,(string.gsub input "<%?>" "%%s") ,val))
 
-(fn vim-map [mode lhs rhs ?key]
-  (let [lhs (-> (tostring lhs)
-                (parse-comma)
-                (parse-format ?key))
-        rhs (case (type rhs)
-              :string (parse-format rhs ?key)
-              :table (do
-                       (if ?key (table.insert rhs ?key))
-                       rhs)
-              _ rhs)]
-    `(vim.keymap.set ,mode ,lhs ,rhs {:silent true})))
+(fn vim-map [modes lhs rhs ?opts]
+  (let [modes (str->tbl modes)
+        lhs (-> (tostring lhs)
+                (parse-comma))
+        opts (table.merge {:silent true} (or ?opts {}))]
+    `(vim.keymap.set ,modes ,lhs ,rhs ,opts)))
 
-(fn nmap [lhs rhs ?key]
-  (vim-map :n lhs rhs ?key))
+(fn map [modes lhs rhs]
+  (vim-map modes lhs rhs))
+
+(fn xmap [modes lhs rhs]
+  (vim-map modes lhs rhs {:expr true}))
+
+(fn nmap [lhs rhs]
+  (vim-map :n lhs rhs))
 
 (fn imap [lhs rhs]
   (vim-map :i lhs rhs))
@@ -105,6 +117,8 @@
  : se-
  : setg
  : setl
+ : map
+ : xmap
  : nmap
  : imap
  : vmap
