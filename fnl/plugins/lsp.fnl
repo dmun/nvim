@@ -1,5 +1,7 @@
 (import-macros {: se : hl : au : setup : plug} :macros)
 
+(plug :mrcjkb/rustaceanvim {:version :^4 :ft :rust})
+
 ;; fnlfmt: skip
 (plug :neovim/nvim-lspconfig
           {:event [:BufReadPre :BufNewFile]
@@ -19,7 +21,6 @@
                                                                   :ltex {:language :nl
                                                                          :filetype [:norg]
                                                                          :additionalRules {:enablePickyRules true}}}}))]}))})
-
 
 (plug :mfussenegger/nvim-lint
       {:config (fn []
