@@ -40,7 +40,7 @@
                              (nmap <leader>hD
                                    (fn []
                                      (gs.diffthis "~")))
-                             (nmap <leader>td gs.toggle_deleted)
+                             (nmap <leader>td gs.toggle_deleted)))}})
                              ;; Text object
-                             (nmap ih ":<C-U>Gitsigns select_hunk<CR>")))}})
+                             ; (nmap ih ":<C-U>Gitsigns select_hunk<CR>")))}})
 

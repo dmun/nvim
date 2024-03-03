@@ -2,7 +2,7 @@
 
 ;; general
 (nmap <ESC> "<CMD>echo<bar>nohl<bar>silent update<CR>")
-(nmap <localleader>r "<CMD>!make -s run<CR>")
+(nmap <leader>mr "<CMD>!make -s run<CR>")
 (vmap <localleader>s ":'<,'>!sort<CR>")
 
 (imap <C-n> "<CMD>norm j<CR>")
