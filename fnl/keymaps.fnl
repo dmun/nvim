@@ -33,7 +33,10 @@
 (nmap <leader>e :<CMD>Oil<CR>)
 
 ;; lazy
-(nmap <leader>l :<CMD>Lazy<CR>)
+(nmap <leader>la :<CMD>Lazy<CR>)
+
+;; mason
+(nmap <leader>ls :<CMD>Mason<CR>)
 
 ;; harpoon
 (nmap <leader>m "<CMD>lua require('harpoon.mark').add_file()<CR>")

@@ -1,6 +1,6 @@
 (import-macros {: plug} :macros)
 
-(plug :nvim.neorg/neorg {:ft :norg
+(plug :nvim-neorg/neorg {:ft :norg
                          :dependencies [:nvim-lua/plenary.nvim]
                          :opts {:load {:core.defaults {}
                                        :core.concealer {:config {:folds false

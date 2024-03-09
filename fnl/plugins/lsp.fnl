@@ -31,7 +31,7 @@
                                                              (lint.try_lint))})))})
 
 (plug :stevearc/conform.nvim
-      {:opts {:formatters_by_ft {:lua [:stylua] :fennel [:fnlfmt]}}})
+      {:opts {:formatters_by_ft {:lua [:stylua] :fennel [:fnlfmt] :rust [:rustfmt]}}})
 
 (plug :williamboman/mason.nvim {:lazy true :opts {:ui {:width 1 :height 1}}})
 

@@ -20,7 +20,6 @@ if not vim.loop.fs_stat(hotpotpath) then
         "clone",
         "--filter=blob:none",
         "--single-branch",
-        -- You may with to pin a known version tag with `--branch=vX.Y.Z`
         "--branch=v0.9.6",
         "https://github.com/rktjmp/hotpot.nvim.git",
         hotpotpath,
@@ -40,15 +39,14 @@ require("hotpot").setup({
         },
         macros = {
             allowGlobals = true,
-            -- compilerEnv = "_G",
             env = "_COMPILER",
         },
     },
 })
 
 require("options")
-
 require("autocommands")
+require("keymaps")
 
 local plugins_path = vim.fn.stdpath("config") .. "/fnl/plugins"
 if vim.loop.fs_stat(plugins_path) then
@@ -58,14 +56,5 @@ if vim.loop.fs_stat(plugins_path) then
     end
 end
 
-plugins_path = vim.fn.stdpath("config") .. "/lua/plugins"
-if vim.loop.fs_stat(plugins_path) then
-    for file in vim.fs.dir(plugins_path) do
-        file = file:match("^(.*)%.lua$")
-        table.insert(_G.packages, require("plugins." .. file))
-    end
-end
-
 require("lazy").setup(_G.packages, { ui = { size = { width = 1, height = 1 } } })
 
-require("keymaps")

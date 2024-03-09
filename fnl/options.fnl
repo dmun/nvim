@@ -1,7 +1,5 @@
 (import-macros {: se : se+ : setg : sign} :macros)
 
-(vim.cmd.source :$HOME/.config/nvim/.vimrc)
-
 ;; leader keys
 (setg mapleader " ")
 (setg maplocalleader ",")
@@ -59,9 +57,9 @@
 (se noshowcmd)
 (se noshowmode)
 (se showtabline 0)
-(se termguicolors)
 (se+ gcr "n:blinkwait1400-blinkoff400-blinkon250")
 (se+ shm :Iq)
+; (se termguicolors)
 
 ;; window
 (se inccommand :split)
