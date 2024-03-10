@@ -61,5 +61,10 @@
                                                        cmp.config.compare.offset
                                                        (. (require :cmp-under-comparator)
                                                           :under)
-                                                       cmp.config.compare.order]}})))})
+                                                       cmp.config.compare.order]}
+                               :formatting {:format (fn [entry vim_item]
+                                                      (set vim_item.abbr
+                                                           (string.sub vim_item.abbr
+                                                                       1 20))
+                                                      vim_item)}})))})
 

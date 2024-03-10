@@ -20,14 +20,14 @@
 (nmap <leader>tw "<CMD>set wrap!<CR>")
 
 ;; fzf-lua
-(nmap <leader><leader> "<CMD>FzfLua files<CR>")
-(nmap <leader>fr "<CMD>FzfLua oldfiles<CR>")
+(nmap <C-p> "<CMD>FzfLua files<CR>")
+(nmap <M-o> "<CMD>FzfLua oldfiles<CR>")
 (nmap <leader>/ "<CMD>FzfLua live_grep_native<CR>")
 (nmap <leader>? "<CMD>FzfLua live_grep_resume<CR>")
 (nmap <leader><comma> "<CMD>FzfLua buffers<CR>")
 (nmap <leader>bi "<CMD>FzfLua builtin<CR>")
 (nmap <M-x> "<CMD>FzfLua commands<CR>")
-(nmap <M-k> "<CMD>FzfLua lsp_code_actions<CR>")
+(nmap <leader>a "<CMD>FzfLua lsp_code_actions<CR>")
 
 ;; oil
 (nmap <leader>e :<CMD>Oil<CR>)
