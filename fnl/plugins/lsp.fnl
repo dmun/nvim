@@ -8,7 +8,8 @@
            :dependencies [{1 :williamboman/mason-lspconfig.nvim
                            :dependencies [:williamboman/mason.nvim]}]
            :config (fn []
-                     (vim.diagnostic.config {:float {:border :single}})
+                     (vim.diagnostic.config {:virtual_text true
+                                             :float {:border false}})
                      (setup :mason-lspconfig
                             {:handlers [(fn [ls]
                                           (if (= ls :lua_ls) (setup :neodev))
@@ -31,7 +32,9 @@
                                                              (lint.try_lint))})))})
 
 (plug :stevearc/conform.nvim
-      {:opts {:formatters_by_ft {:lua [:stylua] :fennel [:fnlfmt] :rust [:rustfmt]}}})
+      {:opts {:formatters_by_ft {:lua [:stylua]
+                                 :fennel [:fnlfmt]
+                                 :rust [:rustfmt]}}})
 
 (plug :williamboman/mason.nvim {:lazy true :opts {:ui {:width 1 :height 1}}})
 

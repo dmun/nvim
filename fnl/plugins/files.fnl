@@ -1,6 +1,6 @@
 (import-macros {: se : hl : au : setup : plug} :macros)
 
-(plug "windwp/nvim-autopairs")
+(plug "windwp/nvim-autopairs" {:config true})
 
 (plug :airblade/vim-rooter)
 

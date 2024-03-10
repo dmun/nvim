@@ -27,7 +27,7 @@
 (nmap <leader><comma> "<CMD>FzfLua buffers<CR>")
 (nmap <leader>bi "<CMD>FzfLua builtin<CR>")
 (nmap <M-x> "<CMD>FzfLua commands<CR>")
-(nmap <leader>ca "<CMD>FzfLua lsp_code_actions<CR>")
+(nmap <M-k> "<CMD>FzfLua lsp_code_actions<CR>")
 
 ;; oil
 (nmap <leader>e :<CMD>Oil<CR>)
@@ -60,6 +60,7 @@
 (nmap gi vim.lsp.buf.implementation)
 (nmap "[d" vim.diagnostic.goto_prev)
 (nmap "]d" vim.diagnostic.goto_next)
+(nmap <leader>k vim.diagnostic.open_float)
 (nmap <space>rn vim.lsp.buf.rename)
 (nmap <leader>wa vim.lsp.buf.add_workspace_folder)
 (nmap <leader>wr vim.lsp.buf.remove_workspace_folder)

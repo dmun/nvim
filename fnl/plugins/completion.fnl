@@ -11,8 +11,10 @@
        :build "make install_jsregexp"})
 
 (plug :hrsh7th/nvim-cmp
-      {:event :InsertEnter
+      {:version false
+       :event :InsertEnter
        :dependencies [:hrsh7th/cmp-buffer
+                      :hrsh7th/cmp-path
                       :hrsh7th/cmp-nvim-lua
                       :hrsh7th/cmp-nvim-lsp
                       :hrsh7th/cmp-nvim-lsp-signature-help
@@ -36,27 +38,28 @@
                                                                    (cmp.confirm {:select true})
                                                                    (luasnip.expand_or_jumpable)
                                                                    (luasnip.expand_or_jump)
-                                                                   (fallback))) [:i :s])
+                                                                   (fallback)))
+                                                             [:i :s])
                                          :<S-TAB> (cmp.mapping (fn [fallback]
                                                                  (if (luasnip.jumpable -1)
                                                                      (luasnip.jump -1)
-                                                                     (fallback))) [:i :s])}
+                                                                     (fallback)))
+                                                               [:i :s])}
                                :completion {:completeopt "menu,menuone"}
                                :preselect cmp.PreselectMode.None
                                :experimental {:ghost_text true}
                                :sources (cmp.config.sources [{:name :conjure}
-                                                             {:name :luasnip}
                                                              {:name :nvim_lsp}
+                                                             {:name :luasnip}
+                                                             {:name :path}
                                                              {:name :nvim_lua}
                                                              {:name :nvim_lsp_signature_help}
                                                              {:name :buffer}])
-                               :sorting {:comparators [cmp.config.compare.offset
-                                                       cmp.config.compare.kind
-                                                       cmp.config.compare.exact
+                               :sorting {:comparators [cmp.config.compare.locality
+                                                       cmp.config.compare.recently_used
                                                        cmp.config.compare.score
+                                                       cmp.config.compare.offset
                                                        (. (require :cmp-under-comparator)
                                                           :under)
-                                                       cmp.config.compare.sort_text
-                                                       cmp.config.compare.length
                                                        cmp.config.compare.order]}})))})
 

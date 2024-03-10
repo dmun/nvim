@@ -9,6 +9,10 @@
 (setg sneak#use_ic_scs 1)
 (setg sneak#s_next 1)
 (setg tex_flavor :latex)
+(setg rustaceanvim
+      {:tools {:hover_actions {:replace_builtin_hover false}
+               :float_win_config {:border :none}}})
+
 (setg conjure#filetypes [:clojure
                          :fennel
                          :hy
@@ -25,6 +29,7 @@
 ;; text
 (se breakindent)
 (se completeopt "menuone,noselect")
+(se confirm)
 (se expandtab)
 (se linebreak)
 (se nowrap)
@@ -86,3 +91,4 @@
 (sign DiagnosticSignWarn {:text "•" :texthl :DiagnosticSignWarn})
 (sign DiagnosticSignInfo {:text "•" :texthl :DiagnosticSignInfo})
 (sign DiagnosticSignHint {:text "•" :texthl :DiagnosticSignHint})
+

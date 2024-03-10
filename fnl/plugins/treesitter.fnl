@@ -1,5 +1,8 @@
 (import-macros {: se : hl : au : setup : plug} :macros)
 
+; (plug :lukas-reineke/indent-blankline.nvim
+;       {:main :ibl :opts {:indent {:char "▏"}}})
+
 ;; fnlfmt: skip
 (plug :nvim-treesitter/nvim-treesitter-textobjects
       {:dependencies [:nvim-treesitter/nvim-treesitter]
