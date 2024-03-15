@@ -6,6 +6,7 @@
 ;; fnlfmt: skip
 (plug :nvim-treesitter/nvim-treesitter-textobjects
       {:dependencies [:nvim-treesitter/nvim-treesitter]
+       :event [:BufReadPre :BufNewFile]
        :config (fn [_ opts]
                  (setup :nvim-treesitter.configs opts))
        :opts {:textobjects {:select {:enable true
@@ -24,18 +25,18 @@
                                      :include_surrounding_whitespace true}}}})
 
 (plug :nvim-treesitter/nvim-treesitter
-      {:event [:BufReadPre :BufNewFile]
-       :build ":TSUpdate"
+      {:build ":TSUpdate"
+       :event [:BufReadPre :BufNewFile]
        :config (fn []
-                 (let [configs (require :nvim-treesitter.configs)]
-                   (configs.setup {:highlight {:enable true}
-                                   :indent {:enable true :disable [:markdown]}
-                                   :ensure_installed [:lua
-                                                      :vim
-                                                      :vimdoc
-                                                      :luadoc
-                                                      :norg
-                                                      :fennel]})))})
+                  (let [configs (require :nvim-treesitter.configs)]
+                    (configs.setup {:highlight {:enable true}
+                                    :indent {:enable true :disable [:markdown]}
+                                    :ensure_installed [:lua
+                                                       :vim
+                                                       :vimdoc
+                                                       :luadoc
+                                                       :norg
+                                                       :fennel]})))})
 
 ; (plug :kevinhwang91/nvim-ufo
 ;       {:event [:BufReadPre :BufNewFile]

@@ -56,5 +56,5 @@ if vim.loop.fs_stat(plugins_path) then
     end
 end
 
-require("lazy").setup(_G.packages, { ui = { size = { width = 1, height = 1 } } })
+require("lazy").setup(_G.packages, { ui = { size = { width = 1, height = 0.99 } } })
 
