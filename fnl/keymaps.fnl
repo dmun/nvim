@@ -20,8 +20,8 @@
 (nmap <leader>tw "<CMD>set wrap!<CR>")
 
 ;; fzf-lua
-(nmap <C-p> "<CMD>FzfLua files<CR>")
-(nmap <M-o> "<CMD>FzfLua oldfiles<CR>")
+(nmap <leader><leader> "<CMD>FzfLua files<CR>")
+(nmap <leader>fr "<CMD>FzfLua oldfiles<CR>")
 (nmap <leader>/ "<CMD>FzfLua live_grep_native<CR>")
 (nmap <leader>? "<CMD>FzfLua live_grep_resume<CR>")
 (nmap <leader><comma> "<CMD>FzfLua buffers<CR>")
