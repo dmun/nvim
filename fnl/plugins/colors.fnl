@@ -1,10 +1,22 @@
 (import-macros {: se : hl : au : setup : plug} :macros)
 
-; (hl Sneak {:guifg "#FF007C" :gui "underline,nocombine"})
+(plug :felipeagc/fleet-theme-nvim
+      {:lazy false
+       :priority 1000
+       :config (fn []
+                 (vim.cmd "colorscheme fleet")
+                 (hl IlluminatedWordText {:guibg "#2E2E2E"})
+                 (hl IlluminatedWordRead {:guibg "#2E2E2E"})
+                 (hl IlluminatedWordWrite {:guibg "#2E2E2E"})
+                 (hl DiagnosticError {:guibg :NONE})
+                 (hl DiagnosticWarn {:guibg :NONE})
+                 (hl DiagnosticInfo {:guibg :NONE})
+                 (hl DiagnosticHint {:guibg :NONE}))})
 
 ;; fnlfmt: skip
 (plug :catppuccin/nvim
-      {:lazy false
+      {:enabled false
+       :lazy false
        :name :catppuccin
        :priority 1000
        :config (fn [_ opts]
@@ -16,9 +28,9 @@
                                    {:FzfLuaHeaderBind {:fg colors.lavender}
                                     :FzfLuaHeaderText {:fg colors.lavender}
                                     :TroubleCount {:fg colors.green}
-                                    :CursorLine {:bg "#2A2B3E"}
-                                    :CursorNr {:bg "#2A2B3E"}
-                                    :CursorSign {:bg "#2A2B3E"}
+                                    :CursorLine {:bg "#1E1E2E"}
+                                    :CursorNr {:bg "#1E1E2E"}
+                                    :CursorSign {:bg "#1E1E2E"}
                                     :TreesitterContext {:bg colors.mantle}
                                     :TroubleText {:bg colors.none}
                                     :TroubleFoldIcon {:bg colors.none}

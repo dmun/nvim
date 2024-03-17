@@ -11,7 +11,8 @@
       {:opts {:options {:theme :auto
                         :component_separators {:left "" :right ""}
                         :section_separators {:left "" :right ""}
-                        :always_divide_middle true}
+                        :always_divide_middle true
+                        :disabled_filetypes [:Trouble]}
               :sections {:lualine_a []
                          :lualine_b []
                          :lualine_c [:mode :filename]

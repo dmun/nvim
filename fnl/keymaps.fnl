@@ -29,6 +29,13 @@
 (nmap <M-x> "<CMD>FzfLua commands<CR>")
 (nmap <leader>a "<CMD>FzfLua lsp_code_actions<CR>")
 
+; ;; telescope
+; (nmap <leader><leader> "<CMD>Telescope find_files<CR>")
+; (nmap <leader>fr "<CMD>Telescope oldfiles<CR>")
+; (nmap <leader>/ "<CMD>Telescope live_grep<CR>")
+; (nmap <leader><comma> "<CMD>Telescope buffers<CR>")
+; (nmap <leader>fh "<CMD>Telescope help_tags<CR>")
+
 ;; oil
 (nmap <leader>e :<CMD>Oil<CR>)
 
@@ -64,13 +71,14 @@
 (nmap <space>rn vim.lsp.buf.rename)
 (nmap <leader>wa vim.lsp.buf.add_workspace_folder)
 (nmap <leader>wr vim.lsp.buf.remove_workspace_folder)
-(nmap <leader>wl "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>")
+(nmap <leader>wl
+      "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>")
 
 ;; conform
 (nmap <leader>bf (partial (#$.format (require :conform) {:async true})))
 
 ;; trouble
-(nmap <leader>d "<CMD>TroubleToggle<CR>")
+(nmap <leader>d :<CMD>TroubleToggle<CR>)
 (nmap <leader>D "<CMD>TroubleToggle lsp_definitions<CR>")
 (nmap gr "<CMD>TroubleToggle lsp_references<CR>")
 

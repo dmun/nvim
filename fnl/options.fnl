@@ -54,8 +54,10 @@
 
 ;; visual
 (se background :dark)
+(se cmdheight 1)
 (se conceallevel 3)
 (se fillchars "vert:▏,eob: ")
+(se laststatus 2)
 (se lazyredraw)
 (se nocursorline)
 (se noruler)
@@ -87,8 +89,8 @@
 (se clipboard :unnamedplus)
 
 ;; signs
-(sign DiagnosticSignError {:text "•" :texthl :DiagnosticSignError})
-(sign DiagnosticSignWarn {:text "•" :texthl :DiagnosticSignWarn})
-(sign DiagnosticSignInfo {:text "•" :texthl :DiagnosticSignInfo})
-(sign DiagnosticSignHint {:text "•" :texthl :DiagnosticSignHint})
+(sign DiagnosticSignError {:text "■" :texthl :DiagnosticSignError})
+(sign DiagnosticSignWarn {:text "■" :texthl :DiagnosticSignWarn})
+(sign DiagnosticSignInfo {:text "■" :texthl :DiagnosticSignInfo})
+(sign DiagnosticSignHint {:text "■" :texthl :DiagnosticSignHint})
 
