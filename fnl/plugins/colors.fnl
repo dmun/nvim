@@ -1,7 +1,15 @@
 (import-macros {: se : hl : au : setup : plug} :macros)
 
+(plug :kvrohit/rasmus.nvim
+      {:enabled true
+       :lazy false
+       :priority 1000
+       :config (fn []
+                 (vim.cmd "colorscheme rasmus"))})
+
 (plug :felipeagc/fleet-theme-nvim
-      {:lazy false
+      {:enabled false
+       :lazy false
        :priority 1000
        :config (fn []
                  (vim.cmd "colorscheme fleet")
