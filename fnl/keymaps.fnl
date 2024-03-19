@@ -20,6 +20,8 @@
 (nmap <leader>tc :<cmd>ColorizerToggle<cr>)
 (nmap <leader>ts :<cmd>ASToggle<cr>)
 (nmap <leader>tw "<cmd>set wrap!<cr>")
+(nmap <leader>tl "<cmd>Lazy<cr>")
+(nmap <leader>tm "<cmd>Mason<cr>")
 
 ;; fzf-lua
 (nmap <leader><leader> "<cmd>FzfLua files<cr>")
