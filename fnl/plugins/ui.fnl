@@ -13,9 +13,9 @@
                         :section_separators {:left "" :right ""}
                         :always_divide_middle true
                         :disabled_filetypes [:Trouble]}
-              :sections {:lualine_a []
+              :sections {:lualine_a [:mode]
                          :lualine_b []
-                         :lualine_c [:mode :filename]
+                         :lualine_c [:filename]
                          :lualine_x [:diagnostics
                                      {1 :fileformat :icons_enabled false}
                                      :progress

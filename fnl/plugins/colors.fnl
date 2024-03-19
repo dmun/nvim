@@ -1,14 +1,14 @@
 (import-macros {: se : hl : au : setup : plug} :macros)
 
 (plug :kvrohit/rasmus.nvim
-      {:enabled true
+      {:enabled false
        :lazy false
        :priority 1000
        :config (fn []
                  (vim.cmd "colorscheme rasmus"))})
 
 (plug :felipeagc/fleet-theme-nvim
-      {:enabled false
+      {:enabled true
        :lazy false
        :priority 1000
        :config (fn []
@@ -16,10 +16,10 @@
                  (hl IlluminatedWordText {:guibg "#2E2E2E"})
                  (hl IlluminatedWordRead {:guibg "#2E2E2E"})
                  (hl IlluminatedWordWrite {:guibg "#2E2E2E"})
-                 (hl DiagnosticError {:guibg :NONE})
-                 (hl DiagnosticWarn {:guibg :NONE})
-                 (hl DiagnosticInfo {:guibg :NONE})
-                 (hl DiagnosticHint {:guibg :NONE}))})
+                 (hl DiagnosticError {:guibg :none})
+                 (hl DiagnosticWarn {:guibg :none})
+                 (hl DiagnosticInfo {:guibg :none})
+                 (hl DiagnosticHint {:guibg :none}))})
 
 ;; fnlfmt: skip
 (plug :catppuccin/nvim
