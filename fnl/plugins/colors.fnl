@@ -9,10 +9,12 @@
 
 (plug :felipeagc/fleet-theme-nvim
       {:enabled true
+       :dependencies [:nvim-lualine/lualine.nvim]
        :lazy false
        :priority 1000
        :config (fn []
                  (vim.cmd "colorscheme fleet")
+                 (hl lualine_a_normal {:guifg "#2197F3" :guibg "#1F3661"})
                  (hl TroubleCount {:guifg "#2197F3" :guibg "#1F3661"})
                  (hl IlluminatedWordText {:guibg "#2E2E2E"})
                  (hl IlluminatedWordRead {:guibg "#2E2E2E"})

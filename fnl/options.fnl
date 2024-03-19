@@ -64,7 +64,7 @@
 (se noshowcmd)
 (se noshowmode)
 (se showtabline 0)
-(se+ gcr "n:blinkwait1400-blinkoff400-blinkon250,i:block-iCursor")
+(se+ gcr "n:blinkwait1400-blinkoff400-blinkon250,i:block")
 (se+ shm :Iq)
 ; (se termguicolors)
 
