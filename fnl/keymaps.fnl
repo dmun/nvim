@@ -1,13 +1,15 @@
 (import-macros {: nmap : imap : vmap} :macros)
 
 ;; general
-(nmap <ESC> "<CMD>echo<bar>nohl<bar>silent update<CR>")
-(nmap <leader>mr "<CMD>!make -s run<CR>")
-(vmap <localleader>s ":'<,'>!sort<CR>")
+(nmap <ESC> "<cmd>echo<bar>nohl<bar>silent update<cr>")
+(nmap <leader>mr "<cmd>!make -s run<cr>")
+(nmap u "<cmd>silent undo<cr>")
+(nmap <C-r> "<cmd>silent redo<cr>")
+(vmap <localleader>s ":'<,'>!sort<cr>")
 
-(imap <C-n> "<CMD>norm j<CR>")
-(imap <C-p> "<CMD>norm k<CR>")
-(imap <C-k> "<CMD>norm dd<CR>")
+(imap <C-n> "<cmd>norm j<cr>")
+(imap <C-p> "<cmd>norm k<cr>")
+(imap <C-k> "<cmd>norm dd<cr>")
 
 (nmap <C-h> :<C-w>h)
 (nmap <C-j> :<C-w>j)
@@ -15,44 +17,44 @@
 (nmap <C-l> :<C-w>l)
 
 ;; toggles
-(nmap <leader>tc :<CMD>ColorizerToggle<CR>)
-(nmap <leader>ts :<CMD>ASToggle<CR>)
-(nmap <leader>tw "<CMD>set wrap!<CR>")
+(nmap <leader>tc :<cmd>ColorizerToggle<cr>)
+(nmap <leader>ts :<cmd>ASToggle<cr>)
+(nmap <leader>tw "<cmd>set wrap!<cr>")
 
 ;; fzf-lua
-(nmap <leader><leader> "<CMD>FzfLua files<CR>")
-(nmap <leader>fr "<CMD>FzfLua oldfiles<CR>")
-(nmap <leader>/ "<CMD>FzfLua live_grep_native<CR>")
-(nmap <leader>? "<CMD>FzfLua live_grep_resume<CR>")
-(nmap <leader><comma> "<CMD>FzfLua buffers<CR>")
-(nmap <leader>bi "<CMD>FzfLua builtin<CR>")
-(nmap <M-x> "<CMD>FzfLua commands<CR>")
-(nmap <leader>a "<CMD>FzfLua lsp_code_actions<CR>")
+(nmap <leader><leader> "<cmd>FzfLua files<cr>")
+(nmap <leader>fr "<cmd>FzfLua oldfiles<cr>")
+(nmap <leader>/ "<cmd>FzfLua live_grep_native<cr>")
+(nmap <leader>? "<cmd>FzfLua live_grep_resume<cr>")
+(nmap <leader><comma> "<cmd>FzfLua buffers<cr>")
+(nmap <leader>bi "<cmd>FzfLua builtin<cr>")
+(nmap <M-x> "<cmd>FzfLua commands<cr>")
+(nmap <leader>a "<cmd>FzfLua lsp_code_actions<cr>")
 
 ; ;; telescope
-; (nmap <leader><leader> "<CMD>Telescope find_files<CR>")
-; (nmap <leader>fr "<CMD>Telescope oldfiles<CR>")
-; (nmap <leader>/ "<CMD>Telescope live_grep<CR>")
-; (nmap <leader><comma> "<CMD>Telescope buffers<CR>")
-; (nmap <leader>fh "<CMD>Telescope help_tags<CR>")
+; (nmap <leader><leader> "<cmd>Telescope find_files<cr>")
+; (nmap <leader>fr "<cmd>Telescope oldfiles<cr>")
+; (nmap <leader>/ "<cmd>Telescope live_grep<cr>")
+; (nmap <leader><comma> "<cmd>Telescope buffers<cr>")
+; (nmap <leader>fh "<cmd>Telescope help_tags<cr>")
 
 ;; oil
-(nmap <leader>e :<CMD>Oil<CR>)
+(nmap <leader>e :<cmd>Oil<cr>)
 
 ;; lazy
-(nmap <leader>la :<CMD>Lazy<CR>)
+(nmap <leader>la :<cmd>Lazy<cr>)
 
 ;; mason
-(nmap <leader>ls :<CMD>Mason<CR>)
+(nmap <leader>ls :<cmd>Mason<cr>)
 
 ;; harpoon
-(nmap <leader>m "<CMD>lua require('harpoon.mark').add_file()<CR>")
-(nmap <leader>q "<CMD>lua require('harpoon.ui').toggle_quick_menu()<CR>")
-(nmap <leader>1 "<CMD>lua require('harpoon.ui').nav_file(1)<CR>")
-(nmap <leader>2 "<CMD>lua require('harpoon.ui').nav_file(2)<CR>")
-(nmap <leader>3 "<CMD>lua require('harpoon.ui').nav_file(3)<CR>")
-(nmap <leader>4 "<CMD>lua require('harpoon.ui').nav_file(4)<CR>")
-(nmap <leader>5 "<CMD>lua require('harpoon.ui').nav_file(5)<CR>")
+(nmap <leader>m "<cmd>lua require('harpoon.mark').add_file()<cr>")
+(nmap <leader>q "<cmd>lua require('harpoon.ui').toggle_quick_menu()<cr>")
+(nmap <leader>1 "<cmd>lua require('harpoon.ui').nav_file(1)<cr>")
+(nmap <leader>2 "<cmd>lua require('harpoon.ui').nav_file(2)<cr>")
+(nmap <leader>3 "<cmd>lua require('harpoon.ui').nav_file(3)<cr>")
+(nmap <leader>4 "<cmd>lua require('harpoon.ui').nav_file(4)<cr>")
+(nmap <leader>5 "<cmd>lua require('harpoon.ui').nav_file(5)<cr>")
 
 ;; sneak
 ; (nmap f :<Plug>Sneak_f)
@@ -71,14 +73,13 @@
 (nmap <space>rn vim.lsp.buf.rename)
 (nmap <leader>wa vim.lsp.buf.add_workspace_folder)
 (nmap <leader>wr vim.lsp.buf.remove_workspace_folder)
-(nmap <leader>wl
-      "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>")
+(nmap <leader>wl "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<cr>")
 
 ;; conform
 (nmap <leader>bf (partial (#$.format (require :conform) {:async true})))
 
 ;; trouble
-(nmap <leader>d :<CMD>TroubleToggle<CR>)
-(nmap <leader>D "<CMD>TroubleToggle lsp_definitions<CR>")
-(nmap gr "<CMD>TroubleToggle lsp_references<CR>")
+(nmap <leader>d :<cmd>TroubleToggle<cr>)
+(nmap <leader>D "<cmd>TroubleToggle lsp_definitions<cr>")
+(nmap gr "<cmd>TroubleToggle lsp_references<cr>")
 
