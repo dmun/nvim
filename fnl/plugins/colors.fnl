@@ -1,11 +1,6 @@
 (import-macros {: se : hl : au : setup : plug} :macros)
 
-(plug :kvrohit/rasmus.nvim
-      {:enabled false
-       :lazy false
-       :priority 1000
-       :config (fn []
-                 (vim.cmd.colorscheme :rasmus))})
+(plug :norcalli/nvim-colorizer.lua)
 
 (plug :felipeagc/fleet-theme-nvim
       {:enabled true
@@ -14,19 +9,21 @@
        :priority 1000
        :config (fn []
                  (vim.cmd.colorscheme :fleet)
+
+                 ;; lsp
+                 (hl DiagnosticError {:bg :none})
+                 (hl DiagnosticWarn {:bg :none})
+                 (hl DiagnosticInfo {:bg :none})
+                 (hl DiagnosticHint {:bg :none})
+
+                 ;; plugins
                  (hl lualine_a_normal {:fg "#2197F3" :bg "#1F3661"})
                  (hl TroubleCount {:fg "#2197F3" :bg "#1F3661"})
                  (hl IlluminatedWordText {:bg "#2E2E2E"})
                  (hl IlluminatedWordRead {:bg "#2E2E2E"})
                  (hl IlluminatedWordWrite {:bg "#2E2E2E"})
-                 (hl DiagnosticError {:bg :none})
-                 (hl DiagnosticWarn {:bg :none})
-                 (hl DiagnosticInfo {:bg :none})
-                 (hl DiagnosticHint {:bg :none})
-                 (hl CursorLine {:bg "#292929"})
-                 (hl CursorLineNr {:bg "#292929"})
-                 (hl CursorLineSign {:bg "#292929"})
-                 (hl CursorLineFold {:bg "#292929"}))})
+                 (hl LeapLabelPrimary {:fg "#1A1A1A" :bg "#AFCB85"})
+                 (hl LeapMatch CurSearch))})
 
 ;; fnlfmt: skip
 (plug :catppuccin/nvim
@@ -49,17 +46,7 @@
                                     :TreesitterContext {:bg colors.mantle}
                                     :TroubleText {:bg colors.none}
                                     :TroubleFoldIcon {:bg colors.none}
-                                    ; :CursorInsert {:bg colors.green}
-                                    ; :Cursor {:bg colors.rosewater}
-                                    ; :Cursor {:style [:reverse]}
                                     "@neorg.todo_items.pending" {:style [:altfont]}
                                     "@neorg.todo_items.on_hold" {:fg colors.blue
                                                                   :bg colors.none}})}})
-
-(plug :norcalli/nvim-colorizer.lua)
-
-(plug :bluz71/vim-moonfly-colors
-      {:enabled false
-       :priority 1000
-       :config (fn [] (vim.cmd.colorscheme :moonfly))})
 

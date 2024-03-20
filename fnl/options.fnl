@@ -49,8 +49,6 @@
 (se nonu)
 (se nornu)
 (se signcolumn :yes)
-; (se number)
-; (se relativenumber)
 
 ;; visual
 (se background :dark)
@@ -66,7 +64,6 @@
 (se showtabline 0)
 (se+ gcr "n:blinkwait1400-blinkoff400-blinkon250,i:block")
 (se+ shm :Iq)
-; (se termguicolors)
 
 ;; window
 (se inccommand :split)

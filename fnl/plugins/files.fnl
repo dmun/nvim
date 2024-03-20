@@ -1,13 +1,5 @@
 (import-macros {: se : hl : au : setup : plug} :macros)
 
-; (plug :nvim-telescope/telescope.nvim
-;       {:cmd :Telescope
-;        :module :telescope
-;        :tag :0.1.6
-;        :dependencies [:nvim-lua/plenary.nvim]
-;        :opts {:defaults (get-dropdown {:mappings {:i {:<ESC> :close
-;                                                       :<C-d> :delete_buffer}}})}})
-
 (plug :windwp/nvim-autopairs {:config true})
 (plug :airblade/vim-rooter)
 (plug :jghauser/mkdir.nvim)
@@ -30,11 +22,19 @@
               :files {:fzf_opts {:--header false}}
               :oldfiles {:fd_opts "--exclude '/nvim/runtime/doc/*.txt'"}}
        :config (fn [_ opts]
-                 ((#$.setup (require :fzf-lua)) opts)
+                 (setup :fzf-lua opts)
                  (hl FzfLuaHeaderBind "@punctuation")
                  (hl FzfLuaBorder Comment)
                  (hl FzfLuaCursorlineNr Normal)
                  (hl FzfLuaCursorline Normal)
                  (hl FzfLuaTitle "@text.title")
                  (hl FzfLuaHeaderText "@constant"))})
+
+; (plug :nvim-telescope/telescope.nvim
+;       {:cmd :Telescope
+;        :module :telescope
+;        :tag :0.1.6
+;        :dependencies [:nvim-lua/plenary.nvim]
+;        :opts {:defaults (get-dropdown {:mappings {:i {:<ESC> :close
+;                                                       :<C-d> :delete_buffer}}})}})
 
