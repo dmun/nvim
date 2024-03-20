@@ -5,7 +5,7 @@
        :lazy false
        :priority 1000
        :config (fn []
-                 (vim.cmd "colorscheme rasmus"))})
+                 (vim.cmd.colorscheme :rasmus))})
 
 (plug :felipeagc/fleet-theme-nvim
       {:enabled true
@@ -13,16 +13,20 @@
        :lazy false
        :priority 1000
        :config (fn []
-                 (vim.cmd "colorscheme fleet")
-                 (hl lualine_a_normal {:guifg "#2197F3" :guibg "#1F3661"})
-                 (hl TroubleCount {:guifg "#2197F3" :guibg "#1F3661"})
-                 (hl IlluminatedWordText {:guibg "#2E2E2E"})
-                 (hl IlluminatedWordRead {:guibg "#2E2E2E"})
-                 (hl IlluminatedWordWrite {:guibg "#2E2E2E"})
-                 (hl DiagnosticError {:guibg :none})
-                 (hl DiagnosticWarn {:guibg :none})
-                 (hl DiagnosticInfo {:guibg :none})
-                 (hl DiagnosticHint {:guibg :none}))})
+                 (vim.cmd.colorscheme :fleet)
+                 (hl lualine_a_normal {:fg "#2197F3" :bg "#1F3661"})
+                 (hl TroubleCount {:fg "#2197F3" :bg "#1F3661"})
+                 (hl IlluminatedWordText {:bg "#2E2E2E"})
+                 (hl IlluminatedWordRead {:bg "#2E2E2E"})
+                 (hl IlluminatedWordWrite {:bg "#2E2E2E"})
+                 (hl DiagnosticError {:bg :none})
+                 (hl DiagnosticWarn {:bg :none})
+                 (hl DiagnosticInfo {:bg :none})
+                 (hl DiagnosticHint {:bg :none})
+                 (hl CursorLine {:bg "#292929"})
+                 (hl CursorLineNr {:bg "#292929"})
+                 (hl CursorLineSign {:bg "#292929"})
+                 (hl CursorLineFold {:bg "#292929"}))})
 
 ;; fnlfmt: skip
 (plug :catppuccin/nvim

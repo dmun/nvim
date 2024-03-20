@@ -1,6 +1,9 @@
 (fn str? [val]
   (if (= (type val) :string) true false))
 
+(fn tbl? [val]
+  (if (= (type val) :table) true false))
+
 (fn str->tbl [str]
   (let [tbl {}]
     (for [i 1 (length str)]
@@ -77,8 +80,8 @@
 (fn tmap [lhs rhs]
   (vim-map :t lhs rhs))
 
-(fn remap [lhs rhs]
-  `(vim.keymap.set :n ,lhs ,rhs {:silent true :remap true}))
+(fn nremap [lhs rhs]
+  (vim-map :n lhs rhs {:remap true}))
 
 (fn cmd [command ...]
   `(let [args# (table.concat (icollect [_# v# (ipairs [,...])]
@@ -87,10 +90,17 @@
 
 (lambda hl [group opts]
   (assert-compile (sym? group) "expected symbol" group)
-  (let [group (tostring group)
-        opts (icollect [k v (pairs opts)]
-               (string.format "%s=%s" k v))]
-    `(vim.cmd.highlight ,group ,(.. (unpack opts)))))
+  (let [group (tostring group)]
+    (if (table? opts)
+        (let [opts (icollect [k v (pairs opts)]
+                     (string.format "%s=%s"
+                                    (case k
+                                      :fg :guifg
+                                      :bg :guibg
+                                      _ k) v))]
+          `(vim.cmd.highlight ,group ,(.. (unpack opts))))
+        (let [opts (tostring opts)]
+          `(vim.cmd (.. "highlight! link " ,group " " ,opts))))))
 
 (fn sign [sign opts]
   (assert-compile (sym? sign) "expected symbol" sign)
@@ -123,7 +133,7 @@
  : imap
  : vmap
  : tmap
- : remap
+ : nremap
  : cmd
  : hl
  : au

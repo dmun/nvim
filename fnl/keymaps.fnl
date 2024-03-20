@@ -1,11 +1,11 @@
-(import-macros {: nmap : imap : vmap} :macros)
+(import-macros {: nmap : imap : vmap : nremap} :macros)
 
 ;; general
 (nmap <ESC> "<cmd>echo<bar>nohl<bar>silent update<cr>")
-(nmap <leader>mr "<cmd>!make -s run<cr>")
-(nmap u "<cmd>silent undo<cr>")
-(nmap <C-r> "<cmd>silent redo<cr>")
+(nmap <leader>r "<cmd>!make -s run<cr>")
 (vmap <localleader>s ":'<,'>!sort<cr>")
+(nremap u "<cmd>silent undo<cr>")
+(nremap <C-r> "<cmd>silent redo<cr>")
 
 (imap <C-n> "<cmd>norm j<cr>")
 (imap <C-p> "<cmd>norm k<cr>")
@@ -24,12 +24,13 @@
 (nmap <leader>tm "<cmd>Mason<cr>")
 
 ;; fzf-lua
-(nmap <leader><leader> "<cmd>FzfLua files<cr>")
-(nmap <leader>fr "<cmd>FzfLua oldfiles<cr>")
+(nmap <leader>f "<cmd>FzfLua files<cr>")
+(nmap <leader>of "<cmd>FzfLua oldfiles<cr>")
 (nmap <leader>/ "<cmd>FzfLua live_grep_native<cr>")
 (nmap <leader>? "<cmd>FzfLua live_grep_resume<cr>")
 (nmap <leader><comma> "<cmd>FzfLua buffers<cr>")
-(nmap <leader>bi "<cmd>FzfLua builtin<cr>")
+(nmap <leader><leader> "<cmd>FzfLua builtin<cr>")
+(nmap <leader>hf "<cmd>FzfLua highlights<cr>")
 (nmap <M-x> "<cmd>FzfLua commands<cr>")
 (nmap <leader>a "<cmd>FzfLua lsp_code_actions<cr>")
 

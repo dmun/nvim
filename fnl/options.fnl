@@ -22,7 +22,7 @@
                          ; :lua
                          :python
                          :racket
-                         :rust
+                         ; :rust
                          :scheme
                          :sql])
 

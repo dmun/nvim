@@ -18,6 +18,7 @@
   "flit.nvim": { "branch": "main", "commit": "94419242ba07170b0009514d745e617b120964f4" },
   "friendly-snippets": { "branch": "main", "commit": "dcd4a586439a1c81357d5b9d26319ae218cc9479" },
   "fzf-lua": { "branch": "main", "commit": "5104ac1744b92f888ef9f1d4bb6ff14e700c7a37" },
+  "fzfx": { "branch": "main", "commit": "be147216edf164a1739430c7fda210f9876cc430" },
   "gitsigns.nvim": { "branch": "main", "commit": "078041e9d060a386b0c9d3a8c7a7b019a35d3fb0" },
   "go.nvim": { "branch": "master", "commit": "9ac3e6faa32d01479973f4ca368d00b7ae328646" },
   "harpoon": { "branch": "master", "commit": "ccae1b9bec717ae284906b0bf83d720e59d12b91" },

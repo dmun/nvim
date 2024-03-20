@@ -15,13 +15,7 @@
 
 (plug :stevearc/oil.nvim
       {:cmd :Oil
-       :opts {:columns [; {1 :permissions :highlight :Comment}
-                        ; {1 :mtime
-                        ;  :highlight :Comment
-                        ;  :format "%d %b %H:%M "}
-                        :icon]
-              :keymaps {:<C-p> false}
-              :win_options {:signcolumn :yes}}
+       :opts {:win_options {:signcolumn :yes}}
        :dependencies [:nvim-tree/nvim-web-devicons]})
 
 (plug :ibhagwan/fzf-lua
@@ -30,14 +24,17 @@
        :cmd :FzfLua
        :dependencies [:nvim-tree/nvim-web-devicons]
        :opts {:winopts {:height 20}
-                        ; :width 60}
-                        ; :preview {:hidden :hidden
-                        ;           :layout :horizontal
-                        ;           :horizontal "right:50%"}}
-              ; :split "bo 10split new"}
               :defaults {:git_icons false
                          :file_icons false
                          :fzf_opts {:--info :inline-right}}
               :files {:fzf_opts {:--header false}}
-              :oldfiles {:fd_opts "--exclude '/nvim/runtime/doc/*.txt'"}}})
+              :oldfiles {:fd_opts "--exclude '/nvim/runtime/doc/*.txt'"}}
+       :config (fn [_ opts]
+                 ((#$.setup (require :fzf-lua)) opts)
+                 (hl FzfLuaHeaderBind "@punctuation")
+                 (hl FzfLuaBorder Comment)
+                 (hl FzfLuaCursorlineNr Normal)
+                 (hl FzfLuaCursorline Normal)
+                 (hl FzfLuaTitle "@text.title")
+                 (hl FzfLuaHeaderText "@constant"))})
 

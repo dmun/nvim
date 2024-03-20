@@ -54,8 +54,8 @@
               :fold_closed "+"}
        :config (fn [_ opts]
                  (setup :trouble opts)
-                 (hl TroubleText {:guibg :none})
-                 (hl TroubleFoldIcon {:guibg :none}))})
+                 (hl TroubleText {:bg :none})
+                 (hl TroubleFoldIcon {:bg :none}))})
 
 (plug :folke/neodev.nvim {:lazy true :opts {}})
 (plug :Olical/conjure {:ft :fennel})
