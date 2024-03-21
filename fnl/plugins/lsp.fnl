@@ -1,5 +1,9 @@
 (import-macros {: se : hl : au : setup : plug} :macros)
 
+(plug :zeioth/garbage-day.nvim {:dependencies :neovim/nvim-lspconfig
+                                :event :VeryLazy
+                                :config true})
+
 (plug :mrcjkb/rustaceanvim {:version :^4 :ft :rust})
 
 ;; fnlfmt: skip

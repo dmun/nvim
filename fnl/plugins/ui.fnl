@@ -12,7 +12,7 @@
                         :component_separators {:left "" :right ""}
                         :section_separators {:left "" :right ""}
                         :always_divide_middle true
-                        :disabled_filetypes [:Trouble]}
+                        :disabled_filetypes [:Trouble :httpResult]}
               :sections {:lualine_a [:mode]
                          :lualine_b []
                          :lualine_c [:filename]

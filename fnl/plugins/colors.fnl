@@ -22,7 +22,6 @@
                  (hl IlluminatedWordText {:bg "#2E2E2E"})
                  (hl IlluminatedWordRead {:bg "#2E2E2E"})
                  (hl IlluminatedWordWrite {:bg "#2E2E2E"})
-                 (hl LeapLabelPrimary {:fg "#1A1A1A" :bg "#AFCB85"})
                  (hl LeapMatch CurSearch))})
 
 ;; fnlfmt: skip
