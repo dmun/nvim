@@ -55,7 +55,9 @@
        :config (fn [_ opts]
                  (setup :trouble opts)
                  (hl TroubleText {:bg :none})
-                 (hl TroubleFoldIcon {:bg :none}))})
+                 (hl TroubleFoldIcon {:bg :none})
+                 (au :BufEnter {:pattern :Trouble :callback (fn [] (se cul))})
+                 (au :BufLeave {:pattern :Trouble :callback (fn [] (se nocul))}))})
 
 (plug :folke/neodev.nvim {:lazy true :opts {}})
 (plug :Olical/conjure {:ft :fennel})
