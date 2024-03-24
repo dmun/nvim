@@ -13,6 +13,7 @@
                            :dependencies [:williamboman/mason.nvim]}]
            :config (fn []
                      (vim.diagnostic.config {:virtual_text true
+                                             :signs false
                                              :float {:border false}})
                      (setup :mason-lspconfig
                             {:handlers [(fn [ls]

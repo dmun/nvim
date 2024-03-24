@@ -17,7 +17,7 @@
                  (hl DiagnosticHint {:bg :none})
 
                  ;; plugins
-                 (hl lualine_a_normal {:fg "#2197F3" :bg "#1F3661"})
+                 (hl lualine_a_normal {:fg "#1A1A1A" :bg "#FFFFFF"})
                  (hl TroubleCount {:fg "#2197F3" :bg "#1F3661"})
                  (hl IlluminatedWordText {:bg "#2E2E2E"})
                  (hl IlluminatedWordRead {:bg "#2E2E2E"})
