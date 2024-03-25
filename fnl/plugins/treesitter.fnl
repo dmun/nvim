@@ -1,7 +1,7 @@
 (import-macros {: se : hl : au : setup : plug} :macros)
 
-; (plug :lukas-reineke/indent-blankline.nvim
-;       {:main :ibl :opts {:indent {:char "▏"}}})
+(plug :lukas-reineke/indent-blankline.nvim
+      {:enabled false :main :ibl :opts {:indent {:char "▏"}}})
 
 ;; fnlfmt: skip
 (plug :nvim-treesitter/nvim-treesitter-textobjects
@@ -28,15 +28,15 @@
       {:build ":TSUpdate"
        :event [:BufReadPre :BufNewFile]
        :config (fn []
-                  (let [configs (require :nvim-treesitter.configs)]
-                    (configs.setup {:highlight {:enable true}
-                                    :indent {:enable true :disable [:markdown]}
-                                    :ensure_installed [:lua
-                                                       :vim
-                                                       :vimdoc
-                                                       :luadoc
-                                                       :norg
-                                                       :fennel]})))})
+                 (let [configs (require :nvim-treesitter.configs)]
+                   (configs.setup {:highlight {:enable true}
+                                   :indent {:enable true :disable [:markdown]}
+                                   :ensure_installed [:lua
+                                                      :vim
+                                                      :vimdoc
+                                                      :luadoc
+                                                      :norg
+                                                      :fennel]})))})
 
 ; (plug :kevinhwang91/nvim-ufo
 ;       {:event [:BufReadPre :BufNewFile]

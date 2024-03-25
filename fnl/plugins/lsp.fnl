@@ -65,7 +65,7 @@
                  (au :BufLeave {:pattern :Trouble :callback (fn [] (se nocul))}))})
 
 (plug :folke/neodev.nvim {:lazy true :opts {}})
-(plug :Olical/conjure {:ft :fennel})
+(plug :Olical/conjure {:enabled true :ft :fennel})
 (plug :gpanders/nvim-parinfer)
 (plug :m-demare/hlargs.nvim {:opts {}})
 ; (plug :HiPhish/rainbow-delimiters.nvim)

@@ -60,10 +60,10 @@
 (nmap <leader>5 "<cmd>lua require('harpoon.ui').nav_file(5)<cr>")
 
 ;; sneak
-; (nmap f :<Plug>Sneak_f)
-; (nmap F :<Plug>Sneak_F)
-; (nmap t :<Plug>Sneak_t)
-; (nmap T :<Plug>Sneak_T)
+(nmap f :<Plug>Sneak_f)
+(nmap F :<Plug>Sneak_F)
+(nmap t :<Plug>Sneak_t)
+(nmap T :<Plug>Sneak_T)
 
 ;; lsp
 (nmap K vim.lsp.buf.hover)
