@@ -10,8 +10,8 @@
 (setg sneak#s_next 1)
 (setg tex_flavor :latex)
 (setg rustaceanvim
-      {:tools {:hover_actions {:replace_builtin_hover false}
-               :float_win_config {:border :none}}})
+    {:tools {:hover_actions {:replace_builtin_hover false}
+             :float_win_config {:border :none}}})
 
 (setg conjure#filetypes [:clojure
                          :fennel
@@ -62,6 +62,7 @@
 (se noshowcmd)
 (se noshowmode)
 (se showtabline 0)
+(se termguicolors)
 (se+ gcr "n:blinkwait1400-blinkoff400-blinkon250,i:block")
 (se+ shm :Iq)
 

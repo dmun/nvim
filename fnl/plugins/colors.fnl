@@ -1,14 +1,31 @@
-(import-macros {: se : hl : au : setup : plug} :macros)
+(import-macros {: se : setg : hl : au : setup : plug} :macros)
+
+(plug :rktjmp/lush.nvim)
+(plug :metalelf0/jellybeans-nvim
+      {:enabled true
+       :config (fn []
+                 (vim.cmd.color :jellybeans-nvim)
+                 (hl IlluminatedWordRead {:bg "#242424"})
+                 (hl DiagnosticUnderlineError {:gui :undercurl})
+                 (hl DiagnosticUnderlineHint {:gui :undercurl})
+                 (hl DiagnosticUnderlineInfo {:gui :undercurl})
+                 (hl DiagnosticUnderlineOk {:gui :undercurl})
+                 (hl DiagnosticUnderlineWarn {:gui :undercurl}))})
+
+(plug :sainnhe/gruvbox-material
+      {:enabled false
+       :config (fn [] ; (vim.cmd.color :gruvbox-material)
+                 (setg gruvbox_material_foreground :mixed)
+                 (setg gruvbox_material_background :hard))})
 
 (plug :norcalli/nvim-colorizer.lua)
 
 (plug :felipeagc/fleet-theme-nvim
-      {:enabled true
+      {:enabled false
        :dependencies [:nvim-lualine/lualine.nvim]
        :lazy false
        :priority 1000
-       :config (fn []
-                 (vim.cmd.colorscheme :fleet)
+       :config (fn [] ; (vim.cmd.colorscheme :fleet)
                  ;; lsp
                  (hl DiagnosticError {:bg :none})
                  (hl DiagnosticWarn {:bg :none})

@@ -1,5 +1,9 @@
 (import-macros {: se : hl : au : setup : plug} :macros)
 
+(plug :ThePrimeagen/refactoring.nvim
+      {:dependencies [:plenary.nvim :nvim-treesitter]
+       :config true})
+
 (plug :zeioth/garbage-day.nvim {:dependencies :neovim/nvim-lspconfig
                                 :event :VeryLazy
                                 :config true})
@@ -12,7 +16,7 @@
            :dependencies [{1 :williamboman/mason-lspconfig.nvim
                            :dependencies [:williamboman/mason.nvim]}]
            :config (fn []
-                     (vim.diagnostic.config {:virtual_text true
+                     (vim.diagnostic.config {:virtual_text false
                                              :signs false
                                              :float {:border false}})
                      (setup :mason-lspconfig
@@ -52,6 +56,7 @@
       {:lazy true
        :cmd :TroubleToggle
        :opts {:padding false
+              :multiline false
               :indent_lines false
               :use_diagnostic_signs true
               :icons false
