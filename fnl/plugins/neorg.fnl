@@ -2,7 +2,8 @@
 
 (plug :nvim-neorg/neorg
       {:ft :norg
-       :dependencies [:nvim-lua/plenary.nvim]
+       :version :v7.0.0
+       :dependencies [:nvim-lua/plenary.nvim :luarocks.nvim]
        :opts {:load {:core.defaults {}
                      :core.concealer {:config {:folds false
                                                :icon_preset :basic}}

@@ -63,7 +63,7 @@
 (se noshowmode)
 (se showtabline 0)
 (se termguicolors)
-(se+ gcr "n:blinkwait1400-blinkoff400-blinkon250,i:block")
+; (se+ gcr "n:blinkwait1400-blinkoff400-blinkon250,i:block")
 (se+ shm :Iq)
 
 ;; window

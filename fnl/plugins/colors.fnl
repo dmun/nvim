@@ -38,9 +38,10 @@
                  (hl DiagnosticInfo {:bg :none})
                  (hl DiagnosticHint {:bg :none})
                  ;; plugins
+                 (hl Sneak {:fg "#1A1A1A" :bg "#D898D8" :gui :bold})
+                 (hl SneakLabel {:fg "#1A1A1A" :bg "#D898D8" :gui :bold})
                  (hl lualine_a_insert {:fg "#1A1A1A" :bg "#78D0BD"})
-                 (hl lualine_a_normal {:fg "#FFFFFF" :bg "#535353"})
-                 (hl TroubleCount {:fg "#2197F3" :bg "#1F3661"})
+                 (hl lualine_a_normal {:fg "#FFFFFF" :bg "#535353"}) (hl TroubleCount {:fg "#2197F3" :bg "#1F3661"})
                  (hl IlluminatedWordText {:bg "#2E2E2E"})
                  (hl IlluminatedWordRead {:bg "#2E2E2E"})
                  (hl IlluminatedWordWrite {:bg "#2E2E2E"})
