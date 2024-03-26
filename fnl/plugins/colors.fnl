@@ -2,10 +2,14 @@
 
 (plug :rktjmp/lush.nvim)
 (plug :metalelf0/jellybeans-nvim
-      {:enabled true
+      {:enabled false
        :config (fn []
                  (vim.cmd.color :jellybeans-nvim)
+                 (hl "@lsp.type.variable" Normal)
+                 (hl "@lsp.type.keyword" Identifier)
                  (hl IlluminatedWordRead {:bg "#242424"})
+                 (hl IlluminatedWordWrite {:bg "#242424"})
+                 (hl IlluminatedWordText {:bg "#242424"})
                  (hl DiagnosticUnderlineError {:gui :undercurl})
                  (hl DiagnosticUnderlineHint {:gui :undercurl})
                  (hl DiagnosticUnderlineInfo {:gui :undercurl})
@@ -14,18 +18,20 @@
 
 (plug :sainnhe/gruvbox-material
       {:enabled false
-       :config (fn [] ; (vim.cmd.color :gruvbox-material)
-                 (setg gruvbox_material_foreground :mixed)
-                 (setg gruvbox_material_background :hard))})
+       :config (fn []
+                 (setg gruvbox_material_foreground :material)
+                 (setg gruvbox_material_background :hard)
+                 (vim.cmd.color :gruvbox-material))})
 
 (plug :norcalli/nvim-colorizer.lua)
 
 (plug :felipeagc/fleet-theme-nvim
-      {:enabled false
+      {:enabled true
        :dependencies [:nvim-lualine/lualine.nvim]
        :lazy false
        :priority 1000
-       :config (fn [] ; (vim.cmd.colorscheme :fleet)
+       :config (fn []
+                 (vim.cmd.colorscheme :fleet)
                  ;; lsp
                  (hl DiagnosticError {:bg :none})
                  (hl DiagnosticWarn {:bg :none})
