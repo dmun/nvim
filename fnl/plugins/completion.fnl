@@ -20,7 +20,7 @@
   {:fields [:kind :abbr :menu]
    :format (lspkind.cmp_format {:mode :symbol
                                 :maxwidth 40
-                                ; :ellipsis_char "..."
+                                :ellipsis_char "…"
                                 :show_labelDetails true
                                 :before (fn [entry vim_item]
                                           (set vim_item.abbr
