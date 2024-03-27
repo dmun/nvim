@@ -37,6 +37,8 @@
                  (hl DiagnosticWarn {:bg :none})
                  (hl DiagnosticInfo {:bg :none})
                  (hl DiagnosticHint {:bg :none})
+                 (hl "@lsp.type.selfKeyword.rust" {:fg "#CC7C89"})
+                 (hl "@lsp.type.interface.rust" "@type")
                  ;; plugins
                  (hl Sneak {:fg "#1A1A1A" :bg "#D898D8" :gui :bold})
                  (hl SneakLabel {:fg "#1A1A1A" :bg "#D898D8" :gui :bold})
