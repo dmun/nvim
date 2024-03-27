@@ -4,6 +4,7 @@
 (nmap <ESC> "<cmd>echo<bar>nohl<bar>silent update<cr>")
 (nmap <leader>r "<cmd>!make -s run<cr>")
 (vmap <localleader>s ":'<,'>!sort<cr>")
+(nmap <leader>i "<cmd>Inspect<cr>")
 (nremap u "<cmd>silent undo<cr>")
 (nremap <C-r> "<cmd>silent redo<cr>")
 

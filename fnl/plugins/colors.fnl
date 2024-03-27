@@ -25,28 +25,12 @@
 
 (plug :norcalli/nvim-colorizer.lua)
 
-(plug :felipeagc/fleet-theme-nvim
-      {:enabled true
-       :dependencies [:nvim-lualine/lualine.nvim]
+(plug :dmun/fleet-theme-nvim
+      {; :dir "$HOME/Development/fleet-theme-nvim"
+       :enabled true
        :lazy false
        :priority 1000
-       :config (fn []
-                 (vim.cmd.colorscheme :fleet)
-                 ;; lsp
-                 (hl DiagnosticError {:bg :none})
-                 (hl DiagnosticWarn {:bg :none})
-                 (hl DiagnosticInfo {:bg :none})
-                 (hl DiagnosticHint {:bg :none})
-                 (hl "@lsp.type.selfKeyword.rust" {:fg "#CC7C89"})
-                 (hl "@lsp.type.interface.rust" "@type")
-                 ;; plugins
-                 (hl Sneak {:fg "#1A1A1A" :bg "#D898D8" :gui :bold})
-                 (hl SneakLabel {:fg "#1A1A1A" :bg "#D898D8" :gui :bold})
-                 (hl TroubleCount {:fg "#2197F3" :bg "#1F3661"})
-                 (hl IlluminatedWordText {:bg "#2E2E2E"})
-                 (hl IlluminatedWordRead {:bg "#2E2E2E"})
-                 (hl IlluminatedWordWrite {:bg "#2E2E2E"})
-                 (hl LeapMatch CurSearch))})
+       :config (fn [] (vim.cmd.colorscheme :fleet))})
 
 ;; fnlfmt: skip
 (plug :catppuccin/nvim
