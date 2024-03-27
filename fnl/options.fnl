@@ -75,7 +75,7 @@
 (se ignorecase)
 (se nottimeout)
 (se scrolloff 5)
-(se sidescrolloff 10)
+; (se sidescrolloff 10)
 (se smartcase)
 
 ;; file

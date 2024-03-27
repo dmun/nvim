@@ -22,6 +22,8 @@
 (nmap <leader>tw "<cmd>set wrap!<cr>")
 (nmap <leader>tl "<cmd>Lazy<cr>")
 (nmap <leader>tm "<cmd>Mason<cr>")
+(nmap <leader>tg "<cmd>Gitsigns toggle_signs<cr>")
+(nmap <leader>tn "<cmd>se nu!<cr>")
 
 ;; fzf-lua
 (nmap <leader>f "<cmd>FzfLua files<cr>")
