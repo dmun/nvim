@@ -52,7 +52,12 @@
                          :lualine_z []}
               :inactive_sections {:lualine_a []
                                   :lualine_b []
-                                  :lualine_c [(fn [] "      ") :filename]
+                                  :lualine_c [(fn [] "      ")
+                                              {1 :filename
+                                               :path 4
+                                               :symbols {:unnamed :*scratch*
+                                                         :newfile :*scratch*}}]
+
                                   :lualine_x [:diagnostics
                                               {1 :fileformat
                                                :icons_enabled false}
