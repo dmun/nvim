@@ -10,6 +10,32 @@
                  ((. (require :luasnip.loaders.from_snipmate) :lazy_load)))
        :build "make install_jsregexp"})
 
+(fn whitespace [n]
+  (if (> n 0)
+      (.. " " (whitespace (- n 1)))
+      ""))
+
+;; fnlfmt: skip
+(fn formatting [lspkind]
+  {:fields [:kind :abbr :menu]
+   :format (lspkind.cmp_format {:mode :symbol
+                                :maxwidth 40
+                                ; :ellipsis_char "..."
+                                :show_labelDetails true
+                                :before (fn [entry vim_item]
+                                          (set vim_item.abbr
+                                               (.. " " (string.gsub vim_item.abbr "%s+" "")))
+                                          (if vim_item.menu
+                                              (let [len (+ (length vim_item.abbr) 
+                                                           (length vim_item.menu))] 
+                                                (set vim_item.abbr
+                                                     (.. vim_item.abbr
+                                                         (whitespace (- 38 len))
+                                                         "  "
+                                                         vim_item.menu))))
+                                          (set vim_item.menu "")
+                                          vim_item)})})
+
 (plug :hrsh7th/nvim-cmp
       {:version false
        :event :InsertEnter
@@ -24,7 +50,8 @@
                        :dependencies [:L3MON4D3/LuaSnip]}]
        :config (fn []
                  (let [cmp (require :cmp)
-                       luasnip (require :luasnip)]
+                       luasnip (require :luasnip)
+                       lspkind (require :lspkind)]
                    (cmp.setup {:snippet {:expand (fn [args]
                                                    (luasnip.lsp_expand args.body))}
                                :mapping {:<C-k> (cmp.mapping.scroll_docs -4)
@@ -62,9 +89,6 @@
                                                        (. (require :cmp-under-comparator)
                                                           :under)
                                                        cmp.config.compare.order]}
-                               :formatting {:format (fn [entry vim_item]
-                                                      (set vim_item.abbr
-                                                           (string.sub vim_item.abbr
-                                                                       1 20))
-                                                      vim_item)}})))})
+                               :window {:completion {:col_offset -3}}
+                               :formatting (formatting (require :lspkind))})))})
 
