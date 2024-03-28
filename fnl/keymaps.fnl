@@ -4,7 +4,7 @@
 (nmap <ESC> "<cmd>echo<bar>nohl<bar>silent update<cr>")
 (nmap <leader>r "<cmd>!make -s run<cr>")
 (vmap <localleader>s ":'<,'>!sort<cr>")
-(nmap <leader>i "<cmd>Inspect<cr>")
+(nmap <leader>i :<cmd>Inspect<cr>)
 (nremap u "<cmd>silent undo<cr>")
 (nremap <C-r> "<cmd>silent redo<cr>")
 
@@ -21,11 +21,10 @@
 (nmap <leader>tc :<cmd>ColorizerToggle<cr>)
 (nmap <leader>ts :<cmd>ASToggle<cr>)
 (nmap <leader>tw "<cmd>set wrap!<cr>")
-(nmap <leader>tl "<cmd>Lazy<cr>")
-(nmap <leader>tm "<cmd>Mason<cr>")
+(nmap <leader>tl :<cmd>Lazy<cr>)
+(nmap <leader>tm :<cmd>Mason<cr>)
 (nmap <leader>tg "<cmd>Gitsigns toggle_signs<cr>")
 (nmap <leader>tn "<cmd>se nu!<cr>")
-(nmap <leader>ti "<cmd>LspUI inlay_hint<cr>")
 
 ;; fzf-lua
 (nmap <leader>f "<cmd>FzfLua files<cr>")
@@ -69,15 +68,17 @@
 (nmap T :<Plug>Sneak_T)
 
 ;; lsp
-(nmap <leader>a "<cmd>LspUI code_action<cr>")
-(nmap K "<cmd>LspUI hover<cr>")
+(nmap <leader>a "<cmd>Lspsaga code_action<cr>")
+(nmap K "<cmd>Lspsaga hover_doc<cr>")
 (nmap gD vim.lsp.buf.declaration)
-(nmap gd vim.lsp.buf.definition)
-(nmap gi vim.lsp.buf.implementation)
-(nmap "[d" "<cmd>LspUI diagnostic prev<cr>")
-(nmap "]d" "<cmd>LspUI diagnostic next<cr>")
-(nmap <leader>k vim.diagnostic.open_float)
-(nmap <leader>rn "<cmd>LspUI rename<cr>")
+(nmap gd "<cmd>Glance definitions<cr>")
+(nmap gi "<cmd>Glance implementations<cr>")
+(nmap gr "<cmd>Glance references<cr>")
+(nmap "[d" "<cmd>Lspsaga diagnostic_jump_prev<cr>")
+(nmap "]d" "<cmd>Lspsaga diagnostic_jump_next<cr>")
+; (nmap <leader>k vim.diagnostic.open_float)
+(nmap <leader>to "<cmd>Lspsaga outline<cr>")
+(nmap <leader>rn "<cmd>Lspsaga rename<cr>")
 (nmap <leader>wa vim.lsp.buf.add_workspace_folder)
 (nmap <leader>wr vim.lsp.buf.remove_workspace_folder)
 (nmap <leader>wl "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<cr>")
@@ -88,5 +89,4 @@
 ;; trouble
 (nmap <leader>d :<cmd>TroubleToggle<cr>)
 (nmap <leader>D "<cmd>TroubleToggle lsp_definitions<cr>")
-(nmap gr "<cmd>TroubleToggle lsp_references<cr>")
 

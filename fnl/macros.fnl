@@ -47,7 +47,7 @@
   (vim-set :g opt ?val))
 
 (lambda setl [opt ?val]
-  (vim-set :bo opt ?val))
+  (vim-set :opt_local opt ?val))
 
 (fn parse-comma [input]
   (pick-values 1 (string.gsub input :<comma> ",")))

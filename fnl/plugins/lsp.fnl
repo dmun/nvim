@@ -1,8 +1,18 @@
 (import-macros {: se : hl : au : setup : plug} :macros)
 
-(plug :jinzhongjia/LspUI.nvim
-      {:branch :main
-       :config true})
+(plug :nvimdev/lspsaga.nvim
+      {:dependencies [:nvim-treesitter :nvim-tree/nvim-web-devicons]
+       :opts {:ui {:title false :border :single}
+              :beacon {:enable false}
+              :lightbulb {:virtual_text false}
+              :diagnostic {:show_code_action false}
+              :symbol_in_winbar {:enable false}}})
+              
+(plug :dnlhc/glance.nvim
+      {:opts {:hooks {:before_open (fn [results open jump method]
+                                     (if (= (length results) 1)
+                                         (jump (. results 1))
+                                         (open results)))}}})
 
 (plug :ThePrimeagen/refactoring.nvim
       {:dependencies [:plenary.nvim :nvim-treesitter] :config true})

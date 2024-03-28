@@ -1,4 +1,4 @@
-(import-macros {: au : aug : se} :macros)
+(import-macros {: au : aug : se : setl} :macros)
 
 ;; hide statusline for popup style windows
 ; (vim.cmd "autocmd! FileType fzf,NeogitPopup,Trouble")
@@ -22,4 +22,7 @@
     {:callback (fn []
                  (if (= vim.bo.buftype "")
                      (vim.cmd "silent update")))})
+
+(au :FileType {:pattern :saga_codeaction
+               :callback (fn [] (setl cul))})
 
