@@ -19,8 +19,7 @@
   (set item.abbr (.. " " (string.gsub item.abbr "%s+" "")))
   (if item.menu
       (let [len (+ (length item.abbr) (length item.menu))]
-        (set item.abbr (.. item.abbr (whitespace (- 38 len)) "  "
-                           item.menu))))
+        (set item.abbr (.. item.abbr (whitespace (- 38 len)) "  " item.menu))))
   (set item.menu "")
   item)
 
