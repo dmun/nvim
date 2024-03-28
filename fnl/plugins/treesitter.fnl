@@ -50,5 +50,6 @@
       {:event [:BufReadPre :BufNewFile]
        :config (fn []
                  (let [illuminate (require :illuminate)]
-                   (illuminate.configure {:filetypes_denylist [:NeogitStatus]})))})
+                   (illuminate.configure {:filetypes_denylist [:NeogitStatus
+                                                               :Glance]})))})
 

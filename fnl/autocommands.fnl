@@ -23,6 +23,6 @@
                  (if (= vim.bo.buftype "")
                      (vim.cmd "silent update")))})
 
-(au :FileType {:pattern :saga_codeaction
-               :callback (fn [] (setl cul))})
+(au :FileType {:pattern "Glance"
+               :callback (fn [] (se cul))})
 
