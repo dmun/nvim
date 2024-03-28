@@ -25,6 +25,7 @@
 (nmap <leader>tm "<cmd>Mason<cr>")
 (nmap <leader>tg "<cmd>Gitsigns toggle_signs<cr>")
 (nmap <leader>tn "<cmd>se nu!<cr>")
+(nmap <leader>ti "<cmd>LspUI inlay_hint<cr>")
 
 ;; fzf-lua
 (nmap <leader>f "<cmd>FzfLua files<cr>")
@@ -35,7 +36,6 @@
 (nmap <leader><leader> "<cmd>FzfLua builtin<cr>")
 (nmap <leader>hf "<cmd>FzfLua highlights<cr>")
 (nmap <M-x> "<cmd>FzfLua commands<cr>")
-(nmap <leader>a "<cmd>FzfLua lsp_code_actions<cr>")
 
 ; ;; telescope
 ; (nmap <leader><leader> "<cmd>Telescope find_files<cr>")
@@ -69,14 +69,15 @@
 (nmap T :<Plug>Sneak_T)
 
 ;; lsp
-(nmap K vim.lsp.buf.hover)
+(nmap <leader>a "<cmd>LspUI code_action<cr>")
+(nmap K "<cmd>LspUI hover<cr>")
 (nmap gD vim.lsp.buf.declaration)
 (nmap gd vim.lsp.buf.definition)
 (nmap gi vim.lsp.buf.implementation)
-(nmap "[d" vim.diagnostic.goto_prev)
-(nmap "]d" vim.diagnostic.goto_next)
+(nmap "[d" "<cmd>LspUI diagnostic prev<cr>")
+(nmap "]d" "<cmd>LspUI diagnostic next<cr>")
 (nmap <leader>k vim.diagnostic.open_float)
-(nmap <space>rn vim.lsp.buf.rename)
+(nmap <leader>rn "<cmd>LspUI rename<cr>")
 (nmap <leader>wa vim.lsp.buf.add_workspace_folder)
 (nmap <leader>wr vim.lsp.buf.remove_workspace_folder)
 (nmap <leader>wl "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<cr>")

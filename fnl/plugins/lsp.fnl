@@ -1,8 +1,11 @@
 (import-macros {: se : hl : au : setup : plug} :macros)
 
-(plug :ThePrimeagen/refactoring.nvim
-      {:dependencies [:plenary.nvim :nvim-treesitter]
+(plug :jinzhongjia/LspUI.nvim
+      {:branch :main
        :config true})
+
+(plug :ThePrimeagen/refactoring.nvim
+      {:dependencies [:plenary.nvim :nvim-treesitter] :config true})
 
 (plug :zeioth/garbage-day.nvim {:dependencies :neovim/nvim-lspconfig
                                 :event :VeryLazy
