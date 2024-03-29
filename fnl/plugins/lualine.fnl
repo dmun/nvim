@@ -33,7 +33,7 @@
 
 ;; fnlfmt: skip
 (plug :nvim-lualine/lualine.nvim
-      {:opts {:options {:theme theme
+      {:opts {:options {:theme :auto
                         :component_separators {:left "" :right ""}
                         :section_separators {:left "" :right ""}
                         :always_divide_middle true
