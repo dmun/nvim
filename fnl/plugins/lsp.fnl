@@ -1,5 +1,12 @@
 (import-macros {: se : hl : au : setup : plug} :macros)
 
+(plug :dmun/lspsaga.nvim
+      {; :dir "~/Development/lspsaga.nvim"
+       :opts {:ui {:border :none}
+              :code_action {:keys {:quit :<ESC>}}
+              :symbol_in_winbar {:enable false}
+              :lightbulb {:virtual_text false}}})
+
 (plug :dnlhc/glance.nvim
       {:opts {:hooks {:before_open (fn [results open jump method]
                                      (if (= (length results) 1)

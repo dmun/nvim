@@ -51,5 +51,6 @@
        :config (fn []
                  (let [illuminate (require :illuminate)]
                    (illuminate.configure {:filetypes_denylist [:NeogitStatus
+                                                               :saga_codeaction
                                                                :Glance]})))})
 

@@ -60,6 +60,9 @@
                                 :crust "#080808"}})
 
 (fn custom-highlights [colors]
+  (hl SagaNormal Pmenu)
+  (hl SagaCursorLine PmenuSel)
+  (hl ActionPreviewNormal NormalFloat)
   {:DiagnosticUnderlineOk {:style [:undercurl]}
    :DiagnosticUnderlineHint {:style [:undercurl]}
    :DiagnosticUnderlineInfo {:style [:undercurl]}

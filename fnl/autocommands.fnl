@@ -1,4 +1,4 @@
-(import-macros {: au : aug : se : setl} :macros)
+(import-macros {: au : aug : se : hl} :macros)
 
 ;; hide statusline for popup style windows
 ; (vim.cmd "autocmd! FileType fzf,NeogitPopup,Trouble")
@@ -23,6 +23,9 @@
                  (if (= vim.bo.buftype "")
                      (vim.cmd "silent update")))})
 
-(au :FileType {:pattern "Glance"
-               :callback (fn [] (se cul))})
+(hl CursorHidden {:blend 100 :cterm :strikethrough})
+
+(au :FileType {:pattern "Glance,saga_codeaction"
+               :callback (fn []
+                           (se cursorline))})
 

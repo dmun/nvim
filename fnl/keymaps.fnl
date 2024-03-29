@@ -68,7 +68,7 @@
 (nmap T :<Plug>Sneak_T)
 
 ;; lsp
-(nmap <leader>a vim.lsp.buf.code_action)
+(nmap <M-CR> ":Lspsaga code_action<CR>")
 (nmap K vim.lsp.buf.hover)
 (nmap gD vim.lsp.buf.declaration)
 (nmap gd "<cmd>Glance definitions<cr>")
