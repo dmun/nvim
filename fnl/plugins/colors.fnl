@@ -61,13 +61,14 @@
 
 (fn custom-highlights [colors]
   (hl SagaNormal Pmenu)
-  (hl SagaCursorLine PmenuSel)
+  (hl CodeActionCursorLine PmenuSel)
   (hl ActionPreviewNormal NormalFloat)
   {:DiagnosticUnderlineOk {:style [:undercurl]}
    :DiagnosticUnderlineHint {:style [:undercurl]}
    :DiagnosticUnderlineInfo {:style [:undercurl]}
    :DiagnosticUnderlineError {:style [:undercurl]}
-   :DiagnosticUnderlineWarn {:style [:undercurl]}})
+   :DiagnosticUnderlineWarn {:style [:undercurl]}
+   :Sneak {:fg colors.base :bg colors.mauve}})
 
 ;; fnlfmt: skip
 (plug :catppuccin/nvim

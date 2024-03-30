@@ -25,7 +25,7 @@
 
 (hl CursorHidden {:blend 100 :cterm :strikethrough})
 
-(au :FileType {:pattern "Glance,saga_codeaction"
+(au :FileType {:pattern :Glance
                :callback (fn []
                            (se cursorline))})
 
