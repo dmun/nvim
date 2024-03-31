@@ -42,8 +42,8 @@
 (se foldenable)
 (se foldlevel 99)
 (se foldlevelstart 99)
-(se nonu)
-(se nornu)
+(se nu)
+(se rnu)
 (se signcolumn :yes)
 
 ;; visual
