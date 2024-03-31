@@ -49,13 +49,13 @@
               :sections {:lualine_a [:mode]
                          :lualine_b []
                          :lualine_c [custom-filename]
-                         :lualine_x [:diagnostics]
+                         :lualine_x [:diagnostics :location]
                          :lualine_y []
                          :lualine_z []}
               :inactive_sections {:lualine_a [(fn [] "      ")]
                                   :lualine_b []
                                   :lualine_c [custom-filename]
-                                  :lualine_x [:diagnostics]
+                                  :lualine_x [:diagnostics :location]
                                   :lualine_y []
                                   :lualine_z []}}})
 
