@@ -1,9 +1,5 @@
 (import-macros {: se : se+ : setg : sign} :macros)
 
-;; leader keys
-(setg mapleader " ")
-(setg maplocalleader ",")
-
 ;; global options
 (setg rooter_silent_chdir 1)
 (setg sneak#use_ic_scs 1)
@@ -46,8 +42,8 @@
 (se foldenable)
 (se foldlevel 99)
 (se foldlevelstart 99)
-(se nu)
-(se rnu)
+(se nonu)
+(se nornu)
 (se signcolumn :yes)
 
 ;; visual
@@ -57,8 +53,8 @@
 (se fillchars "vert:▏,eob: ")
 (se laststatus 2)
 (se lazyredraw)
-(se cursorline)
-(se cursorlineopt :number)
+(se nocursorline)
+(se cursorlineopt :both)
 (se noruler)
 (se noshowcmd)
 (se noshowmode)

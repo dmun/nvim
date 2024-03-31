@@ -1,4 +1,8 @@
-(import-macros {: nmap : imap : vmap : nremap} :macros)
+(import-macros {: nmap : imap : vmap : nremap : setg} :macros)
+
+;; leader keys
+(setg mapleader " ")
+(setg maplocalleader ",")
 
 ;; general
 (nmap <ESC> "<cmd>echo<bar>nohl<bar>silent update<cr>")

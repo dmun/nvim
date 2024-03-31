@@ -89,7 +89,6 @@
      (.. :<CMD> ,command (or args# "") :<CR>)))
 
 (lambda hl [group opts]
-  ; (assert-compile (sym? group) "expected symbol" group)
   (let [group (tostring group)]
     (if (table? opts)
         (let [opts (icollect [k v (pairs opts)]

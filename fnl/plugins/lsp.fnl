@@ -1,6 +1,6 @@
 (import-macros {: se : hl : au : setup : plug} :macros)
 
-(plug :dmun/lspsaga.nvim
+(plug :nvimdev/lspsaga.nvim
       {; :dir "~/Development/lspsaga.nvim"
        :opts {:ui {:border :none}
               :code_action {:keys {:quit :<ESC>}}
