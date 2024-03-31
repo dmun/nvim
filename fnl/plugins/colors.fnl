@@ -17,11 +17,16 @@
                  (hl DiagnosticUnderlineWarn {:gui :undercurl}))})
 
 (plug :sainnhe/gruvbox-material
-      {:enabled false
+      {:enabled true
        :config (fn []
-                 (setg gruvbox_material_foreground :material)
+                 (setg gruvbox_material_foreground :original)
                  (setg gruvbox_material_background :hard)
-                 (vim.cmd.color :gruvbox-material))})
+                 (vim.cmd.color :gruvbox-material)
+                 (hl PmenuSel {:fg :none :bg "#5D524A" :gui :bold})
+                 (hl NormalFloat {:bg "#282828"})
+                 (hl SagaNormal Pmenu)
+                 (hl CodeActionCursorLine PmenuSel)
+                 (hl ActionPreviewNormal NormalFloat))})
 
 (plug :norcalli/nvim-colorizer.lua)
 
@@ -32,37 +37,35 @@
        :priority 1000
        :config (fn [] (vim.cmd.colorscheme :fleet))})
 
-(local color-overrides {:mocha {:rosewater "#ffc9c9"
-                                :flamingo "#ff9f9a"
-                                :pink "#ffa9c9"
-                                :mauve "#df95cf"
-                                :lavender "#a990c9"
-                                :red "#ff6960"
-                                :maroon "#f98080"
-                                :peach "#f9905f"
-                                :yellow "#f9bd69"
-                                :green "#b0d080"
-                                :teal "#a0dfa0"
-                                :sky "#a0d0c0"
-                                :sapphire "#95b9d0"
-                                :blue "#89a0e0"
-                                :text "#e0d0b0"
-                                :subtext1 "#d5c4a1"
-                                :subtext0 "#bdae93"
-                                :overlay2 "#928374"
-                                :overlay1 "#7c6f64"
-                                :overlay0 "#665c54"
-                                :surface2 "#504844"
-                                :surface1 "#3a3634"
-                                :surface0 "#252525"
-                                :base "#151515"
-                                :mantle "#0e0e0e"
-                                :crust "#080808"}})
+;; by s1m0000n
+(local retro-dark {:rosewater "#ffc9c9"
+                   :flamingo "#ff9f9a"
+                   :pink "#ffa9c9"
+                   :mauve "#df95cf"
+                   :lavender "#a990c9"
+                   :red "#ff6960"
+                   :maroon "#f98080"
+                   :peach "#f9905f"
+                   :yellow "#f9bd69"
+                   :green "#b0d080"
+                   :teal "#a0dfa0"
+                   :sky "#a0d0c0"
+                   :sapphire "#95b9d0"
+                   :blue "#89a0e0"
+                   :text "#e0d0b0"
+                   :subtext1 "#d5c4a1"
+                   :subtext0 "#bdae93"
+                   :overlay2 "#928374"
+                   :overlay1 "#7c6f64"
+                   :overlay0 "#665c54"
+                   :surface2 "#504844"
+                   :surface1 "#3a3634"
+                   :surface0 "#252525"
+                   :base "#151515"
+                   :mantle "#0e0e0e"
+                   :crust "#080808"})
 
 (fn custom-highlights [colors]
-  (hl SagaNormal Pmenu)
-  (hl CodeActionCursorLine PmenuSel)
-  (hl ActionPreviewNormal NormalFloat)
   {:DiagnosticUnderlineOk {:style [:undercurl]}
    :DiagnosticUnderlineHint {:style [:undercurl]}
    :DiagnosticUnderlineInfo {:style [:undercurl]}
@@ -72,7 +75,7 @@
 
 ;; fnlfmt: skip
 (plug :catppuccin/nvim
-      {:enabled true
+      {:enabled false
        :lazy false
        :name :catppuccin
        :priority 1000
@@ -80,7 +83,7 @@
                  (setup :catppuccin opts)
                  (vim.cmd.color :catppuccin))
        :opts {:flavour :mocha
-              :color_overrides color-overrides
+              :color_overrides {:mocha retro-dark}
               :custom_highlights custom-highlights}})
 
 ; :custom_highlights (fn [colors]

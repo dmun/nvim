@@ -3,7 +3,7 @@
 (plug :dmun/lspsaga.nvim
       {; :dir "~/Development/lspsaga.nvim"
        :opts {:ui {:border :none}
-              ; :code_action {:keys {:quit :<ESC>}}
+              :code_action {:keys {:quit :<ESC>}}
               :symbol_in_winbar {:enable false}
               :lightbulb {:sign false}}})
 

@@ -76,7 +76,7 @@
 (nmap gr "<cmd>Glance references<cr>")
 (nmap "[d" vim.diagnostic.goto_prev)
 (nmap "]d" vim.diagnostic.goto_next)
-; (nmap <leader>k vim.diagnostic.open_float)
+(nmap <leader>k vim.diagnostic.open_float)
 (nmap <leader>rn vim.lsp.buf.rename)
 (nmap <leader>wa vim.lsp.buf.add_workspace_folder)
 (nmap <leader>wr vim.lsp.buf.remove_workspace_folder)

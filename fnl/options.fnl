@@ -46,8 +46,8 @@
 (se foldenable)
 (se foldlevel 99)
 (se foldlevelstart 99)
-(se nonu)
-(se nornu)
+(se nu)
+(se rnu)
 (se signcolumn :yes)
 
 ;; visual
@@ -57,7 +57,8 @@
 (se fillchars "vert:▏,eob: ")
 (se laststatus 2)
 (se lazyredraw)
-(se nocursorline)
+(se cursorline)
+(se cursorlineopt :number)
 (se noruler)
 (se noshowcmd)
 (se noshowmode)
