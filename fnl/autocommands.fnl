@@ -12,6 +12,7 @@
 ;; highlight on yank
 (let [hi-group (aug :YankHighlight {:clear true})]
   (au :TextYankPost {:callback (fn [] (vim.highlight.on_yank)
+
                                  :group
                                  hi-group
                                  :pattern
@@ -23,9 +24,9 @@
                  (if (= vim.bo.buftype "")
                      (vim.cmd "silent update")))})
 
-(hl CursorHidden {:blend 100 :cterm :strikethrough})
-
-(au :FileType {:pattern :Glance
+;; cursorline
+(au :FileType {:pattern "Glance,Trouble"
                :callback (fn []
-                           (se cursorline))})
+                           (se cursorline)
+                           (se cursorlineopt :both))})
 

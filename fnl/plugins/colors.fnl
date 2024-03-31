@@ -7,6 +7,7 @@
                  (vim.cmd.color :modus_vivendi)
                  (hl TroubleNormal Normal)
                  (hl LineNr Comment)
+                 (hl CursorLineNr Normal)
                  (hl PmenuSel {:fg :none :gui :bold})
                  (hl SagaNormal Pmenu)
                  (hl CodeActionCursorLine PmenuSel)
