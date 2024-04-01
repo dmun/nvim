@@ -12,7 +12,6 @@
 ;; highlight on yank
 (let [hi-group (aug :YankHighlight {:clear true})]
   (au :TextYankPost {:callback (fn [] (vim.highlight.on_yank)
-
                                  :group
                                  hi-group
                                  :pattern
@@ -29,4 +28,7 @@
                :callback (fn []
                            (se cursorline)
                            (se cursorlineopt :both))})
+
+; (au :InsertEnter {:callback (fn [] (se nornu))})
+; (au :InsertLeave {:callback (fn [] (se rnu))})
 
