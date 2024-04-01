@@ -73,7 +73,10 @@
 
 ;; lsp
 (nmap <M-CR> ":Lspsaga code_action<CR>")
-(nmap K vim.lsp.buf.hover)
+(nmap K (fn []
+          (vim.cmd "call sneak#cancel()")
+          (vim.lsp.buf.hover)))
+
 (nmap gD vim.lsp.buf.declaration)
 (nmap gd "<cmd>Glance definitions<cr>")
 (nmap gi "<cmd>Glance implementations<cr>")

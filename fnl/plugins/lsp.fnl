@@ -5,7 +5,7 @@
        :opts {:ui {:border :none}
               :code_action {:keys {:quit :<ESC>}}
               :symbol_in_winbar {:enable false}
-              :lightbulb {:sign false}}})
+              :lightbulb {:virtual_text false}}})
 
 (plug :dnlhc/glance.nvim
       {:opts {:hooks {:before_open (fn [results open jump method]
@@ -55,7 +55,8 @@
 (plug :stevearc/conform.nvim
       {:opts {:formatters_by_ft {:lua [:stylua]
                                  :fennel [:fnlfmt]
-                                 :rust [:rustfmt]}}})
+                                 :rust [:rustfmt]
+                                 :go [:gofmt]}}})
 
 (plug :williamboman/mason.nvim {:lazy true :opts {:ui {:width 1 :height 1}}})
 
@@ -63,7 +64,11 @@
 
 (plug :vidocqh/auto-indent.nvim {:opts {}})
 
-(plug :ray-x/go.nvim {:ft :go})
+; (plug :ray-x/go.nvim {:ft :go
+;                       :build ":lua require('go.install ').update_all_sync()"
+;                       :opts {:diagnostic {:signs false
+;                                           :underline true}}})
+
 (plug :folke/trouble.nvim
       {:lazy true
        :cmd :TroubleToggle
