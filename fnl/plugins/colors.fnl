@@ -2,17 +2,17 @@
 
 (plug :miikanissi/modus-themes.nvim
       {:opts {:dim_inactive false}
-       :config (fn [_ opts] 
+       :config (fn [_ opts]
                  (setup :modus-themes opts)
                  (vim.cmd.color :modus_vivendi)
                  (hl TroubleNormal Normal)
                  (hl LineNr Comment)
                  (hl CursorLineNr Normal)
-                 (hl PmenuSel {:fg :none :gui :bold})
+                 (hl PmenuSel {:fg :none :bg "#313071" :gui :bold})
                  (hl SagaNormal Pmenu)
                  (hl CodeActionCursorLine PmenuSel)
                  (hl ActionPreviewNormal NormalFloat))})
-                 
+
 ; (plug :rktjmp/lush.nvim)
 ; (plug :metalelf0/jellybeans-nvim
 ;       {:config (fn []
