@@ -2,7 +2,7 @@
 
 ;; leader keys
 (setg mapleader " ")
-(setg maplocalleader ",")
+(setg maplocalleader " m")
 
 ;; general
 (nmap <ESC> "<cmd>echo<bar>nohl<bar>silent update<cr>")
@@ -64,6 +64,10 @@
 (nmap <leader>3 "<cmd>lua require('harpoon.ui').nav_file(3)<cr>")
 (nmap <leader>4 "<cmd>lua require('harpoon.ui').nav_file(4)<cr>")
 (nmap <leader>5 "<cmd>lua require('harpoon.ui').nav_file(5)<cr>")
+
+;; refactor
+(vmap <leader>v "<cmd>Refactor extract_var<cr>")
+(vmap <leader>f "<cmd>Refactor extract_function<cr>")
 
 ;; sneak
 (nmap f :<Plug>Sneak_f)
