@@ -7,7 +7,9 @@
 
 (plug :stevearc/oil.nvim
       {:cmd :Oil
-       :opts {:win_options {:signcolumn :yes}}
+       :opts {:win_options {:signcolumn :yes}
+              :preview {:border :single}
+              :float {:border :single}}
        :dependencies [:nvim-tree/nvim-web-devicons]})
 
 (plug :ibhagwan/fzf-lua
