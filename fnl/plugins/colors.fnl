@@ -1,13 +1,14 @@
 (import-macros {: se : setg : hl : au : setup : plug} :macros)
 
 (plug :miikanissi/modus-themes.nvim
-      {:opts {:dim_inactive false}
+      {:enabled false
+       :opts {:dim_inactive false}
        :config (fn [_ opts]
                  (setup :modus-themes opts)
                  (vim.cmd.color :modus_vivendi)
 
                  ;; general
-                 (hl Normal {:bg "#181818"})
+                 ; (hl Normal {:bg "#181818"})
                  (hl NormalNC Normal)
                  (hl SignColumn Normal)
                  (hl LineNr Comment)
@@ -59,11 +60,18 @@
 ;                 (hl CodeActionCursorLine PmenuSel)
 ;                 (hl ActionPreviewNormal NormalFloat))})
 
-; (plug :dmun/fleet-theme-nvim
-;       {; :dir "$HOME/Development/fleet-theme-nvim"
-;        :lazy false
-;        :priority 1000
-;        :config (fn [] (vim.cmd.colorscheme :fleet))})
+(plug :dmun/fleet-theme-nvim
+      {; :dir "$HOME/Development/fleet-theme-nvim"
+       :lazy false
+       :priority 1000
+       :config (fn [] 
+                 (vim.cmd.colorscheme :fleet))})
+
+                 ;; saga
+                 ; (hl SagaNormal Pmenu)
+                 ; (hl CodeActionCursorLine PmenuSel)
+                 ; (hl ActionPreviewNormal NormalFloat))})
+
 
 ;; by s1m0000n
 (local retro-dark {:rosewater "#ffc9c9"

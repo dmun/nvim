@@ -15,7 +15,8 @@
        :lazy true
        :cmd :FzfLua
        :dependencies [:nvim-tree/nvim-web-devicons]
-       :opts {:winopts {:height 20}
+       :opts {:winopts {:height 20
+                        :border :single}
               :defaults {:git_icons false
                          :file_icons false
                          :fzf_opts {:--info :inline-right}}

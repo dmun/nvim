@@ -1,9 +1,11 @@
 (import-macros {: se : hl : au : setup : plug} :macros)
 
 (plug :nvimdev/lspsaga.nvim
-      {; :dir "~/Development/lspsaga.nvim"
-       :opts {:ui {:border :none}
+      {:opts {:ui {:border :single :title false}
               :code_action {:keys {:quit :<ESC>}}
+              :hover {:max_height 0.5}
+              :diagnostic {:show_code_action false}
+              :rename {:keys {:quit :<ESC>}}
               :symbol_in_winbar {:enable false}
               :lightbulb {:virtual_text false}}})
 
