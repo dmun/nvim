@@ -15,11 +15,14 @@
                  (hl PmenuSel {:fg :none :bg "#535353" :gui :bold})
                  (hl Pmenu {:bg "#333333"})
 
-                 ;; git
+                 ;; plugins
                  (hl TroubleNormal Normal)
                  (hl DiffAdd {:bg :none})
                  (hl DiffChange {:bg :none})
                  (hl DiffDelete {:bg :none})
+                 (hl IlluminatedWordRead {:bg "#242424"})
+                 (hl IlluminatedWordWrite {:bg "#242424"})
+                 (hl IlluminatedWordText {:bg "#242424"})
 
                  ;; cmp
                  (hl CmpItemAbbr Comment)
