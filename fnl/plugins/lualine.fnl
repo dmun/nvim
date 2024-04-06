@@ -8,7 +8,7 @@
           :blue         "#0031a9"
           :yellow       "#6f5500"
           :purple       "#313071"
-          :gray         "#9f9f9f"
+          :gray         "#8A8AC1"
           :darkgray     "#595959"
           :lightgray    "#c8c8c8"})
 

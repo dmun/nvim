@@ -5,11 +5,27 @@
        :config (fn [_ opts]
                  (setup :modus-themes opts)
                  (vim.cmd.color :modus_vivendi)
-                 (hl TroubleNormal Normal)
+
+                 ;; general
+                 (hl Normal {:bg "#181818"})
+                 (hl NormalNC Normal)
+                 (hl SignColumn Normal)
                  (hl LineNr Comment)
                  (hl CursorLineNr Normal)
                  (hl PmenuSel {:fg :none :bg "#535353" :gui :bold})
                  (hl Pmenu {:bg "#333333"})
+
+                 ;; git
+                 (hl TroubleNormal Normal)
+                 (hl DiffAdd {:bg :none})
+                 (hl DiffChange {:bg :none})
+                 (hl DiffDelete {:bg :none})
+
+                 ;; cmp
+                 (hl CmpItemAbbr Comment)
+                 (hl CmpItemAbbrMatch {:fg :white :gui :bold})
+
+                 ;; saga
                  (hl SagaNormal Pmenu)
                  (hl CodeActionCursorLine PmenuSel)
                  (hl ActionPreviewNormal NormalFloat))})
