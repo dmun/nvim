@@ -78,17 +78,17 @@
 ;; lsp
 (nmap <M-CR> ":Lspsaga code_action<CR>")
 (nmap K (fn []
-          (vim.cmd "call sneak#cancel()")
-          (vim.cmd.Lspsaga :hover_doc)))
+          (vim.cmd.call "sneak#cancel()")
+          (vim.lsp.buf.hover)))
 
 (nmap gD vim.lsp.buf.declaration)
 (nmap gd "<cmd>Glance definitions<cr>")
 (nmap gi "<cmd>Glance implementations<cr>")
 (nmap gr "<cmd>Glance references<cr>")
-(nmap "[d" ":Lspsaga diagnostic_jump_prev<cr>")
-(nmap "]d" ":Lspsaga diagnostic_jump_next<cr>")
+(nmap "]d" vim.diagnostic.goto_next)
+(nmap "[d" vim.diagnostic.goto_prev)
 (nmap <leader>k vim.diagnostic.open_float)
-(nmap <leader>rn ":Lspsaga rename<cr>")
+(nmap <leader>rn vim.lsp.buf.rename)
 (nmap <leader>wa vim.lsp.buf.add_workspace_folder)
 (nmap <leader>wr vim.lsp.buf.remove_workspace_folder)
 (nmap <leader>wl "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<cr>")

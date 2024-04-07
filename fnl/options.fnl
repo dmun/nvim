@@ -42,7 +42,7 @@
 (se foldenable)
 (se foldlevel 99)
 (se foldlevelstart 99)
-(se nonu)
+(se nu)
 (se rnu)
 (se signcolumn :yes)
 
@@ -53,8 +53,8 @@
 (se fillchars "vert:▏,eob: ")
 (se laststatus 2)
 (se lazyredraw)
-(se nocursorline)
-; (se cursorlineopt :number)
+(se cursorline)
+(se cursorlineopt :number)
 (se noruler)
 (se noshowcmd)
 (se noshowmode)
@@ -82,10 +82,4 @@
 ;; system
 (se autochdir)
 (se clipboard :unnamedplus)
-
-;; signs
-(sign DiagnosticSignError {:text "■" :texthl :DiagnosticSignError})
-(sign DiagnosticSignWarn {:text "■" :texthl :DiagnosticSignWarn})
-(sign DiagnosticSignInfo {:text "■" :texthl :DiagnosticSignInfo})
-(sign DiagnosticSignHint {:text "■" :texthl :DiagnosticSignHint})
 

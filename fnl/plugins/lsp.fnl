@@ -1,7 +1,7 @@
 (import-macros {: se : hl : au : setup : plug} :macros)
 
 (plug :nvimdev/lspsaga.nvim
-      {:opts {:ui {:border :single :title false}
+      {:opts {:ui {:border :none :title false}
               :code_action {:keys {:quit :<ESC>}}
               :hover {:max_height 0.5}
               :diagnostic {:show_code_action false}
@@ -30,8 +30,8 @@
            :dependencies [{1 :williamboman/mason-lspconfig.nvim
                            :dependencies [:williamboman/mason.nvim]}]
            :config (fn []
-                     (vim.diagnostic.config {:virtual_text false
-                                             :signs true
+                     (vim.diagnostic.config {:virtual_text true
+                                             :signs false
                                              :float {:border false}})
                      (setup :mason-lspconfig
                             {:handlers [(fn [ls]

@@ -1,8 +1,5 @@
 (import-macros {: se : hl : au : setup : plug} :macros)
 
-(plug :lukas-reineke/indent-blankline.nvim
-      {:enabled false :main :ibl :opts {:indent {:char "▏"}}})
-
 ;; fnlfmt: skip
 (plug :nvim-treesitter/nvim-treesitter-textobjects
       {:dependencies [:nvim-treesitter/nvim-treesitter]
@@ -28,15 +25,15 @@
       {:build ":TSUpdate"
        :event [:BufReadPre :BufNewFile]
        :config (fn []
-                 (let [configs (require :nvim-treesitter.configs)]
-                   (configs.setup {:highlight {:enable true}
-                                   :indent {:enable true :disable [:markdown]}
-                                   :ensure_installed [:lua
-                                                      :vim
-                                                      :vimdoc
-                                                      :luadoc
-                                                      :norg
-                                                      :fennel]})))})
+                 (local c (require :nvim-treesitter.configs))
+                 (c.setup {:highlight {:enable true}
+                           :indent {:enable true :disable [:markdown]}
+                           :ensure_installed [:lua
+                                              :vim
+                                              :vimdoc
+                                              :luadoc
+                                              :norg
+                                              :fennel]}))})
 
 ; (plug :kevinhwang91/nvim-ufo
 ;       {:event [:BufReadPre :BufNewFile]
@@ -49,8 +46,8 @@
 (plug :RRethy/vim-illuminate
       {:event [:BufReadPre :BufNewFile]
        :config (fn []
-                 (let [illuminate (require :illuminate)]
-                   (illuminate.configure {:filetypes_denylist [:NeogitStatus
-                                                               :saga_codeaction
-                                                               :Glance]})))})
+                 (local c (require :illuminate))
+                 (c.configure {:filetypes_denylist [:NeogitStatus
+                                                    :saga_codeaction
+                                                    :Glance]}))})
 
