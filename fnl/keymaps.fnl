@@ -74,6 +74,10 @@
 (nmap F :<Plug>Sneak_F)
 (nmap t :<Plug>Sneak_t)
 (nmap T :<Plug>Sneak_T)
+(vmap f :<Plug>Sneak_f)
+(vmap F :<Plug>Sneak_F)
+(vmap t :<Plug>Sneak_t)
+(vmap T :<Plug>Sneak_T)
 
 ;; lsp
 (nmap <M-CR> ":Lspsaga code_action<CR>")
