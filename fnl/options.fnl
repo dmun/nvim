@@ -3,7 +3,7 @@
 ;; global options
 (setg rooter_silent_chdir 1)
 (setg sneak#use_ic_scs 1)
-(setg sneak#s_next 1)
+; (setg sneak#s_next 1)
 (setg tex_flavor :latex)
 (setg rustaceanvim
     {:tools {:hover_actions {:replace_builtin_hover false}
