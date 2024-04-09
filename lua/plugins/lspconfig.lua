@@ -1,12 +1,11 @@
-require("rocks").packadd("lspconfig")
 require("rocks").packadd("mason")
 require("rocks").packadd("mason-lspconfig")
+require("rocks").packadd("lspconfig")
 
-local lspconfig = require("lspconfig")
-local mason = require("mason")
 local mason_lspconfig = require("mason-lspconfig")
+local lspconfig = require("lspconfig")
 
-mason.setup()
+require("mason").setup()
 
 mason_lspconfig.setup {
 	ensure_installed = { "lua_ls", "rust_analyzer" },
