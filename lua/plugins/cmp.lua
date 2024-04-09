@@ -26,6 +26,12 @@ cmp.setup {
 	completion = {
 		completeopt = "menu,menuone",
 	},
+	formatting = {
+		format = function(_, vim_item)
+			vim_item.abbr = vim_item.abbr:sub(1, 30)
+			return vim_item
+		end,
+	},
 	experimental = {
 		ghost_text = true,
 	},
