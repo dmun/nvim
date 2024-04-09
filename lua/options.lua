@@ -3,6 +3,8 @@ local g = vim.g
 
 -- globals
 g.tex_flavor = "latex"
+g.rooter_silent_chdir = 1
+g["sneak#use_ic_scs"] = 1
 
 -- text
 o.wrap = false

@@ -1,1 +1,4 @@
-require("nvim-surround").setup()
+return {
+	"kylechui/nvim-surround",
+	opts = {},
+}

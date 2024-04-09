@@ -1,1 +1,4 @@
-require("auto-indent").setup()
+return {
+	"VidocqH/auto-indent.nvim",
+	opts = {},
+}

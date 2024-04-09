@@ -1,1 +1,4 @@
-require("nvim-autopairs").setup {}
+return {
+	"nvim-autopairs",
+	opts = {},
+}

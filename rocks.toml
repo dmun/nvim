@@ -52,14 +52,6 @@ nvim-lspconfig = "0.1.7"
 nvim-lint = "scm"
 "lspsaga.nvim" = "scm"
 
-# treesitter
-tree-sitter-rust = "scm"
-tree-sitter-lua = "scm"
-tree-sitter-markdown = "scm"
-tree-sitter-fennel = "scm"
-tree-sitter-vimdoc = "scm"
-tree-sitter-toml = "scm"
-
 # git
 "gitsigns.nvim" = { git = "lewis6991/gitsigns.nvim" }
 
@@ -73,6 +65,7 @@ tree-sitter-toml = "scm"
 "numb.nvim" = "scm"
 "fidget.nvim" = "1.1.0"
 "vim-repeat" = { git = "tpope/vim-repeat" }
+nvim-treesitter = "0.9.2"
 
 [config]
 plugins_dir = "plugins/"
