@@ -37,6 +37,7 @@ opt.showmode = false
 opt.showtabline = 0
 opt.termguicolors = true
 opt.shm:append("I")
+opt.cmdheight = 1
 
 -- window
 opt.inccommand = "split"

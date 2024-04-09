@@ -1,6 +1,7 @@
 local cmp = require("cmp")
 
 cmp.register_source("buffer", require("cmp_buffer"))
+cmp.register_source("path", require("cmp_path"))
 require("cmp_nvim_lsp").setup()
 
 cmp.setup {
@@ -19,6 +20,7 @@ cmp.setup {
 	sources = cmp.config.sources {
 		{ name = "nvim_lsp" },
 		{ name = "luasnip" },
+		{ name = "path" },
 		{ name = "buffer" },
 	},
 	completion = {
