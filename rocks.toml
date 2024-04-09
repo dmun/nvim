@@ -29,6 +29,7 @@ vim-sneak = { git = "justinmk/vim-sneak" }
 "comment.nvim" = "0.8.0"
 nvim-autopairs = "scm"
 nvim-surround = "2.1.5"
+"auto-indent.nvim" = { git = "vidocqh/auto-indent.nvim" }
 
 # completion
 nvim-cmp = "0.0.1"
