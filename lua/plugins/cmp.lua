@@ -2,6 +2,7 @@ local cmp = require("cmp")
 
 cmp.register_source("buffer", require("cmp_buffer"))
 cmp.register_source("path", require("cmp_path"))
+cmp.register_source("luasnip", require("cmp_luasnip"))
 require("cmp_nvim_lsp").setup()
 
 local function generate_whitespace(n)
@@ -22,6 +23,9 @@ local function format_menu(_, item)
 	return item
 end
 
+require("luasnip.loaders.from_vscode").lazy_load()
+require("luasnip.loaders.from_snipmate").lazy_load()
+
 cmp.setup {
 	snippet = {
 		expand = function(args)
@@ -40,7 +44,18 @@ cmp.setup {
 		{ name = "nvim_lsp" },
 		{ name = "luasnip" },
 		{ name = "path" },
+		{ name = "nvim_lua" },
+		{ name = "nvim_lsp_signature_help" },
 		{ name = "buffer" },
+	},
+	sorting = {
+		comparators = {
+			cmp.config.compare.locality,
+			cmp.config.compare.recently_used,
+			cmp.config.compare.score,
+			cmp.config.compare.offset,
+			cmp.config.compare.order,
+		},
 	},
 	completion = {
 		completeopt = "menu,menuone",

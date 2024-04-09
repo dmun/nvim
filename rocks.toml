@@ -31,12 +31,15 @@ nvim-autopairs = "scm"
 nvim-surround = "2.1.5"
 "auto-indent.nvim" = { git = "vidocqh/auto-indent.nvim" }
 
+# snippets
+luasnip = "2.2.0"
+friendly-snippets = { git = "rafamadriz/friendly-snippets" }
+
 # completion
 nvim-cmp = "0.0.1"
 cmp-nvim-lsp = "scm"
 cmp-buffer = { version = "scm", opt = true }
 cmp_luasnip = { version = "scm", opt = true }
-luasnip = "2.2.0"
 cmp-path = "scm"
 
 # language

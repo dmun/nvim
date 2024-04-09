@@ -1,60 +1,64 @@
-local opt = vim.opt
+local o = vim.opt
+local g = vim.g
+
+-- globals
+g.tex_flavor = "latex"
 
 -- text
-opt.wrap = false
-opt.breakindent = true
-opt.completeopt = "menuone,noselect"
-opt.confirm = true
-opt.expandtab = true
-opt.linebreak = true
-opt.shiftwidth = 4
-opt.softtabstop = 4
-opt.tabstop = 4
-opt.textwidth = 80
+o.wrap = false
+o.breakindent = true
+o.completeopt = "menuone,noselect"
+o.confirm = true
+o.expandtab = true
+o.linebreak = true
+o.shiftwidth = 4
+o.softtabstop = 4
+o.tabstop = 4
+o.textwidth = 80
 
 -- mouse
-opt.mouse = "a"
+o.mouse = "a"
 
 -- statuscolumn
-opt.foldcolumn = "0"
-opt.foldenable = true
-opt.foldlevel = 99
-opt.foldlevelstart = 99
-opt.number = true
-opt.relativenumber = true
-opt.signcolumn = "yes"
+o.foldcolumn = "0"
+o.foldenable = true
+o.foldlevel = 99
+o.foldlevelstart = 99
+o.number = true
+o.relativenumber = true
+o.signcolumn = "yes"
 
 -- appearance
-opt.background = "dark"
-opt.conceallevel = 3
-opt.laststatus = 2
-opt.lazyredraw = true
-opt.cursorline = true
+o.background = "dark"
+o.conceallevel = 3
+o.laststatus = 2
+o.lazyredraw = true
+o.cursorline = true
 -- opt.cursorlineopt = "number"
-opt.ruler = false
-opt.showcmd = false
-opt.showmode = false
-opt.showtabline = 0
-opt.termguicolors = true
-opt.shm:append("I")
-opt.cmdheight = 1
+o.ruler = false
+o.showcmd = false
+o.showmode = false
+o.showtabline = 0
+o.termguicolors = true
+o.shm:append("I")
+o.cmdheight = 1
 
 -- window
-opt.inccommand = "split"
-opt.splitbelow = true
-opt.splitkeep = "topline"
+o.inccommand = "split"
+o.splitbelow = true
+o.splitkeep = "topline"
 
 -- keys
-opt.ignorecase = true
-opt.ttimeout = false
-opt.scrolloff = 5
-opt.sidescrolloff = 10
-opt.smartcase = true
+o.ignorecase = true
+o.ttimeout = false
+o.scrolloff = 5
+o.sidescrolloff = 10
+o.smartcase = true
 
 -- file
-opt.swapfile = false
-opt.undofile = true
+o.swapfile = false
+o.undofile = true
 
 -- system
 -- opt.autochdir = true
-opt.clipboard = "unnamedplus"
+o.clipboard = "unnamedplus"
