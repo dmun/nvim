@@ -11,6 +11,7 @@ cmp.setup {
 		end,
 	},
 	mapping = cmp.mapping.preset.insert {
+		["<C-e>"] = vim.NIL,
 		["<C-k>"] = cmp.mapping.scroll_docs(-4),
 		["<C-j>"] = cmp.mapping.scroll_docs(4),
 		["<C-Space>"] = cmp.mapping.complete(),
