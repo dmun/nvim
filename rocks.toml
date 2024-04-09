@@ -62,6 +62,7 @@ tree-sitter-toml = "scm"
 
 # other
 "numb.nvim" = "scm"
+"fidget.nvim" = "1.1.0"
 
 [config]
 plugins_dir = "plugins/"

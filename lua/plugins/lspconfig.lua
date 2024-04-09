@@ -8,7 +8,7 @@ local lspconfig = require("lspconfig")
 require("mason").setup()
 
 mason_lspconfig.setup {
-	ensure_installed = { "lua_ls", "rust_analyzer" },
+	ensure_installed = { "lua_ls" },
 }
 
 mason_lspconfig.setup_handlers {

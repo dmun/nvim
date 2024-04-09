@@ -4,6 +4,24 @@ cmp.register_source("buffer", require("cmp_buffer"))
 cmp.register_source("path", require("cmp_path"))
 require("cmp_nvim_lsp").setup()
 
+local function generate_whitespace(n)
+	if n > 0 then
+		return " " .. generate_whitespace(n - 1)
+	else
+		return ""
+	end
+end
+
+local function format_menu(_, item)
+	item.abbr = " " .. item.abbr:gsub("%s+", "")
+	if item.menu then
+		local len = item.abbr:len() + item.menu:len()
+		item.abbr = item.abbr .. generate_whitespace(38 - len) .. "  " .. item.menu
+	end
+	item.menu = ""
+	return item
+end
+
 cmp.setup {
 	snippet = {
 		expand = function(args)
