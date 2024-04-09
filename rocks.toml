@@ -57,7 +57,6 @@ tree-sitter-toml = "scm"
 # colors
 "nvim-colorizer.lua" = { git = "NvChad/nvim-colorizer.lua" }
 "lualine.nvim" = "scm"
-"mini.base16" = "0.9.0"
 "gruber-darker.nvim" = { git = "blazkowolf/gruber-darker.nvim" }
 "gruvbox.nvim" = "2.0.0"
 
