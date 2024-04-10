@@ -1,15 +1,22 @@
--- leader
+local util = require("util")
+
 vim.g.mapleader = " "
 vim.g.maplocalleader = " m"
 
-vim.keymap.set("i", "<C-h>", "<C-w>h")
-vim.keymap.set("i", "<C-j>", "<C-w>j")
-vim.keymap.set("i", "<C-k>", "<C-w>k")
-vim.keymap.set("i", "<C-l>", "<C-w>l")
+util.handle_keymaps {
+	n = {
+		{ "<leader>w", "<cmd>w<cr>" },
+		{ "<leader>tw", "<cmd>set wrap!<cr>" },
 
-vim.keymap.set("n", "<C-h>", "<C-w>h")
-vim.keymap.set("n", "<C-j>", "<C-w>j")
-vim.keymap.set("n", "<C-k>", "<C-w>k")
-vim.keymap.set("n", "<C-l>", "<C-w>l")
-
-vim.keymap.set("n", "<leader>tw", "<cmd>set wrap!<cr>")
+		{ "<C-h>", "<C-w>h" },
+		{ "<C-j>", "<C-w>j" },
+		{ "<C-k>", "<C-w>k" },
+		{ "<C-l>", "<C-w>l" },
+	},
+	i = {
+		{ "<C-h>", "<C-w>h" },
+		{ "<C-j>", "<C-w>j" },
+		{ "<C-k>", "<C-w>k" },
+		{ "<C-l>", "<C-w>l" },
+	},
+}
