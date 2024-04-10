@@ -9,5 +9,11 @@ return {
 	},
 	config = function()
 		vim.cmd("hi Sneak guifg=#ff00ff")
+
+		vim.api.nvim_create_autocmd("WinClosed", {
+			callback = function()
+				vim.cmd.call("sneak#cancel()")
+			end,
+		})
 	end,
 }
