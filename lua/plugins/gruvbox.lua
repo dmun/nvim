@@ -3,11 +3,10 @@ return {
 	enabled = true,
 	lazy = false,
 	priority = 1000,
-	opts = {
-		contrast = "hard",
-	},
-	config = function(_, opts)
-		require("gruvbox").setup(opts)
+	config = function()
+		require("gruvbox").setup {
+			contrast = "hard",
+		}
 		vim.cmd.colorscheme("gruvbox")
 	end,
 }

@@ -16,7 +16,4 @@ return {
 			go = { "gofmt" },
 		},
 	},
-	-- config = function(_, opts)
-	-- 	require("conform").setup(opts)
-	-- end,
 }

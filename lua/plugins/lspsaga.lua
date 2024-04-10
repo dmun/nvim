@@ -1,7 +1,9 @@
-vim.keymap.set("n", "<M-CR>", "<cmd>Lspsaga code_action<cr>")
-
 return {
 	"glepnir/lspsaga.nvim",
+	event = { "BufReadPre", "BufNewFile" },
+	keys = {
+		{ "<M-CR>", "<cmd>Lspsaga code_action<cr>" },
+	},
 	opts = {
 		ui = {
 			title = false,
