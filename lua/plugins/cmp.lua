@@ -91,6 +91,7 @@ return {
 			completion = {
 				completeopt = "menu,menuone",
 			},
+			window = { completion = { col_offset = -3 } },
 			formatting = {
 				fields = { "kind", "abbr", "menu" },
 				format = lspkind.cmp_format {
