@@ -28,6 +28,7 @@ return {
 					},
 				}
 			end,
+			["rust_analyzer"] = function() end,
 			["lua_ls"] = function()
 				require("neodev").setup()
 
