@@ -7,4 +7,7 @@ return {
 		{ "t", "<Plug>Sneak_t" },
 		{ "T", "<Plug>Sneak_T" },
 	},
+	config = function()
+		vim.cmd("hi! Sneak guifg=#ff00ff guibg=none gui=bold")
+	end,
 }

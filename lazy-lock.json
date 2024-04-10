@@ -30,6 +30,7 @@
   "nvim-treesitter": { "branch": "master", "commit": "8253aac4199e61da6e1311a65d48fc40eb02530d" },
   "nvim-web-devicons": { "branch": "master", "commit": "6e355632387a085f15a66ad68cf681c1d7374a04" },
   "oil.nvim": { "branch": "master", "commit": "e462a3446505185adf063566f5007771b69027a1" },
+  "vim-cool": { "branch": "master", "commit": "662e7b11064cbeedad17c45d2fe926e78d3cd0b6" },
   "vim-rooter": { "branch": "master", "commit": "1353fa47ee3a81083c284e28ff4f7d92655d7c9e" },
   "vim-rsi": { "branch": "master", "commit": "45540637ead22f011e8215f1c90142e49d946a54" },
   "vim-sneak": { "branch": "master", "commit": "c13d0497139b8796ff9c44ddb9bc0dc9770ad2dd" }
