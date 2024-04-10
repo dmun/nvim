@@ -1,3 +1,21 @@
+local function generate_whitespace(n)
+	if n > 0 then
+		return " " .. generate_whitespace(n - 1)
+	else
+		return ""
+	end
+end
+
+local function format_menu(_, item)
+	item.abbr = " " .. item.abbr:gsub("%s+", "")
+	if item.menu then
+		local len = item.abbr:len() + item.menu:len()
+		item.abbr = item.abbr .. generate_whitespace(38 - len) .. "  " .. item.menu
+	end
+	item.menu = ""
+	return item
+end
+
 return {
 	"hrsh7th/nvim-cmp",
 	event = "InsertEnter",
@@ -7,6 +25,7 @@ return {
 		"hrsh7th/cmp-nvim-lua",
 		"hrsh7th/cmp-nvim-lsp",
 		"hrsh7th/cmp-nvim-lsp-signature-help",
+		"onsails/lspkind.nvim",
 		{
 			"saadparwaiz1/cmp_luasnip",
 			dependencies = "L3MON4D3/LuaSnip",
@@ -14,8 +33,16 @@ return {
 	},
 	config = function()
 		local cmp = require("cmp")
+		local cmp_autopairs = require("nvim-autopairs.completion.cmp")
 		local luasnip = require("luasnip")
+		local lspkind = require("lspkind")
+
+		cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
 		cmp.setup {
+			preselect = cmp.PreselectMode.None,
+			view = {
+				entries = { name = "custom", selection_order = "near_cursor" },
+			},
 			snippet = {
 				expand = function(args)
 					luasnip.lsp_expand(args.body)
@@ -54,9 +81,9 @@ return {
 			},
 			sorting = {
 				comparators = {
-					cmp.config.compare.locality,
 					cmp.config.compare.recently_used,
 					cmp.config.compare.score,
+					cmp.config.compare.locality,
 					cmp.config.compare.offset,
 					cmp.config.compare.order,
 				},
@@ -65,10 +92,14 @@ return {
 				completeopt = "menu,menuone",
 			},
 			formatting = {
-				format = function(_, vim_item)
-					vim_item.abbr = vim_item.abbr:sub(1, 30)
-					return vim_item
-				end,
+				fields = { "kind", "abbr", "menu" },
+				format = lspkind.cmp_format {
+					mode = "symbol",
+					maxwidth = 40,
+					ellipsis_char = "…",
+					show_labelDetails = true,
+					before = format_menu,
+				},
 			},
 			experimental = {
 				ghost_text = true,
