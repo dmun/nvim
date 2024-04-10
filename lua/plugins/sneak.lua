@@ -8,6 +8,6 @@ return {
 		{ "T", "<Plug>Sneak_T" },
 	},
 	config = function()
-		vim.cmd("hi! Sneak guifg=#ff00ff guibg=none gui=bold")
+		vim.cmd("hi Sneak guifg=#ff00ff")
 	end,
 }
