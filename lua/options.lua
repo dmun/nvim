@@ -32,7 +32,7 @@ o.signcolumn = "yes"
 
 -- appearance
 o.background = "dark"
-o.conceallevel = 3
+o.conceallevel = 2
 o.laststatus = 2
 o.lazyredraw = true
 o.cursorline = true
