@@ -36,6 +36,7 @@
   "oil.nvim": { "branch": "master", "commit": "e462a3446505185adf063566f5007771b69027a1" },
   "plenary.nvim": { "branch": "master", "commit": "8aad4396840be7fc42896e3011751b7609ca4119" },
   "rustaceanvim": { "branch": "master", "commit": "e2dbf91daed26d4dd7263affbecbf9a36e0096e5" },
+  "sqlua.nvim": { "branch": "master", "commit": "130101f0db73d23e27eb580069d83dd48e4034af" },
   "vim-cool": { "branch": "master", "commit": "662e7b11064cbeedad17c45d2fe926e78d3cd0b6" },
   "vim-illuminate": { "branch": "master", "commit": "305bf07b919ac526deb5193280379e2f8b599926" },
   "vim-rooter": { "branch": "master", "commit": "1353fa47ee3a81083c284e28ff4f7d92655d7c9e" },
