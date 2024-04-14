@@ -10,6 +10,15 @@ util.handle_keymaps {
 		{ "<leader>w", "<cmd>w<cr>" },
 		{ "<leader>tw", "<cmd>set wrap!<cr>" },
 
+		{
+			"<localleader>r",
+			util.run_command,
+		},
+		{
+			"<localleader>R",
+			util.run_command_reset,
+		},
+
 		{ "<C-h>", "<C-w>h" },
 		{ "<C-j>", "<C-w>j" },
 		{ "<C-k>", "<C-w>k" },
