@@ -76,6 +76,11 @@ function M.run_command(reset)
 		end)
 	end
 
+	if not command then
+		print("No command specified")
+		return
+	end
+
 	vim.cmd("split term://" .. command)
 	vim.opt_local.number = false
 	vim.opt_local.relativenumber = false
