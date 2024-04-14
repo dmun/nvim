@@ -57,7 +57,7 @@ function M.run_command(reset)
 
 	if command == nil or reset == true then
 		vim.ui.input({
-			prompt = "choose a run command: ",
+			prompt = "choose a run command for '" .. project_path .. "': ",
 		}, function(input)
 			local encoded = vim.json.encode {
 				run = input,
@@ -86,6 +86,7 @@ function M.run_command(reset)
 	vim.opt_local.relativenumber = false
 	vim.opt_local.signcolumn = "no"
 	vim.keymap.set("n", "q", "<cmd>bdelete<cr>", { buffer = true })
+	vim.cmd.norm("G")
 end
 
 function M.run_command_reset()
