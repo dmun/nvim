@@ -15,6 +15,17 @@ return {
 			rust = { "rustfmt" },
 			go = { "gofmt" },
 			typescript = { "prettier" },
+			cpp = { "clang-format" },
 		},
 	},
+	config = function(_, opts)
+		local conform = require("conform")
+
+		conform.formatters["clang-format"] = {
+			command = "clang-format",
+			args = { "--style", "{BasedOnStyle: LLVM, IndentWidth: 4}" },
+		}
+
+		conform.setup(opts)
+	end,
 }
