@@ -16,6 +16,7 @@ return {
 			go = { "gofmt" },
 			typescript = { "prettier" },
 			cpp = { "clang-format" },
+			tex = { "latexindent" },
 		},
 	},
 	config = function(_, opts)
