@@ -1,6 +1,8 @@
 local o = vim.opt
 local g = vim.g
 
+vim.cmd.color("gruvbox")
+
 -- globals
 g.tex_flavor = "latex"
 g.rooter_silent_chdir = 1
@@ -36,7 +38,7 @@ o.conceallevel = 2
 o.laststatus = 2
 o.lazyredraw = true
 o.cursorline = true
-o.cursorlineopt = "number"
+o.cursorlineopt = "both"
 o.ruler = false
 o.showcmd = false
 o.showmode = false

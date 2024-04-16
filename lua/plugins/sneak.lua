@@ -8,7 +8,7 @@ return {
 		{ "T", "<Plug>Sneak_T" },
 	},
 	config = function()
-		vim.cmd("hi Sneak guifg=#ff00ff")
+		vim.cmd("hi! Sneak guifg=#ff00ff guibg=NONE")
 
 		vim.api.nvim_create_autocmd("WinClosed", {
 			callback = function()
