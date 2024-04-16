@@ -44,6 +44,7 @@ o.showtabline = 0
 o.termguicolors = true
 o.shm:append("I")
 o.cmdheight = 1
+o.pumheight = 15
 
 -- window
 o.inccommand = "split"

@@ -72,8 +72,8 @@ return {
 				end, { "i", "s" }),
 			},
 			sources = cmp.config.sources {
-				{ name = "nvim_lsp" },
 				{ name = "luasnip" },
+				{ name = "nvim_lsp" },
 				{ name = "path" },
 				{ name = "nvim_lua" },
 				{ name = "nvim_lsp_signature_help" },
@@ -81,10 +81,12 @@ return {
 			},
 			sorting = {
 				comparators = {
+					cmp.config.compare.scopes,
 					cmp.config.compare.score,
-					cmp.config.compare.recently_used,
+					cmp.config.compare.kind,
 					cmp.config.compare.locality,
 					cmp.config.compare.offset,
+					cmp.config.compare.length,
 					cmp.config.compare.order,
 				},
 			},
