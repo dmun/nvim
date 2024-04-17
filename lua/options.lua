@@ -1,7 +1,7 @@
 local o = vim.opt
 local g = vim.g
 
-vim.cmd.color("catppuccin")
+vim.cmd.color("gruvbox")
 
 -- globals
 g.tex_flavor = "latex"
@@ -38,7 +38,7 @@ o.conceallevel = 2
 o.laststatus = 2
 o.lazyredraw = true
 o.cursorline = true
-o.cursorlineopt = "both"
+o.cursorlineopt = "number"
 o.ruler = false
 o.showcmd = false
 o.showmode = false

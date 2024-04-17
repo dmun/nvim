@@ -3,6 +3,9 @@ return {
 		"ellisonleao/gruvbox.nvim",
 		opts = {
 			contrast = "hard",
+			overrides = {
+				PmenuSel = { link = "Cursorline" },
+			},
 		},
 	},
 	"dmun/fleet-theme-nvim",
