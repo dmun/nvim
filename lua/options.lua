@@ -1,7 +1,7 @@
 local o = vim.opt
 local g = vim.g
 
-vim.cmd.color("gruvbox")
+vim.cmd.color("catppuccin")
 
 -- globals
 g.tex_flavor = "latex"

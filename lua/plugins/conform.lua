@@ -16,6 +16,7 @@ return {
 			go = { "gofmt" },
 			typescript = { "prettier" },
 			cpp = { "clang-format" },
+			c = { "clang-format" },
 			tex = { "latexindent" },
 		},
 	},
@@ -24,7 +25,7 @@ return {
 
 		conform.formatters["clang-format"] = {
 			command = "clang-format",
-			args = { "--style", "{BasedOnStyle: LLVM, IndentWidth: 4}" },
+			args = { "--style", "{BasedOnStyle: Webkit, IndentWidth: 4}" },
 		}
 
 		conform.setup(opts)
