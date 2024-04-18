@@ -1,8 +1,6 @@
 local o = vim.opt
 local g = vim.g
 
-vim.cmd.color("gruvbox")
-
 -- globals
 g.tex_flavor = "latex"
 g.rooter_silent_chdir = 1

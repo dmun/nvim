@@ -5,6 +5,9 @@ return {
 			contrast = "hard",
 			overrides = {
 				PmenuSel = { link = "Cursorline" },
+				GitSignsAdd = { link = "GruvboxGreenSign" },
+				GitSignsChange = { link = "GruvboxAquaSign" },
+				GitSignsDelete = { link = "GruvboxRedSign" },
 			},
 		},
 	},
