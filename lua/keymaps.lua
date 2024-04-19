@@ -20,7 +20,7 @@ util.handle_keymaps {
 		},
 
 		{ "<C-h>", "<C-w>h" },
-		{ "<ESC>", "<ESC><C-w>j" },
+		{ "<ESC>", "<C-w>j<ESC>" },
 		{ "<C-k>", "<C-w>k" },
 		{ "<C-l>", "<C-w>l" },
 	},

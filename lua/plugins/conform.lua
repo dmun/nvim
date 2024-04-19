@@ -19,15 +19,16 @@ return {
 			c = { "clang-format" },
 			tex = { "latexindent" },
 		},
+		formatters = {
+			stylua = {
+				condition = function(_, ctx)
+					return vim.fs.basename(ctx.filename) ~= "premake5.lua"
+				end,
+			},
+			["clang-format"] = {
+				command = "clang-format",
+				args = { "--style", "{BasedOnStyle: Webkit, IndentWidth: 4}" },
+			},
+		},
 	},
-	config = function(_, opts)
-		local conform = require("conform")
-
-		conform.formatters["clang-format"] = {
-			command = "clang-format",
-			args = { "--style", "{BasedOnStyle: Webkit, IndentWidth: 4}" },
-		}
-
-		conform.setup(opts)
-	end,
 }
