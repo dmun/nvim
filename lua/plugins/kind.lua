@@ -17,7 +17,6 @@ return {
 				Value = "󰎠",
 				Enum = "󰯸",
 				Keyword = "󰰊",
-				Snippet = " ",
 				Color = "󰏘",
 				File = "󰈙",
 				Reference = "󰈇",

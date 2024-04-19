@@ -7,7 +7,7 @@ local function generate_whitespace(n)
 end
 
 local function format_menu(_, item)
-	item.abbr = " " .. item.abbr:gsub("%s+", "")
+	item.abbr = item.abbr:gsub("%s+", "")
 	if item.menu then
 		local len = item.abbr:len() + item.menu:len()
 		item.abbr = item.abbr .. generate_whitespace(38 - len) .. "  " .. item.menu
@@ -93,7 +93,7 @@ return {
 			completion = {
 				completeopt = "menu,menuone",
 			},
-			window = { completion = { col_offset = -3 } },
+			window = { completion = { col_offset = -2 } },
 			formatting = {
 				fields = { "kind", "abbr", "menu" },
 				format = lspkind.cmp_format {
