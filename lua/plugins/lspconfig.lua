@@ -18,19 +18,7 @@ return {
 		mason_lspconfig.setup_handlers {
 			function(server_name)
 				lspconfig[server_name].setup {
-					autostart = function()
-						local filepath = vim.api.nvim_buf_get_name(0)
-
-						if server_name ~= "ltex" then
-							return false
-						end
-
-						if vim.fs.basename(filepath) == "premake5.lua" then
-							return false
-						end
-
-						return true
-					end,
+					autostart = server_name ~= "ltex",
 					settings = {
 						ltex = {
 							language = "nl",

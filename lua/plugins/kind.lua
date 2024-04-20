@@ -4,6 +4,7 @@ return {
 		require("lspkind").init {
 			symbol_map = {
 				Text = " ",
+				Snippet = " ",
 				Method = "󰰐",
 				Function = "󰯻",
 				Constructor = "󰯲",

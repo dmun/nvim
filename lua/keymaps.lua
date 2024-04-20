@@ -5,8 +5,6 @@ vim.g.maplocalleader = " m"
 
 util.handle_keymaps {
 	n = {
-		{ "<TAB>", "<C-^>" },
-
 		{ "<leader>w", "<cmd>w<cr>" },
 		{ "<leader>tw", "<cmd>set wrap!<cr>" },
 

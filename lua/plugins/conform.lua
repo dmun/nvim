@@ -22,7 +22,7 @@ return {
 		formatters = {
 			stylua = {
 				condition = function(_, ctx)
-					return vim.fs.basename(ctx.filename) ~= "premake5.lua"
+					return vim.fs.basename(ctx.filename) ~= "xmake.lua"
 				end,
 			},
 			["clang-format"] = {

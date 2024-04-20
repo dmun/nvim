@@ -1,30 +1,37 @@
 return {
 	"nvim-lualine/lualine.nvim",
-	opts = {
-		options = {
-			component_separators = { left = nil, right = nil },
-			section_separators = { left = nil, right = nil },
-			always_divide_middle = true,
-		},
-		sections = {
-			lualine_a = { "mode" },
-			lualine_b = {},
-			lualine_c = { { "filename", path = 1 } },
-			lualine_x = { "diagnostics", "location" },
-			lualine_y = {},
-			lualine_z = {},
-		},
-		inactive_sections = {
-			lualine_a = {
-				function()
-					return "      "
-				end,
+	config = function()
+		local gruvbox = require("lualine.themes.gruvbox")
+		local util = require("util")
+
+		gruvbox.normal.a = { fg = "#7C6F64", bg = "#282828" }
+		gruvbox.normal.c = { fg = gruvbox.normal.c.fg, bg = "#303030" }
+		gruvbox.normal.y = gruvbox.normal.a
+		gruvbox.inactive = util.deepcopy(gruvbox.normal)
+		gruvbox.normal.z = gruvbox.command.c
+
+		require("lualine").setup {
+			options = {
+				component_separators = { left = nil, right = nil },
+				section_separators = { left = nil, right = nil },
+				always_divide_middle = true,
 			},
-			lualine_b = {},
-			lualine_c = { { "filename", path = 1 } },
-			lualine_x = { "diagnostics", "location" },
-			lualine_y = {},
-			lualine_z = {},
-		},
-	},
+			sections = {
+				lualine_a = { { "filename", path = 4 } },
+				lualine_b = {},
+				lualine_c = {},
+				lualine_x = { "diagnostics" },
+				lualine_y = { "progress" },
+				lualine_z = { "location" },
+			},
+			inactive_sections = {
+				lualine_a = { { "filename", path = 4 } },
+				lualine_b = {},
+				lualine_c = {},
+				lualine_x = { "diagnostics" },
+				lualine_y = { "progress" },
+				lualine_z = { "location" },
+			},
+		}
+	end,
 }

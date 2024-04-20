@@ -4,10 +4,18 @@ return {
 		opts = {
 			contrast = "hard",
 			overrides = {
+				LineNr = { bg = "#3C3836" },
 				PmenuSel = { link = "Cursorline" },
 				GitSignsAdd = { link = "GruvboxGreenSign" },
 				GitSignsChange = { link = "GruvboxAquaSign" },
 				GitSignsDelete = { link = "GruvboxRedSign" },
+				GruvboxRedUnderline = { underline = true, undercurl = false },
+				GruvboxAquaUnderline = { underline = true, undercurl = false },
+				GruvboxYellowUnderline = { underline = true, undercurl = false },
+				GruvboxGreenUnderline = { underline = true, undercurl = false },
+				GruvboxBlueUnderline = { underline = true, undercurl = false },
+				GruvboxOrangeUnderline = { underline = true, undercurl = false },
+				GruvboxPurpleUnderline = { underline = true, undercurl = false },
 			},
 		},
 	},
