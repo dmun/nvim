@@ -7,8 +7,8 @@ return {
 		gruvbox.normal.a = { fg = "#7C6F64", bg = "#282828" }
 		gruvbox.normal.c = { fg = gruvbox.normal.c.fg, bg = "#303030" }
 		gruvbox.normal.y = gruvbox.normal.a
-		gruvbox.inactive = util.deepcopy(gruvbox.normal)
 		gruvbox.normal.z = gruvbox.command.c
+		gruvbox.inactive = util.deepcopy(gruvbox.normal)
 
 		require("lualine").setup {
 			options = {
