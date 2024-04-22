@@ -13,7 +13,10 @@ return {
 		opts = {
 			files = {
 				cmd = "rg --files --hidden",
+				no_header_i = true,
 			},
+			grep = { no_header_i = true },
+			buffers = { no_header_i = true },
 			winopts = {
 				split = "botright new",
 				preview = {
