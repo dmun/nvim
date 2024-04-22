@@ -84,7 +84,6 @@ return {
 					cmp.config.compare.score,
 					cmp.config.compare.locality,
 					cmp.config.compare.kind,
-					cmp.config.compare.scope,
 					cmp.config.compare.offset,
 					cmp.config.compare.length,
 					cmp.config.compare.order,
