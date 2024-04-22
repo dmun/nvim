@@ -22,7 +22,4 @@ util.handle_keymaps {
 		{ "<C-k>", "<C-w>k" },
 		{ "<C-l>", "<C-w>l" },
 	},
-	i = {
-		{ "<ESC>", "<ESC><cmd>silent LuaSnipUnlinkCurrent<cr>" },
-	},
 }

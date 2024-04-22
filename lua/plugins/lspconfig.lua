@@ -21,10 +21,16 @@ return {
 					autostart = server_name ~= "ltex",
 					settings = {
 						ltex = {
-							language = "nl",
+							-- language = "nl",
 							filetype = { "norg" },
 							additionalRules = { enablePickyRules = true },
 						},
+					},
+					handlers = {
+						["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+							signs = false,
+							virtual_text = server_name ~= "ltex",
+						}),
 					},
 				}
 			end,
