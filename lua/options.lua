@@ -50,7 +50,7 @@ o.colorcolumn = "+1"
 -- window
 o.inccommand = "split"
 o.splitbelow = true
-o.splitkeep = "topline"
+o.splitkeep = "cursor"
 
 -- keys
 o.ignorecase = true

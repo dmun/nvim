@@ -18,10 +18,10 @@ return {
 		mason_lspconfig.setup_handlers {
 			function(server_name)
 				lspconfig[server_name].setup {
-					autostart = server_name ~= "ltex",
+					autostart = true,
 					settings = {
 						ltex = {
-							-- language = "nl",
+							language = "nl",
 							filetype = { "norg" },
 							additionalRules = { enablePickyRules = true },
 						},
@@ -66,6 +66,12 @@ return {
 							completion = { callSnippet = "Replace" },
 							diagnostics = { globals = { "vim" } },
 						},
+					},
+					handlers = {
+						["textDocument/publishDiagnostics"] = vim.lsp.with(
+							vim.lsp.diagnostic.on_publish_diagnostics,
+							{ signs = false }
+						),
 					},
 				}
 			end,
