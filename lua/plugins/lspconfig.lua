@@ -24,6 +24,8 @@ return {
 							language = "nl",
 							filetype = { "norg" },
 							additionalRules = { enablePickyRules = true },
+							checkFrequency = "save",
+							completionEnabled = true,
 						},
 					},
 					handlers = {
