@@ -14,6 +14,8 @@ return {
 			files = {
 				cmd = "rg --files --hidden",
 				no_header_i = true,
+				file_icons = false,
+				-- git_icons = false,
 			},
 			grep = { no_header_i = true },
 			buffers = { no_header_i = true },
