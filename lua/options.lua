@@ -45,7 +45,8 @@ o.termguicolors = true
 o.shm:append("I")
 o.cmdheight = 1
 o.pumheight = 15
-o.colorcolumn = "+1"
+-- o.colorcolumn = "+1"
+o.fillchars = "eob: "
 
 -- window
 o.inccommand = "split"
