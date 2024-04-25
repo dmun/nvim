@@ -1,5 +1,12 @@
 local M = {}
 
+---@param highlights table
+function M.set_highlights(highlights)
+	for k, v in pairs(highlights) do
+		vim.api.nvim_set_hl(0, k, v)
+	end
+end
+
 function M.handle_keymaps(modes)
 	for mode, maps in pairs(modes) do
 		for _, map in pairs(maps) do

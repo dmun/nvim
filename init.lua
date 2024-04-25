@@ -20,5 +20,3 @@ require("lazy").setup("plugins", {
 		enabled = false,
 	},
 })
-
-vim.cmd.color("gruvbox")

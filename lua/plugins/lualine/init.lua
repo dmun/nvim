@@ -12,6 +12,7 @@ return {
 
 		require("lualine").setup {
 			options = {
+				-- theme = require("plugins.lualine.theme"),
 				component_separators = { left = nil, right = nil },
 				section_separators = { left = nil, right = nil },
 				always_divide_middle = true,
