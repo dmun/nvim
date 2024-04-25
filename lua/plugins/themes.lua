@@ -6,14 +6,19 @@ return {
 			vim.g.alabaster_dim_comments = true
 			vim.cmd.color("alabaster")
 
-			-- require("util").set_highlights {
-			-- 	LineNr = { fg = "#566062", bg = "#162022" },
-			-- 	CursorLineNr = { link = "StatusLine" },
-			-- 	SignColumn = { link = "StatusLine" },
-			-- 	GitSignsAdd = { link = "StatusLineGreen" },
-			-- 	GitSignsChange = { link = "StatusLineBlue" },
-			-- 	GitSignsDelete = { link = "StatusLineRed" },
-			-- }
+			require("util").set_highlights {
+				LineNr = { fg = "#566062", bg = "#162022" },
+				CursorLineNr = { link = "StatusLine" },
+				SignColumn = { link = "StatusLine" },
+				GitSignsAdd = { link = "StatusLineGreen" },
+				GitSignsChange = { link = "StatusLineBlue" },
+				GitSignsDelete = { link = "StatusLineRed" },
+				DiagnosticSignOk = { link = "StatusLineGreen" },
+				DiagnosticSignHint = { link = "StatusLineBlue" },
+				DiagnosticSignInfo = { link = "StatusLineCyan" },
+				DiagnosticSignWarn = { link = "StatusLineYellow" },
+				DiagnosticSignError = { link = "StatusLineRed" },
+			}
 		end,
 	},
 	{
