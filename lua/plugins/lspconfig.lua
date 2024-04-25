@@ -30,7 +30,7 @@ return {
 					},
 					handlers = {
 						["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-							signs = false,
+							signs = server_name ~= "ltex",
 							virtual_text = server_name ~= "ltex",
 						}),
 					},
@@ -68,12 +68,6 @@ return {
 							completion = { callSnippet = "Replace" },
 							diagnostics = { globals = { "vim" } },
 						},
-					},
-					handlers = {
-						["textDocument/publishDiagnostics"] = vim.lsp.with(
-							vim.lsp.diagnostic.on_publish_diagnostics,
-							{ signs = false }
-						),
 					},
 				}
 			end,
