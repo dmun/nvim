@@ -30,13 +30,13 @@ return {
 					},
 					handlers = {
 						["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-							signs = server_name ~= "ltex",
+							signs = false,
 							virtual_text = server_name ~= "ltex",
 						}),
 					},
 				}
 			end,
-			["rust_analyzer"] = function() end,
+			-- ["rust_analyzer"] = function() end,
 			["lua_ls"] = function()
 				lspconfig.lua_ls.setup {
 					on_init = function(client)
@@ -68,6 +68,11 @@ return {
 							completion = { callSnippet = "Replace" },
 							diagnostics = { globals = { "vim" } },
 						},
+					},
+					handlers = {
+						["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+							signs = false,
+						}),
 					},
 				}
 			end,

@@ -1,0 +1,61 @@
+local colors = {
+	rosewater = "#FFAA43",
+	flamingo = "#FFAA43",
+	pink = "#CF92C9",
+	mauve = "#CF92C9",
+	red = "#FF5261",
+	maroon = "#FF714C",
+	peach = "#FFAA43",
+	yellow = "#FFAA43",
+	green = "#8CC98F",
+	teal = "#36B7B5",
+	sky = "#559BD1",
+	sapphire = "#559BD1",
+	blue = "#559BD1",
+	lavender = "#CF92C9",
+	text = "#D7DEEA",
+	subtext1 = "#A5ACBA",
+	subtext0 = "#828B96",
+	overlay2 = "#71787F",
+	overlay1 = "#6A727B",
+	overlay0 = "#616870",
+	surface2 = "#505A63",
+	surface1 = "#4C555E",
+	surface0 = "#39424C",
+	base = "#2E3842",
+	mantle = "#44525E",
+	crust = "#2D3239",
+}
+--#21262A
+return {
+	normal = {
+		a = { bg = colors.crust, fg = colors.subtext1 },
+		b = { bg = colors.crust, fg = colors.subtext1 },
+		c = { bg = colors.crust, fg = colors.subtext1 },
+	},
+	insert = {
+		a = { bg = colors.crust, fg = colors.subtext1 },
+		b = { bg = colors.crust, fg = colors.subtext1 },
+		c = { bg = colors.crust, fg = colors.subtext1 },
+	},
+	visual = {
+		a = { bg = colors.crust, fg = colors.subtext1 },
+		b = { bg = colors.crust, fg = colors.subtext1 },
+		c = { bg = colors.crust, fg = colors.subtext1 },
+	},
+	replace = {
+		a = { bg = colors.crust, fg = colors.subtext1 },
+		b = { bg = colors.crust, fg = colors.subtext1 },
+		c = { bg = colors.crust, fg = colors.subtext1 },
+	},
+	command = {
+		a = { bg = colors.crust, fg = colors.subtext1 },
+		b = { bg = colors.crust, fg = colors.subtext1 },
+		c = { bg = colors.crust, fg = colors.subtext1 },
+	},
+	inactive = {
+		a = { bg = colors.crust, fg = colors.subtext1 },
+		b = { bg = colors.crust, fg = colors.subtext1 },
+		c = { bg = colors.crust, fg = colors.subtext1 },
+	},
+}
