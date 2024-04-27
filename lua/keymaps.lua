@@ -5,7 +5,10 @@ vim.g.maplocalleader = " m"
 
 util.handle_keymaps {
 	n = {
-		{ "<leader>w", "<cmd>w<cr>" },
+		{ "u", "<cmd>silent undo<cr>" },
+		{ "<C-r>", "<cmd>silent redo<cr>" },
+
+		{ "<leader>w", "<cmd>silent update<cr>" },
 		{ "<leader>tw", "<cmd>set wrap!<cr>" },
 
 		{

@@ -16,3 +16,12 @@ vim.api.nvim_create_autocmd({ "BufLeave", "FocusLost" }, {
 		end
 	end,
 })
+
+vim.api.nvim_create_autocmd("CmdlineLeave", {
+	--group = "someGroup",
+	callback = function()
+		vim.fn.timer_start(1000, function()
+			print(" ")
+		end)
+	end,
+})
