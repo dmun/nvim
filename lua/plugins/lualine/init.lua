@@ -12,13 +12,13 @@ return {
 
 		require("lualine").setup {
 			options = {
-				theme = require("plugins.lualine.theme"),
+				-- theme = require("plugins.lualine.theme"),
 				component_separators = { left = nil, right = nil },
 				section_separators = { left = nil, right = nil },
 				always_divide_middle = true,
 			},
 			sections = {
-				lualine_a = { "mode", { "filename", path = 4 } },
+				lualine_a = { { "filename", path = 4 } },
 				lualine_b = {},
 				lualine_c = {},
 				lualine_x = { "diagnostics" },
@@ -26,7 +26,7 @@ return {
 				lualine_z = { "location" },
 			},
 			inactive_sections = {
-				lualine_a = { "mode", { "filename", path = 4 } },
+				lualine_a = { { "filename", path = 4 } },
 				lualine_b = {},
 				lualine_c = {},
 				lualine_x = { "diagnostics" },

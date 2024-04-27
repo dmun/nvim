@@ -26,7 +26,7 @@ local colors = {
 	mantle = "#44525E",
 	crust = "#2D3239",
 }
---#21262A
+
 return {
 	normal = {
 		a = { bg = colors.crust, fg = colors.subtext1 },
