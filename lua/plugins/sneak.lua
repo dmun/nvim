@@ -1,5 +1,6 @@
 return {
 	"justinmk/vim-sneak",
+	enabled = false,
 	event = "VeryLazy",
 	keys = {
 		{ "f", "<Plug>Sneak_f" },
