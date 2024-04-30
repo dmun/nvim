@@ -89,8 +89,8 @@ return {
 					overlay1 = "#6A727B",
 					overlay0 = "#616870",
 					surface2 = "#505A63",
-					surface1 = "#4C555E",
-					surface0 = "#39424C",
+					surface1 = "#39424C",
+					surface0 = "#31353f",
 					base = "#282c34",
 					mantle = "#21252b",
 					crust = "#181a1f",
@@ -98,18 +98,19 @@ return {
 			},
 			custom_highlights = function(colors)
 				return {
-					LineNr = { fg = colors.subtext0, bg = colors.surface0 },
-					CursorLineNr = { fg = colors.text, bg = colors.surface0 },
-					SignColumn = { bg = colors.surface0 },
-					GitSignsAdd = { fg = colors.green, bg = colors.surface0 },
-					GitSignsChange = { fg = colors.peach, bg = colors.surface0 },
-					GitSignsDelete = { fg = colors.red, bg = colors.surface0 },
+					LineNr = { fg = colors.subtext0, bg = colors.surface1 },
+					CursorLineNr = { fg = colors.text, bg = colors.surface1 },
+					SignColumn = { bg = colors.surface1 },
+					GitSignsAdd = { fg = colors.green, bg = colors.surface1 },
+					GitSignsChange = { fg = colors.peach, bg = colors.surface1 },
+					GitSignsDelete = { fg = colors.red, bg = colors.surface1 },
 
 					-- CursorLineNr = { fg = colors.peach, bold = true },
-					-- PmenuSel = { bg = colors.overlay0 },
-					-- Pmenu = { fg = colors.text },
-
+					-- PmenuSel = { bg = colors.surface1 },
+					Pmenu = { fg = colors.subtext1 },
 					CmpItemAbbr = { fg = colors.subtext1 },
+
+					IlluminatedWord = { bg = colors.surface0 },
 
 					Delimiter = { fg = colors.subtext1 },
 					Comment = { fg = colors.subtext1 },
