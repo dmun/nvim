@@ -110,7 +110,7 @@ return {
 			custom_highlights = function(colors)
 				return {
 					LineNr = { fg = colors.surface2 },
-					CursorLineNr = { fg = colors.subtext1 },
+					CursorLineNr = { link = "nCursorLineNr" },
 					-- SignColumn = { bg = colors.surface1 },
 					-- GitSignsAdd = { fg = colors.green, bg = colors.surface1 },
 					-- GitSignsChange = { fg = colors.peach, bg = colors.surface1 },
@@ -128,7 +128,9 @@ return {
 					nCursor = { bg = colors.peach },
 					iCursor = { bg = colors.green },
 
-					-- CursorLineNr = { fg = colors.peach, bold = true },
+					nCursorLineNr = { fg = colors.peach, bold = true },
+					iCursorLineNr = { fg = colors.green, bold = true },
+
 					PmenuSel = { bg = colors.surface2 },
 					Pmenu = { fg = colors.subtext0, bg = colors.surface1 },
 					CmpItemAbbr = { fg = colors.subtext0 },
