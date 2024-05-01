@@ -11,7 +11,7 @@ o.wrap = false
 o.breakindent = true
 o.completeopt = "menuone,noselect"
 o.confirm = true
-o.expandtab = false
+o.expandtab = true
 o.linebreak = true
 o.shiftwidth = 4
 o.softtabstop = 4
@@ -46,7 +46,8 @@ o.shm:append("I")
 o.cmdheight = 1
 o.pumheight = 15
 -- o.colorcolumn = "+1"
-o.fillchars = "eob: ,vert: "
+o.fillchars = "eob: "
+o.guicursor = "i:block-iCursor,n:block-nCursor"
 
 -- window
 o.inccommand = "split"
@@ -67,3 +68,7 @@ o.undofile = true
 -- system
 -- opt.autochdir = true
 o.clipboard = "unnamedplus"
+
+-- lazyvim statuscolumn
+vim.opt.statuscolumn = [[%!v:lua.require'util.ui'.statuscolumn()]]
+vim.opt.foldtext = "v:lua.require'util.ui'.foldtext()"

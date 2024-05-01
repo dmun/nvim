@@ -4,6 +4,9 @@ return {
 		{ "<M-e>", "<cmd>NvimTreeOpen<cr>" },
 	},
 	opts = {
+		view = {
+			cursorline = false,
+		},
 		on_attach = function(bufnr)
 			local api = require("nvim-tree.api")
 

@@ -17,14 +17,23 @@ vim.api.nvim_create_autocmd({ "BufLeave", "FocusLost" }, {
 	end,
 })
 
+-- clear cmdline
 vim.api.nvim_create_autocmd("CmdlineLeave", {
-	--group = "someGroup",
 	callback = function()
 		vim.fn.timer_start(1000, function()
 			print(" ")
 		end)
 	end,
 })
+
+-- filetype handling
+vim.cmd("au BufRead,BufNewFile *.conf se ft=conf")
+
+-- dynamic linenumbers
+if false then
+	vim.cmd("au InsertEnter * se nornu")
+	vim.cmd("au InsertLeave * se rnu")
+end
 
 -- vim.api.nvim_create_autocmd("TextChangedI", {
 -- 	callback = function()

@@ -1,5 +1,16 @@
 return {
 	{
+		"marko-cerovac/material.nvim",
+		opts = {
+			high_visibility = {
+				darker = true,
+			},
+			disable = {
+				colored_cursor = false,
+			},
+		},
+	},
+	{
 		"p00f/alabaster.nvim",
 		enabled = false,
 		priority = 1000,
@@ -98,19 +109,31 @@ return {
 			},
 			custom_highlights = function(colors)
 				return {
-					LineNr = { fg = colors.subtext0, bg = colors.surface1 },
-					CursorLineNr = { fg = colors.text, bg = colors.surface1 },
-					SignColumn = { bg = colors.surface1 },
-					GitSignsAdd = { fg = colors.green, bg = colors.surface1 },
-					GitSignsChange = { fg = colors.peach, bg = colors.surface1 },
-					GitSignsDelete = { fg = colors.red, bg = colors.surface1 },
+					LineNr = { fg = colors.surface2 },
+					CursorLineNr = { fg = colors.subtext1 },
+					-- SignColumn = { bg = colors.surface1 },
+					-- GitSignsAdd = { fg = colors.green, bg = colors.surface1 },
+					-- GitSignsChange = { fg = colors.peach, bg = colors.surface1 },
+					-- GitSignsDelete = { fg = colors.red, bg = colors.surface1 },
+
+					WinSeparator = { fg = colors.mantle, bg = colors.mantle },
+
+					-- Folded = { bg = colors.none },
+					UfoFoldedBg = { link = "DiffChange" },
+					Folded = { link = "DiffChange" },
+					FoldSign = { link = "CursorLineNr" },
+					UfoFoldedEllipsis = { link = "NeogitHunkHeaderHighlight" },
+					-- UfoFoldedEllipsis = { link = "DiffText" },
+
+					nCursor = { bg = colors.peach },
+					iCursor = { bg = colors.green },
 
 					-- CursorLineNr = { fg = colors.peach, bold = true },
-					-- PmenuSel = { bg = colors.surface1 },
-					Pmenu = { fg = colors.subtext1 },
-					CmpItemAbbr = { fg = colors.subtext1 },
+					PmenuSel = { bg = colors.surface2 },
+					Pmenu = { fg = colors.subtext0, bg = colors.surface1 },
+					CmpItemAbbr = { fg = colors.subtext0 },
 
-					IlluminatedWord = { bg = colors.surface0 },
+					IlluminatedWord = { link = "DiffChange" },
 
 					Delimiter = { fg = colors.subtext1 },
 					Comment = { fg = colors.subtext1 },
