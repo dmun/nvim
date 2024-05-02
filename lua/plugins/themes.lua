@@ -112,9 +112,9 @@ return {
 					LineNr = { fg = colors.surface2 },
 					CursorLineNr = { link = "nCursorLineNr" },
 					-- SignColumn = { bg = colors.surface1 },
-					-- GitSignsAdd = { fg = colors.green, bg = colors.surface1 },
-					-- GitSignsChange = { fg = colors.peach, bg = colors.surface1 },
-					-- GitSignsDelete = { fg = colors.red, bg = colors.surface1 },
+					GitSignsAdd = { fg = "#466448" },
+					GitSignsChange = { fg = "#7f5522" },
+					GitSignsDelete = { fg = "#7f2931" },
 
 					WinSeparator = { fg = colors.mantle, bg = colors.mantle },
 
