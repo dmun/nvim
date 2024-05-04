@@ -36,8 +36,10 @@ if false then
 end
 
 -- dynamic CursorLineNr color
-vim.cmd("au InsertEnter * se winhl=CursorLineNr:iCursorLineNr")
-vim.cmd("au InsertLeave * se winhl=CursorLineNr:nCursorLineNr")
+if false then
+	vim.cmd("au InsertEnter * se winhl=CursorLineNr:iCursorLineNr")
+	vim.cmd("au InsertLeave * se winhl=CursorLineNr:nCursorLineNr")
+end
 
 -- vim.api.nvim_create_autocmd("TextChangedI", {
 -- 	callback = function()

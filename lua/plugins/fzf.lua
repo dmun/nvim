@@ -8,7 +8,7 @@ return {
 			{ "<leader>?", "<cmd>Fzf live_grep_resume<cr>" },
 			{ "<leader>,", "<cmd>Fzf buffers<cr>" },
 			{ "<leader><leader>", "<cmd>Fzf builtin<cr>" },
-			{ "<M-CR>", "<cmd>Fzf lsp_code_actions<cr>" },
+			{ "<CR>", "<cmd>Fzf lsp_code_actions<cr>" },
 		},
 		opts = {
 			files = {
