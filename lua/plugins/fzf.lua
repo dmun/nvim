@@ -1,14 +1,14 @@
 return {
 	{
 		"ibhagwan/fzf-lua",
+		cmd = "FzfLua",
 		keys = {
-			{ "<leader>f", "<cmd>Fzf files<cr>" },
-			{ "<leader>l", "<cmd>Fzf oldfiles<cr>" },
-			{ "<leader>/", "<cmd>Fzf live_grep<cr>" },
-			{ "<leader>?", "<cmd>Fzf live_grep_resume<cr>" },
-			{ "<leader>,", "<cmd>Fzf buffers<cr>" },
-			{ "<leader><leader>", "<cmd>Fzf builtin<cr>" },
-			{ "<CR>", "<cmd>Fzf lsp_code_actions<cr>" },
+			{ "<leader>f", "<cmd>FzfLua files<cr>" },
+			{ "<leader>l", "<cmd>FzfLua oldfiles<cr>" },
+			{ "<leader>/", "<cmd>FzfLua live_grep<cr>" },
+			{ "<leader>?", "<cmd>FzfLua live_grep_resume<cr>" },
+			{ "<leader>,", "<cmd>FzfLua buffers<cr>" },
+			{ "<leader><leader>", "<cmd>FzfLua builtin<cr>" },
 		},
 		opts = {
 			files = {

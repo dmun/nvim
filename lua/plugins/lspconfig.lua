@@ -11,6 +11,12 @@ return {
 		local lspconfig = require("lspconfig")
 		require("mason").setup()
 
+		-- lspconfig.util.default_config = vim.tbl_extend("force", lspconfig.util.default_config, {
+		-- 	on_attach = function(client)
+		-- 		client.server_capabilities.semanticTokensProvider = nil
+		-- 	end,
+		-- })
+
 		mason_lspconfig.setup {
 			ensure_installed = { "lua_ls" },
 		}
@@ -106,6 +112,7 @@ return {
 				vim.keymap.set("n", "<leader>D", vim.lsp.buf.type_definition, opts)
 				vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
 				-- vim.keymap.set({ 'n', 'v' }, '<space>ca', vim.lsp.buf.code_action, opts)
+				vim.keymap.set("n", "<CR>", "<cmd>FzfLua lsp_code_actions<cr>", opts)
 			end,
 		})
 	end,
