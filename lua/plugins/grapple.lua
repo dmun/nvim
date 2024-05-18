@@ -12,4 +12,7 @@ return {
 		{ "<leader>4", "<cmd>Grapple select index=4<cr>" },
 		{ "<leader>5", "<cmd>Grapple select index=5<cr>" },
 	},
+	opts = {
+		scope = "cwd",
+	},
 }

@@ -1,7 +1,8 @@
 return {
 	"nvim-tree/nvim-tree.lua",
+	enabled = false,
 	keys = {
-		{ "<M-e>", "<cmd>NvimTreeOpen<cr>" },
+		{ "<leader>e", "<cmd>NvimTreeOpen<cr>" },
 	},
 	opts = {
 		view = {

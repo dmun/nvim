@@ -28,6 +28,7 @@ vim.api.nvim_create_autocmd("CmdlineLeave", {
 
 -- filetype handling
 vim.cmd("au BufRead,BufNewFile *.conf se ft=conf")
+vim.cmd("au BufRead,BufNewFile *.typ se ft=typst")
 
 -- dynamic linenumbers
 if false then

@@ -10,6 +10,9 @@ return {
 			changedelete = { text = "▍" },
 			untracked = { text = "┆" },
 		},
+		preview_config = {
+			border = "none",
+		},
 		on_attach = function(bufnr)
 			local gitsigns = require("gitsigns")
 			vim.keymap.set("n", "<leader>tg", gitsigns.toggle_signs)

@@ -18,12 +18,16 @@ return {
 			cpp = { "clang-format" },
 			c = { "clang-format" },
 			tex = { "latexindent" },
+			typst = { "typstyle" },
 		},
 		formatters = {
 			stylua = {
 				condition = function(_, ctx)
 					return vim.fs.basename(ctx.filename) ~= "xmake.lua"
 				end,
+			},
+			typstyle = {
+				command = "typstyle",
 			},
 			["clang-format"] = {
 				command = "clang-format",

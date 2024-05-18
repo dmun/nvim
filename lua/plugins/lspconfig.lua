@@ -27,11 +27,16 @@ return {
 					autostart = server_name ~= "ltex",
 					settings = {
 						ltex = {
-							language = "nl",
+							-- language = "nl",
 							filetype = { "norg" },
 							additionalRules = { enablePickyRules = true },
 							checkFrequency = "save",
 							completionEnabled = true,
+							latex = {
+								commands = {
+									["\\inline{}"] = "dummy",
+								},
+							},
 						},
 					},
 					handlers = {
@@ -84,7 +89,8 @@ return {
 			end,
 		}
 
-		vim.keymap.set("n", "<space>d", vim.diagnostic.open_float)
+		vim.keymap.set("n", "<C-W><C-D>", vim.diagnostic.open_float)
+		vim.keymap.set("n", "<C-W><C-d>", vim.diagnostic.open_float)
 		vim.keymap.set("n", "[d", vim.diagnostic.goto_prev)
 		vim.keymap.set("n", "]d", vim.diagnostic.goto_next)
 		-- vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist)

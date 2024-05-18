@@ -4,7 +4,7 @@ return {
 		"nvim-tree/nvim-web-devicons",
 	},
 	keys = {
-		{ "<leader>e", "<cmd>Oil<cr>" },
+		{ "-", "<cmd>Oil<cr>" },
 	},
 	opts = {},
 }
