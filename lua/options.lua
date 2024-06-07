@@ -16,7 +16,7 @@ o.linebreak = true
 o.shiftwidth = 4
 o.softtabstop = 4
 o.tabstop = 4
-o.textwidth = 80
+o.textwidth = 0
 
 -- mouse
 o.mouse = "a"

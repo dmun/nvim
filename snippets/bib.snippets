@@ -1,3 +1,11 @@
 snippet accon Accessed on dd mm, yy
 	Accessed on $CURRENT_DATE $CURRENT_MONTH_NAME_SHORT, $CURRENT_YEAR
 
+snippet online @online{$1,...
+	@online{$1,
+		author = {$2},
+		title = {$3},
+		url = {$4},
+		urldate = {$CURRENT_YEAR-$CURRENT_MONTH-$CURRENT_DATE},
+		date = {$CURRENT_YEAR-$CURRENT_MONTH-$CURRENT_DATE},
+	}

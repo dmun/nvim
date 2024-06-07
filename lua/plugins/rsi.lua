@@ -1,5 +1,5 @@
 return {
 	"tpope/vim-rsi",
-	enabled = false,
+	-- enabled = false,
 	event = "InsertEnter",
 }

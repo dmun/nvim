@@ -21,4 +21,4 @@ require("lazy").setup("plugins", {
 	},
 })
 
-vim.cmd.color("catppuccin")
+vim.cmd.color("gruvbox")

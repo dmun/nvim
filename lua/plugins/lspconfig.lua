@@ -28,7 +28,7 @@ return {
 					settings = {
 						ltex = {
 							-- language = "nl",
-							filetype = { "norg" },
+							filetype = { "norg", "typ" },
 							additionalRules = { enablePickyRules = true },
 							checkFrequency = "save",
 							completionEnabled = true,

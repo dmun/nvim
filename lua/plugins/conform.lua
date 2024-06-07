@@ -15,6 +15,7 @@ return {
 			rust = { "rustfmt" },
 			go = { "gofmt" },
 			typescript = { "prettier" },
+			json = { "prettier" },
 			cpp = { "clang-format" },
 			c = { "clang-format" },
 			tex = { "latexindent" },
