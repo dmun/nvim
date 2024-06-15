@@ -1,5 +1,6 @@
 -- filetypes
 vim.cmd("au BufRead,BufEnter *.swiftinterface se ft=swift")
+vim.cmd("au BufRead,BufEnter .swift-format se ft=json")
 
 -- highlight on yank
 local hi_group = vim.api.nvim_create_augroup("YankHighlight", { clear = true })

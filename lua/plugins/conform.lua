@@ -20,12 +20,17 @@ return {
 			c = { "clang-format" },
 			tex = { "latexindent" },
 			typst = { "typstyle" },
+			swift = { "swift-format" },
 		},
 		formatters = {
 			stylua = {
 				condition = function(_, ctx)
 					return vim.fs.basename(ctx.filename) ~= "xmake.lua"
 				end,
+			},
+			["swift-format"] = {
+				command = "swift-format",
+				args = { "--configuration", ".swift-format" },
 			},
 			typstyle = {
 				command = "typstyle",
