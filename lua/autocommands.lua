@@ -1,3 +1,6 @@
+-- filetypes
+vim.cmd("au BufRead,BufEnter *.swiftinterface se ft=swift")
+
 -- highlight on yank
 local hi_group = vim.api.nvim_create_augroup("YankHighlight", { clear = true })
 vim.api.nvim_create_autocmd("TextYankPost", {
@@ -25,10 +28,6 @@ vim.api.nvim_create_autocmd("CmdlineLeave", {
 		end)
 	end,
 })
-
--- filetype handling
-vim.cmd("au BufRead,BufNewFile *.conf se ft=conf")
-vim.cmd("au BufRead,BufNewFile *.typ se ft=typst")
 
 -- dynamic linenumbers
 if false then

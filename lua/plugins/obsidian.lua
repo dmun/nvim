@@ -1,6 +1,6 @@
 return {
 	"epwalsh/obsidian.nvim",
-	enabled = false,
+	-- enabled = false,
 	version = "*",
 	lazy = true,
 	ft = "markdown",
@@ -19,6 +19,9 @@ return {
 	},
 	dependencies = { "nvim-lua/plenary.nvim" },
 	opts = {
+		ui = {
+			enable = false,
+		},
 		completion = {
 			nvim_cmp = true,
 		},

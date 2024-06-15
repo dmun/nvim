@@ -52,7 +52,7 @@ o.guicursor = "i:block-iCursor,n:block-nCursor"
 -- window
 o.inccommand = "split"
 o.splitbelow = true
-o.splitkeep = "cursor"
+o.splitkeep = "screen"
 
 -- keys
 o.ignorecase = true
@@ -72,3 +72,19 @@ o.clipboard = "unnamedplus"
 -- lazyvim statuscolumn
 vim.opt.statuscolumn = [[%!v:lua.require'util.ui'.statuscolumn()]]
 vim.opt.foldtext = "v:lua.require'util.ui'.foldtext()"
+
+-- diagnostics
+vim.diagnostic.config {
+	signs = {
+		text = {
+			[vim.diagnostic.severity.ERROR] = "",
+			[vim.diagnostic.severity.WARN] = "",
+			[vim.diagnostic.severity.HINT] = "",
+			[vim.diagnostic.severity.INFO] = "",
+		},
+		linehl = {
+			[vim.diagnostic.severity.ERROR] = "GruvboxRedBg",
+			[vim.diagnostic.severity.WARN] = "GruvboxYellowBg",
+		},
+	},
+}

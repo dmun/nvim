@@ -65,10 +65,40 @@ return {
 			-- bold = false,
 			overrides = {
 				CursorLineNr = { link = "GruvboxYellow" },
+				DiagnosticOk = { link = "GruvboxGreen" },
 				-- 	PmenuSel = { link = "Cursorline" },
-				-- 	GitSignsAdd = { link = "GruvboxGreenSign" },
-				-- 	GitSignsChange = { link = "GruvboxAquaSign" },
-				-- 	GitSignsDelete = { link = "GruvboxRedSign" },
+				-- GitSignsAdd = { link = "GruvboxGreenSign" },
+				-- GitSignsChange = { link = "GruvboxAquaSign" },
+				-- GitSignsDelete = { link = "GruvboxRedSign" },
+				GruvboxGreenLabel = { fg = "#b8bb26", bg = "#252615" },
+				GruvboxGreenBg = { bg = "#252615" },
+
+				GruvboxAquaLabel = { fg = "#8ec07c", bg = "#1c2c16" },
+				GruvboxAquaBg = { bg = "#1c2c16" },
+
+				GruvboxBlueLabel = { fg = "#83a598", bg = "#172923" },
+				GruvboxBlueBg = { bg = "#172923" },
+
+				GruvboxYellowLabel = { fg = "#fabd2f", bg = "#3e3221" },
+				GruvboxYellowBg = { bg = "#3e3221" },
+
+				GruvboxRedLabel = { fg = "#fb4934", bg = "#36231f" },
+				GruvboxRedBg = { bg = "#36231f" },
+
+				DiagnosticVirtualTextOk = { link = "GruvboxGreenLabel" },
+				DiagnosticVirtualTextHint = { link = "GruvboxAquaLabel" },
+				DiagnosticVirtualTextInfo = { link = "GruvboxBlueLabel" },
+				DiagnosticVirtualTextWarn = { link = "GruvboxYellowLabel" },
+				DiagnosticVirtualTextError = { link = "GruvboxRedLabel" },
+
+				DiagnosticSignOk = { link = "GruvboxGreen" },
+				DiagnosticSignHint = { link = "GruvboxAqua" },
+				DiagnosticSignInfo = { link = "GruvboxBlue" },
+				DiagnosticSignWarn = { link = "GruvboxYellow" },
+				DiagnosticSignError = { link = "GruvboxRed" },
+
+				DiagnosticUnderlineError = { sp = "#fb4934", underline = true },
+				DiagnosticUnderlineWarn = { sp = "#fabd2f", underline = true },
 			},
 		},
 	},

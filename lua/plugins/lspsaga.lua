@@ -1,11 +1,10 @@
 return {
-	"glepnir/lspsaga.nvim",
-	event = { "BufReadPre", "BufNewFile" },
+	"kosayoda/nvim-lightbulb",
 	opts = {
-		symbol_in_winbar = { enable = false },
-		lightbulb = {
-			virtual_text = false,
-			debounce = 250,
+		autocmd = { enabled = true },
+		sign = {
+			text = "",
+			hl = "DiagnosticWarn",
 		},
 	},
 }

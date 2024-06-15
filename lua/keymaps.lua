@@ -11,9 +11,6 @@ vim.api.nvim_set_keymap("n", "j", "v:count == 0 ? 'gj' : 'j'", { noremap = true,
 
 util.handle_keymaps {
 	n = {
-		-- { "$", "g$" },
-		{ "0", "g0" },
-
 		{ "u", "<cmd>silent undo<cr>" },
 		{ "<C-r>", "<cmd>silent redo<cr>" },
 
@@ -33,9 +30,5 @@ util.handle_keymaps {
 		{ "<ESC>", "<C-w>j<ESC>" },
 		{ "<C-k>", "<C-w>k" },
 		{ "<C-l>", "<C-w>l" },
-	},
-	v = {
-		-- { "$", "g$" },
-		{ "0", "g0" },
 	},
 }

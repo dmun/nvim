@@ -48,7 +48,7 @@ return {
 							["textDocument/publishDiagnostics"] = vim.lsp.with(
 								vim.lsp.diagnostic.on_publish_diagnostics,
 								{
-									signs = false,
+									-- signs = false,
 									virtual_text = server_name ~= "ltex",
 								}
 							),
@@ -94,12 +94,27 @@ return {
 							["textDocument/publishDiagnostics"] = vim.lsp.with(
 								vim.lsp.diagnostic.on_publish_diagnostics,
 								{
-									signs = false,
+									-- signs = false,
 								}
 							),
 						},
 					}
 				end,
+			}
+
+			lspconfig.sourcekit.setup {
+				capabilities = {
+					workspace = {
+						didChangeWatchedFiles = {
+							dynamicRegistration = true,
+						},
+					},
+				},
+				handlers = {
+					["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+						-- signs = false,
+					}),
+				},
 			}
 
 			vim.api.nvim_create_autocmd("LspAttach", {

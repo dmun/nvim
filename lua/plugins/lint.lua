@@ -7,6 +7,7 @@ return {
 		lint.linters_by_ft = {
 			-- lua = { "luacheck" },
 			typescript = { "eslint" },
+			swift = { "swiftlint" },
 		}
 
 		vim.api.nvim_create_autocmd("InsertLeave", {
