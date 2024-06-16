@@ -10,7 +10,7 @@ return {
 	event = { "BufWritePre" },
 	opts = {
 		formatters_by_ft = {
-			lua = { "stylua" },
+			-- lua = { "stylua" },
 			python = { "black" },
 			rust = { "rustfmt" },
 			go = { "gofmt" },

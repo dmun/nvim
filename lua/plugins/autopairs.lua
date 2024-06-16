@@ -1,5 +1,5 @@
-return {
-	"windwp/nvim-autopairs",
-	event = "InsertEnter",
-	opts = {},
-}
+Plug("windwp/nvim-autopairs")
+	:on(Event.InsertEnter)
+	:opts()
+
+return {}

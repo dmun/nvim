@@ -85,11 +85,11 @@ return {
 				GruvboxRedLabel = { fg = "#fb4934", bg = "#36231f" },
 				GruvboxRedBg = { bg = "#36231f" },
 
-				DiagnosticVirtualTextOk = { link = "GruvboxGreenLabel" },
-				DiagnosticVirtualTextHint = { link = "GruvboxAquaLabel" },
-				DiagnosticVirtualTextInfo = { link = "GruvboxBlueLabel" },
-				DiagnosticVirtualTextWarn = { link = "GruvboxYellowLabel" },
-				DiagnosticVirtualTextError = { link = "GruvboxRedLabel" },
+				DiagnosticVirtualTextOk = { link = "GruvboxGreen" },
+				DiagnosticVirtualTextHint = { link = "GruvboxAqua" },
+				DiagnosticVirtualTextInfo = { link = "GruvboxBlue" },
+				DiagnosticVirtualTextWarn = { link = "GruvboxYellow" },
+				DiagnosticVirtualTextError = { link = "GruvboxRed" },
 
 				DiagnosticSignOk = { link = "GruvboxGreen" },
 				DiagnosticSignHint = { link = "GruvboxAqua" },
@@ -97,6 +97,8 @@ return {
 				DiagnosticSignWarn = { link = "GruvboxYellow" },
 				DiagnosticSignError = { link = "GruvboxRed" },
 
+				DiagnosticUnderlineInfo = { sp = "#83a598", underline = true },
+				DiagnosticUnderlineHint = { sp = "#8ec07c", underline = true },
 				DiagnosticUnderlineError = { sp = "#fb4934", underline = true },
 				DiagnosticUnderlineWarn = { sp = "#fabd2f", underline = true },
 			},

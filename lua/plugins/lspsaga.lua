@@ -1,10 +1,9 @@
-return {
-	"kosayoda/nvim-lightbulb",
-	opts = {
-		autocmd = { enabled = true },
-		sign = {
-			text = "",
-			hl = "DiagnosticWarn",
-		},
-	},
+Plug("kosayoda/nvim-lightbulb") {
+	autocmd = { enabled = true },
+	sign = {
+		text = "",
+		hl = "DiagnosticWarn"
+	}
 }
+
+return {}

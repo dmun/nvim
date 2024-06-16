@@ -1,5 +1,5 @@
-return {
-	"j-hui/fidget.nvim",
-	event = "VeryLazy",
-	opts = {},
-}
+Plug("j-hui/fidget.nvim")
+	:on(Event.VeryLazy)
+	:opts()
+
+return {}

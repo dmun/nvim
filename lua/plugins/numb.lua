@@ -1,5 +1,5 @@
-return {
-	"nacro90/numb.nvim",
-	event = "CmdLineEnter",
-	opts = {},
-}
+Plug("nacro90/numb.nvim")
+	:on(Event.CmdLineEnter)
+	:opts()
+
+return {}

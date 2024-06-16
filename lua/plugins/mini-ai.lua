@@ -1,7 +1,5 @@
-return {
-	"echasnovski/mini.nvim",
-	name = "mini.ai",
-	opts = {
-		silent = true,
-	},
-}
+Plug("echasnovski/mini.nvim")
+	:name("mini.ai")
+	:opts()
+
+return {}

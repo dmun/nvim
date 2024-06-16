@@ -11,11 +11,16 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+require("configs")
 require("options")
 require("keymaps")
 require("autocommands")
+require("util.plug")
 
-require("lazy").setup("plugins", {
+require("lazy").setup({
+	{ import = "plugins" },
+	{ import = "plug" },
+}, {
 	change_detection = {
 		enabled = false,
 	},

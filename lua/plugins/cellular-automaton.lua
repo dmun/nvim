@@ -1,3 +1,3 @@
-return {
-	"eandrju/cellular-automaton.nvim",
-}
+Plug("eandrju/cellular-automaton.nvim")
+
+return {}
