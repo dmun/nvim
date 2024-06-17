@@ -47,13 +47,9 @@ function M:name(name)
 	return self
 end
 
----@param input? table|string
-function M:opts(input)
-	if type(input) == "string" then
-		self.mod_name = input
-	else
-		self.opts = input or {}
-	end
+---@param opts? table
+function M:opts(opts)
+	self.opts = opts or {}
 	return self
 end
 
@@ -75,11 +71,11 @@ function M:config(config)
 	return self
 end
 
----@param setup function
-function M:setup(setup)
-	self:config(function (_, opts)
-		setup(opts)
-	end)
+---@param name string
+function M:setup(name)
+	self.config = function (_, opts)
+		require(name).setup(opts)
+	end
 	return self
 end
 
