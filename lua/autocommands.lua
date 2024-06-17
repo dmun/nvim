@@ -59,8 +59,8 @@ vim.api.nvim_create_autocmd("ColorScheme", {
 
 		local bg = rgb:from_hex(normal_bg):to(oklch) ---@cast bg Oklch
 		local value = Vec.cubic_bezier(p1, p2, p3, p4, bg.L)[2]
-		bg.L = bg.L + value * 0.15
-		bg.c = bg.c + value * 0.05
+		bg.L = bg.L + value * 0.25
+		bg.c = bg.c + value * 0.06
 
 		local error_bg = vim.deepcopy(bg)
 		error_bg.h = bg.h + 30
