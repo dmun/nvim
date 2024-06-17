@@ -14,13 +14,13 @@ vim.opt.rtp:prepend(lazypath)
 _G.Plug = require("util.plug")
 local plugins_path = vim.fn.stdpath("config") .. "/lua/plugins"
 if vim.loop.fs_stat(plugins_path) then
-    for file in vim.fs.dir(plugins_path) do
-        file = file:match("^(.*)%.lua$")
-        require("plugins." .. file)
-    end
+	for file in vim.fs.dir(plugins_path) do
+		file = file:match("^(.*)%.lua$")
+		require("plugins." .. file)
+	end
 end
 for _, spec in pairs(_G.Plug.specs) do
-    setmetatable(spec, {})
+	setmetatable(spec, {})
 end
 
 require("configs")
@@ -34,4 +34,4 @@ require("lazy").setup(_G.Plug.specs, {
 	},
 })
 
-vim.cmd.color("jellybeans")
+vim.cmd.color("gruvbox")

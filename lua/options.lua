@@ -83,8 +83,8 @@ vim.diagnostic.config {
 			[vim.diagnostic.severity.INFO] = "",
 		},
 		linehl = {
-			[vim.diagnostic.severity.ERROR] = "GruvboxRedBg",
-			[vim.diagnostic.severity.WARN] = "GruvboxYellowBg",
+			[vim.diagnostic.severity.ERROR] = "DiagnosticSignLineError",
+			[vim.diagnostic.severity.WARN] = "DiagnosticSignLineWarn",
 		},
 	},
 }

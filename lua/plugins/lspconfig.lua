@@ -32,6 +32,7 @@ end
 
 Plug("folke/lazydev.nvim")
 	:ft("lua")
+	:opts()
 
 Plug("neovim/nvim-lspconfig")
 	:on(Event.BufReadPre, Event.BufNewFile)

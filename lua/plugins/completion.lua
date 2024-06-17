@@ -88,13 +88,15 @@ Plug("hrsh7th/nvim-cmp")
 				{ name = "nvim_lsp_signature_help" },
 				{ name = "buffer" },
 			},
+
+			---@diagnostic disable-next-line: missing-fields
 			sorting = {
 				comparators = {
 					cmp.config.compare.score,
 					cmp.config.compare.locality,
+					cmp.config.compare.length,
 					cmp.config.compare.kind,
 					cmp.config.compare.offset,
-					cmp.config.compare.length,
 					cmp.config.compare.order,
 				},
 			},
@@ -102,6 +104,8 @@ Plug("hrsh7th/nvim-cmp")
 				completeopt = "menu,menuone",
 			},
 			window = { completion = { col_offset = -2 } },
+
+			---@diagnostic disable-next-line: missing-fields
 			formatting = {
 				fields = { "kind", "abbr", "menu" },
 				format = lspkind.cmp_format {

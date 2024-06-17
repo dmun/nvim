@@ -1,3 +1,5 @@
+local Vec = require("util.vector")
+
 -- filetypes
 vim.cmd("au BufRead,BufEnter *.swiftinterface se ft=swift")
 vim.cmd("au BufRead,BufEnter .swift-format se ft=json")
@@ -41,3 +43,42 @@ if false then
 	vim.cmd("au InsertEnter * se winhl=CursorLineNr:iCursorLineNr")
 	vim.cmd("au InsertLeave * se winhl=CursorLineNr:nCursorLineNr")
 end
+
+vim.api.nvim_create_autocmd("ColorScheme", {
+	callback = function()
+		local rgb = require("polychrome.color.rgb")
+		local oklch = require("polychrome.color.oklch")
+
+		local hl = vim.api.nvim_get_hl(0, { name = "Normal" })
+		local normal_bg = string.format("#%06x", hl.bg)
+
+		local p1 = Vec(0, 1)
+		local p2 = Vec(0.1, 0)
+		local p3 = Vec(0, 0)
+		local p4 = Vec(0.3, 0)
+
+		local bg = rgb:from_hex(normal_bg):to(oklch) ---@cast bg Oklch
+		local value = Vec.cubic_bezier(p1, p2, p3, p4, bg.L)[2]
+		bg.L = bg.L + value * 0.15
+		bg.c = bg.c + value * 0.05
+
+		local error_bg = vim.deepcopy(bg)
+		error_bg.h = bg.h + 30
+
+		local warn_bg = vim.deepcopy(bg)
+		warn_bg.h = bg.h + 85
+
+		vim.cmd("hi! DiagnosticSignLineWarn guibg=" .. warn_bg:hex())
+		vim.cmd("hi! DiagnosticSignLineError guibg=" .. error_bg:hex())
+
+		hl = vim.api.nvim_get_hl(0, { name = "DiagnosticError", link = false })
+		local error_fg = string.format("#%06x", hl.fg)
+		vim.cmd("hi! DiagnosticError guifg=" .. error_fg)
+		vim.cmd("hi! link DiagnosticVirtualTextError DiagnosticError")
+
+		hl = vim.api.nvim_get_hl(0, { name = "DiagnosticWarn", link = false })
+		local warn_fg = string.format("#%06x", hl.fg)
+		vim.cmd("hi! DiagnosticWarn guifg=" .. warn_fg)
+		vim.cmd("hi! link DiagnosticVirtualTextWarn DiagnosticWarn")
+	end,
+})
