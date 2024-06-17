@@ -6,6 +6,11 @@ Plug("NvChad/nvim-colorizer.lua")
 		}
 	}
 
+Plug("rachartier/tiny-devicons-auto-colors.nvim")
+	:on(Event.VeryLazy)
+	:dependencies("nvim-tree/nvim-web-devicons")
+	:opts()
+
 Plug("loganswartz/polychrome.nvim")
 Plug("miikanissi/modus-themes.nvim")
 Plug("dmun/fleet-theme-nvim")

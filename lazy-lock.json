@@ -45,6 +45,7 @@
   "plenary.nvim": { "branch": "master", "commit": "a3e3bc82a3f95c5ed0d7201546d5d2c19b20d683" },
   "polychrome.nvim": { "branch": "main", "commit": "ba984fd7267956bf46fb14a6d482761c15f9c50d" },
   "promise-async": { "branch": "main", "commit": "28c1d5a295eb5310afa2523d4ae9aa41ec5a9de2" },
+  "tiny-devicons-auto-colors.nvim": { "branch": "main", "commit": "9be4af5b1bc1f26a11206ed7ce8bf44312e7941a" },
   "typst-preview.nvim": { "branch": "master", "commit": "34732719de123f0d5e859b9e392c9b0e44247ee8" },
   "vim-colors-xcode": { "branch": "master", "commit": "3d1f81ce9550d609ce962f66407759eb581bd725" },
   "vim-cool": { "branch": "master", "commit": "662e7b11064cbeedad17c45d2fe926e78d3cd0b6" },
