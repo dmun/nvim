@@ -1,10 +1,6 @@
-return {
-	"epwalsh/obsidian.nvim",
-	-- enabled = false,
-	version = "*",
-	lazy = true,
-	ft = "markdown",
-	keys = {
+Plug("epwalsh/obsidian.nvim")
+	:ft("markdown")
+	:keys {
 		{ "<leader>oo", "<cmd>ObsidianOpen<cr>" },
 
 		{ "<leader>of", "<cmd>ObsidianQuickSwitch<cr>" },
@@ -16,9 +12,9 @@ return {
 		{ "<leader>oy", "<cmd>ObsidianYesterday<cr>" },
 
 		{ "<leader>ot", "<cmd>ObsidianTemplate<cr>" },
-	},
-	dependencies = { "nvim-lua/plenary.nvim" },
-	opts = {
+	}
+	:dependencies("nvim-lua/plenary.nvim")
+	:opts {
 		ui = {
 			enable = false,
 		},
@@ -46,5 +42,4 @@ return {
 				return tostring(os.time()) .. "-" .. suffix
 			end
 		end,
-	},
-}
+	}

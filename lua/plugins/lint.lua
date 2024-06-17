@@ -1,7 +1,6 @@
-return {
-	"mfussenegger/nvim-lint",
-	event = "BufWritePost",
-	config = function()
+Plug("mfussenegger/nvim-lint")
+	:on(Event.BufWritePost)
+	:config(function()
 		local lint = require("lint")
 
 		lint.linters_by_ft = {
@@ -15,5 +14,4 @@ return {
 				lint.try_lint()
 			end,
 		})
-	end,
-}
+	end)

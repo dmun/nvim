@@ -1,7 +1,6 @@
-return {
-	"lewis6991/gitsigns.nvim",
-	event = { "BufReadPre", "BufNewFile" },
-	opts = {
+Plug("lewis6991/gitsigns.nvim")
+	:on(Event.BufNewFile, Event.BufReadPre)
+	:opts {
 		signs = {
 			add = { text = "▍" },
 			change = { text = "▍" },
@@ -55,5 +54,4 @@ return {
 			end)
 			vim.keymap.set("n", "<leader>td", gitsigns.toggle_deleted)
 		end,
-	},
-}
+	}

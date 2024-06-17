@@ -1,7 +1,6 @@
-return {
-	"chomosuke/typst-preview.nvim",
-	ft = "typst",
-	keys = {
+Plug("chomosuke/typst-preview.nvim")
+	:ft("typst")
+	:keys {
 		{
 			"<leader>tt",
 			function()
@@ -13,12 +12,11 @@ return {
 			end,
 		},
 		{ "<C-c>", "<cmd>TypstPreviewSyncCursor<cr>" },
-	},
-	opts = {
+	}
+	:opts {
 		debug = false,
 		follow_cursor = false,
-	},
-	build = function()
+	}
+	:build(function()
 		require("typst-preview").update()
-	end,
-}
+	end)

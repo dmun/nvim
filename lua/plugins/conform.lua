@@ -1,16 +1,10 @@
-vim.api.nvim_create_autocmd("BufWritePre", {
-	pattern = "*",
-	callback = function(args)
-		require("conform").format { bufnr = args.buf }
-	end,
-})
-
-return {
-	"stevearc/conform.nvim",
-	event = { "BufWritePre" },
-	opts = {
+Plug("stevearc/conform.nvim")
+	:keys {
+		{ "<M-f>", function() require("conform").format() end }
+	}
+	:opts {
 		formatters_by_ft = {
-			-- lua = { "stylua" },
+			lua = { "stylua" },
 			python = { "black" },
 			rust = { "rustfmt" },
 			go = { "gofmt" },
@@ -40,5 +34,4 @@ return {
 				args = { "--style", "{BasedOnStyle: Webkit, IndentWidth: 4}" },
 			},
 		},
-	},
-}
+	}

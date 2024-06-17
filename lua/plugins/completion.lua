@@ -16,10 +16,19 @@ local function format_menu(_, item)
 	return item
 end
 
-return {
-	"hrsh7th/nvim-cmp",
-	event = "InsertEnter",
-	dependencies = {
+Plug("L3MON4D3/LuaSnip")
+	:cmd("LuaSnipUnlinkCurrent")
+	:version("v2.*")
+	:dependencies { "rafamadriz/friendly-snippets" }
+	:build("make install_jsregexp")
+	:config(function()
+		require("luasnip.loaders.from_vscode").lazy_load()
+		require("luasnip.loaders.from_snipmate").lazy_load()
+	end)
+
+Plug("hrsh7th/nvim-cmp")
+	:on(Event.InsertEnter)
+	:dependencies {
 		"hrsh7th/cmp-buffer",
 		"hrsh7th/cmp-path",
 		"hrsh7th/cmp-nvim-lua",
@@ -30,8 +39,8 @@ return {
 			"saadparwaiz1/cmp_luasnip",
 			dependencies = "L3MON4D3/LuaSnip",
 		},
-	},
-	config = function()
+	}
+	:config(function()
 		local cmp = require("cmp")
 		local cmp_autopairs = require("nvim-autopairs.completion.cmp")
 		local luasnip = require("luasnip")
@@ -107,5 +116,4 @@ return {
 				ghost_text = true,
 			},
 		}
-	end,
-}
+	end)

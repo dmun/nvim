@@ -11,11 +11,12 @@ vim.api.nvim_set_keymap("n", "j", "v:count == 0 ? 'gj' : 'j'", { noremap = true,
 
 util.handle_keymaps {
 	n = {
-		{ "u", "<cmd>silent undo<cr>" },
-		{ "<C-r>", "<cmd>silent redo<cr>" },
+		{ "u", ":silent undo<cr>" },
+		{ "<C-r>", ":silent redo<cr>" },
 
-		{ "<leader>w", "<cmd>silent update<cr>" },
-		{ "<leader>tw", "<cmd>set wrap!<cr>" },
+		{ "<M-s>", ":silent update<cr>" },
+
+		{ "<leader>tw", ":set wrap!<cr>" },
 
 		{
 			"<localleader>r",

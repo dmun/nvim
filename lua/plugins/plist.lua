@@ -1,3 +1,0 @@
-return {
-	"darfink/vim-plist",
-}

@@ -1,21 +1,17 @@
-return {
-	"nvim-treesitter/nvim-treesitter",
-	event = { "BufReadPre", "BufNewFile" },
-	config = function()
-		require("nvim-treesitter.configs").setup {
-			ensure_installed = {
-				"lua",
-				"luadoc",
-				"vim",
-				"vimdoc",
-				"query",
-			},
-			highlight = {
-				enable = true,
-			},
-			indent = {
-				enable = false,
-			},
+Plug("nvim-treesitter/nvim-treesitter")
+	:on(Event.BufReadPre, Event.BufNewFile)
+	:opts("nvim-treesitter.configs") {
+		ensure_installed = {
+			"lua",
+			"luadoc",
+			"vim",
+			"vimdoc",
+			"query",
+		},
+		highlight = {
+			enable = true,
+		},
+		indent = {
+			enable = false,
 		}
-	end,
-}
+	}
