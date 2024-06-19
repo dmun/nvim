@@ -12,6 +12,7 @@ Plug("stevearc/oil.nvim")
 	}
 
 Plug("ibhagwan/fzf-lua")
+	:cmd("FzfLua")
 	:keys {
 		{ "<leader>f", "<cmd>FzfLua files<cr>" },
 		{ "<leader>l", "<cmd>FzfLua oldfiles<cr>" },

@@ -14,7 +14,7 @@ local function get_ls_config(config)
 	return {
 		settings = get_ls_settings(),
 		filetypes = config and config.filetypes or nil,
-		autostart = config and config.autostart or true,
+		autostart = config and (config.autostart ~= false),
 		on_init = config and config.on_init or nil,
 		capabilities = vim.tbl_deep_extend(
 			"force",
@@ -22,10 +22,17 @@ local function get_ls_config(config)
 			config and config.capabilities or {}
 		),
 		handlers = {
-			["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-				signs = diagnostics.signs ~= false,
-				virtual_text = diagnostics.virtual_text ~= false,
-			}),
+			["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, 
+				vim.tbl_deep_extend(
+					"force",
+					config and config.diagnostics or {},
+					{
+						virtual_text = {
+							prefix = "",
+						}
+					}
+				)
+			),
 		},
 	}
 end
