@@ -53,6 +53,14 @@ Plug("neovim/nvim-lspconfig")
 		local lsp = require("lspconfig")
 		local mason_lsp = require("mason-lspconfig")
 
+		require("lspconfig.configs").kotlin_lsp = {
+			default_config = {
+				filetypes = { "kotlin" },
+				cmd = { "/Users/david/Development/kotlin-lsp/target/debug/kotlin-lsp" },
+				root_dir = lsp.util.root_pattern(".git"),
+			}
+		}
+
 		mason_lsp.setup {
 			ensure_installed = Conf.lsp.ensure_installed,
 		}

@@ -3,6 +3,8 @@ Conf.lsp = {
 	ls_name = { lua_ls = "Lua" },
 }
 
+Conf.ls.kotlin_lsp = {}
+
 Conf.ls.ltex = {
 	filetypes = { "tex", "typst", "markdown" },
 	autostart = false,
