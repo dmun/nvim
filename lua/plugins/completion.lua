@@ -26,7 +26,7 @@ Plug("L3MON4D3/LuaSnip")
 		require("luasnip.loaders.from_snipmate").lazy_load()
 	end)
 
-Plug("hrsh7th/nvim-cmp")
+Plug("dmun/nvim-cmp")
 	:on(Event.InsertEnter)
 	:dependencies {
 		"hrsh7th/cmp-buffer",
@@ -35,6 +35,7 @@ Plug("hrsh7th/nvim-cmp")
 		"hrsh7th/cmp-nvim-lsp",
 		"hrsh7th/cmp-nvim-lsp-signature-help",
 		"onsails/lspkind.nvim",
+		"ryo33/nvim-cmp-rust",
 		{
 			"saadparwaiz1/cmp_luasnip",
 			dependencies = "L3MON4D3/LuaSnip",
@@ -43,6 +44,7 @@ Plug("hrsh7th/nvim-cmp")
 	:config(function()
 		local cmp = require("cmp")
 		local cmp_autopairs = require("nvim-autopairs.completion.cmp")
+		local cmp_rust = require("cmp-rust")
 		local luasnip = require("luasnip")
 		local lspkind = require("lspkind")
 
@@ -92,6 +94,10 @@ Plug("hrsh7th/nvim-cmp")
 			---@diagnostic disable-next-line: missing-fields
 			sorting = {
 				comparators = {
+					cmp_rust.deprioritize_postfix,
+					cmp_rust.deprioritize_borrow,
+					cmp_rust.deprioritize_deref,
+					cmp_rust.deprioritize_common_traits,
 					cmp.config.compare.score,
 					cmp.config.compare.locality,
 					cmp.config.compare.length,
@@ -113,7 +119,6 @@ Plug("hrsh7th/nvim-cmp")
 					maxwidth = 40,
 					ellipsis_char = "…",
 					show_labelDetails = true,
-					before = format_menu,
 				},
 			},
 			experimental = {

@@ -41,6 +41,10 @@ Plug("folke/lazydev.nvim")
 	:ft("lua")
 	:opts()
 
+Plug('mrcjkb/rustaceanvim')
+  :version("^4")
+  :disabled()
+
 Plug("neovim/nvim-lspconfig")
 	:on(Event.BufReadPre, Event.BufNewFile)
 	:dependencies {
