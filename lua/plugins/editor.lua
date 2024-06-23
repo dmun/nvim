@@ -57,3 +57,8 @@ Plug("kevinhwang91/nvim-ufo")
 			return { "treesitter", "indent" }
 		end
 	}
+
+Plug("folke/trouble.nvim")
+	:opts {
+		focus = true
+	}

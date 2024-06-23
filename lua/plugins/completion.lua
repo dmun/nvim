@@ -6,14 +6,64 @@ local function generate_whitespace(n)
 	end
 end
 
-local function format_menu(_, item)
-	item.abbr = item.abbr:gsub("%s+", "")
-	if item.menu then
-		local len = item.abbr:len() + item.menu:len()
-		item.abbr = item.abbr .. generate_whitespace(38 - len) .. "  " .. item.menu
+---@param entry cmp.Entry
+---@param vim_item lsp.CompletionItem|table
+---@return lsp.CompletionItem
+local function format_menu(entry, vim_item)
+	-- item.abbr = item.abbr:gsub("%s+", "")
+	local cmp_item = entry:get_completion_item()
+	local label_details = cmp_item.labelDetails or nil
+	local entry_kind = entry:get_kind()
+	-- local kind = require("lspkind")
+	local ft = vim.bo.filetype
+	local args = ''
+
+	if vim.tbl_contains({ 2, 3, 13 }, entry_kind) then
+		if ft == "lua" then
+			local s = vim.split(vim_item.abbr, "%(")
+			if s then
+				vim_item.abbr = s[1]
+				args = "(" .. (s[2] or ")")
+			end
+			local docs = cmp_item.documentation
+			if docs then
+				local type = docs.value:match("-> (.*)\n") or ""
+				vim_item.menu = type
+			end
+		elseif ft == "rust" then
+			if cmp_item.detail then
+				local s = vim.split(cmp_item.detail, " -> ")
+				if s then
+					vim_item.abbr = vim_item.abbr:gsub("%(.*", "")
+					args = (s[1]:match("%(.*%)") or ""):gsub("&?m?u?t? ?self,? ?", "") or "()"
+					vim_item.menu = s[2] or ""
+				end
+			end
+		elseif ft == "go" then
+			if cmp_item.detail then
+				vim_item.abbr = vim_item.abbr:gsub("~", "")
+				args = cmp_item.detail:match("func(%(.*%)) ") or ""
+				vim_item.menu = cmp_item.detail:match("func%(.*%) (.*)") or ""
+			end
+		end
+	elseif vim.tbl_contains({ 4, 8, 9, 22 }, entry_kind) then
+		vim_item.menu = label_details and label_details.detail or ""
+		vim_item.menu = vim_item.menu:gsub("use ", "")
 	end
-	item.menu = ""
-	return item
+
+	if not vim_item.menu then
+		if cmp_item.detail then
+			vim_item.menu = cmp_item.detail
+		elseif cmp_item.labelDetails then
+			vim_item.menu = cmp_item.labelDetails.description or cmp_item.labelDetails.detail
+		end
+	end
+
+	if vim_item.abbr then
+		vim_item.abbr = vim_item.abbr .. args
+	end
+
+	return vim_item
 end
 
 Plug("L3MON4D3/LuaSnip")
@@ -116,9 +166,10 @@ Plug("dmun/nvim-cmp")
 				fields = { "kind", "abbr", "menu" },
 				format = lspkind.cmp_format {
 					mode = "symbol",
-					maxwidth = 40,
+					maxwidth = 30,
 					ellipsis_char = "…",
 					show_labelDetails = true,
+					before = format_menu,
 				},
 			},
 			experimental = {

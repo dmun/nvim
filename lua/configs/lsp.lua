@@ -28,7 +28,7 @@ Conf.ls.sourcekit = {
 
 Conf.ls.lua_ls = {
 	settings = {
-		completion = { callSnippet = "Replace" },
+		-- completion = { callSnippet = "Replace" },
 		diagnostics = { globals = { "vim" } },
 	},
 	on_init = function(client)

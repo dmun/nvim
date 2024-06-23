@@ -19,6 +19,7 @@ Plug("nvim-lualine/lualine.nvim")
 				statusline = {
 					"NvimTree",
 					"fzf",
+					"trouble",
 				},
 			},
 		},

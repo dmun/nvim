@@ -48,6 +48,12 @@ function M:name(name)
 	return self
 end
 
+---@param branch string
+function M:branch(branch)
+	self.branch = branch
+	return self
+end
+
 ---@param opts? table
 function M:opts(opts)
 	self.opts = opts or {}
@@ -81,6 +87,7 @@ function M:setup(name)
 end
 
 ---@param dir string
+---@return Plug
 function M.dir(_, dir)
 	local index = #M.specs + 1
 	M.specs[index] = { dir = dir }

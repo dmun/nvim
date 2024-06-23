@@ -45,7 +45,7 @@ Plug("catppuccin/nvim")
 	:name("catppuccin")
 	:opts {
 		color_overrides = {
-			all = {
+			frappe = {
 				rosewater = "#FFAA43",
 				flamingo = "#FFAA43",
 				pink = "#CF92C9",
@@ -77,7 +77,16 @@ Plug("catppuccin/nvim")
 				crust = "#1E272C",
 			},
 		},
+		---@param colors CtpColors<CtpFlavor>
 		custom_highlights = function(colors)
+			return {
+				CmpItemAbbr = { fg = colors.text },
+				CmpItemAbbrMatch = { fg = colors.blue },
+				CmpItemMenu = { fg = colors.overlay2 },
+				CmpItemArgs = { fg = colors.overlay0 },
+			}
+		end,
+		_custom_highlights = function(colors)
 			return {
 				LineNr = { fg = colors.surface2 },
 				CursorLineNr = { fg = colors.subtext1 },
