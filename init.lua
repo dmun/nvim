@@ -34,4 +34,7 @@ require("lazy").setup(_G.Plug.specs, {
 	},
 })
 
+-- vim.lsp.set_log_level("debug")
+-- vim.lsp.log.set_format_func(vim.inspect)
+
 vim.cmd.color("gruvbox")

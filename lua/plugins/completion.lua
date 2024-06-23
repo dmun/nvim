@@ -18,7 +18,7 @@ local function format_menu(entry, vim_item)
 	local ft = vim.bo.filetype
 	local args = ''
 
-	if vim.tbl_contains({ 2, 3, 13 }, entry_kind) then
+	if vim.tbl_contains({ 2, 3 }, entry_kind) then
 		if ft == "lua" then
 			local s = vim.split(vim_item.abbr, "%(")
 			if s then
