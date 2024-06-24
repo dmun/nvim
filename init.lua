@@ -27,6 +27,7 @@ require("configs")
 require("options")
 require("keymaps")
 require("autocommands")
+require("sandbox")
 
 require("lazy").setup(_G.Plug.specs, {
 	change_detection = {
@@ -34,7 +35,9 @@ require("lazy").setup(_G.Plug.specs, {
 	},
 })
 
+-- require("profiler")
+
 -- vim.lsp.set_log_level("debug")
 -- vim.lsp.log.set_format_func(vim.inspect)
 
-vim.cmd.color("gruvbox")
+vim.cmd.color("catppuccin")

@@ -44,6 +44,7 @@
   "oil.nvim": { "branch": "master", "commit": "65c53dbe4f2140236590a7568a5f22a77d16be39" },
   "plenary.nvim": { "branch": "master", "commit": "a3e3bc82a3f95c5ed0d7201546d5d2c19b20d683" },
   "polychrome.nvim": { "branch": "main", "commit": "ba984fd7267956bf46fb14a6d482761c15f9c50d" },
+  "profile.nvim": { "branch": "master", "commit": "0ee32b7aba31d84b0ca76aaff2ffcb11f8f5449f" },
   "promise-async": { "branch": "main", "commit": "28c1d5a295eb5310afa2523d4ae9aa41ec5a9de2" },
   "tiny-devicons-auto-colors.nvim": { "branch": "main", "commit": "9be4af5b1bc1f26a11206ed7ce8bf44312e7941a" },
   "trouble.nvim": { "branch": "main", "commit": "57761ba7148164f0315ed203e714ac242329abd4" },

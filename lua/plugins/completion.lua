@@ -16,7 +16,7 @@ local function format_menu(entry, vim_item)
 	local entry_kind = entry:get_kind()
 	-- local kind = require("lspkind")
 	local ft = vim.bo.filetype
-	local args = ''
+	local args = ""
 
 	if vim.tbl_contains({ 2, 3 }, entry_kind) then
 		if ft == "lua" then
@@ -30,6 +30,10 @@ local function format_menu(entry, vim_item)
 				local type = docs.value:match("-> (.*)\n") or ""
 				vim_item.menu = type
 			end
+		elseif ft == "zig" then
+			vim_item.abbr = vim_item.abbr:gsub("~", "")
+			vim_item.menu = label_details and label_details.description or ""
+			vim_item.abbr = "" .. vim_item.abbr .. (label_details and label_details.detail or "()")
 		elseif ft == "rust" then
 			if cmp_item.detail then
 				local s = vim.split(cmp_item.detail, " -> ")
@@ -159,14 +163,14 @@ Plug("dmun/nvim-cmp")
 			completion = {
 				completeopt = "menu,menuone",
 			},
-			window = { completion = { col_offset = -2 } },
+			window = { completion = { col_offset = -2, max_width = 50 } },
 
 			---@diagnostic disable-next-line: missing-fields
 			formatting = {
 				fields = { "kind", "abbr", "menu" },
 				format = lspkind.cmp_format {
 					mode = "symbol",
-					maxwidth = 30,
+					-- maxwidth = 20,
 					ellipsis_char = "…",
 					show_labelDetails = true,
 					before = format_menu,
@@ -174,6 +178,9 @@ Plug("dmun/nvim-cmp")
 			},
 			experimental = {
 				ghost_text = true,
+			},
+			performance = {
+				max_view_entries = 30,
 			},
 		}
 	end)

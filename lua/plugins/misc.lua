@@ -6,3 +6,5 @@ Plug:dir("~/Development/ad.nvim")
     :opts()
 
 Plug("darfink/vim-plist")
+
+Plug("stevearc/profile.nvim")

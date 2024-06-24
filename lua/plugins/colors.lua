@@ -80,8 +80,10 @@ Plug("catppuccin/nvim")
 		---@param colors CtpColors<CtpFlavor>
 		custom_highlights = function(colors)
 			return {
+				PmenuSel = { fg = colors.none, bg = colors.surface1, style = {} },
 				CmpItemAbbr = { fg = colors.text },
-				CmpItemAbbrMatch = { fg = colors.blue },
+				CmpItemAbbrMatch = { fg = colors.none, bold = true },
+				CmpItemAbbrMatchFuzzy = { link = "CmpItemAbbrMatch" },
 				CmpItemMenu = { fg = colors.overlay2 },
 				CmpItemArgs = { fg = colors.overlay0 },
 			}
