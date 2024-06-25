@@ -1,13 +1,13 @@
-local Vec = require("util.vector")
+local Vec = require('util.vector')
 
 -- filetypes
-vim.cmd("au BufRead,BufEnter *.swiftinterface se ft=swift")
-vim.cmd("au BufRead,BufEnter .swift-format se ft=json")
+vim.cmd('au BufRead,BufEnter *.swiftinterface se ft=swift')
+vim.cmd('au BufRead,BufEnter .swift-format se ft=json')
 
 -- highlight on yank
-local hi_group = vim.api.nvim_create_augroup("YankHighlight", { clear = true })
-vim.api.nvim_create_autocmd("TextYankPost", {
-	pattern = "*",
+local hi_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
+vim.api.nvim_create_autocmd('TextYankPost', {
+	pattern = '*',
 	group = hi_group,
 	callback = function()
 		vim.highlight.on_yank()
@@ -15,34 +15,50 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 })
 
 -- auto-save
-vim.api.nvim_create_autocmd({ "BufLeave", "FocusLost" }, {
+vim.api.nvim_create_autocmd({ 'BufLeave', 'FocusLost' }, {
 	callback = function()
-		if vim.bo.buftype == "" then
-			vim.cmd("silent update")
+		if vim.bo.buftype == '' then
+			vim.cmd('silent update')
 		end
 	end,
 })
 
 -- clear cmdline
-vim.api.nvim_create_autocmd("CmdlineLeave", {
+vim.api.nvim_create_autocmd('CmdlineLeave', {
 	callback = function()
 		vim.fn.timer_start(1000, function()
-			print(" ")
+			print(' ')
 		end)
 	end,
 })
 
 -- dynamic linenumbers
 if false then
-	vim.cmd("au InsertEnter * se nornu")
-	vim.cmd("au InsertLeave * se rnu")
+	vim.cmd('au InsertEnter * se nornu')
+	vim.cmd('au InsertLeave * se rnu')
 end
 
 -- dynamic CursorLineNr color
 if false then
-	vim.cmd("au InsertEnter * se winhl=CursorLineNr:iCursorLineNr")
-	vim.cmd("au InsertLeave * se winhl=CursorLineNr:nCursorLineNr")
+	vim.cmd('au InsertEnter * se winhl=CursorLineNr:iCursorLineNr')
+	vim.cmd('au InsertLeave * se winhl=CursorLineNr:nCursorLineNr')
 end
+
+vim.api.nvim_create_autocmd('ColorScheme', {
+	callback = function()
+		local path = vim.fn.stdpath('cache') .. '/colorscheme'
+		local fd, err, _ = vim.uv.fs_open(path, 'w+', 438)
+
+		if not fd then
+			error(err)
+		end
+
+		local str = vim.api.nvim_exec2('color', { output = true }).output
+		vim.uv.fs_write(fd, str, 0)
+
+		vim.uv.fs_close(fd)
+	end,
+})
 
 -- vim.api.nvim_create_autocmd("ColorScheme", {
 -- 	callback = function()

@@ -25,7 +25,7 @@ function M.deepcopy(o, seen)
 	end
 
 	local no
-	if type(o) == "table" then
+	if type(o) == 'table' then
 		no = {}
 		seen[o] = no
 
@@ -42,21 +42,21 @@ end
 ---@param reset boolean?
 function M.run_command(reset)
 	local project_path = vim.fn.getcwd()
-	local data_path = vim.fn.stdpath("data")
+	local data_path = vim.fn.stdpath('data')
 
-	local dir = data_path .. "/localleader-r" .. vim.fs.dirname(project_path)
+	local dir = data_path .. '/localleader-r' .. vim.fs.dirname(project_path)
 	local basename = vim.fs.basename(project_path)
-	local file = dir .. "/" .. basename .. ".json"
+	local file = dir .. '/' .. basename .. '.json'
 
 	if vim.loop.fs_stat(dir) == nil then
-		vim.fn.mkdir(dir, "p")
+		vim.fn.mkdir(dir, 'p')
 	end
 
 	if vim.loop.fs_stat(file) == nil then
 		vim.cmd.write(file)
 	end
 
-	local fd, err, _ = vim.loop.fs_open(file, "r", 438)
+	local fd, err, _ = vim.loop.fs_open(file, 'r', 438)
 	if err then
 		print(err)
 		return
@@ -95,7 +95,7 @@ function M.run_command(reset)
 			}
 
 			---@diagnostic disable-next-line: redefined-local
-			local fd, err, _ = vim.loop.fs_open(file, "w", 438)
+			local fd, err, _ = vim.loop.fs_open(file, 'w', 438)
 			if not data then
 				print(err)
 				return
@@ -108,20 +108,44 @@ function M.run_command(reset)
 	end
 
 	if not command then
-		print("No command specified")
+		print('No command specified')
 		return
 	end
 
-	vim.cmd("split term://" .. command)
+	vim.cmd('split term://' .. command)
 	vim.opt_local.number = false
 	vim.opt_local.relativenumber = false
-	vim.opt_local.signcolumn = "no"
-	vim.keymap.set("n", "q", "<cmd>bdelete<cr>", { buffer = true })
-	vim.cmd.norm("G")
+	vim.opt_local.signcolumn = 'no'
+	vim.keymap.set('n', 'q', '<cmd>bdelete<cr>', { buffer = true })
+	vim.cmd.norm('G')
 end
 
 function M.run_command_reset()
 	M.run_command(true)
+end
+
+function M.set_colorscheme()
+	local path = vim.fn.stdpath('cache') .. '/colorscheme'
+	local fd, err, _ = vim.uv.fs_open(path, 'r', 438)
+
+	if not fd then
+		error(err)
+	end
+
+	local fstat, err, _ = vim.uv.fs_fstat(fd)
+
+	if not fstat then
+		error(err)
+	end
+
+	local data, err, _ = vim.uv.fs_read(fd, fstat.size, 0)
+
+	if not data then
+		error(err)
+	end
+	vim.cmd.color(data)
+
+	vim.uv.fs_close(fd)
 end
 
 return M

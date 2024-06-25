@@ -30,7 +30,7 @@ Plug("nvim-lualine/lualine.nvim")
 				"mode",
 				custom_filename,
 			},
-			lualine_x = { "diagnostics", "progress", "location" },
+			lualine_x = { "branch", "diagnostics", "progress", "location" },
 			lualine_y = {},
 			lualine_z = {},
 		},
@@ -43,7 +43,7 @@ Plug("nvim-lualine/lualine.nvim")
 				end,
 				custom_filename,
 			},
-			lualine_x = { "diagnostics", "progress", "location" },
+			lualine_x = { "branch", "diagnostics", "progress", "location" },
 			lualine_y = {},
 			lualine_z = {},
 		}
