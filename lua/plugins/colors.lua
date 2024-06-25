@@ -81,6 +81,7 @@ Plug("catppuccin/nvim")
 		custom_highlights = function(colors)
 			return {
 				PmenuSel = { fg = colors.none, bg = colors.surface1, style = {} },
+				-- Pmenu = { bg = colors.mantle },
 				CmpItemAbbr = { fg = colors.text },
 				CmpItemAbbrMatch = { fg = colors.none, bold = true },
 				CmpItemAbbrMatchFuzzy = { link = "CmpItemAbbrMatch" },

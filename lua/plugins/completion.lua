@@ -33,13 +33,15 @@ local function format_menu(entry, vim_item)
 		elseif ft == "zig" then
 			vim_item.abbr = vim_item.abbr:gsub("~", "")
 			vim_item.menu = label_details and label_details.description or ""
-			vim_item.abbr = "" .. vim_item.abbr .. (label_details and label_details.detail or "()")
+			vim_item.menu = vim_item.menu:gsub("Allocator%.Error", "")
+			vim_item.concat = "fn " .. vim_item.abbr .. (label_details and label_details.detail or "()")
+			vim_item.offset = 3
+			vim_item.abbr = vim_item.abbr .. (label_details and label_details.detail or "()")
 		elseif ft == "rust" then
 			if cmp_item.detail then
 				local s = vim.split(cmp_item.detail, " -> ")
 				if s then
-					vim_item.abbr = vim_item.abbr:gsub("%(.*", "")
-					args = (s[1]:match("%(.*%)") or ""):gsub("&?m?u?t? ?self,? ?", "") or "()"
+					vim_item.abbr = vim_item.abbr:gsub("%(.*", "") .. (s[1]:match("%(.*%)") or "()")
 					vim_item.menu = s[2] or ""
 				end
 			end
@@ -47,6 +49,7 @@ local function format_menu(entry, vim_item)
 			if cmp_item.detail then
 				vim_item.abbr = vim_item.abbr:gsub("~", "")
 				args = cmp_item.detail:match("func(%(.*%)) ") or ""
+				vim_item.abbr = vim_item.abbr .. args
 				vim_item.menu = cmp_item.detail:match("func%(.*%) (.*)") or ""
 			end
 		end
@@ -61,10 +64,6 @@ local function format_menu(entry, vim_item)
 		elseif cmp_item.labelDetails then
 			vim_item.menu = cmp_item.labelDetails.description or cmp_item.labelDetails.detail
 		end
-	end
-
-	if vim_item.abbr then
-		vim_item.abbr = vim_item.abbr .. args
 	end
 
 	return vim_item
@@ -106,7 +105,13 @@ Plug("dmun/nvim-cmp")
 		cmp.setup {
 			preselect = cmp.PreselectMode.None,
 			view = {
-				entries = { name = "custom", selection_order = "near_cursor" },
+				entries = {
+					name = "custom",
+					selection_order = "near_cursor",
+				},
+				docs = {
+					auto_open = false,
+				},
 			},
 			snippet = {
 				expand = function(args)
@@ -115,6 +120,7 @@ Plug("dmun/nvim-cmp")
 			},
 			mapping = cmp.mapping.preset.insert {
 				["<C-e>"] = vim.NIL,
+				["<C-k>"] = cmp.mapping.open_docs(),
 				["<C-u>"] = cmp.mapping.scroll_docs(-4),
 				["<C-d>"] = cmp.mapping.scroll_docs(4),
 				["<C-Space>"] = cmp.mapping.complete(),
