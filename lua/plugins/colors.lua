@@ -23,7 +23,9 @@ Plug("ellisonleao/gruvbox.nvim") {
 	overrides = {
 		CursorLineNr = { link = "GruvboxYellow" },
 		DiagnosticOk = { link = "GruvboxGreen" },
-		-- 	PmenuSel = { link = "Cursorline" },
+		PmenuSel = { link = "Cursorline" },
+		CmpItemAbbrMatch = { bold = true },
+		CmpItemAbbrMatchFuzzy = { bold = true },
 		-- GitSignsAdd = { link = "GruvboxGreenSign" },
 		-- GitSignsChange = { link = "GruvboxAquaSign" },
 		-- GitSignsDelete = { link = "GruvboxRedSign" },
