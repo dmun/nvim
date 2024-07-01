@@ -1,4 +1,5 @@
 Plug("chomosuke/typst-preview.nvim")
+	:disabled()
 	:ft("typst")
 	:keys {
 		{

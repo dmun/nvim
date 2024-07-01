@@ -1,6 +1,6 @@
-Plug("onsails/lspkind.nvim")
+Plug('onsails/lspkind.nvim')
 	:config(function()
-		require("lspkind").init {
+		require('lspkind').init {
 			symbol_map = {
 				Text = " ",
 				Snippet = " ",

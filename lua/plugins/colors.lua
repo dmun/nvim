@@ -34,6 +34,9 @@ Plug("ellisonleao/gruvbox.nvim") {
 		DiagnosticSignWarn = { link = "GruvboxYellow" },
 		DiagnosticSignError = { link = "GruvboxRed" },
 
+		TreesitterContextLineNumber = { fg = '#7C6F64', sp = '#3C3836', underline = true },
+		TreesitterContext = { sp = '#3C3836', underline = true },
+
 		DiagnosticUnderlineInfo = { sp = "#83a598", underline = true },
 		DiagnosticUnderlineHint = { sp = "#8ec07c", underline = true },
 		DiagnosticUnderlineError = { sp = "#fb4934", underline = true },
@@ -87,6 +90,9 @@ Plug("catppuccin/nvim")
 				CmpItemAbbrMatchFuzzy = { link = "CmpItemAbbrMatch" },
 				CmpItemMenu = { fg = colors.overlay2 },
 				CmpItemArgs = { fg = colors.overlay0 },
+
+				TreesitterContext = { bg = colors.none },
+				TreesitterContextLineNumber = { bg = colors.none },
 			}
 		end,
 		_custom_highlights = function(colors)

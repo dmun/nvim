@@ -17,6 +17,7 @@ util.handle_keymaps {
 		{ "<M-s>", ":silent update<cr>" },
 
 		{ "<leader>tw", ":set wrap!<cr>" },
+		{ "<leader>dl", ":messages<cr>" },
 
 		{
 			"<localleader>r",
