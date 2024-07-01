@@ -2,10 +2,8 @@ local query = nil
 
 vim.api.nvim_create_autocmd({ 'BufRead', 'BufEnter' }, {
 	callback = function()
-		query = vim.treesitter.query.get(vim.bo.filetype, 'highlights')
-		if query == nil then
-			query = vim.treesitter.query.get('lua', 'highlights')
-		end
+		local success, result = pcall(vim.treesitter.query.get, vim.bo.filetype, 'highlights')
+		query = success and result or nil
 	end,
 })
 
@@ -110,6 +108,9 @@ end
 
 ---@param str string
 local function get_highlights(str, width, kind)
+	if not query then
+		return nil
+	end
 	local highlights = {}
 	local ft = vim.bo.filetype
 	local is_function = vim.tbl_contains({ 2, 3 }, kind)
