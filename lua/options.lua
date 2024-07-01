@@ -57,6 +57,9 @@ o.splitkeep = "screen"
 -- keys
 o.ignorecase = true
 o.ttimeout = false
+o.timeout = false
+o.ttimeoutlen = 0
+o.timeoutlen = 0
 o.scrolloff = 5
 o.sidescrolloff = 10
 o.smartcase = true

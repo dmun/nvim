@@ -24,6 +24,7 @@ Plug("ellisonleao/gruvbox.nvim") {
 		CursorLineNr = { link = "GruvboxYellow" },
 		DiagnosticOk = { link = "GruvboxGreen" },
 		PmenuSel = { link = "Cursorline" },
+		CmpItemMenu = { link = "Comment" },
 		CmpItemAbbrMatch = { bold = true },
 		CmpItemAbbrMatchFuzzy = { bold = true },
 		-- GitSignsAdd = { link = "GruvboxGreenSign" },

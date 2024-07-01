@@ -5,6 +5,7 @@ Plug("numToStr/Comment.nvim")
 	:opts()
 
 Plug("echasnovski/mini.nvim")
+	:disabled()
 	:name("mini.ai")
 	:opts()
 
