@@ -21,6 +21,8 @@ Plug("ellisonleao/gruvbox.nvim") {
 	contrast = "hard",
 	bold = false,
 	overrides = {
+		iCursor = { bg = "#FBBD2E"},
+		nCursor = { bg = "#D3859B"},
 		CursorLineNr = { link = "GruvboxYellow" },
 		DiagnosticOk = { link = "GruvboxGreen" },
 		PmenuSel = { link = "Cursorline" },
@@ -93,6 +95,9 @@ Plug("catppuccin/nvim")
 				CmpItemAbbrMatchFuzzy = { link = "CmpItemAbbrMatch" },
 				CmpItemMenu = { fg = colors.overlay2 },
 				CmpItemArgs = { fg = colors.overlay0 },
+
+				nCursor = { bg = colors.peach },
+				iCursor = { bg = colors.green },
 
 				TreesitterContext = { bg = colors.none },
 				TreesitterContextLineNumber = { bg = colors.none },
