@@ -21,8 +21,8 @@ Plug("ellisonleao/gruvbox.nvim") {
 	contrast = "hard",
 	bold = false,
 	overrides = {
-		iCursor = { bg = "#FBBD2E"},
-		nCursor = { bg = "#D3859B"},
+		iCursor = { bg = "#D3859B"},
+		nCursor = { bg = "#FBBD2E"},
 		CursorLineNr = { link = "GruvboxYellow" },
 		DiagnosticOk = { link = "GruvboxGreen" },
 		PmenuSel = { link = "Cursorline" },
