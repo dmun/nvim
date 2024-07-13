@@ -89,6 +89,14 @@ local function set_abbr_menu(entry, vim_item)
 				end
 			end,
 		},
+		odin = {
+			functions = function()
+				if label_details then
+					abbr = abbr .. (label_details.detail or '()')
+					menu = label_details.description or ''
+				end
+			end,
+		},
 	}
 
 	if vim.tbl_contains({ 2, 3 }, entry_kind) then
@@ -121,6 +129,13 @@ local function get_highlights(str, width, kind)
 		go = 'func ',
 	}
 	local prefix = prefixes[ft]
+
+	if ft == 'odin' then
+		local s = vim.split(str, '%(')
+		table.insert(highlights, { '@function', range = { 0, #s[1] } })
+		table.insert(highlights, { 'Comment', range = { #s[1], #str } })
+		return highlights
+	end
 
 	if is_function and prefix then
 		str = prefix .. str
