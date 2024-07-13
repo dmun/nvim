@@ -207,10 +207,13 @@ local function format_menu(entry, vim_item)
 	vim_item.abbr_hl_group = fields[kind] and { { fields[kind], range = { 0, #abbr } } }
 		or get_highlights(vim_item.abbr, #abbr, kind)
 	vim_item.abbr = abbr .. string.rep(' ', whitespace + 1) .. (menu or '')
-	table.insert(
-		vim_item.abbr_hl_group,
-		{ 'CmpItemMenu', range = { #abbr + whitespace + 1, #abbr + whitespace + #menu + 1 } }
-	)
+
+	if type(vim_item.abbr_hl_group) == 'table' then
+		table.insert(
+			vim_item.abbr_hl_group,
+			{ 'CmpItemMenu', range = { #abbr + whitespace + 1, #abbr + whitespace + #menu + 1 } }
+		)
+	end
 
 	return vim_item
 end

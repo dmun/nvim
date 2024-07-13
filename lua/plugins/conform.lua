@@ -1,6 +1,6 @@
 Plug("stevearc/conform.nvim")
 	:keys {
-		{ "<M-f>", function() require("conform").format() end }
+		{ "<M-f>", function() require("conform").format { lsp_format = "fallback" } end }
 	}
 	:opts {
 		formatters_by_ft = {
@@ -15,6 +15,7 @@ Plug("stevearc/conform.nvim")
 			tex = { "latexindent" },
 			typst = { "typstyle" },
 			swift = { "swift-format" },
+			odin = { "odinfmt" },
 		},
 		formatters = {
 			stylua = {
