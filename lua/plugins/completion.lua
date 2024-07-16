@@ -92,7 +92,11 @@ local function set_abbr_menu(entry, vim_item)
 		odin = {
 			functions = function()
 				if label_details then
-					abbr = abbr .. (label_details.detail or '()')
+					local p = label_details.detail
+					if p then
+						p = p:find('%(') and label_details.detail or '()'
+					end
+					abbr = abbr .. p
 					menu = label_details.description or ''
 				end
 			end,
