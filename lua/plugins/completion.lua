@@ -273,6 +273,20 @@ Plug('dmun/nvim-cmp')
 			},
 			mapping = cmp.mapping.preset.insert {
 				['<C-e>'] = vim.NIL,
+				['<C-n>'] = cmp.mapping(function(fallback)
+					if cmp.visible() then
+						cmp.select_next_item()
+					else
+						fallback()
+					end
+				end, { 'i', 's' }),
+				['<C-p>'] = cmp.mapping(function(fallback)
+					if cmp.visible() then
+						cmp.select_prev_item()
+					else
+						fallback()
+					end
+				end, { 'i', 's' }),
 				['<C-k>'] = cmp.mapping.open_docs(),
 				['<C-u>'] = cmp.mapping.scroll_docs(-4),
 				['<C-d>'] = cmp.mapping.scroll_docs(4),
@@ -326,7 +340,7 @@ Plug('dmun/nvim-cmp')
 				expandable_indicator = false,
 			},
 			experimental = {
-				ghost_text = true,
+				-- ghost_text = true,
 			},
 		}
 	end)
