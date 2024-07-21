@@ -34,7 +34,7 @@ util.handle_keymaps {
 		{ '<C-l>', '<C-w>l' },
 	},
 	i = {
-		{ '<M-s>', '<cmd>silent update<cr>' },
+		{ '<M-s>', '<esc>:silent update<cr>' },
 		{ '<C-n>', '<cmd>norm j<cr>' },
 		{ '<C-p>', '<cmd>norm k<cr>' },
 	},
