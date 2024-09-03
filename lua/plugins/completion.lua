@@ -3,7 +3,12 @@ local query = nil
 vim.api.nvim_create_autocmd({ 'BufRead', 'BufEnter' }, {
 	callback = function()
 		local success, result = pcall(vim.treesitter.query.get, vim.bo.filetype, 'highlights')
-		query = success and result or nil
+		if success and result then
+			query = result
+		else
+			_, result = pcall(vim.treesitter.query.get, 'lua', 'highlights')
+			query = result
+		end
 	end,
 })
 
@@ -101,6 +106,11 @@ local function set_abbr_menu(entry, vim_item)
 				end
 			end,
 		},
+		quarto = {
+			functions = function()
+				abbr = abbr .. '()'
+			end
+		}
 	}
 
 	if vim.tbl_contains({ 2, 3 }, entry_kind) then
@@ -134,7 +144,7 @@ local function get_highlights(str, width, kind)
 	}
 	local prefix = prefixes[ft]
 
-	if ft == 'odin' then
+	if ft == 'odin' or ft == 'quarto' then
 		local s = vim.split(str, '%(')
 		table.insert(highlights, { '@function', range = { 0, #s[1] } })
 		table.insert(highlights, { 'Comment', range = { #s[1], #str } })
@@ -311,6 +321,7 @@ Plug('dmun/nvim-cmp')
 			sources = cmp.config.sources {
 				{ name = 'luasnip' },
 				{ name = 'nvim_lsp' },
+				{ name = 'otter' },
 				{ name = 'path' },
 				{ name = 'nvim_lua' },
 				{ name = 'nvim_lsp_signature_help' },
@@ -340,7 +351,7 @@ Plug('dmun/nvim-cmp')
 				expandable_indicator = false,
 			},
 			experimental = {
-				-- ghost_text = true,
+				ghost_text = true,
 			},
 		}
 	end)

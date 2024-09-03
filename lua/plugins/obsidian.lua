@@ -16,7 +16,7 @@ Plug("epwalsh/obsidian.nvim")
 	:dependencies("nvim-lua/plenary.nvim")
 	:opts {
 		ui = {
-			enable = false,
+			enable = true,
 		},
 		completion = {
 			nvim_cmp = true,
