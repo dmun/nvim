@@ -40,4 +40,5 @@ require('lazy').setup(_G.Plug.specs, {
 -- vim.lsp.set_log_level("debug")
 -- vim.lsp.log.set_format_func(vim.inspect)
 
-require("util").set_colorscheme()
+-- require("util").set_colorscheme()
+vim.cmd.color("catppuccin")

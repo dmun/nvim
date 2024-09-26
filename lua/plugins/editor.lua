@@ -1,4 +1,5 @@
 Plug("romainl/vim-cool")
+	:disabled()
 
 Plug("numToStr/Comment.nvim")
 	:on(Event.VeryLazy)
@@ -10,6 +11,7 @@ Plug("echasnovski/mini.nvim")
 	:opts()
 
 Plug("kylechui/nvim-surround")
+	:disabled()
 	:on(Event.VeryLazy)
 	:opts()
 

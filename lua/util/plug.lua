@@ -105,6 +105,12 @@ function M:build(build)
 	return self
 end
 
+---@param init function
+function M:init(init)
+	self.init = init
+	return self
+end
+
 ---@param version string
 function M:version(version)
 	self.version = version

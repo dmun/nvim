@@ -15,6 +15,7 @@ util.handle_keymaps {
 		{ '<C-r>', ':silent redo<cr>' },
 
 		{ '<M-s>', ':silent update<cr>' },
+		{ '<M-a>', 'ggVG' },
 
 		{ '<leader>tw', ':set wrap!<cr>' },
 		{ '<leader>dl', ':messages<cr>' },
@@ -28,10 +29,10 @@ util.handle_keymaps {
 			util.run_command_reset,
 		},
 
-		{ '<C-h>', '<C-w>h' },
-		{ '<ESC>', '<C-w>j' },
-		{ '<C-k>', '<C-w>k' },
-		{ '<C-l>', '<C-w>l' },
+		-- { '<C-h>', '<C-w>h' },
+		-- { '<C-j>', '<C-w>j' },
+		-- { '<C-k>', '<C-w>k' },
+		-- { '<C-l>', '<C-w>l' },
 	},
 	i = {
 		{ '<M-s>', '<esc>:silent update<cr>' },
