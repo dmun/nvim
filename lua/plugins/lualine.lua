@@ -1,25 +1,26 @@
 local custom_filename = {
-	"filename",
+	'filename',
 	path = 4,
 	symbols = {
-		modified = "󰏫", -- Text to show when the file is modified.
-		readonly = "", -- Text to show when the file is non-modifiable or readonly.
-		unnamed = "*scratch*", -- Text to show for unnamed buffers.
-		newfile = "*new*", -- Text to show for newly created file before first write
+		modified = '󰏫', -- Text to show when the file is modified.
+		readonly = '', -- Text to show when the file is non-modifiable or readonly.
+		unnamed = '*scratch*', -- Text to show for unnamed buffers.
+		newfile = '*new*', -- Text to show for newly created file before first write
 	},
 }
 
-Plug("nvim-lualine/lualine.nvim")
-	:opts {
+return {
+	'nvim-lualine/lualine.nvim',
+	opts = {
 		options = {
 			component_separators = { left = nil, right = nil },
 			section_separators = { left = nil, right = nil },
 			always_divide_middle = true,
 			disabled_filetypes = {
 				statusline = {
-					"NvimTree",
-					"fzf",
-					"trouble",
+					'NvimTree',
+					'fzf',
+					'trouble',
 				},
 			},
 		},
@@ -27,10 +28,10 @@ Plug("nvim-lualine/lualine.nvim")
 			lualine_a = {},
 			lualine_b = {},
 			lualine_c = {
-				"mode",
+				'mode',
 				custom_filename,
 			},
-			lualine_x = { "branch", "diagnostics", "progress", "location" },
+			lualine_x = { 'branch', 'diagnostics', 'progress', 'location' },
 			lualine_y = {},
 			lualine_z = {},
 		},
@@ -39,12 +40,13 @@ Plug("nvim-lualine/lualine.nvim")
 			lualine_b = {},
 			lualine_c = {
 				function()
-					return "      "
+					return '      '
 				end,
 				custom_filename,
 			},
-			lualine_x = { "branch", "diagnostics", "progress", "location" },
+			lualine_x = { 'branch', 'diagnostics', 'progress', 'location' },
 			lualine_y = {},
 			lualine_z = {},
-		}
-	}
+		},
+	},
+}

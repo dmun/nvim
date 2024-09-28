@@ -1,67 +1,58 @@
-Plug("romainl/vim-cool")
-	:disabled()
-
-Plug("numToStr/Comment.nvim")
-	:on(Event.VeryLazy)
-	:opts()
-
-Plug("echasnovski/mini.nvim")
-	:disabled()
-	:name("mini.ai")
-	:opts()
-
-Plug("kylechui/nvim-surround")
-	:disabled()
-	:on(Event.VeryLazy)
-	:opts()
-
-Plug("windwp/nvim-autopairs")
-	:on(Event.InsertEnter)
-	:opts()
-
-Plug("VidocqH/auto-indent.nvim")
-	:on(Event.InsertEnter)
-	:opts()
-
-Plug("lukas-reineke/indent-blankline.nvim")
-	:disabled()
-	:name("ibl")
-	:opts {
-		indent = {
-			char = "▏",
+return {
+	-- 'romainl/vim-cool',
+	'echasnovski/mini.nvim',
+	{ 'numToStr/Comment.nvim', event = 'VeryLazy' },
+	{ 'kylechui/nvim-surround', event = 'VeryLazy' },
+	{ 'windwp/nvim-autopairs', event = 'InsertEnter', config = true },
+	{ 'VidocqH/auto-indent.nvim', event = 'InsertEnter' },
+	{
+		'lukas-reineke/indent-blankline.nvim',
+		enabled = false,
+		name = 'ibl',
+		opts = {
+			indent = {
+				char = '▏',
+			},
+			scope = { enabled = false },
 		},
-		scope = { enabled = false },
-	}
-
-Plug("RRethy/vim-illuminate")
-	:config(function()
-		require("illuminate").configure {
-			providers = { "lsp", "treesitter" }
-		}
-	end)
-
-Plug("NMAC427/guess-indent.nvim")
-	:on(Event.BufReadPre, Event.BufNewFile)
-	:opts()
-
-Plug("kosayoda/nvim-lightbulb") {
-	autocmd = { enabled = true },
-	sign = {
-		text = "",
-		hl = "DiagnosticWarn"
-	}
+	},
+	{
+		'RRethy/vim-illuminate',
+		config = function()
+			require('illuminate').configure {
+				providers = { 'lsp', 'treesitter' },
+			}
+		end,
+	},
+	{
+		'NMAC427/guess-indent.nvim',
+		event = { 'BufReadPre', 'BufNewFile' },
+		opts = {},
+	},
+	{
+		'kosayoda/nvim-lightbulb',
+		opts = {
+			autocmd = { enabled = true },
+			sign = {
+				text = '',
+				hl = 'DiagnosticWarn',
+			},
+		},
+	},
+	{
+		'kevinhwang91/nvim-ufo',
+		event = { 'BufRead', 'BufNewFile' },
+		dependencies = { 'kevinhwang91/promise-async' },
+		opts = {
+			provider_selector = function()
+				return { 'treesitter', 'indent' }
+			end,
+		},
+	},
+	{
+		'folke/trouble.nvim',
+		opts = {
+			focus = true,
+		},
+	},
 }
-
-Plug("kevinhwang91/nvim-ufo")
-	:on(Event.BufRead, Event.BufNewFile)
-	:dependencies { "kevinhwang91/promise-async" }
-	:opts {
-		provider_selector = function()
-			return { "treesitter", "indent" }
-		end
-	}
-
-Plug("folke/trouble.nvim")
-	:opts {
-		focus = true
-	}

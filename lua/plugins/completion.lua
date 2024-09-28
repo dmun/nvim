@@ -109,8 +109,8 @@ local function set_abbr_menu(entry, vim_item)
 		quarto = {
 			functions = function()
 				abbr = abbr .. '()'
-			end
-		}
+			end,
+		},
 	}
 
 	if vim.tbl_contains({ 2, 3 }, entry_kind) then
@@ -232,126 +232,131 @@ local function format_menu(entry, vim_item)
 	return vim_item
 end
 
-Plug('L3MON4D3/LuaSnip')
-	:cmd('LuaSnipUnlinkCurrent')
-	:version('v2.*')
-	:dependencies { 'rafamadriz/friendly-snippets' }
-	:build('make install_jsregexp')
-	:config(function()
-		require('luasnip.loaders.from_vscode').lazy_load()
-		require('luasnip.loaders.from_snipmate').lazy_load()
-	end)
-
-Plug('dmun/nvim-cmp')
-	:branch('fix-field-column-width')
-	:on(Event.InsertEnter)
-	:dependencies {
-		'hrsh7th/cmp-buffer',
-		'hrsh7th/cmp-path',
-		'hrsh7th/cmp-nvim-lua',
-		'hrsh7th/cmp-nvim-lsp',
-		'hrsh7th/cmp-nvim-lsp-signature-help',
-		'onsails/lspkind.nvim',
-		'ryo33/nvim-cmp-rust',
-		{
-			'saadparwaiz1/cmp_luasnip',
-			dependencies = 'L3MON4D3/LuaSnip',
+return {
+	{
+		'L3MON4D3/LuaSnip',
+		cmd = 'LuaSnipUnlinkCurrent',
+		version = 'v2.*',
+		dependencies = { 'rafamadriz/friendly-snippets' },
+		build = 'make install_jsregexp',
+		config = function()
+			require('luasnip.loaders.from_vscode').lazy_load()
+			require('luasnip.loaders.from_snipmate').lazy_load()
+		end,
+	},
+	{
+		'dmun/nvim-cmp',
+		branch = 'fix-field-column-width',
+		event = 'InsertEnter',
+		dependencies = {
+			'hrsh7th/cmp-buffer',
+			'hrsh7th/cmp-path',
+			'hrsh7th/cmp-nvim-lua',
+			'hrsh7th/cmp-nvim-lsp',
+			'hrsh7th/cmp-nvim-lsp-signature-help',
+			'onsails/lspkind.nvim',
+			'ryo33/nvim-cmp-rust',
+			{
+				'saadparwaiz1/cmp_luasnip',
+				dependencies = 'L3MON4D3/LuaSnip',
+			},
 		},
-	}
-	:config(function()
-		local cmp = require('cmp')
-		local cmp_autopairs = require('nvim-autopairs.completion.cmp')
-		local cmp_rust = require('cmp-rust')
-		local luasnip = require('luasnip')
+		config = function()
+			local cmp = require('cmp')
+			local cmp_autopairs = require('nvim-autopairs.completion.cmp')
+			local cmp_rust = require('cmp-rust')
+			local luasnip = require('luasnip')
 
-		cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
-		cmp.setup {
-			preselect = cmp.PreselectMode.None,
-			view = {
-				entries = {
-					name = 'custom',
-					selection_order = 'near_cursor',
+			cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
+			cmp.setup {
+				preselect = cmp.PreselectMode.None,
+				view = {
+					entries = {
+						name = 'custom',
+						selection_order = 'near_cursor',
+					},
+					docs = {
+						auto_open = false,
+					},
 				},
-				docs = {
-					auto_open = false,
+				snippet = {
+					expand = function(args)
+						luasnip.lsp_expand(args.body)
+					end,
 				},
-			},
-			snippet = {
-				expand = function(args)
-					luasnip.lsp_expand(args.body)
-				end,
-			},
-			mapping = cmp.mapping.preset.insert {
-				['<C-e>'] = vim.NIL,
-				['<C-n>'] = cmp.mapping(function(fallback)
-					if cmp.visible() then
-						cmp.select_next_item()
-					else
-						fallback()
-					end
-				end, { 'i', 's' }),
-				['<C-p>'] = cmp.mapping(function(fallback)
-					if cmp.visible() then
-						cmp.select_prev_item()
-					else
-						fallback()
-					end
-				end, { 'i', 's' }),
-				['<C-k>'] = cmp.mapping.open_docs(),
-				['<C-u>'] = cmp.mapping.scroll_docs(-4),
-				['<C-d>'] = cmp.mapping.scroll_docs(4),
-				['<C-Space>'] = cmp.mapping.complete(),
-				['<C-c>'] = cmp.mapping.abort(),
-				['<TAB>'] = cmp.mapping.confirm { select = true }, -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-				['<C-f>'] = cmp.mapping(function(fallback)
-					if luasnip.locally_jumpable(1) then
-						luasnip.jump(1)
-					else
-						fallback()
-					end
-				end, { 'i', 's' }),
-				['<C-b>'] = cmp.mapping(function(fallback)
-					if luasnip.locally_jumpable(-1) then
-						luasnip.jump(-1)
-					else
-						fallback()
-					end
-				end, { 'i', 's' }),
-			},
-			sources = cmp.config.sources {
-				{ name = 'luasnip' },
-				{ name = 'nvim_lsp' },
-				{ name = 'otter' },
-				{ name = 'path' },
-				{ name = 'nvim_lua' },
-				{ name = 'nvim_lsp_signature_help' },
-				{ name = 'buffer' },
-			},
-			---@diagnostic disable-next-line: missing-fields
-			sorting = {
-				comparators = {
-					-- cmp_rust.deprioritize_postfix,
-					-- cmp_rust.deprioritize_borrow,
-					-- cmp_rust.deprioritize_deref,
-					-- cmp_rust.deprioritize_common_traits,
-					cmp.config.compare.score,
-					cmp.config.compare.kind,
-					cmp.config.compare.locality,
-					cmp.config.compare.length,
-					cmp.config.compare.offset,
-					cmp.config.compare.order,
+				mapping = cmp.mapping.preset.insert {
+					['<C-e>'] = vim.NIL,
+					['<C-n>'] = cmp.mapping(function(fallback)
+						if cmp.visible() then
+							cmp.select_next_item()
+						else
+							fallback()
+						end
+					end, { 'i', 's' }),
+					['<C-p>'] = cmp.mapping(function(fallback)
+						if cmp.visible() then
+							cmp.select_prev_item()
+						else
+							fallback()
+						end
+					end, { 'i', 's' }),
+					['<C-k>'] = cmp.mapping.open_docs(),
+					['<C-u>'] = cmp.mapping.scroll_docs(-4),
+					['<C-d>'] = cmp.mapping.scroll_docs(4),
+					['<C-Space>'] = cmp.mapping.complete(),
+					['<C-c>'] = cmp.mapping.abort(),
+					['<TAB>'] = cmp.mapping.confirm { select = true }, -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+					['<C-f>'] = cmp.mapping(function(fallback)
+						if luasnip.locally_jumpable(1) then
+							luasnip.jump(1)
+						else
+							fallback()
+						end
+					end, { 'i', 's' }),
+					['<C-b>'] = cmp.mapping(function(fallback)
+						if luasnip.locally_jumpable(-1) then
+							luasnip.jump(-1)
+						else
+							fallback()
+						end
+					end, { 'i', 's' }),
 				},
-			},
-			completion = {
-				completeopt = 'menu,menuone',
-			},
-			formatting = {
-				fields = { 'abbr' },
-				format = format_menu,
-				expandable_indicator = false,
-			},
-			experimental = {
-				ghost_text = true,
-			},
-		}
-	end)
+				sources = cmp.config.sources {
+					{ name = 'luasnip' },
+					{ name = 'nvim_lsp' },
+					{ name = 'otter' },
+					{ name = 'path' },
+					{ name = 'nvim_lua' },
+					{ name = 'nvim_lsp_signature_help' },
+					{ name = 'buffer' },
+				},
+				---@diagnostic disable-next-line: missing-fields
+				sorting = {
+					comparators = {
+						-- cmp_rust.deprioritize_postfix,
+						-- cmp_rust.deprioritize_borrow,
+						-- cmp_rust.deprioritize_deref,
+						-- cmp_rust.deprioritize_common_traits,
+						cmp.config.compare.score,
+						cmp.config.compare.kind,
+						cmp.config.compare.locality,
+						cmp.config.compare.length,
+						cmp.config.compare.offset,
+						cmp.config.compare.order,
+					},
+				},
+				completion = {
+					completeopt = 'menu,menuone',
+				},
+				formatting = {
+					fields = { 'abbr' },
+					format = format_menu,
+					expandable_indicator = false,
+				},
+				experimental = {
+					ghost_text = true,
+				},
+			}
+		end,
+	},
+}

@@ -29,10 +29,10 @@ util.handle_keymaps {
 			util.run_command_reset,
 		},
 
-		-- { '<C-h>', '<C-w>h' },
-		-- { '<C-j>', '<C-w>j' },
-		-- { '<C-k>', '<C-w>k' },
-		-- { '<C-l>', '<C-w>l' },
+		{ '<A-h>', '<C-w>h' },
+		{ '<A-j>', '<C-w>j' },
+		{ '<A-k>', '<C-w>k' },
+		{ '<A-l>', '<C-w>l' },
 	},
 	i = {
 		{ '<M-s>', '<esc>:silent update<cr>' },
