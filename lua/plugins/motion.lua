@@ -27,7 +27,9 @@ Plug("jake-stewart/multicursor.nvim")
     :config(function()
         local mc = require("multicursor-nvim")
 
-        mc.setup()
+        mc.setup {
+            signs = {}
+        }
 
         -- Add cursors above/below the main cursor.
         vim.keymap.set({"n", "v"}, "<C-k>", function()
@@ -97,8 +99,11 @@ Plug("jake-stewart/multicursor.nvim")
         vim.keymap.set("v", "<leader>T", function() mc.transposeCursors(-1) end)
 
         -- Customize how cursors look.
+        vim.api.nvim_set_hl(0, "MultiCursorMainSign", {})
         vim.api.nvim_set_hl(0, "MultiCursorCursor", { link = "Cursor" })
         vim.api.nvim_set_hl(0, "MultiCursorVisual", { link = "Visual" })
+        vim.api.nvim_set_hl(0, "MultiCursorSign", { link = "SignColumn" })
         vim.api.nvim_set_hl(0, "MultiCursorDisabledCursor", { link = "Visual" })
         vim.api.nvim_set_hl(0, "MultiCursorDisabledVisual", { link = "Visual" })
+        vim.api.nvim_set_hl(0, "MultiCursorDisabledSign", { link = "SignColumn" })
     end)
