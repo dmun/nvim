@@ -27,13 +27,13 @@ local fields = {
 	'CmpItemKindValue', --     12
 	'@lsp.type.enum', --     13
 	'@keyword', --     14 keyword
-	nil, --     15 snippet
+	'Comment', --     15 snippet
 	'CmpItemKindColor', --     16
 	'CmpItemKindFile', --     17
 	'CmpItemKindReference', --     18
 	'CmpItemKindFolder', --     19
 	'@lsp.type.enumMember', --     20
-	nil, --     21 concstant
+	'@constant', --     21 concstant
 	'@lsp.type.struct', --     22
 	'CmpItemKindEvent', --     23
 	'@operator', --     24
@@ -49,6 +49,9 @@ local function set_abbr_menu(entry, vim_item)
 
 	local abbr = vim_item.abbr
 	local menu = vim_item.menu
+
+	abbr = abbr:gsub('^%s', '')
+	abbr = abbr:gsub('•', '')
 
 	local tbl = {
 		lua = {
@@ -111,6 +114,27 @@ local function set_abbr_menu(entry, vim_item)
 				abbr = abbr .. '()'
 			end,
 		},
+		python = {
+			functions = function()
+				abbr = abbr .. '()'
+			end,
+		},
+		cpp = {
+			functions = function()
+				if label_details then
+					abbr = abbr .. label_details.detail
+					menu = label_details.description
+				end
+			end,
+		},
+		c = {
+			functions = function()
+				if label_details then
+					abbr = abbr .. label_details.detail
+					menu = label_details.description
+				end
+			end,
+		},
 	}
 
 	if vim.tbl_contains({ 2, 3 }, entry_kind) then
@@ -130,29 +154,31 @@ end
 
 ---@param str string
 local function get_highlights(str, width, kind)
-	if not query then
-		return nil
-	end
 	local highlights = {}
 	local ft = vim.bo.filetype
 	local is_function = vim.tbl_contains({ 2, 3 }, kind)
 
 	local prefixes = {
-		zig = 'fn ',
-		rust = 'fn ',
+		-- zig = 'fn ',
+		rust = '',
 		go = 'func ',
+		lua = '',
 	}
 	local prefix = prefixes[ft]
 
-	if ft == 'odin' or ft == 'quarto' then
+	if prefix == nil then
 		local s = vim.split(str, '%(')
 		table.insert(highlights, { '@function', range = { 0, #s[1] } })
-		table.insert(highlights, { 'Comment', range = { #s[1], #str } })
+		table.insert(highlights, { 'CmpItemArgs', range = { #s[1], #str } })
 		return highlights
 	end
 
 	if is_function and prefix then
 		str = prefix .. str
+	end
+
+	if not query then
+		return nil
 	end
 
 	local success, parser = pcall(vim.treesitter.get_string_parser, str, ft)
@@ -328,7 +354,7 @@ return {
 					{ name = 'path' },
 					{ name = 'nvim_lua' },
 					{ name = 'nvim_lsp_signature_help' },
-					{ name = 'buffer' },
+					-- { name = 'buffer' },
 				},
 				---@diagnostic disable-next-line: missing-fields
 				sorting = {

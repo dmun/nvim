@@ -18,13 +18,13 @@ Conf.ls.ltex = {
 	},
 }
 
-Conf.ls.sourcekit = {
-	capabilities = {
-		workspace = {
-			didChangeWatchedFiles = { dynamicRegistration = true },
-		},
-	},
-}
+-- Conf.ls.sourcekit = {
+-- 	capabilities = {
+-- 		workspace = {
+-- 			didChangeWatchedFiles = { dynamicRegistration = true },
+-- 		},
+-- 	},
+-- }
 
 Conf.ls.lua_ls = {
 	settings = {
