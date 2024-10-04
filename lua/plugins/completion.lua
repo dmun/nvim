@@ -27,7 +27,7 @@ local fields = {
 	'CmpItemKindValue', --     12
 	'@lsp.type.enum', --     13
 	'@keyword', --     14 keyword
-	'Comment', --     15 snippet
+	'CmpItemArgs', --     15 snippet
 	'CmpItemKindColor', --     16
 	'CmpItemKindFile', --     17
 	'CmpItemKindReference', --     18
@@ -293,6 +293,11 @@ return {
 			local cmp_rust = require('cmp-rust')
 			local luasnip = require('luasnip')
 
+			vim.cmd('hi! CmpItemAbbrMatch guifg=none gui=bold')
+			vim.cmd('hi! CmpItemAbbrMatchDefault guifg=none gui=bold')
+			vim.cmd('hi! CmpItemAbbrMatchFuzzy guifg=none gui=bold')
+			vim.cmd('hi! CmpItemAbbrMatchFuzzyDefault guifg=none gui=bold')
+
 			cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
 			cmp.setup {
 				preselect = cmp.PreselectMode.None,
@@ -380,7 +385,7 @@ return {
 					expandable_indicator = false,
 				},
 				experimental = {
-					ghost_text = true,
+					ghost_text = false,
 				},
 			}
 		end,

@@ -20,4 +20,4 @@ require('lazy').setup('plugins', {
 	change_detection = { enabled = false },
 })
 
-vim.cmd.color('catppuccin')
+vim.cmd.color('themer_nord')
