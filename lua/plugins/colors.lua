@@ -48,6 +48,7 @@ return {
 							['change'] = c.yellow_fade,
 						},
 						['built_in'] = {
+							['variable'] = c.green1,
 							['function'] = c.green1,
 							['constant'] = c.green1,
 							['keyword']  = c.green1,
