@@ -34,40 +34,42 @@ return {
 
 			local set = vim.keymap.set
 			-- Add cursors above/below the main cursor.
-			set({ 'n', 'v' }, '<C-k>', function()
-				return ':lua for i=1,' .. vim.v.count1 .. " do require('multicursor-nvim').addCursor('k') end<CR>"
-			end, { expr = true, silent = true })
+			-- set({ 'n', 'v' }, '<A-k>', function()
+			-- 	return ':lua for i=1,' .. vim.v.count1 .. " do require('multicursor-nvim').addCursor('k') end<CR>"
+			-- end, { expr = true, silent = true })
 
-			set({ 'n', 'v' }, '<C-j>', function()
-				return ':lua for i=1,' .. vim.v.count1 .. " do require('multicursor-nvim').addCursor('j') end<CR>"
-			end, { expr = true, silent = true })
+			-- set({ 'n', 'v' }, '<A-j>', function()
+			-- 	return ':lua for i=1,' .. vim.v.count1 .. " do require('multicursor-nvim').addCursor('j') end<CR>"
+			-- end, { expr = true, silent = true })
 
-			set('v', '<C-g>', mc.visualToCursors)
+			set('v', '<CR>', mc.visualToCursors)
 
-			-- Add a cursor and jump to the next word under cursor.
-			set({ 'n', 'v' }, '<c-n>', function()
+			set({ 'n' }, '<A-d>', 'viw')
+			set({ 'v' }, '<A-d>', function()
 				mc.matchAddCursor(1)
 			end)
-			set({ 'n', 'v' }, '<c-p>', function()
-				mc.matchAddCursor(-1)
-			end)
+			set({ 'n', 'v' }, '<A-u>', mc.deleteCursor)
 
 			-- Jump to the next word under cursor but do not add a cursor.
-			set({ 'n', 'v' }, '<c-c>', function()
+			set({ 'v' }, '<A-k><A-d>', function()
 				mc.matchSkipCursor(1)
 			end)
 
-			set({"n", "v"}, "<leader>A", mc.matchAllAddCursors)
+			set({ 'n' }, '<A-l>', function()
+				vim.cmd.norm('viw')
+				mc.matchAllAddCursors()
+			end)
+			set({ 'v' }, '<A-l>', mc.matchAllAddCursors)
 
 			-- Rotate the main cursor.
-			set({ 'n', 'v' }, '<C-l>', mc.nextCursor)
-			set({ 'n', 'v' }, '<C-h>', mc.prevCursor)
+			-- set({ 'n', 'v' }, '<A-l>', mc.nextCursor)
+			-- set({ 'n', 'v' }, '<A-h>', mc.prevCursor)
 
 			-- Delete the main cursor.
 			set({ 'n', 'v' }, '<leader>x', mc.deleteCursor)
 
 			-- Add and remove cursors with control + left click.
-			set('n', '<c-leftmouse>', mc.handleMouse)
+			-- set('n', '<c-leftmouse>', mc.handleMouse)
 
 			set({ 'n', 'v' }, '<c-q>', function()
 				if mc.cursorsEnabled() then

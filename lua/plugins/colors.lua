@@ -35,7 +35,7 @@ return {
 						['accent'] = c.fg1,
 						['border'] = c.fg2,
 						['fg']     = c.fg1,
-						['bg']     = { ['alt'] = '#16161d', ['selected'] = '#363646', ['base'] = '#1f1f28' },
+						['bg']     = { ['alt'] = '#16161d', ['base'] = '#363646', ['selected'] = '#1f1f28' },
 						['pum'] = {
 							['sbar']  = c.bg.base,
 							['sel']   = { fg = 'none', bg = c.bg.alt },
@@ -51,7 +51,7 @@ return {
 							['function'] = c.green1,
 							['constant'] = c.green1,
 							['keyword']  = c.green1,
-							['type']     = c.cyan,
+							['type']     = c.cyan2,
 						},
 						['syntax'] = {
 							['function']    = c.cyan1,
@@ -70,7 +70,7 @@ return {
 				highlights = {
 					globals = {
 						base = {
-							Cursor                  = { fg = '#dddddd', bg = '#111111' },
+							Cursor                  = { fg = c.fg1, bg = '#111111' },
 							nCursor                 = { bg = c.green1},
 							iCursor                 = { bg = c.yellow},
 							Normal                  = { bg = '#000000' },
