@@ -72,7 +72,7 @@ return {
 					globals = {
 						base = {
 							Cursor                  = { fg = c.fg1, bg = '#111111' },
-							nCursor                 = { bg = c.green1},
+							nCursor                 = { bg = c.cyan2},
 							iCursor                 = { bg = c.yellow},
 							Normal                  = { bg = '#000000' },
 							SignColumn              = { link = 'Normal' },
