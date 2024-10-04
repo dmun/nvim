@@ -34,7 +34,7 @@ o.signcolumn = "yes"
 o.background = "dark"
 o.conceallevel = 2
 o.laststatus = 2
-o.lazyredraw = true
+o.lazyredraw = false
 o.cursorline = true
 o.cursorlineopt = "number"
 o.ruler = false
@@ -43,7 +43,7 @@ o.showmode = false
 o.showtabline = 0
 o.termguicolors = true
 o.shm:append("I")
-o.cmdheight = 1
+o.cmdheight = 0
 o.pumheight = 15
 -- o.colorcolumn = "+1"
 o.fillchars = "eob: "

@@ -24,13 +24,13 @@ vim.api.nvim_create_autocmd({ 'BufLeave', 'FocusLost' }, {
 })
 
 -- clear cmdline
-vim.api.nvim_create_autocmd('CmdlineLeave', {
-	callback = function()
-		vim.fn.timer_start(1000, function()
-			print(' ')
-		end)
-	end,
-})
+-- vim.api.nvim_create_autocmd('CmdlineLeave', {
+-- 	callback = function()
+-- 		vim.fn.timer_start(1000, function()
+-- 			print(' ')
+-- 		end)
+-- 	end,
+-- })
 
 -- dynamic linenumbers
 if false then
