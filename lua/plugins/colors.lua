@@ -5,6 +5,7 @@ local c = {
 	fg3         = '#999999',
 	bg          = { ['alt'] = '#16161d', ['selected'] = '#363646', ['base'] = '#1f1f28' },
 	blue        = '#89B4FB',
+	red         = '#FF5189',
 	purple      = '#C8D7E8',
 	cyan        = '#88C1D0',
 	cyan1       = '#05A8C5',
@@ -72,7 +73,7 @@ return {
 					globals = {
 						base = {
 							Cursor                  = { fg = c.fg1, bg = '#111111' },
-							nCursor                 = { bg = c.cyan2},
+							nCursor                 = { bg = c.red},
 							iCursor                 = { bg = c.yellow},
 							Normal                  = { bg = '#000000' },
 							SignColumn              = { link = 'Normal' },
@@ -99,6 +100,10 @@ return {
 		'NvChad/nvim-colorizer.lua',
 		event = { 'BufReadPre', 'BufNewFile' },
 		opts = {
+			filetypes = {
+				'*',
+				'!noice',
+			},
 			user_default_options = {
 				names = false,
 			},
