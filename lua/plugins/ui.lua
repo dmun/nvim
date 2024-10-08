@@ -3,6 +3,7 @@ return {
 	event = 'VeryLazy',
 	dependencies = 'MunifTanjim/nui.nvim',
 	opts = {
+		lsp = { signature = { enabled = false } },
 		views = {
 			cmdline_popup = {
 				position = {

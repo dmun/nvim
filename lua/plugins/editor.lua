@@ -4,7 +4,7 @@ return {
 	{ 'numToStr/Comment.nvim', event = 'VeryLazy' },
 	{ 'kylechui/nvim-surround', event = 'VeryLazy' },
 	{ 'windwp/nvim-autopairs', event = 'InsertEnter', config = true },
-	{ 'VidocqH/auto-indent.nvim', event = 'InsertEnter' },
+	-- { 'VidocqH/auto-indent.nvim', event = 'InsertEnter' },
 	{
 		'lukas-reineke/indent-blankline.nvim',
 		enabled = false,

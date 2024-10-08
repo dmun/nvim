@@ -1,5 +1,6 @@
 return {
 	'onsails/lspkind.nvim',
+	enabled = false,
 	config = function()
 		require('lspkind').init {
 			symbol_map = {

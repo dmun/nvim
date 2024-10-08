@@ -272,6 +272,7 @@ return {
 	},
 	{
 		'dmun/nvim-cmp',
+		enabled = false,
 		branch = 'fix-field-column-width',
 		event = 'InsertEnter',
 		dependencies = {

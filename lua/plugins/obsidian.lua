@@ -20,7 +20,7 @@ return {
 			enable = true,
 		},
 		completion = {
-			nvim_cmp = true,
+			nvim_cmp = false,
 		},
 		workspaces = {
 			{

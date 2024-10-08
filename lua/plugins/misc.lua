@@ -19,7 +19,7 @@ return {
 		end,
 		keys = {
 			{ '<leader>rt', '<cmd>ReplToggle<cr>', desc = 'Toggle nvim-repl' },
-			{ '<S-CR>', '<cmd>ReplRunCell<cr>', desc = 'nvim-repl run cell' },
+			{ '<C-g>', '<cmd>ReplRunCell<cr>', desc = 'nvim-repl run cell' },
 		},
 	},
 }

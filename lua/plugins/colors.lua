@@ -28,7 +28,7 @@ return {
 		'themercorp/themer.lua',
 		opts = {
 			plugins = {
-				cmp = false,
+				cmp = true,
 			},
 			remaps = {
 				palette = {
