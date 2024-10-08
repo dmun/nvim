@@ -10,6 +10,17 @@ return {
 					return vim.startswith(name, '.') or vim.endswith(name, '.pdf')
 				end,
 			},
+			win_options = {
+				number = false,
+				wrap = false,
+				signcolumn = 'yes',
+				cursorcolumn = false,
+				foldcolumn = '0',
+				spell = false,
+				list = false,
+				conceallevel = 3,
+				concealcursor = 'nvic',
+			},
 		},
 	},
 	{

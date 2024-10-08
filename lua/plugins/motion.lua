@@ -34,19 +34,21 @@ return {
 
 			local set = vim.keymap.set
 			-- Add cursors above/below the main cursor.
-			-- set({ 'n', 'v' }, '<A-k>', function()
-			-- 	return ':lua for i=1,' .. vim.v.count1 .. " do require('multicursor-nvim').addCursor('k') end<CR>"
-			-- end, { expr = true, silent = true })
+			set({ 'n', 'v' }, '<A-k>', function()
+				return ':lua for i=1,' .. vim.v.count1 .. " do require('multicursor-nvim').addCursor('k') end<CR>"
+			end, { expr = true, silent = true })
 
-			-- set({ 'n', 'v' }, '<A-j>', function()
-			-- 	return ':lua for i=1,' .. vim.v.count1 .. " do require('multicursor-nvim').addCursor('j') end<CR>"
-			-- end, { expr = true, silent = true })
+			set({ 'n', 'v' }, '<A-j>', function()
+				return ':lua for i=1,' .. vim.v.count1 .. " do require('multicursor-nvim').addCursor('j') end<CR>"
+			end, { expr = true, silent = true })
 
 			set('v', '<CR>', mc.visualToCursors)
 
-			set({ 'n' }, '<A-d>', 'viw')
-			set({ 'v' }, '<A-d>', function()
+			set({ 'n', 'v' }, '<C-n>', function()
 				mc.matchAddCursor(1)
+			end)
+			set({ 'n', 'v' }, '<C-p>', function()
+				mc.matchAddCursor(-1)
 			end)
 			set({ 'n', 'v' }, '<A-u>', mc.deleteCursor)
 
@@ -55,11 +57,7 @@ return {
 				mc.matchSkipCursor(1)
 			end)
 
-			set({ 'n' }, '<A-l>', function()
-				vim.cmd.norm('viw')
-				mc.matchAllAddCursors()
-			end)
-			set({ 'v' }, '<A-l>', mc.matchAllAddCursors)
+			set({ 'n', 'v' }, '<A-l>', mc.matchAllAddCursors)
 
 			-- Rotate the main cursor.
 			-- set({ 'n', 'v' }, '<A-l>', mc.nextCursor)
@@ -116,11 +114,11 @@ return {
 
 			-- Customize how cursors look.
 			local hl = vim.api.nvim_set_hl
-			hl(0, 'MultiCursorSign',           { link = 'LineNr', force = true })
-			hl(0, 'MultiCursorMainSign',       { link = 'CursorLineNr' })
-			hl(0, 'MultiCursorDisabledSign',   { link = 'LineNr' })
-			hl(0, 'MultiCursorCursor',         { link = 'Cursor' })
-			hl(0, 'MultiCursorVisual',         { link = 'Visual' })
+			hl(0, 'MultiCursorSign', { link = 'LineNr', force = true })
+			hl(0, 'MultiCursorMainSign', { link = 'CursorLineNr' })
+			hl(0, 'MultiCursorDisabledSign', { link = 'LineNr' })
+			hl(0, 'MultiCursorCursor', { link = 'Cursor' })
+			hl(0, 'MultiCursorVisual', { link = 'Visual' })
 			hl(0, 'MultiCursorDisabledCursor', { link = 'Visual' })
 			hl(0, 'MultiCursorDisabledVisual', { link = 'Visual' })
 		end,

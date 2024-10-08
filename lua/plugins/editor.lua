@@ -5,6 +5,7 @@ return {
 	{ 'kylechui/nvim-surround', event = 'VeryLazy' },
 	{ 'windwp/nvim-autopairs', event = 'InsertEnter', config = true },
 	-- { 'VidocqH/auto-indent.nvim', event = 'InsertEnter' },
+	{ 'dstein64/nvim-scrollview', opts = {} },
 	{
 		'lukas-reineke/indent-blankline.nvim',
 		enabled = false,
@@ -21,6 +22,10 @@ return {
 		config = function()
 			require('illuminate').configure {
 				providers = { 'lsp', 'treesitter' },
+				large_file_cutoff = 1000,
+				large_file_overrides = {
+					providers = { 'lsp' },
+				},
 			}
 		end,
 	},
