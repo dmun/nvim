@@ -19,7 +19,7 @@ o.tabstop = 4
 o.textwidth = 0
 
 -- mouse
-o.mouse = "a"
+o.mouse = "iv"
 
 -- statuscolumn
 o.foldcolumn = "0"
