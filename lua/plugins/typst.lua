@@ -1,6 +1,6 @@
 return {
 	'chomosuke/typst-preview.nvim',
-	enabled = false,
+	-- enabled = false,
 	ft = 'typst',
 	keys = {
 		{

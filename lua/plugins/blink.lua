@@ -1,10 +1,9 @@
 return {
-	'benlubas/blink.cmp',
-	branch = 'push-omlsnsoqzwmv',
+	'Saghen/blink.cmp',
 	lazy = false,
 	dependencies = 'rafamadriz/friendly-snippets',
-	-- version = 'v0.*',
-	build = 'cargo +nightly build --release',
+	version = 'v0.*',
+	-- build = 'cargo +nightly build --release',
 	opts = {
 		highlight = { use_nvim_cmp_as_default = true },
 		nerd_font_variant = 'normal',
