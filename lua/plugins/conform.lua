@@ -38,7 +38,7 @@ return {
 			},
 			['clang-format'] = {
 				command = 'clang-format',
-				args = { '--style', '{BasedOnStyle: Webkit, IndentWidth: 4}' },
+				args = { '--style', '{BasedOnStyle: LLVM, IndentWidth: 4}' },
 			},
 		},
 	},
