@@ -1,6 +1,9 @@
 local api = vim.api
 local ts = vim.treesitter
 
+vim.keymap.set('n', '<CR>', '<cmd>QuartoSend<cr>', { buffer = 0 })
+
+-- vim.g.molten_virt_lines_off_by_1 = true
 vim.b.slime_cell_delimiter = '```'
 vim.b['quarto_is_r_mode'] = nil
 vim.b['reticulate_running'] = false
@@ -36,7 +39,19 @@ local tsquery = '(fenced_code_block)@codecell'
 
 -- vim.api.nvim_set_hl(0, '@markup.codecell', { bg = '#000055' })
 vim.api.nvim_set_hl(0, '@markup.codecell', {
-	link = 'CursorColumn',
+	link = 'MoltenCell',
+})
+
+-- vim.api.nvim_set_hl(0, '@markup.codecell', { bg = '#000055' })
+vim.api.nvim_set_hl(0, '@markup.codecell.lang', {
+	fg = '#333338',
+	bg = '#111116',
+})
+
+-- vim.api.nvim_set_hl(0, '@markup.codecell', { bg = '#000055' })
+vim.api.nvim_set_hl(0, '@markup.codecell.end', {
+	fg = 'black',
+	bg = 'black',
 })
 
 local function clear_all()
@@ -46,11 +61,11 @@ local function clear_all()
 	end
 end
 
-local function highlight_range(from, to)
+local function highlight_range(from, to, group)
 	for i = from, to do
 		vim.api.nvim_buf_set_extmark(buf, ns, i, 0, {
 			hl_eol = true,
-			line_hl_group = '@markup.codecell',
+			line_hl_group = group,
 		})
 	end
 end
@@ -65,7 +80,9 @@ local function highlight_cells()
 		for _, nodes in pairs(match) do
 			for _, node in ipairs(nodes) do
 				local start_line, _, end_line, _ = node:range()
-				pcall(highlight_range, start_line, end_line - 1)
+				pcall(highlight_range, start_line, start_line, '@markup.codecell.lang')
+				pcall(highlight_range, start_line + 1, end_line - 2, '@markup.codecell')
+				pcall(highlight_range, end_line - 1, end_line - 1, '@markup.codecell.end')
 			end
 		end
 	end

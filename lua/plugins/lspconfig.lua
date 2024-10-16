@@ -16,7 +16,11 @@ local function get_ls_config(config)
 		filetypes = config and config.filetypes or nil,
 		autostart = config and (config.autostart ~= false),
 		on_init = config and config.on_init or nil,
-		capabilities = config and config.capabilities or {},
+		capabilities = vim.tbl_deep_extend(
+			'force',
+			require('cmp_nvim_lsp').default_capabilities() or {},
+			config and config.capabilities or {}
+		),
 		handlers = {
 			['textDocument/publishDiagnostics'] = vim.lsp.with(
 				vim.lsp.diagnostic.on_publish_diagnostics,

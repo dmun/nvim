@@ -1,5 +1,6 @@
 return {
 	'Saghen/blink.cmp',
+    enabled = false,
 	lazy = false,
 	dependencies = 'rafamadriz/friendly-snippets',
 	version = 'v0.*',
@@ -26,8 +27,8 @@ return {
 			scroll_documentation_up = '<C-u>',
 			scroll_documentation_down = '<C-d>',
 
-			snippet_forward = '<Tab>',
-			snippet_backward = '<S-Tab>',
+			snippet_forward = '<C-f>',
+			snippet_backward = '<C-b>',
 		},
 	},
 }

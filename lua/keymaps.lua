@@ -33,10 +33,19 @@ util.handle_keymaps {
 		{ '<C-j>', '<C-w>j' },
 		{ '<C-k>', '<C-w>k' },
 		{ '<C-l>', '<C-w>l' },
+
+		{ '<M-r>', '<cmd>MoltenReevaluateCell<cr>' },
+		{ '<M-i>', '<cmd>MoltenImagePopup<cr>' },
+		{ '<M-o>', '<cmd>autocmd MoltenEnterOutput<cr>' },
+		{ '<leader>ra', '<cmd>MoltenReevaluateAll<cr>' },
+		{ '<leader>ev', '<cmd>MoltenEvaluateVisual<cr>' },
 	},
 	i = {
 		{ '<M-s>', '<esc>:silent update<cr>' },
 		{ '<C-n>', '<cmd>norm j<cr>' },
 		{ '<C-p>', '<cmd>norm k<cr>' },
+	},
+	v = {
+		{ '<M-r>', '<cmd>MoltenEvaluateOperator<cr>' },
 	},
 }

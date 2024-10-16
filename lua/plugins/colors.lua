@@ -28,7 +28,7 @@ return {
 		'themercorp/themer.lua',
 		opts = {
 			plugins = {
-				cmp = true,
+				cmp = false,
 			},
 			remaps = {
 				palette = {
@@ -80,6 +80,9 @@ return {
 							MultiCursorSign         = { link = 'LineNr' },
 							CmpItemArgs             = { fg = '#777777'},
 							CmpItemMenu             = { fg = c.fg2 },
+							MoltenCell              = { bg = '#111116' },
+							-- MoltenVirtualText       = { fg = '#55555e', bg = '#111116' },
+							-- MoltenVirtualText       = { fg = c.fg3, bg = c.bg.alt },
 							IlluminatedWordText     = { bg = '#111111' },
 							IlluminatedWordRead     = { bg = '#111111' },
 							IlluminatedWordWrite    = { bg = '#111111' },

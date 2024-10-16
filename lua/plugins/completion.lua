@@ -109,6 +109,11 @@ local function set_abbr_menu(entry, vim_item)
 				end
 			end,
 		},
+		typst = {
+			functions = function()
+				abbr = abbr .. '()'
+			end,
+		},
 		quarto = {
 			functions = function()
 				abbr = abbr .. '()'
@@ -272,7 +277,7 @@ return {
 	},
 	{
 		'dmun/nvim-cmp',
-		enabled = false,
+		-- enabled = false,
 		branch = 'fix-field-column-width',
 		event = 'InsertEnter',
 		dependencies = {

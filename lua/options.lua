@@ -47,7 +47,7 @@ o.cmdheight = 0
 o.pumheight = 15
 -- o.colorcolumn = "+1"
 o.fillchars = "eob: "
-o.guicursor = "i:iCursor-block,n-v:nCursor-block"
+-- o.guicursor = "i:iCursor-block,n-v:nCursor-block"
 
 -- window
 o.inccommand = "split"
