@@ -24,20 +24,19 @@ return {
 		dependencies = { '3rd/image.nvim', 'vhyrro/luarocks.nvim' },
 		build = ':UpdateRemotePlugins',
 		init = function()
-			-- this is an example, not a default. Please see the readme for more configuration options
-			-- vim.g.molten_image_provider = 'image.nvim'
-			-- vim.g.molten_auto_image_popup = true
-			-- vim.g.molten_image_location = 'virt'
 			-- vim.g.molten_output_win_hide_on_leave = false
-			-- vim.g.molten_output_win_style = 'minimal'
+			vim.g.molten_output_win_style = 'minimal'
 			vim.g.molten_tick_rate = 100
 
 			vim.g.molten_enter_output_behavior = 'open_and_enter'
 			vim.g.molten_output_win_max_height = 12
-			-- vim.g.molten_auto_open_output = false
-			vim.g.molten_output_virt_lines = true
+			vim.g.molten_auto_open_output = false
+			vim.g.molten_auto_image_popup = true
+			vim.g.molten_output_virt_lines = false
 			vim.g.molten_virt_text_output = true
-			vim.g.molten_cover_empty_lines = true
+			vim.g.molten_cover_empty_lines = false
+			vim.g.molten_output_win_border = { '', '', '', '' }
+			vim.g.molten_output_win_cover_gutter = false
 			-- vim.g.molten_virt_lines_off_by_1 = true
 		end,
 	},

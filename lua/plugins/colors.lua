@@ -73,7 +73,7 @@ return {
 					globals = {
 						base = {
 							Cursor                  = { fg = c.fg1, bg = '#111111' },
-							nCursor                 = { bg = c.red},
+							nCursor                 = { bg = c.orange},
 							iCursor                 = { bg = c.yellow},
 							Normal                  = { bg = '#000000' },
 							SignColumn              = { link = 'Normal' },
@@ -81,6 +81,7 @@ return {
 							CmpItemArgs             = { fg = '#777777'},
 							CmpItemMenu             = { fg = c.fg2 },
 							MoltenCell              = { bg = '#111116' },
+							MoltenOutputWin         = { link = 'Comment' },
 							-- MoltenVirtualText       = { fg = '#55555e', bg = '#111116' },
 							-- MoltenVirtualText       = { fg = c.fg3, bg = c.bg.alt },
 							IlluminatedWordText     = { bg = '#111111' },

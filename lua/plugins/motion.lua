@@ -42,7 +42,7 @@ return {
 				return ':lua for i=1,' .. vim.v.count1 .. " do require('multicursor-nvim').addCursor('j') end<CR>"
 			end, { expr = true, silent = true })
 
-			set('v', '<CR>', mc.visualToCursors)
+			set('v', '<M-s>', mc.visualToCursors)
 
 			set({ 'n', 'v' }, '<C-n>', function()
 				mc.matchAddCursor(1)

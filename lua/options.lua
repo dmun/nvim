@@ -62,8 +62,8 @@ o.ttimeout = false
 o.timeout = false
 o.ttimeoutlen = 0
 o.timeoutlen = 0
-o.scrolloff = 5
-o.sidescrolloff = 10
+o.scrolloff = 0
+o.sidescrolloff = 15
 o.smartcase = true
 
 -- file
