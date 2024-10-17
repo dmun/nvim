@@ -12,6 +12,7 @@ return {
 			},
 			win_options = {
 				number = false,
+				relativenumber = false,
 				wrap = false,
 				signcolumn = 'yes',
 				cursorcolumn = false,
@@ -44,8 +45,11 @@ return {
 			grep = { no_header_i = true },
 			buffers = { no_header_i = true },
 			winopts = {
-				split = 'botright new',
+				-- split = 'botright new',
 				preview = { hidden = 'hidden' },
+                width = 50,
+                height = 15,
+                backdrop = 100,
 			},
 			fzf_opts = {
 				['--no-info'] = true,

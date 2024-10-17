@@ -1,7 +1,7 @@
 local util = require('util')
 
 vim.g.mapleader = ' '
-vim.g.maplocalleader = ' m'
+vim.g.maplocalleader = ','
 
 vim.api.nvim_set_keymap('x', 'k', "v:count == 0 ? 'gk' : 'k'", { noremap = true, expr = true, silent = true })
 vim.api.nvim_set_keymap('x', 'j', "v:count == 0 ? 'gj' : 'j'", { noremap = true, expr = true, silent = true })
@@ -11,9 +11,6 @@ vim.api.nvim_set_keymap('n', 'j', "v:count == 0 ? 'gj' : 'j'", { noremap = true,
 
 util.handle_keymaps {
 	n = {
-		-- { 'u', '<cmd>undo<cr>' },
-		-- { '<C-r>', '<cmd>silent redo<cr>' },
-
 		{ '<M-s>', ':silent update<cr>' },
 		{ '<M-a>', 'ggVG' },
 

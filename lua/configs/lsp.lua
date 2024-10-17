@@ -11,6 +11,14 @@ Conf.ls.zls = {
 	end,
 }
 
+Conf.ls['r_language_server'] = {
+	settings = {
+		lsp = {
+			diagnostics = false,
+		},
+	},
+}
+
 Conf.ls.ltex = {
 	filetypes = { 'tex', 'typst', 'markdown' },
 	autostart = false,

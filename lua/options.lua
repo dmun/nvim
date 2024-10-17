@@ -11,11 +11,11 @@ o.wrap = false
 o.breakindent = true
 o.completeopt = "menuone,noselect"
 o.confirm = true
-o.expandtab = true
+o.expandtab = false
 o.linebreak = true
-o.shiftwidth = 4
-o.softtabstop = 4
+o.softtabstop = -1
 o.tabstop = 4
+o.shiftwidth = 0
 o.textwidth = 0
 
 -- mouse
@@ -27,7 +27,7 @@ o.foldenable = true
 o.foldlevel = 99
 o.foldlevelstart = 99
 o.number = true
-o.relativenumber = false
+o.relativenumber = true
 o.signcolumn = "yes"
 
 -- appearance
@@ -47,7 +47,9 @@ o.cmdheight = 0
 o.pumheight = 15
 -- o.colorcolumn = "+1"
 o.fillchars = "eob: "
--- o.guicursor = "i:iCursor-block,n-v:nCursor-block"
+-- o.guicursor = "i:nCursor-block,n-v:Cursor-block"
+o.guicursor = "i:Cursor-ver25"
+o.laststatus = 0
 
 -- window
 o.inccommand = "split"

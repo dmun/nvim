@@ -11,6 +11,7 @@ local custom_filename = {
 
 return {
 	'nvim-lualine/lualine.nvim',
+    enabled = false,
 	opts = {
 		options = {
 			theme = 'themer',

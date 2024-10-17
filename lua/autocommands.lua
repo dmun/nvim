@@ -1,8 +1,7 @@
-local Vec = require('util.vector')
-
 -- filetypes
 vim.cmd('au BufRead,BufEnter *.swiftinterface se ft=swift')
 vim.cmd('au BufRead,BufEnter .swift-format se ft=json')
+vim.cmd('au BufRead,BufEnter *.dagitty se ft=luau')
 
 -- highlight on yank
 local hi_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
@@ -23,76 +22,47 @@ vim.api.nvim_create_autocmd({ 'BufLeave', 'FocusLost' }, {
 	end,
 })
 
--- clear cmdline
--- vim.api.nvim_create_autocmd('CmdlineLeave', {
--- 	callback = function()
--- 		vim.fn.timer_start(1000, function()
--- 			print(' ')
--- 		end)
--- 	end,
--- })
-
--- dynamic linenumbers
-if false then
-	vim.cmd('au InsertEnter * se nornu')
-	vim.cmd('au InsertLeave * se rnu')
-end
-
--- dynamic CursorLineNr color
-if false then
-	vim.cmd('au InsertEnter * se winhl=CursorLineNr:iCursorLineNr')
-	vim.cmd('au InsertLeave * se winhl=CursorLineNr:nCursorLineNr')
-end
-
-vim.api.nvim_create_autocmd('ColorScheme', {
+-- auto-save
+vim.api.nvim_create_autocmd({ 'WinResized' }, {
 	callback = function()
-		local path = vim.fn.stdpath('cache') .. '/colorscheme'
-		local fd, err, _ = vim.uv.fs_open(path, 'w+', 438)
-
-		if not fd then
-			error(err)
-		end
-
-		local str = vim.api.nvim_exec2('color', { output = true }).output
-		vim.uv.fs_write(fd, str, 0)
-
-		vim.uv.fs_close(fd)
+		vim.api.nvim_set_hl(0, 'Statusline', { link = 'Normal' })
+		vim.api.nvim_set_hl(0, 'StatuslineNC', { link = 'Normal' })
+		local str = string.rep('─', vim.api.nvim_win_get_width(0))
+		vim.opt.statusline = str
+		vim.opt.statusline = '%#WinSeparator#' .. str .. '%*'
 	end,
 })
 
--- vim.api.nvim_create_autocmd("ColorScheme", {
+-- auto-save
+vim.api.nvim_create_autocmd({ 'BufNew', 'BufEnter', 'BufReadPre', 'BufReadPost' }, {
+	callback = function()
+		if vim.bo.buftype == 'terminal' then
+			vim.opt_local.relativenumber = false
+			vim.opt_local.number = false
+		end
+	end,
+})
+
+-- -- dynamic linenumbers
+-- vim.cmd('au InsertEnter * se nornu')
+-- vim.cmd('au InsertLeave * se rnu')
+
+-- -- dynamic CursorLineNr color
+-- vim.cmd('au InsertEnter * se winhl=CursorLineNr:iCursorLineNr')
+-- vim.cmd('au InsertLeave * se winhl=CursorLineNr:nCursorLineNr')
+
+-- vim.api.nvim_create_autocmd('ColorScheme', {
 -- 	callback = function()
--- 		local rgb = require("polychrome.color.rgb")
--- 		local oklch = require("polychrome.color.oklch")
+-- 		local path = vim.fn.stdpath('cache') .. '/colorscheme'
+-- 		local fd, err, _ = vim.uv.fs_open(path, 'w+', 438)
 --
--- 		local hl = vim.api.nvim_get_hl(0, { name = "Normal" })
--- 		local normal_bg = string.format("#%06x", hl.bg)
+-- 		if not fd then
+-- 			error(err)
+-- 		end
 --
--- 		local p1 = Vec(0, 1)
--- 		local p2 = Vec(0.1, 0)
--- 		local p3 = Vec(0, 0)
--- 		local p4 = Vec(0.3, 0)
+-- 		local str = vim.api.nvim_exec2('color', { output = true }).output
+-- 		vim.uv.fs_write(fd, str, 0)
 --
--- 		local bg = rgb:from_hex(normal_bg):to(oklch) ---@cast bg Oklch
--- 		local value = Vec.cubic_bezier(p1, p2, p3, p4, bg.L)[2]
---
--- 		local error_bg = vim.deepcopy(bg)
--- 		error_bg.h = bg.h + 30
---
--- 		local warn_bg = vim.deepcopy(bg)
--- 		warn_bg.h = bg.h + 85
---
--- 		vim.cmd("hi! DiagnosticSignLineWarn guibg=" .. warn_bg:hex())
--- 		vim.cmd("hi! DiagnosticSignLineError guibg=" .. error_bg:hex())
---
--- 		hl = vim.api.nvim_get_hl(0, { name = "DiagnosticError", link = false })
--- 		local error_fg = string.format("#%06x", hl.fg)
--- 		vim.cmd("hi! DiagnosticError guifg=" .. error_fg)
--- 		vim.cmd("hi! link DiagnosticVirtualTextError DiagnosticError")
---
--- 		hl = vim.api.nvim_get_hl(0, { name = "DiagnosticWarn", link = false })
--- 		local warn_fg = string.format("#%06x", hl.fg)
--- 		vim.cmd("hi! DiagnosticWarn guifg=" .. warn_fg)
--- 		vim.cmd("hi! link DiagnosticVirtualTextWarn DiagnosticWarn")
+-- 		vim.uv.fs_close(fd)
 -- 	end,
 -- })

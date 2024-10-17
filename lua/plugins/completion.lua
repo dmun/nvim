@@ -305,7 +305,7 @@ return {
 			vim.cmd('hi! CmpItemAbbrMatchFuzzyDefault guifg=none gui=bold')
 
 			cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
-			cmp.setup {
+			cmp.setup({
 				preselect = cmp.PreselectMode.None,
 				view = {
 					entries = {
@@ -321,7 +321,7 @@ return {
 						luasnip.lsp_expand(args.body)
 					end,
 				},
-				mapping = cmp.mapping.preset.insert {
+				mapping = cmp.mapping.preset.insert({
 					['<C-e>'] = vim.NIL,
 					['<C-n>'] = cmp.mapping(function(fallback)
 						if cmp.visible() then
@@ -342,7 +342,7 @@ return {
 					['<C-d>'] = cmp.mapping.scroll_docs(4),
 					['<C-Space>'] = cmp.mapping.complete(),
 					['<C-c>'] = cmp.mapping.abort(),
-					['<TAB>'] = cmp.mapping.confirm { select = true }, -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+					['<TAB>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
 					['<C-f>'] = cmp.mapping(function(fallback)
 						if luasnip.locally_jumpable(1) then
 							luasnip.jump(1)
@@ -357,16 +357,16 @@ return {
 							fallback()
 						end
 					end, { 'i', 's' }),
-				},
-				sources = cmp.config.sources {
+				}),
+				sources = cmp.config.sources({
 					{ name = 'luasnip' },
 					{ name = 'nvim_lsp' },
 					{ name = 'otter' },
 					{ name = 'path' },
 					{ name = 'nvim_lua' },
 					{ name = 'nvim_lsp_signature_help' },
-					-- { name = 'buffer' },
-				},
+					{ name = 'buffer' },
+				}),
 				---@diagnostic disable-next-line: missing-fields
 				sorting = {
 					comparators = {
@@ -393,7 +393,7 @@ return {
 				experimental = {
 					ghost_text = false,
 				},
-			}
+			})
 		end,
 	},
 }
