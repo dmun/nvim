@@ -35,11 +35,11 @@ return {
 			local set = vim.keymap.set
 			-- Add cursors above/below the main cursor.
 			set({ 'n', 'v' }, '<C-k>', function()
-				return ':lua for i=1,' .. vim.v.count1 .. " do require('multicursor-nvim').lineAddCursor(-1) end<CR>"
+				return '<cmd>lua for i=1,' .. vim.v.count1 .. " do require('multicursor-nvim').lineAddCursor(-1) end<CR>"
 			end, { expr = true, silent = true })
 
 			set({ 'n', 'v' }, '<C-j>', function()
-				return ':lua for i=1,' .. vim.v.count1 .. " do require('multicursor-nvim').lineAddCursor(1) end<CR>"
+				return '<cmd>lua for i=1,' .. vim.v.count1 .. " do require('multicursor-nvim').lineAddCursor(1) end<CR>"
 			end, { expr = true, silent = true })
 
 			set('v', '<C-c>', mc.visualToCursors)
@@ -59,25 +59,7 @@ return {
 
 			set({ 'n', 'v' }, '<leader>M', mc.matchAllAddCursors)
 
-			-- Rotate the main cursor.
-			-- set({ 'n', 'v' }, '<A-l>', mc.nextCursor)
-			-- set({ 'n', 'v' }, '<A-h>', mc.prevCursor)
-
-			-- Delete the main cursor.
-			set({ 'n', 'v' }, '<leader>x', mc.deleteCursor)
-
-			-- Add and remove cursors with control + left click.
-			-- set('n', '<c-leftmouse>', mc.handleMouse)
-
-			set({ 'n', 'v' }, 'q', function()
-				if mc.cursorsEnabled() then
-					-- Stop other cursors from moving.
-					-- This allows you to reposition the main cursor.
-					mc.disableCursors()
-				else
-					mc.addCursor()
-				end
-			end)
+			set({ 'n', 'v' }, 'q', mc.toggleCursor)
 
 			set('n', '<esc>', function()
 				if not mc.cursorsEnabled() then
@@ -103,6 +85,7 @@ return {
 
 			-- match new cursors within visual selections by regex.
 			set('v', 'M', mc.matchCursors)
+			set('n', 'gm', mc.restoreCursors)
 
 			-- Rotate visual selection contents.
 			set('v', '<leader>t', function()
@@ -111,6 +94,10 @@ return {
 			set('v', '<leader>T', function()
 				mc.transposeCursors(-1)
 			end)
+
+			-- Jumplist support
+			set({ 'v', 'n' }, '<c-i>', mc.jumpForward)
+			set({ 'v', 'n' }, '<c-o>', mc.jumpBackward)
 
 			-- Customize how cursors look.
 			local hl = vim.api.nvim_set_hl

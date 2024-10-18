@@ -26,6 +26,7 @@ return {
 	{ 'miikanissi/modus-themes.nvim', priority = 1000 },
 	{
 		'themercorp/themer.lua',
+		priority = 1000,
 		opts = {
 			plugins = {
 				cmp = false,
@@ -90,6 +91,8 @@ return {
 							FloatBorder             = { fg = '#333338' },
 							WinSeparator            = { fg = '#333338' },
 							FzfLuaFzfGutter         = { bg = '#000000' },
+							LeapLabel               = { fg = c.red },
+							LeapMatch               = { fg = c.red },
 							FzfLuaBorder            = { link = 'FloatBorder' },
 							['@lsp.type.variable.zig'] = {},
 						},
