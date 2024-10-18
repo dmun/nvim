@@ -35,11 +35,12 @@ return {
 			local set = vim.keymap.set
 			-- Add cursors above/below the main cursor.
 			set({ 'n', 'v' }, '<C-k>', function()
-				mc.lineAddCursor(-1)
-			end)
+				return ':lua for i=1,' .. vim.v.count1 .. " do require('multicursor-nvim').lineAddCursor(-1) end<CR>"
+			end, { expr = true, silent = true })
+
 			set({ 'n', 'v' }, '<C-j>', function()
-				mc.lineAddCursor(1)
-			end)
+				return ':lua for i=1,' .. vim.v.count1 .. " do require('multicursor-nvim').lineAddCursor(1) end<CR>"
+			end, { expr = true, silent = true })
 
 			set('v', '<C-c>', mc.visualToCursors)
 
@@ -68,7 +69,7 @@ return {
 			-- Add and remove cursors with control + left click.
 			-- set('n', '<c-leftmouse>', mc.handleMouse)
 
-			set({ 'n', 'v' }, '<c-q>', function()
+			set({ 'n', 'v' }, 'q', function()
 				if mc.cursorsEnabled() then
 					-- Stop other cursors from moving.
 					-- This allows you to reposition the main cursor.

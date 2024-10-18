@@ -20,10 +20,10 @@ util.handle_keymaps({
 		{ '<M-r>', util.run_command },
 		{ '<M-x>', util.run_command_reset },
 
-		{ '<C-h>', '<C-w>h' },
-		{ '<C-j>', '<C-w>j' },
-		{ '<C-k>', '<C-w>k' },
-		{ '<C-l>', '<C-w>l' },
+		{ '<M-h>', '<C-w>h' },
+		{ '<M-j>', '<C-w>j' },
+		{ '<M-k>', '<C-w>k' },
+		{ '<M-l>', '<C-w>l' },
 	},
 	i = {
 		{ '<M-s>', '<esc>:silent update<cr>' },
