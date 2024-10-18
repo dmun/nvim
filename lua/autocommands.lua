@@ -22,7 +22,7 @@ vim.api.nvim_create_autocmd({ 'BufLeave', 'FocusLost' }, {
 	end,
 })
 
--- auto-save
+-- statusline
 vim.api.nvim_create_autocmd({ 'WinResized' }, {
 	callback = function()
 		vim.api.nvim_set_hl(0, 'Statusline', { link = 'Normal' })
@@ -33,7 +33,7 @@ vim.api.nvim_create_autocmd({ 'WinResized' }, {
 	end,
 })
 
--- auto-save
+-- terminal
 vim.api.nvim_create_autocmd({ 'BufNew', 'BufEnter', 'BufReadPre', 'BufReadPost' }, {
 	callback = function()
 		if vim.bo.buftype == 'terminal' then

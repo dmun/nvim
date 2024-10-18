@@ -34,15 +34,14 @@ return {
 
 			local set = vim.keymap.set
 			-- Add cursors above/below the main cursor.
-			set({ 'n', 'v' }, '<A-k>', function()
-				return ':lua for i=1,' .. vim.v.count1 .. " do require('multicursor-nvim').addCursor('k') end<CR>"
-			end, { expr = true, silent = true })
+			set({ 'n', 'v' }, '<C-k>', function()
+				mc.lineAddCursor(-1)
+			end)
+			set({ 'n', 'v' }, '<C-j>', function()
+				mc.lineAddCursor(1)
+			end)
 
-			set({ 'n', 'v' }, '<A-j>', function()
-				return ':lua for i=1,' .. vim.v.count1 .. " do require('multicursor-nvim').addCursor('j') end<CR>"
-			end, { expr = true, silent = true })
-
-			set('v', '<M-s>', mc.visualToCursors)
+			set('v', '<C-c>', mc.visualToCursors)
 
 			set({ 'n', 'v' }, '<C-n>', function()
 				mc.matchAddCursor(1)
@@ -50,14 +49,14 @@ return {
 			set({ 'n', 'v' }, '<C-p>', function()
 				mc.matchAddCursor(-1)
 			end)
-			set({ 'n', 'v' }, '<A-u>', mc.deleteCursor)
+			set({ 'n', 'v' }, '<C-h>', mc.deleteCursor)
 
 			-- Jump to the next word under cursor but do not add a cursor.
-			set({ 'v' }, '<A-k><A-d>', function()
+			set({ 'n', 'v' }, '<C-l>', function()
 				mc.matchSkipCursor(1)
 			end)
 
-			set({ 'n', 'v' }, '<A-l>', mc.matchAllAddCursors)
+			set({ 'n', 'v' }, '<leader>M', mc.matchAllAddCursors)
 
 			-- Rotate the main cursor.
 			-- set({ 'n', 'v' }, '<A-l>', mc.nextCursor)

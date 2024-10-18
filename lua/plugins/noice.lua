@@ -11,7 +11,7 @@ return {
 					col = '50%',
 				},
 				border = {
-					-- style = 'single',
+					style = 'single',
 				},
 			},
 		},
