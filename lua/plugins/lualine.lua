@@ -11,10 +11,10 @@ local custom_filename = {
 
 return {
 	'nvim-lualine/lualine.nvim',
-    enabled = false,
+	-- enabled = false,
 	opts = {
 		options = {
-			theme = 'themer',
+			theme = 'powerline',
 			component_separators = { left = nil, right = nil },
 			section_separators = { left = nil, right = nil },
 			always_divide_middle = true,
@@ -33,7 +33,7 @@ return {
 				'mode',
 				custom_filename,
 			},
-			lualine_x = { 'diagnostics', 'progress', 'location' },
+			lualine_x = { 'diagnostics' },
 			lualine_y = {},
 			lualine_z = {},
 		},
@@ -46,7 +46,7 @@ return {
 				end,
 				custom_filename,
 			},
-			lualine_x = { 'diagnostics', 'progress', 'location' },
+			lualine_x = { 'diagnostics' },
 			lualine_y = {},
 			lualine_z = {},
 		},

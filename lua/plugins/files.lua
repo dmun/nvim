@@ -54,7 +54,7 @@ return {
 			},
 			fzf_opts = {
 				['--no-info'] = true,
-				['--color'] = 'fg+:#ffffff,bg+:#16161d',
+				['--color'] = 'fg+:#ffffff,bg+:#161616',
 			},
 		},
 	},

@@ -237,28 +237,32 @@ local function format_menu(entry, vim_item)
 	local whitespace = max_width - #abbr - #menu
 	local ellipses = '…'
 
-	if whitespace < 0 then
-		if #abbr <= max_width / 2 then
-			menu = menu:sub(0, max_width - #abbr - 1) .. ellipses
-		elseif #menu <= max_width / 2 then
-			abbr = abbr:sub(0, max_width - #menu - 1) .. ellipses
-		else
-			abbr = abbr:sub(0, max_width / 2 - 1) .. ellipses
-			menu = menu:sub(0, max_width / 2 - 1) .. ellipses
-		end
-		whitespace = 0
-	end
+	-- if whitespace < 0 then
+	-- 	if #abbr <= max_width / 2 then
+	-- 		menu = menu:sub(0, max_width - #abbr - 1) .. ellipses
+	-- 	elseif #menu <= max_width / 2 then
+	-- 		abbr = abbr:sub(0, max_width - #menu - 1) .. ellipses
+	-- 	else
+	-- 		abbr = abbr:sub(0, max_width / 2 - 1) .. ellipses
+	-- 		menu = menu:sub(0, max_width / 2 - 1) .. ellipses
+	-- 	end
+	-- 	whitespace = 0
+	-- end
 
 	vim_item.abbr_hl_group = fields[kind] and { { fields[kind], range = { 0, #abbr } } }
 		or get_highlights(vim_item.abbr, #abbr, kind)
-	vim_item.abbr = abbr .. string.rep(' ', whitespace + 1) .. (menu or '')
-
-	if type(vim_item.abbr_hl_group) == 'table' then
-		table.insert(
-			vim_item.abbr_hl_group,
-			{ 'CmpItemMenu', range = { #abbr + whitespace + 1, #abbr + whitespace + #menu + 1 } }
-		)
+	-- vim_item.abbr = abbr .. string.rep(' ', whitespace + 1) .. (menu or '')
+	if #abbr > 40 then
+		vim_item.abbr = abbr:sub(0, 40) .. ellipses
 	end
+
+	-- if type(vim_item.abbr_hl_group) == 'table' then
+	-- 	table.insert(
+	-- 		vim_item.abbr_hl_group,
+	-- 		{ 'CmpItemMenu', range = { #abbr + whitespace + 1, #abbr + whitespace + #menu + 1 } }
+	-- 	)
+	-- end
+	vim_item.menu = ''
 
 	return vim_item
 end
@@ -385,10 +389,22 @@ return {
 				completion = {
 					completeopt = 'menu,menuone',
 				},
+				performance = {
+					-- max_view_entries = 50,
+				},
 				formatting = {
 					fields = { 'abbr' },
 					format = format_menu,
 					expandable_indicator = false,
+				},
+				window = {
+					completion = {
+						scrolloff = 2,
+					},
+					documentation = {
+						max_height = 15,
+						max_width = 40,
+					},
 				},
 				experimental = {
 					ghost_text = false,
