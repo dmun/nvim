@@ -8,7 +8,7 @@ return {
 	{ 'dstein64/nvim-scrollview', opts = {} },
 	{
 		'lukas-reineke/indent-blankline.nvim',
-		enabled = false,
+		-- enabled = false,
 		name = 'ibl',
 		opts = {
 			indent = {

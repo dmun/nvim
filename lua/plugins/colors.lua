@@ -30,17 +30,25 @@ local c = {
 
 return {
 	'maxmx03/solarized.nvim',
-	'ramojus/mellifluous.nvim',
 	{
 		'ramojus/mellifluous.nvim',
 		opts = {
 			colorset = 'mellifluous',
 			mellifluous = {
 				neutral = true,
+				highlight_overrides = {
+					dark = function(hl, colors)
+						hl.set('IlluminatedWordText', { link = 'CursorLine' })
+						hl.set('IlluminatedWordRead', { link = 'CursorLine' })
+						hl.set('IlluminatedWordWrite', { link = 'CursorLine' })
+						hl.set('DiagnosticUnnecessary', { fg = colors.fg4 })
+						hl.set('iCursor', { bg = '#88DFFF' })
+					end,
+				},
 			},
 			flat_background = {
 				line_numbers = true,
-				floating_windows = true,
+				floating_windows = false,
 				file_tree = false,
 				cursor_line_number = true,
 			},
