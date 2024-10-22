@@ -42,6 +42,7 @@ return {
 						hl.set('IlluminatedWordRead', { link = 'CursorLine' })
 						hl.set('IlluminatedWordWrite', { link = 'CursorLine' })
 						hl.set('DiagnosticUnnecessary', { fg = colors.fg4 })
+						hl.set('CursorLineNr', { link = 'Normal' })
 						hl.set('iCursor', { bg = '#88DFFF' })
 					end,
 				},
@@ -50,7 +51,7 @@ return {
 				line_numbers = true,
 				floating_windows = false,
 				file_tree = false,
-				cursor_line_number = true,
+				cursor_line_number = false,
 			},
 		},
 	},
