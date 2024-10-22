@@ -32,8 +32,9 @@ return {
 			lualine_c = {
 				'mode',
 				custom_filename,
+				'diagnostics',
 			},
-			lualine_x = { 'diagnostics' },
+			lualine_x = {},
 			lualine_y = {},
 			lualine_z = {},
 		},
@@ -45,8 +46,9 @@ return {
 					return '      '
 				end,
 				custom_filename,
+				'diagnostics',
 			},
-			lualine_x = { 'diagnostics' },
+			lualine_x = {},
 			lualine_y = {},
 			lualine_z = {},
 		},
