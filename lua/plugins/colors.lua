@@ -31,6 +31,21 @@ local c = {
 return {
 	'maxmx03/solarized.nvim',
 	'ramojus/mellifluous.nvim',
+	{
+		'ramojus/mellifluous.nvim',
+		opts = {
+			colorset = 'mellifluous',
+			mellifluous = {
+				neutral = true,
+			},
+			flat_background = {
+				line_numbers = true,
+				floating_windows = true,
+				file_tree = false,
+				cursor_line_number = true,
+			},
+		},
+	},
 	'kaiuri/nvim-juliana',
 	'Mofiqul/vscode.nvim',
 	'bluz71/vim-moonfly-colors',
