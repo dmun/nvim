@@ -43,6 +43,7 @@ return {
 						hl.set('IlluminatedWordWrite', { link = 'CursorLine' })
 						hl.set('DiagnosticUnnecessary', { fg = colors.fg4 })
 						hl.set('CursorLineNr', { link = 'Normal' })
+						hl.set('FzfLuaBorder', { fg = colors.fg3 })
 						hl.set('iCursor', { bg = '#88DFFF' })
 					end,
 				},

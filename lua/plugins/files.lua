@@ -54,7 +54,7 @@ return {
 			},
 			fzf_opts = {
 				['--no-info'] = true,
-				['--color'] = 'fg+:#ffffff,bg+:#161616',
+				-- ['--color'] = 'fg+:#ffffff,bg+:#161616',
 			},
 		},
 	},
@@ -77,7 +77,6 @@ return {
 		},
 	},
 	{
-
 		'nvim-tree/nvim-tree.lua',
 		enabled = false,
 		keys = {
