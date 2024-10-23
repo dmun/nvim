@@ -11,9 +11,6 @@ vim.api.nvim_set_keymap('n', 'j', "v:count == 0 ? 'gj' : 'j'", { noremap = true,
 
 util.handle_keymaps({
 	n = {
-		{ '<M-s>', ':silent update<cr>' },
-		{ '<M-a>', 'ggVG' },
-
 		{ '<leader>tw', ':set wrap!<cr>' },
 		{ '<leader>dl', ':messages<cr>' },
 

@@ -8,7 +8,7 @@ return {
 	{ 'dstein64/nvim-scrollview', opts = {} },
 	{
 		'lukas-reineke/indent-blankline.nvim',
-		-- enabled = false,
+		enabled = false,
 		name = 'ibl',
 		opts = {
 			indent = {
@@ -20,13 +20,13 @@ return {
 	{
 		'RRethy/vim-illuminate',
 		config = function()
-			require('illuminate').configure {
+			require('illuminate').configure({
 				providers = { 'lsp', 'treesitter' },
 				large_file_cutoff = 1000,
 				large_file_overrides = {
 					providers = { 'lsp' },
 				},
-			}
+			})
 		end,
 	},
 	{

@@ -14,7 +14,7 @@ return {
 	-- enabled = false,
 	opts = {
 		options = {
-			theme = 'powerline',
+			theme = 'auto',
 			component_separators = { left = nil, right = nil },
 			section_separators = { left = nil, right = nil },
 			always_divide_middle = true,
@@ -30,7 +30,6 @@ return {
 			lualine_a = {},
 			lualine_b = {},
 			lualine_c = {
-				'mode',
 				custom_filename,
 				'diagnostics',
 			},
@@ -42,9 +41,6 @@ return {
 			lualine_a = {},
 			lualine_b = {},
 			lualine_c = {
-				function()
-					return '      '
-				end,
 				custom_filename,
 				'diagnostics',
 			},
