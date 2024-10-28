@@ -45,6 +45,7 @@ return {
 						hl.set('CursorLineNr', { link = 'Normal' })
 						hl.set('FzfLuaBorder', { fg = colors.fg3 })
 						hl.set('iCursor', { bg = '#88DFFF' })
+						hl.set('LeapLabel', { fg = c.red })
 					end,
 				},
 			},
