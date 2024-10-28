@@ -46,8 +46,8 @@ o.cmdheight = 0
 o.pumheight = 10
 -- o.colorcolumn = "+1"
 o.fillchars = 'eob: '
-o.guicursor = "i:iCursor-block,n-v:Cursor-block"
--- o.guicursor = 'i:Cursor-ver25'
+-- o.guicursor = "i:iCursor-block,n-v:Cursor-block"
+o.guicursor = 'i:ver25'
 -- o.guicursor = 'a:Cursor-block'
 -- o.laststatus = 0
 
