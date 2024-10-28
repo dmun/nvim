@@ -5,7 +5,11 @@ return {
 	{ 'kylechui/nvim-surround', event = 'VeryLazy' },
 	{ 'windwp/nvim-autopairs', event = 'InsertEnter', config = true },
 	-- { 'VidocqH/auto-indent.nvim', event = 'InsertEnter' },
-	{ 'dstein64/nvim-scrollview', opts = {} },
+	{
+		'dstein64/nvim-scrollview',
+		enabled = false,
+		opts = {},
+	},
 	{
 		'lukas-reineke/indent-blankline.nvim',
 		enabled = false,

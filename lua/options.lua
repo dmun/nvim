@@ -62,7 +62,7 @@ o.ttimeout = false
 o.timeout = false
 o.ttimeoutlen = 0
 o.timeoutlen = 0
-o.scrolloff = 5
+o.scrolloff = 10
 o.sidescrolloff = 15
 o.smartcase = true
 

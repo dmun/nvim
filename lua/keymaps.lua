@@ -17,6 +17,9 @@ util.handle_keymaps({
 		{ '<M-r>', util.run_command },
 		{ '<M-x>', util.run_command_reset },
 
+		{ '<C-d>', '<C-d>zz' },
+		{ '<C-u>', '<C-u>zz' },
+
 		{ '<M-s>', '<C-w>s' },
 		{ '<M-v>', '<C-w>v' },
 
