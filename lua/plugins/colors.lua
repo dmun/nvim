@@ -43,9 +43,16 @@ return {
 						hl.set('IlluminatedWordWrite', { link = 'CursorLine' })
 						hl.set('DiagnosticUnnecessary', { fg = colors.fg4 })
 						hl.set('CursorLineNr', { link = 'Normal' })
-						hl.set('FzfLuaBorder', { fg = colors.fg3 })
 						hl.set('iCursor', { bg = '#88DFFF' })
 						hl.set('LeapLabel', { fg = c.red })
+
+						hl.set('FloatBorder', { link = 'DiagnosticSignInfo' })
+						hl.set('FzfLuaBorder', { link = 'FloatBorder' })
+						hl.set('TelescopeBorder', { fg = '#777777' })
+						hl.set('NormalFloat', { link = 'Normal' })
+						hl.set('StatusLine', { bg = '#101010' })
+						hl.set('StatusLineNC', { link = 'StatusLine' })
+						hl.set('VertSplit', { fg = 'black' })
 					end,
 				},
 			},
@@ -54,6 +61,11 @@ return {
 				floating_windows = false,
 				file_tree = false,
 				cursor_line_number = false,
+			},
+			plugins = {
+				telescope = {
+					nvchad_like = false,
+				},
 			},
 		},
 	},
@@ -204,9 +216,9 @@ return {
 				CmpItemAbbrMatchFuzzy = { bold = true },
 				-- SignColumn = { link = 'Normal' },
 				LineNr = { fg = '#7c6f64', bg = '#3c3836' },
-				GitSignsAdd = { link = "GruvboxGreenSign" },
-				GitSignsChange = { link = "GruvboxAquaSign" },
-				gitsignsdelete = { link = "gruvboxredsign" },
+				GitSignsAdd = { link = 'GruvboxGreenSign' },
+				GitSignsChange = { link = 'GruvboxAquaSign' },
+				gitsignsdelete = { link = 'gruvboxredsign' },
 
 				diagnosticsignok = { link = 'gruvboxgreen' },
 				diagnosticsignhint = { link = 'gruvboxaqua' },

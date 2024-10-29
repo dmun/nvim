@@ -49,7 +49,7 @@ o.fillchars = 'eob: '
 -- o.guicursor = "i:iCursor-block,n-v:Cursor-block"
 o.guicursor = 'i:ver25'
 -- o.guicursor = 'a:Cursor-block'
--- o.laststatus = 0
+o.laststatus = 3
 
 -- window
 o.inccommand = 'split'
@@ -62,7 +62,7 @@ o.ttimeout = false
 o.timeout = false
 o.ttimeoutlen = 0
 o.timeoutlen = 0
-o.scrolloff = 10
+o.scrolloff = 5
 o.sidescrolloff = 15
 o.smartcase = true
 

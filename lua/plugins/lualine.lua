@@ -8,18 +8,17 @@ local custom_filename = {
 		newfile = '*new*', -- Text to show for newly created file before first write
 	},
 	padding = 0,
+	color = { fg = '#cccccc' },
 }
 
-local function project(active)
-	return {
-		function()
-			local path = vim.fn.getcwd()
-			local text = vim.fs.basename(path)
-			return '[' .. text .. ']'
-		end,
-		color = { fg = active and '#f0f0b4' or '#8a8a6d', gui = 'bold' },
-	}
-end
+local project = {
+	function()
+		local path = vim.fn.getcwd()
+		local text = vim.fs.basename(path)
+		return '' .. text .. ''
+	end,
+	color = { fg = '#9c9c78', gui = 'bold' },
+}
 
 return {
 	'nvim-lualine/lualine.nvim',
@@ -33,7 +32,7 @@ return {
 			disabled_filetypes = {
 				statusline = {
 					'NvimTree',
-					'fzf',
+					-- 'fzf',
 					'trouble',
 				},
 			},
@@ -42,7 +41,7 @@ return {
 			lualine_a = {},
 			lualine_b = {},
 			lualine_c = {
-				project(true),
+				project,
 				custom_filename,
 			},
 			lualine_x = { 'diagnostics' },
@@ -53,7 +52,7 @@ return {
 			lualine_a = {},
 			lualine_b = {},
 			lualine_c = {
-				project(false),
+				project,
 				custom_filename,
 			},
 			lualine_x = { 'diagnostics' },

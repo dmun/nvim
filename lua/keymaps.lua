@@ -20,17 +20,24 @@ util.handle_keymaps({
 		{ '<C-d>', '<C-d>zz' },
 		{ '<C-u>', '<C-u>zz' },
 
-		{ '<M-s>', '<C-w>s' },
-		{ '<M-v>', '<C-w>v' },
-
 		{ '<M-h>', '<C-w>h' },
 		{ '<M-j>', '<C-w>j' },
 		{ '<M-k>', '<C-w>k' },
 		{ '<M-l>', '<C-w>l' },
 	},
 	i = {
-		{ '<M-s>', '<esc>:silent update<cr>' },
+		{ '<M-h>', '<C-[><C-w>h' },
+		{ '<M-j>', '<C-[><C-w>j' },
+		{ '<M-k>', '<C-[><C-w>k' },
+		{ '<M-l>', '<C-[><C-w>l' },
+
 		{ '<C-n>', '<cmd>norm j<cr>' },
 		{ '<C-p>', '<cmd>norm k<cr>' },
+	},
+	t = {
+		{ '<M-h>', '<C-\\><C-n><C-w>h' },
+		{ '<M-j>', '<C-\\><C-n><C-w>j' },
+		{ '<M-k>', '<C-\\><C-n><C-w>k' },
+		{ '<M-l>', '<C-\\><C-n><C-w>l' },
 	},
 })

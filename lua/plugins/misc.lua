@@ -1,9 +1,14 @@
 return {
-	-- 'darfnk/vim-plist',
 	-- 'stevearc/profile.nvim'
+	{
+		'levouh/tint.nvim',
+		enabled = false,
+		opts = {},
+	},
 	{ 'eandrju/cellular-automaton.nvim', cmd = 'CellularAutomaton' },
 	{
 		'quarto-dev/quarto-nvim',
+		enabled = false,
 		ft = 'quarto',
 		dependencies = {
 			'jmbuhr/otter.nvim',
