@@ -1,3 +1,8 @@
+local grapple = {
+	'grapple',
+	color = { fg = '#bfaf8e', gui = '' },
+}
+
 local project = {
 	function()
 		local path = vim.fn.getcwd()
@@ -48,16 +53,16 @@ return {
 		sections = {
 			lualine_a = {},
 			lualine_b = {},
-			lualine_c = { project, filename },
-			lualine_x = { 'diagnostics' },
+			lualine_c = { project, filename, 'diagnostics' },
+			lualine_x = { grapple },
 			lualine_y = {},
 			lualine_z = {},
 		},
 		inactive_sections = {
 			lualine_a = {},
 			lualine_b = {},
-			lualine_c = { project, filename },
-			lualine_x = { 'diagnostics' },
+			lualine_c = { project, filename, 'diagnostics' },
+			lualine_x = { grapple },
 			lualine_y = {},
 			lualine_z = {},
 		},

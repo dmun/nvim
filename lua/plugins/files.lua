@@ -25,55 +25,6 @@ return {
 		},
 	},
 	{
-		'nvim-telescope/telescope.nvim',
-		tag = '0.1.8',
-		dependencies = {
-			'nvim-lua/plenary.nvim',
-			'nvim-telescope/telescope-ui-select.nvim',
-		},
-		keys = {
-			{ '<leader>f', '<cmd>Telescope find_files<cr>' },
-			{ '<leader>l', '<cmd>Telescope oldfiles<cr>' },
-			{ '<leader>/', '<cmd>Telescope live_grep<cr>' },
-			{ '<leader>,', '<cmd>Telescope buffers<cr>' },
-			{ '<leader><leader>', '<cmd>Telescope<cr>' },
-		},
-		config = function()
-			local actions = require('telescope.actions')
-
-			require('telescope').setup({
-				extensions = {
-					['ui-select'] = {},
-				},
-				defaults = {
-					mappings = {
-						i = {
-							['<esc>'] = actions.close,
-						},
-					},
-					results_title = '',
-					sorting_strategy = 'ascending',
-					-- layout_strategy = 'center',
-					layout_config = {
-						prompt_position = 'top',
-					},
-					border = {
-						prompt = { 1, 1, 1, 1 },
-						results = { 1, 1, 1, 1 },
-						preview = { 1, 1, 1, 1 },
-					},
-					borderchars = {
-						preview = { '─', '│', '─', '│', '┌', '┐', '┘', '└' },
-						prompt = { '─', '│', '─', '│', '┌', '┐', '┘', '└' },
-						results = { '─', '│', '─', '│', '┌', '┐', '┘', '└' },
-					},
-				},
-			})
-
-			require('telescope').load_extension('ui-select')
-		end,
-	},
-	{
 		'ibhagwan/fzf-lua',
 		enabled = false,
 		cmd = 'FzfLua',
@@ -114,7 +65,7 @@ return {
 			{ 'nvim-tree/nvim-web-devicons', lazy = true },
 		},
 		keys = {
-			{ '<leader>q', '<cmd>Grapple toggle_tags<cr>' },
+			{ '<leader>g', '<cmd>Grapple toggle_tags<cr>' },
 			{ '<leader>m', '<cmd>Grapple tag<cr>' },
 			{ '<M-1>', '<cmd>Grapple select index=1<cr>' },
 			{ '<M-2>', '<cmd>Grapple select index=2<cr>' },
@@ -124,6 +75,9 @@ return {
 		},
 		opts = {
 			scope = 'cwd',
+			statusline = {
+				icon = '',
+			},
 		},
 	},
 	{
