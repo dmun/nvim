@@ -1,49 +1,54 @@
-local custom_filename = {
-	'filename',
-	path = 1,
-	symbols = {
-		modified = '󰏫', -- Text to show when the file is modified.
-		readonly = '', -- Text to show when the file is non-modifiable or readonly.
-		unnamed = '*scratch*', -- Text to show for unnamed buffers.
-		newfile = '*new*', -- Text to show for newly created file before first write
-	},
-	padding = 0,
-	color = { fg = '#cccccc' },
-}
-
 local project = {
 	function()
 		local path = vim.fn.getcwd()
-		local text = vim.fs.basename(path)
-		return '' .. text .. ''
+		return vim.fs.basename(path)
 	end,
 	color = { fg = '#9c9c78', gui = 'bold' },
 }
 
+local filename = {
+	function()
+		if vim.bo.filetype == 'help' then
+			return 'Neovim Documentation'
+		end
+
+		local path = vim.fn.expand('%:.')
+
+		if path:find('oil://') then
+			path = path:sub(7)
+		end
+
+		return path
+	end,
+	color = function()
+		local fg = '#cccccc'
+		local gui = ''
+
+		if vim.bo.modifiable == false then
+			fg = '#777777'
+		end
+
+		if vim.bo.modified then
+			gui = 'italic'
+		end
+
+		return { fg = fg, gui = gui }
+	end,
+}
+
 return {
 	'nvim-lualine/lualine.nvim',
-	-- enabled = false,
 	opts = {
 		options = {
 			theme = 'auto',
 			component_separators = { left = nil, right = nil },
 			section_separators = { left = nil, right = nil },
 			always_divide_middle = true,
-			disabled_filetypes = {
-				statusline = {
-					'NvimTree',
-					-- 'fzf',
-					'trouble',
-				},
-			},
 		},
 		sections = {
 			lualine_a = {},
 			lualine_b = {},
-			lualine_c = {
-				project,
-				custom_filename,
-			},
+			lualine_c = { project, filename },
 			lualine_x = { 'diagnostics' },
 			lualine_y = {},
 			lualine_z = {},
@@ -51,10 +56,7 @@ return {
 		inactive_sections = {
 			lualine_a = {},
 			lualine_b = {},
-			lualine_c = {
-				project,
-				custom_filename,
-			},
+			lualine_c = { project, filename },
 			lualine_x = { 'diagnostics' },
 			lualine_y = {},
 			lualine_z = {},
