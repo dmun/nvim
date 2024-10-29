@@ -49,6 +49,8 @@ return {
 						-- hl.set('NormalFloat', { link = 'Normal' })
 						hl.set('TroubleNormal', { link = 'Normal' })
 						hl.set('FloatBorder', { fg = '#777777' })
+						hl.set('GrappleNormal', { link = 'Normal' })
+						hl.set('FloatTitle', { fg = '#777777' })
 						hl.set('TelescopeBorder', { link = 'FloatBorder' })
 						hl.set('FzfLuaBorder', { link = 'FloatBorder' })
 						hl.set('StatusLine', { bg = '#101010' })

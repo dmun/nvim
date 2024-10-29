@@ -27,7 +27,10 @@ return {
 	{
 		'nvim-telescope/telescope.nvim',
 		tag = '0.1.8',
-		dependencies = { 'nvim-lua/plenary.nvim' },
+		dependencies = {
+			'nvim-lua/plenary.nvim',
+			'nvim-telescope/telescope-ui-select.nvim',
+		},
 		keys = {
 			{ '<leader>f', '<cmd>Telescope find_files<cr>' },
 			{ '<leader>l', '<cmd>Telescope oldfiles<cr>' },
@@ -37,7 +40,11 @@ return {
 		},
 		config = function()
 			local actions = require('telescope.actions')
+
 			require('telescope').setup({
+				extensions = {
+					['ui-select'] = {},
+				},
 				defaults = {
 					mappings = {
 						i = {
@@ -62,6 +69,8 @@ return {
 					},
 				},
 			})
+
+			require('telescope').load_extension('ui-select')
 		end,
 	},
 	{
@@ -107,11 +116,11 @@ return {
 		keys = {
 			{ '<leader>q', '<cmd>Grapple toggle_tags<cr>' },
 			{ '<leader>m', '<cmd>Grapple tag<cr>' },
-			{ '<leader>1', '<cmd>Grapple select index=1<cr>' },
-			{ '<leader>2', '<cmd>Grapple select index=2<cr>' },
-			{ '<leader>3', '<cmd>Grapple select index=3<cr>' },
-			{ '<leader>4', '<cmd>Grapple select index=4<cr>' },
-			{ '<leader>5', '<cmd>Grapple select index=5<cr>' },
+			{ '<M-1>', '<cmd>Grapple select index=1<cr>' },
+			{ '<M-2>', '<cmd>Grapple select index=2<cr>' },
+			{ '<M-3>', '<cmd>Grapple select index=3<cr>' },
+			{ '<M-4>', '<cmd>Grapple select index=4<cr>' },
+			{ '<M-5>', '<cmd>Grapple select index=5<cr>' },
 		},
 		opts = {
 			scope = 'cwd',

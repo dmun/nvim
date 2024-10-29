@@ -13,14 +13,14 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 	end,
 })
 
--- auto-save
-vim.api.nvim_create_autocmd({ 'BufLeave', 'FocusLost' }, {
-	callback = function()
-		if vim.bo.buftype == '' then
-			vim.cmd('silent update')
-		end
-	end,
-})
+-- -- auto-save
+-- vim.api.nvim_create_autocmd({ 'BufLeave', 'FocusLost' }, {
+-- 	callback = function()
+-- 		if vim.bo.buftype == '' then
+-- 			vim.cmd('silent update')
+-- 		end
+-- 	end,
+-- })
 
 -- terminal
 vim.api.nvim_create_autocmd({ 'BufNew', 'BufEnter', 'BufReadPre', 'BufReadPost' }, {

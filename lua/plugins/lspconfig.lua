@@ -38,13 +38,13 @@ return {
 	{ 'folke/lazydev.nvim', ft = 'lua' },
 	-- { 'mrcjkb/rustaceanvim', version = '^4' },
 	{
-
 		'neovim/nvim-lspconfig',
 		event = { 'BufReadPre', 'BufNewFile' },
 		dependencies = {
 			'williamboman/mason.nvim',
 			'williamboman/mason-lspconfig.nvim',
 			'folke/lazydev.nvim',
+			'nvim-telescope/telescope.nvim',
 		},
 		config = function()
 			require('mason').setup()
@@ -59,16 +59,16 @@ return {
 				},
 			}
 
-			mason_lsp.setup {
+			mason_lsp.setup({
 				ensure_installed = Conf.lsp.ensure_installed,
-			}
+			})
 
 			-- setup mason language servers
-			mason_lsp.setup_handlers {
+			mason_lsp.setup_handlers({
 				function(ls)
 					lsp[ls].setup(get_ls_config(Conf.ls[ls]))
 				end,
-			}
+			})
 
 			-- setup non-mason language servers
 			for ls, _ in pairs(Conf.ls) do
@@ -90,7 +90,7 @@ return {
 					vim.keymap.set('i', '<C-k>', vim.lsp.buf.signature_help, opts)
 					vim.keymap.set('n', '<leader>D', '<cmd>Trouble lsp_type_definitions<cr>', opts)
 					vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, opts)
-					vim.keymap.set('n', '<C-c>', '<cmd>FzfLua lsp_code_actions<cr>', opts)
+					vim.keymap.set('n', '<C-c>', vim.lsp.buf.code_action, opts)
 				end,
 			})
 		end,
