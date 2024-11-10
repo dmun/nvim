@@ -26,8 +26,9 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 vim.api.nvim_create_autocmd({ 'BufNew', 'BufEnter', 'BufReadPre', 'BufReadPost' }, {
 	callback = function()
 		if vim.bo.buftype == 'terminal' then
-			vim.opt_local.relativenumber = false
-			vim.opt_local.number = false
+			-- vim.opt_local.relativenumber = false
+			-- vim.opt_local.number = false
+			vim.cmd.normal('i')
 		end
 	end,
 })

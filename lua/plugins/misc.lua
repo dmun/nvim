@@ -25,7 +25,7 @@ return {
 		-- 'benlubas/molten-nvim',
 		dir = '~/Development/molten-nvim',
 		-- version = '^1.0.0', -- use version <2.0.0 to avoid breaking changes
-		-- enabled = false,
+		enabled = false,
 		dependencies = { '3rd/image.nvim', 'vhyrro/luarocks.nvim' },
 		build = ':UpdateRemotePlugins',
 		init = function()
@@ -47,6 +47,7 @@ return {
 	},
 	{
 		'pappasam/nvim-repl',
+		enabled = false,
 		init = function()
 			vim.g['repl_filetype_commands'] = {
 				javascript = 'node',
@@ -60,6 +61,7 @@ return {
 	},
 	{
 		'R-nvim/R.nvim',
+		enabled = false,
 		-- Only required if you also set defaults.lazy = true
 		lazy = false,
 		-- R.nvim is still young and we may make some breaking changes from time
@@ -89,7 +91,7 @@ return {
 				disable_cmds = {
 					'RClearConsole',
 					'RCustomStart',
-					'RSPlot',
+					-- 'RSPlot',
 					'RSaveClose',
 				},
 			}

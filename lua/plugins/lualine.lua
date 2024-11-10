@@ -13,14 +13,19 @@ local project = {
 
 local filename = {
 	function()
-		if vim.bo.filetype == 'help' then
-			return 'Neovim Documentation'
-		end
-
+		local ft = vim.bo.filetype
+		local bt = vim.bo.buftype
 		local path = vim.fn.expand('%:.')
 
-		if path:find('oil://') then
-			path = path:sub(7)
+		if ft == 'help' then
+			return 'Neovim Documentation'
+		elseif bt == 'terminal' then
+			if path:find('ipython') then
+				path = 'IPython Kernel'
+			end
+			if path:find('oil://') then
+				path = path:sub(7)
+			end
 		end
 
 		return path
