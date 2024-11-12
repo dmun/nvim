@@ -29,6 +29,46 @@ return {
 		branch = '1.0',
 		config = function()
 			local mc = require('multicursor-nvim')
+			local tbl = require('multicursor-nvim.tbl')
+			local util = require('multicursor-nvim.util')
+
+			local function matchCursors(pattern)
+				mc.action(function(ctx)
+					pattern = pattern or vim.fn.input('Match: ')
+					if not pattern or pattern == '' then
+						return
+					end
+					--- @type Cursor[]
+					local newCursors = {}
+					ctx:forEachCursor(function(cursor)
+						if cursor:hasSelection() then
+							newCursors = tbl.concat(newCursors, cursor:splitVisualLines())
+						else
+							newCursors[#newCursors + 1] = cursor
+							cursor:setMode('v')
+						end
+					end)
+					for _, cursor in ipairs(newCursors) do
+						local selection = cursor:getVisualLines()
+						local matches = util.matchlist(selection, pattern, {
+							userConfig = true,
+						})
+						local vs = cursor:getVisual()
+						for _, match in ipairs(matches) do
+							if #match.text > 0 then
+								local newCursor = cursor:clone()
+								newCursor:setVisual(
+									{ vs[1], vs[2] + match.byteidx + #match.text - 1 },
+									{ vs[1], vs[2] + match.byteidx }
+								)
+								newCursor:feedkeys('o')
+								-- newCursor:setMode("n")
+							end
+						end
+						cursor:delete()
+					end
+				end)
+			end
 
 			mc.setup()
 
@@ -83,7 +123,7 @@ return {
 			set('v', 'A', mc.appendVisual)
 
 			-- match new cursors within visual selections by regex.
-			set('v', 's', mc.matchCursors)
+			set('v', 's', matchCursors)
 			set('n', 'gm', mc.restoreCursors)
 
 			-- Rotate visual selection contents.
