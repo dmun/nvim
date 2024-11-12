@@ -1,8 +1,8 @@
 return {
 	-- 'romainl/vim-cool',
-	'echasnovski/mini.nvim',
+	-- 'echasnovski/mini.nvim',
 	{ 'numToStr/Comment.nvim', event = 'VeryLazy' },
-	{ 'kylechui/nvim-surround', event = 'VeryLazy' },
+	-- { 'kylechui/nvim-surround', event = 'VeryLazy' },
 	{ 'windwp/nvim-autopairs', event = 'InsertEnter', config = true },
 	-- { 'VidocqH/auto-indent.nvim', event = 'InsertEnter' },
 	{
@@ -23,9 +23,10 @@ return {
 	},
 	{
 		'RRethy/vim-illuminate',
+		enabled = false,
 		config = function()
 			require('illuminate').configure({
-				providers = { 'lsp', 'treesitter' },
+				providers = { 'lsp' },
 				large_file_cutoff = 1000,
 				large_file_overrides = {
 					providers = { 'lsp' },

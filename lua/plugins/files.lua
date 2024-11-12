@@ -67,11 +67,11 @@ return {
 		keys = {
 			{ '<leader>g', '<cmd>Grapple toggle_tags<cr>' },
 			{ '<leader>m', '<cmd>Grapple tag<cr>' },
-			{ '<M-a>', '<cmd>Grapple select index=1<cr>' },
-			{ '<M-s>', '<cmd>Grapple select index=2<cr>' },
-			{ '<M-d>', '<cmd>Grapple select index=3<cr>' },
-			{ '<M-f>', '<cmd>Grapple select index=4<cr>' },
-			{ '<M-g>', '<cmd>Grapple select index=5<cr>' },
+			{ '<M-1>', '<cmd>Grapple select index=1<cr>' },
+			{ '<M-2>', '<cmd>Grapple select index=2<cr>' },
+			{ '<M-3>', '<cmd>Grapple select index=3<cr>' },
+			{ '<M-4>', '<cmd>Grapple select index=4<cr>' },
+			{ '<M-5>', '<cmd>Grapple select index=5<cr>' },
 		},
 		opts = {
 			scope = 'cwd',

@@ -29,9 +29,10 @@ local c = {
 }
 
 return {
-	'maxmx03/solarized.nvim',
+	-- 'maxmx03/solarized.nvim',
 	{
 		'ramojus/mellifluous.nvim',
+		enabled = false,
 		opts = {
 			colorset = 'mellifluous',
 			mellifluous = {
@@ -72,10 +73,10 @@ return {
 			},
 		},
 	},
-	'kaiuri/nvim-juliana',
-	'Mofiqul/vscode.nvim',
-	'bluz71/vim-moonfly-colors',
-	{ 'miikanissi/modus-themes.nvim', priority = 1000 },
+	-- 'kaiuri/nvim-juliana',
+	-- 'Mofiqul/vscode.nvim',
+	-- 'bluz71/vim-moonfly-colors',
+	-- { 'miikanissi/modus-themes.nvim', priority = 1000 },
 	{
 		'themercorp/themer.lua',
 		priority = 1000,
@@ -128,9 +129,11 @@ return {
 					globals = {
 						base = {
 							IblIndent = { fg = c.bg.alt },
-							Cursor = { fg = c.fg1, bg = '#111111' },
-							nCursor = { bg = c.orange1 },
-							iCursor = { bg = c.cyan1 },
+							Cursor = { fg = '#514F67' },
+							-- iCursor = { bg = '#514F67' },
+							iCursor = { bg = '#6E6A86' },
+							Visual = { bg = '#3F3D52' },
+							MultiCursorVisual = { bg = '#25233A' },
 							-- Normal = { bg = '#000000' },
 							SignColumn = { link = 'Normal' },
 							MultiCursorSign = { link = 'LineNr' },
@@ -140,9 +143,9 @@ return {
 							MoltenOutputWin = { link = 'Comment' },
 							-- MoltenVirtualText       = { fg = '#55555e', bg = '#111116' },
 							-- MoltenVirtualText       = { fg = c.fg3, bg = c.bg.alt },
-							IlluminatedWordText = { bg = '#131313' },
-							IlluminatedWordRead = { bg = '#131313' },
-							IlluminatedWordWrite = { bg = '#131313' },
+							-- IlluminatedWordText = { link = 'ThemerFloat' },
+							-- IlluminatedWordRead = { link = 'ThemerFloat' },
+							-- IlluminatedWordWrite = { link = 'ThemerFloat' },
 							FloatBorder = { fg = '#333338' },
 							WinSeparator = { fg = '#333338' },
 							FzfLuaFzfGutter = { bg = '#000000' },
@@ -164,7 +167,8 @@ return {
 	},
 	{
 		'NvChad/nvim-colorizer.lua',
-		event = { 'BufReadPre', 'BufNewFile' },
+		cmd = 'ColorizerAttachToBuffer',
+		-- event = { 'BufReadPre', 'BufNewFile' },
 		opts = {
 			filetypes = {
 				'*',
@@ -175,68 +179,68 @@ return {
 			},
 		},
 	},
-	{
-		'catppuccin/nvim',
-		lazy = false,
-		name = 'catppuccin',
-		priority = 1000,
-		opts = {
-			---@param c CtpColors<CtpFlavor>
-			custom_highlights = function(c)
-				return {
-					PmenuSel = { fg = c.none, bg = c.surface1, style = {} },
-					-- Pmenu = { bg = c.mantle },
-					CmpItemAbbr = { fg = c.text },
-					CmpItemAbbrMatch = { fg = c.none, style = { 'bold' } },
-					CmpItemAbbrMatchDefault = { link = 'CmpItemAbbrMatch' },
-					CmpItemAbbrMatchFuzzy = { link = 'CmpItemAbbrMatch' },
-					CmpItemMenu = { fg = c.overlay2 },
-					CmpItemArgs = { fg = c.overlay0 },
-
-					nCursor = { bg = c.peach },
-					iCursor = { bg = c.green },
-
-					TreesitterContext = { bg = c.none },
-					TreesitterContextLineNumber = { bg = c.none },
-				}
-			end,
-		},
-	},
-	{
-		'ellisonleao/gruvbox.nvim',
-		opts = {
-			contrast = 'hard',
-			bold = false,
-			overrides = {
-				iCursor = { bg = '#D3859B' },
-				nCursor = { bg = '#FBBD2E' },
-				-- CursorLineNr = { link = 'GruvboxYellow' },
-				DiagnosticOk = { link = 'GruvboxGreen' },
-				PmenuSel = { link = 'Cursorline' },
-				CmpItemMenu = { fg = '#A79A84', bg = 'none' },
-				CmpItemArgs = { link = 'Comment' },
-				CmpItemAbbrMatch = { bold = true },
-				CmpItemAbbrMatchFuzzy = { bold = true },
-				-- SignColumn = { link = 'Normal' },
-				LineNr = { fg = '#7c6f64', bg = '#3c3836' },
-				GitSignsAdd = { link = 'GruvboxGreenSign' },
-				GitSignsChange = { link = 'GruvboxAquaSign' },
-				gitsignsdelete = { link = 'gruvboxredsign' },
-
-				diagnosticsignok = { link = 'gruvboxgreen' },
-				diagnosticsignhint = { link = 'gruvboxaqua' },
-				diagnosticsigninfo = { link = 'gruvboxblue' },
-				diagnosticsignwarn = { link = 'gruvboxyellow' },
-				diagnosticsignerror = { link = 'gruvboxred' },
-
-				treesittercontextlinenumber = { fg = '#7c6f64', sp = '#3c3836', underline = true },
-				treesittercontext = { sp = '#3c3836', underline = true },
-
-				diagnosticunderlineinfo = { sp = '#83a598', underline = true },
-				diagnosticunderlinehint = { sp = '#8ec07c', underline = true },
-				diagnosticunderlineerror = { sp = '#fb4934', underline = true },
-				diagnosticunderlinewarn = { sp = '#fabd2f', underline = true },
-			},
-		},
-	},
+	-- {
+	-- 	'catppuccin/nvim',
+	-- 	lazy = false,
+	-- 	name = 'catppuccin',
+	-- 	priority = 1000,
+	-- 	opts = {
+	-- 		---@param c CtpColors<CtpFlavor>
+	-- 		custom_highlights = function(c)
+	-- 			return {
+	-- 				PmenuSel = { fg = c.none, bg = c.surface1, style = {} },
+	-- 				-- Pmenu = { bg = c.mantle },
+	-- 				CmpItemAbbr = { fg = c.text },
+	-- 				CmpItemAbbrMatch = { fg = c.none, style = { 'bold' } },
+	-- 				CmpItemAbbrMatchDefault = { link = 'CmpItemAbbrMatch' },
+	-- 				CmpItemAbbrMatchFuzzy = { link = 'CmpItemAbbrMatch' },
+	-- 				CmpItemMenu = { fg = c.overlay2 },
+	-- 				CmpItemArgs = { fg = c.overlay0 },
+	--
+	-- 				nCursor = { bg = c.peach },
+	-- 				iCursor = { bg = c.green },
+	--
+	-- 				TreesitterContext = { bg = c.none },
+	-- 				TreesitterContextLineNumber = { bg = c.none },
+	-- 			}
+	-- 		end,
+	-- 	},
+	-- },
+	-- {
+	-- 	'ellisonleao/gruvbox.nvim',
+	-- 	opts = {
+	-- 		contrast = 'hard',
+	-- 		bold = false,
+	-- 		overrides = {
+	-- 			iCursor = { bg = '#D3859B' },
+	-- 			nCursor = { bg = '#FBBD2E' },
+	-- 			-- CursorLineNr = { link = 'GruvboxYellow' },
+	-- 			DiagnosticOk = { link = 'GruvboxGreen' },
+	-- 			PmenuSel = { link = 'Cursorline' },
+	-- 			CmpItemMenu = { fg = '#A79A84', bg = 'none' },
+	-- 			CmpItemArgs = { link = 'Comment' },
+	-- 			CmpItemAbbrMatch = { bold = true },
+	-- 			CmpItemAbbrMatchFuzzy = { bold = true },
+	-- 			-- SignColumn = { link = 'Normal' },
+	-- 			LineNr = { fg = '#7c6f64', bg = '#3c3836' },
+	-- 			GitSignsAdd = { link = 'GruvboxGreenSign' },
+	-- 			GitSignsChange = { link = 'GruvboxAquaSign' },
+	-- 			gitsignsdelete = { link = 'gruvboxredsign' },
+	--
+	-- 			diagnosticsignok = { link = 'gruvboxgreen' },
+	-- 			diagnosticsignhint = { link = 'gruvboxaqua' },
+	-- 			diagnosticsigninfo = { link = 'gruvboxblue' },
+	-- 			diagnosticsignwarn = { link = 'gruvboxyellow' },
+	-- 			diagnosticsignerror = { link = 'gruvboxred' },
+	--
+	-- 			treesittercontextlinenumber = { fg = '#7c6f64', sp = '#3c3836', underline = true },
+	-- 			treesittercontext = { sp = '#3c3836', underline = true },
+	--
+	-- 			diagnosticunderlineinfo = { sp = '#83a598', underline = true },
+	-- 			diagnosticunderlinehint = { sp = '#8ec07c', underline = true },
+	-- 			diagnosticunderlineerror = { sp = '#fb4934', underline = true },
+	-- 			diagnosticunderlinewarn = { sp = '#fabd2f', underline = true },
+	-- 		},
+	-- 	},
+	-- },
 }

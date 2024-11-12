@@ -35,12 +35,11 @@ return {
 			local set = vim.keymap.set
 			-- Add cursors above/below the main cursor.
 			set({ 'n', 'v' }, '<C-k>', function()
-				return '<cmd>lua for i=1,' .. vim.v.count1 .. " do require('multicursor-nvim').lineAddCursor(-1) end<CR>"
-			end, { expr = true, silent = true })
-
+				mc.lineAddCursor(-1)
+			end)
 			set({ 'n', 'v' }, '<C-j>', function()
-				return '<cmd>lua for i=1,' .. vim.v.count1 .. " do require('multicursor-nvim').lineAddCursor(1) end<CR>"
-			end, { expr = true, silent = true })
+				mc.lineAddCursor(1)
+			end)
 
 			set('v', '<C-c>', mc.visualToCursors)
 
@@ -84,7 +83,7 @@ return {
 			set('v', 'A', mc.appendVisual)
 
 			-- match new cursors within visual selections by regex.
-			set('v', 'M', mc.matchCursors)
+			set('v', 's', mc.matchCursors)
 			set('n', 'gm', mc.restoreCursors)
 
 			-- Rotate visual selection contents.

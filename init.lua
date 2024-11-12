@@ -19,7 +19,7 @@ require('options')
 require('keymaps')
 require('autocommands')
 
-local colorscheme = 'mellifluous'
+local colorscheme = 'themer_rose_pine'
 require('lazy').setup('plugins', {
 	install = { colorscheme = { colorscheme } },
 })

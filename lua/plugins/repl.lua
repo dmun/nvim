@@ -1,5 +1,6 @@
 return {
 	'Vigemus/iron.nvim',
+	cmd = 'IronRepl',
 	config = function()
 		local iron = require('iron.core')
 		iron.setup({
@@ -9,13 +10,13 @@ return {
 				-- Your repl definitions come here
 				repl_definition = {
 					r = {
-						command = {
-							'jupyter',
-							'console',
-							'--kernel=ark',
-							"--ZMQTerminalInteractiveShell.image_handler='tempfile'",
-						},
-						-- command = { 'R' },
+						-- command = {
+						-- 	'jupyter',
+						-- 	'console',
+						-- 	'--kernel=ark',
+						-- 	"--ZMQTerminalInteractiveShell.image_handler='tempfile'",
+						-- },
+						command = { 'R' },
 					},
 					sh = {
 						-- Can be a table or a function that
@@ -39,8 +40,8 @@ return {
 			-- Iron doesn't set keymaps by default anymore.
 			-- You can set them here or manually add keymaps to the functions in iron.core
 			keymaps = {
-				send_motion = '<leader>s',
-				visual_send = '<leader>s',
+				send_motion = '<cr>',
+				visual_send = '<cr>',
 				send_file = '<M-r>',
 				send_line = '<space>sl',
 				send_paragraph = '<space>sp',
