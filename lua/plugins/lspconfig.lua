@@ -17,16 +17,16 @@ local function get_ls_config(config)
 		autostart = config and (config.autostart ~= false),
 		on_init = config and config.on_init or nil,
 		capabilities = vim.tbl_deep_extend(
-			'force',
-			require('cmp_nvim_lsp').default_capabilities() or {},
+			"force",
+			require("cmp_nvim_lsp").default_capabilities() or {},
 			config and config.capabilities or {}
 		),
 		handlers = {
-			['textDocument/publishDiagnostics'] = vim.lsp.with(
+			["textDocument/publishDiagnostics"] = vim.lsp.with(
 				vim.lsp.diagnostic.on_publish_diagnostics,
-				vim.tbl_deep_extend('force', config and config.diagnostics or {}, {
+				vim.tbl_deep_extend("force", config and config.diagnostics or {}, {
 					virtual_text = {
-						prefix = '',
+						prefix = "",
 					},
 				})
 			),
@@ -35,27 +35,27 @@ local function get_ls_config(config)
 end
 
 return {
-	{ 'folke/lazydev.nvim', ft = 'lua' },
+	{ "folke/lazydev.nvim", ft = "lua" },
 	-- { 'mrcjkb/rustaceanvim', version = '^4' },
 	{
-		'neovim/nvim-lspconfig',
-		event = { 'BufReadPre', 'BufNewFile' },
+		"neovim/nvim-lspconfig",
+		event = { "BufReadPre", "BufNewFile" },
 		dependencies = {
-			'williamboman/mason.nvim',
-			'williamboman/mason-lspconfig.nvim',
-			'folke/lazydev.nvim',
-			'nvim-telescope/telescope.nvim',
+			"williamboman/mason.nvim",
+			"williamboman/mason-lspconfig.nvim",
+			"folke/lazydev.nvim",
+			"nvim-telescope/telescope.nvim",
 		},
 		config = function()
-			require('mason').setup()
-			local lsp = require('lspconfig')
-			local mason_lsp = require('mason-lspconfig')
+			require("mason").setup()
+			local lsp = require("lspconfig")
+			local mason_lsp = require("mason-lspconfig")
 
-			require('lspconfig.configs').kotlin_lsp = {
+			require("lspconfig.configs").kotlin_lsp = {
 				default_config = {
-					filetypes = { 'kotlin' },
-					cmd = { '/Users/david/Development/kotlin-lsp/target/debug/kotlin-lsp' },
-					root_dir = lsp.util.root_pattern('.git'),
+					filetypes = { "kotlin" },
+					cmd = { "/Users/david/Development/kotlin-lsp/target/debug/kotlin-lsp" },
+					root_dir = lsp.util.root_pattern(".git"),
 				},
 			}
 
@@ -77,20 +77,20 @@ return {
 				end
 			end
 
-			vim.api.nvim_create_autocmd('LspAttach', {
-				group = vim.api.nvim_create_augroup('UserLspConfig', {}),
+			vim.api.nvim_create_autocmd("LspAttach", {
+				group = vim.api.nvim_create_augroup("UserLspConfig", {}),
 				callback = function(ev)
-					vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
+					vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
 					local opts = { buffer = ev.buf }
-					vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
-					vim.keymap.set('n', 'gd', '<cmd>Trouble lsp_definitions<CR>', opts)
-					vim.keymap.set('n', 'gi', '<cmd>Trouble lsp_implementations<CR>', opts)
-					vim.keymap.set('n', 'gr', '<cmd>Trouble lsp_references<CR>', opts)
-					vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
-					vim.keymap.set('i', '<C-k>', vim.lsp.buf.signature_help, opts)
-					vim.keymap.set('n', '<leader>D', '<cmd>Trouble lsp_type_definitions<cr>', opts)
-					vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, opts)
-					vim.keymap.set('n', '<C-c>', vim.lsp.buf.code_action, opts)
+					vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
+					vim.keymap.set("n", "gd", "<cmd>Trouble lsp_definitions<CR>", opts)
+					vim.keymap.set("n", "gi", "<cmd>Trouble lsp_implementations<CR>", opts)
+					vim.keymap.set("n", "gr", "<cmd>Trouble lsp_references<CR>", opts)
+					vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+					vim.keymap.set("i", "<C-k>", vim.lsp.buf.signature_help, opts)
+					vim.keymap.set("n", "<leader>D", "<cmd>Trouble lsp_type_definitions<cr>", opts)
+					vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
+					vim.keymap.set("n", "<C-c>", vim.lsp.buf.code_action, opts)
 				end,
 			})
 		end,

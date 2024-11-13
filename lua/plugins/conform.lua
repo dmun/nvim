@@ -1,44 +1,44 @@
 return {
-	'stevearc/conform.nvim',
+	"stevearc/conform.nvim",
 	keys = {
 		{
-			'<M-f>',
+			"<M-f>",
 			function()
-				require('conform').format { lsp_format = 'fallback' }
+				require("conform").format({ lsp_format = "fallback" })
 			end,
 		},
 	},
 	opts = {
 		formatters_by_ft = {
-			lua = { 'stylua' },
-			python = { 'ruff' },
-			rust = { 'rustfmt' },
-			go = { 'gofmt' },
-			typescript = { 'prettier' },
-			json = { 'prettier' },
-			cpp = { 'clang-format' },
-			c = { 'clang-format' },
-			tex = { 'latexindent' },
-			typst = { 'typstyle' },
-			swift = { 'swift-format' },
-			odin = { 'odinfmt' },
+			lua = { "stylua" },
+			python = { "ruff" },
+			rust = { "rustfmt" },
+			go = { "gofmt" },
+			typescript = { "prettier" },
+			json = { "prettier" },
+			cpp = { "clang-format" },
+			c = { "clang-format" },
+			tex = { "latexindent" },
+			typst = { "typstyle" },
+			swift = { "swift-format" },
+			odin = { "odinfmt" },
 		},
 		formatters = {
 			stylua = {
 				condition = function(_, ctx)
-					return vim.fs.basename(ctx.filename) ~= 'xmake.lua'
+					return vim.fs.basename(ctx.filename) ~= "xmake.lua"
 				end,
 			},
-			['swift-format'] = {
-				command = 'swift-format',
-				args = { '--configuration', '.swift-format' },
+			["swift-format"] = {
+				command = "swift-format",
+				args = { "--configuration", ".swift-format" },
 			},
 			typstyle = {
-				command = 'typstyle',
+				command = "typstyle",
 			},
-			['clang-format'] = {
-				command = 'clang-format',
-				args = { '--style', '{BasedOnStyle: LLVM, IndentWidth: 4}' },
+			["clang-format"] = {
+				command = "clang-format",
+				args = { "--style", "{BasedOnStyle: LLVM, IndentWidth: 4}" },
 			},
 		},
 	},

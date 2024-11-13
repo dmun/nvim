@@ -1,12 +1,12 @@
 -- filetypes
-vim.cmd('au BufRead,BufEnter *.swiftinterface se ft=swift')
-vim.cmd('au BufRead,BufEnter .swift-format se ft=json')
-vim.cmd('au BufRead,BufEnter *.dagitty se ft=luau')
+vim.cmd("au BufRead,BufEnter *.swiftinterface se ft=swift")
+vim.cmd("au BufRead,BufEnter .swift-format se ft=json")
+vim.cmd("au BufRead,BufEnter *.dagitty se ft=luau")
 
 -- highlight on yank
-local hi_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
-vim.api.nvim_create_autocmd('TextYankPost', {
-	pattern = '*',
+local hi_group = vim.api.nvim_create_augroup("YankHighlight", { clear = true })
+vim.api.nvim_create_autocmd("TextYankPost", {
+	pattern = "*",
 	group = hi_group,
 	callback = function()
 		vim.highlight.on_yank()
@@ -23,12 +23,12 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 -- })
 
 -- terminal
-vim.api.nvim_create_autocmd({ 'BufNew', 'BufEnter', 'BufReadPre', 'BufReadPost' }, {
+vim.api.nvim_create_autocmd({ "BufNew", "BufEnter", "BufReadPre", "BufReadPost" }, {
 	callback = function()
-		if vim.bo.buftype == 'terminal' then
+		if vim.bo.buftype == "terminal" then
 			-- vim.opt_local.relativenumber = false
 			-- vim.opt_local.number = false
-			vim.cmd.normal('i')
+			vim.cmd.normal("i")
 		end
 	end,
 })

@@ -1,9 +1,9 @@
 local mode = {
 	function()
-		return '▍'
+		return "▍"
 	end,
 	padding = 0,
-	color = { gui = 'reverse' },
+	color = { gui = "reverse" },
 	-- color = 'lualine_a_insert',
 }
 
@@ -12,22 +12,22 @@ local project = {
 		local path = vim.fn.getcwd()
 		return vim.fs.basename(path)
 	end,
-	color = { gui = 'bold' },
+	color = { gui = "bold" },
 }
 
 local filename = {
 	function()
 		local ft = vim.bo.filetype
 		local bt = vim.bo.buftype
-		local path = vim.fn.expand('%:.')
+		local path = vim.fn.expand("%:.")
 
-		if ft == 'help' then
-			return 'Neovim Documentation'
-		elseif bt == 'terminal' then
-			if path:find('ipython') then
-				path = 'IPython Kernel'
+		if ft == "help" then
+			return "Neovim Documentation"
+		elseif bt == "terminal" then
+			if path:find("ipython") then
+				path = "IPython Kernel"
 			end
-			if path:find('oil://') then
+			if path:find("oil://") then
 				path = path:sub(7)
 			end
 		end
@@ -35,15 +35,15 @@ local filename = {
 		return path
 	end,
 	color = function()
-		local fg = '#cccccc'
-		local gui = ''
+		local fg = "#cccccc"
+		local gui = ""
 
 		if vim.bo.modifiable == false then
-			fg = '#777777'
+			fg = "#777777"
 		end
 
 		if vim.bo.modified then
-			gui = 'italic'
+			gui = "italic"
 		end
 
 		return { fg = fg, gui = gui }
@@ -51,10 +51,10 @@ local filename = {
 }
 
 return {
-	'nvim-lualine/lualine.nvim',
+	"nvim-lualine/lualine.nvim",
 	opts = {
 		options = {
-			theme = 'auto',
+			theme = "auto",
 			component_separators = { left = nil, right = nil },
 			section_separators = { left = nil, right = nil },
 			always_divide_middle = true,
@@ -62,7 +62,7 @@ return {
 		sections = {
 			lualine_a = { mode },
 			lualine_b = {},
-			lualine_c = { project, filename, 'diagnostics' },
+			lualine_c = { project, filename, "diagnostics" },
 			lualine_x = {},
 			lualine_y = {},
 			lualine_z = {},
@@ -70,7 +70,7 @@ return {
 		inactive_sections = {
 			lualine_a = { mode },
 			lualine_b = {},
-			lualine_c = { project, filename, 'diagnostics' },
+			lualine_c = { project, filename, "diagnostics" },
 			lualine_x = {},
 			lualine_y = {},
 			lualine_z = {},

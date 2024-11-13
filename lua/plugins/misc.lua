@@ -1,57 +1,57 @@
 return {
 	-- 'stevearc/profile.nvim'
 	{
-		'levouh/tint.nvim',
+		"levouh/tint.nvim",
 		enabled = false,
 		opts = {},
 	},
-	{ 'eandrju/cellular-automaton.nvim', cmd = 'CellularAutomaton' },
+	{ "eandrju/cellular-automaton.nvim", cmd = "CellularAutomaton" },
 	{
-		'quarto-dev/quarto-nvim',
+		"quarto-dev/quarto-nvim",
 		enabled = false,
-		ft = 'quarto',
+		ft = "quarto",
 		dependencies = {
-			'jmbuhr/otter.nvim',
-			'nvim-treesitter/nvim-treesitter',
+			"jmbuhr/otter.nvim",
+			"nvim-treesitter/nvim-treesitter",
 		},
 		opts = {
 			codeRunner = {
 				enabled = true,
-				default_method = 'molten',
+				default_method = "molten",
 			},
 		},
 	},
 	{
 		-- 'benlubas/molten-nvim',
-		dir = '~/Development/molten-nvim',
+		dir = "~/Development/molten-nvim",
 		-- version = '^1.0.0', -- use version <2.0.0 to avoid breaking changes
 		enabled = false,
-		dependencies = { '3rd/image.nvim', 'vhyrro/luarocks.nvim' },
-		build = ':UpdateRemotePlugins',
+		dependencies = { "3rd/image.nvim", "vhyrro/luarocks.nvim" },
+		build = ":UpdateRemotePlugins",
 		init = function()
 			-- vim.g.molten_output_win_hide_on_leave = false
-			vim.g.molten_output_win_style = 'minimal'
+			vim.g.molten_output_win_style = "minimal"
 			vim.g.molten_tick_rate = 100
 
-			vim.g.molten_enter_output_behavior = 'open_and_enter'
+			vim.g.molten_enter_output_behavior = "open_and_enter"
 			vim.g.molten_output_win_max_height = 12
 			vim.g.molten_auto_open_output = false
 			vim.g.molten_auto_image_popup = true
 			vim.g.molten_output_virt_lines = false
 			vim.g.molten_virt_text_output = true
 			vim.g.molten_cover_empty_lines = false
-			vim.g.molten_output_win_border = { '', '', '', '' }
+			vim.g.molten_output_win_border = { "", "", "", "" }
 			vim.g.molten_output_win_cover_gutter = false
 			-- vim.g.molten_virt_lines_off_by_1 = true
 		end,
 	},
 	{
-		'pappasam/nvim-repl',
+		"pappasam/nvim-repl",
 		enabled = false,
 		init = function()
-			vim.g['repl_filetype_commands'] = {
-				javascript = 'node',
-				python = 'ipython --no-autoindent',
+			vim.g["repl_filetype_commands"] = {
+				javascript = "node",
+				python = "ipython --no-autoindent",
 			}
 		end,
 		keys = {
@@ -60,24 +60,24 @@ return {
 		},
 	},
 	{
-		'R-nvim/R.nvim',
+		"R-nvim/R.nvim",
 		enabled = false,
 		-- Only required if you also set defaults.lazy = true
 		lazy = false,
 		-- R.nvim is still young and we may make some breaking changes from time
 		-- to time. For now we recommend pinning to the latest minor version
 		-- like so:
-		version = '~0.1.0',
+		version = "~0.1.0",
 		config = function()
 			-- Create a table with the options to be passed to setup()
 			local opts = {
 				hook = {
 					on_filetype = function()
-						vim.api.nvim_buf_set_keymap(0, 'n', '<Enter>', '<Plug>RDSendLine', {})
-						vim.api.nvim_buf_set_keymap(0, 'v', '<Enter>', '<Plug>RSendSelection', {})
+						vim.api.nvim_buf_set_keymap(0, "n", "<Enter>", "<Plug>RDSendLine", {})
+						vim.api.nvim_buf_set_keymap(0, "v", "<Enter>", "<Plug>RSendSelection", {})
 					end,
 				},
-				R_args = { '--quiet', '--no-save' },
+				R_args = { "--quiet", "--no-save" },
 				min_editor_width = 72,
 				rconsole_width = 78,
 				-- objbr_mappings = { -- Object browser keymap
@@ -89,20 +89,20 @@ return {
 				-- 	end,
 				-- },
 				disable_cmds = {
-					'RClearConsole',
-					'RCustomStart',
+					"RClearConsole",
+					"RCustomStart",
 					-- 'RSPlot',
-					'RSaveClose',
+					"RSaveClose",
 				},
 			}
 			-- Check if the environment variable "R_AUTO_START" exists.
 			-- If using fish shell, you could put in your config.fish:
 			-- alias r "R_AUTO_START=true nvim"
-			if vim.env.R_AUTO_START == 'true' then
-				opts.auto_start = 'on startup'
+			if vim.env.R_AUTO_START == "true" then
+				opts.auto_start = "on startup"
 				opts.objbr_auto_start = true
 			end
-			require('r').setup(opts)
+			require("r").setup(opts)
 		end,
 	},
 }

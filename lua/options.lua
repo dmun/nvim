@@ -2,14 +2,14 @@ local o = vim.opt
 local g = vim.g
 
 -- globals
-g.tex_flavor = 'latex'
+g.tex_flavor = "latex"
 g.rooter_silent_chdir = 1
-g['sneak#use_ic_scs'] = 1
+g["sneak#use_ic_scs"] = 1
 
 -- text
 o.wrap = false
 o.breakindent = true
-o.completeopt = 'menuone,noselect'
+o.completeopt = "menuone,noselect"
 o.confirm = true
 o.expandtab = false
 o.linebreak = true
@@ -19,42 +19,42 @@ o.shiftwidth = 0
 o.textwidth = 0
 
 -- mouse
-o.mouse = 'a'
+o.mouse = "a"
 
 -- statuscolumn
-o.foldcolumn = '0'
+o.foldcolumn = "0"
 o.foldenable = true
 o.foldlevel = 99
 o.foldlevelstart = 99
 o.number = true
 o.relativenumber = false
-o.signcolumn = 'yes'
+o.signcolumn = "yes"
 
 -- appearance
-o.background = 'dark'
+o.background = "dark"
 o.conceallevel = 2
 o.lazyredraw = false
 o.cursorline = true
-o.cursorlineopt = 'number'
+o.cursorlineopt = "number"
 o.ruler = false
 o.showcmd = false
 o.showmode = false
 o.showtabline = 0
 o.termguicolors = true
-o.shm:append('I')
+o.shm:append("I")
 o.cmdheight = 0
 o.pumheight = 10
 -- o.colorcolumn = "+1"
-o.fillchars = 'eob: '
+o.fillchars = "eob: "
 o.guicursor = "i:iCursor-block,n-v:nCursor-block"
 -- o.guicursor = 'i:ver25'
 -- o.guicursor = 'a:nCursor-block'
 o.laststatus = 3
 
 -- window
-o.inccommand = 'split'
+o.inccommand = "split"
 o.splitbelow = true
-o.splitkeep = 'screen'
+o.splitkeep = "screen"
 
 -- keys
 o.ignorecase = true
@@ -72,7 +72,7 @@ o.undofile = true
 
 -- system
 -- opt.autochdir = true
-o.clipboard = 'unnamedplus'
+o.clipboard = "unnamedplus"
 
 -- lazyvim statuscolumn
 vim.opt.statuscolumn = [[%!v:lua.require'util.ui'.statuscolumn()]]
@@ -82,14 +82,14 @@ vim.opt.foldtext = "v:lua.require'util.ui'.foldtext()"
 vim.diagnostic.config({
 	signs = {
 		text = {
-			[vim.diagnostic.severity.ERROR] = '',
-			[vim.diagnostic.severity.WARN] = '',
-			[vim.diagnostic.severity.HINT] = '',
-			[vim.diagnostic.severity.INFO] = '',
+			[vim.diagnostic.severity.ERROR] = "",
+			[vim.diagnostic.severity.WARN] = "",
+			[vim.diagnostic.severity.HINT] = "",
+			[vim.diagnostic.severity.INFO] = "",
 		},
 		linehl = {
-			[vim.diagnostic.severity.ERROR] = 'DiagnosticSignLineError',
-			[vim.diagnostic.severity.WARN] = 'DiagnosticSignLineWarn',
+			[vim.diagnostic.severity.ERROR] = "DiagnosticSignLineError",
+			[vim.diagnostic.severity.WARN] = "DiagnosticSignLineWarn",
 		},
 	},
 })

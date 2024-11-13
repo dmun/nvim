@@ -1,68 +1,68 @@
 return {
 	-- 'romainl/vim-cool',
 	-- 'echasnovski/mini.nvim',
-	{ 'numToStr/Comment.nvim', event = 'VeryLazy' },
+	{ "numToStr/Comment.nvim", event = "VeryLazy" },
 	-- { 'kylechui/nvim-surround', event = 'VeryLazy' },
-	{ 'windwp/nvim-autopairs', event = 'InsertEnter', config = true },
+	{ "windwp/nvim-autopairs", event = "InsertEnter", config = true },
 	-- { 'VidocqH/auto-indent.nvim', event = 'InsertEnter' },
 	{
-		'dstein64/nvim-scrollview',
+		"dstein64/nvim-scrollview",
 		enabled = false,
 		opts = {},
 	},
 	{
-		'lukas-reineke/indent-blankline.nvim',
+		"lukas-reineke/indent-blankline.nvim",
 		enabled = false,
-		name = 'ibl',
+		name = "ibl",
 		opts = {
 			indent = {
-				char = '▏',
+				char = "▏",
 			},
 			scope = { enabled = false },
 		},
 	},
 	{
-		'RRethy/vim-illuminate',
+		"RRethy/vim-illuminate",
 		enabled = false,
 		config = function()
-			require('illuminate').configure({
-				providers = { 'lsp' },
+			require("illuminate").configure({
+				providers = { "lsp" },
 				large_file_cutoff = 1000,
 				large_file_overrides = {
-					providers = { 'lsp' },
+					providers = { "lsp" },
 				},
 			})
 		end,
 	},
 	{
-		'NMAC427/guess-indent.nvim',
+		"NMAC427/guess-indent.nvim",
 		-- enabled = false,
-		event = { 'BufReadPre', 'BufNewFile' },
+		event = { "BufReadPre", "BufNewFile" },
 		opts = {},
 	},
 	{
-		'kosayoda/nvim-lightbulb',
+		"kosayoda/nvim-lightbulb",
 		enabled = false,
 		opts = {
 			autocmd = { enabled = true },
 			sign = {
-				text = '',
-				hl = 'DiagnosticWarn',
+				text = "",
+				hl = "DiagnosticWarn",
 			},
 		},
 	},
 	{
-		'kevinhwang91/nvim-ufo',
-		event = { 'BufRead', 'BufNewFile' },
-		dependencies = { 'kevinhwang91/promise-async' },
+		"kevinhwang91/nvim-ufo",
+		event = { "BufRead", "BufNewFile" },
+		dependencies = { "kevinhwang91/promise-async" },
 		opts = {
 			provider_selector = function()
-				return { 'treesitter', 'indent' }
+				return { "treesitter", "indent" }
 			end,
 		},
 	},
 	{
-		'folke/trouble.nvim',
+		"folke/trouble.nvim",
 		opts = {
 			focus = true,
 		},
