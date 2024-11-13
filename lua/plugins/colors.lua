@@ -32,9 +32,12 @@ return {
 	-- 'maxmx03/solarized.nvim',
 	{
 		"oxfist/night-owl.nvim",
-		opts = {
-			italics = false,
-		},
+		config = function()
+			require("night-owl").setup({
+				italics = false,
+			})
+			vim.cmd("hi LeapLabel guifg=#f977a1 gui=bold")
+		end,
 	},
 	{
 		"ramojus/mellifluous.nvim",
