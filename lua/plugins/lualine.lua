@@ -1,6 +1,10 @@
-local grapple = {
-	'grapple',
-	color = { fg = '#bfaf8e', gui = '' },
+local mode = {
+	function()
+		return '▍'
+	end,
+	padding = 0,
+	color = { gui = 'reverse' },
+	-- color = 'lualine_a_insert',
 }
 
 local project = {
@@ -8,7 +12,7 @@ local project = {
 		local path = vim.fn.getcwd()
 		return vim.fs.basename(path)
 	end,
-	color = { fg = '#9c9c78', gui = 'bold' },
+	color = { gui = 'bold' },
 }
 
 local filename = {
@@ -56,18 +60,18 @@ return {
 			always_divide_middle = true,
 		},
 		sections = {
-			lualine_a = {},
+			lualine_a = { mode },
 			lualine_b = {},
 			lualine_c = { project, filename, 'diagnostics' },
-			lualine_x = { grapple },
+			lualine_x = {},
 			lualine_y = {},
 			lualine_z = {},
 		},
 		inactive_sections = {
-			lualine_a = {},
+			lualine_a = { mode },
 			lualine_b = {},
 			lualine_c = { project, filename, 'diagnostics' },
-			lualine_x = { grapple },
+			lualine_x = {},
 			lualine_y = {},
 			lualine_z = {},
 		},

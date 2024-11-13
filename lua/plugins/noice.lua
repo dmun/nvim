@@ -6,6 +6,9 @@ return {
 		lsp = { signature = { enabled = false } },
 		views = {
 			cmdline_popup = {
+				size = {
+					width = '50',
+				},
 				position = {
 					row = '33%',
 					col = '50%',
