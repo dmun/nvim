@@ -27,7 +27,7 @@ local fields = {
 	"CmpItemKindValue", --     12
 	"@lsp.type.enum", --     13
 	"@keyword", --     14 keyword
-	"CmpItemArgs", --     15 snippet
+	"Comment", --     15 snippet
 	"CmpItemKindColor", --     16
 	"CmpItemKindFile", --     17
 	"CmpItemKindReference", --     18
@@ -174,7 +174,7 @@ local function get_highlights(str, width, kind)
 	if prefix == nil then
 		local s = vim.split(str, "%(")
 		table.insert(highlights, { "@function", range = { 0, #s[1] } })
-		table.insert(highlights, { "CmpItemArgs", range = { #s[1], #str } })
+		table.insert(highlights, { "Comment", range = { #s[1], #str } })
 		return highlights
 	end
 
