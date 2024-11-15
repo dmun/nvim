@@ -7,7 +7,7 @@ return {
 	-- { 'VidocqH/auto-indent.nvim', event = 'InsertEnter' },
 	{
 		"dstein64/nvim-scrollview",
-		enabled = false,
+		-- enabled = false,
 		opts = {},
 	},
 	{

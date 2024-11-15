@@ -70,7 +70,7 @@ return {
 				end)
 			end
 
-			mc.setup()
+			mc.setup({ signs = false })
 
 			local set = vim.keymap.set
 			-- Add cursors above/below the main cursor.

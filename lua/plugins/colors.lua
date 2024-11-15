@@ -33,10 +33,10 @@ return {
 	{
 		"oxfist/night-owl.nvim",
 		config = function()
-			require("night-owl").setup({
-				italics = false,
-			})
+			require("night-owl").setup({ italics = false })
 			vim.cmd("hi LeapLabel guifg=#f977a1 gui=bold")
+			vim.cmd("hi link iCursor lualine_a_insert")
+			vim.cmd("hi link nCursor lualine_a_normal")
 		end,
 	},
 	{
@@ -53,7 +53,8 @@ return {
 						hl.set("IlluminatedWordWrite", { link = "CursorLine" })
 						hl.set("DiagnosticUnnecessary", { fg = colors.fg4 })
 						hl.set("CursorLineNr", { link = "Normal" })
-						hl.set("iCursor", { bg = "#88DFFF" })
+						hl.set("iCursor", { link = "lualine_a_insert" })
+						hl.set("nCursor", { link = "lualine_a_normal" })
 						hl.set("LeapLabel", { fg = c.red })
 
 						-- hl.set('NormalFloat', { link = 'Normal' })

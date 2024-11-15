@@ -1,10 +1,18 @@
+local multicursor = {
+	icon = { "󰬸", color = { fg = "#80A4C2" } },
+	function()
+		local n = require("multicursor-nvim").numCursors()
+		return n > 1 and n or ""
+	end,
+	color = { gui = "bold" },
+}
+
 local mode = {
 	function()
 		return "▍"
 	end,
 	padding = 0,
 	color = { gui = "reverse" },
-	-- color = 'lualine_a_insert',
 }
 
 local project = {
@@ -57,21 +65,21 @@ return {
 			theme = "auto",
 			component_separators = { left = nil, right = nil },
 			section_separators = { left = nil, right = nil },
-			always_divide_middle = true,
+			always_divide_middle = false,
 		},
 		sections = {
 			lualine_a = { mode },
-			lualine_b = {},
-			lualine_c = { project, filename, "diagnostics" },
-			lualine_x = {},
+			lualine_b = { project },
+			lualine_c = { filename, "diagnostics" },
+			lualine_x = { multicursor },
 			lualine_y = {},
 			lualine_z = {},
 		},
 		inactive_sections = {
 			lualine_a = { mode },
-			lualine_b = {},
-			lualine_c = { project, filename, "diagnostics" },
-			lualine_x = {},
+			lualine_b = { project },
+			lualine_c = { filename, "diagnostics" },
+			lualine_x = { multicursor },
 			lualine_y = {},
 			lualine_z = {},
 		},

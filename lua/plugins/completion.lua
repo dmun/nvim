@@ -365,7 +365,7 @@ return {
 				sources = cmp.config.sources({
 					{ name = "luasnip" },
 					{ name = "nvim_lsp" },
-					{ name = "otter" },
+					{ name = "lazydev" },
 					{ name = "path" },
 					{ name = "nvim_lua" },
 					{ name = "nvim_lsp_signature_help" },
