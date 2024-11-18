@@ -1,6 +1,7 @@
 return {
 	"Vigemus/iron.nvim",
 	cmd = "IronRepl",
+	ft = "python",
 	config = function()
 		local iron = require("iron.core")
 		iron.setup({
@@ -24,7 +25,7 @@ return {
 						command = { "zsh" },
 					},
 					python = {
-						command = { "ipython", "--no-autoindent" },
+						command = { "ipython", "--no-autoindent", "--matplotlib" },
 						format = require("iron.fts.common").bracketed_paste_python,
 					},
 				},
@@ -65,7 +66,8 @@ return {
 		})
 
 		-- iron also has a list of commands, see :h iron-commands for all available commands
-		vim.keymap.set("n", "<CR>", " sic", { remap = true })
+		vim.keymap.set("n", "<CR>", " sic", { remap = true, buffer = true })
+		vim.keymap.set("n", "<M-b>", "o# %%\n", { remap = true, buffer = true })
 		vim.keymap.set("n", "<space>rs", "<Cmd>IronRepl<CR>")
 		vim.keymap.set("n", "<space>rr", "<Cmd>IronRestart<CR>")
 		vim.keymap.set("n", "<space>rf", "<Cmd>IronFocus<CR>")

@@ -1,10 +1,7 @@
 ; extends
 (module
- (comment) @cell.comment
- (#lua-match? @cell.comment "^# %%%%")
- .
- (_) @cell.start
- (#not-any-lua-match? @cell.start "^# %%%%")
+ (comment) @cell.start
+ (#lua-match? @cell.start "^# %%%%")
  .
  (_)+ @cell.content
  (#not-any-lua-match? @cell.content "^# %%%%")

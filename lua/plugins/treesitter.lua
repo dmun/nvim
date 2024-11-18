@@ -9,10 +9,10 @@ return {
 					move = {
 						enable = true,
 						goto_next_start = {
-							["<Down>"] = "@cell.start",
+							["<C-f>"] = "@cell.start",
 						},
 						goto_previous_start = {
-							["<Up>"] = "@cell.start",
+							["<C-b>"] = "@cell.start",
 						},
 					},
 					select = {
