@@ -40,7 +40,7 @@ return {
 			-- Iron doesn't set keymaps by default anymore.
 			-- You can set them here or manually add keymaps to the functions in iron.core
 			keymaps = {
-				send_motion = "<cr>",
+				send_motion = "<space>s",
 				visual_send = "<cr>",
 				send_file = "<M-r>",
 				send_line = "<space>sl",
@@ -58,15 +58,17 @@ return {
 			-- If the highlight is on, you can change how it looks
 			-- For the available options, check nvim_set_hl
 			highlight = {
-				italic = true,
+				bold = false,
+				italic = false,
 			},
 			ignore_blank_lines = true, -- ignore blank lines when sending visual select lines
 		})
 
 		-- iron also has a list of commands, see :h iron-commands for all available commands
-		vim.keymap.set("n", "<space>rs", "<cmd>IronRepl<cr>")
-		vim.keymap.set("n", "<space>rr", "<cmd>IronRestart<cr>")
-		vim.keymap.set("n", "<space>rf", "<cmd>IronFocus<cr>")
-		vim.keymap.set("n", "<space>rh", "<cmd>IronHide<cr>")
+		vim.keymap.set("n", "<CR>", " sic", { remap = true })
+		vim.keymap.set("n", "<space>rs", "<Cmd>IronRepl<CR>")
+		vim.keymap.set("n", "<space>rr", "<Cmd>IronRestart<CR>")
+		vim.keymap.set("n", "<space>rf", "<Cmd>IronFocus<CR>")
+		vim.keymap.set("n", "<space>rh", "<Cmd>IronHide<CR>")
 	end,
 }

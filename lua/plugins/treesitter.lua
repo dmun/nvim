@@ -3,8 +3,18 @@ return {
 		"nvim-treesitter/nvim-treesitter-textobjects",
 		dependencies = "nvim-treesitter/nvim-treesitter",
 		config = function()
+			---@diagnostic disable-next-line: missing-fields
 			require("nvim-treesitter.configs").setup({
 				textobjects = {
+					move = {
+						enable = true,
+						goto_next_start = {
+							["<Down>"] = "@cell.start",
+						},
+						goto_previous_start = {
+							["<Up>"] = "@cell.start",
+						},
+					},
 					select = {
 						enable = true,
 
@@ -15,10 +25,10 @@ return {
 							-- You can use the capture groups defined in textobjects.scm
 							["af"] = "@function.outer",
 							["if"] = "@function.inner",
-							["ac"] = "@class.outer",
+							["ac"] = "@cell.outer",
 							-- You can optionally set descriptions to the mappings (used in the desc parameter of
 							-- nvim_buf_set_keymap) which plugins like which-key display
-							["ic"] = { query = "@class.inner", desc = "Select inner part of a class region" },
+							["ic"] = { query = "@cell.outer", desc = "Select inner part of a cell" },
 							-- You can also use captures from other query groups like `locals.scm`
 							["as"] = { query = "@local.scope", query_group = "locals", desc = "Select language scope" },
 						},
