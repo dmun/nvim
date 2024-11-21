@@ -1,7 +1,14 @@
 return {
 	"tpope/vim-rsi",
 	{
+		"rhysd/clever-f.vim",
+		init = function()
+			vim.g.clever_f_smart_case = 1
+		end,
+	},
+	{
 		"ggandor/leap.nvim",
+		enabled = false,
 		keys = {
 			{ "s", "<Plug>(leap-forward)", { "n", "x", "o" } },
 			{ "S", "<Plug>(leap-backward)", { "n", "x", "o" } },
@@ -116,14 +123,14 @@ return {
 			set("n", "<leader>a", mc.alignCursors)
 
 			-- Split visual selections by regex.
-			set("v", "S", mc.splitCursors)
+			set("v", "?", mc.splitCursors)
 
 			-- Append/insert for each line of visual selections.
 			set("v", "I", mc.insertVisual)
 			set("v", "A", mc.appendVisual)
 
 			-- match new cursors within visual selections by regex.
-			set("v", "s", matchCursors)
+			set("v", "/", matchCursors)
 			set("n", "gm", mc.restoreCursors)
 
 			-- Rotate visual selection contents.

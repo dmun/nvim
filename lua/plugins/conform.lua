@@ -11,7 +11,7 @@ return {
 	opts = {
 		formatters_by_ft = {
 			lua = { "stylua" },
-			python = { "ruff" },
+			-- python = { "ruff" },
 			rust = { "rustfmt" },
 			go = { "gofmt" },
 			typescript = { "prettier" },

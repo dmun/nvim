@@ -83,6 +83,7 @@ return {
 				},
 				highlight = {
 					enable = true,
+					disable = { "r" },
 				},
 				indent = {
 					enable = false,

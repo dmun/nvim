@@ -1,5 +1,5 @@
 ; extends
-(module
+(program
  (comment) @cell.start
  (#lua-match? @cell.start "^# %%%%")
  .
@@ -11,7 +11,7 @@
  (#make-range! "cell.outer" @cell.start @cell.content)
 )
 
-(module
+(program
  .
  (_) @cell.start
  (#not-any-lua-match? @cell.start "^# %%%%")

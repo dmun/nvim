@@ -2,7 +2,25 @@ return {
 	-- 'romainl/vim-cool',
 	-- 'echasnovski/mini.nvim',
 	{ "numToStr/Comment.nvim", event = "VeryLazy" },
-	-- { 'kylechui/nvim-surround', event = 'VeryLazy' },
+	{
+		"kylechui/nvim-surround",
+		event = "VeryLazy",
+		opts = {
+			keymaps = {
+				insert = "<C-g>s",
+				insert_line = "<C-g>S",
+				normal = "s",
+				normal_cur = "ss",
+				normal_line = "S",
+				normal_cur_line = "SS",
+				visual = "s",
+				visual_line = "S",
+				delete = "ds",
+				change = "cs",
+				change_line = "cS",
+			},
+		},
+	},
 	{ "windwp/nvim-autopairs", event = "InsertEnter", config = true },
 	-- { 'VidocqH/auto-indent.nvim', event = 'InsertEnter' },
 	{

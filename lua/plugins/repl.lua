@@ -1,7 +1,7 @@
 return {
 	"Vigemus/iron.nvim",
 	cmd = "IronRepl",
-	ft = "python",
+	ft = { "python", "r" },
 	config = function()
 		local iron = require("iron.core")
 		iron.setup({
@@ -33,8 +33,8 @@ return {
 				-- See below for more information
 				-- repl_open_cmd = require('iron.view').right(40),
 				repl_open_cmd = require("iron.view").split(10, {
-					winfixwidth = false,
-					winfixheight = false,
+					winfixwidth = true,
+					winfixheight = true,
 					number = false,
 				}),
 			},
@@ -67,7 +67,7 @@ return {
 
 		-- iron also has a list of commands, see :h iron-commands for all available commands
 		vim.keymap.set("n", "<CR>", " sic", { remap = true, buffer = true })
-		vim.keymap.set("n", "<M-b>", "o# %%\n", { remap = true, buffer = true })
+		vim.keymap.set("n", "<M-b>", "O# %%0j", { remap = true, buffer = true })
 		vim.keymap.set("n", "<space>rs", "<Cmd>IronRepl<CR>")
 		vim.keymap.set("n", "<space>rr", "<Cmd>IronRestart<CR>")
 		vim.keymap.set("n", "<space>rf", "<Cmd>IronFocus<CR>")

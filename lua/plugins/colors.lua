@@ -34,7 +34,7 @@ return {
 		"oxfist/night-owl.nvim",
 		config = function()
 			require("night-owl").setup({ italics = false })
-			vim.cmd("hi LeapLabel guifg=#f977a1 gui=bold")
+			vim.cmd("hi CleverFChar guifg=#f977a1 gui=bold")
 			vim.cmd("hi link iCursor lualine_a_insert")
 			vim.cmd("hi link nCursor lualine_a_normal")
 		end,

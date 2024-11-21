@@ -36,11 +36,11 @@ vim.api.nvim_create_autocmd({ "BufNew", "BufEnter", "BufReadPre", "BufReadPost" 
 -- dynamic linenumbers
 -- vim.cmd('au InsertEnter * se nornu')
 -- vim.cmd('au InsertLeave * se rnu')
-vim.cmd([[
-		:au ModeChanged [vV\x16]*:* let &l:rnu = mode() =~# '^[vV\x16]'
-		:au ModeChanged *:[vV\x16]* let &l:rnu = mode() =~# '^[vV\x16]'
-		:au WinEnter,WinLeave * let &l:rnu = mode() =~# '^[vV\x16]'
-]])
+-- vim.cmd([[
+-- 		:au ModeChanged [vV\x16]*:* let &l:rnu = mode() =~# '^[vV\x16]'
+-- 		:au ModeChanged *:[vV\x16]* let &l:rnu = mode() =~# '^[vV\x16]'
+-- 		:au WinEnter,WinLeave * let &l:rnu = mode() =~# '^[vV\x16]'
+-- ]])
 
 -- -- dynamic CursorLineNr color
 -- vim.cmd('au InsertEnter * se winhl=CursorLineNr:iCursorLineNr')

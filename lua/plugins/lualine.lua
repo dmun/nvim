@@ -1,3 +1,15 @@
+local macro = {
+	function()
+		local recording_register = vim.fn.reg_recording()
+		if recording_register == "" then
+			return ""
+		else
+			return "Recording @" .. recording_register
+		end
+	end,
+	color = { gui = "bold" },
+}
+
 local multicursor = {
 	icon = { "󰬸", color = { fg = "#80A4C2" } },
 	function()
@@ -71,7 +83,7 @@ return {
 			lualine_a = { mode },
 			lualine_b = { project },
 			lualine_c = { filename, "diagnostics" },
-			lualine_x = { multicursor },
+			lualine_x = { multicursor, macro },
 			lualine_y = {},
 			lualine_z = {},
 		},
@@ -79,7 +91,7 @@ return {
 			lualine_a = { mode },
 			lualine_b = { project },
 			lualine_c = { filename, "diagnostics" },
-			lualine_x = { multicursor },
+			lualine_x = { multicursor, macro },
 			lualine_y = {},
 			lualine_z = {},
 		},
