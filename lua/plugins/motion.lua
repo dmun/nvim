@@ -123,14 +123,14 @@ return {
 			set("n", "<leader>a", mc.alignCursors)
 
 			-- Split visual selections by regex.
-			set("v", "?", mc.splitCursors)
+			set("v", "V", mc.splitCursors)
 
 			-- Append/insert for each line of visual selections.
 			set("v", "I", mc.insertVisual)
 			set("v", "A", mc.appendVisual)
 
 			-- match new cursors within visual selections by regex.
-			set("v", "/", matchCursors)
+			set("v", "v", matchCursors)
 			set("n", "gm", mc.restoreCursors)
 
 			-- Rotate visual selection contents.
