@@ -2,9 +2,29 @@ return {
 	"tpope/vim-rsi",
 	{
 		"rhysd/clever-f.vim",
+		enabled = false,
 		init = function()
 			vim.g.clever_f_smart_case = 1
 		end,
+	},
+	{
+		"folke/flash.nvim",
+		enabled = false,
+		event = "VeryLazy",
+		---@type Flash.Config
+		opts = {
+			search = { incremental = true },
+			highlight = { backdrop = false },
+			prompt = { enabled = false },
+		},
+		-- stylua: ignore
+		keys = {
+			{ "s", mode = { "n", "o" }, function() require("flash").jump() end, desc = "Flash" },
+			{ "S", mode = { "n", "o" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
+			{ "r", mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },
+			{ "R", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
+			{ "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
+		},
 	},
 	{
 		"ggandor/leap.nvim",
@@ -16,8 +36,8 @@ return {
 		},
 	},
 	{
-		"justinmk/vim-sneak",
-		enabled = false,
+		"dmun/vim-sneak",
+		-- enabled = false,
 		event = "VeryLazy",
 		keys = {
 			{ "f", "<Plug>Sneak_f" },
@@ -90,6 +110,13 @@ return {
 
 			set("v", "<C-c>", mc.visualToCursors)
 
+			set({ "n" }, "<M-d>", function()
+				vim.cmd.norm("viw")
+			end)
+			set({ "v" }, "<M-d>", function()
+				mc.matchAddCursor(1)
+			end)
+
 			set({ "n", "v" }, "<C-n>", function()
 				mc.matchAddCursor(1)
 			end)
@@ -123,14 +150,14 @@ return {
 			set("n", "<leader>a", mc.alignCursors)
 
 			-- Split visual selections by regex.
-			set("v", "V", mc.splitCursors)
+			set("v", "S", mc.splitCursors)
 
 			-- Append/insert for each line of visual selections.
 			set("v", "I", mc.insertVisual)
 			set("v", "A", mc.appendVisual)
 
 			-- match new cursors within visual selections by regex.
-			set("v", "v", matchCursors)
+			set("v", "s", matchCursors)
 			set("n", "gm", mc.restoreCursors)
 
 			-- Rotate visual selection contents.

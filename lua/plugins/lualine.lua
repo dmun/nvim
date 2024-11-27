@@ -1,3 +1,11 @@
+local block = {
+	function()
+		return " "
+	end,
+	color = "Normal",
+	padding = 0,
+}
+
 local macro = {
 	function()
 		local recording_register = vim.fn.reg_recording()
@@ -32,7 +40,7 @@ local project = {
 		local path = vim.fn.getcwd()
 		return vim.fs.basename(path)
 	end,
-	color = { gui = "bold" },
+	color = { fg = "#D7DBDF", gui = "bold" },
 }
 
 local filename = {
@@ -40,6 +48,9 @@ local filename = {
 		local ft = vim.bo.filetype
 		local bt = vim.bo.buftype
 		local path = vim.fn.expand("%:.")
+		if #path > 25 then
+			path = vim.fn.pathshorten(path)
+		end
 
 		if ft == "help" then
 			return "Neovim Documentation"
@@ -74,24 +85,29 @@ return {
 	"nvim-lualine/lualine.nvim",
 	opts = {
 		options = {
-			theme = "auto",
+			theme = "material",
 			component_separators = { left = nil, right = nil },
 			section_separators = { left = nil, right = nil },
 			always_divide_middle = false,
 		},
 		sections = {
-			lualine_a = { mode },
+			lualine_a = { block },
 			lualine_b = { project },
-			lualine_c = { filename, "diagnostics" },
-			lualine_x = { multicursor, macro },
+			lualine_c = { filename },
+			lualine_x = {
+				"diagnostics",
+				multicursor,
+				macro,
+				"location",
+			},
 			lualine_y = {},
-			lualine_z = {},
+			lualine_z = { block },
 		},
 		inactive_sections = {
-			lualine_a = { mode },
-			lualine_b = { project },
-			lualine_c = { filename, "diagnostics" },
-			lualine_x = { multicursor, macro },
+			lualine_a = {},
+			lualine_b = {},
+			lualine_c = {},
+			lualine_x = {},
 			lualine_y = {},
 			lualine_z = {},
 		},

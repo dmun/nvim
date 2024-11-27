@@ -5,6 +5,7 @@ local g = vim.g
 g.tex_flavor = "latex"
 g.rooter_silent_chdir = 1
 g["sneak#use_ic_scs"] = 1
+g["sneak#s_next"] = 1
 
 -- text
 o.wrap = false
@@ -16,7 +17,7 @@ o.linebreak = true
 o.softtabstop = -1
 o.tabstop = 4
 o.shiftwidth = 0
-o.textwidth = 0
+o.textwidth = 80
 
 -- mouse
 o.mouse = "a"
@@ -26,7 +27,7 @@ o.foldcolumn = "0"
 o.foldenable = true
 o.foldlevel = 99
 o.foldlevelstart = 99
-o.number = true
+o.number = false
 o.relativenumber = false
 o.signcolumn = "yes"
 
@@ -46,7 +47,7 @@ o.cmdheight = 0
 o.pumheight = 10
 -- o.colorcolumn = "+1"
 o.fillchars = "eob: "
-o.guicursor = "i:iCursor-block,n-v:tCursor-block"
+o.guicursor = "i:iCursor-block,n-v:nCursor-block"
 -- o.guicursor = 'i:ver25'
 -- o.guicursor = 'a:nCursor-block'
 o.laststatus = 3
@@ -75,8 +76,8 @@ o.undofile = true
 o.clipboard = "unnamedplus"
 
 -- lazyvim statuscolumn
-vim.opt.statuscolumn = [[%!v:lua.require'util.ui'.statuscolumn()]]
-vim.opt.foldtext = "v:lua.require'util.ui'.foldtext()"
+-- vim.opt.statuscolumn = [[%!v:lua.require'util.ui'.statuscolumn()]]
+-- vim.opt.foldtext = "v:lua.require'util.ui'.foldtext()"
 
 -- diagnostics
 vim.diagnostic.config({

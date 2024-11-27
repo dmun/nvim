@@ -1,9 +1,11 @@
 return {
 	"Vigemus/iron.nvim",
+	-- enabled = false,
 	cmd = "IronRepl",
 	ft = { "python", "r" },
 	config = function()
 		local iron = require("iron.core")
+		local python_format = require("iron.fts.common").bracketed_paste
 		iron.setup({
 			config = {
 				-- Whether a repl should be discarded or not
@@ -25,8 +27,9 @@ return {
 						command = { "zsh" },
 					},
 					python = {
-						command = { "ipython", "--no-autoindent", "--matplotlib" },
-						format = require("iron.fts.common").bracketed_paste_python,
+						-- command = { "ipython", "--no-autoindent", "--matplotlib" },
+						command = { "jupyter-console", "--existing" },
+						format = python_format,
 					},
 				},
 				-- How the repl window will be displayed

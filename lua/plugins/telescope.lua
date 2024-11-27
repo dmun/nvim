@@ -20,6 +20,7 @@ return {
 				["ui-select"] = {},
 			},
 			defaults = {
+				path_display = { "smart" },
 				mappings = {
 					i = {
 						["<esc>"] = actions.close,

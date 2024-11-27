@@ -3,7 +3,13 @@ return {
 	-- 'echasnovski/mini.nvim',
 	{ "numToStr/Comment.nvim", event = "VeryLazy" },
 	{
+		"dgagn/diagflow.nvim",
+		event = "LspAttach",
+		opts = {},
+	},
+	{
 		"kylechui/nvim-surround",
+		enabled = false,
 		event = "VeryLazy",
 		opts = {
 			keymaps = {
@@ -22,10 +28,8 @@ return {
 		},
 	},
 	{ "windwp/nvim-autopairs", event = "InsertEnter", config = true },
-	-- { 'VidocqH/auto-indent.nvim', event = 'InsertEnter' },
 	{
 		"dstein64/nvim-scrollview",
-		-- enabled = false,
 		opts = {},
 	},
 	{
@@ -72,9 +76,38 @@ return {
 	{
 		"kevinhwang91/nvim-ufo",
 		event = { "BufRead", "BufNewFile" },
-		dependencies = { "kevinhwang91/promise-async" },
+		dependencies = { "kevinhwang91/promise-async", "kiyoon/jupynium.nvim" },
 		opts = {
-			provider_selector = function()
+			provider_selector = function(bufnr, ft, bt)
+				local ufo = require("ufo")
+				local function get_cell_folds(bufnr)
+					local function handleFallbackException(err, providerName)
+						if type(err) == "string" and err:match("UfoFallbackException") then
+							return ufo.getFolds(bufnr, providerName)
+						else
+							return require("promise").reject(err)
+						end
+					end
+					return ufo.getFolds(bufnr, "lsp")
+						:catch(function(err)
+							return handleFallbackException(err, "treesitter")
+						end)
+						:catch(function(err)
+							return handleFallbackException(err, "indent")
+						end)
+						:thenCall(function(ufo_folds)
+							local ok, jupynium = pcall(require, "jupynium")
+							if ok then
+								for _, fold in ipairs(jupynium.get_folds()) do
+									table.insert(ufo_folds, fold)
+								end
+							end
+							return ufo_folds
+						end)
+				end
+				if ft == "python" then
+					return get_cell_folds
+				end
 				return { "treesitter", "indent" }
 			end,
 		},

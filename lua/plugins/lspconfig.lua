@@ -21,16 +21,16 @@ local function get_ls_config(config)
 			require("cmp_nvim_lsp").default_capabilities() or {},
 			config and config.capabilities or {}
 		),
-		handlers = {
-			["textDocument/publishDiagnostics"] = vim.lsp.with(
-				vim.lsp.diagnostic.on_publish_diagnostics,
-				vim.tbl_deep_extend("force", config and config.diagnostics or {}, {
-					virtual_text = {
-						prefix = "",
-					},
-				})
-			),
-		},
+		-- handlers = {
+		-- 	["textDocument/publishDiagnostics"] = vim.lsp.with(
+		-- 		vim.lsp.diagnostic.on_publish_diagnostics,
+		-- 		vim.tbl_deep_extend("force", config and config.diagnostics or {}, {
+		-- 			virtual_text = {
+		-- 				prefix = "",
+		-- 			},
+		-- 		})
+		-- 	),
+		-- },
 	}
 end
 
