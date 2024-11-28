@@ -5,7 +5,10 @@ return {
 	{
 		"dgagn/diagflow.nvim",
 		event = "LspAttach",
-		opts = {},
+		opts = {
+			scope = "cursor",
+			padding_right = 2,
+		},
 	},
 	{
 		"kylechui/nvim-surround",

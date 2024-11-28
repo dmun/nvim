@@ -1,3 +1,49 @@
+local colors = {
+	black = "#1D3B53",
+	white = "#D7DBDF",
+	red = "#1D3B53",
+	green = "#1D3B53",
+	blue = "#1D3B53",
+	yellow = "#1D3B53",
+	gray = "#1D3B53",
+	darkgray = "#1D3B53",
+	lightgray = "#1D3B53",
+	inactivegray = "#1D3B53",
+}
+
+local theme = {
+	normal = {
+		a = { bg = colors.gray, fg = colors.white, gui = "bold" },
+		b = { bg = colors.lightgray, fg = colors.white },
+		c = { bg = colors.darkgray, fg = colors.white },
+	},
+	insert = {
+		a = { bg = colors.blue, fg = colors.white, gui = "bold" },
+		b = { bg = colors.lightgray, fg = colors.white },
+		c = { bg = colors.lightgray, fg = colors.white },
+	},
+	visual = {
+		a = { bg = colors.yellow, fg = colors.white, gui = "bold" },
+		b = { bg = colors.lightgray, fg = colors.white },
+		c = { bg = colors.inactivegray, fg = colors.white },
+	},
+	replace = {
+		a = { bg = colors.red, fg = colors.white, gui = "bold" },
+		b = { bg = colors.lightgray, fg = colors.white },
+		c = { bg = colors.white, fg = colors.white },
+	},
+	command = {
+		a = { bg = colors.green, fg = colors.white, gui = "bold" },
+		b = { bg = colors.lightgray, fg = colors.white },
+		c = { bg = colors.inactivegray, fg = colors.white },
+	},
+	inactive = {
+		a = { bg = colors.darkgray, fg = colors.white, gui = "bold" },
+		b = { bg = colors.darkgray, fg = colors.white },
+		c = { bg = colors.darkgray, fg = colors.white },
+	},
+}
+
 local block = {
 	function()
 		return " "
@@ -38,9 +84,9 @@ local mode = {
 local project = {
 	function()
 		local path = vim.fn.getcwd()
-		return vim.fs.basename(path)
+		return "(" .. vim.fs.basename(path) .. ")"
 	end,
-	color = { fg = "#D7DBDF", gui = "bold" },
+	color = { fg = "#d7dbe0", gui = "bold" },
 }
 
 local filename = {
@@ -66,7 +112,7 @@ local filename = {
 		return path
 	end,
 	color = function()
-		local fg = "#cccccc"
+		local fg = colors.white
 		local gui = ""
 
 		if vim.bo.modifiable == false then
@@ -85,7 +131,7 @@ return {
 	"nvim-lualine/lualine.nvim",
 	opts = {
 		options = {
-			theme = "material",
+			theme = theme,
 			component_separators = { left = nil, right = nil },
 			section_separators = { left = nil, right = nil },
 			always_divide_middle = false,

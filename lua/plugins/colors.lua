@@ -34,10 +34,10 @@ return {
 		"oxfist/night-owl.nvim",
 		config = function()
 			require("night-owl").setup({ italics = false })
-			vim.cmd("hi Sneak guifg=#ff00ff gui=bold")
-			vim.cmd("hi! FlashLabel guifg=#ff00ff")
-			vim.cmd("hi link iCursor lualine_a_insert")
-			vim.cmd("hi link nCursor lualine_a_normal")
+			vim.cmd("hi FlashLabel guifg=#FE2C83 gui=bold")
+			vim.cmd("hi link FlashCurrent CurSearch")
+			vim.cmd("hi iCursor guibg=#FF869A gui=bold")
+			-- vim.cmd("hi nCursor guibg=#FF869A gui=bold")
 		end,
 	},
 	{

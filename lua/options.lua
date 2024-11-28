@@ -17,7 +17,7 @@ o.linebreak = true
 o.softtabstop = -1
 o.tabstop = 4
 o.shiftwidth = 0
-o.textwidth = 80
+o.textwidth = 0
 
 -- mouse
 o.mouse = "a"
@@ -47,7 +47,7 @@ o.cmdheight = 0
 o.pumheight = 10
 -- o.colorcolumn = "+1"
 o.fillchars = "eob: "
-o.guicursor = "i:iCursor-block,n-v:nCursor-block"
+o.guicursor = "i:iCursor-block,n-v:Cursor-block"
 -- o.guicursor = 'i:ver25'
 -- o.guicursor = 'a:nCursor-block'
 o.laststatus = 3

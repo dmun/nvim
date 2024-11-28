@@ -9,13 +9,22 @@ return {
 	},
 	{
 		"folke/flash.nvim",
-		enabled = false,
+		-- enabled = false,
 		event = "VeryLazy",
 		---@type Flash.Config
 		opts = {
-			search = { incremental = true },
+			search = { incremental = false },
 			highlight = { backdrop = false },
 			prompt = { enabled = false },
+			label = { style = "overlay" },
+			modes = {
+				char = {
+					-- enabled = false,
+					highlight = { backdrop = false },
+					jump_labels = false,
+					multi_line = false,
+				},
+			},
 		},
 		-- stylua: ignore
 		keys = {
@@ -37,7 +46,7 @@ return {
 	},
 	{
 		"dmun/vim-sneak",
-		-- enabled = false,
+		enabled = false,
 		event = "VeryLazy",
 		keys = {
 			{ "f", "<Plug>Sneak_f" },
