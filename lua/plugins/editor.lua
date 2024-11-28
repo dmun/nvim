@@ -8,6 +8,7 @@ return {
 		opts = {
 			scope = "cursor",
 			padding_right = 2,
+			toggle_event = { "InsertEnter", "InsertLeave" },
 		},
 	},
 	{

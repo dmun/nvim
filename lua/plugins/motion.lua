@@ -19,7 +19,7 @@ return {
 			label = { style = "overlay" },
 			modes = {
 				char = {
-					-- enabled = false,
+					enabled = false,
 					highlight = { backdrop = false },
 					jump_labels = false,
 					multi_line = false,
