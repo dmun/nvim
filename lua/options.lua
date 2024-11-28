@@ -50,7 +50,7 @@ o.fillchars = "eob: "
 o.guicursor = "i:iCursor-block,n-v:Cursor-block"
 -- o.guicursor = 'i:ver25'
 -- o.guicursor = 'a:nCursor-block'
-o.laststatus = 3
+o.laststatus = 2
 
 -- window
 o.inccommand = "split"

@@ -1,46 +1,41 @@
 local colors = {
-	black = "#1D3B53",
-	white = "#D7DBDF",
-	red = "#1D3B53",
-	green = "#1D3B53",
-	blue = "#1D3B53",
-	yellow = "#1D3B53",
-	gray = "#1D3B53",
-	darkgray = "#1D3B53",
-	lightgray = "#1D3B53",
-	inactivegray = "#1D3B53",
+	fg = "#c8ccd1",
+	fg2 = "#858f99",
+	bg = "#4B6479",
+	fg_alt = "#466075",
+	bg_alt = "#1D3B53",
 }
 
 local theme = {
 	normal = {
-		a = { bg = colors.gray, fg = colors.white, gui = "bold" },
-		b = { bg = colors.lightgray, fg = colors.white },
-		c = { bg = colors.darkgray, fg = colors.white },
+		a = { bg = colors.bg, fg = colors.fg, gui = "bold" },
+		b = { bg = colors.bg, fg = colors.fg },
+		c = { bg = colors.bg, fg = colors.fg },
 	},
 	insert = {
-		a = { bg = colors.blue, fg = colors.white, gui = "bold" },
-		b = { bg = colors.lightgray, fg = colors.white },
-		c = { bg = colors.lightgray, fg = colors.white },
+		a = { bg = colors.bg, fg = colors.fg, gui = "bold" },
+		b = { bg = colors.bg, fg = colors.fg },
+		c = { bg = colors.bg, fg = colors.fg },
 	},
 	visual = {
-		a = { bg = colors.yellow, fg = colors.white, gui = "bold" },
-		b = { bg = colors.lightgray, fg = colors.white },
-		c = { bg = colors.inactivegray, fg = colors.white },
+		a = { bg = colors.bg, fg = colors.fg, gui = "bold" },
+		b = { bg = colors.bg, fg = colors.fg },
+		c = { bg = colors.bg, fg = colors.fg },
 	},
 	replace = {
-		a = { bg = colors.red, fg = colors.white, gui = "bold" },
-		b = { bg = colors.lightgray, fg = colors.white },
-		c = { bg = colors.white, fg = colors.white },
+		a = { bg = colors.bg, fg = colors.fg, gui = "bold" },
+		b = { bg = colors.bg, fg = colors.fg },
+		c = { bg = colors.bg, fg = colors.fg },
 	},
 	command = {
-		a = { bg = colors.green, fg = colors.white, gui = "bold" },
-		b = { bg = colors.lightgray, fg = colors.white },
-		c = { bg = colors.inactivegray, fg = colors.white },
+		a = { bg = colors.bg, fg = colors.fg, gui = "bold" },
+		b = { bg = colors.bg, fg = colors.fg },
+		c = { bg = colors.bg, fg = colors.fg },
 	},
 	inactive = {
-		a = { bg = colors.darkgray, fg = colors.white, gui = "bold" },
-		b = { bg = colors.darkgray, fg = colors.white },
-		c = { bg = colors.darkgray, fg = colors.white },
+		a = { bg = colors.bg_alt, fg = colors.fg_alt, gui = "bold" },
+		b = { bg = colors.bg_alt, fg = colors.fg_alt },
+		c = { bg = colors.bg_alt, fg = colors.fg_alt },
 	},
 }
 
@@ -51,6 +46,18 @@ local block = {
 	color = "Normal",
 	padding = 0,
 }
+
+---@param active boolean
+---@return table
+local function section(active)
+	return {
+		function()
+			return "<<"
+		end,
+		padding = 0,
+		color = { fg = active and colors.fg2 or colors.fg_alt },
+	}
+end
 
 local macro = {
 	function()
@@ -81,51 +88,69 @@ local mode = {
 	color = { gui = "reverse" },
 }
 
-local project = {
-	function()
-		local path = vim.fn.getcwd()
-		return "(" .. vim.fs.basename(path) .. ")"
-	end,
-	color = { fg = "#d7dbe0", gui = "bold" },
-}
+---@param active boolean
+---@return table
+local function project(active)
+	return {
+		function()
+			local path = vim.fn.getcwd()
+			local text = "" .. vim.fs.basename(path) .. ""
 
-local filename = {
-	function()
-		local ft = vim.bo.filetype
-		local bt = vim.bo.buftype
-		local path = vim.fn.expand("%:.")
-		if #path > 25 then
-			path = vim.fn.pathshorten(path)
-		end
-
-		if ft == "help" then
-			return "Neovim Documentation"
-		elseif bt == "terminal" then
-			if path:find("ipython") then
-				path = "IPython Kernel"
+			if not active then
+				return string.rep(" ", #text)
+			else
+				return text
 			end
-			if path:find("oil://") then
-				path = path:sub(7)
+		end,
+		color = { fg = "#d7dbe0", gui = "bold" },
+	}
+end
+
+---@param active boolean
+---@return table
+local function filename(active)
+	return {
+		function()
+			local ft = vim.bo.filetype
+			local bt = vim.bo.buftype
+			local path = vim.fn.expand("%:.")
+			if #path > 25 then
+				path = vim.fn.pathshorten(path)
 			end
-		end
 
-		return path
-	end,
-	color = function()
-		local fg = colors.white
-		local gui = ""
+			if ft == "help" then
+				return "Neovim Documentation"
+			elseif bt == "terminal" then
+				if path:find("jupyter") then
+					path = "Jupyter Console"
+				end
+				if path:find("oil://") then
+					path = path:sub(7)
+				end
+			end
 
-		if vim.bo.modifiable == false then
-			fg = "#777777"
-		end
+			return path
+		end,
+		color = function()
+			local fg = colors.fg
+			local gui = ""
 
-		if vim.bo.modified then
-			gui = "italic"
-		end
+			if vim.bo.modifiable == false then
+				fg = "#777777"
+			end
 
-		return { fg = fg, gui = gui }
-	end,
-}
+			if vim.bo.modified then
+				gui = "italic"
+			end
+
+			return {
+				fg = active and colors.fg or colors.fg_alt,
+				bg = active and colors.bg or colors.bg_alt,
+				gui = gui,
+			}
+		end,
+	}
+end
 
 return {
 	"nvim-lualine/lualine.nvim",
@@ -138,8 +163,8 @@ return {
 		},
 		sections = {
 			lualine_a = { block },
-			lualine_b = { project },
-			lualine_c = { filename },
+			lualine_b = { project(true), section(true) },
+			lualine_c = { filename(true) },
 			lualine_x = {
 				"diagnostics",
 				multicursor,
@@ -150,12 +175,12 @@ return {
 			lualine_z = { block },
 		},
 		inactive_sections = {
-			lualine_a = {},
-			lualine_b = {},
-			lualine_c = {},
+			lualine_a = { block },
+			lualine_b = { project(false), section(false) },
+			lualine_c = { filename(false) },
 			lualine_x = {},
 			lualine_y = {},
-			lualine_z = {},
+			lualine_z = { block },
 		},
 	},
 }

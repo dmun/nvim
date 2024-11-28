@@ -1,4 +1,5 @@
 setl tabstop=2
+nnoremap <buffer> <M-b> O<C-o>I# %%<ESC>j0
 "setl nornu nonu
 "setl signcolumn=no
 "setl foldcolumn=1
