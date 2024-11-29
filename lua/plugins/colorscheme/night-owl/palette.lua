@@ -1,6 +1,11 @@
+local tinted_bg_main = "#0d0e1c"
+local tinted_bg_dim = "#1d2235" local tinted_bg_active = "#4a4f69"
+local tinted_bg_inactive = "#2b3045"
+
 return {
 	fg = "#d6deeb",
-	bg = "#021727",
+	-- bg = "#021727",
+	bg = tinted_bg_main,
 	folded_bg = "#092135",
 	cursor_fg = "#805a3e",
 	cursor_bg = "#80a4c2",
@@ -29,9 +34,12 @@ return {
 	title = "#82b1ff",
 	parameter = "#d7dbe0",
 	string_delimiter = "#d9f5dd",
-	dark = "#010d18",
-	dark2 = "#021320",
-	dark3 = "#99b76d23",
+	-- dark = "#010d18",
+	-- dark2 = "#021320",
+	-- dark3 = "#99b76d23",
+	dark = tinted_bg_dim,
+	dark2 = tinted_bg_inactive,
+	dark3 = tinted_bg_active,
 	white = "#ffffff",
 	white2 = "#eeefff",
 	dark_white = "#cccccc",

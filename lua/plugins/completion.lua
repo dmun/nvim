@@ -27,7 +27,7 @@ local fields = {
 	"CmpItemKindValue", --     12
 	"@lsp.type.enum", --     13
 	"@keyword", --     14 keyword
-	"Comment", --     15 snippet
+	"@tag.delimiter", --     15 snippet
 	"CmpItemKindColor", --     16
 	"CmpItemKindFile", --     17
 	"CmpItemKindReference", --     18

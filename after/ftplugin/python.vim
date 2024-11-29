@@ -1,5 +1,5 @@
 "setl tabstop=2
-nnoremap <buffer> <CR> <cmd>JupyniumExecuteSelectedCells<CR>
+"nnoremap <buffer> <CR> <cmd>JupyniumExecuteSelectedCells<CR>
 nnoremap <buffer> <M-b> O<C-o>I# %%<ESC>j0
 "setl nornu nonu
 "setl signcolumn=no

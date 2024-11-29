@@ -20,9 +20,6 @@ return {
 		"themercorp/themer.lua",
 		priority = 1000,
 		opts = {
-			plugins = {
-				cmp = false,
-			},
 			remaps = {
 				palette = {
 					boo = require("plugins.colorscheme.night-owl.highlights"),
