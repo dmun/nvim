@@ -1,3 +1,5 @@
+local palette = require("plugins.colorscheme.night-owl.highlights")
+
 return {
 	{
 		"oxfist/night-owl.nvim",
@@ -22,8 +24,16 @@ return {
 		opts = {
 			remaps = {
 				palette = {
-					boo = require("plugins.colorscheme.night-owl.highlights"),
-					nord = require("plugins.colorscheme.ginger.highlights"),
+					boo = palette,
+				},
+				highlights = {
+					globals = {
+						base = {
+							Cursor = { bg = palette.bg.base, fg = palette.fg },
+							iCursor = { fg = palette.bg.base, bg = palette.fg },
+							nCursor = { fg = palette.bg.base, bg = palette.fg },
+						},
+					},
 				},
 			},
 		},
