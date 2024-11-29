@@ -363,6 +363,7 @@ return {
 					end, { "i", "s" }),
 				}),
 				sources = cmp.config.sources({
+					{ name = "jupynium", priority = 1000 },
 					{ name = "luasnip" },
 					{ name = "nvim_lsp" },
 					{ name = "lazydev" },

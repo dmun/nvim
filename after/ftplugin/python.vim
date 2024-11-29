@@ -1,9 +1,10 @@
-setl tabstop=2
+"setl tabstop=2
+nnoremap <buffer> <CR> <cmd>JupyniumExecuteSelectedCells<CR>
 nnoremap <buffer> <M-b> O<C-o>I# %%<ESC>j0
 "setl nornu nonu
 "setl signcolumn=no
 "setl foldcolumn=1
-"nnoremap <buffer> <leader>h <cmd>g/# %% \[markdown\]/norm zc<CR>
+nnoremap <buffer> <leader>h <cmd>g/# %% \[markdown\]/norm zc<CR>
 "nnoremap <buffer> <CR> <cmd>JupyniumExecuteSelectedCells<CR>
 "hi! JupyniumCodeCellContent guibg=#010D18
 "hi! JupyniumCodeCellLineNr guibg=#010D18 guifg=#465D70

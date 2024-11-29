@@ -25,10 +25,10 @@ return {
 						col = -1,
 					},
 					size = {
-						max_height = 1,
+						-- max_height = 1,
 					},
 					win_options = {
-						winblend = 10,
+						winblend = 30,
 					},
 				},
 			},
