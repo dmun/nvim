@@ -63,6 +63,7 @@
   "themer.lua": { "branch": "main", "commit": "625510cfec70b55fe42d04b1256c5f93c92a4202" },
   "tint.nvim": { "branch": "master", "commit": "02bd0527a315a80e4e25bb2dd7b6994fb0daae01" },
   "tiny-devicons-auto-colors.nvim": { "branch": "main", "commit": "a39fa4c92268832f6034306793b8acbfec2a7549" },
+  "tiny-inline-diagnostic.nvim": { "branch": "main", "commit": "0f3a6e316dbfc8fc8abbd4c631496a0f054e5459" },
   "trouble.nvim": { "branch": "main", "commit": "46cf952fc115f4c2b98d4e208ed1e2dce08c9bf6" },
   "typst-preview.nvim": { "branch": "master", "commit": "051d5b41e7de91e3a2004f14b2526988a33eb2c2" },
   "vim-illuminate": { "branch": "master", "commit": "5eeb7951fc630682c322e88a9bbdae5c224ff0aa" },

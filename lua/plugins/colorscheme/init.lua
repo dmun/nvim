@@ -5,8 +5,8 @@ return {
 		"oxfist/night-owl.nvim",
 		config = function()
 			require("night-owl").setup({ italics = false })
-			vim.cmd("hi FlashLabel guifg=#FE2C83 gui=bold")
-			vim.cmd("hi link FlashCurrent CurSearch")
+			-- vim.cmd("hi FlashLabel guifg=#FE2C83 gui=bold")
+			-- vim.cmd("hi link FlashCurrent CurSearch")
 			vim.cmd("hi iCursor guibg=#FF869A gui=bold")
 			-- vim.cmd("hi nCursor guibg=#FF869A gui=bold")
 		end,

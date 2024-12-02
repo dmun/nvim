@@ -3,7 +3,32 @@ return {
 	-- 'echasnovski/mini.nvim',
 	{ "numToStr/Comment.nvim", event = "VeryLazy" },
 	{
+		"rachartier/tiny-inline-diagnostic.nvim",
+		event = "VeryLazy", -- Or `LspAttach`
+		priority = 1000, -- needs to be loaded in first
+		config = function()
+			require("tiny-inline-diagnostic").setup({
+				preset = "modern",
+				hi = {
+					background = "None",
+					mixing_color = "CursorLine",
+				},
+				signs = {
+					left = "",
+					right = "",
+					diag = "",
+					arrow = "",
+					up_arrow = "",
+					vertical = "",
+					vertical_end = "",
+				},
+			})
+			vim.diagnostic.config({ virtual_text = false })
+		end,
+	},
+	{
 		"dgagn/diagflow.nvim",
+		enabled = false,
 		event = "LspAttach",
 		opts = {
 			scope = "cursor",
