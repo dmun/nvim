@@ -162,7 +162,7 @@ return {
 			always_divide_middle = false,
 		},
 		sections = {
-			lualine_a = { block },
+			lualine_a = {},
 			lualine_b = { project(true), section(true) },
 			lualine_c = { filename(true) },
 			lualine_x = {
@@ -172,15 +172,15 @@ return {
 				"location",
 			},
 			lualine_y = {},
-			lualine_z = { block },
+			lualine_z = {},
 		},
 		inactive_sections = {
-			lualine_a = { block },
+			lualine_a = {},
 			lualine_b = { project(false), section(false) },
 			lualine_c = { filename(false) },
 			lualine_x = {},
 			lualine_y = {},
-			lualine_z = { block },
+			lualine_z = {},
 		},
 	},
 }
