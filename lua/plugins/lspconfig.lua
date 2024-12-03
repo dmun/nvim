@@ -90,7 +90,8 @@ return {
 					vim.keymap.set("i", "<C-k>", vim.lsp.buf.signature_help, opts)
 					vim.keymap.set("n", "<leader>D", "<cmd>Trouble lsp_type_definitions<cr>", opts)
 					vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
-					vim.keymap.set("n", "<C-c>", vim.lsp.buf.code_action, opts)
+					-- vim.keymap.set("n", "<C-c>", vim.lsp.buf.code_action, opts)
+					vim.keymap.set("n", "<C-c>", "<cmd>FzfLua lsp_code_actions<CR>", opts)
 				end,
 			})
 		end,

@@ -1,6 +1,29 @@
 return {
 	-- 'romainl/vim-cool',
 	-- 'echasnovski/mini.nvim',
+	{
+		"Pocco81/auto-save.nvim",
+		config = function()
+			require("auto-save").setup({
+				execution_message = {
+					message = function()
+						return "✓ "
+					end,
+					dim = 0.20,
+				},
+				condition = function(buf)
+					local ft = vim.bo.filetype
+					local fts = { "oil" }
+
+					if vim.tbl_contains(fts, ft) then
+						return false
+					end
+
+					return true
+				end,
+			})
+		end,
+	},
 	{ "numToStr/Comment.nvim", event = "VeryLazy" },
 	{
 		"rachartier/tiny-inline-diagnostic.nvim",

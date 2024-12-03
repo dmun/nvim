@@ -1,9 +1,16 @@
 local colors = {
-	fg = "#c8ccd1",
-	fg2 = "#858f99",
-	bg = "#4B6479",
-	fg_alt = "#466075",
-	bg_alt = "#1D3B53",
+	fg = "#ffffff",
+	fg2 = "#d0d0d0",
+	bg = "#393F52",
+	fg_alt = "#61647a",
+	bg_alt = "#2b3045",
+	blue = "#30AEFF",
+	purple = "#B6A0FF",
+}
+
+local diagnostics = {
+	"diagnostics",
+	symbols = { error = "", warn = "", info = "", hint = "" },
 }
 
 local theme = {
@@ -43,7 +50,7 @@ local block = {
 	function()
 		return " "
 	end,
-	color = "Normal",
+	-- color = "Normal",
 	padding = 0,
 }
 
@@ -55,7 +62,7 @@ local function section(active)
 			return "<<"
 		end,
 		padding = 0,
-		color = { fg = active and colors.fg2 or colors.fg_alt },
+		color = { fg = colors.fg_alt },
 	}
 end
 
@@ -85,7 +92,7 @@ local mode = {
 		return "▍"
 	end,
 	padding = 0,
-	color = { gui = "reverse" },
+	-- color = { gui = "reverse" },
 }
 
 ---@param active boolean
@@ -102,41 +109,53 @@ local function project(active)
 				return text
 			end
 		end,
-		color = { fg = "#d7dbe0", gui = "bold" },
+		color = { fg = colors.fg, gui = "bold" },
 	}
 end
 
 ---@param active boolean
 ---@return table
 local function filename(active)
+	local fts = {
+		help = "Neovim Documentation",
+		trouble = "Trouble",
+		fzf = "Fzf",
+		oil = "Oil",
+		terminal = "Terminal",
+	}
+	local ft_keys = vim.tbl_keys(fts)
+
 	return {
 		function()
 			local ft = vim.bo.filetype
 			local bt = vim.bo.buftype
 			local path = vim.fn.expand("%:.")
-			if #path > 25 then
+			if #path > 35 then
 				path = vim.fn.pathshorten(path)
 			end
 
-			if ft == "help" then
-				return "Neovim Documentation"
-			elseif bt == "terminal" then
-				if path:find("jupyter") then
-					path = "Jupyter Console"
-				end
-				if path:find("oil://") then
-					path = path:sub(7)
-				end
+			if vim.tbl_contains(ft_keys, ft) then
+				return fts[ft]
+			elseif vim.tbl_contains(ft_keys, bt) then
+				return fts[bt]
 			end
 
 			return path
 		end,
 		color = function()
-			local fg = colors.fg
+			local ft = vim.bo.filetype
+			local bt = vim.bo.buftype
+
+			local fg = colors.fg2
 			local gui = ""
 
 			if vim.bo.modifiable == false then
 				fg = "#777777"
+			end
+
+			if vim.tbl_contains(ft_keys, ft) or vim.tbl_contains(ft_keys, bt) then
+				fg = colors.purple
+				gui = "bold"
 			end
 
 			if vim.bo.modified then
@@ -144,7 +163,7 @@ local function filename(active)
 			end
 
 			return {
-				fg = active and colors.fg or colors.fg_alt,
+				fg = active and fg or colors.fg_alt,
 				bg = active and colors.bg or colors.bg_alt,
 				gui = gui,
 			}
@@ -160,13 +179,18 @@ return {
 			component_separators = { left = nil, right = nil },
 			section_separators = { left = nil, right = nil },
 			always_divide_middle = false,
+			disabled_filetypes = {
+				statusline = {
+					"fzf",
+				},
+			},
 		},
 		sections = {
-			lualine_a = {},
+			lualine_a = { mode },
 			lualine_b = { project(true), section(true) },
 			lualine_c = { filename(true) },
 			lualine_x = {
-				"diagnostics",
+				diagnostics,
 				multicursor,
 				macro,
 				"location",
@@ -175,7 +199,7 @@ return {
 			lualine_z = {},
 		},
 		inactive_sections = {
-			lualine_a = {},
+			lualine_a = { block },
 			lualine_b = { project(false), section(false) },
 			lualine_c = { filename(false) },
 			lualine_x = {},

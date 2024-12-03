@@ -23,9 +23,10 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 -- })
 
 -- terminal
-vim.api.nvim_create_autocmd({ "BufNew", "BufEnter", "BufReadPre", "BufReadPost" }, {
+vim.api.nvim_create_autocmd({ "BufEnter" }, {
 	callback = function()
 		if vim.bo.buftype == "terminal" then
+			vim.opt_local.winhl = "Normal:NormalTerm,SignColumn:NormalTerm"
 			vim.opt_local.relativenumber = false
 			vim.opt_local.number = false
 			-- vim.opt_local.signcolumn = "no"

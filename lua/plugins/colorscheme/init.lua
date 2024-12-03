@@ -14,9 +14,41 @@ return {
 	{
 		"miikanissi/modus-themes.nvim",
 		priority = 1000,
-		opts = {
-			variant = "tinted",
-		},
+		config = function()
+			require("modus-themes").setup({
+				variant = "tinted",
+				styles = {
+					variables = { link = "lispSymbol" },
+				},
+				---@param colors ColorScheme
+				on_colors = function(colors)
+					colors.bg_active = "#141528"
+				end,
+				---@param hl Highlights
+				---@param c ColorScheme
+				on_highlights = function(hl, c)
+					hl.PmenuSel = { bg = c.bg_inactive }
+					hl.Pmenu = { bg = c.bg_dim }
+					hl.PmenuThumb = { bg = c.border }
+					hl.CursorLine = { bg = c.bg_dim }
+					hl.CursorLineSign = { bg = c.bg_dim }
+					hl.CursorLineNr = { bg = c.bg_dim }
+					hl.LineNr = { fg = c.bg_inactive }
+
+					hl.NoiceCmdline = { bg = c.bg_inactive }
+
+					hl.GitSignsAdd = { fg = c.bg_added }
+					hl.GitSignsChange = { fg = c.bg_changed }
+					hl.GitSignsDelete = { fg = c.bg_removed }
+
+					hl.Visual = { bg = c.bg_inactive }
+					hl.Search = { bg = c.bg_inactive }
+					hl.NormalTerm = { bg = c.bg_active }
+
+					hl.FzfLuaNormal = { bg = c.bg_active }
+				end,
+			})
+		end,
 	},
 	{
 		"themercorp/themer.lua",

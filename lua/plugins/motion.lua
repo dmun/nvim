@@ -31,8 +31,8 @@ return {
 		},
 		-- stylua: ignore
 		keys = {
-			{ "s", mode = { "n", "o" }, function() require("flash").jump() end, desc = "Flash" },
-			{ "S", mode = { "n", "o" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
+			{ "s", mode = { "n", "o", "x" }, function() require("flash").jump() end, desc = "Flash" },
+			{ "S", mode = { "n", "o", "x" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
 			-- { "r", mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },
 			-- { "R", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
 			-- { "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
@@ -162,14 +162,14 @@ return {
 			set("n", "<leader>a", mc.alignCursors)
 
 			-- Split visual selections by regex.
-			set("v", "S", mc.splitCursors)
+			set("v", "M", mc.splitCursors)
 
 			-- Append/insert for each line of visual selections.
 			set("v", "I", mc.insertVisual)
 			set("v", "A", mc.appendVisual)
 
 			-- match new cursors within visual selections by regex.
-			set("v", "s", matchCursors)
+			set("v", "m", matchCursors)
 			set("n", "gm", mc.restoreCursors)
 
 			-- Rotate visual selection contents.

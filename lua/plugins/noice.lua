@@ -1,15 +1,41 @@
 return {
 	"folke/noice.nvim",
-	event = "VeryLazy",
 	dependencies = "MunifTanjim/nui.nvim",
 	config = function()
 		require("noice").setup({
 			lsp = { signature = { enabled = false } },
+			cmdline = {
+				view = "cmdline",
+				format = {
+					cmdline = { icon = " cmd:" },
+					search_down = { icon = " search:" },
+					search_up = { icon = " search:" },
+					filter = { icon = " filter:" },
+					lua = { icon = " lua:" },
+					help = { icon = " help:" },
+					input = { view = "cmdline" },
+				},
+			},
+			format = {
+				level = {
+					icons = {
+						error = "",
+						warn = "",
+						info = "",
+					},
+				},
+			},
+			popupmenu = { kind_icons = false },
+			inc_rename = {
+				cmdline = {
+					format = { IncRename = { icon = "⟳" } },
+				},
+			},
 			views = {
 				cmdline_popup = {
-					size = {
-						width = "50",
-					},
+					-- size = {
+					-- 	width = "50",
+					-- },
 					position = {
 						row = "33%",
 						col = "50%",

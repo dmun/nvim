@@ -19,8 +19,9 @@ require("options")
 require("keymaps")
 require("autocommands")
 
-local colorscheme = "night-owl"
+local colorscheme = "modus_vivendi"
 require("lazy").setup("plugins", {
 	install = { colorscheme = { colorscheme } },
+	change_detection = { enabled = false },
 })
 vim.cmd.color(colorscheme)

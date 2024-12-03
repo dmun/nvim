@@ -174,7 +174,7 @@ local function get_highlights(str, width, kind)
 	if prefix == nil then
 		local s = vim.split(str, "%(")
 		table.insert(highlights, { "@function", range = { 0, #s[1] } })
-		table.insert(highlights, { "Comment", range = { #s[1], #str } })
+		table.insert(highlights, { "CmpGhostText", range = { #s[1], #str } })
 		return highlights
 	end
 

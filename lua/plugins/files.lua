@@ -26,7 +26,7 @@ return {
 	},
 	{
 		"ibhagwan/fzf-lua",
-		enabled = false,
+		-- enabled = false,
 		cmd = "FzfLua",
 		keys = {
 			{ "<leader>f", "<cmd>FzfLua files<cr>" },
@@ -37,16 +37,18 @@ return {
 			{ "<leader><leader>", "<cmd>FzfLua builtin<cr>" },
 		},
 		opts = {
+			defaults = {
+				file_icons = false,
+			},
 			files = {
 				cmd = "rg --files --hidden",
 				no_header_i = true,
-				file_icons = false,
 				-- git_icons = false,
 			},
 			grep = { no_header_i = true },
 			buffers = { no_header_i = true },
 			winopts = {
-				-- split = 'botright new',
+				split = "botright new",
 				border = "single",
 				preview = { hidden = "hidden" },
 				width = 50,
@@ -55,7 +57,9 @@ return {
 			},
 			fzf_opts = {
 				["--no-info"] = true,
-				-- ['--color'] = 'fg+:#ffffff,bg+:#161616',
+			},
+			fzf_colors = {
+				["bg+"] = { "bg", "PmenuSel" },
 			},
 		},
 	},
