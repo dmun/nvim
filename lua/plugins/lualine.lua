@@ -130,7 +130,7 @@ local function filename(active)
 			local ft = vim.bo.filetype
 			local bt = vim.bo.buftype
 			local path = vim.fn.expand("%:.")
-			if #path > 35 then
+			if #path > 50 then
 				path = vim.fn.pathshorten(path)
 			end
 
@@ -186,7 +186,7 @@ return {
 			},
 		},
 		sections = {
-			lualine_a = { mode },
+			lualine_a = {},
 			lualine_b = { project(true), section(true) },
 			lualine_c = { filename(true) },
 			lualine_x = {
@@ -199,7 +199,7 @@ return {
 			lualine_z = {},
 		},
 		inactive_sections = {
-			lualine_a = { block },
+			lualine_a = {},
 			lualine_b = { project(false), section(false) },
 			lualine_c = { filename(false) },
 			lualine_x = {},
