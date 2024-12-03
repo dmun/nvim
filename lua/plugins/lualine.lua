@@ -143,20 +143,20 @@ local function filename(active)
 			return path
 		end,
 		color = function()
-			local ft = vim.bo.filetype
-			local bt = vim.bo.buftype
+			-- local ft = vim.bo.filetype
+			-- local bt = vim.bo.buftype
 
 			local fg = colors.fg2
 			local gui = ""
 
-			if vim.bo.modifiable == false then
-				fg = "#777777"
-			end
+			-- if vim.bo.modifiable == false then
+			-- 	fg = "#777777"
+			-- end
 
-			if vim.tbl_contains(ft_keys, ft) or vim.tbl_contains(ft_keys, bt) then
-				fg = colors.purple
-				gui = "bold"
-			end
+			-- if vim.tbl_contains(ft_keys, ft) or vim.tbl_contains(ft_keys, bt) then
+			-- 	fg = colors.purple
+			-- 	gui = "bold"
+			-- end
 
 			if vim.bo.modified then
 				gui = "italic"
