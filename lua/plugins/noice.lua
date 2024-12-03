@@ -64,10 +64,10 @@ return {
 					filter = { event = "msg_show", kind = "", find = "lines" },
 					opts = { skip = true },
 				},
-				-- {
-				-- 	filter = { event = "msg_show", kind = "", find = "--" },
-				-- 	opts = { skip = true },
-				-- },
+				{
+					filter = { event = "msg_show", kind = "", find = "]$" },
+					opts = { skip = true },
+				},
 			},
 		})
 	end,

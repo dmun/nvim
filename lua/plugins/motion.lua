@@ -9,7 +9,7 @@ return {
 	},
 	{
 		"folke/flash.nvim",
-		-- enabled = false,
+		enabled = false,
 		event = "VeryLazy",
 		---@type Flash.Config
 		opts = {
@@ -113,10 +113,10 @@ return {
 
 			local set = vim.keymap.set
 			-- Add cursors above/below the main cursor.
-			set({ "n", "v" }, "<C-k>", function()
+			set({ "n", "v" }, "<Up>", function()
 				mc.lineAddCursor(-1)
 			end)
-			set({ "n", "v" }, "<C-j>", function()
+			set({ "n", "v" }, "<Down>", function()
 				mc.lineAddCursor(1)
 			end)
 

@@ -6,15 +6,6 @@ return {
 			---@diagnostic disable-next-line: missing-fields
 			require("nvim-treesitter.configs").setup({
 				textobjects = {
-					move = {
-						enable = true,
-						goto_next_start = {
-							["<C-f>"] = "@cell.start",
-						},
-						goto_previous_start = {
-							["<C-b>"] = "@cell.start",
-						},
-					},
 					select = {
 						enable = true,
 

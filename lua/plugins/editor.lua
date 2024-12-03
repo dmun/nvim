@@ -4,6 +4,7 @@ return {
 	{ "numToStr/Comment.nvim", event = "VeryLazy" },
 	{
 		"rachartier/tiny-inline-diagnostic.nvim",
+		enabled = false,
 		event = "VeryLazy", -- Or `LspAttach`
 		priority = 1000, -- needs to be loaded in first
 		config = function()
@@ -27,7 +28,7 @@ return {
 	},
 	{
 		"dgagn/diagflow.nvim",
-		enabled = false,
+		-- enabled = false,
 		event = "LspAttach",
 		opts = {
 			scope = "cursor",

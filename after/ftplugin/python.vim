@@ -1,6 +1,8 @@
 "setl tabstop=2
 "nnoremap <buffer> <CR> <cmd>JupyniumExecuteSelectedCells<CR>
 nnoremap <buffer> <M-b> O<C-o>I# %%<ESC>j0
+nnoremap <silent> <C-j> /# %%<CR>zz<cmd>nohl<CR>
+nnoremap <silent> <C-k> ?# %%<CR>zz<cmd>nohl<CR>
 "setl nornu nonu
 "setl signcolumn=no
 "setl foldcolumn=1
