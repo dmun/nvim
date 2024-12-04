@@ -9,7 +9,7 @@ return {
 	},
 	{
 		"folke/flash.nvim",
-		-- enabled = false,
+		enabled = false,
 		event = "VeryLazy",
 		---@type Flash.Config
 		opts = {
@@ -49,13 +49,13 @@ return {
 	},
 	{
 		"dmun/vim-sneak",
-		enabled = false,
+		-- enabled = false,
 		event = "VeryLazy",
 		keys = {
-			{ "f", "<Plug>Sneak_f" },
-			{ "F", "<Plug>Sneak_F" },
-			{ "t", "<Plug>Sneak_t" },
-			{ "T", "<Plug>Sneak_T" },
+			-- { "f", "<Plug>Sneak_f" },
+			-- { "F", "<Plug>Sneak_F" },
+			-- { "t", "<Plug>Sneak_t" },
+			-- { "T", "<Plug>Sneak_T" },
 		},
 	},
 	{

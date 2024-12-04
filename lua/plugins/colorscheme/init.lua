@@ -45,7 +45,7 @@ return {
 					hl.Search = { bg = c.bg_inactive }
 					hl.NormalTerm = { bg = c.bg_active }
 
-					hl.FzfLuaNormal = { bg = c.bg_active }
+					-- hl.FzfLuaNormal = { bg = c.bg_active }
 				end,
 			})
 		end,
