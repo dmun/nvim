@@ -190,7 +190,7 @@ return {
 			lualine_b = { project(true), section(true) },
 			lualine_c = { filename(true) },
 			lualine_x = {
-				diagnostics,
+				"diagnostics",
 				multicursor,
 				macro,
 				"location",
