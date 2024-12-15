@@ -35,8 +35,15 @@ local function get_ls_config(config)
 end
 
 return {
-	{ "folke/lazydev.nvim", ft = "lua", opts = {} },
-	-- { 'mrcjkb/rustaceanvim', version = '^4' },
+	{
+		"folke/lazydev.nvim",
+		ft = "lua",
+		opts = {
+			library = {
+				{ path = "${3rd}/luv/library", words = { "vim%.uv" } },
+			},
+		},
+	},
 	{
 		"neovim/nvim-lspconfig",
 		event = { "BufReadPre", "BufNewFile" },

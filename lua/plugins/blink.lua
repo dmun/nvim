@@ -101,7 +101,9 @@ local draw = {
 return {
 	"saghen/blink.cmp",
 	lazy = false,
-	dependencies = "rafamadriz/friendly-snippets",
+	dependencies = {
+		"rafamadriz/friendly-snippets",
+	},
 	version = "v0.*",
 	-- build = 'cargo build --release',
 	opts = {
@@ -117,7 +119,18 @@ return {
 			nerd_font_variant = "mono",
 		},
 		sources = {
-			default = { "lsp", "path", "snippets", "buffer" },
+			default = {
+				"lsp",
+				"path",
+				"snippets",
+				"buffer",
+				"lazydev",
+			},
+			providers = {
+				-- dont show LuaLS require statements when lazydev has items
+				lsp = { fallback_for = { "lazydev" } },
+				lazydev = { name = "LazyDev", module = "lazydev.integrations.blink" },
+			},
 		},
 		completion = {
 			accept = { auto_brackets = { enabled = true } },
