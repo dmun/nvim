@@ -113,10 +113,10 @@ return {
 
 			local set = vim.keymap.set
 			-- Add cursors above/below the main cursor.
-			set({ "n", "v" }, "<Up>", function()
+			set({ "n", "v" }, "<C-k>", function()
 				mc.lineAddCursor(-1)
 			end)
-			set({ "n", "v" }, "<Down>", function()
+			set({ "n", "v" }, "<C-j>", function()
 				mc.lineAddCursor(1)
 			end)
 

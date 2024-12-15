@@ -52,6 +52,8 @@ o.guicursor = "i:iCursor-block,n-v:nCursor-block"
 -- o.guicursor = 'i:ver25'
 -- o.guicursor = 'a:nCursor-block'
 o.laststatus = 2
+o.list = true
+o.listchars = "tab:  "
 
 -- window
 o.inccommand = "split"

@@ -18,7 +18,7 @@ local function get_ls_config(config)
 		on_init = config and config.on_init or nil,
 		capabilities = vim.tbl_deep_extend(
 			"force",
-			require("cmp_nvim_lsp").default_capabilities() or {},
+			require("blink.cmp").get_lsp_capabilities() or {},
 			config and config.capabilities or {}
 		),
 		-- handlers = {

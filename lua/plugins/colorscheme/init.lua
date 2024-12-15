@@ -30,6 +30,7 @@ return {
 					hl.PmenuSel = { bg = c.bg_inactive }
 					hl.Pmenu = { bg = c.bg_dim }
 					hl.PmenuThumb = { bg = c.border }
+					-- hl.PmenuSbar = { bg = c.bg_inactive }
 					hl.CursorLine = { bg = c.bg_dim }
 					hl.CursorLineSign = { bg = c.bg_dim }
 					hl.CursorLineNr = { bg = c.bg_dim }
@@ -44,6 +45,10 @@ return {
 					hl.Visual = { bg = c.bg_inactive }
 					hl.Search = { bg = c.bg_inactive }
 					hl.NormalTerm = { bg = c.bg_active }
+
+					hl.nCursor = { bg = c.red_cooler }
+					hl.iCursor = { bg = c.magenta }
+					hl.NormalFloat = { bg = c.bg_dim }
 
 					-- hl.FzfLuaNormal = { bg = c.bg_active }
 				end,
@@ -119,7 +124,7 @@ return {
 	-- },
 	{
 		"ellisonleao/gruvbox.nvim",
-		enabled = false,
+		-- enabled = false,
 		opts = {
 			contrast = "hard",
 			bold = false,

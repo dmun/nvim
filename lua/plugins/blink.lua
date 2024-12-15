@@ -1,34 +1,129 @@
+local kind_hl_map = {
+	Text = "Comment",
+	Method = "@function.method",
+	Function = "@function",
+	Constructor = "@constructor",
+	Field = "@field",
+	Variable = "@variable",
+	Class = "@lsp.type.class",
+	Interface = "@lsp.type.interface",
+	Module = "@module",
+	Property = "@property",
+	Unit = "CmpItemKindUnit",
+	Value = "CmpItemKindValue",
+	Enum = "@lsp.type.enum",
+	Keyword = "@keyword",
+	Delimiter = "@tag.delimiter",
+	Color = "CmpItemKindColor",
+	File = "@module",
+	Reference = "CmpItemKindReference",
+	Folder = "CmpItemKindFolder",
+	EnumMember = "@lsp.type.enumMember",
+	Constant = "@constant",
+	Struct = "@lsp.type.struct",
+	Event = "CmpItemKindEvent",
+	Operator = "@operator",
+	TypeParameter = "@lsp.type.parameter",
+	Snippet = "CmpItemKindSnippet",
+}
+
+--- @module 'blink.cmp'
+--- @type blink.cmp.Draw
+local draw = {
+	padding = 1,
+	gap = 0,
+	-- treesitter = { "lsp" },
+	columns = {
+		{
+			"label",
+			-- "label_description",
+			-- gap = 1,
+		},
+	},
+	components = {
+		label = {
+			ellipsis = true,
+			width = { fill = true, max = 40 },
+			text = function(ctx)
+				if vim.tbl_contains({ "Method", "Function" }, ctx.kind) then
+					if not vim.endswith(ctx.label, ")") and ctx.label_detail == "" then
+						ctx.label_detail = "()"
+					end
+
+					if vim.o.filetype == "rust" then
+						if ctx.label_detail then
+							local s = vim.split(ctx.label_description, " -> ")
+							if s then
+								ctx.label = ctx.label:gsub("%(.*", "")
+								ctx.label_description = ctx.label_detail
+								ctx.label_detail = s[1]:match("%(.*%)") or "()"
+							end
+						end
+					end
+				end
+
+				return ctx.label .. ctx.label_detail
+			end,
+			highlight = function(ctx)
+				local ts = require("blink.cmp.completion.windows.render.treesitter")
+				local ts_filetypes = { "lua" }
+
+				if
+					vim.tbl_contains({ "Method", "Function" }, ctx.kind)
+					and vim.tbl_contains(ts_filetypes, vim.o.filetype)
+				then
+					return ts.highlight(ctx)
+				end
+
+				local highlights = {
+					{
+						0,
+						#ctx.label,
+						group = ctx.deprecated and "BlinkCmpLabelDeprecated"
+							or (kind_hl_map[ctx.kind] or "BlinkCmpKind"),
+					},
+				}
+
+				if ctx.label_detail then
+					table.insert(highlights, {
+						#ctx.label,
+						#ctx.label + #ctx.label_detail,
+						group = "BlinkCmpLabelDetail",
+					})
+				end
+
+				return highlights
+			end,
+		},
+	},
+}
+
 return {
-	"Saghen/blink.cmp",
-	enabled = false,
+	"saghen/blink.cmp",
 	lazy = false,
 	dependencies = "rafamadriz/friendly-snippets",
 	version = "v0.*",
-	-- build = 'cargo +nightly build --release',
+	-- build = 'cargo build --release',
 	opts = {
-		highlight = { use_nvim_cmp_as_default = true },
-		nerd_font_variant = "normal",
-		accept = {
-			auto_brackets = { enabled = true },
-			kind_resolution = { enabled = true },
-			semantic_token_resolution = { enabled = true },
-		},
-		-- trigger = { signature_help = { enabled = false } },
-		windows = { autocomplete = { draw = "simple" } },
 		keymap = {
-			show = "<C-space>",
-			hide = "<C-c>",
-			accept = "<Tab>",
-			select_prev = { "<Up>", "<C-p>" },
-			select_next = { "<Down>", "<C-n>" },
-
-			show_documentation = {},
-			hide_documentation = {},
-			scroll_documentation_up = "<C-u>",
-			scroll_documentation_down = "<C-d>",
-
-			snippet_forward = "<C-f>",
-			snippet_backward = "<C-b>",
+			preset = "default",
+			["<Tab>"] = { "select_and_accept", "fallback" },
+			["<C-f>"] = { "snippet_forward", "fallback" },
+			["<C-b>"] = { "snippet_backward", "fallback" },
+			["<C-e>"] = {},
 		},
+		appearance = {
+			use_nvim_cmp_as_default = false,
+			nerd_font_variant = "mono",
+		},
+		sources = {
+			default = { "lsp", "path", "snippets", "buffer" },
+		},
+		completion = {
+			accept = { auto_brackets = { enabled = true } },
+			menu = { draw = draw },
+		},
+		signature = { enabled = true },
 	},
+	opts_extend = { "sources.default" },
 }

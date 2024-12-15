@@ -24,6 +24,8 @@ util.handle_keymaps({
 		{ "<M-j>", "<C-w>j" },
 		{ "<M-k>", "<C-w>k" },
 		{ "<M-l>", "<C-w>l" },
+
+		{ "yc", "yygccp" },
 	},
 	i = {
 		{ "<M-h>", "<C-[><C-w>h" },

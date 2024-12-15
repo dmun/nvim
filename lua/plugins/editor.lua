@@ -1,6 +1,7 @@
 return {
 	-- 'romainl/vim-cool',
 	-- 'echasnovski/mini.nvim',
+	"https://github.com/tpope/vim-fugitive",
 	{
 		"Pocco81/auto-save.nvim",
 		config = function()
