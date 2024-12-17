@@ -117,15 +117,15 @@ return {
 			buffers = { no_header_i = true },
 			winopts = {
 				border = "single",
-				row = 0.2,
+				row = 0.4,
 				col = 0.5,
-				height = 0.8,
+				height = 0.6,
 				width = 0.75,
 				backdrop = 100,
 				preview = {
 					border = "noborder",
 					hidden = "nohidden",
-					vertical = "down:45%",
+					vertical = "down:60%",
 					title = false,
 					scrollbar = false,
 					scrollchars = { "┃", "" },

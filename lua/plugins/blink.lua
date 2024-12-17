@@ -43,7 +43,7 @@ local draw = {
 	components = {
 		label = {
 			ellipsis = true,
-			width = { fill = true, max = 40 },
+			width = { fill = true, max = 50 },
 			text = function(ctx)
 				if vim.tbl_contains({ "Method", "Function" }, ctx.kind) then
 					if not vim.endswith(ctx.label, ")") and ctx.label_detail == "" then
@@ -145,6 +145,9 @@ return {
 		},
 		signature = {
 			enabled = true,
+			trigger = {
+				show_on_insert_on_trigger_character = true,
+			},
 			-- window = { max_width = 60 },
 		},
 	},
