@@ -112,6 +112,8 @@ return {
 			["<Tab>"] = { "select_and_accept", "fallback" },
 			["<C-f>"] = { "snippet_forward", "fallback" },
 			["<C-b>"] = { "snippet_backward", "fallback" },
+			["<C-j>"] = { "select_next", "fallback" },
+			["<C-k>"] = { "select_prev", "fallback" },
 			["<C-e>"] = {},
 		},
 		appearance = {
@@ -134,9 +136,17 @@ return {
 		},
 		completion = {
 			accept = { auto_brackets = { enabled = true } },
-			menu = { draw = draw },
+			menu = {
+				max_height = 8,
+				draw = draw,
+				scrollbar = false,
+			},
+			ghost_text = { enabled = true },
 		},
-		signature = { enabled = true },
+		signature = {
+			enabled = true,
+			-- window = { max_width = 60 },
+		},
 	},
 	opts_extend = { "sources.default" },
 }

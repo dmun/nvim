@@ -5,16 +5,16 @@ return {
 		require("noice").setup({
 			lsp = { signature = { enabled = false } },
 			cmdline = {
-				view = "cmdline",
-				format = {
-					cmdline = { icon = " cmd:" },
-					search_down = { icon = " search:" },
-					search_up = { icon = " search:" },
-					filter = { icon = " filter:" },
-					lua = { icon = " lua:" },
-					help = { icon = " help:" },
-					input = { view = "cmdline" },
-				},
+				-- view = "cmdline",
+				-- format = {
+				-- 	cmdline = { icon = " cmd:" },
+				-- 	search_down = { icon = " search:" },
+				-- 	search_up = { icon = " search:" },
+				-- 	filter = { icon = " filter:" },
+				-- 	lua = { icon = " lua:" },
+				-- 	help = { icon = " help:" },
+				-- 	input = { view = "cmdline" },
+				-- },
 			},
 			format = {
 				level = {

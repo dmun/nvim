@@ -7,7 +7,7 @@ return {
 			require("night-owl").setup({ italics = false })
 			-- vim.cmd("hi FlashLabel guifg=#FE2C83 gui=bold")
 			-- vim.cmd("hi link FlashCurrent CurSearch")
-			vim.cmd("hi iCursor guibg=#FF869A gui=bold")
+			-- vim.cmd("hi iCursor guibg=#FF869A gui=bold")
 			-- vim.cmd("hi nCursor guibg=#FF869A gui=bold")
 		end,
 	},
@@ -30,6 +30,9 @@ return {
 					hl.PmenuSel = { bg = c.bg_inactive }
 					hl.Pmenu = { bg = c.bg_dim }
 					hl.PmenuThumb = { bg = c.border }
+					hl.BlinkCmpDoc = { bg = c.bg_active }
+					hl.BlinkCmpDocBorder = { bg = c.bg_active }
+
 					-- hl.PmenuSbar = { bg = c.bg_inactive }
 					hl.CursorLine = { bg = c.bg_dim }
 					hl.CursorLineSign = { bg = c.bg_dim }
@@ -47,8 +50,15 @@ return {
 					hl.NormalTerm = { bg = c.bg_active }
 
 					hl.nCursor = { bg = c.red_cooler }
-					hl.iCursor = { bg = c.magenta }
+					hl.iCursor = { bg = c.magenta_intense }
 					hl.NormalFloat = { bg = c.bg_dim }
+
+					hl.CursorLineNr = { fg = c.fg_alt }
+					hl.LineNrAbove = { link = "LineNr" }
+					hl.LineNrBelow = { link = "LineNr" }
+
+					hl.LeapBackdrop = {}
+					hl.LeapLabel = { fg = c.magenta_intense }
 
 					-- hl.FzfLuaNormal = { bg = c.bg_active }
 				end,

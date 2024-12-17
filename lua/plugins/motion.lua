@@ -40,7 +40,7 @@ return {
 	},
 	{
 		"ggandor/leap.nvim",
-		enabled = false,
+		-- enabled = false,
 		keys = {
 			{ "s", "<Plug>(leap-forward)", { "n", "x", "o" } },
 			{ "S", "<Plug>(leap-backward)", { "n", "x", "o" } },
