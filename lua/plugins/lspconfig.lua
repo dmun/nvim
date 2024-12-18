@@ -21,16 +21,6 @@ local function get_ls_config(config)
 			require("blink.cmp").get_lsp_capabilities() or {},
 			config and config.capabilities or {}
 		),
-		-- handlers = {
-		-- 	["textDocument/publishDiagnostics"] = vim.lsp.with(
-		-- 		vim.lsp.diagnostic.on_publish_diagnostics,
-		-- 		vim.tbl_deep_extend("force", config and config.diagnostics or {}, {
-		-- 			virtual_text = {
-		-- 				prefix = "",
-		-- 			},
-		-- 		})
-		-- 	),
-		-- },
 	}
 end
 
@@ -51,23 +41,15 @@ return {
 			"williamboman/mason.nvim",
 			"williamboman/mason-lspconfig.nvim",
 			"folke/lazydev.nvim",
-			"nvim-telescope/telescope.nvim",
 		},
 		config = function()
 			require("mason").setup()
 			local lsp = require("lspconfig")
 			local mason_lsp = require("mason-lspconfig")
 
-			require("lspconfig.configs").kotlin_lsp = {
-				default_config = {
-					filetypes = { "kotlin" },
-					cmd = { "/Users/david/Development/kotlin-lsp/target/debug/kotlin-lsp" },
-					root_dir = lsp.util.root_pattern(".git"),
-				},
-			}
-
 			mason_lsp.setup({
 				ensure_installed = Conf.lsp.ensure_installed,
+				automatic_installation = true,
 			})
 
 			-- setup mason language servers

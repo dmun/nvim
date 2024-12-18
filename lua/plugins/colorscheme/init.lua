@@ -31,6 +31,7 @@ return {
 					hl.Pmenu = { bg = c.bg_dim }
 					hl.PmenuThumb = { bg = c.border }
 					hl.BlinkCmpDoc = { bg = c.bg_active }
+					hl.BlinkCmpDocSeparator = { fg = c.fg_dim }
 					hl.BlinkCmpDocBorder = { bg = c.bg_active }
 
 					-- hl.PmenuSbar = { bg = c.bg_inactive }

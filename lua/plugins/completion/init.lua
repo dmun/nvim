@@ -1,30 +1,32 @@
+ -- stylua: ignore
 local kind_hl_map = {
-	Text = "Comment",
-	Method = "@function.method",
-	Function = "@function",
-	Constructor = "@constructor",
-	Field = "@field",
-	Variable = "@variable",
-	Class = "@lsp.type.class",
-	Interface = "@lsp.type.interface",
-	Module = "@module",
-	Property = "@property",
-	Unit = "CmpItemKindUnit",
-	Value = "CmpItemKindValue",
-	Enum = "@lsp.type.enum",
-	Keyword = "@keyword",
-	Delimiter = "@tag.delimiter",
-	Color = "CmpItemKindColor",
-	File = "@module",
-	Reference = "CmpItemKindReference",
-	Folder = "CmpItemKindFolder",
-	EnumMember = "@lsp.type.enumMember",
-	Constant = "@constant",
-	Struct = "@lsp.type.struct",
-	Event = "CmpItemKindEvent",
-	Operator = "@operator",
+	Method        = "@function.method",
+	Variable      = "@variable",
+	Class         = "@lsp.type.class",
+	Interface     = "@lsp.type.interface",
+	Field         = "@field",
+	Function      = "@function",
+	Constructor   = "@constructor",
+	Module        = "@module",
+	Property      = "@property",
+	Enum          = "@lsp.type.enum",
+	Keyword       = "@keyword",
+	Delimiter     = "@tag.delimiter",
+	File          = "@module",
+	Constant      = "@constant",
+	EnumMember    = "@lsp.type.enumMember",
+	Struct        = "@lsp.type.struct",
+	Operator      = "@operator",
 	TypeParameter = "@lsp.type.parameter",
-	Snippet = "CmpItemKindSnippet",
+
+	Text          = "Comment",
+	Unit          = "CmpItemKindUnit",
+	Value         = "CmpItemKindValue",
+	Color         = "CmpItemKindColor",
+	Reference     = "CmpItemKindReference",
+	Folder        = "CmpItemKindFolder",
+	Event         = "CmpItemKindEvent",
+	Snippet       = "CmpItemKindSnippet",
 }
 
 --- @module 'blink.cmp'
@@ -32,7 +34,6 @@ local kind_hl_map = {
 local draw = {
 	padding = 1,
 	gap = 0,
-	-- treesitter = { "lsp" },
 	columns = {
 		{
 			"label",
@@ -45,35 +46,31 @@ local draw = {
 			ellipsis = true,
 			width = { fill = true, max = 50 },
 			text = function(ctx)
+				local ft = vim.o.filetype
+
 				if vim.tbl_contains({ "Method", "Function" }, ctx.kind) then
-					if not vim.endswith(ctx.label, ")") and ctx.label_detail == "" then
-						ctx.label_detail = "()"
+					local ft_ctx = require("plugins.completion.ft_ctx")
+					if ft_ctx[ft] and ft_ctx[ft].fix_label then
+						ft_ctx[ft].fix_label(ctx)
 					end
 
-					if vim.o.filetype == "rust" then
-						if ctx.label_detail then
-							local s = vim.split(ctx.label_description, " -> ")
-							if s then
-								ctx.label = ctx.label:gsub("%(.*", "")
-								ctx.label_description = ctx.label_detail
-								ctx.label_detail = s[1]:match("%(.*%)") or "()"
-							end
-						end
+					if not vim.endswith(ctx.label, ")") and not vim.endswith(ctx.label_detail, ")") then
+						ctx.label_detail = "()"
 					end
 				end
 
 				return ctx.label .. ctx.label_detail
 			end,
 			highlight = function(ctx)
-				local ts = require("blink.cmp.completion.windows.render.treesitter")
-				local ts_filetypes = { "lua" }
-
-				if
-					vim.tbl_contains({ "Method", "Function" }, ctx.kind)
-					and vim.tbl_contains(ts_filetypes, vim.o.filetype)
-				then
-					return ts.highlight(ctx)
-				end
+				-- local ts = require("blink.cmp.completion.windows.render.treesitter")
+				-- local ts_filetypes = {}
+				--
+				-- if
+				-- 	vim.tbl_contains({ "Method", "Function" }, ctx.kind)
+				-- 	and vim.tbl_contains(ts_filetypes, vim.o.filetype)
+				-- then
+				-- 	return ts.highlight(ctx)
+				-- end
 
 				local highlights = {
 					{

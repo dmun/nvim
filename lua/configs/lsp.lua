@@ -3,8 +3,6 @@ Conf.lsp = {
 	ls_name = { lua_ls = "Lua" },
 }
 
-Conf.ls.kotlin_lsp = {}
-
 Conf.ls.pyright = {
 	settings = {
 		pyright = {

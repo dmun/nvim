@@ -83,6 +83,7 @@ return {
 	{ "windwp/nvim-autopairs", event = "InsertEnter", config = true },
 	{
 		"dstein64/nvim-scrollview",
+		enabled = false,
 		opts = {},
 	},
 	{
