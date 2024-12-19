@@ -1,1 +1,0 @@
-setl tabstop=2
