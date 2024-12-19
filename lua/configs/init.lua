@@ -2,8 +2,8 @@
 ---@field lsp table
 ---@field ls table
 _G.Conf = {
-	lsp = {},
-	ls = {},
+  lsp = {},
+  ls = {},
 }
 
 require("configs.lsp")

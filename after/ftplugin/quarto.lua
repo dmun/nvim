@@ -25,7 +25,7 @@ vim.api.nvim_win_set_hl_ns(0, ns)
 -- ts based code chunk highlighting uses a change
 -- only availabl in nvim >= 0.10
 if vim.fn.has("nvim-0.10.0") == 0 then
-	return
+  return
 end
 
 -- highlight code cells similar to
@@ -39,59 +39,59 @@ local tsquery = "(fenced_code_block)@codecell"
 
 -- vim.api.nvim_set_hl(0, '@markup.codecell', { bg = '#000055' })
 vim.api.nvim_set_hl(0, "@markup.codecell", {
-	link = "MoltenCell",
+  link = "MoltenCell",
 })
 
 -- vim.api.nvim_set_hl(0, '@markup.codecell', { bg = '#000055' })
 vim.api.nvim_set_hl(0, "@markup.codecell.lang", {
-	fg = "#333338",
-	bg = "#111116",
+  fg = "#333338",
+  bg = "#111116",
 })
 
 -- vim.api.nvim_set_hl(0, '@markup.codecell', { bg = '#000055' })
 vim.api.nvim_set_hl(0, "@markup.codecell.end", {
-	fg = "black",
-	bg = "black",
+  fg = "black",
+  bg = "black",
 })
 
 local function clear_all()
-	local all = api.nvim_buf_get_extmarks(buf, ns, 0, -1, {})
-	for _, mark in ipairs(all) do
-		vim.api.nvim_buf_del_extmark(buf, ns, mark[1])
-	end
+  local all = api.nvim_buf_get_extmarks(buf, ns, 0, -1, {})
+  for _, mark in ipairs(all) do
+    vim.api.nvim_buf_del_extmark(buf, ns, mark[1])
+  end
 end
 
 local function highlight_range(from, to, group)
-	for i = from, to do
-		vim.api.nvim_buf_set_extmark(buf, ns, i, 0, {
-			hl_eol = true,
-			line_hl_group = group,
-		})
-	end
+  for i = from, to do
+    vim.api.nvim_buf_set_extmark(buf, ns, i, 0, {
+      hl_eol = true,
+      line_hl_group = group,
+    })
+  end
 end
 
 local function highlight_cells()
-	clear_all()
+  clear_all()
 
-	local query = ts.query.parse(parsername, tsquery)
-	local tree = parser:parse()
-	local root = tree[1]:root()
-	for _, match, _ in query:iter_matches(root, buf, 0, -1, { all = true }) do
-		for _, nodes in pairs(match) do
-			for _, node in ipairs(nodes) do
-				local start_line, _, end_line, _ = node:range()
-				pcall(highlight_range, start_line, start_line, "@markup.codecell.lang")
-				pcall(highlight_range, start_line + 1, end_line - 2, "@markup.codecell")
-				pcall(highlight_range, end_line - 1, end_line - 1, "@markup.codecell.end")
-			end
-		end
-	end
+  local query = ts.query.parse(parsername, tsquery)
+  local tree = parser:parse()
+  local root = tree[1]:root()
+  for _, match, _ in query:iter_matches(root, buf, 0, -1, { all = true }) do
+    for _, nodes in pairs(match) do
+      for _, node in ipairs(nodes) do
+        local start_line, _, end_line, _ = node:range()
+        pcall(highlight_range, start_line, start_line, "@markup.codecell.lang")
+        pcall(highlight_range, start_line + 1, end_line - 2, "@markup.codecell")
+        pcall(highlight_range, end_line - 1, end_line - 1, "@markup.codecell.end")
+      end
+    end
+  end
 end
 
 highlight_cells()
 
 vim.api.nvim_create_autocmd({ "ModeChanged", "BufWrite" }, {
-	group = vim.api.nvim_create_augroup("QuartoCellHighlight", { clear = true }),
-	buffer = buf,
-	callback = highlight_cells,
+  group = vim.api.nvim_create_augroup("QuartoCellHighlight", { clear = true }),
+  buffer = buf,
+  callback = highlight_cells,
 })
