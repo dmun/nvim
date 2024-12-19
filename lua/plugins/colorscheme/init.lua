@@ -1,6 +1,7 @@
 local palette = require("plugins.colorscheme.night-owl.highlights")
 
 return {
+	{ "bluz71/vim-nightfly-colors", name = "nightfly", lazy = false, priority = 1000 },
 	{
 		"oxfist/night-owl.nvim",
 		config = function()
@@ -18,7 +19,7 @@ return {
 			require("modus-themes").setup({
 				variant = "tinted",
 				styles = {
-					variables = { link = "lispSymbol" },
+					-- variables = { link = "lispSymbol" },
 				},
 				---@param colors ColorScheme
 				on_colors = function(colors)
@@ -27,6 +28,8 @@ return {
 				---@param hl Highlights
 				---@param c ColorScheme
 				on_highlights = function(hl, c)
+					hl["@variable"] = { link = "lispSymbol" }
+					hl["@lsp.typemod.variable.global"] = { link = "@variable.member" }
 					hl.PmenuSel = { bg = c.bg_inactive }
 					hl.Pmenu = { bg = c.bg_dim }
 					hl.PmenuThumb = { bg = c.border }

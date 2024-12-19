@@ -75,6 +75,7 @@ return {
 				highlight = {
 					enable = true,
 					disable = { "r" },
+					additional_vim_regex_highlighting = false,
 				},
 				indent = {
 					enable = false,

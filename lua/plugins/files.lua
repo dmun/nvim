@@ -104,11 +104,19 @@ return {
 			defaults = {
 				file_icons = false,
 			},
+			previewers = {
+				builtin = {
+					syntax_limit_b = 1024 * 100,
+				},
+			},
 			files = {
 				cwd_prompt = false,
 				cmd = "rg --files --hidden",
 				no_header_i = true,
 				git_icons = false,
+			},
+			oldfiles = {
+				include_current_session = true,
 			},
 			code_actions = {
 				prompt = " > ",

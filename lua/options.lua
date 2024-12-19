@@ -82,7 +82,8 @@ o.clipboard = "unnamedplus"
 -- vim.opt.statuscolumn = [[%!v:lua.require'util.ui'.statuscolumn()]]
 -- vim.opt.foldtext = "v:lua.require'util.ui'.foldtext()"
 
--- diagnostics
+-- lsp
+vim.highlight.priorities.semantic_tokens = 95
 vim.diagnostic.config({
 	signs = {
 		text = {

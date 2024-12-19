@@ -4,8 +4,8 @@ local kind_hl_map = {
 	Variable      = "@variable",
 	Class         = "@lsp.type.class",
 	Interface     = "@lsp.type.interface",
-	Field         = "@field",
-	Function      = "@function",
+	Field         = "@variable.member",
+	Function      = "@function.call",
 	Constructor   = "@constructor",
 	Module        = "@module",
 	Property      = "@property",
@@ -62,24 +62,24 @@ local draw = {
 				return ctx.label .. ctx.label_detail
 			end,
 			highlight = function(ctx)
-				-- local ts = require("blink.cmp.completion.windows.render.treesitter")
-				-- local ts_filetypes = {}
-				--
-				-- if
-				-- 	vim.tbl_contains({ "Method", "Function" }, ctx.kind)
-				-- 	and vim.tbl_contains(ts_filetypes, vim.o.filetype)
-				-- then
-				-- 	return ts.highlight(ctx)
-				-- end
+				local ts = require("blink.cmp.completion.windows.render.treesitter")
+				local ts_filetypes = { "rust" }
 
-				local highlights = {
-					{
+				local highlights = {}
+
+				if
+					vim.tbl_contains({ "Method", "Function" }, ctx.kind)
+					and vim.tbl_contains(ts_filetypes, vim.o.filetype)
+				then
+					highlights = ts.highlight(ctx)
+				else
+					table.insert(highlights, {
 						0,
 						#ctx.label,
 						group = ctx.deprecated and "BlinkCmpLabelDeprecated"
 							or (kind_hl_map[ctx.kind] or "BlinkCmpKind"),
-					},
-				}
+					})
+				end
 
 				if ctx.label_detail then
 					table.insert(highlights, {
