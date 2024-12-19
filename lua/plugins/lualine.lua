@@ -8,11 +8,6 @@ local colors = {
 	purple = "#B6A0FF",
 }
 
-local diagnostics = {
-	"diagnostics",
-	symbols = { error = "", warn = "", info = "", hint = "" },
-}
-
 local theme = {
 	normal = {
 		a = { bg = colors.bg, fg = colors.fg, gui = "bold" },
@@ -44,14 +39,6 @@ local theme = {
 		b = { bg = colors.bg_alt, fg = colors.fg_alt },
 		c = { bg = colors.bg_alt, fg = colors.fg_alt },
 	},
-}
-
-local block = {
-	function()
-		return " "
-	end,
-	-- color = "Normal",
-	padding = 0,
 }
 
 ---@param active boolean

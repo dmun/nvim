@@ -1,11 +1,32 @@
 return {
 	"tpope/vim-rsi",
+	{ "nacro90/numb.nvim", event = "CmdLineEnter", opts = {} },
 	{
 		"rhysd/clever-f.vim",
 		enabled = false,
 		init = function()
 			vim.g.clever_f_smart_case = 1
 		end,
+	},
+	{
+		"ggandor/leap.nvim",
+		-- enabled = false,
+		keys = {
+			{ "s", "<Plug>(leap-forward)", { "n", "x", "o" } },
+			{ "S", "<Plug>(leap-backward)", { "n", "x", "o" } },
+			{ "gs", "<Plug>(leap-from-window)", { "n", "x", "o" } },
+		},
+	},
+	{
+		"dmun/vim-sneak",
+		-- enabled = false,
+		event = "VeryLazy",
+		keys = {
+			-- { "f", "<Plug>Sneak_f" },
+			-- { "F", "<Plug>Sneak_F" },
+			-- { "t", "<Plug>Sneak_t" },
+			-- { "T", "<Plug>Sneak_T" },
+		},
 	},
 	{
 		"folke/flash.nvim",
@@ -37,31 +58,6 @@ return {
 			-- { "R", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
 			-- { "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
 		},
-	},
-	{
-		"ggandor/leap.nvim",
-		-- enabled = false,
-		keys = {
-			{ "s", "<Plug>(leap-forward)", { "n", "x", "o" } },
-			{ "S", "<Plug>(leap-backward)", { "n", "x", "o" } },
-			{ "gs", "<Plug>(leap-from-window)", { "n", "x", "o" } },
-		},
-	},
-	{
-		"dmun/vim-sneak",
-		-- enabled = false,
-		event = "VeryLazy",
-		keys = {
-			-- { "f", "<Plug>Sneak_f" },
-			-- { "F", "<Plug>Sneak_F" },
-			-- { "t", "<Plug>Sneak_t" },
-			-- { "T", "<Plug>Sneak_T" },
-		},
-	},
-	{
-		"nacro90/numb.nvim",
-		event = "CmdLineEnter",
-		opts = {},
 	},
 	{
 		"jake-stewart/multicursor.nvim",

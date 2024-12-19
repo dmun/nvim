@@ -1,7 +1,14 @@
 return {
-	-- 'romainl/vim-cool',
-	-- 'echasnovski/mini.nvim',
 	"https://github.com/tpope/vim-fugitive",
+	{ "numToStr/Comment.nvim", event = "VeryLazy" },
+	{ "windwp/nvim-autopairs", event = "InsertEnter", config = true },
+	{ "dstein64/nvim-scrollview", enabled = false, config = true },
+	{ "folke/trouble.nvim", opts = { focus = true } },
+	{
+		"NMAC427/guess-indent.nvim",
+		event = { "BufReadPre", "BufNewFile" },
+		config = true,
+	},
 	{
 		"Pocco81/auto-save.nvim",
 		config = function()
@@ -25,34 +32,8 @@ return {
 			})
 		end,
 	},
-	{ "numToStr/Comment.nvim", event = "VeryLazy" },
-	{
-		"rachartier/tiny-inline-diagnostic.nvim",
-		enabled = false,
-		event = "VeryLazy", -- Or `LspAttach`
-		priority = 1000, -- needs to be loaded in first
-		config = function()
-			require("tiny-inline-diagnostic").setup({
-				preset = "nonerdfont",
-				hi = {
-					background = "None",
-				},
-				signs = {
-					left = "",
-					right = "",
-					diag = "",
-					arrow = "",
-					up_arrow = "",
-					vertical = "",
-					vertical_end = "",
-				},
-			})
-			vim.diagnostic.config({ virtual_text = false })
-		end,
-	},
 	{
 		"dgagn/diagflow.nvim",
-		-- enabled = false,
 		event = "LspAttach",
 		opts = {
 			scope = "cursor",
@@ -62,70 +43,8 @@ return {
 	},
 	{
 		"kylechui/nvim-surround",
-		enabled = false,
 		event = "VeryLazy",
-		opts = {
-			keymaps = {
-				insert = "<C-g>s",
-				insert_line = "<C-g>S",
-				normal = "s",
-				normal_cur = "ss",
-				normal_line = "S",
-				normal_cur_line = "SS",
-				visual = "s",
-				visual_line = "S",
-				delete = "ds",
-				change = "cs",
-				change_line = "cS",
-			},
-		},
-	},
-	{ "windwp/nvim-autopairs", event = "InsertEnter", config = true },
-	{
-		"dstein64/nvim-scrollview",
-		enabled = false,
-		opts = {},
-	},
-	{
-		"lukas-reineke/indent-blankline.nvim",
-		enabled = false,
-		name = "ibl",
-		opts = {
-			indent = {
-				char = "▏",
-			},
-			scope = { enabled = false },
-		},
-	},
-	{
-		"RRethy/vim-illuminate",
-		enabled = false,
-		config = function()
-			require("illuminate").configure({
-				providers = { "lsp" },
-				large_file_cutoff = 1000,
-				large_file_overrides = {
-					providers = { "lsp" },
-				},
-			})
-		end,
-	},
-	{
-		"NMAC427/guess-indent.nvim",
-		-- enabled = false,
-		event = { "BufReadPre", "BufNewFile" },
-		opts = {},
-	},
-	{
-		"kosayoda/nvim-lightbulb",
-		enabled = false,
-		opts = {
-			autocmd = { enabled = true },
-			sign = {
-				text = "",
-				hl = "DiagnosticWarn",
-			},
-		},
+		config = true,
 	},
 	{
 		"kevinhwang91/nvim-ufo",
@@ -164,12 +83,6 @@ return {
 				end
 				return { "treesitter", "indent" }
 			end,
-		},
-	},
-	{
-		"folke/trouble.nvim",
-		opts = {
-			focus = true,
 		},
 	},
 }

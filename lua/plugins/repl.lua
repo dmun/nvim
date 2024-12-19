@@ -1,6 +1,5 @@
 return {
 	"Vigemus/iron.nvim",
-	-- enabled = false,
 	cmd = "IronRepl",
 	ft = { "python", "r" },
 	config = function()
