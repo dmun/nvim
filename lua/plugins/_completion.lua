@@ -270,6 +270,7 @@ end
 return {
 	{
 		"L3MON4D3/LuaSnip",
+		enabled = false,
 		cmd = "LuaSnipUnlinkCurrent",
 		version = "v2.*",
 		dependencies = { "rafamadriz/friendly-snippets" },

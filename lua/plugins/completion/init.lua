@@ -100,9 +100,10 @@ return {
 	lazy = false,
 	dependencies = {
 		"rafamadriz/friendly-snippets",
+		{ "L3MON4D3/LuaSnip", version = "v2.*" },
 	},
 	version = "v0.*",
-	-- build = 'cargo build --release',
+	-- build = "cargo build --release",
 	opts = {
 		keymap = {
 			preset = "default",
@@ -129,6 +130,7 @@ return {
 				-- dont show LuaLS require statements when lazydev has items
 				lsp = { fallback_for = { "lazydev" } },
 				lazydev = { name = "LazyDev", module = "lazydev.integrations.blink" },
+				-- lazydev = { name = "LazyDev", module = "lazydev.integrations.blink", fallbacks = { "lsp" } },
 			},
 		},
 		completion = {
@@ -145,7 +147,9 @@ return {
 			trigger = {
 				show_on_insert_on_trigger_character = true,
 			},
-			-- window = { max_width = 60 },
+			-- window = {
+			-- 	show_documentation = false,
+			-- },
 		},
 	},
 	opts_extend = { "sources.default" },
