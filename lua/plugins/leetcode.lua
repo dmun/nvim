@@ -3,10 +3,10 @@ return {
 	build = ":TSUpdate html",
 	lazy = "leetcode.nvim" ~= vim.fn.argv()[1],
 	dependencies = {
-		"nvim-telescope/telescope.nvim",
+		"ibhagwan/fzf-lua",
 		"nvim-lua/plenary.nvim",
 		"MunifTanjim/nui.nvim",
-		"ibhagwan/fzf-lua",
+		"nvim-treesitter/nvim-treesitter",
 		"nvim-tree/nvim-web-devicons",
 	},
 	opts = {

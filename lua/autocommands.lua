@@ -13,15 +13,6 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 	end,
 })
 
--- -- auto-save
--- vim.api.nvim_create_autocmd({ 'BufLeave', 'FocusLost' }, {
--- 	callback = function()
--- 		if vim.bo.buftype == '' then
--- 			vim.cmd('silent update')
--- 		end
--- 	end,
--- })
-
 -- terminal
 vim.api.nvim_create_autocmd({ "BufEnter" }, {
 	callback = function()
@@ -38,12 +29,3 @@ vim.api.nvim_create_autocmd({ "BufEnter" }, {
 -- dynamic linenumbers
 -- vim.cmd('au InsertEnter * se nornu')
 -- vim.cmd('au InsertLeave * se rnu')
--- vim.cmd([[
--- 		:au ModeChanged [vV\x16]*:* let &l:rnu = mode() =~# '^[vV\x16]'
--- 		:au ModeChanged *:[vV\x16]* let &l:rnu = mode() =~# '^[vV\x16]'
--- 		:au WinEnter,WinLeave * let &l:rnu = mode() =~# '^[vV\x16]'
--- ]])
-
--- -- dynamic CursorLineNr color
--- vim.cmd('au InsertEnter * se winhl=CursorLineNr:iCursorLineNr')
--- vim.cmd('au InsertLeave * se winhl=CursorLineNr:nCursorLineNr')
