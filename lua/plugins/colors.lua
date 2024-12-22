@@ -10,7 +10,7 @@ return {
         },
         ---@param colors ColorScheme
         on_colors = function(colors)
-          colors.bg_active = "#141528"
+          colors.bg_tab_bar = "#141528"
         end,
         ---@param hl Highlights
         ---@param c ColorScheme
@@ -20,9 +20,14 @@ return {
           hl.PmenuSel = { bg = c.bg_inactive }
           hl.Pmenu = { bg = c.bg_dim }
           hl.PmenuThumb = { bg = c.border }
+
+          hl.LspSignatureActiveParameter = { bg = c.bg_active, bold = true }
+          hl.BlinkCmpSignatureHelp = { bg = c.bg_dim }
+          hl.BlinkCmpSignatureHelpBorder = { bg = c.bg_dim }
+
           hl.BlinkCmpDoc = { bg = c.bg_active }
           hl.BlinkCmpDocSeparator = { fg = c.fg_dim }
-          hl.BlinkCmpDocBorder = { bg = c.bg_active }
+          -- hl.BlinkCmpDocBorder = { bg = c.bg_active }
 
           -- hl.PmenuSbar = { bg = c.bg_inactive }
           hl.CursorLine = { bg = c.bg_dim }
@@ -38,11 +43,11 @@ return {
 
           hl.Visual = { bg = c.bg_inactive }
           hl.Search = { bg = c.bg_inactive }
-          hl.NormalTerm = { bg = c.bg_active }
+          hl.NormalTerm = { bg = c.bg_tab_bar }
 
           hl.nCursor = { bg = c.red_cooler }
           hl.iCursor = { bg = c.magenta_intense }
-          hl.NormalFloat = { bg = c.bg_dim }
+          hl.NormalFloat = {}
 
           hl.CursorLineNr = { fg = c.fg_alt }
           hl.LineNrAbove = { link = "LineNr" }
@@ -50,8 +55,12 @@ return {
 
           hl.LeapBackdrop = {}
           hl.LeapLabel = { fg = c.magenta_intense }
+          hl.CleverFChar = { fg = c.magenta_intense }
 
-          -- hl.FzfLuaNormal = { bg = c.bg_active }
+          hl.FzfLuaBorder = { fg = c.border_highlight }
+          -- hl.FzfLuaBorder = { link = "NoiceCmdlinePopupBorderSearch" }
+          hl.FzfLuaTitle = { fg = c.border_highlight, bold = true }
+          hl.FzfLuaBackdrop = { link = "Normal" }
         end,
       })
     end,

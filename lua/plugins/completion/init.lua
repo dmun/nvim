@@ -62,12 +62,11 @@ local draw = {
         return ctx.label .. ctx.label_detail
       end,
       highlight = function(ctx)
-        local ts = require("blink.cmp.completion.windows.render.treesitter")
-        local ts_filetypes = { "rust" }
-
+        local ts_filetypes = {}
         local highlights = {}
 
         if vim.tbl_contains({ "Method", "Function" }, ctx.kind) and vim.tbl_contains(ts_filetypes, vim.o.filetype) then
+          local ts = require("blink.cmp.completion.windows.render.treesitter")
           highlights = ts.highlight(ctx)
         else
           table.insert(highlights, {
@@ -103,11 +102,11 @@ return {
   opts = {
     keymap = {
       preset = "default",
-      ["<Tab>"] = { "select_and_accept", "fallback" },
+      -- ["<C-Enter>"] = { "select_and_accept", "fallback" },
       ["<C-f>"] = { "snippet_forward", "fallback" },
       ["<C-b>"] = { "snippet_backward", "fallback" },
-      ["<C-j>"] = { "select_next", "fallback" },
-      ["<C-k>"] = { "select_prev", "fallback" },
+      ["<C-n>"] = { "select_next", "fallback" },
+      ["<C-p>"] = { "select_prev", "fallback" },
       ["<C-e>"] = {},
     },
     appearance = {
@@ -124,9 +123,7 @@ return {
       },
       providers = {
         -- dont show LuaLS require statements when lazydev has items
-        lsp = { fallback_for = { "lazydev" } },
-        lazydev = { name = "LazyDev", module = "lazydev.integrations.blink" },
-        -- lazydev = { name = "LazyDev", module = "lazydev.integrations.blink", fallbacks = { "lsp" } },
+        lazydev = { name = "LazyDev", module = "lazydev.integrations.blink", fallbacks = { "lsp" } },
       },
     },
     completion = {
@@ -136,7 +133,7 @@ return {
         draw = draw,
         scrollbar = false,
       },
-      ghost_text = { enabled = true },
+      -- ghost_text = { enabled = true },
     },
     signature = {
       enabled = true,

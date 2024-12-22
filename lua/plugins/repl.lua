@@ -46,7 +46,7 @@ return {
       keymaps = {
         send_motion = "<space>s",
         visual_send = "<cr>",
-        send_file = "<M-r>",
+        send_file = "<space>sr",
         send_line = "<space>sl",
         send_paragraph = "<space>sp",
         send_until_cursor = "<space>su",

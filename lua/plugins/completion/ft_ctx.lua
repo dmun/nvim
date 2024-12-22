@@ -13,7 +13,7 @@ M.lua = {
 
 M.rust = {
   ---@param ctx blink.cmp.DrawItemContext
-  _fix_label = function(ctx)
+  fix_label = function(ctx)
     if ctx.label_detail then
       local s = vim.split(ctx.label_description, " -> ")
       if s then

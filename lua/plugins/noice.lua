@@ -1,100 +1,148 @@
 return {
   "folke/noice.nvim",
   dependencies = "MunifTanjim/nui.nvim",
-  config = function()
-    require("noice").setup({
-      lsp = { signature = { enabled = false } },
-      cmdline = {
-        -- view = "cmdline",
-        -- format = {
-        -- 	cmdline = { icon = " cmd:" },
-        -- 	search_down = { icon = " search:" },
-        -- 	search_up = { icon = " search:" },
-        -- 	filter = { icon = " filter:" },
-        -- 	lua = { icon = " lua:" },
-        -- 	help = { icon = " help:" },
-        -- 	input = { view = "cmdline" },
-        -- },
-      },
+  ---@type NoiceConfig
+  ---@diagnostic disable-next-line: missing-fields
+  opts = {
+    notify = { enabled = true },
+    messages = { enabled = true },
+    popupmenu = { enable = false },
+    lsp = {
+      signature = { enabled = false },
+      documentation = { view = "hover" },
+    },
+    cmdline = {
+      view = "cmdline_popup",
       format = {
-        level = {
-          icons = {
-            error = "",
-            warn = "",
-            info = "",
-          },
+        cmdline = { icon = ">" },
+        search_down = { icon = ">" },
+        search_up = { icon = ">" },
+        filter = { icon = ">" },
+        lua = { icon = ">" },
+        help = { icon = ">" },
+        input = { view = "cmdline" },
+      },
+    },
+    ---@type NoiceConfigViews
+    ---@diagnostic disable-next-line: missing-fields
+    views = {
+      split = {
+        relative = "win",
+        win_options = {
+          number = false,
+          relativenumber = false,
         },
       },
-      popupmenu = { kind_icons = false },
-      inc_rename = {
-        cmdline = {
-          format = { IncRename = { icon = "⟳" } },
+      hover = {
+        view = "popup",
+        relative = "cursor",
+        zindex = 45,
+        enter = false,
+        anchor = "auto",
+        size = {
+          width = "auto",
+          height = "auto",
+          max_height = 20,
+          max_width = 80,
+        },
+        border = {
+          style = "none",
+          padding = { 0, 1 },
+        },
+        position = { row = 1, col = 0 },
+        win_options = {
+          wrap = true,
+          linebreak = true,
         },
       },
-      views = {
-        cmdline_popup = {
-          -- size = {
-          -- 	width = "50",
-          -- },
-          position = {
-            row = "33%",
-            col = "50%",
-          },
-          border = {
-            style = "single",
-          },
+      popup = {
+        backend = "popup",
+        relative = "editor",
+        close = {
+          events = { "BufLeave" },
+          keys = { "q" },
         },
-        mini = {
-          timeout = 1500,
-          position = {
-            row = -1,
-            col = -1,
-          },
-          size = {
-            -- max_height = 1,
-          },
-          win_options = {
-            winblend = 30,
-          },
+        enter = true,
+        border = {
+          style = "rounded",
+        },
+        position = "50%",
+        size = {
+          width = "80",
+          height = "20",
+        },
+        win_options = {
+          winhighlight = { Normal = "NoicePopupmenu", FloatBorder = "NoicePopupmenu" },
+          winbar = "",
+          foldenable = false,
         },
       },
-      notify = {
-        enabled = true,
-      },
-      messages = {
-        enabled = true,
-      },
-      routes = {
-        -- { filter = { event = "msg_showmode" } },
-        {
-          filter = { event = "msg_show", kind = "search_count" },
-          opts = { skip = true },
+      cmdline_popup = {
+        size = {
+          width = "70%",
         },
-        {
-          filter = { event = "msg_show", kind = "", find = "before" },
-          opts = { skip = true },
+        position = {
+          row = "33%",
+          col = "50%",
         },
-        {
-          filter = { event = "msg_show", kind = "", find = "after" },
-          opts = { skip = true },
-        },
-        {
-          filter = { event = "msg_show", kind = "", find = "written" },
-          opts = { skip = true },
-        },
-        {
-          filter = { event = "msg_show", kind = "", find = "Modified" },
-          opts = { skip = true },
-        },
-        {
-          filter = { event = "msg_show", kind = "", find = "lines" },
-          opts = { skip = true },
-        },
-        {
-          filter = { event = "msg_show", kind = "", find = "]$" },
-          opts = { skip = true },
+        border = {
+          style = "single",
+          text = { top_align = "left" },
         },
       },
-    })
-  end,
+      mini = {
+        timeout = 1500,
+        position = {
+          row = -1,
+          col = -1,
+        },
+        size = {
+          -- max_height = 1,
+        },
+        win_options = {
+          winblend = 30,
+        },
+      },
+    },
+    ---@type NoiceRouteConfig
+    ---@diagnostic disable-next-line: missing-fields
+    routes = {
+      {
+        filter = { event = "msg_show", kind = "search_count" },
+        opts = { skip = true },
+      },
+      {
+        filter = { event = "msg_show", find = "before" },
+        opts = { skip = true },
+      },
+      {
+        filter = { event = "msg_show", find = "after" },
+        opts = { skip = true },
+      },
+      {
+        filter = { event = "msg_show", find = "written" },
+        opts = { skip = true },
+      },
+      {
+        filter = { event = "msg_show", find = "Modified" },
+        opts = { skip = true },
+      },
+      {
+        filter = { event = "msg_show", find = "lines" },
+        opts = { skip = true },
+      },
+      {
+        filter = { event = "msg_show", find = "]$" },
+        opts = { skip = true },
+      },
+      {
+        filter = { event = "msg_show", find = "AutoSave" },
+        opts = { skip = true },
+      },
+      {
+        view = "split",
+        filter = { event = "msg_show", min_height = 2 },
+      },
+    },
+  },
 }

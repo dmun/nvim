@@ -25,23 +25,51 @@ return {
     },
   },
   {
-    "cbochs/grapple.nvim",
-    dependencies = {
-      { "nvim-tree/nvim-web-devicons", lazy = true },
+    "theprimeagen/harpoon",
+    branch = "harpoon2",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    opts = {
+      settings = {
+        save_on_toggle = true,
+      },
     },
     keys = {
-      { "<leader>g", "<cmd>Grapple toggle_tags<cr>" },
-      { "<leader>m", "<cmd>Grapple tag<cr>" },
-      { "<M-1>", "<cmd>Grapple select index=1<cr>" },
-      { "<M-2>", "<cmd>Grapple select index=2<cr>" },
-      { "<M-3>", "<cmd>Grapple select index=3<cr>" },
-      { "<M-4>", "<cmd>Grapple select index=4<cr>" },
-      { "<M-5>", "<cmd>Grapple select index=5<cr>" },
-    },
-    opts = {
-      scope = "cwd",
-      statusline = {
-        icon = "",
+      {
+        "<leader>m",
+        function()
+          require("harpoon"):list():add()
+        end,
+      },
+      {
+        "<leader>q",
+        function()
+          local harpoon = require("harpoon")
+          harpoon.ui:toggle_quick_menu(harpoon:list())
+        end,
+      },
+      {
+        "<M-t>",
+        function()
+          require("harpoon"):list():select(1)
+        end,
+      },
+      {
+        "<M-s>",
+        function()
+          require("harpoon"):list():select(2)
+        end,
+      },
+      {
+        "<M-r>",
+        function()
+          require("harpoon"):list():select(3)
+        end,
+      },
+      {
+        "<M-a>",
+        function()
+          require("harpoon"):list():select(4)
+        end,
       },
     },
   },

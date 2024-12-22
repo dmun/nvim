@@ -1,9 +1,9 @@
 local colors = {
   fg = "#ffffff",
   fg2 = "#d0d0d0",
-  bg = "#393F52",
+  bg = "#2b3045",
   fg_alt = "#61647a",
-  bg_alt = "#2b3045",
+  bg_alt = "#1D2131",
   blue = "#30AEFF",
   purple = "#B6A0FF",
 }
@@ -168,7 +168,10 @@ return {
       always_divide_middle = false,
       disabled_filetypes = {
         statusline = {
-          "fzf",
+          -- "fzf",
+          -- "noice",
+          "fugitive",
+          -- "terminal",
         },
       },
     },
@@ -180,7 +183,7 @@ return {
         "diagnostics",
         multicursor,
         macro,
-        "location",
+        -- "location",
       },
       lualine_y = {},
       lualine_z = {},

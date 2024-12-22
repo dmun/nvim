@@ -3,14 +3,12 @@ return {
   { "nacro90/numb.nvim", event = "CmdLineEnter", opts = {} },
   {
     "rhysd/clever-f.vim",
-    enabled = false,
     init = function()
       vim.g.clever_f_smart_case = 1
     end,
   },
   {
     "ggandor/leap.nvim",
-    -- enabled = false,
     keys = {
       { "s", "<Plug>(leap-forward)", { "n", "x", "o" } },
       { "S", "<Plug>(leap-backward)", { "n", "x", "o" } },
@@ -19,7 +17,7 @@ return {
   },
   {
     "dmun/vim-sneak",
-    -- enabled = false,
+    enabled = false,
     event = "VeryLazy",
     keys = {
       -- { "f", "<Plug>Sneak_f" },

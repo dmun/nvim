@@ -15,6 +15,26 @@ local function get_clients(opts)
   return opts and opts.filter and vim.tbl_filter(opts.filter, ret) or ret
 end
 
+local default_winopts = {
+  title = "Fzf",
+  -- title_pos = "center",
+  border = "single",
+  row = 0.4,
+  col = 0.5,
+  height = 0.6,
+  width = 0.75,
+  backdrop = 70,
+  preview = {
+    border = "single",
+    hidden = "nohidden",
+    vertical = "down:60%",
+    title = false,
+    title_pos = "left",
+    scrollbar = false,
+    scrollchars = { "┃", "" },
+  },
+}
+
 return {
   "ibhagwan/fzf-lua",
   -- enabled = false,
@@ -33,7 +53,7 @@ return {
       require("lazy").load({ plugins = { "fzf-lua" } })
       require("fzf-lua").register_ui_select(function(fzf_opts, items)
         return vim.tbl_deep_extend("force", fzf_opts, {
-          prompt = "  ",
+          prompt = " > ",
           winopts = {
             title = " " .. vim.trim((fzf_opts.prompt or "Select"):gsub("%s*:%s*$", "")) .. " ",
             title_pos = "center",
@@ -75,8 +95,13 @@ return {
     end
   end,
   opts = {
+    file_icons = false,
+    prompt = "> ",
+    winopts = default_winopts,
     defaults = {
       file_icons = false,
+      prompt = "> ",
+      winopts = default_winopts,
     },
     previewers = {
       builtin = {
@@ -84,6 +109,7 @@ return {
       },
     },
     files = {
+      winopts = { title = "Files" },
       cwd_prompt = false,
       cmd = "rg --files --hidden",
       no_header_i = true,
@@ -91,27 +117,18 @@ return {
     },
     oldfiles = {
       include_current_session = true,
+      winopts = { title = "Oldfiles" },
     },
     code_actions = {
-      prompt = " > ",
+      winopts = { title = "Code Actions" },
     },
-    grep = { no_header_i = true },
-    buffers = { no_header_i = true },
-    winopts = {
-      border = "single",
-      row = 0.4,
-      col = 0.5,
-      height = 0.6,
-      width = 0.75,
-      backdrop = 100,
-      preview = {
-        border = "noborder",
-        hidden = "nohidden",
-        vertical = "down:60%",
-        title = false,
-        scrollbar = false,
-        scrollchars = { "┃", "" },
-      },
+    grep = {
+      no_header_i = true,
+      winopts = { title = "Grep" },
+    },
+    buffers = {
+      no_header_i = true,
+      winopts = { title = "Buffers" },
     },
     fzf_opts = {
       ["--info"] = "hidden",
