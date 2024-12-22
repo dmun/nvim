@@ -1,43 +1,35 @@
-local colors = {
-  fg = "#ffffff",
-  fg2 = "#d0d0d0",
-  bg = "#2b3045",
-  fg_alt = "#61647a",
-  bg_alt = "#1D2131",
-  blue = "#30AEFF",
-  purple = "#B6A0FF",
-}
+local colors = require("modus-themes.colors").modus_vivendi
 
 local theme = {
   normal = {
-    a = { bg = colors.bg, fg = colors.fg, gui = "bold" },
-    b = { bg = colors.bg, fg = colors.fg },
-    c = { bg = colors.bg, fg = colors.fg },
+    a = { bg = colors.tinted_bg_dim, fg = colors.fg_dim, gui = "bold" },
+    b = { bg = colors.tinted_bg_dim, fg = colors.blue },
+    c = { bg = colors.tinted_bg_dim, fg = colors.fg_dim },
   },
   insert = {
-    a = { bg = colors.bg, fg = colors.fg, gui = "bold" },
-    b = { bg = colors.bg, fg = colors.fg },
-    c = { bg = colors.bg, fg = colors.fg },
+    a = { bg = colors.tinted_bg_dim, fg = colors.fg_dim, gui = "bold" },
+    b = { bg = colors.tinted_bg_dim, fg = colors.green },
+    c = { bg = colors.tinted_bg_dim, fg = colors.fg_dim },
   },
   visual = {
-    a = { bg = colors.bg, fg = colors.fg, gui = "bold" },
-    b = { bg = colors.bg, fg = colors.fg },
-    c = { bg = colors.bg, fg = colors.fg },
+    a = { bg = colors.tinted_bg_dim, fg = colors.fg_dim, gui = "bold" },
+    b = { bg = colors.tinted_bg_dim, fg = colors.red },
+    c = { bg = colors.tinted_bg_dim, fg = colors.fg_dim },
   },
   replace = {
-    a = { bg = colors.bg, fg = colors.fg, gui = "bold" },
-    b = { bg = colors.bg, fg = colors.fg },
-    c = { bg = colors.bg, fg = colors.fg },
+    a = { bg = colors.tinted_bg_dim, fg = colors.fg_dim, gui = "bold" },
+    b = { bg = colors.tinted_bg_dim, fg = colors.tinted_bg_dim },
+    c = { bg = colors.tinted_bg_dim, fg = colors.fg_dim },
   },
   command = {
-    a = { bg = colors.bg, fg = colors.fg, gui = "bold" },
-    b = { bg = colors.bg, fg = colors.fg },
-    c = { bg = colors.bg, fg = colors.fg },
+    a = { bg = colors.tinted_bg_dim, fg = colors.fg_dim, gui = "bold" },
+    b = { bg = colors.tinted_bg_dim, fg = colors.red },
+    c = { bg = colors.tinted_bg_dim, fg = colors.fg_dim },
   },
   inactive = {
-    a = { bg = colors.bg_alt, fg = colors.fg_alt, gui = "bold" },
-    b = { bg = colors.bg_alt, fg = colors.fg_alt },
-    c = { bg = colors.bg_alt, fg = colors.fg_alt },
+    a = { bg = colors.tinted_bg_dim, fg = colors.fg_dim, gui = "bold" },
+    b = { bg = colors.tinted_bg_dim, fg = colors.fg_dim },
+    c = { bg = colors.tinted_bg_dim, fg = colors.fg_dim },
   },
 }
 
@@ -96,7 +88,7 @@ local function project(active)
         return text
       end
     end,
-    color = { fg = colors.fg, gui = "bold" },
+    color = { fg = colors.fg_main, bg = colors.tinted_bg_dim, gui = "bold" },
   }
 end
 
@@ -150,8 +142,8 @@ local function filename(active)
       end
 
       return {
-        fg = active and fg or colors.fg_alt,
-        bg = active and colors.bg or colors.bg_alt,
+        -- fg = active and fg or colors.fg_alt,
+        -- bg = active and colors.bg or colors.bg_alt,
         gui = gui,
       }
     end,
@@ -177,8 +169,8 @@ return {
     },
     sections = {
       lualine_a = {},
-      lualine_b = { project(true), section(true) },
-      lualine_c = { filename(true) },
+      lualine_b = { mode },
+      lualine_c = { project(true), filename(true) },
       lualine_x = {
         "diagnostics",
         multicursor,
@@ -190,8 +182,8 @@ return {
     },
     inactive_sections = {
       lualine_a = {},
-      lualine_b = { project(false), section(false) },
-      lualine_c = { filename(false) },
+      lualine_b = { mode },
+      lualine_c = { project(false), filename(false) },
       lualine_x = {},
       lualine_y = {},
       lualine_z = {},
