@@ -51,9 +51,9 @@ util.handle_keymaps({
     { "<M-k>", "<C-\\><C-n><C-w>k" },
     { "<M-l>", "<C-\\><C-n><C-w>l" },
 
-    { "<M-Left>", "<C-w>h" },
-    { "<M-Down>", "<C-w>j" },
-    { "<M-Up>", "<C-w>k" },
-    { "<M-Right>", "<C-w>l" },
+    { "<M-Left>",  "<C-\\><C-n><C-w>h" },
+    { "<M-Down>",  "<C-\\><C-n><C-w>j" },
+    { "<M-Up>",    "<C-\\><C-n><C-w>k" },
+    { "<M-Right>", "<C-\\><C-n><C-w>l" },
   },
 })

@@ -16,6 +16,7 @@ return {
         ---@param c ColorScheme
         on_highlights = function(hl, c)
           hl["@variable"] = { link = "lispSymbol" }
+          hl["@constant"] = { fg = c.magenta_cooler }
           hl["@lsp.typemod.variable.global"] = { link = "@variable.member" }
           hl.PmenuSel = { bg = c.bg_inactive }
           hl.Pmenu = { bg = c.bg_dim }

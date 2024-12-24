@@ -37,7 +37,7 @@ local draw = {
   columns = {
     {
       "label",
-      -- "label_description",
+      -- "kind",
       -- gap = 1,
     },
   },
