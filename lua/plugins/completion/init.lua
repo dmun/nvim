@@ -37,8 +37,8 @@ local draw = {
   columns = {
     {
       "label",
-      -- "label_description",
-      -- gap = 1,
+      "kind",
+      gap = 1,
     },
   },
   components = {
@@ -47,6 +47,7 @@ local draw = {
       width = { fill = true, max = 50 },
       text = function(ctx)
         local ft = vim.o.filetype
+        local ft_filter = { "tex" }
 
         if vim.tbl_contains({ "Method", "Function" }, ctx.kind) then
           local ft_ctx = require("plugins.completion.ft_ctx")
@@ -54,7 +55,11 @@ local draw = {
             ft_ctx[ft].fix_label(ctx)
           end
 
-          if not vim.endswith(ctx.label, ")") and not vim.endswith(ctx.label_detail, ")") then
+          if
+            not vim.endswith(ctx.label, ")")
+            and not vim.endswith(ctx.label_detail, ")")
+            and not vim.tbl_contains(ft_filter, ft)
+          then
             ctx.label_detail = "()"
           end
         end
@@ -115,34 +120,53 @@ return {
     },
     sources = {
       default = {
+        "lazydev",
         "lsp",
         "path",
         "snippets",
-        "buffer",
-        "lazydev",
+        -- "buffer",
       },
       providers = {
-        -- dont show LuaLS require statements when lazydev has items
         lazydev = { name = "LazyDev", module = "lazydev.integrations.blink", fallbacks = { "lsp" } },
       },
     },
     completion = {
-      accept = { auto_brackets = { enabled = true } },
+      accept = {
+        auto_brackets = {
+          enabled = true,
+          override_brackets_for_filetypes = {
+            tex = { "{", "}" },
+          },
+          kind_resolution = {
+            enabled = true,
+            blocked_filetypes = {
+              "typescriptreact",
+              "javascriptreact",
+              "vue",
+              "tex",
+            },
+          },
+          semantic_token_resolution = {
+            enabled = true,
+            blocked_filetypes = {
+              "java",
+              -- "tex",
+            },
+          },
+        },
+      },
       menu = {
         max_height = 8,
         draw = draw,
         scrollbar = false,
       },
-      -- ghost_text = { enabled = true },
+      ghost_text = { enabled = true },
     },
     signature = {
       enabled = true,
       trigger = {
         show_on_insert_on_trigger_character = true,
       },
-      -- window = {
-      -- 	show_documentation = false,
-      -- },
     },
   },
   opts_extend = { "sources.default" },

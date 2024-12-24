@@ -169,7 +169,7 @@ return {
     },
     sections = {
       lualine_a = {},
-      lualine_b = { mode },
+      lualine_b = {},
       lualine_c = { project(true), filename(true) },
       lualine_x = {
         "diagnostics",
@@ -182,7 +182,7 @@ return {
     },
     inactive_sections = {
       lualine_a = {},
-      lualine_b = { mode },
+      lualine_b = {},
       lualine_c = { project(false), filename(false) },
       lualine_x = {},
       lualine_y = {},

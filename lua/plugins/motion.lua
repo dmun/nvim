@@ -113,6 +113,12 @@ return {
       set({ "n", "v" }, "<C-j>", function()
         mc.lineAddCursor(1)
       end)
+      set({ "n", "v" }, "<C-Up>", function()
+        mc.lineAddCursor(-1)
+      end)
+      set({ "n", "v" }, "<C-Down>", function()
+        mc.lineAddCursor(1)
+      end)
 
       set("v", "<C-c>", mc.visualToCursors)
 
