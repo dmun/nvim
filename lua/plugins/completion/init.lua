@@ -37,8 +37,8 @@ local draw = {
   columns = {
     {
       "label",
-      "kind",
-      gap = 1,
+      -- "label_description",
+      -- gap = 1,
     },
   },
   components = {
@@ -160,7 +160,7 @@ return {
         draw = draw,
         scrollbar = false,
       },
-      ghost_text = { enabled = true },
+      ghost_text = { enabled = false },
     },
     signature = {
       enabled = true,
