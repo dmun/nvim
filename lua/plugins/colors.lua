@@ -50,8 +50,8 @@ return {
           hl.TreesitterContext = { bg = c.bg_tab_bar }
           hl.TreesitterContextLineNumber = { fg = c.bg_active, bg = c.bg_tab_bar }
 
-          hl.nCursor = { bg = c.red_cooler }
-          hl.iCursor = { bg = c.magenta_intense }
+          hl.nCursor = { bg = c.yellow_warmer }
+          hl.iCursor = { bg = c.yellow_warmer }
           hl.NormalFloat = {}
 
           hl.CursorLineNr = { fg = c.fg_alt }
