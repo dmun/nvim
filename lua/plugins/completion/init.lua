@@ -107,12 +107,19 @@ return {
   opts = {
     keymap = {
       preset = "default",
-      -- ["<C-Enter>"] = { "select_and_accept", "fallback" },
-      ["<C-f>"] = { "snippet_forward", "fallback" },
-      ["<C-b>"] = { "snippet_backward", "fallback" },
-      ["<C-n>"] = { "select_next", "fallback" },
-      ["<C-p>"] = { "select_prev", "fallback" },
       ["<C-e>"] = {},
+
+      ["<C-space>"] = { "show", "show_documentation", "hide_documentation" },
+      ["<C-y>"] = { "accept" },
+
+      ["<C-p>"] = { "select_prev" },
+      ["<C-n>"] = { "select_next" },
+
+      ["<C-b>"] = { "scroll_documentation_up", "fallback" },
+      ["<C-f>"] = { "scroll_documentation_down", "fallback" },
+
+      ["<Tab>"] = { "snippet_forward", "fallback" },
+      ["<S-Tab>"] = { "snippet_backward", "fallback" },
     },
     appearance = {
       use_nvim_cmp_as_default = false,

@@ -106,6 +106,7 @@ return {
     previewers = {
       builtin = {
         syntax_limit_b = 1024 * 100,
+        treesitter = { context = false },
       },
     },
     files = {

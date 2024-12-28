@@ -14,13 +14,13 @@ return {
     cmdline = {
       view = "cmdline_popup",
       format = {
-        cmdline = { icon = ">" },
-        search_down = { icon = ">" },
-        search_up = { icon = ">" },
-        filter = { icon = ">" },
-        lua = { icon = ">" },
-        help = { icon = ">" },
-        input = { view = "cmdline" },
+        cmdline = { icon = ">", title = "Cmdline" },
+        search_down = { icon = ">", title = "Search" },
+        search_up = { icon = ">", title = "Search" },
+        filter = { icon = ">", title = "Filter" },
+        lua = { icon = ">", title = "Lua" },
+        help = { icon = ">", title = "Help" },
+        input = { view = "cmdline_input", icon = ">" },
       },
     },
     ---@type NoiceConfigViews
@@ -77,7 +77,7 @@ return {
           foldenable = false,
         },
       },
-      cmdline_popup = {
+      cmdline_input = {
         size = {
           width = "70%",
         },
@@ -87,7 +87,24 @@ return {
         },
         border = {
           style = "single",
-          text = { top_align = "left" },
+          text = {
+            top_align = "left",
+          },
+        },
+      },
+      cmdline_popup = {
+        size = {
+          width = "80%",
+        },
+        position = {
+          row = "85%",
+          col = "50%",
+        },
+        border = {
+          style = "single",
+          text = {
+            top_align = "left",
+          },
         },
       },
       mini = {

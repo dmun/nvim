@@ -53,11 +53,11 @@ return {
 
   {
     "nvim-treesitter/nvim-treesitter-context",
-    enabled = false,
+    enabled = true,
     opts = {
       max_lines = 1,
       trim_scope = "inner",
-      mode = "cursor",
+      mode = "topline",
     },
   },
   {

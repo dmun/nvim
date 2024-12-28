@@ -9,6 +9,7 @@ return {
   },
   {
     "ggandor/leap.nvim",
+    enabled = false,
     keys = {
       { "s", "<Plug>(leap-forward)", { "n", "x", "o" } },
       { "S", "<Plug>(leap-backward)", { "n", "x", "o" } },
@@ -17,7 +18,7 @@ return {
   },
   {
     "dmun/vim-sneak",
-    enabled = false,
+    enabled = true,
     event = "VeryLazy",
     keys = {
       -- { "f", "<Plug>Sneak_f" },
@@ -113,10 +114,10 @@ return {
       set({ "n", "v" }, "<C-j>", function()
         mc.lineAddCursor(1)
       end)
-      set({ "n", "v" }, "<C-Up>", function()
+      set({ "n", "v" }, "<S-Up>", function()
         mc.lineAddCursor(-1)
       end)
-      set({ "n", "v" }, "<C-Down>", function()
+      set({ "n", "v" }, "<S-Down>", function()
         mc.lineAddCursor(1)
       end)
 

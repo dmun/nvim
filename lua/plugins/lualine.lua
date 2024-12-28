@@ -163,7 +163,7 @@ return {
           -- "fzf",
           -- "noice",
           "fugitive",
-          -- "terminal",
+          "trouble",
         },
       },
     },

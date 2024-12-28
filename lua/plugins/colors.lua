@@ -45,6 +45,10 @@ return {
           hl.Visual = { bg = c.bg_inactive }
           hl.Search = { bg = c.bg_inactive }
           hl.NormalTerm = { bg = c.bg_tab_bar }
+          hl.TroubleNormal = { bg = c.bg_tab_bar }
+          hl.TroubleNormalNC = { bg = c.bg_tab_bar }
+          hl.TreesitterContext = { bg = c.bg_tab_bar }
+          hl.TreesitterContextLineNumber = { fg = c.bg_active, bg = c.bg_tab_bar }
 
           hl.nCursor = { bg = c.red_cooler }
           hl.iCursor = { bg = c.magenta_intense }

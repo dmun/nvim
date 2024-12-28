@@ -15,7 +15,10 @@ return {
       require("auto-save").setup({
         condition = function(buf)
           local ft = vim.bo.filetype
-          local fts = { "oil", "harpoon" }
+          local fts = {
+            "oil",
+            "harpoon",
+          }
 
           if vim.tbl_contains(fts, ft) then
             return false

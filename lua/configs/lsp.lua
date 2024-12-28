@@ -1,3 +1,5 @@
+vim.g.zig_fmt_autosave = 0
+
 Conf.lsp = {
   ensure_installed = { "lua_ls" },
   ls_name = { lua_ls = "Lua" },
