@@ -114,10 +114,10 @@ return {
       set({ "n", "v" }, "<C-j>", function()
         mc.lineAddCursor(1)
       end)
-      set({ "n", "v" }, "<S-Up>", function()
+      set({ "n", "v" }, "<C-Up>", function()
         mc.lineAddCursor(-1)
       end)
-      set({ "n", "v" }, "<S-Down>", function()
+      set({ "n", "v" }, "<C-Down>", function()
         mc.lineAddCursor(1)
       end)
 
