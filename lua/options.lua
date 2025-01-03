@@ -48,12 +48,12 @@ o.cmdheight = 0
 o.pumheight = 8
 -- o.colorcolumn = "+1"
 o.fillchars = "eob: "
--- o.guicursor = "i:Cursor-block,n-v:rCursor-block"
-o.guicursor = 'i:iCursor-ver25,n-v:rCursor-block'
+o.guicursor = "i:iCursor-block,n-v:rCursor-block"
+-- o.guicursor = 'i:iCursor-ver25,n-v:rCursor-block'
 -- o.guicursor = "a:Cursor-block"
 o.laststatus = 2
--- o.list = true
--- o.listchars = "tab:  "
+o.list = true
+o.listchars = "tab:  "
 
 -- window
 o.inccommand = "split"

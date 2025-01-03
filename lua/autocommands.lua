@@ -16,14 +16,15 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 })
 
 -- terminal
-vim.api.nvim_create_autocmd({ "BufEnter" }, {
+vim.api.nvim_create_autocmd({ "TermOpen", "BufEnter" }, {
   callback = function()
-    if vim.bo.buftype == "terminal" then
+    -- only if this terminal is opened manually
+    if vim.fn.expand("%:t") ~= "sh" and vim.bo.buftype == "terminal" then
       vim.o.ft = "terminal"
       vim.opt_local.winhl = "Normal:NormalTerm,SignColumn:NormalTerm"
       vim.opt_local.relativenumber = false
       vim.opt_local.number = false
-      -- vim.opt_local.signcolumn = "no"
+      vim.opt_local.signcolumn = "no"
       vim.cmd.normal("i")
     end
   end,

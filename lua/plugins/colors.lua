@@ -31,9 +31,10 @@ return {
           -- hl.BlinkCmpDocBorder = { bg = c.bg_active }
 
           -- hl.PmenuSbar = { bg = c.bg_inactive }
-          hl.CursorLine = { bg = c.bg_dim }
-          hl.CursorLineSign = { bg = c.bg_dim }
-          hl.CursorLineNr = { bg = c.bg_dim }
+          hl.CursorLine = { bg = c.bg_tab_bar }
+          hl.CursorLineSign = { bg = c.bg_tab_bar }
+          -- hl.CursorLineNr = { bg = c.bg_tab_bar }
+          hl.CursorLineNr = { fg = c.fg_alt }
           hl.LineNr = { fg = c.bg_inactive }
 
           hl.NoiceCmdline = { bg = c.bg_inactive }
@@ -44,7 +45,9 @@ return {
 
           hl.Visual = { bg = c.bg_inactive }
           hl.Search = { bg = c.bg_inactive }
-          hl.NormalTerm = { bg = c.bg_tab_bar }
+          hl.NormalTerm = { bg = "#101121" }
+          hl.DapUINormal = { bg = "#0F1121" }
+          hl.DapUINormalNC = { link = "DapUINormal" }
           hl.TroubleNormal = { bg = c.bg_tab_bar }
           hl.TroubleNormalNC = { bg = c.bg_tab_bar }
           hl.TreesitterContext = { bg = c.bg_tab_bar }
@@ -54,7 +57,6 @@ return {
           hl.iCursor = { bg = c.yellow_warmer }
           hl.NormalFloat = {}
 
-          hl.CursorLineNr = { fg = c.fg_alt }
           hl.LineNrAbove = { link = "LineNr" }
           hl.LineNrBelow = { link = "LineNr" }
 

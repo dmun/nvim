@@ -18,8 +18,8 @@ util.handle_keymaps({
     { "<leader>tw", ":set wrap!<cr>" },
     { "<leader>dl", ":messages<cr>" },
 
-    { "<M-r>", util.run_command },
-    { "<M-x>", util.run_command_reset },
+    { "<leader>mr", util.run_command },
+    { "<leader>mR", util.run_command_reset },
 
     -- { "<C-d>", "<C-d>zz" },
     -- { "<C-u>", "<C-u>zz" },
@@ -29,10 +29,10 @@ util.handle_keymaps({
     { "<M-k>", "<C-w>k" },
     { "<M-l>", "<C-w>l" },
 
-    { "<M-Left>", "<C-w>h" },
-    { "<M-Down>", "<C-w>j" },
-    { "<M-Up>", "<C-w>k" },
-    { "<M-Right>", "<C-w>l" },
+    { "<C-Left>", "<C-w>h" },
+    { "<C-Down>", "<C-w>j" },
+    { "<C-Up>", "<C-w>k" },
+    { "<C-Right>", "<C-w>l" },
 
     { "yc", "yygccp" },
   },
@@ -51,9 +51,9 @@ util.handle_keymaps({
     { "<M-k>", "<C-\\><C-n><C-w>k" },
     { "<M-l>", "<C-\\><C-n><C-w>l" },
 
-    { "<M-Left>",  "<C-\\><C-n><C-w>h" },
-    { "<M-Down>",  "<C-\\><C-n><C-w>j" },
-    { "<M-Up>",    "<C-\\><C-n><C-w>k" },
-    { "<M-Right>", "<C-\\><C-n><C-w>l" },
+    { "<C-Left>",  "<C-\\><C-n><C-w>h" },
+    { "<C-Down>",  "<C-\\><C-n><C-w>j" },
+    { "<C-Up>",    "<C-\\><C-n><C-w>k" },
+    { "<C-Right>", "<C-\\><C-n><C-w>l" },
   },
 })
