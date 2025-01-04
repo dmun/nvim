@@ -99,7 +99,7 @@ local mode = {
     }
     return map[vim.fn.mode()]
   end,
-  color = { fg = c.fg_bright },
+  _color = { fg = c.fg_bright },
 }
 
 ---@param active boolean
@@ -151,7 +151,7 @@ local function filename(active)
         return fts[bt]
       end
 
-      return path
+      return path .. " "
     end,
     color = function()
       local gui = ""
@@ -161,7 +161,7 @@ local function filename(active)
       end
 
       return {
-        fg = active and c.fg or c.dim,
+        -- fg = active and c.fg or c.dim,
         gui = gui,
       }
     end,
@@ -172,7 +172,7 @@ return {
   "nvim-lualine/lualine.nvim",
   opts = {
     options = {
-      theme = theme,
+      theme = "powerline",
       component_separators = { left = nil, right = nil },
       section_separators = { left = nil, right = nil },
       always_divide_middle = false,
@@ -181,12 +181,14 @@ return {
           -- "fzf",
           -- "noice",
           "fugitive",
-          "trouble",
+          "copilot-chat",
+          "copilot-diff",
+          "copilot-overlay",
         },
       },
     },
     sections = {
-      lualine_a = { mode },
+      lualine_a = { "mode" },
       lualine_b = {},
       lualine_c = { filename(true) },
       lualine_x = {
@@ -199,7 +201,7 @@ return {
       lualine_z = {},
     },
     inactive_sections = {
-      lualine_a = { spacer(5) },
+      lualine_a = { spacer(8) },
       lualine_b = {},
       lualine_c = { filename(false) },
       lualine_x = {},

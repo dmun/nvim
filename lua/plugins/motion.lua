@@ -3,6 +3,7 @@ return {
   { "nacro90/numb.nvim", event = "CmdLineEnter", opts = {} },
   {
     "rhysd/clever-f.vim",
+    enbaled = false,
     init = function()
       vim.g.clever_f_smart_case = 1
     end,
@@ -18,7 +19,7 @@ return {
   },
   {
     "dmun/vim-sneak",
-    enabled = true,
+    enabled = false,
     event = "VeryLazy",
     keys = {
       -- { "f", "<Plug>Sneak_f" },
@@ -29,7 +30,7 @@ return {
   },
   {
     "folke/flash.nvim",
-    enabled = false,
+    enabled = true,
     event = "VeryLazy",
     ---@type Flash.Config
     opts = {

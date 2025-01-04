@@ -19,7 +19,7 @@ require("options")
 require("keymaps")
 require("autocommands")
 
-local colorscheme = "modus_vivendi"
+local colorscheme = "catppuccin"
 require("lazy").setup("plugins", {
   install = { colorscheme = { colorscheme } },
   change_detection = { enabled = false },

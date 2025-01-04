@@ -10,6 +10,7 @@ return {
       changedelete = { text = "▍" },
       untracked = { text = "┆" },
     },
+    signcolumn = false,
     preview_config = {
       border = "none",
     },

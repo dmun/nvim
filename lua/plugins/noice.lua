@@ -12,14 +12,14 @@ return {
       documentation = { view = "hover" },
     },
     cmdline = {
-      view = "cmdline_popup",
+      view = "cmdline",
       format = {
-        cmdline = { icon = ">", title = "Cmdline" },
-        search_down = { icon = ">", title = "Search" },
-        search_up = { icon = ">", title = "Search" },
-        filter = { icon = ">", title = "Filter" },
-        lua = { icon = ">", title = "Lua" },
-        help = { icon = ">", title = "Help" },
+        cmdline = { icon = ":" },
+        search_down = { icon = "/" },
+        search_up = { icon = "?" },
+        filter = { icon = ">" },
+        lua = { icon = ">" },
+        help = { icon = ">" },
         input = { view = "cmdline_input", icon = ">" },
       },
     },
@@ -77,6 +77,13 @@ return {
           foldenable = false,
         },
       },
+      cmdline = {
+        relative = "editor",
+        position = {
+          row = "100%",
+          col = 0,
+        },
+      },
       cmdline_input = {
         size = {
           width = "70%",
@@ -97,7 +104,7 @@ return {
           width = "80%",
         },
         position = {
-          row = "85%",
+          row = "33%",
           col = "50%",
         },
         border = {

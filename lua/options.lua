@@ -28,8 +28,8 @@ o.foldcolumn = "0"
 o.foldenable = true
 o.foldlevel = 99
 o.foldlevelstart = 99
-o.number = true
-o.relativenumber = true
+o.number = false
+o.relativenumber = false
 o.signcolumn = "yes"
 
 -- appearance
@@ -48,10 +48,10 @@ o.cmdheight = 0
 o.pumheight = 8
 -- o.colorcolumn = "+1"
 o.fillchars = "eob: "
-o.guicursor = "i:iCursor-block,n-v:rCursor-block"
--- o.guicursor = 'i:iCursor-ver25,n-v:rCursor-block'
+o.guicursor = "i:iCursor-block-blinkon500,n-v:rCursor-block"
+-- o.guicursor = 'i:iCursor-ver25-blinkon500-blinkoff500,n-v:rCursor-block'
 -- o.guicursor = "a:Cursor-block"
-o.laststatus = 2
+o.laststatus = 3
 o.list = true
 o.listchars = "tab:  "
 
@@ -80,8 +80,8 @@ o.undofile = true
 o.clipboard = "unnamedplus"
 
 -- lazyvim statuscolumn
-vim.opt.statuscolumn = [[%!v:lua.require'util.ui'.statuscolumn()]]
-vim.opt.foldtext = "v:lua.require'util.ui'.foldtext()"
+-- vim.opt.statuscolumn = [[%!v:lua.require'util.ui'.statuscolumn()]]
+-- vim.opt.foldtext = "v:lua.require'util.ui'.foldtext()"
 
 -- lsp
 vim.highlight.priorities.semantic_tokens = 95

@@ -16,7 +16,7 @@ local function get_clients(opts)
 end
 
 local default_winopts = {
-  title = "Fzf",
+  title = " Fzf ",
   -- title_pos = "center",
   border = "single",
   row = 0.4,
@@ -110,7 +110,7 @@ return {
       },
     },
     files = {
-      winopts = { title = "Files" },
+      winopts = { title = " Files " },
       cwd_prompt = false,
       cmd = "rg --files --hidden",
       no_header_i = true,
@@ -118,18 +118,18 @@ return {
     },
     oldfiles = {
       include_current_session = true,
-      winopts = { title = "Oldfiles" },
+      winopts = { title = " Oldfiles " },
     },
     code_actions = {
-      winopts = { title = "Code Actions" },
+      winopts = { title = " Code  Actions" },
     },
     grep = {
       no_header_i = true,
-      winopts = { title = "Grep" },
+      winopts = { title = " Grep " },
     },
     buffers = {
       no_header_i = true,
-      winopts = { title = "Buffers" },
+      winopts = { title = " Buffers " },
     },
     fzf_opts = {
       ["--info"] = "hidden",

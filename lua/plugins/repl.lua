@@ -38,7 +38,8 @@ return {
           winfixwidth = true,
           winfixheight = true,
           number = false,
-          winhl = "Normal:NormalTerm,SignColumn:NormalTerm",
+          relativenumber = false,
+          -- winhl = "Normal:NormalTerm,SignColumn:NormalTerm",
         }),
       },
       -- Iron doesn't set keymaps by default anymore.

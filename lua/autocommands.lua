@@ -15,21 +15,24 @@ vim.api.nvim_create_autocmd("TextYankPost", {
   end,
 })
 
--- terminal
-vim.api.nvim_create_autocmd({ "TermOpen", "BufEnter" }, {
+local fts = {
+  -- "copilot-chat",
+  -- "copilot-diff",
+  -- "copilot-overlay",
+  "oil",
+}
+
+vim.api.nvim_create_autocmd({ "BufEnter", "WinEnter" }, {
   callback = function()
-    -- only if this terminal is opened manually
-    if vim.fn.expand("%:t") ~= "sh" and vim.bo.buftype == "terminal" then
-      vim.o.ft = "terminal"
-      vim.opt_local.winhl = "Normal:NormalTerm,SignColumn:NormalTerm"
+    if vim.tbl_contains(fts, vim.bo.ft) then
+      vim.opt_local.winhl = "Normal:NormalTerm"
       vim.opt_local.relativenumber = false
       vim.opt_local.number = false
       vim.opt_local.signcolumn = "no"
-      vim.cmd.normal("i")
     end
   end,
 })
 
 -- dynamic linenumbers
-vim.cmd("au InsertEnter * se nornu")
-vim.cmd("au InsertLeave * se rnu")
+vim.cmd("au InsertEnter * if &nu | se nornu | endif")
+vim.cmd("au InsertLeave * if &nu | se rnu | endif")
