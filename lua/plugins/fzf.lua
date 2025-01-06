@@ -15,29 +15,83 @@ local function get_clients(opts)
   return opts and opts.filter and vim.tbl_filter(opts.filter, ret) or ret
 end
 
+local _single = { "┌", "─", "┐", "│", "┘", "─", "└", "│" }
+local _rounded = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" }
+local _border = false and _rounded or _single
+
 local default_winopts = {
-  title = "Fzf",
-  -- title_pos = "center",
-  border = "single",
+  title = true,
+  title_pos = "left",
   row = 0.4,
   col = 0.5,
   height = 0.6,
-  width = 0.75,
-  backdrop = 100,
+  width = 0.8,
+  backdrop = 70,
+  border = function(_, m)
+    assert(m.type == "nvim" and m.name == "fzf")
+    if m.nwin == 1 then
+      -- No preview, return the border whole
+      return _border
+    else
+      -- has preview `nwim==2`
+      assert(type(m.layout) == "string")
+      local b = vim.deepcopy(_border)
+      if m.layout == "down" then
+        b[5] = "┤" -- bottom right
+        b[6] = "" -- remove bottom
+        b[7] = "├" -- bottom left
+      elseif m.layout == "up" then
+        b[1] = "├" --top right
+        b[3] = "┤" -- top left
+      elseif m.layout == "left" then
+        b[1] = "┬" -- top left
+        b[8] = "" -- remove left
+        b[7] = "┴" -- bottom right
+      else -- right
+        b[3] = "┬" -- top right
+        b[4] = "" -- remove right
+        b[5] = "┴" -- bottom right
+      end
+      return b
+    end
+  end,
   preview = {
-    border = "single",
     hidden = "nohidden",
     vertical = "down:60%",
     title = false,
     title_pos = "left",
     scrollbar = false,
     scrollchars = { "┃", "" },
+    border = function(_, m)
+      if m.type == "fzf" then
+        -- Always return none, let `bat --style=default` to draw our border
+        return "none"
+      else
+        assert(m.type == "nvim" and m.name == "prev" and type(m.layout) == "string")
+        local b = vim.deepcopy(_border)
+        if m.layout == "down" then
+          b[1] = "├" --top right
+          b[3] = "┤" -- top left
+        elseif m.layout == "up" then
+          b[7] = "├" -- bottom left
+          b[6] = "" -- remove bottom
+          b[5] = "┤" -- bottom right
+        elseif m.layout == "left" then
+          b[3] = "┬" -- top right
+          b[5] = "┴" -- bottom right
+        else -- right
+          b[1] = "┬" -- top left
+          b[7] = "┴" -- bottom left
+        end
+        return b
+      end
+    end,
   },
 }
 
 return {
   "ibhagwan/fzf-lua",
-  -- enabled = false,
+  enabled = true,
   cmd = "FzfLua",
   keys = {
     { "<leader>f", "<cmd>FzfLua files<cr>" },
@@ -110,7 +164,6 @@ return {
       },
     },
     files = {
-      winopts = { title = "Files" },
       cwd_prompt = false,
       cmd = "rg --files --hidden",
       no_header_i = true,
@@ -118,18 +171,14 @@ return {
     },
     oldfiles = {
       include_current_session = true,
-      winopts = { title = "Oldfiles" },
     },
     code_actions = {
-      winopts = { title = "Code Actions" },
     },
     grep = {
       no_header_i = true,
-      winopts = { title = "Grep" },
     },
     buffers = {
       no_header_i = true,
-      winopts = { title = "Buffers" },
     },
     fzf_opts = {
       ["--info"] = "hidden",

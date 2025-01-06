@@ -23,5 +23,10 @@ local colorscheme = "catppuccin"
 require("lazy").setup("plugins", {
   install = { colorscheme = { colorscheme } },
   change_detection = { enabled = false },
+  ui = {
+    pills = false,
+    backdrop = 100,
+    size = { width = 1.0, height = 0.99 },
+  },
 })
 vim.cmd.color(colorscheme)

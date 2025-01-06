@@ -35,6 +35,8 @@ util.handle_keymaps({
     { "<C-Right>", "<C-w>l" },
 
     { "yc", "yygccp" },
+
+    { "<leader>p", "<cmd>Lazy<cr>" },
   },
   i = {
     { "<M-h>", "<C-[><C-w>h" },
