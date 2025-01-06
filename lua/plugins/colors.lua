@@ -71,6 +71,8 @@ return {
               CopilotChatHeader = { fg = colors.maroon, style = { "bold" } },
               FloatTitle = { style = { "bold" } },
               FzfLuaTitle = { style = { "bold" } },
+              CleverFChar = { fg = colors.yellow, style = { "bold" } },
+              LeapLabel = { fg = colors.yellow, style = { "bold" } },
 
               Comment = { fg = colors.overlay2, italic = true },
               Function = { fg = colors.sky },

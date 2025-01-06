@@ -3,14 +3,15 @@ return {
   { "nacro90/numb.nvim", event = "CmdLineEnter", opts = {} },
   {
     "rhysd/clever-f.vim",
-    enbaled = false,
+    enabled = true,
     init = function()
       vim.g.clever_f_smart_case = 1
+      vim.g.clever_f_across_no_line = 1
     end,
   },
   {
     "ggandor/leap.nvim",
-    enabled = false,
+    enabled = true,
     keys = {
       { "s", "<Plug>(leap-forward)", { "n", "x", "o" } },
       { "S", "<Plug>(leap-backward)", { "n", "x", "o" } },
@@ -27,10 +28,15 @@ return {
       -- { "t", "<Plug>Sneak_t" },
       -- { "T", "<Plug>Sneak_T" },
     },
+    init = function()
+      vim.g["sneak#use_ic_scs"] = 1
+      vim.g["sneak#s_next"] = 1
+      vim.g["sneak#prompt"] = ""
+    end,
   },
   {
     "folke/flash.nvim",
-    enabled = true,
+    enabled = false,
     event = "VeryLazy",
     ---@type Flash.Config
     opts = {
