@@ -14,13 +14,13 @@ return {
     cmdline = {
       view = "cmdline",
       format = {
-        cmdline = { icon = ":" },
-        search_down = { icon = "/" },
-        search_up = { icon = "?" },
-        filter = { icon = ">" },
-        lua = { icon = ">" },
-        help = { icon = ">" },
-        input = { view = "cmdline_input", icon = ">" },
+        cmdline = { icon = " COMMAND " },
+        search_down = { icon = " SEARCH " },
+        search_up = { icon = " SEARCH " },
+        filter = { icon = " FILTER " },
+        lua = { icon = " LUA " },
+        help = { icon = " HELP " },
+        input = { view = "cmdline", icon = ">" },
       },
     },
     ---@type NoiceConfigViews

@@ -47,7 +47,7 @@ local draw = {
       width = { fill = true, max = 50 },
       text = function(ctx)
         local ft = vim.o.filetype
-        local ft_filter = { "tex" }
+        local ft_filter = { "tex", "codecompanion" }
 
         if vim.tbl_contains({ "Method", "Function" }, ctx.kind) then
           local ft_ctx = require("plugins.completion.ft_ctx")
@@ -102,14 +102,7 @@ return {
     "rafamadriz/friendly-snippets",
     {
       "giuxtaposition/blink-cmp-copilot",
-      dependencies = {
-        "zbirenbaum/copilot.lua",
-        cmd = "Copilot",
-        event = "InsertEnter",
-        config = function()
-          require("copilot").setup({})
-        end,
-      },
+      dependencies = "zberinbaum/copilot.lua",
     },
     { "L3MON4D3/LuaSnip", version = "v2.*" },
   },
@@ -142,7 +135,8 @@ return {
         "lsp",
         "path",
         "snippets",
-        "copilot",
+        "codecompanion",
+        -- "copilot",
         -- "buffer",
       },
       providers = {
@@ -169,6 +163,7 @@ return {
               "javascriptreact",
               "vue",
               "tex",
+              "codecompanion",
             },
           },
           semantic_token_resolution = {

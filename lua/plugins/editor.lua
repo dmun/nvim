@@ -11,6 +11,7 @@ return {
   },
   {
     "Pocco81/auto-save.nvim",
+    enabled = true,
     config = function()
       require("auto-save").setup({
         condition = function(buf)
@@ -18,6 +19,8 @@ return {
           local fts = {
             "oil",
             "harpoon",
+            "fzf",
+            "codecompanion",
           }
 
           if vim.tbl_contains(fts, ft) then

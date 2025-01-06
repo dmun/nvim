@@ -42,6 +42,11 @@ util.handle_keymaps({
     { "<M-k>", "<C-[><C-w>k" },
     { "<M-l>", "<C-[><C-w>l" },
 
+    { "<C-Left>", "<C-[><C-w>h" },
+    { "<C-Down>", "<C-[><C-w>j" },
+    { "<C-Up>", "<C-[><C-w>k" },
+    { "<C-Right>", "<C-[><C-w>l" },
+
     { "<C-n>", "<cmd>norm j<cr>" },
     { "<C-p>", "<cmd>norm k<cr>" },
   },
@@ -51,9 +56,9 @@ util.handle_keymaps({
     { "<M-k>", "<C-\\><C-n><C-w>k" },
     { "<M-l>", "<C-\\><C-n><C-w>l" },
 
-    { "<C-Left>",  "<C-\\><C-n><C-w>h" },
-    { "<C-Down>",  "<C-\\><C-n><C-w>j" },
-    { "<C-Up>",    "<C-\\><C-n><C-w>k" },
+    { "<C-Left>", "<C-\\><C-n><C-w>h" },
+    { "<C-Down>", "<C-\\><C-n><C-w>j" },
+    { "<C-Up>", "<C-\\><C-n><C-w>k" },
     { "<C-Right>", "<C-\\><C-n><C-w>l" },
   },
 })

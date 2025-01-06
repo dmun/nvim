@@ -16,16 +16,14 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 })
 
 local fts = {
-  -- "copilot-chat",
-  -- "copilot-diff",
-  -- "copilot-overlay",
+  "codecompanion",
   "oil",
 }
 
 vim.api.nvim_create_autocmd({ "BufEnter", "WinEnter" }, {
   callback = function()
     if vim.tbl_contains(fts, vim.bo.ft) then
-      vim.opt_local.winhl = "Normal:NormalTerm"
+      -- vim.opt_local.winhl = "Normal:NormalFloat"
       vim.opt_local.relativenumber = false
       vim.opt_local.number = false
       vim.opt_local.signcolumn = "no"

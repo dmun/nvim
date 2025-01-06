@@ -1,5 +1,10 @@
 return {
-  "airblade/vim-rooter",
+  {
+    "airblade/vim-rooter",
+    init = function()
+      vim.g.rooter_silent_chdir = 1
+    end,
+  },
   {
     "stevearc/oil.nvim",
     dependencies = "nvim-tree/nvim-web-devicons",

@@ -69,7 +69,7 @@ Conf.ls.lua_ls = {
     if vim.loop.fs_stat(path .. "/.luarc.json") or vim.loop.fs_stat(path .. "/.luarc.jsonc") then
       return
     end
-    client.server_capabilities.semanticTokensProvider = nil
+    -- client.server_capabilities.semanticTokensProvider = nil
 
     client.config.settings.Lua = vim.tbl_deep_extend("force", client.config.settings.Lua or {}, {
       runtime = { version = "LuaJIT" },

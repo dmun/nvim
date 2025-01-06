@@ -3,10 +3,6 @@ local g = vim.g
 
 -- globals
 g.tex_flavor = "latex"
-g.rooter_silent_chdir = 1
-g["sneak#use_ic_scs"] = 1
-g["sneak#s_next"] = 1
-g["sneak#prompt"] = ""
 
 -- text
 o.wrap = false
@@ -28,8 +24,8 @@ o.foldcolumn = "0"
 o.foldenable = true
 o.foldlevel = 99
 o.foldlevelstart = 99
-o.number = false
-o.relativenumber = false
+o.number = true
+o.relativenumber = true
 o.signcolumn = "yes"
 
 -- appearance
@@ -51,7 +47,7 @@ o.fillchars = "eob: "
 o.guicursor = "i:iCursor-block-blinkon500,n-v:rCursor-block"
 -- o.guicursor = 'i:iCursor-ver25-blinkon500-blinkoff500,n-v:rCursor-block'
 -- o.guicursor = "a:Cursor-block"
-o.laststatus = 3
+o.laststatus = 2
 o.list = true
 o.listchars = "tab:  "
 
@@ -80,8 +76,8 @@ o.undofile = true
 o.clipboard = "unnamedplus"
 
 -- lazyvim statuscolumn
--- vim.opt.statuscolumn = [[%!v:lua.require'util.ui'.statuscolumn()]]
--- vim.opt.foldtext = "v:lua.require'util.ui'.foldtext()"
+vim.opt.statuscolumn = [[%!v:lua.require'util.ui'.statuscolumn()]]
+vim.opt.foldtext = "v:lua.require'util.ui'.foldtext()"
 
 -- lsp
 vim.highlight.priorities.semantic_tokens = 95
