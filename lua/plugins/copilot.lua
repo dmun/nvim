@@ -110,7 +110,7 @@ return {
     end,
   },
   {
-    "olimorris/codecompanion.nvim",
+    "dmun/codecompanion.nvim",
     enabled = true,
     dependencies = {
       "nvim-lua/plenary.nvim",

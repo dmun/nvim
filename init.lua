@@ -28,6 +28,9 @@ require("lazy").setup("plugins", {
     backdrop = 100,
     size = { width = 1.0, height = 0.99 },
   },
+  dev = {
+    path = "~/Development",
+    fallback = true,
+  },
 })
 vim.cmd.color(colorscheme)
-vim.cmd("hi! link iCursor @comment.todo")

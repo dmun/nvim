@@ -152,7 +152,7 @@ return {
 
       set({ "n", "v" }, "<leader>M", mc.matchAllAddCursors)
 
-      set({ "n", "v" }, "<C-q>", mc.toggleCursor)
+      -- set({ "n", "v" }, "<C-q>", mc.toggleCursor)
 
       set("n", "<esc>", function()
         if not mc.cursorsEnabled() then

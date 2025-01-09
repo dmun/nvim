@@ -42,6 +42,7 @@ return {
   "bluz71/vim-moonfly-colors",
   {
     "dmun/alabaster.nvim",
+    dev = true,
     init = function()
       vim.g.alabaster_floatborder = true
     end,
