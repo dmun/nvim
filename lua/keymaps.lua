@@ -16,6 +16,7 @@ vim.api.nvim_set_keymap("n", "<Down>", "v:count == 0 ? 'gj' : 'j'", { noremap = 
 util.handle_keymaps({
   n = {
     { "<leader>tw", ":set wrap!<cr>" },
+    { "<C-,>", "gccj" },
     { "<leader>dl", ":messages<cr>" },
 
     { "<leader>mr", util.run_command },
@@ -37,6 +38,9 @@ util.handle_keymaps({
     { "yc", "yygccp" },
 
     { "<leader>p", "<cmd>Lazy<cr>" },
+  },
+  v = {
+    { "<C-,>", "gc" },
   },
   i = {
     { "<M-h>", "<C-[><C-w>h" },

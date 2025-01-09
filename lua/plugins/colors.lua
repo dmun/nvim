@@ -41,6 +41,12 @@ local bay = "#4d5d8d"
 return {
   "bluz71/vim-moonfly-colors",
   {
+    "dmun/alabaster.nvim",
+    init = function()
+      vim.g.alabaster_floatborder = true
+    end,
+  },
+  {
     "catppuccin/nvim",
     name = "catppuccin",
     priority = 1000,
@@ -66,7 +72,8 @@ return {
               NoiceCmdline = { bg = colors.mantle },
               NoiceCmdlineIcon = { fg = colors.mantle, bg = colors.peach, style = { "bold" } },
               NoiceCmdlineIconSearch = { fg = colors.mantle, bg = colors.yellow, style = { "bold" } },
-              NormalFloat = { link = "Normal" },
+              -- NormalFloat = { link = "Normal" },
+              NormalFloat = { bg = grey7 },
               NormalTerm = { bg = grey7 },
               CopilotChatHeader = { fg = colors.maroon, style = { "bold" } },
               FloatTitle = { fg = colors.sky, style = { "bold" } },
@@ -194,9 +201,9 @@ return {
         ---@param hl Highlights
         ---@param c ColorScheme
         on_highlights = function(hl, c)
-          hl["@variable"] = { link = "lispSymbol" }
-          hl["@constant"] = { fg = c.magenta_cooler }
-          hl["@lsp.typemod.variable.global"] = { link = "@variable.member" }
+          -- hl["@variable"] = { link = "lispSymbol" }
+          -- hl["@constant"] = { fg = c.magenta_cooler }
+          -- hl["@lsp.typemod.variable.global"] = { link = "@variable.member" }
           hl.PmenuSel = { bg = c.bg_inactive }
           hl.Pmenu = { bg = c.bg_dim }
           hl.PmenuThumb = { bg = c.border }

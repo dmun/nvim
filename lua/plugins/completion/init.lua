@@ -176,6 +176,7 @@ return {
         },
       },
       menu = {
+        auto_show = true,
         max_height = 8,
         draw = draw,
         scrollbar = false,

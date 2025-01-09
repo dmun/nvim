@@ -117,7 +117,7 @@ return {
       mini = {
         timeout = 1500,
         position = {
-          row = -1,
+          row = -2,
           col = -1,
         },
         size = {

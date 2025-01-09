@@ -1,5 +1,5 @@
 return {
-  "tpope/vim-rsi",
+  -- "tpope/vim-rsi",
   { "nacro90/numb.nvim", event = "CmdLineEnter", opts = {} },
   {
     "rhysd/clever-f.vim",
@@ -167,7 +167,7 @@ return {
       end)
 
       -- Align cursor columns.
-      set("n", "<leader>a", mc.alignCursors)
+      set("n", "=a", mc.alignCursors)
 
       -- Split visual selections by regex.
       set("v", "M", mc.splitCursors)
@@ -179,14 +179,6 @@ return {
       -- match new cursors within visual selections by regex.
       set("v", "m", matchCursors)
       set("n", "gm", mc.restoreCursors)
-
-      -- Rotate visual selection contents.
-      set("v", "<leader>t", function()
-        mc.transposeCursors(1)
-      end)
-      set("v", "<leader>T", function()
-        mc.transposeCursors(-1)
-      end)
 
       -- Jumplist support
       set({ "v", "n" }, "<c-i>", mc.jumpForward)

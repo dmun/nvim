@@ -19,7 +19,7 @@ require("options")
 require("keymaps")
 require("autocommands")
 
-local colorscheme = "catppuccin"
+local colorscheme = "alabaster"
 require("lazy").setup("plugins", {
   install = { colorscheme = { colorscheme } },
   change_detection = { enabled = false },
@@ -30,3 +30,4 @@ require("lazy").setup("plugins", {
   },
 })
 vim.cmd.color(colorscheme)
+vim.cmd("hi! link iCursor @comment.todo")

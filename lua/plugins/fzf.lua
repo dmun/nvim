@@ -20,13 +20,13 @@ local _rounded = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" }
 local _border = false and _rounded or _single
 
 local default_winopts = {
-  title = true,
+  title = "Fzf",
   title_pos = "left",
-  row = 0.4,
-  col = 0.5,
-  height = 0.6,
-  width = 0.8,
-  backdrop = 70,
+  row = 0.99,
+  col = 0.0,
+  height = 0.52,
+  width = 1.0,
+  backdrop = 100,
   border = function(_, m)
     assert(m.type == "nvim" and m.name == "fzf")
     if m.nwin == 1 then
@@ -57,7 +57,7 @@ local default_winopts = {
   end,
   preview = {
     hidden = "nohidden",
-    vertical = "down:60%",
+    vertical = "down:50%",
     title = false,
     title_pos = "left",
     scrollbar = false,
@@ -149,6 +149,7 @@ return {
     end
   end,
   opts = {
+    "default",
     file_icons = false,
     prompt = "> ",
     winopts = default_winopts,

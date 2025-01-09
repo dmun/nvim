@@ -1,4 +1,58 @@
+local constants = {
+  LLM_ROLE = "llm",
+  USER_ROLE = "user",
+  SYSTEM_ROLE = "system",
+}
+
 return {
+  {
+    "MeanderingProgrammer/render-markdown.nvim",
+    enabled = true,
+    dependencies = { "nvim-treesitter/nvim-treesitter" }, -- if you use the mini.nvim suite
+    opts = {
+      file_types = {
+        "markdown",
+        "copilot-chat",
+        "codecompanion",
+      },
+      heading = {
+        enabled = true,
+        render_modes = { "n", "c", "t", "i" },
+        sign = true,
+        icons = { "◉ ", "◎ ", "○ ", "✺ ", "▶ ", "⤷ " },
+        position = "inline",
+        width = "full",
+        left_margin = 0,
+        left_pad = 0,
+        right_pad = 0,
+        backgrounds = {},
+        foregrounds = {
+          "RenderMarkdownH1",
+          "RenderMarkdownH2",
+          "RenderMarkdownH3",
+          "RenderMarkdownH4",
+          "RenderMarkdownH5",
+          "RenderMarkdownH6",
+        },
+      },
+      code = {
+        enabled = true,
+        render_modes = { "n", "c", "t", "i" },
+        sign = true,
+        style = "normal",
+        width = "full",
+        left_pad = 1,
+        left_margin = 0,
+        right_pad = 1,
+        min_width = 0,
+        above = "▃",
+        below = "▀",
+      },
+      link = { enabled = false },
+      bullet = { enabled = false },
+      sign = { enabled = false },
+    },
+  },
   {
     "zbirenbaum/copilot.lua",
     cmd = "Copilot",
@@ -17,6 +71,7 @@ return {
       { "<leader>e", "<cmd>CopilotChat<cr>" },
     },
     dependencies = {
+      "MeanderingProgrammer/render-markdown.nvim",
       { "zbirenbaum/copilot.lua" }, -- or zbirenbaum/copilot.lua
       { "nvim-lua/plenary.nvim", branch = "master" }, -- for curl, log and async functions
     },
@@ -24,9 +79,12 @@ return {
     opts = {
       window = {
         layout = "float",
+        border = "single",
         width = 1.0,
-        height = 0.99,
-        border = "none",
+        height = 0.6,
+        row = 0.99,
+        col = 0,
+        relative = "editor",
       },
       show_folds = false,
       highlight_headers = true,
@@ -34,12 +92,11 @@ return {
       auto_insert_mode = false,
       question_header = "User ",
       answer_header = "Copilot ",
-      error_header = "Error ",
+      error_header = "> [!ERROR] Error",
     },
   },
   {
     "echasnovski/mini.diff",
-    version = false,
     config = function()
       require("mini.diff").setup({
         view = {
@@ -54,47 +111,65 @@ return {
   },
   {
     "olimorris/codecompanion.nvim",
+    enabled = true,
     dependencies = {
       "nvim-lua/plenary.nvim",
       "nvim-treesitter/nvim-treesitter",
     },
     opts = {
-      adapters = {
-        copilot = function()
-          return require("codecompanion.adapters").extend("copilot", {
-            schema = {
-              model = {
-                -- default = "claude-3.5-sonnet",
-              },
-            },
-          })
-        end,
-      },
       strategies = {
+        inline = { adapter = "anthropic" },
         chat = {
-          adapter = "copilot",
+          adapter = "anthropic",
+          roles = {
+            llm = "CodeCompanion",
+            user = "Me",
+          },
           slash_commands = {
             ["buffer"] = { opts = { provider = "fzf_lua" } },
             ["file"] = { opts = { provider = "fzf_lua" } },
             ["help"] = { opts = { provider = "fzf_lua" } },
             ["symbols"] = { opts = { provider = "fzf_lua" } },
           },
+          keymaps = {
+            stop = { modes = { n = "gx" } },
+            clear = { modes = { n = "<C-l>", i = "<C-l>" } },
+          },
         },
-        inline = { adapter = "copilot" },
       },
       display = {
         diff = {
           enabled = true,
+          opts = {
+            "internal",
+            "filler",
+            "closeoff",
+            "algorithm:minimal",
+            "followwrap",
+            "linematch:120",
+          },
           provider = "mini_diff",
         },
         chat = {
+          intro_message = "Welcome to CodeCompanion! Press ? for options",
+          show_header_separator = false,
+          start_in_insert_mode = false,
+          separator = "─",
           window = {
-            layout = "buffer", -- float|vertical|horizontal|buffer
+            layout = "float",
+            position = "bottom",
+            border = "single",
+            row = 0.99,
+            col = 0.0,
+            height = 0.5,
+            width = 1.0,
+            relative = "win",
+            title_pos = "left",
             opts = {
               breakindent = true,
               cursorcolumn = false,
               cursorline = false,
-              foldcolumn = "0",
+              foldcolumn = "1",
               linebreak = true,
               list = false,
               numberwidth = 1,
@@ -107,8 +182,42 @@ return {
           },
         },
       },
+      prompt_library = {
+        ["Tutor"] = {
+          strategy = "chat",
+          description = "General guidance",
+          opts = {
+            index = 0,
+            short_name = "tutor",
+            stop_context_insertion = true,
+            ignore_system_prompt = true,
+          },
+          prompts = {
+            {
+              role = constants.SYSTEM_ROLE,
+              content = [[You are a tutor which has the primary goal of making the user intuitively understand concepts. When answering, make sure that new information is not overwhelming and that it builds on existing knowledge. Use steps as a way to progress. Make sure the user understands before progressing.]],
+              opts = {
+                visible = false,
+              },
+            },
+            {
+              role = constants.USER_ROLE,
+              content = " ",
+            },
+          },
+        },
+      },
+      opts = {
+        ---@param adapter CodeCompanion.Adapter
+        ---@return string
+        system_prompt = function(adapter)
+          return [[You are a tutor which has the primary goal of making the user intuitively understand concepts. When answering, make sure that new information is not overwhelming and that it builds on existing knowledge. Use steps as a way to progress. Make sure the user understands before progressing.]]
+        end,
+      },
     },
     init = function()
+      vim.cmd("au! FileType codecompanion nnoremap <buffer> q <C-w>q")
+      vim.keymap.set("n", "<leader>c", "<cmd>CodeCompanionActions<cr>", { noremap = true, silent = true })
       vim.keymap.set("n", "<leader>e", "<cmd>CodeCompanionChat Toggle<cr>", { noremap = true, silent = true })
       vim.keymap.set("v", "<leader>e", "<cmd>CodeCompanionChat Toggle<cr>", { noremap = true, silent = true })
       vim.keymap.set("v", "ga", "<cmd>CodeCompanionChat Add<cr>", { noremap = true, silent = true })
