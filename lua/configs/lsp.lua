@@ -32,11 +32,11 @@ vim.api.nvim_create_autocmd("LspAttach", {
   desc = "LSP: Disable hover capability from Ruff",
 })
 
-Conf.ls.zls = {
-  on_init = function(client, _)
-    client.server_capabilities.semanticTokensProvider = nil
-  end,
-}
+-- Conf.ls.zls = {
+--   on_init = function(client, _)
+--     client.server_capabilities.semanticTokensProvider = nil
+--   end,
+-- }
 
 Conf.ls["r_language_server"] = {
   settings = {

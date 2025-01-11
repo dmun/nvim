@@ -32,7 +32,7 @@ o.signcolumn = "yes"
 o.background = "dark"
 o.conceallevel = 2
 o.lazyredraw = false
--- o.cursorline = false
+o.cursorline = true
 o.cursorlineopt = "number"
 o.ruler = false
 o.showcmd = false
@@ -80,7 +80,7 @@ o.clipboard = "unnamedplus"
 -- vim.opt.foldtext = "v:lua.require'util.ui'.foldtext()"
 
 -- lsp
-vim.highlight.priorities.semantic_tokens = 95
+-- vim.highlight.priorities.semantic_tokens = 95
 vim.diagnostic.config({
   signs = {
     text = {
