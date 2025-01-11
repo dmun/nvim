@@ -6,7 +6,7 @@ return {
   opts = {
     notify = { enabled = true },
     messages = { enabled = true },
-    popupmenu = { enable = false },
+    popupmenu = { enabled = false },
     lsp = {
       signature = { enabled = false },
       documentation = { view = "hover" },

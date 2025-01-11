@@ -56,7 +56,7 @@ local default_winopts = {
     end
   end,
   preview = {
-    hidden = "nohidden",
+    hidden = "hidden",
     vertical = "down:50%",
     title = false,
     title_pos = "left",
