@@ -4,6 +4,14 @@ local constants = {
   SYSTEM_ROLE = "system",
 }
 
+local prompts = {
+  tutor = [[You are a tutor which has the primary goal of making the user
+  intuitively understand concepts. Do not answer the question, but lead the
+  user towards the answer. Be concise.]],
+  assistant = [[You are an assistent that provides the user with dense and
+  concise information.]],
+}
+
 return {
   {
     "MeanderingProgrammer/render-markdown.nvim",
@@ -189,13 +197,38 @@ return {
           opts = {
             index = 0,
             short_name = "tutor",
+            is_slash_cmd = true,
             stop_context_insertion = true,
             ignore_system_prompt = true,
           },
           prompts = {
             {
               role = constants.SYSTEM_ROLE,
-              content = [[You are a tutor which has the primary goal of making the user intuitively understand concepts. When answering, make sure that new information is not overwhelming and that it builds on existing knowledge. Use steps as a way to progress. Make sure the user understands before progressing.]],
+              content = prompts.tutor,
+              opts = {
+                visible = false,
+              },
+            },
+            {
+              role = constants.USER_ROLE,
+              content = " ",
+            },
+          },
+        },
+        ["Assistant"] = {
+          strategy = "chat",
+          description = "Assistant",
+          opts = {
+            index = 0,
+            short_name = "assistant",
+            is_slash_cmd = true,
+            stop_context_insertion = true,
+            ignore_system_prompt = false,
+          },
+          prompts = {
+            {
+              role = constants.SYSTEM_ROLE,
+              content = prompts.assistant,
               opts = {
                 visible = false,
               },
@@ -211,7 +244,7 @@ return {
         ---@param adapter CodeCompanion.Adapter
         ---@return string
         system_prompt = function(adapter)
-          return [[You are a tutor which has the primary goal of making the user intuitively understand concepts. When answering, make sure that new information is not overwhelming and that it builds on existing knowledge. Use steps as a way to progress. Make sure the user understands before progressing.]]
+          return prompts.assistant
         end,
       },
     },
