@@ -118,7 +118,8 @@ return {
     end,
   },
   {
-    "dmun/codecompanion.nvim",
+    "olimorris/codecompanion.nvim",
+    dev = true,
     enabled = true,
     dependencies = {
       "nvim-lua/plenary.nvim",
@@ -142,6 +143,7 @@ return {
           keymaps = {
             stop = { modes = { n = "gx" } },
             clear = { modes = { n = "<C-l>", i = "<C-l>" } },
+            send = { modes = { n = "<CR>", i = "<CR>" } },
           },
         },
       },
@@ -161,7 +163,7 @@ return {
         chat = {
           intro_message = "Welcome to CodeCompanion! Press ? for options",
           show_header_separator = false,
-          start_in_insert_mode = false,
+          start_in_insert_mode = true,
           separator = "─",
           window = {
             layout = "float",
@@ -250,6 +252,7 @@ return {
     },
     init = function()
       vim.cmd("au! FileType codecompanion nnoremap <buffer> q <C-w>q")
+      vim.keymap.set("i", "<S-CR>", "<CR>", { noremap = true, silent = true })
       vim.keymap.set("n", "<leader>c", "<cmd>CodeCompanionActions<cr>", { noremap = true, silent = true })
       vim.keymap.set("n", "<leader>e", "<cmd>CodeCompanionChat Toggle<cr>", { noremap = true, silent = true })
       vim.keymap.set("v", "<leader>e", "<cmd>CodeCompanionChat Toggle<cr>", { noremap = true, silent = true })
