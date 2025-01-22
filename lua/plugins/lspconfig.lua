@@ -76,7 +76,7 @@ return {
           vim.keymap.set("n", "gi", "<cmd>Trouble lsp_implementations<CR>", opts)
           vim.keymap.set("n", "gr", "<cmd>Trouble lsp_references<CR>", opts)
           vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
-          vim.keymap.set("i", "<C-k>", vim.lsp.buf.signature_help, opts)
+          vim.keymap.set("i", "<C-s>", vim.lsp.buf.signature_help, opts)
           vim.keymap.set("n", "<leader>D", "<cmd>Trouble lsp_type_definitions<cr>", opts)
           vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
           vim.keymap.set("n", "<C-c>", vim.lsp.buf.code_action, opts)

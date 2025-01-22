@@ -8,7 +8,12 @@ return {
     messages = { enabled = true },
     popupmenu = { enabled = false },
     lsp = {
-      signature = { enabled = false },
+      signature = {
+        enabled = true,
+        auto_open = {
+          enabled = false,
+        },
+      },
       documentation = { view = "hover" },
     },
     cmdline = {

@@ -184,7 +184,7 @@ return {
       ghost_text = { enabled = false },
     },
     signature = {
-      enabled = true,
+      enabled = false,
       trigger = {
         show_on_insert_on_trigger_character = true,
       },
