@@ -27,7 +27,7 @@ return {
           },
           python = {
             -- command = { "ipython", "--no-autoindent", "--matplotlib" },
-            command = { "jupyter-console", "--existing" },
+            command = { "jupyter-console" }, --existing" },
             format = python_format,
           },
         },

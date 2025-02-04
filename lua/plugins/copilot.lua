@@ -63,6 +63,7 @@ return {
   },
   {
     "zbirenbaum/copilot.lua",
+    enabled = false,
     cmd = "Copilot",
     event = "InsertEnter",
     config = function()
@@ -89,8 +90,8 @@ return {
         layout = "float",
         border = "single",
         width = 1.0,
-        height = 0.6,
-        row = 0.99,
+        height = 0.92,
+        row = 0,
         col = 0,
         relative = "editor",
       },

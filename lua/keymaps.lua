@@ -52,9 +52,6 @@ util.handle_keymaps({
     { "<C-Down>", "<C-[><C-w>j" },
     { "<C-Up>", "<C-[><C-w>k" },
     { "<C-Right>", "<C-[><C-w>l" },
-
-    { "<C-n>", "<cmd>norm j<cr>" },
-    { "<C-p>", "<cmd>norm k<cr>" },
   },
   t = {
     { "<M-h>", "<C-\\><C-n><C-w>h" },

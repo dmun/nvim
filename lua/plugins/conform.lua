@@ -2,7 +2,7 @@ return {
   "stevearc/conform.nvim",
   keys = {
     {
-      "<M-f>",
+      "<leader>bf",
       function()
         require("conform").format({ lsp_format = "fallback" })
       end,
