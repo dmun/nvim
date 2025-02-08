@@ -27,6 +27,7 @@ local default_winopts = {
   height = 0.52,
   width = 1.0,
   backdrop = 100,
+  split = "botright new",
   border = function(_, m)
     assert(m.type == "nvim" and m.name == "fzf")
     if m.nwin == 1 then

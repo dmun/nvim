@@ -1,57 +1,3 @@
-local colors = require("modus-themes.colors").modus_vivendi
-local c = {
-  fg = colors.tinted_border,
-  fg_bright = colors.tinted_border,
-  fg_dim = colors.tinted_bg_inactive,
-  bg = colors.tinted_bg_dim,
-  bg_dim = "#0A0C17",
-}
-
-local theme = {
-  normal = {
-    a = { bg = c.bg, fg = c.fg, gui = "bold" },
-    b = { bg = c.bg, fg = c.fg },
-    c = { bg = c.bg, fg = c.fg },
-  },
-  insert = {
-    a = { bg = c.bg, fg = c.fg, gui = "bold" },
-    b = { bg = c.bg, fg = c.fg },
-    c = { bg = c.bg, fg = c.fg },
-  },
-  visual = {
-    a = { bg = c.bg, fg = c.fg, gui = "bold" },
-    b = { bg = c.bg, fg = c.fg },
-    c = { bg = c.bg, fg = c.fg },
-  },
-  replace = {
-    a = { bg = c.bg, fg = c.fg, gui = "bold" },
-    b = { bg = c.bg, fg = c.fg },
-    c = { bg = c.bg, fg = c.fg },
-  },
-  command = {
-    a = { bg = c.bg, fg = c.fg, gui = "bold" },
-    b = { bg = c.bg, fg = c.fg },
-    c = { bg = c.bg, fg = c.fg },
-  },
-  inactive = {
-    a = { bg = c.bg, fg = c.fg_dim, gui = "bold" },
-    b = { bg = c.bg, fg = c.fg_dim },
-    c = { bg = c.bg, fg = c.fg_dim },
-  },
-}
-
----@param active boolean
----@return table
-local function section(active)
-  return {
-    function()
-      return "<<"
-    end,
-    padding = 0,
-    color = { fg = colors.fg_alt },
-  }
-end
-
 local spacer = function(n)
   return {
     function()
@@ -81,48 +27,6 @@ local multicursor = {
   end,
   color = { gui = "bold" },
 }
-
-local mode = {
-  function()
-    local map = {
-      n = "NOR",
-      i = "INS",
-      v = "SEL",
-      V = "LIN",
-      [""] = "BLK",
-      c = "CMD",
-      R = "REP",
-      s = "SEL",
-      S = "LIN",
-      [""] = "BLK",
-      t = "TER",
-    }
-    return map[vim.fn.mode()]
-  end,
-  _color = { fg = c.fg_bright },
-}
-
----@param active boolean
----@return table
-local function project(active)
-  return {
-    function()
-      local path = vim.fn.getcwd()
-      local text = "" .. vim.fs.basename(path) .. ""
-
-      if not active then
-        return string.rep(" ", #text)
-      else
-        return text
-      end
-    end,
-    color = {
-      fg = c.fg_dim,
-      bg = active and theme.normal.c.bg or theme.inactive.c.bg,
-      gui = "bold",
-    },
-  }
-end
 
 ---@param active boolean
 ---@return table
@@ -172,7 +76,7 @@ return {
   "nvim-lualine/lualine.nvim",
   opts = {
     options = {
-      theme = "auto",
+      theme = "jellybeans",
       component_separators = { left = nil, right = nil },
       section_separators = { left = nil, right = nil },
       always_divide_middle = false,

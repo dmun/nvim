@@ -1,13 +1,19 @@
 return {
   -- "tpope/vim-rsi",
+  { "echasnovski/mini.ai", opts = {} },
   { "nacro90/numb.nvim", event = "CmdLineEnter", opts = {} },
   {
     "rhysd/clever-f.vim",
-    enabled = true,
     init = function()
       vim.g.clever_f_smart_case = 1
       vim.g.clever_f_across_no_line = 1
     end,
+  },
+  {
+    "Wansmer/treesj",
+    keys = { "<space>tj", "<space>j", "<space>s" },
+    dependencies = { "nvim-treesitter/nvim-treesitter" },
+    config = true,
   },
   {
     "ggandor/leap.nvim",

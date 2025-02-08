@@ -1,8 +1,9 @@
 return {
-  "https://github.com/tpope/vim-fugitive",
+  "tpope/vim-fugitive",
   { "numToStr/Comment.nvim", event = "VeryLazy" },
   { "windwp/nvim-autopairs", event = "InsertEnter", config = true },
-  { "dstein64/nvim-scrollview", enabled = false, config = true },
+  -- { "dstein64/nvim-scrollview", enabled = false, config = true },
+  "https://github.com/RRethy/vim-illuminate",
   { "folke/trouble.nvim", opts = { focus = true } },
   {
     "NMAC427/guess-indent.nvim",

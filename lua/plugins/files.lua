@@ -10,21 +10,12 @@ return {
     "stevearc/oil.nvim",
     dependencies = "nvim-tree/nvim-web-devicons",
     lazy = false,
-    keys = { { "-", "<cmd>Oil --float<cr>" } },
+    keys = { { "-", "<cmd>Oil<cr>" } },
     opts = {
       default_file_explorer = true,
       view_options = {
         is_hidden_file = function(name, bufnr)
           return vim.startswith(name, ".") or vim.endswith(name, ".pdf")
-        end,
-      },
-      float = {
-        border = "single",
-        max_height = 0.5,
-        padding = 0,
-        override = function(conf)
-          conf.row = math.floor((vim.o.lines - 4) / 2)
-          return conf
         end,
       },
       win_options = {

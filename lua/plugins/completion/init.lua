@@ -100,10 +100,10 @@ return {
   lazy = false,
   dependencies = {
     "rafamadriz/friendly-snippets",
-    {
-      "giuxtaposition/blink-cmp-copilot",
-      dependencies = "zberinbaum/copilot.lua",
-    },
+    -- {
+    --   "giuxtaposition/blink-cmp-copilot",
+    --   dependencies = "zberinbaum/copilot.lua",
+    -- },
     { "L3MON4D3/LuaSnip", version = "v2.*" },
   },
   version = "v0.*",
@@ -135,18 +135,22 @@ return {
         "lsp",
         "path",
         "snippets",
-        "codecompanion",
+        -- "codecompanion",
         -- "copilot",
         -- "buffer",
       },
       providers = {
-        lazydev = { name = "LazyDev", module = "lazydev.integrations.blink", fallbacks = { "lsp" } },
-        copilot = {
-          name = "copilot",
-          module = "blink-cmp-copilot",
-          score_offset = 10,
-          async = true,
+        lazydev = {
+          name = "LazyDev",
+          module = "lazydev.integrations.blink",
+          score_offset = 100,
         },
+        -- copilot = {
+        --   name = "copilot",
+        --   module = "blink-cmp-copilot",
+        --   score_offset = 10,
+        --   async = true,
+        -- },
       },
     },
     completion = {
@@ -176,7 +180,7 @@ return {
         },
       },
       menu = {
-        auto_show = false,
+        auto_show = true,
         max_height = 8,
         draw = draw,
         scrollbar = false,
