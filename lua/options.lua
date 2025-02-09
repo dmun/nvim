@@ -81,6 +81,4 @@ o.clipboard = "unnamedplus"
 
 -- lsp
 vim.highlight.priorities.semantic_tokens = 95
-vim.diagnostic.config({
-  signs = false,
-})
+vim.diagnostic.config({ signs = false })
