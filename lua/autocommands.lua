@@ -32,5 +32,5 @@ vim.api.nvim_create_autocmd({ "BufEnter", "WinEnter" }, {
 })
 
 -- dynamic linenumbers
-vim.cmd("au InsertEnter * if &nu | se nornu | endif")
-vim.cmd("au InsertLeave * if &nu | se rnu | endif")
+-- vim.cmd("au InsertEnter * if &nu | se nornu | endif")
+-- vim.cmd("au InsertLeave * if &nu | se rnu | endif")

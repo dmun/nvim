@@ -3,7 +3,7 @@ return {
   { "numToStr/Comment.nvim", event = "VeryLazy" },
   { "windwp/nvim-autopairs", event = "InsertEnter", config = true },
   -- { "dstein64/nvim-scrollview", enabled = false, config = true },
-  "https://github.com/RRethy/vim-illuminate",
+  -- "https://github.com/RRethy/vim-illuminate",
   { "folke/trouble.nvim", opts = { focus = true } },
   {
     "NMAC427/guess-indent.nvim",
@@ -38,7 +38,8 @@ return {
     event = "LspAttach",
     opts = {
       scope = "cursor",
-      padding_right = 2,
+      inline_padding_left = 1,
+      padding_right = 1,
       toggle_event = { "InsertEnter", "InsertLeave" },
     },
   },
