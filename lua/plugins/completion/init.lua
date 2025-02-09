@@ -26,7 +26,7 @@ local kind_hl_map = {
 	Reference     = "CmpItemKindReference",
 	Folder        = "CmpItemKindFolder",
 	Event         = "CmpItemKindEvent",
-	Snippet       = "CmpItemKindSnippet",
+	Snippet       = "BlinkCmpKindSnippet",
 }
 
 --- @module 'blink.cmp'
