@@ -21,7 +21,7 @@ return {
     keys = {
       { "s", "<Plug>(leap-forward)", { "n", "x", "o" } },
       { "S", "<Plug>(leap-backward)", { "n", "x", "o" } },
-      { "gs", "<Plug>(leap-from-window)", { "n", "x", "o" } },
+      -- { "gs", "<Plug>(leap-from-window)", { "n", "x", "o" } },
     },
   },
   {

@@ -26,7 +26,7 @@ o.foldlevel = 99
 o.foldlevelstart = 99
 o.number = true
 o.relativenumber = true
-o.signcolumn = "yes"
+o.signcolumn = "no"
 
 -- appearance
 o.background = "dark"
