@@ -16,7 +16,6 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 })
 
 local fts = {
-  "codecompanion",
   "oil",
 }
 

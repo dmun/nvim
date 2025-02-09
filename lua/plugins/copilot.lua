@@ -61,7 +61,7 @@ return {
   },
   {
     "CopilotC-Nvim/CopilotChat.nvim",
-    enabled = false,
+    enabled = true,
     keys = {
       { "<leader>e", "<cmd>CopilotChat<cr>" },
     },
@@ -74,11 +74,11 @@ return {
     opts = {
       window = {
         layout = "float",
-        border = "single",
-        width = 0.5,
-        height = 1.0,
-        -- row = -1,
-        col = 50,
+        border = "none",
+        width = 1,
+        height = 0.95,
+        row = 0,
+        col = 0,
         relative = "editor",
       },
       show_folds = false,
