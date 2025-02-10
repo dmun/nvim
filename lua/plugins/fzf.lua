@@ -100,7 +100,7 @@ return {
     { "<leader>/", "<cmd>FzfLua live_grep<cr>" },
     { "<leader>?", "<cmd>FzfLua live_grep_resume<cr>" },
     { "<leader>,", "<cmd>FzfLua buffers<cr>" },
-    { "<leader>w", "<cmd>FzfLua lsp_document_symbols<cr>" },
+    -- { "<leader>w", "<cmd>FzfLua lsp_document_symbols<cr>" },
     { "<leader><leader>", "<cmd>FzfLua builtin<cr>" },
   },
   init = function()

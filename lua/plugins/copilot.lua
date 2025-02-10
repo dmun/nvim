@@ -73,7 +73,7 @@ return {
     build = "make tiktoken", -- Only on MacOS or Linux
     opts = {
       window = {
-        layout = "float",
+        -- layout = "float",
         border = "none",
         width = 1,
         height = 0.95,
@@ -81,13 +81,14 @@ return {
         col = 0,
         relative = "editor",
       },
-      show_folds = false,
-      highlight_headers = true,
+      show_folds = true,
+      highlight_headers = false,
       insert_at_end = true,
       auto_insert_mode = false,
-      question_header = "User ",
-      answer_header = "Copilot ",
+      question_header = "# User ",
+      answer_header = "# Copilot ",
       error_header = "> [!ERROR] Error",
+      separator = "",
     },
   },
 }

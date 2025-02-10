@@ -3,7 +3,24 @@ return {
   { "numToStr/Comment.nvim", event = "VeryLazy" },
   { "windwp/nvim-autopairs", event = "InsertEnter", config = true },
   -- { "dstein64/nvim-scrollview", enabled = false, config = true },
-  { "folke/trouble.nvim", opts = { focus = true } },
+  {
+    "folke/trouble.nvim",
+    keys = {
+      { "gd", "<cmd>Trouble lsp_definitions<CR>" },
+      { "gi", "<cmd>Trouble lsp_implementations<CR>" },
+      { "gr", "<cmd>Trouble lsp_references<CR>" },
+      { "<leader>w", "<cmd>Trouble symbols<cr>" },
+    },
+    opts = {
+      focus = true,
+      modes = {
+        symbols = {
+          focus = true,
+          -- win = { position = "bottom" },
+        },
+      },
+    },
+  },
   {
     "monaqa/dial.nvim",
     config = function()
