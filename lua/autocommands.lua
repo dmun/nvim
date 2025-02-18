@@ -4,6 +4,7 @@ vim.cmd("au BufRead,BufEnter .swift-format se ft=json")
 vim.cmd("au BufRead,BufEnter *.dagitty se ft=luau")
 vim.cmd("au BufRead,BufEnter *.metal se ft=metal")
 vim.cmd("au BufRead,BufEnter config se ft=conf")
+vim.cmd("au BufRead,BufEnter hyprland.conf se ft=hyprlang")
 
 -- highlight on yank
 local hi_group = vim.api.nvim_create_augroup("YankHighlight", { clear = true })

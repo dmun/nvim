@@ -74,7 +74,7 @@ o.undofile = true
 
 -- system
 -- opt.autochdir = true
-o.clipboard = "unnamedplus"
+-- o.clipboard = "unnamedplus"
 
 -- lazyvim statuscolumn
 -- vim.opt.statuscolumn = [[%!v:lua.require'util.ui'.statuscolumn()]]

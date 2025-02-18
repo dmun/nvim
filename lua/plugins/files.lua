@@ -22,9 +22,9 @@ return {
         number = false,
         relativenumber = false,
         wrap = false,
-        signcolumn = "yes",
+        signcolumn = "no",
         cursorcolumn = false,
-        foldcolumn = "0",
+        foldcolumn = "1",
         spell = false,
         list = false,
         conceallevel = 3,
@@ -59,25 +59,25 @@ return {
         end,
       },
       {
-        "<M-t>",
+        "<M-1>",
         function()
           require("harpoon"):list():select(1)
         end,
       },
       {
-        "<M-s>",
+        "<M-2>",
         function()
           require("harpoon"):list():select(2)
         end,
       },
       {
-        "<M-r>",
+        "<M-3>",
         function()
           require("harpoon"):list():select(3)
         end,
       },
       {
-        "<M-a>",
+        "<M-4>",
         function()
           require("harpoon"):list():select(4)
         end,
