@@ -115,15 +115,19 @@ return {
 
       ["<C-space>"] = { "show", "show_documentation", "hide_documentation" },
       ["<C-y>"] = { "accept" },
+      ["<Tab>"] = { "accept", "fallback" },
 
       ["<C-p>"] = { "select_prev" },
       ["<C-n>"] = { "show", "select_next" },
 
-      ["<C-b>"] = { "scroll_documentation_up", "fallback" },
-      ["<C-f>"] = { "scroll_documentation_down", "fallback" },
+      ["<C-k>"] = { "select_prev" },
+      ["<C-j>"] = { "select_next" },
 
-      ["<Tab>"] = { "snippet_forward", "fallback" },
-      ["<S-Tab>"] = { "snippet_backward", "fallback" },
+      ["<C-u>"] = { "scroll_documentation_up", "fallback" },
+      ["<C-d>"] = { "scroll_documentation_down", "fallback" },
+
+      ["<C-f>"] = { "snippet_forward", "fallback" },
+      ["<C-b>"] = { "snippet_backward", "fallback" },
     },
     appearance = {
       use_nvim_cmp_as_default = false,
@@ -188,7 +192,7 @@ return {
       ghost_text = { enabled = false },
     },
     signature = {
-      enabled = false,
+      enabled = true,
       trigger = {
         show_on_insert_on_trigger_character = true,
       },

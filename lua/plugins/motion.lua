@@ -179,8 +179,8 @@ return {
       set("v", "M", mc.splitCursors)
 
       -- Append/insert for each line of visual selections.
-      set("v", "I", mc.insertVisual)
-      set("v", "A", mc.appendVisual)
+      -- set("v", "I", mc.insertVisual)
+      -- set("v", "A", mc.appendVisual)
 
       -- match new cursors within visual selections by regex.
       set("v", "m", matchCursors)

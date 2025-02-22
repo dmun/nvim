@@ -34,3 +34,4 @@ require("lazy").setup("plugins", {
   },
 })
 vim.cmd.color(colorscheme)
+-- vim.cmd("hi Normal guibg=black")
