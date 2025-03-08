@@ -4,6 +4,7 @@ return {
   { "nacro90/numb.nvim", event = "CmdLineEnter", opts = {} },
   {
     "rhysd/clever-f.vim",
+    enabled = false,
     init = function()
       vim.g.clever_f_smart_case = 1
       vim.g.clever_f_across_no_line = 1

@@ -24,7 +24,7 @@ require("lazy").setup("plugins", {
   install = { colorscheme = { colorscheme } },
   change_detection = { enabled = false },
   ui = {
-    pills = false,
+    pills = true,
     backdrop = 100,
     size = { width = 1.0, height = 0.99 },
   },

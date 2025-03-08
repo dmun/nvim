@@ -50,12 +50,12 @@ local function filename(active)
       end
 
       if vim.tbl_contains(ft_keys, ft) then
-        return fts[ft]
+        path = fts[ft]
       elseif vim.tbl_contains(ft_keys, bt) then
-        return fts[bt]
+        path = fts[bt]
       end
 
-      return path .. " "
+      return " " .. path .. " "
     end,
     color = function()
       local gui = ""
@@ -92,7 +92,7 @@ return {
       },
     },
     sections = {
-      lualine_a = { "mode" },
+      lualine_a = {},
       lualine_b = {},
       lualine_c = { filename(true) },
       lualine_x = {
@@ -105,7 +105,7 @@ return {
       lualine_z = {},
     },
     inactive_sections = {
-      lualine_a = { spacer(8) },
+      lualine_a = {},
       lualine_b = {},
       lualine_c = { filename(false) },
       lualine_x = {},

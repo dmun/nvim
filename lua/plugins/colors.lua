@@ -10,6 +10,7 @@ return {
         italics = false,
         on_highlights = function(hl, c)
           hl.CleverFDefaultLabel = { link = "Search" }
+          hl.Cursor = { fg = c.cadet_blue, bold = true }
         end,
       })
     end,

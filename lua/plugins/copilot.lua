@@ -241,7 +241,7 @@ return {
     init = function()
       vim.cmd("au! FileType codecompanion nnoremap <buffer> q <C-w>q")
       vim.keymap.set("i", "<S-CR>", "<CR>", { noremap = true, silent = true })
-      vim.keymap.set("n", "<leader>c", "<cmd>CodeCompanionActions<cr>", { noremap = true, silent = true })
+      -- vim.keymap.set("n", "<leader>c", "<cmd>CodeCompanionActions<cr>", { noremap = true, silent = true })
       vim.keymap.set("n", "<leader>e", "<cmd>CodeCompanionChat Toggle<cr>", { noremap = true, silent = true })
       vim.keymap.set("v", "<leader>e", "<cmd>CodeCompanionChat Toggle<cr>", { noremap = true, silent = true })
       vim.keymap.set("v", "ga", "<cmd>CodeCompanionChat Add<cr>", { noremap = true, silent = true })

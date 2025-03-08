@@ -1,47 +1,21 @@
 return {
   "tpope/vim-fugitive",
   { "numToStr/Comment.nvim", event = "VeryLazy" },
-  { "windwp/nvim-autopairs", event = "InsertEnter", config = true },
-  -- { "dstein64/nvim-scrollview", enabled = false, config = true },
   {
-    "bassamsdata/namu.nvim",
+    "windwp/nvim-autopairs",
+    event = "InsertEnter",
     config = function()
-      require("namu").setup({
-        -- Enable the modules you want
-        namu_symbols = {
-          enable = true,
-          options = {}, -- here you can configure namu
-        },
-        -- Optional: Enable other modules if needed
-        colorscheme = {
-          enable = false,
-          options = {
-            -- NOTE: if you activate persist, then please remove any vim.cmd("colorscheme ...") in your config, no needed anymore
-            persist = true,    -- very efficient mechanism to Remember selected colorscheme
-            write_shada = false, -- If you open multiple nvim instances, then probably you need to enable this
-          },
-        },
-        ui_select = { enable = false }, -- vim.ui.select() wrapper
-      })
-      -- === Suggested Keymaps: ===
-      local namu = require("namu.namu_symbols")
-      local colorscheme = require("namu.colorscheme")
-      vim.keymap.set("n", "<leader>ss", ":Namu symbols<cr>", {
-        desc = "Jump to LSP symbol",
-        silent = true,
-      })
-      vim.keymap.set("n", "<leader>th", ":Namu colorscheme<cr>", {
-        desc = "Colorscheme Picker",
-        silent = true,
-      })
+      require("nvim-autopairs").setup()
+      require("nvim-autopairs").remove_rule("`")
     end,
   },
+  -- { "dstein64/nvim-scrollview", enabled = false, config = true },
   {
     "folke/trouble.nvim",
     keys = {
-      { "gd",        "<cmd>Trouble lsp_definitions<CR>" },
-      { "gi",        "<cmd>Trouble lsp_implementations<CR>" },
-      { "gr",        "<cmd>Trouble lsp_references<CR>" },
+      { "gd", "<cmd>Trouble lsp_definitions<CR>" },
+      { "gi", "<cmd>Trouble lsp_implementations<CR>" },
+      { "gr", "<cmd>Trouble lsp_references<CR>" },
       { "<leader>w", "<cmd>Trouble symbols<cr>" },
     },
     opts = {
@@ -60,9 +34,9 @@ return {
       local augend = require("dial.augend")
       require("dial.config").augends:register_group({
         default = {
-          augend.integer.alias.decimal,  -- nonnegative decimal number (0, 1, 2, 3, ...)
-          augend.integer.alias.hex,      -- nonnegative hex number  (0x01, 0x1a1f, etc.)
-          augend.constant.alias.bool,    -- boolean value (true <-> false)
+          augend.integer.alias.decimal, -- nonnegative decimal number (0, 1, 2, 3, ...)
+          augend.integer.alias.hex, -- nonnegative hex number  (0x01, 0x1a1f, etc.)
+          augend.constant.alias.bool, -- boolean value (true <-> false)
           augend.date.alias["%Y/%m/%d"], -- date (2022/02/19, etc.)
         },
       })
@@ -152,22 +126,22 @@ return {
             end
           end
           return ufo
-              .getFolds(bufnr, "lsp")
-              :catch(function(err)
-                return handleFallbackException(err, "treesitter")
-              end)
-              :catch(function(err)
-                return handleFallbackException(err, "indent")
-              end)
-              :thenCall(function(ufo_folds)
-                local ok, jupynium = pcall(require, "jupynium")
-                if ok then
-                  for _, fold in ipairs(jupynium.get_folds()) do
-                    table.insert(ufo_folds, fold)
-                  end
+            .getFolds(bufnr, "lsp")
+            :catch(function(err)
+              return handleFallbackException(err, "treesitter")
+            end)
+            :catch(function(err)
+              return handleFallbackException(err, "indent")
+            end)
+            :thenCall(function(ufo_folds)
+              local ok, jupynium = pcall(require, "jupynium")
+              if ok then
+                for _, fold in ipairs(jupynium.get_folds()) do
+                  table.insert(ufo_folds, fold)
                 end
-                return ufo_folds
-              end)
+              end
+              return ufo_folds
+            end)
         end
         if ft == "python" then
           return get_cell_folds

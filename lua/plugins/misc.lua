@@ -10,9 +10,11 @@ return {
         bigfile = {},
         quickfile = {},
         statuscolumn = {
+          enabled = false,
           left = { "sign", "fold", "git" },
         },
         words = {
+          enabled = false,
           debounce = 50,
           modes = { "n", "o" },
         },
