@@ -141,7 +141,7 @@ return {
         "snippets",
         -- "codecompanion",
         -- "copilot",
-        -- "buffer",
+        "buffer",
       },
       providers = {
         lazydev = {
