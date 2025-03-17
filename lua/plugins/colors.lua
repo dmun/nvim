@@ -1,5 +1,33 @@
 return {
   {
+    "oxfist/night-owl.nvim",
+    priority = 1000,
+    config = function()
+      require("night-owl").setup({
+        italics = false,
+      })
+    end,
+  },
+  {
+    "catppuccin/nvim",
+    enabled = false,
+    name = "catppuccin",
+    priority = 1000,
+    opts = {
+      dim_inactive = { enabled = false },
+      no_italic = true,
+      custom_highlights = function(colors)
+        return {
+          Normal = { bg = "black" },
+          NormalNC = { bg = "black" },
+          -- MsgArea = { bg = colors.base },
+          CursorN = { bg = colors.peach },
+          CursorI = { bg = colors.green },
+        }
+      end,
+    },
+  },
+  {
     "dmun/jellybeans.nvim",
     dev = true,
     priority = 1000,

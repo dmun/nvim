@@ -19,7 +19,7 @@ require("options")
 require("keymaps")
 require("autocommands")
 
-local colorscheme = "jellybeans"
+local colorscheme = "night-owl"
 require("lazy").setup("plugins", {
   install = { colorscheme = { colorscheme } },
   change_detection = { enabled = false },
@@ -34,4 +34,3 @@ require("lazy").setup("plugins", {
   },
 })
 vim.cmd.color(colorscheme)
--- vim.cmd("hi Normal guibg=black")

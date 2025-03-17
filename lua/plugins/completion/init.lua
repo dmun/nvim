@@ -85,7 +85,7 @@ local draw = {
           table.insert(highlights, {
             #ctx.label,
             #ctx.label + #ctx.label_detail,
-            group = "BlinkCmpLabelDetail",
+            group = "Comment",
           })
         end
 

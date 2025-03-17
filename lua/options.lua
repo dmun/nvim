@@ -40,13 +40,13 @@ o.showmode = false
 o.showtabline = 0
 o.termguicolors = true
 o.shm:append("I")
-o.cmdheight = 0
+o.cmdheight = 1
 o.pumheight = 8
 -- o.colorcolumn = "+1"
 o.fillchars = "eob: ,fold: ,foldopen:,foldclose:,foldsep: ,vert:█"
--- o.guicursor = "i:Cursor-block-blinkon500,n-v:Cursor-block"
-o.guicursor = 'i:Cursor-ver25-blinkon500-blinkoff500,n-v:rCursor-block'
--- o.guicursor = "a:Cursor-block"
+-- o.guicursor = "i:CursorI-block,n-v:CursorN-block"
+-- o.guicursor = 'i:Cursor-ver25-blinkon500-blinkoff500,n-v:rCursor-block'
+o.guicursor = "a:Cursor-block"
 o.laststatus = 2
 o.list = true
 o.listchars = "tab:  "

@@ -76,7 +76,7 @@ return {
   "nvim-lualine/lualine.nvim",
   opts = {
     options = {
-      theme = "jellybeans",
+      theme = "auto",
       component_separators = { left = nil, right = nil },
       section_separators = { left = nil, right = nil },
       always_divide_middle = false,

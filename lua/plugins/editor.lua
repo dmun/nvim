@@ -103,6 +103,7 @@ return {
       inline_padding_left = 1,
       padding_right = 1,
       toggle_event = { "InsertEnter", "InsertLeave" },
+      placement = "inline",
     },
   },
   {
