@@ -81,5 +81,5 @@ o.clipboard = "unnamedplus"
 -- vim.opt.foldtext = "v:lua.require'util.ui'.foldtext()"
 
 -- lsp
-vim.highlight.priorities.semantic_tokens = 95
+vim.highlight.priorities.semantic_tokens = 100
 vim.diagnostic.config({ signs = false })

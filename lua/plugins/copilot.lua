@@ -75,7 +75,7 @@ return {
   },
   {
     "CopilotC-Nvim/CopilotChat.nvim",
-    enabled = false,
+    enabled = true,
     keys = {
       { "<leader>e", "<cmd>CopilotChat<cr>" },
     },
@@ -107,8 +107,7 @@ return {
   },
   {
     "olimorris/codecompanion.nvim",
-    dev = true,
-    enabled = true,
+    enabled = false,
     dependencies = {
       "nvim-lua/plenary.nvim",
       "nvim-treesitter/nvim-treesitter",
@@ -146,7 +145,7 @@ return {
             "followwrap",
             "linematch:120",
           },
-          provider = "mini_diff",
+          -- provider = "mini_diff",
         },
         chat = {
           intro_message = "Welcome to CodeCompanion! Press ? for options",
@@ -154,15 +153,15 @@ return {
           start_in_insert_mode = true,
           separator = "─",
           window = {
-            layout = "float",
-            position = "bottom",
-            border = "single",
-            row = 0.99,
-            col = 0.0,
-            height = 0.5,
-            width = 1.0,
-            relative = "win",
-            title_pos = "left",
+            -- layout = "float",
+            -- position = "bottom",
+            -- border = "single",
+            -- row = 0.99,
+            -- col = 0.0,
+            -- height = 0.5,
+            -- width = 1.0,
+            -- relative = "win",
+            -- title_pos = "left",
             opts = {
               breakindent = true,
               cursorcolumn = false,
@@ -213,7 +212,7 @@ return {
             short_name = "assistant",
             is_slash_cmd = true,
             stop_context_insertion = true,
-            ignore_system_prompt = false,
+            ignore_system_prompt = true,
           },
           prompts = {
             {
@@ -233,9 +232,9 @@ return {
       opts = {
         ---@param adapter CodeCompanion.Adapter
         ---@return string
-        system_prompt = function(adapter)
-          return prompts.assistant
-        end,
+        -- system_prompt = function(adapter)
+        --   return prompts.assistant
+        -- end,
       },
     },
     init = function()

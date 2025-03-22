@@ -37,6 +37,7 @@ local function filename(active)
     fzf = "Fzf",
     oil = "Oil",
     terminal = "Terminal",
+    sql = "SQL",
   }
   local ft_keys = vim.tbl_keys(fts)
 
@@ -76,7 +77,7 @@ return {
   "nvim-lualine/lualine.nvim",
   opts = {
     options = {
-      theme = "auto",
+      theme = "jellybeans",
       component_separators = { left = nil, right = nil },
       section_separators = { left = nil, right = nil },
       always_divide_middle = false,

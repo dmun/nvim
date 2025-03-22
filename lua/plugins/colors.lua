@@ -1,10 +1,32 @@
 return {
   {
+    "eero-lehtinen/oklch-color-picker.nvim",
+    event = "VeryLazy",
+    keys = {
+      {
+        "<leader>c",
+        function()
+          require("oklch-color-picker").pick_under_cursor()
+        end,
+        desc = "Color pick under cursor",
+      },
+    },
+    ---@type oklch.Opts
+    opts = {
+      highlight = {
+        style = "virtual_left",
+        virtual_text = "  ",
+        emphasis = false,
+      },
+    },
+  },
+  {
     "oxfist/night-owl.nvim",
     priority = 1000,
     config = function()
       require("night-owl").setup({
         italics = false,
+        transparent_background = false,
       })
     end,
   },
@@ -145,6 +167,7 @@ return {
   },
   {
     "NvChad/nvim-colorizer.lua",
+    enabled = false,
     -- cmd = "ColorizerAttachToBuffer",
     event = { "BufReadPre", "BufNewFile" },
     opts = {

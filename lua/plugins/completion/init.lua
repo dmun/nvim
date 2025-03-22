@@ -94,109 +94,134 @@ local draw = {
     },
   },
 }
-
 return {
-  "saghen/blink.cmp",
-  lazy = false,
-  dependencies = {
-    "rafamadriz/friendly-snippets",
-    -- {
-    --   "giuxtaposition/blink-cmp-copilot",
-    --   dependencies = "zberinbaum/copilot.lua",
-    -- },
-    { "L3MON4D3/LuaSnip", version = "v2.*" },
-  },
-  version = "v0.*",
-  -- build = "cargo build --release",
-  opts = {
-    keymap = {
-      preset = "default",
-      ["<C-e>"] = {},
-
-      ["<C-space>"] = { "show", "show_documentation", "hide_documentation" },
-      ["<C-y>"] = { "accept" },
-      ["<Tab>"] = { "accept", "fallback" },
-
-      ["<C-p>"] = { "select_prev" },
-      ["<C-n>"] = { "show", "select_next" },
-
-      ["<C-k>"] = { "select_prev" },
-      ["<C-j>"] = { "select_next" },
-
-      ["<C-u>"] = { "scroll_documentation_up", "fallback" },
-      ["<C-d>"] = { "scroll_documentation_down", "fallback" },
-
-      ["<C-f>"] = { "snippet_forward", "fallback" },
-      ["<C-b>"] = { "snippet_backward", "fallback" },
-    },
-    appearance = {
-      use_nvim_cmp_as_default = false,
-      nerd_font_variant = "mono",
-    },
-    sources = {
-      default = {
-        "lazydev",
-        "lsp",
-        "path",
-        "snippets",
-        -- "codecompanion",
-        -- "copilot",
-        "buffer",
-      },
-      providers = {
-        lazydev = {
-          name = "LazyDev",
-          module = "lazydev.integrations.blink",
-          score_offset = 100,
-        },
-        -- copilot = {
-        --   name = "copilot",
-        --   module = "blink-cmp-copilot",
-        --   score_offset = 10,
-        --   async = true,
-        -- },
+  {
+    "L3MON4D3/LuaSnip",
+    lazy = true,
+    dependencies = {
+      {
+        "rafamadriz/friendly-snippets",
+        config = function()
+          require("luasnip.loaders.from_vscode").lazy_load()
+          require("luasnip.loaders.from_vscode").lazy_load({ paths = { vim.fn.stdpath("config") .. "/snippets" } })
+        end,
       },
     },
-    completion = {
-      accept = {
-        auto_brackets = {
-          enabled = true,
-          override_brackets_for_filetypes = {
-            tex = { "{", "}" },
-          },
-          kind_resolution = {
-            enabled = true,
-            blocked_filetypes = {
-              "typescriptreact",
-              "javascriptreact",
-              "vue",
-              "tex",
-              "codecompanion",
-            },
-          },
-          semantic_token_resolution = {
-            enabled = true,
-            blocked_filetypes = {
-              "java",
-              -- "tex",
-            },
-          },
-        },
-      },
-      menu = {
-        auto_show = true,
-        max_height = 8,
-        draw = draw,
-        scrollbar = false,
-      },
-      ghost_text = { enabled = false },
-    },
-    signature = {
-      enabled = true,
-      trigger = {
-        show_on_insert_on_trigger_character = true,
-      },
+    opts = {
+      history = true,
+      delete_check_events = "TextChanged",
     },
   },
-  opts_extend = { "sources.default" },
+  {
+    "saghen/blink.cmp",
+    lazy = false,
+    dependencies = {
+      "rafamadriz/friendly-snippets",
+      -- {
+      --   "giuxtaposition/blink-cmp-copilot",
+      --   dependencies = "zberinbaum/copilot.lua",
+      -- },
+      -- { "L3MON4D3/LuaSnip", version = "v2.*" },
+    },
+    version = "v0.*",
+    -- build = "cargo build --release",
+    opts = {
+      keymap = {
+        preset = "default",
+        ["<C-e>"] = {},
+
+        ["<C-space>"] = { "show", "show_documentation", "hide_documentation" },
+        ["<C-y>"] = { "accept" },
+        ["<Tab>"] = { "accept", "fallback" },
+
+        ["<C-p>"] = { "select_prev" },
+        ["<C-n>"] = { "show", "select_next" },
+
+        ["<C-k>"] = { "select_prev" },
+        ["<C-j>"] = { "select_next" },
+
+        ["<C-u>"] = { "scroll_documentation_up", "fallback" },
+        ["<C-d>"] = { "scroll_documentation_down", "fallback" },
+
+        ["<C-f>"] = { "snippet_forward", "fallback" },
+        ["<C-b>"] = { "snippet_backward", "fallback" },
+      },
+      appearance = {
+        use_nvim_cmp_as_default = false,
+        nerd_font_variant = "mono",
+      },
+      snippets = { preset = "luasnip" },
+      sources = {
+        default = {
+          "lazydev",
+          "lsp",
+          "path",
+          "snippets",
+          -- "codecompanion",
+          -- "copilot",
+          "buffer",
+          "dadbod",
+        },
+        providers = {
+          lazydev = {
+            name = "LazyDev",
+            module = "lazydev.integrations.blink",
+            score_offset = 100,
+          },
+          dadbod = {
+             name = "Dadbod",
+             module = "vim_dadbod_completion.blink",
+             score_offset = 200,
+           }
+          -- copilot = {
+          --   name = "copilot",
+          --   module = "blink-cmp-copilot",
+          --   score_offset = 10,
+          --   async = true,
+          -- },
+        },
+      },
+      completion = {
+        accept = {
+          auto_brackets = {
+            enabled = true,
+            override_brackets_for_filetypes = {
+              tex = { "{", "}" },
+            },
+            kind_resolution = {
+              enabled = true,
+              blocked_filetypes = {
+                "typescriptreact",
+                "javascriptreact",
+                "vue",
+                "tex",
+                "codecompanion",
+              },
+            },
+            semantic_token_resolution = {
+              enabled = true,
+              blocked_filetypes = {
+                "java",
+                -- "tex",
+              },
+            },
+          },
+        },
+        menu = {
+          auto_show = true,
+          max_height = 8,
+          draw = draw,
+          scrollbar = false,
+        },
+        ghost_text = { enabled = false },
+      },
+      signature = {
+        enabled = true,
+        trigger = {
+          show_on_insert_on_trigger_character = true,
+        },
+      },
+    },
+    opts_extend = { "sources.default" },
+  },
 }

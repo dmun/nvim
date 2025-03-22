@@ -22,12 +22,12 @@ local _border = false and _rounded or _single
 local default_winopts = {
   title = "Fzf",
   title_pos = "left",
-  row = 0.99,
-  col = 0.0,
-  height = 0.52,
-  width = 1.0,
+  row = 0.5,
+  col = 0.5,
+  height = 0.7,
+  width = 0.8,
   backdrop = 100,
-  split = "botright new",
+  -- split = "botright new",
   border = function(_, m)
     assert(m.type == "nvim" and m.name == "fzf")
     if m.nwin == 1 then
