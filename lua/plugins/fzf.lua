@@ -22,11 +22,12 @@ local _border = false and _rounded or _single
 local default_winopts = {
   title = "Fzf",
   title_pos = "left",
-  row = 0.5,
+  title_flags = false,
+  row = 0.3,
   col = 0.5,
-  height = 0.7,
+  height = 0.5,
   width = 0.8,
-  backdrop = 100,
+  backdrop = 70,
   -- split = "botright new",
   border = function(_, m)
     assert(m.type == "nvim" and m.name == "fzf")
@@ -150,14 +151,13 @@ return {
     end
   end,
   opts = {
-    "default",
+    "max-perf",
     file_icons = false,
     prompt = "> ",
     winopts = default_winopts,
     defaults = {
       file_icons = false,
       prompt = "> ",
-      winopts = default_winopts,
     },
     previewers = {
       builtin = {
@@ -166,20 +166,33 @@ return {
       },
     },
     files = {
+      winopts = { title = "Files" },
       cwd_prompt = false,
       cmd = "rg --files --hidden",
       no_header_i = true,
       git_icons = false,
     },
     oldfiles = {
+      winopts = { title = "Oldfiles" },
       include_current_session = true,
     },
     code_actions = {
+      winopts = { title = "Code Actions" },
     },
     grep = {
+      winopts = { title = "Grep" },
       no_header_i = true,
     },
     buffers = {
+      winopts = { title = "Buffers" },
+      no_header_i = true,
+    },
+    builtin = {
+      winopts = { title = "Builtin" },
+      no_header_i = true,
+    },
+    highlights = {
+      winopts = { title = "Highlights" },
       no_header_i = true,
     },
     fzf_opts = {

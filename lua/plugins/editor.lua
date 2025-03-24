@@ -73,27 +73,9 @@ return {
     config = true,
   },
   {
-    "Pocco81/auto-save.nvim",
-    enabled = true,
+    "dmun/autosave.nvim",
     config = function()
-      require("auto-save").setup({
-        condition = function(buf)
-          local ft = vim.bo.filetype
-          local fts = {
-            "oil",
-            "harpoon",
-            "fzf",
-            "codecompanion",
-            "sql",
-          }
-
-          if vim.tbl_contains(fts, ft) then
-            return false
-          end
-
-          return true
-        end,
-      })
+      vim.g.autosave_enabled = true
     end,
   },
   {

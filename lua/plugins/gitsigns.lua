@@ -11,21 +11,21 @@ return {
       changedelete = { text = "▍" },
       untracked = { text = "┆" },
     },
-    signcolumn = true,
+    signcolumn = false,
     preview_config = {
       border = "none",
     },
     on_attach = function(bufnr)
       local gitsigns = require("gitsigns")
       vim.keymap.set("n", "gs", function()
-        -- if vim.o.signcolumn == "no" then
-        --   vim.o.signcolumn = "yes"
-        --   gitsigns.toggle_signs(true)
-        -- else
-        --   vim.o.signcolumn = "no"
-        --   gitsigns.toggle_signs(false)
-        -- end
-        gitsigns.toggle_signs()
+        if vim.o.signcolumn == "no" then
+          vim.o.signcolumn = "yes"
+          gitsigns.toggle_signs(true)
+        else
+          vim.o.signcolumn = "no"
+          gitsigns.toggle_signs(false)
+        end
+        -- gitsigns.toggle_signs()
       end)
 
       vim.keymap.set("n", "]c", function()

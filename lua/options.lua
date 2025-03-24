@@ -24,23 +24,23 @@ o.foldcolumn = "0"
 o.foldenable = true
 o.foldlevel = 99
 o.foldlevelstart = 99
-o.number = true
+o.number = false
 o.relativenumber = true
-o.signcolumn = "yes"
+o.signcolumn = "no"
 
 -- appearance
 o.background = "dark"
 o.conceallevel = 2
 o.lazyredraw = false
-o.cursorline = true
-o.cursorlineopt = "number"
+o.cursorline = false
+-- o.cursorlineopt = "number"
 o.ruler = false
 o.showcmd = false
 o.showmode = false
 o.showtabline = 0
 o.termguicolors = true
 o.shm:append("I")
-o.cmdheight = 1
+o.cmdheight = 0
 o.pumheight = 8
 -- o.colorcolumn = "+1"
 o.fillchars = "eob: ,fold: ,foldopen:,foldclose:,foldsep: ,vert:█"

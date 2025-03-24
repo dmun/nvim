@@ -75,7 +75,7 @@ return {
   },
   {
     "CopilotC-Nvim/CopilotChat.nvim",
-    enabled = true,
+    enabled = false,
     keys = {
       { "<leader>e", "<cmd>CopilotChat<cr>" },
     },
@@ -107,7 +107,7 @@ return {
   },
   {
     "olimorris/codecompanion.nvim",
-    enabled = false,
+    enabled = true,
     dependencies = {
       "nvim-lua/plenary.nvim",
       "nvim-treesitter/nvim-treesitter",
@@ -135,33 +135,13 @@ return {
         },
       },
       display = {
-        diff = {
-          enabled = true,
-          opts = {
-            "internal",
-            "filler",
-            "closeoff",
-            "algorithm:minimal",
-            "followwrap",
-            "linematch:120",
-          },
-          -- provider = "mini_diff",
-        },
         chat = {
           intro_message = "Welcome to CodeCompanion! Press ? for options",
           show_header_separator = false,
-          start_in_insert_mode = true,
+          start_in_insert_mode = false,
           separator = "─",
           window = {
-            -- layout = "float",
-            -- position = "bottom",
-            -- border = "single",
-            -- row = 0.99,
-            -- col = 0.0,
-            -- height = 0.5,
-            -- width = 1.0,
-            -- relative = "win",
-            -- title_pos = "left",
+            layout = "buffer",
             opts = {
               breakindent = true,
               cursorcolumn = false,
@@ -232,9 +212,9 @@ return {
       opts = {
         ---@param adapter CodeCompanion.Adapter
         ---@return string
-        -- system_prompt = function(adapter)
-        --   return prompts.assistant
-        -- end,
+        system_prompt = function(adapter)
+          return prompts.assistant
+        end,
       },
     },
     init = function()

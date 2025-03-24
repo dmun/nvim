@@ -51,7 +51,7 @@ return {
   },
   {
     "dmun/jellybeans.nvim",
-    dev = true,
+    branch = "dmun",
     priority = 1000,
     config = function()
       ---@diagnostic disable-next-line: missing-fields
@@ -59,8 +59,16 @@ return {
         flat_ui = false,
         italics = false,
         on_highlights = function(hl, c)
-          hl.CleverFDefaultLabel = { link = "Search" }
-          -- hl.Cursor = { fg = c.cadet_blue, bold = true }
+          hl.FloatTitle = { fg = c.green_smoke, bold = true }
+          hl.FloatBorder = { fg = c.green_smoke }
+          hl.FzfLuaTitle = { fg = c.green_smoke, bold = true }
+          hl.FzfLuaBorder = { fg = c.green_smoke }
+          hl.NormalFloat = { bg = c.background }
+          hl.FzfLuaBackdrop = { bg = c.background }
+          hl.FoldColumn = { bg = c.background }
+
+          hl.NoiceCmdline = { bg = "#30302C" }
+          hl.NoicePopup = { bg = c.grey_one }
         end,
       })
     end,

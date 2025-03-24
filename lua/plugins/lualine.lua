@@ -13,14 +13,14 @@ local macro = {
     if recording_register == "" then
       return ""
     else
-      return "Recording @" .. recording_register
+      return "@" .. recording_register
     end
   end,
   color = { gui = "bold" },
 }
 
 local multicursor = {
-  icon = { "󰬸", color = { fg = "#80A4C2" } },
+  icon = { "", color = { fg = "#80A4C2" } },
   function()
     local n = require("multicursor-nvim").numCursors()
     return n > 1 and n or ""
@@ -33,7 +33,7 @@ local multicursor = {
 local function filename(active)
   local fts = {
     help = "Neovim Documentation",
-    trouble = "Trouble",
+    -- trouble = "Trouble",
     fzf = "Fzf",
     oil = "Oil",
     terminal = "Terminal",
@@ -54,9 +54,11 @@ local function filename(active)
         path = fts[ft]
       elseif vim.tbl_contains(ft_keys, bt) then
         path = fts[bt]
+      elseif path == "" then
+        path = "./"
       end
 
-      return " " .. path .. " "
+      return path
     end,
     color = function()
       local gui = ""
@@ -84,7 +86,7 @@ return {
       disabled_filetypes = {
         statusline = {
           -- "fzf",
-          -- "noice",
+          -- "trouble",
           -- "fugitive",
           -- "copilot-chat",
           -- "copilot-diff",
@@ -95,12 +97,15 @@ return {
     sections = {
       lualine_a = {},
       lualine_b = {},
-      lualine_c = { filename(true) },
+      lualine_c = {
+        filename(true),
+        "diff",
+      },
       lualine_x = {
-        "diagnostics",
-        multicursor,
+        -- "diagnostics",
         macro,
-        -- "location",
+        -- multicursor,
+        "location",
       },
       lualine_y = {},
       lualine_z = {},
