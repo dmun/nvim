@@ -126,6 +126,9 @@ return {
     version = "v0.*",
     -- build = "cargo build --release",
     opts = {
+      enabled = function()
+        return not vim.tbl_contains({ "AvanteInput" }, vim.bo.filetype)
+      end,
       keymap = {
         preset = "default",
         ["<C-e>"] = {},
@@ -159,7 +162,7 @@ return {
           "snippets",
           -- "codecompanion",
           -- "copilot",
-          "buffer",
+          -- "buffer",
           "dadbod",
         },
         providers = {
@@ -169,10 +172,10 @@ return {
             score_offset = 100,
           },
           dadbod = {
-             name = "Dadbod",
-             module = "vim_dadbod_completion.blink",
-             score_offset = 200,
-           }
+            name = "Dadbod",
+            module = "vim_dadbod_completion.blink",
+            score_offset = 200,
+          },
           -- copilot = {
           --   name = "copilot",
           --   module = "blink-cmp-copilot",
@@ -214,12 +217,14 @@ return {
           scrollbar = false,
         },
         ghost_text = { enabled = false },
+        documentation = { window = { border = "single" } },
       },
       signature = {
         enabled = true,
         trigger = {
           show_on_insert_on_trigger_character = true,
         },
+        window = { border = "single" },
       },
     },
     opts_extend = { "sources.default" },

@@ -5,10 +5,11 @@ return {
   },
   {
     "folke/noice.nvim",
+    enabled = false,
     event = "VeryLazy",
     opts = {
       cmdline = {
-        enabled = true,
+        enabled = false,
         view = "cmdline",
         format = {
           cmdline = { pattern = "^", icon = false, lang = false, conceal = false },
@@ -23,12 +24,16 @@ return {
       lsp = {
         progress = { enabled = false },
         signature = { enabled = false },
+        hover = { enabled = true },
         override = {
           ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
           ["vim.lsp.util.stylize_markdown"] = true,
         },
       },
-      messages = { enabled = true },
+      messages = { enabled = false },
+      presets = {
+        lsp_doc_border = true,
+      }
     },
   },
 }

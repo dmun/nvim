@@ -51,6 +51,7 @@ return {
   },
   {
     "dmun/jellybeans.nvim",
+    dev = true,
     branch = "dmun",
     priority = 1000,
     config = function()
@@ -59,13 +60,15 @@ return {
         flat_ui = false,
         italics = false,
         on_highlights = function(hl, c)
-          hl.FloatTitle = { fg = c.green_smoke, bold = true }
-          hl.FloatBorder = { fg = c.green_smoke }
+          hl.FloatTitle = { fg = c.tundora, bold = true }
+          hl.FloatBorder = { fg = c.tundora }
           hl.FzfLuaTitle = { fg = c.green_smoke, bold = true }
           hl.FzfLuaBorder = { fg = c.green_smoke }
           hl.NormalFloat = { bg = c.background }
           hl.FzfLuaBackdrop = { bg = c.background }
           hl.FoldColumn = { bg = c.background }
+          hl.Cursor = { bg = c.goldenrod, fg = c.background, bold = true }
+          hl.CursorLineNr = { bg = c.background, fg = c.goldenrod, bold = true }
 
           hl.NoiceCmdline = { bg = "#30302C" }
           hl.NoicePopup = { bg = c.grey_one }

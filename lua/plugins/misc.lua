@@ -21,4 +21,19 @@ return {
       })
     end,
   },
+  {
+    "luukvbaal/statuscol.nvim",
+    enabled = true,
+    config = function()
+      local builtin = require("statuscol.builtin")
+      require("statuscol").setup({
+        relculright = true,
+        fold = { width = 0 },
+        segments = {
+          { text = { builtin.lnumfunc, " " } },
+          { text = { "%s" } },
+        },
+      })
+    end,
+  },
 }

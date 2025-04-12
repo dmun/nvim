@@ -27,7 +27,7 @@ local default_winopts = {
   col = 0.5,
   height = 0.5,
   width = 0.8,
-  backdrop = 70,
+  backdrop = 100,
   -- split = "botright new",
   border = function(_, m)
     assert(m.type == "nvim" and m.name == "fzf")

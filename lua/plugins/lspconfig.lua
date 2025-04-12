@@ -72,7 +72,12 @@ return {
           vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
           local opts = { buffer = ev.buf }
           vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
-          vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+          vim.keymap.set("n", "K", function()
+            vim.lsp.buf.hover({ border = "single" })
+          end, opts)
+          vim.keymap.set("n", "<C-w><C-d>", function()
+            vim.diagnostic.open_float({ border = "single" })
+          end, opts)
           vim.keymap.set("i", "<C-s>", vim.lsp.buf.signature_help, opts)
           vim.keymap.set("n", "<leader>D", "<cmd>Trouble lsp_type_definitions<cr>", opts)
           vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)

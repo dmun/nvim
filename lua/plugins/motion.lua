@@ -122,10 +122,10 @@ return {
 
       local set = vim.keymap.set
       -- Add cursors above/below the main cursor.
-      set({ "n", "v" }, "<C-k>", function()
+      set({ "n", "v" }, "<M-k>", function()
         mc.lineAddCursor(-1)
       end)
-      set({ "n", "v" }, "<C-j>", function()
+      set({ "n", "v" }, "<M-j>", function()
         mc.lineAddCursor(1)
       end)
       set({ "n", "v" }, "<S-Up>", function()
@@ -150,10 +150,10 @@ return {
       set({ "n", "v" }, "<C-p>", function()
         mc.matchAddCursor(-1)
       end)
-      set({ "n", "v" }, "<C-h>", mc.deleteCursor)
+      set({ "n", "v" }, "<M-u>", mc.deleteCursor)
 
       -- Jump to the next word under cursor but do not add a cursor.
-      set({ "n", "v" }, "<C-l>", function()
+      set({ "n", "v" }, "<M-s>", function()
         mc.matchSkipCursor(1)
       end)
 

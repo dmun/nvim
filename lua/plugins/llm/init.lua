@@ -1,17 +1,3 @@
-local constants = {
-  LLM_ROLE = "llm",
-  USER_ROLE = "user",
-  SYSTEM_ROLE = "system",
-}
-
-local prompts = {
-  tutor = [[You are a tutor which has the primary goal of making the user
-  intuitively understand concepts. Do not answer the question, but lead the
-  user towards the answer. Be concise.]],
-  assistant = [[You are an assistent that provides the user with dense and
-  concise information.]],
-}
-
 return {
   {
     "MeanderingProgrammer/render-markdown.nvim",
@@ -19,7 +5,7 @@ return {
     dependencies = { "nvim-treesitter/nvim-treesitter" }, -- if you use the mini.nvim suite
     opts = {
       file_types = {
-        "markdown",
+        -- "markdown",
         "copilot-chat",
         "codecompanion",
       },
@@ -68,14 +54,17 @@ return {
     event = "InsertEnter",
     config = function()
       require("copilot").setup({
-        suggestion = { enabled = false },
-        panel = { enabled = false },
+        suggestion = {
+          enabled = true,
+          auto_trigger = true,
+        },
+        panel = { enabled = true },
       })
     end,
   },
   {
     "CopilotC-Nvim/CopilotChat.nvim",
-    enabled = false,
+    enabled = true,
     keys = {
       { "<leader>e", "<cmd>CopilotChat<cr>" },
     },
@@ -95,7 +84,7 @@ return {
         col = 0,
         relative = "editor",
       },
-      show_folds = true,
+      show_folds = false,
       highlight_headers = false,
       insert_at_end = true,
       auto_insert_mode = false,
@@ -104,127 +93,5 @@ return {
       error_header = "> [!ERROR] Error",
       separator = "",
     },
-  },
-  {
-    "olimorris/codecompanion.nvim",
-    enabled = true,
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "nvim-treesitter/nvim-treesitter",
-    },
-    opts = {
-      strategies = {
-        inline = { adapter = "anthropic" },
-        chat = {
-          adapter = "anthropic",
-          roles = {
-            llm = "CodeCompanion",
-            user = "Me",
-          },
-          slash_commands = {
-            ["buffer"] = { opts = { provider = "fzf_lua" } },
-            ["file"] = { opts = { provider = "fzf_lua" } },
-            ["help"] = { opts = { provider = "fzf_lua" } },
-            ["symbols"] = { opts = { provider = "fzf_lua" } },
-          },
-          keymaps = {
-            stop = { modes = { n = "gx" } },
-            clear = { modes = { n = "<C-l>", i = "<C-l>" } },
-            send = { modes = { n = "<CR>", i = "<CR>" } },
-          },
-        },
-      },
-      display = {
-        chat = {
-          intro_message = "Welcome to CodeCompanion! Press ? for options",
-          show_header_separator = false,
-          start_in_insert_mode = false,
-          separator = "─",
-          window = {
-            layout = "buffer",
-            opts = {
-              breakindent = true,
-              cursorcolumn = false,
-              cursorline = false,
-              foldcolumn = "1",
-              linebreak = true,
-              list = false,
-              numberwidth = 1,
-              signcolumn = "no",
-              spell = false,
-              wrap = true,
-              number = false,
-              relativenumber = false,
-            },
-          },
-        },
-      },
-      prompt_library = {
-        ["Tutor"] = {
-          strategy = "chat",
-          description = "General guidance",
-          opts = {
-            index = 0,
-            short_name = "tutor",
-            is_slash_cmd = true,
-            stop_context_insertion = true,
-            ignore_system_prompt = true,
-          },
-          prompts = {
-            {
-              role = constants.SYSTEM_ROLE,
-              content = prompts.tutor,
-              opts = {
-                visible = false,
-              },
-            },
-            {
-              role = constants.USER_ROLE,
-              content = " ",
-            },
-          },
-        },
-        ["Assistant"] = {
-          strategy = "chat",
-          description = "Assistant",
-          opts = {
-            index = 0,
-            short_name = "assistant",
-            is_slash_cmd = true,
-            stop_context_insertion = true,
-            ignore_system_prompt = true,
-          },
-          prompts = {
-            {
-              role = constants.SYSTEM_ROLE,
-              content = prompts.assistant,
-              opts = {
-                visible = false,
-              },
-            },
-            {
-              role = constants.USER_ROLE,
-              content = " ",
-            },
-          },
-        },
-      },
-      opts = {
-        ---@param adapter CodeCompanion.Adapter
-        ---@return string
-        system_prompt = function(adapter)
-          return prompts.assistant
-        end,
-      },
-    },
-    init = function()
-      vim.cmd("au! FileType codecompanion nnoremap <buffer> q <C-w>q")
-      vim.keymap.set("i", "<S-CR>", "<CR>", { noremap = true, silent = true })
-      -- vim.keymap.set("n", "<leader>c", "<cmd>CodeCompanionActions<cr>", { noremap = true, silent = true })
-      vim.keymap.set("n", "<leader>e", "<cmd>CodeCompanionChat Toggle<cr>", { noremap = true, silent = true })
-      vim.keymap.set("v", "<leader>e", "<cmd>CodeCompanionChat Toggle<cr>", { noremap = true, silent = true })
-      vim.keymap.set("v", "ga", "<cmd>CodeCompanionChat Add<cr>", { noremap = true, silent = true })
-      vim.cmd([[cab cc CodeCompanion]])
-    end,
   },
 }

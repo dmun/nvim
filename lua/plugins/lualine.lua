@@ -55,7 +55,7 @@ local function filename(active)
       elseif vim.tbl_contains(ft_keys, bt) then
         path = fts[bt]
       elseif path == "" then
-        path = "./"
+        path = "*scratch*"
       end
 
       return path
@@ -95,7 +95,7 @@ return {
       },
     },
     sections = {
-      lualine_a = {},
+      lualine_a = { "mode" },
       lualine_b = {},
       lualine_c = {
         filename(true),
@@ -111,7 +111,7 @@ return {
       lualine_z = {},
     },
     inactive_sections = {
-      lualine_a = {},
+      lualine_a = { spacer(8) },
       lualine_b = {},
       lualine_c = { filename(false) },
       lualine_x = {},
