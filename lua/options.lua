@@ -44,7 +44,7 @@ o.shm:append("I")
 o.cmdheight = 0
 o.pumheight = 8
 -- o.colorcolumn = "+1"
--- o.fillchars = "eob: ,fold: ,foldopen:,foldclose:,foldsep: "
+o.fillchars = "eob:~,fold: ,foldopen:,foldclose:,foldsep: "
 -- o.guicursor = "i:iCursor-block,n-v:nCursor-block"
 o.guicursor = "i:Cursor-block-blinkon500-blinkoff500,n-v:Cursor-block"
 -- o.guicursor = "a:Cursor-block"
