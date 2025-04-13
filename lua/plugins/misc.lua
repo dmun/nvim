@@ -2,16 +2,17 @@ return {
   { "eandrju/cellular-automaton.nvim", cmd = "CellularAutomaton" },
   {
     "folke/snacks.nvim",
+    enabled = false,
     priority = 1000,
-    dev = true,
     lazy = false,
     config = function()
       require("snacks").setup({
         bigfile = {},
         quickfile = {},
         statuscolumn = {
-          enabled = false,
-          left = { "sign", "fold", "git" },
+          enabled = true,
+          left = {},
+          right = {  },
         },
         words = {
           enabled = false,
@@ -23,15 +24,14 @@ return {
   },
   {
     "luukvbaal/statuscol.nvim",
-    enabled = true,
+    enabled = false,
     config = function()
       local builtin = require("statuscol.builtin")
       require("statuscol").setup({
         relculright = true,
-        fold = { width = 0 },
         segments = {
-          { text = { builtin.lnumfunc, " " } },
           { text = { "%s" } },
+          { text = { builtin.lnumfunc, " " } },
         },
       })
     end,

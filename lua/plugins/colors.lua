@@ -71,7 +71,7 @@ return {
           hl.FzfLuaBackdrop = { bg = c.background }
           hl.FoldColumn = { bg = c.background }
           hl.Cursor = { bg = c.goldenrod, fg = c.background, bold = true }
-          hl.CursorLineNr = { bg = c.background, fg = c.goldenrod, bold = true }
+          hl.CursorLineNr = { bg = c.background, fg = c.goldenrod, bold = false }
 
           hl.NoiceCmdline = { bg = "#30302C" }
           hl.NoicePopup = { bg = c.grey_one }
