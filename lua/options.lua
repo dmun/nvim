@@ -43,13 +43,13 @@ o.shm:append("I")
 o.cmdheight = 1
 o.pumheight = 8
 -- o.colorcolumn = "+1"
-o.fillchars = "eob: ,fold: ,foldopen:,foldclose:,foldsep: "
+-- o.fillchars = "eob: ,fold: ,foldopen:,foldclose:,foldsep: "
 -- o.guicursor = "i:iCursor-block,n-v:nCursor-block"
--- o.guicursor = "i:Cursor-ver25-blinkon500-blinkoff500,n-v:rCursor-block"
-o.guicursor = "a:Cursor-block"
+o.guicursor = "i:Cursor-block-blinkon500-blinkoff500,n-v:Cursor-block"
+-- o.guicursor = "a:Cursor-block"
 o.laststatus = 2
 o.list = true
-o.listchars = "tab:  "
+o.listchars = "tab:» ,multispace:·"
 
 -- window
 o.inccommand = "split"

@@ -188,7 +188,7 @@ return {
       no_header_i = true,
     },
     builtin = {
-      winopts = { title = "Builtin" },
+      winopts = default_winopts,
       no_header_i = true,
     },
     highlights = {

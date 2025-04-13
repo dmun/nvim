@@ -1,4 +1,5 @@
 return {
+  "aktersnurra/no-clown-fiesta.nvim",
   {
     "eero-lehtinen/oklch-color-picker.nvim",
     event = "VeryLazy",
@@ -60,6 +61,8 @@ return {
         flat_ui = false,
         italics = false,
         on_highlights = function(hl, c)
+          hl.NonText = { fg = c.grey_three }
+
           hl.FloatTitle = { fg = c.tundora, bold = true }
           hl.FloatBorder = { fg = c.tundora }
           hl.FzfLuaTitle = { fg = c.green_smoke, bold = true }

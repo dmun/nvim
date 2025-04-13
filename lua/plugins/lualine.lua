@@ -95,7 +95,7 @@ return {
       },
     },
     sections = {
-      lualine_a = { "mode" },
+      lualine_a = {},
       lualine_b = {},
       lualine_c = {
         filename(true),
@@ -111,7 +111,7 @@ return {
       lualine_z = {},
     },
     inactive_sections = {
-      lualine_a = { spacer(8) },
+      lualine_a = {},
       lualine_b = {},
       lualine_c = { filename(false) },
       lualine_x = {},

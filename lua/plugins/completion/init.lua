@@ -137,8 +137,8 @@ return {
         ["<C-y>"] = { "accept" },
         ["<Tab>"] = { "accept", "fallback" },
 
-        ["<C-p>"] = { "select_prev" },
-        ["<C-n>"] = { "show", "select_next" },
+        ["<C-p>"] = { "select_prev", "fallback" },
+        ["<C-n>"] = { "show", "select_next", "fallback" },
 
         ["<C-k>"] = { "select_prev" },
         ["<C-j>"] = { "select_next" },
@@ -146,8 +146,8 @@ return {
         ["<C-u>"] = { "scroll_documentation_up", "fallback" },
         ["<C-d>"] = { "scroll_documentation_down", "fallback" },
 
-        ["<C-f>"] = { "snippet_forward", "fallback" },
-        ["<C-b>"] = { "snippet_backward", "fallback" },
+        ["<C-l>"] = { "snippet_forward", "fallback" },
+        ["<C-h>"] = { "snippet_backward", "fallback" },
       },
       appearance = {
         use_nvim_cmp_as_default = false,
@@ -211,7 +211,7 @@ return {
           },
         },
         menu = {
-          auto_show = true,
+          auto_show = false,
           max_height = 8,
           draw = draw,
           scrollbar = false,

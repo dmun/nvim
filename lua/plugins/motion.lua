@@ -1,5 +1,5 @@
 return {
-  -- "tpope/vim-rsi",
+  "tpope/vim-rsi",
   { "echasnovski/mini.ai", opts = {} },
   { "nacro90/numb.nvim", event = "CmdLineEnter", opts = {} },
   {
