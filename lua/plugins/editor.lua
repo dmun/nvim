@@ -80,6 +80,7 @@ return {
   },
   {
     "dgagn/diagflow.nvim",
+    enabled = false,
     event = "LspAttach",
     opts = {
       scope = "cursor",

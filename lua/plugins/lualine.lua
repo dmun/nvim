@@ -103,9 +103,9 @@ return {
       },
       lualine_x = {
         -- "diagnostics",
-        macro,
+        -- macro,
         -- multicursor,
-        "location",
+        -- "location",
       },
       lualine_y = {},
       lualine_z = {},

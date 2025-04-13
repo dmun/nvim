@@ -34,6 +34,18 @@ vim.api.nvim_create_autocmd({ "BufEnter", "WinEnter" }, {
   end,
 })
 
+vim.api.nvim_create_autocmd({ "CmdlineEnter" }, {
+  callback = function()
+    vim.o.cmdheight = 1
+  end,
+})
+
+vim.api.nvim_create_autocmd({ "CmdlineLeave" }, {
+  callback = function()
+    vim.o.cmdheight = 0
+  end,
+})
+
 -- dynamic linenumbers
 -- vim.cmd("au InsertEnter * if &nu | se nornu | endif")
 -- vim.cmd("au InsertLeave * if &nu | se rnu | endif")

@@ -141,7 +141,7 @@ return {
         ["<C-n>"] = { "show", "select_next", "fallback" },
 
         ["<C-k>"] = { "select_prev" },
-        ["<C-j>"] = { "select_next" },
+        ["<C-j>"] = { "show", "select_next" },
 
         ["<C-u>"] = { "scroll_documentation_up", "fallback" },
         ["<C-d>"] = { "scroll_documentation_down", "fallback" },
