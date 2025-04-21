@@ -51,9 +51,7 @@ local draw = {
 
         if vim.tbl_contains({ "Method", "Function" }, ctx.kind) then
           local ft_ctx = require("plugins.completion.ft_ctx")
-          if ft_ctx[ft] and ft_ctx[ft].fix_label then
-            ft_ctx[ft].fix_label(ctx)
-          end
+          if ft_ctx[ft] and ft_ctx[ft].fix_label then ft_ctx[ft].fix_label(ctx) end
 
           if
             not vim.endswith(ctx.label, ")")
@@ -85,7 +83,7 @@ local draw = {
           table.insert(highlights, {
             #ctx.label,
             #ctx.label + #ctx.label_detail,
-            group = "Comment",
+            group = "DiagnosticUnnecessary",
           })
         end
 
@@ -117,11 +115,7 @@ return {
     lazy = false,
     dependencies = {
       "rafamadriz/friendly-snippets",
-      -- {
-      --   "giuxtaposition/blink-cmp-copilot",
-      --   dependencies = "zberinbaum/copilot.lua",
-      -- },
-      -- { "L3MON4D3/LuaSnip", version = "v2.*" },
+      "L3MON4D3/LuaSnip",
     },
     version = "v0.*",
     -- build = "cargo build --release",
@@ -138,10 +132,10 @@ return {
         ["<Tab>"] = { "accept", "fallback" },
 
         ["<C-p>"] = { "select_prev", "fallback" },
-        ["<C-n>"] = { "show", "select_next", "fallback" },
+        ["<C-n>"] = { "select_next", "fallback" },
 
-        ["<C-k>"] = { "select_prev" },
-        ["<C-j>"] = { "show", "select_next" },
+        ["<C-k>"] = { "select_prev", "fallback" },
+        ["<C-j>"] = { "show", "select_next", "fallback" },
 
         ["<C-u>"] = { "scroll_documentation_up", "fallback" },
         ["<C-d>"] = { "scroll_documentation_down", "fallback" },
@@ -211,8 +205,8 @@ return {
           },
         },
         menu = {
-          auto_show = false,
-          max_height = 8,
+          auto_show = true,
+          max_height = 6,
           draw = draw,
           scrollbar = false,
         },

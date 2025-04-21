@@ -10,6 +10,10 @@ M.init = function()
     return ""
   end
 
+  if vim.v.virtnum > 0 or vim.v.virtnum < 0 then
+    return ""
+  end
+
   if vim.v.relnum == 0 then
     text = text .. vim.v.lnum
   else

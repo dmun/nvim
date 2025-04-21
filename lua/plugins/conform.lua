@@ -27,6 +27,7 @@ return {
     },
     formatters = {
       stylua = {
+        command = "stylua",
         condition = function(_, ctx)
           return vim.fs.basename(ctx.filename) ~= "xmake.lua"
         end,

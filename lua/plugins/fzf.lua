@@ -20,43 +20,16 @@ local _rounded = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" }
 local _border = false and _rounded or _single
 
 local default_winopts = {
-  title = "Fzf",
+  title = false,
   title_pos = "left",
   title_flags = false,
-  row = 0.3,
-  col = 0.5,
+  row = 0,
+  col = 0.3,
   height = 0.5,
-  width = 0.8,
+  width = 1.0,
   backdrop = 100,
-  split = "botright new",
-  border = function(_, m)
-    assert(m.type == "nvim" and m.name == "fzf")
-    if m.nwin == 1 then
-      -- No preview, return the border whole
-      return _border
-    else
-      -- has preview `nwim==2`
-      assert(type(m.layout) == "string")
-      local b = vim.deepcopy(_border)
-      if m.layout == "down" then
-        b[5] = "┤" -- bottom right
-        b[6] = "" -- remove bottom
-        b[7] = "├" -- bottom left
-      elseif m.layout == "up" then
-        b[1] = "├" --top right
-        b[3] = "┤" -- top left
-      elseif m.layout == "left" then
-        b[1] = "┬" -- top left
-        b[8] = "" -- remove left
-        b[7] = "┴" -- bottom right
-      else -- right
-        b[3] = "┬" -- top right
-        b[4] = "" -- remove right
-        b[5] = "┴" -- bottom right
-      end
-      return b
-    end
-  end,
+  -- split = "botright 10 new",
+  border = "single",
   preview = {
     hidden = "hidden",
     vertical = "down:50%",
@@ -64,30 +37,7 @@ local default_winopts = {
     title_pos = "left",
     scrollbar = false,
     scrollchars = { "┃", "" },
-    border = function(_, m)
-      if m.type == "fzf" then
-        -- Always return none, let `bat --style=default` to draw our border
-        return "none"
-      else
-        assert(m.type == "nvim" and m.name == "prev" and type(m.layout) == "string")
-        local b = vim.deepcopy(_border)
-        if m.layout == "down" then
-          b[1] = "├" --top right
-          b[3] = "┤" -- top left
-        elseif m.layout == "up" then
-          b[7] = "├" -- bottom left
-          b[6] = "" -- remove bottom
-          b[5] = "┤" -- bottom right
-        elseif m.layout == "left" then
-          b[3] = "┬" -- top right
-          b[5] = "┴" -- bottom right
-        else -- right
-          b[1] = "┬" -- top left
-          b[7] = "┴" -- bottom left
-        end
-        return b
-      end
-    end,
+    border = "single"
   },
 }
 
@@ -97,7 +47,8 @@ return {
   cmd = "FzfLua",
   keys = {
     { "<leader>f", "<cmd>FzfLua files<cr>" },
-    { "<leader>l", "<cmd>FzfLua oldfiles<cr>" },
+    { "<leader>g", "<cmd>FzfLua git_status<cr>" },
+    { "<leader>o", "<cmd>FzfLua oldfiles<cr>" },
     { "<leader>/", "<cmd>FzfLua live_grep<cr>" },
     { "<leader>?", "<cmd>FzfLua live_grep_resume<cr>" },
     { "<leader>,", "<cmd>FzfLua buffers<cr>" },
@@ -112,11 +63,10 @@ return {
           prompt = " > ",
           winopts = {
             title = " " .. vim.trim((fzf_opts.prompt or "Select"):gsub("%s*:%s*$", "")) .. " ",
-            title_pos = "center",
+            title_pos = "left",
           },
         }, fzf_opts.kind == "codeaction" and {
           winopts = {
-            title = "",
             -- border = "none",
             relative = "cursor",
             row = 1,
@@ -136,7 +86,7 @@ return {
               hidden = "hidden",
             },
             on_create = function()
-              vim.o.winhl = "Normal:Normal"
+              -- vim.o.winhl = "Normal:Normal"
             end,
           },
         } or {
@@ -151,6 +101,11 @@ return {
     end
   end,
   opts = {
+    keymap = {
+      fzf = {
+        ["ctrl-q"] = "select-all+accept",
+      },
+    },
     "max-perf",
     file_icons = false,
     prompt = "> ",
@@ -166,25 +121,25 @@ return {
       },
     },
     files = {
-      winopts = { title = "Files" },
+      winopts = {},
       cwd_prompt = false,
       cmd = "rg --files --hidden",
       no_header_i = true,
       git_icons = false,
     },
     oldfiles = {
-      winopts = { title = "Oldfiles" },
+      winopts = {},
       include_current_session = true,
     },
     code_actions = {
-      winopts = { title = "Code Actions" },
+      winopts = {},
     },
     grep = {
-      winopts = { title = "Grep" },
+      winopts = {},
       no_header_i = true,
     },
     buffers = {
-      winopts = { title = "Buffers" },
+      winopts = {},
       no_header_i = true,
     },
     builtin = {
@@ -192,7 +147,7 @@ return {
       no_header_i = true,
     },
     highlights = {
-      winopts = { title = "Highlights" },
+      winopts = {},
       no_header_i = true,
     },
     fzf_opts = {
@@ -200,16 +155,21 @@ return {
       ["--no-scrollbar"] = true,
     },
     -- fzf_colors = true,
+    hls = {
+      normal = "NormalFloat",
+      border = "FloatBorder",
+      title = "FloatTitle",
+    },
     fzf_colors = {
       ["fg"] = { "fg", "CursorLine" },
       -- ["bg"] = { "bg", "Normal" },
-      ["hl"] = { "fg", "Comment" },
-      ["fg+"] = { "fg", "Normal" },
-      ["bg+"] = { "bg", "CursorLine" },
-      ["hl+"] = { "fg", "Statement" },
+      ["hl"] = { "fg", "Normal" },
+      ["fg+"] = { "fg", "PmenuSel" },
+      ["bg+"] = { "bg", "PmenuSel" },
+      ["hl+"] = { "fg", "PmenuSel" },
+      ["pointer"] = { "bg", "PmenuSel" },
       ["info"] = { "fg", "PreProc" },
       ["prompt"] = { "fg", "Label" },
-      ["pointer"] = { "bg", "CursorLine" },
       ["marker"] = { "fg", "Keyword" },
       ["spinner"] = { "fg", "Label" },
       ["header"] = { "fg", "Comment" },

@@ -55,15 +55,6 @@ return {
     end,
   },
   {
-    "nvim-treesitter/nvim-treesitter-context",
-    enabled = false,
-    opts = {
-      max_lines = 1,
-      trim_scope = "inner",
-      mode = "topline",
-    },
-  },
-  {
     "nvim-treesitter/nvim-treesitter",
     event = { "BufReadPre", "BufNewFile" },
     config = function()

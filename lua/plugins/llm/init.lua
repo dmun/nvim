@@ -49,7 +49,7 @@ return {
   },
   {
     "zbirenbaum/copilot.lua",
-    enabled = false,
+    enabled = true,
     cmd = "Copilot",
     event = "InsertEnter",
     config = function()
@@ -66,7 +66,7 @@ return {
     "CopilotC-Nvim/CopilotChat.nvim",
     enabled = true,
     keys = {
-      { "<leader>e", "<cmd>CopilotChat<cr>" },
+      { "<leader>l", "<cmd>CopilotChat<cr>" },
     },
     dependencies = {
       "MeanderingProgrammer/render-markdown.nvim",
@@ -76,10 +76,11 @@ return {
     build = "make tiktoken", -- Only on MacOS or Linux
     opts = {
       window = {
-        -- layout = "float",
-        border = "none",
+        layout = "float",
+        -- border = "none",
+        title = " Copilot ",
         width = 1,
-        height = 0.95,
+        height = 0.5,
         row = 0,
         col = 0,
         relative = "editor",

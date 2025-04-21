@@ -1,9 +1,17 @@
 local M = {}
 
----@param highlights table
-function M.set_highlights(highlights)
-  for k, v in pairs(highlights) do
-    vim.api.nvim_set_hl(0, k, v)
+---@param hl table
+function M.set_highlights(hl)
+  for k, v in pairs(hl) do
+    if type(v) == "string" then
+      vim.api.nvim_set_hl(0, k, { link = v })
+    elseif type(v) == "table" then
+      v.fg = type(v.fg or "NONE") ~= "string" and v.fg:hex() or v.fg
+      v.bg = type(v.bg or "NONE") ~= "string" and v.bg:hex() or v.bg
+      vim.api.nvim_set_hl(0, k, v)
+    else
+      error("Invalid highlight value type: " .. type(v))
+    end
   end
 end
 
@@ -112,7 +120,14 @@ function M.run_command(reset)
     return
   end
 
-  vim.cmd("split term://" .. command)
+  vim.keymap.set("n", "gf", function()
+    local filename = vim.fn.expand("<cfile>")
+    vim.cmd("wincmd w") -- Jump to next window
+    vim.cmd("edit " .. filename)
+  end)
+
+  vim.cmd("botright 15 new term://" .. command)
+  vim.opt_local.filetype = "run"
   vim.opt_local.number = false
   vim.opt_local.relativenumber = false
   vim.opt_local.signcolumn = "no"

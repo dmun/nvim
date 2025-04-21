@@ -9,25 +9,6 @@ return {
       require("nvim-autopairs").remove_rule("`")
     end,
   },
-  -- { "dstein64/nvim-scrollview", enabled = false, config = true },
-  {
-    "folke/trouble.nvim",
-    keys = {
-      { "gd", "<cmd>Trouble lsp_definitions<CR>" },
-      { "gi", "<cmd>Trouble lsp_implementations<CR>" },
-      { "gr", "<cmd>Trouble lsp_references<CR>" },
-      { "<leader>w", "<cmd>Trouble symbols<cr>" },
-    },
-    opts = {
-      focus = true,
-      modes = {
-        symbols = {
-          focus = true,
-          -- win = { position = "bottom" },
-        },
-      },
-    },
-  },
   {
     "monaqa/dial.nvim",
     config = function()
@@ -79,21 +60,26 @@ return {
     end,
   },
   {
-    "dgagn/diagflow.nvim",
-    enabled = false,
-    event = "LspAttach",
-    opts = {
-      scope = "cursor",
-      inline_padding_left = 1,
-      padding_right = 1,
-      toggle_event = { "InsertEnter", "InsertLeave" },
-      -- placement = "inline",
-    },
-  },
-  {
     "kylechui/nvim-surround",
+    version = "^3.0.0",
     event = "VeryLazy",
-    config = true,
+    config = function()
+      require("nvim-surround").setup({
+        keymaps = {
+          insert = "<C-g>s",
+          insert_line = "<C-g>S",
+          normal = "s",
+          normal_cur = "ss",
+          -- normal_line = "S",
+          normal_cur_line = "S",
+          visual = "s",
+          visual_line = "S",
+          delete = "ds",
+          change = "cs",
+          change_line = "cS",
+        },
+      })
+    end,
   },
   {
     "kevinhwang91/nvim-ufo",
@@ -128,9 +114,7 @@ return {
               return ufo_folds
             end)
         end
-        if ft == "python" then
-          return get_cell_folds
-        end
+        if ft == "python" then return get_cell_folds end
         return { "treesitter", "indent" }
       end,
     },

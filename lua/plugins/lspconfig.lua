@@ -72,6 +72,7 @@ return {
           vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
           local opts = { buffer = ev.buf }
           vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
+          vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
           vim.keymap.set("n", "K", function()
             vim.lsp.buf.hover({ border = "single" })
           end, opts)

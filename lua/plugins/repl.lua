@@ -5,6 +5,8 @@ return {
   config = function()
     local iron = require("iron.core")
     local python_format = require("iron.fts.common").bracketed_paste
+    local map = vim.keymap.set
+
     iron.setup({
       config = {
         -- Whether a repl should be discarded or not
@@ -70,11 +72,11 @@ return {
     })
 
     -- iron also has a list of commands, see :h iron-commands for all available commands
-    vim.keymap.set("n", "<CR>", " sic", { remap = true, buffer = true })
-    vim.keymap.set("n", "<M-b>", "O# %%0j", { remap = true, buffer = true })
-    vim.keymap.set("n", "<space>rs", "<Cmd>IronRepl<CR>")
-    vim.keymap.set("n", "<space>rr", "<Cmd>IronRestart<CR>")
-    vim.keymap.set("n", "<space>rf", "<Cmd>IronFocus<CR>")
-    vim.keymap.set("n", "<space>rh", "<Cmd>IronHide<CR>")
+    map("n", "<CR>", " sic", { remap = true, buffer = true })
+    map("n", "<M-b>", "O# %%0j", { remap = true, buffer = true })
+    map("n", "<space>rs", "<Cmd>IronRepl<CR>")
+    map("n", "<space>rr", "<Cmd>IronRestart<CR>")
+    map("n", "<space>rf", "<Cmd>IronFocus<CR>")
+    map("n", "<space>rh", "<Cmd>IronHide<CR>")
   end,
 }

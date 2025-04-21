@@ -1,5 +1,20 @@
 return {
   {
+    "echasnovski/mini.nvim",
+    enabled = true,
+    keys = { { "-", [[<cmd>lua require("mini.files").open()<cr>]] } },
+    config = function()
+      require("mini.files").setup({
+        mappings = {
+          go_in = "L",
+          go_in_plus = "l",
+          -- go_out = "H",
+          -- go_out_plus = "h",
+        },
+      })
+    end,
+  },
+  {
     "airblade/vim-rooter",
     enabled = true,
     init = function()
@@ -8,6 +23,7 @@ return {
   },
   {
     "stevearc/oil.nvim",
+    enabled = false,
     dependencies = "nvim-tree/nvim-web-devicons",
     lazy = false,
     keys = { { "-", "<cmd>Oil<cr>" } },
@@ -24,7 +40,7 @@ return {
         wrap = false,
         signcolumn = "yes",
         cursorcolumn = false,
-        foldcolumn = "0",
+        -- foldcolumn = "0",
         spell = false,
         list = false,
         conceallevel = 3,
@@ -36,52 +52,38 @@ return {
     },
   },
   {
-    "theprimeagen/harpoon",
-    branch = "harpoon2",
-    dependencies = { "nvim-lua/plenary.nvim" },
-    opts = {
-      settings = {
-        save_on_toggle = true,
-      },
-    },
-    keys = {
-      {
-        "<leader>m",
-        function()
-          require("harpoon"):list():add()
-        end,
-      },
-      {
-        "<leader>q",
-        function()
-          local harpoon = require("harpoon")
-          harpoon.ui:toggle_quick_menu(harpoon:list())
-        end,
-      },
-      {
-        "<M-1>",
-        function()
-          require("harpoon"):list():select(1)
-        end,
-      },
-      {
-        "<M-2>",
-        function()
-          require("harpoon"):list():select(2)
-        end,
-      },
-      {
-        "<M-3>",
-        function()
-          require("harpoon"):list():select(3)
-        end,
-      },
-      {
-        "<M-4>",
-        function()
-          require("harpoon"):list():select(4)
-        end,
-      },
-    },
+    "cbochs/grapple.nvim",
+    config = function()
+      local grapple = require("grapple")
+      local map = vim.keymap.set
+
+      grapple.setup({
+        win_opts = {
+          width = 999,
+          height = 12,
+          row = 0,
+          col = 0,
+
+          relative = "editor",
+          border = "single",
+          focusable = false,
+          style = "minimal",
+
+          title = "",
+          title_pos = "left",
+          title_padding = " ",
+
+          footer = "",
+        },
+      })
+
+      map("n", "<leader>g", grapple.toggle_tags)
+      map("n", "<leader>a", grapple.toggle)
+      for i = 1, 5 do
+        map("n", "<leader>" .. i, function()
+          grapple.select({ index = i })
+        end)
+      end
+    end,
   },
 }
