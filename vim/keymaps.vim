@@ -1,5 +1,5 @@
 let mapleader = " "
-let maplocalleader = ","
+let maplocalleader = " m"
 
 nnoremap <esc> <cmd>nohl \| echo ''<CR>
 nnoremap <leader>q <cmd>copen<CR>
@@ -20,8 +20,8 @@ nnoremap <leader>tl :set list!<CR>
 nnoremap <C-,> gccj
 nnoremap <leader>dl :messages<CR>
 
-nnoremap <leader>mr <CMD>lua require('util').run_command()<CR>
-nnoremap <leader>mR <CMD>lua require('util').run_command_reset()<CR>
+nnoremap <localleader>r <CMD>lua require('util').run_command()<CR>
+nnoremap <localleader>R <CMD>lua require('util').run_command_reset()<CR>
 
 " nnoremap <C-d> <C-d>zz
 " nnoremap <C-u> <C-u>zz

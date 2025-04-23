@@ -49,7 +49,7 @@ return {
   },
   {
     "zbirenbaum/copilot.lua",
-    enabled = true,
+    enabled = false,
     cmd = "Copilot",
     event = "InsertEnter",
     config = function()
@@ -64,7 +64,7 @@ return {
   },
   {
     "CopilotC-Nvim/CopilotChat.nvim",
-    enabled = true,
+    enabled = false,
     keys = {
       { "<leader>l", "<cmd>CopilotChat<cr>" },
     },

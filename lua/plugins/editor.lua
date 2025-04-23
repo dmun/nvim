@@ -1,5 +1,8 @@
 return {
-  "tpope/vim-fugitive",
+  {
+    "tpope/vim-fugitive",
+    dependencies = "https://github.com/tpope/vim-rhubarb",
+  },
   { "numToStr/Comment.nvim", event = "VeryLazy" },
   {
     "windwp/nvim-autopairs",
@@ -13,6 +16,8 @@ return {
     "monaqa/dial.nvim",
     config = function()
       local augend = require("dial.augend")
+      local map = vim.keymap.set
+
       require("dial.config").augends:register_group({
         default = {
           augend.integer.alias.decimal, -- nonnegative decimal number (0, 1, 2, 3, ...)
@@ -22,30 +27,14 @@ return {
         },
       })
 
-      vim.keymap.set("n", "<C-a>", function()
-        require("dial.map").manipulate("increment", "normal")
-      end)
-      vim.keymap.set("n", "<C-x>", function()
-        require("dial.map").manipulate("decrement", "normal")
-      end)
-      vim.keymap.set("n", "g<C-a>", function()
-        require("dial.map").manipulate("increment", "gnormal")
-      end)
-      vim.keymap.set("n", "g<C-x>", function()
-        require("dial.map").manipulate("decrement", "gnormal")
-      end)
-      vim.keymap.set("v", "<C-a>", function()
-        require("dial.map").manipulate("increment", "visual")
-      end)
-      vim.keymap.set("v", "<C-x>", function()
-        require("dial.map").manipulate("decrement", "visual")
-      end)
-      vim.keymap.set("v", "g<C-a>", function()
-        require("dial.map").manipulate("increment", "gvisual")
-      end)
-      vim.keymap.set("v", "g<C-x>", function()
-        require("dial.map").manipulate("decrement", "gvisual")
-      end)
+      map("n", "<C-a>", function() require("dial.map").manipulate("increment", "normal") end)
+      map("n", "<C-x>", function() require("dial.map").manipulate("decrement", "normal") end)
+      map("n", "g<C-a>", function() require("dial.map").manipulate("increment", "gnormal") end)
+      map("n", "g<C-x>", function() require("dial.map").manipulate("decrement", "gnormal") end)
+      map("v", "<C-a>", function() require("dial.map").manipulate("increment", "visual") end)
+      map("v", "<C-x>", function() require("dial.map").manipulate("decrement", "visual") end)
+      map("v", "g<C-a>", function() require("dial.map").manipulate("increment", "gvisual") end)
+      map("v", "g<C-x>", function() require("dial.map").manipulate("decrement", "gvisual") end)
     end,
   },
   {
@@ -55,9 +44,7 @@ return {
   },
   {
     "dmun/autosave.nvim",
-    config = function()
-      vim.g.autosave_enabled = true
-    end,
+    config = function() vim.g.autosave_enabled = true end,
   },
   {
     "kylechui/nvim-surround",
@@ -98,12 +85,8 @@ return {
           end
           return ufo
             .getFolds(bufnr, "lsp")
-            :catch(function(err)
-              return handleFallbackException(err, "treesitter")
-            end)
-            :catch(function(err)
-              return handleFallbackException(err, "indent")
-            end)
+            :catch(function(err) return handleFallbackException(err, "treesitter") end)
+            :catch(function(err) return handleFallbackException(err, "indent") end)
             :thenCall(function(ufo_folds)
               local ok, jupynium = pcall(require, "jupynium")
               if ok then
