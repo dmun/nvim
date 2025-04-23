@@ -1,12 +1,27 @@
+local map = vim.keymap.set
+
 return {
   "tpope/vim-rsi",
-  { "echasnovski/mini.ai", opts = {} },
-  { "nacro90/numb.nvim", event = "CmdLineEnter", opts = {} },
+  { "echasnovski/mini.ai", config = true },
+  { "nacro90/numb.nvim", event = "CmdLineEnter", config = true },
   {
     "Wansmer/treesj",
-    keys = { "<space>tj", "<space>j", "<space>s" },
     dependencies = { "nvim-treesitter/nvim-treesitter" },
-    config = true,
+    config = function()
+      local tj = require("treesj")
+
+      tj.setup({
+        use_default_keymaps = false,
+        check_syntax_error = true,
+        max_join_length = math.huge,
+        cursor_behavior = "start",
+        notify = false,
+        dot_repeat = true,
+      })
+
+      map("n", "gJ", tj.join)
+      map("n", "gS", tj.split)
+    end,
   },
   {
     "jake-stewart/multicursor.nvim",
@@ -15,42 +30,26 @@ return {
       local mc = require("multicursor-nvim")
       mc.setup()
 
-      local map = vim.keymap.set
-
-      -- Add or skip cursor above/below the main cursor.
       map({ "n", "x" }, "ga", mc.addCursorOperator)
+      map({ "n", "x" }, "<C-q>", mc.toggleCursor)
+      map("n", "gm", mc.restoreCursors)
+      map("x", "m", mc.matchCursors)
+      map("x", "S", mc.splitCursors)
+
       map({ "n", "x" }, "<C-k>", function() mc.lineAddCursor(-1) end)
       map({ "n", "x" }, "<C-j>", function() mc.lineAddCursor(1) end)
-      map({ "n", "x" }, "<leader><up>", function() mc.lineSkipCursor(-1) end)
-      map({ "n", "x" }, "<leader><down>", function() mc.lineSkipCursor(1) end)
-
-      -- Add or skip adding a new cursor by matching word/selection
       map({ "n", "x" }, "<C-n>", function() mc.matchAddCursor(1) end)
       map({ "n", "x" }, "<C-s>", function() mc.matchSkipCursor(1) end)
       map({ "n", "x" }, "<C-p>", function() mc.matchAddCursor(-1) end)
       map({ "n", "x" }, "<C-S-s>", function() mc.matchSkipCursor(-1) end)
 
-      -- Add and remove cursors with control + left click.
-      map("n", "<c-leftmouse>", mc.handleMouse)
-      map("n", "<c-leftdrag>", mc.handleMouseDrag)
-      map("n", "<c-leftrelease>", mc.handleMouseRelease)
+      mc.addKeymapLayer(function(layermap)
+        layermap({ "n", "x" }, "<C-o>", mc.prevCursor)
+        layermap({ "n", "x" }, "<C-i>", mc.nextCursor)
+        layermap({ "n", "x" }, "<C-h>", mc.deleteCursor)
+        layermap({ "n", "x" }, "<C-;>", mc.alignCursors)
 
-      -- Disable and enable cursors.
-      map({ "n", "x" }, "<c-q>", mc.toggleCursor)
-
-      -- Mappings defined in a keymap layer only apply when there are
-      -- multiple cursors. This lets you have overlapping mappings.
-      mc.addKeymapLayer(function(layerSet)
-        -- Select a different cursor as the main one.
-        layerSet({ "n", "x" }, "<C-o>", mc.prevCursor)
-        layerSet({ "n", "x" }, "<C-i>", mc.nextCursor)
-        layerSet("n", "<C-;>", mc.alignCursors)
-
-        -- Delete the main cursor.
-        layerSet({ "n", "x" }, "<C-h>", mc.deleteCursor)
-
-        -- Enable and clear cursors using escape.
-        layerSet("n", "<esc>", function()
+        layermap("n", "<esc>", function()
           if not mc.cursorsEnabled() then
             mc.enableCursors()
           else
@@ -58,12 +57,6 @@ return {
           end
         end)
       end)
-
-      map({ "n", "x" }, "<c-q>", mc.toggleCursor)
-
-      map("n", "gm", mc.restoreCursors)
-      map("v", "m", mc.matchCursors)
-      map("v", "S", mc.splitCursors)
     end,
   },
 }

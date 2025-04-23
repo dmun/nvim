@@ -1,28 +1,5 @@
 local M = {}
 
----@param hl table
-function M.set_highlights(hl)
-  for k, v in pairs(hl) do
-    if type(v) == "string" then
-      vim.api.nvim_set_hl(0, k, { link = v })
-    elseif type(v) == "table" then
-      v.fg = type(v.fg or "NONE") ~= "string" and v.fg:hex() or v.fg
-      v.bg = type(v.bg or "NONE") ~= "string" and v.bg:hex() or v.bg
-      vim.api.nvim_set_hl(0, k, v)
-    else
-      error("Invalid highlight value type: " .. type(v))
-    end
-  end
-end
-
-function M.handle_keymaps(modes)
-  for mode, maps in pairs(modes) do
-    for _, map in pairs(maps) do
-      vim.keymap.set(mode, map[1], map[2], { silent = true, remap = true })
-    end
-  end
-end
-
 function M.deepcopy(o, seen)
   seen = seen or {}
   if o == nil then
@@ -137,30 +114,6 @@ end
 
 function M.run_command_reset()
   M.run_command(true)
-end
-
-function M.set_colorscheme()
-  local path = vim.fn.stdpath("cache") .. "/colorscheme"
-  local fd, err, _ = vim.uv.fs_open(path, "r", 438)
-
-  if not fd then
-    error(err)
-  end
-
-  local fstat, err, _ = vim.uv.fs_fstat(fd)
-
-  if not fstat then
-    error(err)
-  end
-
-  local data, err, _ = vim.uv.fs_read(fd, fstat.size, 0)
-
-  if not data then
-    error(err)
-  end
-  vim.cmd.color(data)
-
-  vim.uv.fs_close(fd)
 end
 
 return M

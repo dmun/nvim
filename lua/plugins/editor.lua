@@ -1,8 +1,8 @@
+local map = vim.keymap.set
+
 return {
-  {
-    "tpope/vim-fugitive",
-    dependencies = "https://github.com/tpope/vim-rhubarb",
-  },
+  "svban/YankAssassin.vim",
+  { "tpope/vim-fugitive", dependencies = "tpope/vim-rhubarb" },
   { "numToStr/Comment.nvim", event = "VeryLazy" },
   {
     "windwp/nvim-autopairs",
@@ -16,35 +16,59 @@ return {
     "monaqa/dial.nvim",
     config = function()
       local augend = require("dial.augend")
-      local map = vim.keymap.set
+      local dial = require("dial.map")
 
       require("dial.config").augends:register_group({
         default = {
-          augend.integer.alias.decimal, -- nonnegative decimal number (0, 1, 2, 3, ...)
-          augend.integer.alias.hex, -- nonnegative hex number  (0x01, 0x1a1f, etc.)
-          augend.constant.alias.bool, -- boolean value (true <-> false)
-          augend.date.alias["%Y/%m/%d"], -- date (2022/02/19, etc.)
+          augend.integer.alias.decimal,
+          augend.integer.alias.hex,
+          augend.constant.alias.bool,
+          augend.date.alias["%Y/%m/%d"],
         },
       })
 
-      map("n", "<C-a>", function() require("dial.map").manipulate("increment", "normal") end)
-      map("n", "<C-x>", function() require("dial.map").manipulate("decrement", "normal") end)
-      map("n", "g<C-a>", function() require("dial.map").manipulate("increment", "gnormal") end)
-      map("n", "g<C-x>", function() require("dial.map").manipulate("decrement", "gnormal") end)
-      map("v", "<C-a>", function() require("dial.map").manipulate("increment", "visual") end)
-      map("v", "<C-x>", function() require("dial.map").manipulate("decrement", "visual") end)
-      map("v", "g<C-a>", function() require("dial.map").manipulate("increment", "gvisual") end)
-      map("v", "g<C-x>", function() require("dial.map").manipulate("decrement", "gvisual") end)
+      map("n", "<C-a>", function() dial.manipulate("increment", "normal") end)
+      map("n", "<C-x>", function() dial.manipulate("decrement", "normal") end)
+      map("n", "g<C-a>", function() dial.manipulate("increment", "gnormal") end)
+      map("n", "g<C-x>", function() dial.manipulate("decrement", "gnormal") end)
+      map("v", "<C-a>", function() dial.manipulate("increment", "visual") end)
+      map("v", "<C-x>", function() dial.manipulate("decrement", "visual") end)
+      map("v", "g<C-a>", function() dial.manipulate("increment", "gvisual") end)
+      map("v", "g<C-x>", function() dial.manipulate("decrement", "gvisual") end)
     end,
   },
   {
     "NMAC427/guess-indent.nvim",
-    event = { "BufReadPre", "BufNewFile" },
-    config = true,
+    event = "VeryLazy",
+    config = function()
+      require("guess-indent").setup({
+        auto_cmd = true,
+        override_editorconfig = false,
+        filetype_exclude = {
+          "netrw",
+          "tutor",
+        },
+        buftype_exclude = {
+          "help",
+          "nofile",
+          "terminal",
+          "prompt",
+        },
+        on_tab_options = {
+          expandtab = false,
+        },
+        on_space_options = {
+          expandtab = true,
+          tabstop = "detected",
+          softtabstop = "detected",
+          shiftwidth = "detected",
+        },
+      })
+    end,
   },
   {
     "dmun/autosave.nvim",
-    config = function() vim.g.autosave_enabled = true end,
+    init = function() vim.g.autosave_enabled = true end,
   },
   {
     "kylechui/nvim-surround",
@@ -67,39 +91,5 @@ return {
         },
       })
     end,
-  },
-  {
-    "kevinhwang91/nvim-ufo",
-    event = { "BufRead", "BufNewFile" },
-    dependencies = { "kevinhwang91/promise-async", "kiyoon/jupynium.nvim" },
-    opts = {
-      provider_selector = function(bufnr, ft, bt)
-        local ufo = require("ufo")
-        local function get_cell_folds(bufnr)
-          local function handleFallbackException(err, providerName)
-            if type(err) == "string" and err:match("UfoFallbackException") then
-              return ufo.getFolds(bufnr, providerName)
-            else
-              return require("promise").reject(err)
-            end
-          end
-          return ufo
-            .getFolds(bufnr, "lsp")
-            :catch(function(err) return handleFallbackException(err, "treesitter") end)
-            :catch(function(err) return handleFallbackException(err, "indent") end)
-            :thenCall(function(ufo_folds)
-              local ok, jupynium = pcall(require, "jupynium")
-              if ok then
-                for _, fold in ipairs(jupynium.get_folds()) do
-                  table.insert(ufo_folds, fold)
-                end
-              end
-              return ufo_folds
-            end)
-        end
-        if ft == "python" then return get_cell_folds end
-        return { "treesitter", "indent" }
-      end,
-    },
   },
 }

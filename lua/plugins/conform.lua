@@ -1,48 +1,33 @@
+local map = vim.keymap.set
+
 return {
   "stevearc/conform.nvim",
-  keys = {
-    {
-      "<M-f>",
-      function()
-        require("conform").format({ lsp_format = "fallback" })
-      end,
-    },
-  },
-  opts = {
-    formatters_by_ft = {
-      lua = { "stylua" },
-      -- python = { "ruff" },
-      rust = { "rustfmt" },
-      go = { "gofmt" },
-      typescript = { "prettier" },
-      javascript = { "prettier" },
-      html = { "prettier" },
-      json = { "prettier" },
-      cpp = { "clang-format" },
-      c = { "clang-format" },
-      tex = { "latexindent" },
-      typst = { "typstyle" },
-      swift = { "swift-format" },
-      odin = { "odinfmt" },
-    },
-    formatters = {
-      stylua = {
-        command = "stylua",
-        condition = function(_, ctx)
-          return vim.fs.basename(ctx.filename) ~= "xmake.lua"
-        end,
+  config = function()
+    local conform = require("conform")
+
+    conform.setup({
+      formatters_by_ft = {
+        lua = { "stylua" },
+        rust = { "rustfmt" },
+        go = { "gofmt" },
+        typescript = { "prettier" },
+        javascript = { "prettier" },
+        html = { "prettier" },
+        json = { "prettier" },
+        cpp = { "clang-format" },
+        c = { "clang-format" },
+        tex = { "latexindent" },
+        typst = { "typstyle" },
+        odin = { "odinfmt" },
       },
-      ["swift-format"] = {
-        command = "swift-format",
-        args = { "--configuration", ".swift-format" },
+      formatters = {
+        ["clang-format"] = {
+          command = "clang-format",
+          args = { "--style", "{BasedOnStyle: LLVM, IndentWidth: 4, BreakTemplateDeclarations: true}" },
+        },
       },
-      typstyle = {
-        command = "typstyle",
-      },
-      ["clang-format"] = {
-        command = "clang-format",
-        args = { "--style", "{BasedOnStyle: LLVM, IndentWidth: 4, BreakTemplateDeclarations: true}" },
-      },
-    },
-  },
+    })
+
+    map("n", "<M-f>", conform.format)
+  end,
 }

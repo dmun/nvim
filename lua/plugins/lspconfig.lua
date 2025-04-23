@@ -1,18 +1,8 @@
-local function get_ls_settings()
-  local settings = {}
-
-  for ls, ls_conf in pairs(Conf.ls) do
-    settings[Conf.lsp.ls_name[ls] or ls] = ls_conf.settings
-  end
-
-  return settings
-end
+local augroup = require("util.augroup")
+local map = vim.keymap.set
 
 local function get_ls_config(config)
-  local diagnostics = config and config.diagnostics or {}
-
   return {
-    settings = get_ls_settings(),
     filetypes = config and config.filetypes or nil,
     autostart = config and (config.autostart ~= false),
     on_init = config and config.on_init or nil,
@@ -43,46 +33,26 @@ return {
       "folke/lazydev.nvim",
     },
     config = function()
-      require("mason").setup()
       local lsp = require("lspconfig")
       local mason_lsp = require("mason-lspconfig")
 
-      mason_lsp.setup({
-        ensure_installed = Conf.lsp.ensure_installed,
-        automatic_installation = true,
-      })
-
-      -- setup mason language servers
+      require("mason").setup()
+      mason_lsp.setup()
       mason_lsp.setup_handlers({
-        function(ls)
-          lsp[ls].setup(get_ls_config(Conf.ls[ls]))
-        end,
+        function(ls) lsp[ls].setup(get_ls_config()) end,
       })
 
-      -- setup non-mason language servers
-      for ls, _ in pairs(Conf.ls) do
-        if not vim.tbl_contains(mason_lsp.get_available_servers(), ls) then
-          lsp[ls].setup(get_ls_config(Conf.ls[ls]))
-        end
-      end
-
-      vim.api.nvim_create_autocmd("LspAttach", {
-        group = vim.api.nvim_create_augroup("UserLspConfig", {}),
+      augroup("UserLspConfig"):au({
+        event = "LspAttach",
         callback = function(ev)
-          vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
           local opts = { buffer = ev.buf }
-          vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
-          vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
-          vim.keymap.set("n", "K", function()
-            vim.lsp.buf.hover({ border = "single" })
-          end, opts)
-          vim.keymap.set("n", "<C-w><C-d>", function()
-            vim.diagnostic.open_float({ border = "single" })
-          end, opts)
-          vim.keymap.set("i", "<C-s>", vim.lsp.buf.signature_help, opts)
-          vim.keymap.set("n", "<leader>D", "<cmd>Trouble lsp_type_definitions<cr>", opts)
-          vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
-          vim.keymap.set("n", "<C-c>", vim.lsp.buf.code_action, opts)
+          map("n", "gD", vim.lsp.buf.declaration, opts)
+          map("n", "gd", vim.lsp.buf.definition, opts)
+          map("n", "K", vim.lsp.buf.hover, opts)
+          map("n", "<C-w><C-d>", vim.diagnostic.open_float, opts)
+          map("i", "<C-s>", vim.lsp.buf.signature_help, opts)
+          map("n", "<leader>rn", vim.lsp.buf.rename, opts)
+          map("n", "<C-c>", vim.lsp.buf.code_action, opts)
         end,
       })
     end,
