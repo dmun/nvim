@@ -79,7 +79,7 @@ return {
 
     map("n", "<leader><leader>", fzf.builtin)
     map("n", "<leader>f", fzf.files)
-    map("n", "<leader>g", fzf.git_status)
+    -- map("n", "<leader>g", fzf.git_status)
     map("n", "<leader>o", fzf.oldfiles)
     map("n", "<leader>/", fzf.live_grep)
     map("n", "<leader>?", fzf.live_grep_resume)

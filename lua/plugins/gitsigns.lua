@@ -16,17 +16,16 @@ return {
       signcolumn = false,
       on_attach = function()
         map("n", "gs", function()
-          local sign = vim.o.signcolumn
-          if sign == "no" then
-            sign = "yes"
+          if vim.o.signcolumn == "no" then
+            vim.o.signcolumn = "yes"
             gs.toggle_signs(true)
           else
-            sign = "no"
+            vim.o.signcolumn = "no"
             gs.toggle_signs(false)
           end
         end)
 
-        vim.keymap.set("n", "]c", function()
+        map("n", "]c", function()
           if vim.wo.diff then
             vim.cmd.normal({ "]c", bang = true })
           else
@@ -34,7 +33,7 @@ return {
           end
         end)
 
-        vim.keymap.set("n", "[c", function()
+        map("n", "[c", function()
           if vim.wo.diff then
             vim.cmd.normal({ "[c", bang = true })
           else

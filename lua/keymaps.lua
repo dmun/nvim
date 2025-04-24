@@ -4,7 +4,11 @@ local util = require("util")
 vim.g.mapleader = " "
 vim.g.maplocalleader = " m"
 
-map("n", "<Esc>", '<cmd>nohl<bar>echo ""<cr>', { silent = true })
+map("n", "<Esc>", function()
+  vim.cmd.noh()
+  vim.cmd.echo()
+end, { silent = true })
+
 map("n", "<leader>q", vim.cmd.copen, { silent = true })
 map("n", "<M-o>", "<cmd>!open .<cr><cr>", { silent = true })
 

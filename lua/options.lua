@@ -23,10 +23,11 @@ o.foldcolumn = "0"
 o.foldenable = true
 o.foldlevel = 99
 o.foldlevelstart = 99
-o.number = false
+o.number = true
 o.numberwidth = 4
-o.relativenumber = false
+o.relativenumber = true
 o.signcolumn = "no"
+o.statuscolumn = [[%!v:lua.require'util.statuscolumn'.init()]]
 
 -- appearance
 o.background = "dark"
@@ -36,7 +37,7 @@ o.cursorline = true
 o.cursorlineopt = "number"
 o.ruler = false
 o.showcmd = false
-o.showmode = true
+o.showmode = false
 o.showtabline = 1
 o.termguicolors = true
 o.shm:append("I")
@@ -46,7 +47,7 @@ o.pumheight = 6
 o.fillchars = "eob: ,fold: ,foldopen:,foldclose:,foldsep: "
 -- o.guicursor = "i:iCursor-block,n-v:nCursor-block"
 o.guicursor = "i:Cursor-block-blinkon500-blinkoff500,n-v:Cursor-block"
-o.guicursor = "a:Cursor-block"
+-- o.guicursor = "a:Cursor-block"
 o.laststatus = 2
 o.listchars = "tab:» ,multispace:⸳"
 o.list = false
@@ -66,7 +67,7 @@ o.timeout = false
 o.ttimeoutlen = 0
 o.timeoutlen = 0
 o.scrolloff = 0
-o.sidescrolloff = 15
+o.sidescrolloff = 0
 o.smartcase = true
 
 -- file
@@ -78,5 +79,5 @@ o.autochdir = true
 o.clipboard = "unnamedplus"
 
 -- lsp
-vim.highlight.priorities.semantic_tokens = 100
+vim.highlight.priorities.semantic_tokens = 95
 vim.diagnostic.config({ signs = false })
