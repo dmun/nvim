@@ -137,10 +137,12 @@ return {
           "lsp",
           "path",
           "snippets",
-          -- "buffer",
+          "buffer",
           "dadbod",
         },
         providers = {
+          snippets = { min_keyword_length = 3 },
+          buffer = { min_keyword_length = 3 },
           lazydev = {
             name = "LazyDev",
             module = "lazydev.integrations.blink",
