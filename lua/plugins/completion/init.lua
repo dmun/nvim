@@ -80,102 +80,85 @@ local label = {
 }
 
 return {
-  {
+  "saghen/blink.cmp",
+  event = "VeryLazy",
+  lazy = false,
+  dependencies = {
+    "rafamadriz/friendly-snippets",
     "L3MON4D3/LuaSnip",
-    dependencies = {
-      {
-        "rafamadriz/friendly-snippets",
-        config = function()
-          require("luasnip.loaders.from_vscode").lazy_load()
-          require("luasnip.loaders.from_vscode").lazy_load({ paths = { vim.fn.stdpath("config") .. "/snippets" } })
-        end,
+  },
+  version = "v0.*",
+  -- build = "cargo build --release",
+  opts = {
+    keymap = {
+      preset = "default",
+      ["<C-e>"] = {},
+
+      ["<C-space>"] = { "show", "show_documentation", "hide_documentation" },
+      ["<C-y>"] = { "accept" },
+      ["<Tab>"] = { "accept", "fallback" },
+
+      ["<C-p>"] = { "select_prev", "fallback" },
+      ["<C-n>"] = { "select_next", "fallback" },
+
+      ["<C-k>"] = { "select_prev", "fallback" },
+      ["<C-j>"] = { "show", "select_next", "fallback" },
+
+      ["<C-u>"] = { "scroll_documentation_up", "fallback" },
+      ["<C-d>"] = { "scroll_documentation_down", "fallback" },
+
+      ["<C-l>"] = { "snippet_forward", "fallback" },
+      ["<C-h>"] = { "snippet_backward", "fallback" },
+    },
+    appearance = {
+      use_nvim_cmp_as_default = false,
+      nerd_font_variant = "mono",
+    },
+    snippets = { preset = "luasnip" },
+    sources = {
+      default = {
+        "lazydev",
+        "lsp",
+        "path",
+        "snippets",
+        "buffer",
+        "dadbod",
+      },
+      providers = {
+        snippets = { min_keyword_length = 3 },
+        buffer = { min_keyword_length = 3 },
+        lazydev = {
+          name = "LazyDev",
+          module = "lazydev.integrations.blink",
+          score_offset = 100,
+        },
+        dadbod = {
+          name = "Dadbod",
+          module = "vim_dadbod_completion.blink",
+          score_offset = 200,
+        },
       },
     },
-    opts = {
-      history = true,
-      delete_check_events = "TextChanged",
+    completion = {
+      list = { selection = { preselect = true } },
+      menu = {
+        draw = {
+          padding = 1,
+          gap = 0,
+          columns = { { "label" } },
+          components = { label = label },
+        },
+        max_height = vim.o.pumheight,
+      },
+      ghost_text = { enabled = false },
+    },
+    fuzzy = { implementation = "prefer_rust" },
+    signature = {
+      enabled = true,
+      trigger = {
+        show_on_insert_on_trigger_character = true,
+      },
     },
   },
-  {
-    "saghen/blink.cmp",
-    event = "VeryLazy",
-    dependencies = {
-      "rafamadriz/friendly-snippets",
-      "L3MON4D3/LuaSnip",
-    },
-    version = "v0.*",
-    -- build = "cargo build --release",
-    opts = {
-      keymap = {
-        preset = "default",
-        ["<C-e>"] = {},
-
-        ["<C-space>"] = { "show", "show_documentation", "hide_documentation" },
-        ["<C-y>"] = { "accept" },
-        ["<Tab>"] = { "accept", "fallback" },
-
-        ["<C-p>"] = { "select_prev", "fallback" },
-        ["<C-n>"] = { "select_next", "fallback" },
-
-        ["<C-k>"] = { "select_prev", "fallback" },
-        ["<C-j>"] = { "show", "select_next", "fallback" },
-
-        ["<C-u>"] = { "scroll_documentation_up", "fallback" },
-        ["<C-d>"] = { "scroll_documentation_down", "fallback" },
-
-        ["<C-l>"] = { "snippet_forward", "fallback" },
-        ["<C-h>"] = { "snippet_backward", "fallback" },
-      },
-      appearance = {
-        use_nvim_cmp_as_default = false,
-        nerd_font_variant = "mono",
-      },
-      snippets = { preset = "luasnip" },
-      sources = {
-        default = {
-          "lazydev",
-          "lsp",
-          "path",
-          "snippets",
-          "buffer",
-          "dadbod",
-        },
-        providers = {
-          snippets = { min_keyword_length = 3 },
-          buffer = { min_keyword_length = 3 },
-          lazydev = {
-            name = "LazyDev",
-            module = "lazydev.integrations.blink",
-            score_offset = 100,
-          },
-          dadbod = {
-            name = "Dadbod",
-            module = "vim_dadbod_completion.blink",
-            score_offset = 200,
-          },
-        },
-      },
-      completion = {
-        list = { selection = { preselect = true } },
-        menu = {
-          draw = {
-            padding = 1,
-            gap = 0,
-            columns = { { "label" } },
-            components = { label = label },
-          },
-          max_height = vim.o.pumheight,
-        },
-        ghost_text = { enabled = false },
-      },
-      fuzzy = { implementation = "prefer_rust" },
-      signature = {
-        enabled = true,
-        trigger = {
-          show_on_insert_on_trigger_character = true,
-        },
-      },
-    },
-    opts_extend = { "sources.default" },
-  },
+  opts_extend = { "sources.default" },
 }

@@ -1,13 +1,34 @@
 local M = {}
 
+local function echo(message, hl) vim.api.nvim_echo({ { message, hl or "Normal" } }, true, {}) end
+
+function M.bootstrap(author, name, opts)
+  opts = opts or {}
+  local path = opts.dir or (vim.fn.stdpath("data") .. "/" .. name .. "/" .. name .. ".nvim")
+  if not vim.uv.fs_stat(path) then
+    local repo = "https://github.com/" .. author .. "/" .. name .. ".nvim"
+    local out = vim.fn.system({
+      "git",
+      "clone",
+      "--branch=" .. (opts.branch or "stable"),
+      "--filter=blob:none",
+      repo,
+      path,
+    })
+    if vim.v.shell_error ~= 0 then
+      echo("Failed to clone " .. name .. ":", "Error")
+      echo(out)
+      vim.fn.getchar()
+      os.exit(1)
+    end
+  end
+  vim.opt.runtimepath:prepend(path)
+end
+
 function M.deepcopy(o, seen)
   seen = seen or {}
-  if o == nil then
-    return nil
-  end
-  if seen[o] then
-    return seen[o]
-  end
+  if o == nil then return nil end
+  if seen[o] then return seen[o] end
 
   local no
   if type(o) == "table" then
@@ -33,13 +54,9 @@ function M.run_command(reset)
   local basename = vim.fs.basename(project_path)
   local file = dir .. "/" .. basename .. ".json"
 
-  if vim.loop.fs_stat(dir) == nil then
-    vim.fn.mkdir(dir, "p")
-  end
+  if vim.loop.fs_stat(dir) == nil then vim.fn.mkdir(dir, "p") end
 
-  if vim.loop.fs_stat(file) == nil then
-    vim.cmd.write(file)
-  end
+  if vim.loop.fs_stat(file) == nil then vim.cmd.write(file) end
 
   local fd, err, _ = vim.loop.fs_open(file, "r", 438)
   if err then
@@ -65,9 +82,7 @@ function M.run_command(reset)
 
   if data then
     local ok, decoded = pcall(vim.json.decode, data)
-    if not ok then
-      print(decoded)
-    end
+    if not ok then print(decoded) end
     command = decoded.run
   end
 
@@ -112,8 +127,6 @@ function M.run_command(reset)
   vim.cmd.norm("G")
 end
 
-function M.run_command_reset()
-  M.run_command(true)
-end
+function M.run_command_reset() M.run_command(true) end
 
 return M

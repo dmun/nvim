@@ -1,24 +1,31 @@
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not (vim.uv or vim.loop).fs_stat(lazypath) then
-  local lazyrepo = "https://github.com/folke/lazy.nvim.git"
-  local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
-  if vim.v.shell_error ~= 0 then
-    vim.api.nvim_echo({
-      { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
-      { out, "WarningMsg" },
-      { "\nPress any key to exit..." },
-    }, true, {})
-    vim.fn.getchar()
-    os.exit(1)
-  end
-end
-vim.opt.rtp:prepend(lazypath)
+local bootstrap = require("util").bootstrap
 
-require("options")
-require("keymaps")
-require("autocommands")
+bootstrap("jake-stewart", "lazier")
+bootstrap("folke", "lazy")
 
-require("lazy").setup("plugins", {
+require("lazier").setup("plugins", {
+  lazier = {
+    before = function()
+      require("options")
+      require("autocommands")
+    end,
+    after = function()
+      require("keymaps")
+      vim.cmd.color("boomer")
+    end,
+    start_lazily = function()
+      local nonLazyLoadableExtensions = {
+        zip = true,
+        tar = true,
+        gz = true,
+      }
+      local fname = vim.fn.expand("%")
+      return fname == ""
+        or vim.fn.isdirectory(fname) == 0 and not nonLazyLoadableExtensions[vim.fn.fnamemodify(fname, ":e")]
+    end,
+    bundle_plugins = false,
+  },
+  defaults = { lazy = false },
   change_detection = { enabled = false },
   ui = { pills = false, backdrop = 100 },
   dev = { path = "~/Development", fallback = true },
