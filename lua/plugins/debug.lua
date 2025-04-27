@@ -1,8 +1,5 @@
-local map = vim.keymap.set
-
-return {
+return require "lazier" {
   "mfussenegger/nvim-dap",
-  enabled = false,
   dependencies = {
     "leoluz/nvim-dap-go",
     "rcarriga/nvim-dap-ui",
@@ -14,6 +11,7 @@ return {
     local dap = require("dap")
     local ui = require("dapui")
     local before = dap.listeners.before
+    local map = vim.keymap.set
 
     require("dapui").setup()
     require("dap-go").setup()

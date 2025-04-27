@@ -1,4 +1,4 @@
-return {
+return require "lazier" {
   "NMAC427/guess-indent.nvim",
   event = "VeryLazy",
   config = function()

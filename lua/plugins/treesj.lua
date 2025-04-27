@@ -1,5 +1,6 @@
 return {
   "Wansmer/treesj",
+  event = "VeryLazy",
   dependencies = { "nvim-treesitter/nvim-treesitter" },
   config = function()
     local tj = require("treesj")

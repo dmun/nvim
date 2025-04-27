@@ -2,11 +2,11 @@ return {
   "Vigemus/iron.nvim",
   cmd = "IronRepl",
   config = function()
-    local iron = require("iron.core")
+    local iron = require "iron.core"
     local python_format = require("iron.fts.common").bracketed_paste
     local map = vim.keymap.set
 
-    iron.setup({
+    iron.setup {
       config = {
         scratch_repl = true,
         repl_definition = {
@@ -45,7 +45,7 @@ return {
         italic = false,
       },
       ignore_blank_lines = true,
-    })
+    }
 
     map("n", "<CR>", " sic", { remap = true, buffer = true })
     map("n", "<M-b>", "O# %%0j", { remap = true, buffer = true })

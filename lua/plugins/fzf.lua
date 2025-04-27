@@ -1,30 +1,29 @@
-local default_winopts = {
-  title = false,
-  title_pos = "left",
-  title_flags = false,
-  row = 0,
-  col = 0.3,
-  height = 0.5,
-  width = 1.0,
-  backdrop = 100,
-  -- split = "botright 10 new",
-  border = "single",
-  preview = {
-    hidden = "hidden",
-    vertical = "down:50%",
-    title = false,
-    title_pos = "left",
-    scrollbar = false,
-    scrollchars = { "┃", "" },
-    border = "single",
-  },
-}
-
-return {
+return require "lazier" {
   "ibhagwan/fzf-lua",
   config = function()
     local fzf = require("fzf-lua")
     local map = vim.keymap.set
+    local default_winopts = {
+      title = false,
+      title_pos = "left",
+      title_flags = false,
+      row = 0,
+      col = 0.3,
+      height = 0.5,
+      width = 1.0,
+      backdrop = 100,
+      -- split = "botright 10 new",
+      border = "single",
+      preview = {
+        hidden = "hidden",
+        vertical = "down:50%",
+        title = false,
+        title_pos = "left",
+        scrollbar = false,
+        scrollchars = { "┃", "" },
+        border = "single",
+      },
+    }
 
     fzf.setup({
       keymap = {

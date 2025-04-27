@@ -1,9 +1,8 @@
-local map = vim.keymap.set
-
-return {
+return require "lazier" {
   "stevearc/conform.nvim",
   config = function()
     local conform = require("conform")
+    local map = vim.keymap.set
 
     conform.setup({
       formatters_by_ft = {
@@ -28,6 +27,6 @@ return {
       },
     })
 
-    map("n", "<M-f>", conform.format)
+    map("n", "<M-f>", function() conform.format({ lsp_format = "prefer" }) end)
   end,
 }

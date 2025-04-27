@@ -1,4 +1,4 @@
-return {
+return require "lazier" {
   "cbochs/grapple.nvim",
   config = function()
     local grapple = require("grapple")

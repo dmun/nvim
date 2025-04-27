@@ -1,10 +1,10 @@
-local map = vim.keymap.set
-
-return {
+return require "lazier" {
   "jake-stewart/multicursor.nvim",
   branch = "1.0",
   config = function()
     local mc = require("multicursor-nvim")
+    local map = vim.keymap.set
+
     mc.setup()
 
     map({ "n", "x" }, "ga", mc.addCursorOperator)

@@ -1,6 +1,9 @@
 local o = vim.opt
 local g = vim.g
 
+vim.g.mapleader = " "
+vim.g.maplocalleader = " m"
+
 g.tex_flavor = "latex"
 
 -- text
@@ -23,9 +26,9 @@ o.foldcolumn = "0"
 o.foldenable = true
 o.foldlevel = 99
 o.foldlevelstart = 99
-o.number = true
+o.number = false
 o.numberwidth = 4
-o.relativenumber = true
+o.relativenumber = false
 o.signcolumn = "no"
 o.statuscolumn = [[%!v:lua.require'util.statuscolumn'.init()]]
 

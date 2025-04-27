@@ -1,9 +1,8 @@
-local map = vim.keymap.set
-
-return {
+return require "lazier" {
   "echasnovski/mini.files",
   config = function()
     local mini = require("mini.files")
+    local map = vim.keymap.set
     mini.setup({
       mappings = {
         go_in = "L",

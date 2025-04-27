@@ -1,9 +1,6 @@
 local map = vim.keymap.set
 local util = require("util")
 
-vim.g.mapleader = " "
-vim.g.maplocalleader = " m"
-
 map("n", "<Esc>", function()
   vim.cmd.noh()
   vim.cmd.echo()

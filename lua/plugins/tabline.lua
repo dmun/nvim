@@ -1,1 +1,5 @@
-return { "crispgm/nvim-tabline", config = true }
+return {
+  "crispgm/nvim-tabline",
+  event = "VeryLazy",
+  config = true,
+}

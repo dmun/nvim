@@ -1,7 +1,7 @@
 return {
   "dmun/boomer.nvim",
+  dependencies = "rktjmp/lush.nvim",
   lazy = false,
   dev = true,
-  dependencies = "rktjmp/lush.nvim",
   priority = 1000,
 }

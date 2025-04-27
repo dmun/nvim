@@ -81,8 +81,7 @@ local label = {
 
 return {
   "saghen/blink.cmp",
-  event = "VeryLazy",
-  lazy = false,
+  event = "InsertEnter",
   dependencies = {
     "rafamadriz/friendly-snippets",
     "L3MON4D3/LuaSnip",
@@ -148,7 +147,7 @@ return {
           columns = { { "label" } },
           components = { label = label },
         },
-        max_height = vim.o.pumheight,
+        max_height = vim.o.pumheight ~= 0 and vim.o.pumheight or 8,
       },
       ghost_text = { enabled = false },
     },
