@@ -2,6 +2,23 @@ local M = {}
 
 local function hl(group) return "%#" .. group .. "#" end
 
+local function mode()
+  local h = hl("GreenFg")
+  local m = vim.fn.mode()
+
+  if m == "n" then
+    h = hl("GreenFg")
+  elseif m == "i" then
+    h = hl("YellowFg")
+  elseif m == "c" then
+    h = hl("RedFg")
+  elseif m == "R" then
+    h = hl("OrangeFg")
+  end
+
+  return h .. "λ"
+end
+
 local function pad(text, length)
   local padding = length - vim.fn.strdisplaywidth(text)
   return string.rep(" ", padding) .. text
@@ -11,7 +28,7 @@ local function file()
   local text = vim.fn.expand("%:.")
   if vim.o.buftype ~= "" then text = vim.o.buftype end
   if text == "" then text = "[No Name]" end
-  return hl("Comment") .. text
+  return hl("Directory") .. text
 end
 
 local function location()
@@ -21,13 +38,13 @@ local function location()
   local ch = vim.api.nvim_get_current_line():sub(col, col)
 
   return table.concat({
-    hl("String"),
+    hl("Type"),
     line,
-    hl("Constant"),
+    hl("Keyword"),
     "/" .. lines,
-    hl("String"),
+    hl("Type"),
     " " .. col,
-    hl("Constant"),
+    hl("Keyword"),
     " " .. string.format("0x%04X", vim.fn.char2nr(ch)),
   })
 end
@@ -57,6 +74,8 @@ end
 function M.render()
   local left = {
     " ",
+    mode(),
+    " %<",
     file(),
     " ",
     diff(),
