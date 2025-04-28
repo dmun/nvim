@@ -9,12 +9,10 @@ require("lazier").setup("plugins", {
   lazier = {
     before = function()
       vim.loader.enable()
-      require "options"
-      require "autocommands"
+      require("options")
+      require("autocommands")
     end,
-    after = function()
-      require "keymaps"
-    end,
+    after = function() require("keymaps") end,
     start_lazily = function()
       local nonLazyLoadableExtensions = {
         zip = true,
@@ -23,7 +21,7 @@ require("lazier").setup("plugins", {
       }
       local fname = vim.fn.expand "%"
       return fname == ""
-          or vim.fn.isdirectory(fname) == 0 and not nonLazyLoadableExtensions[vim.fn.fnamemodify(fname, ":e")]
+        or vim.fn.isdirectory(fname) == 0 and not nonLazyLoadableExtensions[vim.fn.fnamemodify(fname, ":e")]
     end,
     bundle_plugins = false,
   },
@@ -31,5 +29,5 @@ require("lazier").setup("plugins", {
   defaults = { lazy = true },
   change_detection = { enabled = false },
   ui = { pills = false, backdrop = 100, border = "single" },
-  dev = { path = "~/Development", fallback = true },
+  dev = { path = "~/dev", fallback = true },
 })

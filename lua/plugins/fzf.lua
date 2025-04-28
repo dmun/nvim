@@ -1,7 +1,7 @@
 return require "lazier" {
   "ibhagwan/fzf-lua",
   config = function()
-    local fzf = require("fzf-lua")
+    local fzf = require "fzf-lua"
     local map = vim.keymap.set
     local default_winopts = {
       title = false,
@@ -25,7 +25,7 @@ return require "lazier" {
       },
     }
 
-    fzf.setup({
+    fzf.setup {
       keymap = {
         fzf = {
           ["ctrl-q"] = "select-all+accept",
@@ -74,7 +74,7 @@ return require "lazier" {
         ["header"] = { "fg", "Comment" },
         ["gutter"] = "-1",
       },
-    })
+    }
 
     map("n", "<leader><leader>", fzf.builtin)
     map("n", "<leader>f", fzf.files)

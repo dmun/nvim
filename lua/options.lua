@@ -31,6 +31,7 @@ o.numberwidth = 4
 o.relativenumber = false
 o.signcolumn = "no"
 o.statuscolumn = [[%!v:lua.require'util.statuscolumn'.init()]]
+o.statusline = [[%!v:lua.require'util.statusline'.render()]]
 
 -- appearance
 o.background = "dark"
