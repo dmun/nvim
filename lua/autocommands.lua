@@ -34,10 +34,10 @@ group:au({
   end,
 })
 
-group:au({
-  event = "BufWinEnter",
-  callback = function()
-    vim.o.statusline =
-    [[ %t %m%{&modified?'':'   '} %p%% (%l, %c)%=%{get(b:,'gitsigns_status','')}  %{empty(get(b:,'gitsigns_head',''))?'':'Git '}%{get(b:,'gitsigns_head','')}]]
-  end,
-})
+-- group:au({
+--   event = "BufWinEnter",
+--   callback = function()
+--     vim.o.statusline =
+--     [[ %t %m%{&modified?'':'   '} %p%% (%l, %c)%=%{get(b:,'gitsigns_status','')}  %{empty(get(b:,'gitsigns_head',''))?'':'Git '}%{get(b:,'gitsigns_head','')}]]
+--   end,
+-- })

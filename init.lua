@@ -1,5 +1,7 @@
 local bootstrap = require("util").bootstrap
 
+vim.cmd.color("custom")
+
 bootstrap("jake-stewart", "lazier")
 bootstrap("folke", "lazy")
 
@@ -12,7 +14,6 @@ require("lazier").setup("plugins", {
     end,
     after = function()
       require "keymaps"
-      vim.cmd.color "boomer"
     end,
     start_lazily = function()
       local nonLazyLoadableExtensions = {

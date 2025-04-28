@@ -27,6 +27,6 @@ return require "lazier" {
       },
     })
 
-    map("n", "<M-f>", function() conform.format({ lsp_format = "prefer" }) end)
+    map("n", "<M-f>", function() conform.format({ lsp_format = "fallback" }) end)
   end,
 }
