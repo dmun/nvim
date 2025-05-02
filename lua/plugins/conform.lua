@@ -10,6 +10,7 @@ return require "lazier" {
         rust = { "rustfmt" },
         go = { "gofmt" },
         typescript = { "prettier" },
+        typescriptreact = { "prettier" },
         javascript = { "prettier" },
         html = { "prettier" },
         json = { "prettier" },

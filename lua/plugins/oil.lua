@@ -1,6 +1,5 @@
-return {
+return require "lazier" {
   "stevearc/oil.nvim",
-  enabled = false,
   dependencies = "nvim-tree/nvim-web-devicons",
   keys = { { "-", "<cmd>Oil<cr>" } },
   opts = {

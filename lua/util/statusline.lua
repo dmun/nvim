@@ -28,7 +28,7 @@ local function file()
   local text = vim.fn.expand("%:.")
   if vim.o.buftype ~= "" then text = vim.o.buftype end
   if text == "" then text = "[No Name]" end
-  return hl("Directory") .. text
+  return hl("BlueFg") .. text
 end
 
 local function location()
@@ -38,14 +38,14 @@ local function location()
   local ch = vim.api.nvim_get_current_line():sub(col, col)
 
   return table.concat({
-    hl("Type"),
+    hl("GreenFg"),
     line,
-    hl("Keyword"),
+    hl("YellowFg"),
     "/" .. lines,
-    hl("Type"),
+    hl("GreenFg"),
     " " .. col,
-    hl("Keyword"),
-    " " .. string.format("0x%04X", vim.fn.char2nr(ch)),
+    -- hl("YellowFg"),
+    -- " " .. string.format("0x%04X", vim.fn.char2nr(ch)),
   })
 end
 

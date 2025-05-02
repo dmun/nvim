@@ -1,5 +1,6 @@
 return require "lazier" {
   "mfussenegger/nvim-dap",
+  enabled = false,
   dependencies = {
     "leoluz/nvim-dap-go",
     "rcarriga/nvim-dap-ui",

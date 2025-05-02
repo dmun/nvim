@@ -118,13 +118,16 @@ return {
       default = {
         "lazydev",
         "lsp",
-        "path",
         "snippets",
+        "path",
         "buffer",
         "dadbod",
       },
       providers = {
-        snippets = { min_keyword_length = 3 },
+        snippets = {
+          min_keyword_length = 3,
+          -- score_offset = 100,
+        },
         buffer = { min_keyword_length = 3 },
         lazydev = {
           name = "LazyDev",

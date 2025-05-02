@@ -1,5 +1,6 @@
 return require "lazier" {
   "echasnovski/mini.files",
+  enabled = false,
   config = function()
     local mini = require("mini.files")
     local map = vim.keymap.set

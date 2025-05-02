@@ -2,6 +2,15 @@ local augroup = require("util.augroup")
 local group = augroup("CustomAutocommands")
 
 group:au({
+  event = { "FileType" },
+  pattern = "qf",
+  callback = function()
+    vim.wo.rnu = false
+    vim.wo.nu = false
+  end,
+})
+
+group:au({
   event = { "BufRead", "BufEnter" },
   pattern = "config",
   callback = function() vim.bo.ft = "conf" end,
@@ -34,10 +43,9 @@ group:au({
   end,
 })
 
--- group:au({
---   event = "BufWinEnter",
---   callback = function()
---     vim.o.statusline =
---     [[ %t %m%{&modified?'':'   '} %p%% (%l, %c)%=%{get(b:,'gitsigns_status','')}  %{empty(get(b:,'gitsigns_head',''))?'':'Git '}%{get(b:,'gitsigns_head','')}]]
---   end,
--- })
+group:au({
+  event = "BufWinEnter",
+  callback = function()
+    vim.o.statusline = [[%!v:lua.require'util.statusline'.render()]]
+  end,
+})

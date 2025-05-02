@@ -19,7 +19,7 @@ require("lazier").setup("plugins", {
         tar = true,
         gz = true,
       }
-      local fname = vim.fn.expand "%"
+      local fname = vim.fn.expand("%")
       return fname == ""
         or vim.fn.isdirectory(fname) == 0 and not nonLazyLoadableExtensions[vim.fn.fnamemodify(fname, ":e")]
     end,

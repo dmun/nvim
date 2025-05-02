@@ -20,7 +20,7 @@ return require "lazier" {
       },
       on_space_options = {
         expandtab = true,
-        tabstop = "detected",
+        -- tabstop = "detected",
         softtabstop = "detected",
         shiftwidth = "detected",
       },
