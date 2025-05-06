@@ -18,7 +18,11 @@ return {
   "neovim/nvim-lspconfig",
   event = { "BufReadPre", "BufNewFile" },
   dependencies = {
-    "williamboman/mason.nvim",
+    {
+      "williamboman/mason.nvim",
+      url = "https://github.com/iguanacucumber/mason.nvim",
+      branch = "next",
+    },
     "williamboman/mason-lspconfig.nvim",
     "folke/lazydev.nvim",
   },
@@ -26,7 +30,13 @@ return {
     local lsp = require("lspconfig")
     local mason_lsp = require("mason-lspconfig")
 
-    require("mason").setup()
+    require("mason").setup({
+      ui = {
+        border = "single",
+        backdrop = 100,
+        show_header = false,
+      },
+    })
     mason_lsp.setup()
     mason_lsp.setup_handlers({
       function(ls) lsp[ls].setup(get_ls_config()) end,

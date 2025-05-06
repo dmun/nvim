@@ -150,6 +150,7 @@ return {
           columns = { { "label" } },
           components = { label = label },
         },
+        border = "none",
         max_height = vim.o.pumheight ~= 0 and vim.o.pumheight or 8,
       },
       ghost_text = { enabled = false },

@@ -44,8 +44,15 @@ group:au({
 })
 
 group:au({
-  event = "BufWinEnter",
+  event = { "WinEnter", "BufEnter", "BufWinEnter" },
   callback = function()
-    vim.o.statusline = [[%!v:lua.require'util.statusline'.render()]]
+    vim.wo.statusline = [[%{%v:lua.require'util.statusline'.active()%}]]
+  end,
+})
+
+group:au({
+  event = { "WinLeave" },
+  callback = function()
+    vim.wo.statusline = [[%{%v:lua.require'util.statusline'.inactive()%}]]
   end,
 })

@@ -24,18 +24,25 @@ local function pad(text, length)
   return string.rep(" ", padding) .. text
 end
 
-local function file()
-  local text = vim.fn.expand("%:.")
+local function file(opts)
+  opts = opts or {}
+  local F = vim.fn
+  local text = F.expand("%:.")
   if vim.o.buftype ~= "" then text = vim.o.buftype end
-  if text == "" then text = "[No Name]" end
-  return hl("BlueFg") .. text
+  if text == "" then text = F.getcwd() end
+  return hl(opts.hl or "BlueFg")
+    .. F.substitute(text, F.expand("$HOME"), "~", "")
 end
 
-local function location()
+local function location(opts)
   local line = vim.fn.line(".")
   local lines = vim.fn.line("$")
   local col = pad(vim.fn.col("."), 3)
-  local ch = vim.api.nvim_get_current_line():sub(col, col)
+  opts = opts or {}
+
+  if opts.hl == false then
+    return table.concat({ line, "/" .. lines, " " .. col })
+  end
 
   return table.concat({
     hl("GreenFg"),
@@ -49,29 +56,30 @@ local function location()
   })
 end
 
-local function diff()
+local function diff(opts)
   local status = vim.b.gitsigns_status_dict or {}
   local tbl = {}
+  opts = opts or {}
 
   if status.added and status.added > 0 then
-    table.insert(tbl, hl("Added"))
+    if opts.hl ~= false then table.insert(tbl, hl("Added")) end
     table.insert(tbl, " +" .. status.added)
   end
 
   if status.changed and status.changed > 0 then
-    table.insert(tbl, hl("Changed"))
+    if opts.hl ~= false then table.insert(tbl, hl("Changed")) end
     table.insert(tbl, " ~" .. status.changed)
   end
 
   if status.removed and status.removed > 0 then
-    table.insert(tbl, hl("Removed"))
+    if opts.hl ~= false then table.insert(tbl, hl("Removed")) end
     table.insert(tbl, " -" .. status.removed)
   end
 
   return table.concat(tbl)
 end
 
-function M.render()
+function M.active()
   local left = {
     " ",
     mode(),
@@ -84,6 +92,23 @@ function M.render()
   local right = {
     " ",
     location(),
+    " ",
+  }
+
+  return table.concat(left) .. "%=" .. table.concat(right)
+end
+
+function M.inactive()
+  local left = {
+    "   %<",
+    file({ hl = "Comment" }),
+    " ",
+    diff({ hl = false }),
+  }
+
+  local right = {
+    " ",
+    location({ hl = false }),
     " ",
   }
 
