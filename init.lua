@@ -1,14 +1,12 @@
 local bootstrap = require("util").bootstrap
 
-vim.cmd.color("custom")
-
 bootstrap("jake-stewart", "lazier")
 bootstrap("folke", "lazy")
 
 require("lazier").setup("plugins", {
   lazier = {
     before = function()
-      vim.loader.enable()
+      vim.cmd.color("custom")
       require("options")
       require("autocommands")
     end,
@@ -21,7 +19,8 @@ require("lazier").setup("plugins", {
       }
       local fname = vim.fn.expand("%")
       return fname == ""
-        or vim.fn.isdirectory(fname) == 0 and not nonLazyLoadableExtensions[vim.fn.fnamemodify(fname, ":e")]
+        or vim.fn.isdirectory(fname) == 0
+          and not nonLazyLoadableExtensions[vim.fn.fnamemodify(fname, ":e")]
     end,
     bundle_plugins = false,
   },

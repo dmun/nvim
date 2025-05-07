@@ -7,8 +7,9 @@ vim.g.maplocalleader = " m"
 g.tex_flavor = "latex"
 
 -- text
-o.wrap = false
+o.wrap = true
 o.breakindent = true
+-- o.breakat = " "
 o.completeopt = "menuone,noselect"
 o.confirm = true
 o.expandtab = false
@@ -54,7 +55,7 @@ o.guicursor = "a:Cursor-block"
 o.laststatus = 2
 o.listchars = "tab:» ,multispace:⸳"
 o.list = false
-o.winborder = "single"
+-- o.winborder = "single"
 
 -- window
 o.inccommand = "split"
@@ -85,3 +86,9 @@ o.clipboard = "unnamedplus"
 -- lsp
 vim.highlight.priorities.semantic_tokens = 95
 vim.diagnostic.config({ signs = false })
+
+PADDED = { "", "", "", " ", "", "", "", " " }
+local hover = vim.lsp.buf.hover
+local open_float = vim.diagnostic.open_float
+vim.lsp.buf.hover = function() hover({ border = PADDED }) end
+vim.diagnostic.open_float = function() open_float({ border = PADDED }) end

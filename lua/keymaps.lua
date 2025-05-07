@@ -6,7 +6,6 @@ map("n", "<Esc>", function()
   vim.cmd.echo()
 end, { silent = true })
 
-map("n", "<leader>q", vim.cmd.copen, { silent = true })
 map("n", "<M-o>", "<cmd>!open .<cr><cr>", { silent = true })
 
 map("n", "<leader>tw", "<cmd>set wrap!<cr>")

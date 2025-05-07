@@ -1,17 +1,13 @@
 local M = {}
 
 M.init = function()
-  local text = "%="
-
   local win = vim.g.statusline_winid
   local wo = vim.wo[win]
 
-  if not wo.nu then
-    return ""
-  end
+  local text = (wo.signcolumn ~= "no" and "%s" or "") .. "%="
 
-  if vim.v.virtnum > 0 or vim.v.virtnum < 0 then
-    return ""
+  if not wo.nu or vim.v.virtnum > 0 or vim.v.virtnum < 0 then
+    return text
   end
 
   if vim.v.relnum == 0 or not wo.rnu then
@@ -19,8 +15,6 @@ M.init = function()
   else
     text = text .. vim.v.relnum
   end
-
-  text = (wo.signcolumn ~= "no" and "%s" or "") .. text
 
   return text .. " "
 end

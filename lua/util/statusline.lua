@@ -81,8 +81,6 @@ end
 
 function M.active()
   local left = {
-    " ",
-    mode(),
     " %<",
     file(),
     " ",
@@ -100,7 +98,7 @@ end
 
 function M.inactive()
   local left = {
-    "   %<",
+    " %<",
     file({ hl = "Comment" }),
     " ",
     diff({ hl = false }),

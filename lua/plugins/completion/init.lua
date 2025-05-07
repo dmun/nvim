@@ -56,14 +56,18 @@ local label = {
     local ts_filetypes = {}
     local highlights = {}
 
-    if vim.tbl_contains({ "Method", "Function" }, ctx.kind) and vim.tbl_contains(ts_filetypes, vim.o.filetype) then
+    if
+      vim.tbl_contains({ "Method", "Function" }, ctx.kind)
+      and vim.tbl_contains(ts_filetypes, vim.o.filetype)
+    then
       local ts = require("blink.cmp.completion.windows.render.treesitter")
       highlights = ts.highlight(ctx)
     else
       table.insert(highlights, {
         0,
         #ctx.label,
-        group = ctx.deprecated and "BlinkCmpLabelDeprecated" or (kind_hl_map[ctx.kind] or "BlinkCmpKind"),
+        group = ctx.deprecated and "BlinkCmpLabelDeprecated"
+          or (kind_hl_map[ctx.kind] or "BlinkCmpKind"),
       })
     end
 
@@ -151,13 +155,16 @@ return {
           components = { label = label },
         },
         border = "none",
+        scrollbar = false,
         max_height = vim.o.pumheight ~= 0 and vim.o.pumheight or 8,
+        auto_show = true,
       },
       ghost_text = { enabled = false },
     },
     fuzzy = { implementation = "prefer_rust" },
     signature = {
-      enabled = true,
+      enabled = false,
+      window = { border = "padded" },
       trigger = {
         show_on_insert_on_trigger_character = true,
       },

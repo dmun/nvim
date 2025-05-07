@@ -2,6 +2,15 @@ local augroup = require("util.augroup")
 local group = augroup("CustomAutocommands")
 
 group:au({
+  event = { "BufWinEnter", "BufNew" },
+  callback = function()
+    if vim.bo.buftype == "nofile" then
+      vim.wo.winhl = "Normal:NormalFloat"
+    end
+  end,
+})
+
+group:au({
   event = { "FileType" },
   pattern = "qf",
   callback = function()
