@@ -27,9 +27,9 @@ o.foldcolumn = "0"
 o.foldenable = true
 o.foldlevel = 99
 o.foldlevelstart = 99
-o.number = false
+o.number = true
 o.numberwidth = 4
-o.relativenumber = false
+o.relativenumber = true
 o.signcolumn = "no"
 o.statuscolumn = [[%!v:lua.require'util.statuscolumn'.init()]]
 
@@ -53,8 +53,9 @@ o.fillchars = "eob: ,fold: ,foldopen:,foldclose:,foldsep: ,diff: "
 -- o.guicursor = "i:Cursor-ver25-blinkon500-blinkoff500,n-v:Cursor-block"
 o.guicursor = "a:Cursor-block"
 o.laststatus = 2
-o.listchars = "tab:» ,multispace:⸳"
-o.list = false
+o.listchars = "tab:  ,multispace: "--⸳"
+o.list = true
+-- o.virtualedit = "all"
 -- o.winborder = "single"
 
 -- window

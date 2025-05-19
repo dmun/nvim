@@ -39,7 +39,9 @@ local label = {
 
     if vim.tbl_contains({ "Method", "Function" }, ctx.kind) then
       local ft_ctx = require("plugins.completion.ft_ctx")
-      if ft_ctx[ft] and ft_ctx[ft].fix_label then ft_ctx[ft].fix_label(ctx) end
+      if ft_ctx[ft] and ft_ctx[ft].fix_label then
+        ft_ctx[ft].fix_label(ctx)
+      end
 
       if
         not vim.endswith(ctx.label, ")")
@@ -126,6 +128,7 @@ return {
         "path",
         "buffer",
         "dadbod",
+        -- "minuet",
       },
       providers = {
         snippets = {
@@ -142,6 +145,15 @@ return {
           name = "Dadbod",
           module = "vim_dadbod_completion.blink",
           score_offset = 200,
+        },
+        minuet = {
+          name = "minuet",
+          module = "minuet.blink",
+          async = true,
+          -- Should match minuet.config.request_timeout * 1000,
+          -- since minuet.config.request_timeout is in seconds
+          timeout_ms = 3000,
+          score_offset = 50, -- Gives minuet higher priority among suggestions
         },
       },
     },
@@ -160,6 +172,7 @@ return {
         auto_show = true,
       },
       ghost_text = { enabled = false },
+      trigger = { prefetch_on_insert = false },
     },
     fuzzy = { implementation = "prefer_rust" },
     signature = {

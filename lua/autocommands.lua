@@ -2,11 +2,10 @@ local augroup = require("util.augroup")
 local group = augroup("CustomAutocommands")
 
 group:au({
-  event = { "BufWinEnter", "BufNew" },
+  event = { "FileType" },
+  pattern = "sql",
   callback = function()
-    if vim.bo.buftype == "nofile" then
-      vim.wo.winhl = "Normal:NormalFloat"
-    end
+    vim.b.autosave_disabled = true
   end,
 })
 
@@ -63,5 +62,19 @@ group:au({
   event = { "WinLeave" },
   callback = function()
     vim.wo.statusline = [[%{%v:lua.require'util.statusline'.inactive()%}]]
+  end,
+})
+
+group:au({
+  event = { "InsertLeave" },
+  callback = function()
+    vim.o.relativenumber = true
+  end,
+})
+
+group:au({
+  event = { "InsertEnter" },
+  callback = function()
+    vim.o.relativenumber = false
   end,
 })

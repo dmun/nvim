@@ -28,9 +28,9 @@ local function file(opts)
   opts = opts or {}
   local F = vim.fn
   local text = F.expand("%:.")
-  if vim.o.buftype ~= "" then text = vim.o.buftype end
+  if vim.o.buftype ~= "" or #text >= 40 then text = vim.o.filetype:upper() end
   if text == "" then text = F.getcwd() end
-  return hl(opts.hl or "BlueFg")
+  return hl(opts.hl or "StatusLine")
     .. F.substitute(text, F.expand("$HOME"), "~", "")
 end
 
@@ -39,6 +39,10 @@ local function location(opts)
   local lines = vim.fn.line("$")
   local col = pad(vim.fn.col("."), 3)
   opts = opts or {}
+
+  if vim.o.buftype ~= "" then
+    return ""
+  end
 
   if opts.hl == false then
     return table.concat({ line, "/" .. lines, " " .. col })

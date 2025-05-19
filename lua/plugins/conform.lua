@@ -9,6 +9,7 @@ return require "lazier" {
         lua = { "stylua" },
         rust = { "rustfmt" },
         go = { "gofmt" },
+        svelte = { "prettier" },
         typescript = { "prettier" },
         typescriptreact = { "prettier" },
         javascript = { "prettier" },
@@ -23,11 +24,23 @@ return require "lazier" {
       formatters = {
         ["clang-format"] = {
           command = "clang-format",
-          args = { "--style", "{BasedOnStyle: LLVM, IndentWidth: 4, BreakTemplateDeclarations: true}" },
+          args = {
+            "--style",
+            "{BasedOnStyle: LLVM, IndentWidth: 4, BreakTemplateDeclarations: true}",
+          },
         },
       },
     })
 
-    map("n", "<M-f>", function() conform.format({ lsp_format = "fallback" }) end)
+    map(
+      "n",
+      "<M-f>",
+      function()
+        conform.format({
+          lsp_format = "fallback",
+          timeout_ms = 10000,
+        })
+      end
+    )
   end,
 }

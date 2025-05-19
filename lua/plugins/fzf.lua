@@ -85,5 +85,6 @@ return require "lazier" {
     map("n", "<leader>?", fzf.live_grep_resume)
     map("n", "<leader>,", fzf.buffers)
     map("n", "<C-c>", fzf.lsp_code_actions)
+    -- map("n", "<CR>", fzf.lsp_code_actions)
   end,
 }

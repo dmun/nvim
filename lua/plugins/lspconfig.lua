@@ -18,12 +18,8 @@ return {
   "neovim/nvim-lspconfig",
   event = { "BufReadPre", "BufNewFile" },
   dependencies = {
-    {
-      "williamboman/mason.nvim",
-      url = "https://github.com/iguanacucumber/mason.nvim",
-      branch = "next",
-    },
-    "williamboman/mason-lspconfig.nvim",
+    { "williamboman/mason.nvim", version = "^1.0.0" },
+    { "williamboman/mason-lspconfig.nvim", version = "^1.0.0" },
     "folke/lazydev.nvim",
   },
   config = function()
