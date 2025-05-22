@@ -4,9 +4,7 @@ local group = augroup("CustomAutocommands")
 group:au({
   event = { "FileType" },
   pattern = "sql",
-  callback = function()
-    vim.b.autosave_disabled = true
-  end,
+  callback = function() vim.b.autosave_disabled = true end,
 })
 
 group:au({
@@ -26,7 +24,6 @@ group:au({
     vim.wo.nu = false
   end,
 })
-
 
 group:au({
   event = { "FileType" },
@@ -66,34 +63,36 @@ group:au({
 group:au({
   event = { "BufEnter", "WinEnter" },
   callback = function()
-    if vim.bo.bt == "terminal" then vim.cmd.norm("i") end
+    if vim.bo.bt == "terminal" then
+      vim.cmd.norm("i")
+    end
   end,
 })
 
 group:au({
   event = { "WinEnter", "BufEnter", "BufWinEnter" },
-  callback = function()
-    vim.wo.statusline = [[%{%v:lua.require'util.statusline'.active()%}]]
-  end,
+  callback = function() vim.wo.statusline = [[%{%v:lua.require'util.statusline'.active()%}]] end,
 })
 
 group:au({
   event = { "WinLeave" },
-  callback = function()
-    vim.wo.statusline = [[%{%v:lua.require'util.statusline'.inactive()%}]]
-  end,
+  callback = function() vim.wo.statusline = [[%{%v:lua.require'util.statusline'.inactive()%}]] end,
 })
 
 group:au({
   event = { "InsertLeave" },
   callback = function()
-    vim.o.relativenumber = true
+    if vim.o.number == true or vim.o.relativenumber == true then
+      vim.o.relativenumber = true
+    end
   end,
 })
 
 group:au({
   event = { "InsertEnter" },
   callback = function()
-    vim.o.relativenumber = false
+    if vim.o.number == true or vim.o.relativenumber == true then
+      vim.o.relativenumber = false
+    end
   end,
 })
