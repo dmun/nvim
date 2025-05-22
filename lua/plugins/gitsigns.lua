@@ -16,7 +16,7 @@ return {
       },
       signcolumn = false,
       on_attach = function()
-        map("n", "gs", function()
+        map("n", "<leader>ts", function()
           if vim.o.signcolumn == "no" then
             vim.o.signcolumn = "yes"
             gs.toggle_signs(true)

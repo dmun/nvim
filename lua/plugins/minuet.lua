@@ -17,11 +17,11 @@ return require "lazier" {
       virtualtext = {
         auto_trigger_ft = { "*" },
         keymap = {
-          accept = "<A-i>",
-          accept_line = "<A-I>",
-          prev = "<A-[>",
-          next = "<A-]>",
-          dismiss = "<A-e>",
+          accept = "<M-i>",
+          accept_line = "<M-l>",
+          prev = "<M-[>",
+          next = "<M-]>",
+          dismiss = "<M-e>",
         },
       },
     })

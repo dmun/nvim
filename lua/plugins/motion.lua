@@ -7,18 +7,21 @@ return require "lazier" {
 
     mc.setup()
 
-    map({ "n", "x" }, "ga", mc.addCursorOperator)
+    map({ "n" }, "ga", function()
+      mc.matchAllAddCursors()
+      mc.feedkeys("ve")
+    end)
     map({ "n", "x" }, "<C-q>", mc.toggleCursor)
     map("n", "gm", mc.restoreCursors)
     map("x", "m", mc.matchCursors)
     map("x", "S", mc.splitCursors)
 
-    map({ "n", "x" }, "<C-k>", function() mc.lineAddCursor(-1) end)
-    map({ "n", "x" }, "<C-j>", function() mc.lineAddCursor(1) end)
-    map({ "n", "x" }, "<C-n>", function() mc.matchAddCursor(1) end)
-    map({ "n", "x" }, "<C-s>", function() mc.matchSkipCursor(1) end)
-    map({ "n", "x" }, "<C-p>", function() mc.matchAddCursor(-1) end)
-    map({ "n", "x" }, "<C-S-s>", function() mc.matchSkipCursor(-1) end)
+    -- map({ "n", "x" }, "<C-k>", function() mc.lineAddCursor(-1) end)
+    -- map({ "n", "x" }, "<C-j>", function() mc.lineAddCursor(1) end)
+    map({ "n", "x" }, "gl", function() mc.matchAddCursor(1) end)
+    map({ "n", "x" }, "gh", function() mc.matchAddCursor(-1) end)
+    map({ "n", "x" }, "gL", function() mc.matchSkipCursor(1) end)
+    map({ "n", "x" }, "gH", function() mc.matchSkipCursor(-1) end)
 
     mc.addKeymapLayer(function(layermap)
       layermap({ "n", "x" }, "<C-o>", mc.prevCursor)

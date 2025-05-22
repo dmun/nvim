@@ -42,13 +42,13 @@ return {
       event = "LspAttach",
       callback = function(ev)
         local opts = { buffer = ev.buf }
-        map("n", "gD", vim.lsp.buf.declaration, opts)
-        map("n", "gd", vim.lsp.buf.definition, opts)
+        -- map("n", "gD", vim.lsp.buf.declaration, opts)
+        -- map("n", "gd", vim.lsp.buf.definition, opts)
         map("n", "K", vim.lsp.buf.hover, opts)
         map("n", "<C-w><C-d>", vim.diagnostic.open_float, opts)
         map("i", "<C-s>", vim.lsp.buf.signature_help, opts)
         map("n", "<leader>rn", vim.lsp.buf.rename, opts)
-        map("n", "<C-c>", vim.lsp.buf.code_action, opts)
+        map("n", "<CR>", vim.lsp.buf.code_action, opts)
       end,
     })
   end,

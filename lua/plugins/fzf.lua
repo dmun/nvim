@@ -1,20 +1,21 @@
 return require "lazier" {
   "ibhagwan/fzf-lua",
+  enabled = false,
   config = function()
-    local fzf = require "fzf-lua"
+    local fzf = require("fzf-lua")
     local map = vim.keymap.set
 
     local default_winopts = {
       title = false,
       title_pos = "left",
       title_flags = false,
-      row = 1,
-      col = 0.0,
-      height = 12,
-      width = 1.0,
+      row = 0.2,
+      col = 0.5,
+      height = 10,
+      width = 48,
       backdrop = 100,
-      split = "botright 12 new",
-      -- border = "single",
+      -- split = "botright 12 new",
+      border = "single",
       preview = {
         hidden = "hidden",
         vertical = "down:50%",
@@ -27,12 +28,12 @@ return require "lazier" {
     }
 
     fzf.setup {
+      "max-perf",
       keymap = {
         fzf = {
           ["ctrl-q"] = "select-all+accept",
         },
       },
-      "max-perf",
       file_icons = false,
       prompt = "> ",
       defaults = {
@@ -51,15 +52,20 @@ return require "lazier" {
         cwd_prompt = false,
         cmd = "rg --files --hidden",
         git_icons = false,
+        include_recent = true,
+        recent_max = 10,
+      },
+      oldfiles = {
+        include_current_session = true,
       },
       fzf_opts = {
         ["--info"] = "hidden",
         ["--no-scrollbar"] = true,
       },
       hls = {
-        -- normal = "NormalFloat",
-        -- border = "FloatBorder",
-        -- title = "FloatTitle",
+        normal = "NormalFloat",
+        border = "FloatBorder",
+        title = "FloatTitle",
       },
       fzf_colors = {
         ["fg"] = { "fg", "CursorLine" },
@@ -81,10 +87,11 @@ return require "lazier" {
     map("n", "<leader>f", fzf.files)
     -- map("n", "<leader>g", fzf.git_status)
     map("n", "<leader>o", fzf.oldfiles)
-    map("n", "<leader>/", fzf.live_grep)
+    map("n", "g/", fzf.live_grep)
     map("n", "<leader>?", fzf.live_grep_resume)
     map("n", "<leader>,", fzf.buffers)
-    map("n", "<C-c>", fzf.lsp_code_actions)
+    map("n", "g.", fzf.lsp_code_actions)
+    map("n", "gs", fzf.lsp_document_symbols)
     -- map("n", "<CR>", fzf.lsp_code_actions)
   end,
 }
