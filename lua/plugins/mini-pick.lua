@@ -18,7 +18,7 @@ return {
             width = vim.o.columns,
           }
         end,
-        prompt_caret = "▎",
+        prompt_caret = "█",
       },
     })
 

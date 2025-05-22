@@ -173,11 +173,21 @@ return {
       },
       ghost_text = { enabled = false },
       trigger = { prefetch_on_insert = false },
+      documentation = {
+        auto_show = false,
+        window = {
+          scrollbar = false,
+          -- border = PADDED,
+        },
+      },
     },
     fuzzy = { implementation = "prefer_rust" },
     signature = {
       enabled = false,
-      window = { border = "padded" },
+      window = {
+        -- border = PADDED,
+        show_documentation = false,
+      },
       trigger = {
         show_on_insert_on_trigger_character = true,
       },

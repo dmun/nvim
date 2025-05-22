@@ -56,7 +56,8 @@ o.laststatus = 2
 o.listchars = "tab:  ,multispace: "--⸳"
 o.list = true
 -- o.virtualedit = "all"
--- o.winborder = "single"
+vim.o.winborder = "single"
+
 
 -- window
 o.inccommand = "split"
@@ -72,7 +73,7 @@ o.ttimeout = false
 o.timeout = false
 o.ttimeoutlen = 0
 o.timeoutlen = 0
-o.scrolloff = 0
+o.scrolloff = 5
 o.sidescrolloff = 0
 o.smartcase = true
 
@@ -88,8 +89,8 @@ o.clipboard = "unnamedplus"
 vim.highlight.priorities.semantic_tokens = 95
 vim.diagnostic.config({ signs = false })
 
-PADDED = { "", "", "", " ", "", "", "", " " }
-local hover = vim.lsp.buf.hover
-local open_float = vim.diagnostic.open_float
-vim.lsp.buf.hover = function() hover({ border = PADDED }) end
-vim.diagnostic.open_float = function() open_float({ border = PADDED }) end
+-- PADDED = { "▀", "▀", "▀", " ", "▃", "▃", "▃", " " }
+-- local hover = vim.lsp.buf.hover
+-- local open_float = vim.diagnostic.open_float
+-- vim.lsp.buf.hover = function() hover({ border = "double" }) end
+-- vim.diagnostic.open_float = function() open_float({ border = "double" }) end

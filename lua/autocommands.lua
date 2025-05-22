@@ -11,6 +11,25 @@ group:au({
 
 group:au({
   event = { "FileType" },
+  pattern = "git",
+  callback = function()
+    vim.wo.rnu = false
+    vim.wo.nu = false
+  end,
+})
+
+group:au({
+  event = { "FileType" },
+  pattern = "fugitive",
+  callback = function()
+    vim.wo.rnu = false
+    vim.wo.nu = false
+  end,
+})
+
+
+group:au({
+  event = { "FileType" },
   pattern = "qf",
   callback = function()
     vim.wo.rnu = false
