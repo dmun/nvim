@@ -6,6 +6,7 @@ bootstrap("folke", "lazy")
 require("lazier").setup("plugins", {
   lazier = {
     before = function()
+      vim.loader.enable()
       vim.cmd.color("custom")
       require("options")
       require("autocommands")
