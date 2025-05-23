@@ -7,6 +7,17 @@ return require "lazier" {
 
     mc.setup()
 
+    ---@param direction integer 1 for forward, -1 for backward
+    local matchAddCursorVisual = function(direction)
+      if _G.MC_WORD == true then
+        vim.cmd.norm("")
+        mc.matchAddCursor(direction)
+        mc.feedkeys("viw")
+      else
+        mc.matchAddCursor(direction)
+      end
+    end
+
     map("x", "ga", function() mc.matchAllAddCursors() end)
     map("n", "ga", function()
       mc.matchAllAddCursors()
@@ -19,10 +30,11 @@ return require "lazier" {
 
     map({ "n", "x" }, "<C-p>", function() mc.lineAddCursor(-1) end)
     map({ "n", "x" }, "<C-n>", function() mc.lineAddCursor(1) end)
-    map({ "x" }, "gl", function() mc.matchAddCursor(1) end)
+    map({ "x" }, "gl", function() matchAddCursorVisual(1) end)
     map({ "n" }, "gl", function()
       mc.matchAddCursor(1)
       mc.feedkeys("viw")
+      _G.MC_WORD = true
     end)
 
     map({ "x" }, "gH", function() mc.matchSkipCursor(-1) end)
@@ -37,8 +49,9 @@ return require "lazier" {
       mc.feedkeys("viw")
     end)
 
-    map({ "x" }, "gh", function() mc.matchAddCursor(-1) end)
+    map({ "x" }, "gh", function() mc.matchAddCursorVisual(-1) end)
     map({ "n" }, "gH", function()
+      _G.MC_WORD = true
       mc.matchSkipCursor(-1)
       mc.feedkeys("viw")
     end)
@@ -53,6 +66,7 @@ return require "lazier" {
         if not mc.cursorsEnabled() then
           mc.enableCursors()
         else
+          _G.MC_WORD = false
           mc.clearCursors()
         end
       end)
