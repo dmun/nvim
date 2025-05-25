@@ -1,46 +1,47 @@
-return {
-  "nvim-treesitter/nvim-treesitter",
-  dependencies = "nvim-treesitter/nvim-treesitter-textobjects",
-  event = { "BufReadPre", "BufNewFile" },
-  config = function()
-    require("nvim-treesitter.configs").setup({
-      modules = {},
-      ignore_install = {},
-      sync_install = true,
-      auto_install = false,
-      indent = { enable = true },
-      highlight = {
-        enable = true,
-        additional_vim_regex_highlighting = false,
+local add = MiniDeps.add
+local map = vim.keymap.set
+
+add({
+  source = "nvim-treesitter/nvim-treesitter",
+})
+
+add({
+  source = "nvim-treesitter/nvim-treesitter-textobjects",
+  depends = { "nvim-treesitter/nvim-treesitter" },
+})
+
+require("nvim-treesitter.configs").setup({
+  ensure_installed = { "lua", "vim", "vimdoc", "query" },
+  sync_install = false,
+  auto_install = true,
+  ignore_install = {},
+  indent = { enable = false },
+  highlight = {
+    enable = true,
+    additional_vim_regex_highlighting = false,
+  },
+  modules = {},
+  textobjects = {
+    select = {
+      enable = true,
+      lookahead = true,
+      keymaps = {
+        ["af"] = "@function.outer",
+        ["if"] = "@function.inner",
+        ["ac"] = "@class.outer",
+        ["ic"] = "@class.inner",
       },
-      ensure_installed = {
-        "lua",
-        "luadoc",
-        "vim",
-        "vimdoc",
-        "query",
-      },
-      textobjects = {
-        select = {
-          enable = true,
-          lookahead = true,
-          include_surrounding_whitespace = false,
-          keymaps = {
-            ["af"] = "@function.outer",
-            ["if"] = "@function.inner",
-            ["ac"] = "@class.outer",
-            ["ic"] = "@class.inner",
-            ["as"] = "@local.scope",
-            ["al"] = "@loop.outer",
-            ["il"] = "@loop.inner",
-          },
-          selection_modes = {
-            ["@parameter.outer"] = "v",
-            ["@function.outer"] = "V",
-            ["@class.outer"] = "<c-v>",
-          },
-        },
-      },
-    })
-  end,
-}
+    },
+  },
+})
+
+add({
+  source = "Wansmer/treesj",
+  depends = { "nvim-treesitter/nvim-treesitter" },
+})
+
+local tj = require("treesj")
+tj.setup({ use_default_keymaps = false })
+
+map("n", "gS", tj.split)
+map("n", "gJ", tj.join)

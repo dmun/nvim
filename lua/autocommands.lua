@@ -1,98 +1,34 @@
-local augroup = require("util.augroup")
-local group = augroup("CustomAutocommands")
+local map = vim.keymap.set
+local au = function(event, pattern, callback, buffer)
+  vim.api.nvim_create_autocmd(
+    event,
+    { pattern = pattern, callback = callback, buffer = buffer }
+  )
+end
 
-group:au({
-  event = { "FileType" },
-  pattern = "sql",
-  callback = function() vim.b.autosave_disabled = true end,
-})
+au("LspAttach", "*", function()
+  map("n", "<CR>", vim.lsp.buf.code_action, { buffer = true })
+end)
 
-group:au({
-  event = { "FileType" },
-  pattern = "git",
-  callback = function()
-    vim.wo.rnu = false
-    vim.wo.nu = false
-  end,
-})
+au("TextYankPost", "*", function()
+  vim.hl.on_yank({ higroup = "Visual", timeout = 300 })
+end)
 
-group:au({
-  event = { "FileType" },
-  pattern = "fugitive",
-  callback = function()
-    vim.wo.rnu = false
-    vim.wo.nu = false
-  end,
-})
-
-group:au({
-  event = { "FileType" },
-  pattern = "qf",
-  callback = function()
-    vim.wo.rnu = false
-    vim.wo.nu = false
-  end,
-})
-
-group:au({
-  event = { "BufRead", "BufEnter" },
-  pattern = "config",
-  callback = function() vim.bo.ft = "conf" end,
-})
-
-group:au({
-  event = { "BufRead", "BufEnter" },
-  pattern = "hyprland.conf",
-  callback = function() vim.bo.ft = "hyprlang" end,
-})
-
-group:au({
-  event = "TextYankPost",
-  callback = function() vim.highlight.on_yank() end,
-})
-
-group:au({
-  event = "TermOpen",
-  callback = function()
-    vim.wo.nu = false
-    vim.wo.rnu = false
-    vim.wo.signcolumn = "no"
-  end,
-})
-
-group:au({
-  event = { "BufEnter", "WinEnter" },
-  callback = function()
-    if vim.bo.bt == "terminal" then
-      vim.cmd.norm("i")
+_G.AUTOSAVE_TIMER = vim.uv.new_timer()
+au({ "InsertLeave", "TextChanged" }, "*", function()
+  if vim.bo.buftype == "" then
+    if _G.AUTOSAVE_TIMER then
+      vim.uv.timer_stop(_G.AUTOSAVE_TIMER)
+    else
+      _G.AUTOSAVE_TIMER = vim.uv.new_timer()
     end
-  end,
-})
 
-group:au({
-  event = { "WinEnter", "BufEnter", "BufWinEnter" },
-  callback = function() vim.wo.statusline = [[%{%v:lua.require'util.statusline'.active()%}]] end,
-})
-
-group:au({
-  event = { "WinLeave" },
-  callback = function() vim.wo.statusline = [[%{%v:lua.require'util.statusline'.inactive()%}]] end,
-})
-
-group:au({
-  event = { "InsertLeave" },
-  callback = function()
-    if vim.o.number == true or vim.o.relativenumber == true then
-      vim.o.relativenumber = true
-    end
-  end,
-})
-
-group:au({
-  event = { "InsertEnter" },
-  callback = function()
-    if vim.o.number == true or vim.o.relativenumber == true then
-      vim.o.relativenumber = false
-    end
-  end,
-})
+    vim.uv.timer_start(_G.AUTOSAVE_TIMER, 200, 0, function()
+      vim.schedule(function()
+        vim.cmd("silent! update")
+      end)
+      vim.uv.timer_stop(_G.AUTOSAVE_TIMER)
+      _G.AUTOSAVE_TIMER = nil
+    end)
+  end
+end)

@@ -1,132 +1,21 @@
 local M = {}
 
-local function echo(message, hl) vim.api.nvim_echo({ { message, hl or "Normal" } }, true, {}) end
-
-function M.bootstrap(author, name, opts)
-  opts = opts or {}
-  local path = opts.dir or (vim.fn.stdpath("data") .. "/" .. name .. "/" .. name .. ".nvim")
-  if not vim.uv.fs_stat(path) then
-    local repo = "https://github.com/" .. author .. "/" .. name .. ".nvim"
-    local out = vim.fn.system({
+M.bootstrap = function()
+  local path_package = vim.fn.stdpath("data") .. "/site/"
+  local mini_path = path_package .. "pack/deps/start/mini.nvim"
+  if not vim.uv.fs_stat(mini_path) then
+    vim.cmd('echo "Installing `mini.nvim`" | redraw')
+    local clone_cmd = {
       "git",
       "clone",
-      "--branch=" .. (opts.branch or "stable"),
       "--filter=blob:none",
-      repo,
-      path,
-    })
-    if vim.v.shell_error ~= 0 then
-      echo("Failed to clone " .. name .. ":", "Error")
-      echo(out)
-      vim.fn.getchar()
-      os.exit(1)
-    end
+      "https://github.com/echasnovski/mini.nvim",
+      mini_path,
+    }
+    vim.fn.system(clone_cmd)
+    vim.cmd("packadd mini.nvim | helptags ALL")
+    vim.cmd('echo "Installed `mini.nvim`" | redraw')
   end
-  vim.opt.runtimepath:prepend(path)
 end
-
-function M.deepcopy(o, seen)
-  seen = seen or {}
-  if o == nil then return nil end
-  if seen[o] then return seen[o] end
-
-  local no
-  if type(o) == "table" then
-    no = {}
-    seen[o] = no
-
-    for k, v in next, o, nil do
-      no[M.deepcopy(k, seen)] = M.deepcopy(v, seen)
-    end
-    setmetatable(no, M.deepcopy(getmetatable(o), seen))
-  else -- number, string, boolean, etc
-    no = o
-  end
-  return no
-end
-
----@param reset boolean?
-function M.run_command(reset)
-  local project_path = vim.fn.getcwd()
-  local data_path = vim.fn.stdpath("data")
-
-  local dir = data_path .. "/localleader-r" .. vim.fs.dirname(project_path)
-  local basename = vim.fs.basename(project_path)
-  local file = dir .. "/" .. basename .. ".json"
-
-  if vim.loop.fs_stat(dir) == nil then vim.fn.mkdir(dir, "p") end
-
-  if vim.loop.fs_stat(file) == nil then vim.cmd.write(file) end
-
-  local fd, err, _ = vim.loop.fs_open(file, "r", 438)
-  if err then
-    print(err)
-    return
-  end
-
-  ---@diagnostic disable-next-line: redefined-local
-  local fstat, err, _ = vim.loop.fs_fstat(fd)
-  if err then
-    print(err)
-    return
-  end
-
-  ---@diagnostic disable-next-line: redefined-local
-  local data, err, _ = vim.loop.fs_read(fd, fstat.size, 0)
-  if err then
-    print(err)
-    return
-  end
-
-  local command = nil
-
-  if data then
-    local ok, decoded = pcall(vim.json.decode, data)
-    if not ok then print(decoded) end
-    command = decoded.run
-  end
-
-  if command == nil or reset == true then
-    vim.ui.input({
-      prompt = "choose a run command for '" .. project_path .. "': ",
-    }, function(input)
-      local encoded = vim.json.encode({
-        run = input,
-      })
-
-      ---@diagnostic disable-next-line: redefined-local
-      local fd, err, _ = vim.loop.fs_open(file, "w", 438)
-      if not data then
-        print(err)
-        return
-      end
-
-      vim.loop.fs_write(fd, encoded, 0)
-
-      command = input
-    end)
-  end
-
-  if not command then
-    print("No command specified")
-    return
-  end
-
-  vim.keymap.set("n", "gf", function()
-    local filename = vim.fn.expand("<cfile>")
-    vim.cmd("wincmd w") -- Jump to next window
-    vim.cmd("edit " .. filename)
-  end)
-
-  vim.cmd("botright 15 new term://" .. command)
-  vim.opt_local.filetype = "run"
-  vim.opt_local.number = false
-  vim.opt_local.relativenumber = false
-  vim.opt_local.signcolumn = "no"
-  vim.keymap.set("n", "q", "<cmd>bdelete<cr>", { buffer = true })
-  vim.cmd.norm("G")
-end
-
-function M.run_command_reset() M.run_command(true) end
 
 return M

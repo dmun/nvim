@@ -11,7 +11,7 @@ M.init = function()
   end
 
   if vim.v.relnum == 0 or not wo.rnu then
-    text = text .. vim.v.lnum
+    text = "%#CursorLineNr#" .. text .. vim.v.lnum
   else
     text = text .. vim.v.relnum
   end

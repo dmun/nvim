@@ -1,33 +1,42 @@
-local bootstrap = require("util").bootstrap
+require("util").bootstrap()
+require("mini.deps").setup()
 
-bootstrap("jake-stewart", "lazier")
-bootstrap("folke", "lazy")
+local add, now, later = MiniDeps.add, MiniDeps.now, MiniDeps.later
+local map = vim.keymap.set
 
-require("lazier").setup("plugins", {
-  lazier = {
-    before = function()
-      vim.loader.enable()
-      vim.cmd.color("custom")
-      require("options")
-      require("autocommands")
-    end,
-    after = function() require("keymaps") end,
-    start_lazily = function()
-      local nonLazyLoadableExtensions = {
-        zip = true,
-        tar = true,
-        gz = true,
-      }
-      local fname = vim.fn.expand("%")
-      return fname == ""
-        or vim.fn.isdirectory(fname) == 0
-          and not nonLazyLoadableExtensions[vim.fn.fnamemodify(fname, ":e")]
-    end,
-    bundle_plugins = false,
-  },
-  install = { colorscheme = { "boomer" } },
-  defaults = { lazy = true },
-  change_detection = { enabled = false },
-  ui = { pills = false, backdrop = 100, border = "single" },
-  dev = { path = "~/dev", fallback = true },
-})
+now(function()
+  add({
+    source = "dmun/boomer.nvim",
+    depends = { "rktjmp/lush.nvim" },
+  })
+  vim.cmd.color("boomer")
+  add("echasnovski/mini.nvim")
+
+  require("defaults")
+  require("autocommands")
+  require("plugins.ui")
+
+  add("tpope/vim-sleuth")
+end)
+
+later(function()
+  require("plugins.treesitter")
+  require("plugins.mini")
+  require("plugins.motion")
+  require("plugins.blink")
+  require("plugins.lsp")
+  require("plugins.llm")
+
+  add("stevearc/conform.nvim")
+  require("conform").setup()
+  map("n", "<M-f>", function()
+    require("conform").format({ lsp_format = "fallback" })
+  end)
+
+  add("stevearc/quicker.nvim")
+  require("quicker").setup({
+    opts = {
+      signcolumn = "no",
+    },
+  })
+end)

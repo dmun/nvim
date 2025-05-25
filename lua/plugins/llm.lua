@@ -1,15 +1,27 @@
-return {
-  "zbirenbaum/copilot.lua",
-  enabled = false,
-  cmd = "Copilot",
-  event = "InsertEnter",
-  config = function()
-    require("copilot").setup({
-      suggestion = {
-        enabled = true,
-        auto_trigger = true,
+MiniDeps.add({
+  source = "milanglacier/minuet-ai.nvim",
+  depends = { "nvim-lua/plenary.nvim" },
+})
+
+require("minuet").setup({
+  provider = "codestral",
+  n_completions = 1,
+  provider_options = {
+    codestral = {
+      optional = {
+        max_tokens = 256,
+        stop = { "\n\n" },
       },
-      panel = { enabled = true },
-    })
-  end,
-}
+    },
+  },
+  virtualtext = {
+    auto_trigger_ft = { "*" },
+    keymap = {
+      accept = "<M-i>",
+      accept_line = "<M-l>",
+      prev = "<M-[>",
+      next = "<M-]>",
+      dismiss = "<M-e>",
+    },
+  },
+})
