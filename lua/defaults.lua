@@ -8,7 +8,7 @@ o.ttimeoutlen = 0
 o.nu = true
 o.rnu = true
 o.so = 5
-o.gcr = "a:block"
+o.gcr = "a:Cursor-block"
 o.cul = false
 o.culopt = "both"
 o.sms = true
@@ -28,11 +28,12 @@ o.ru = false
 o.sc = false
 o.ph = 6
 o.wrap = false
-o.stc = [[%!v:lua.require'util.statuscolumn'.init()]]
 o.spk = "screen"
 o.fcs = "eob: "
 o.acd = true
 o.bri = true
+o.ch = 1
+o.stc = [[%!v:lua.require'util.statuscolumn'.init()]]
 
 map({ "n", "x" }, "k", "v:count == 0 ? 'gk' : 'k'", { expr = true })
 map({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { expr = true })

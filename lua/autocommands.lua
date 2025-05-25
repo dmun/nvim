@@ -14,6 +14,21 @@ au("TextYankPost", "*", function()
   vim.hl.on_yank({ higroup = "Visual", timeout = 300 })
 end)
 
+-- au("InsertLeave", "*", function()
+--   if vim.o.nu then vim.o.rnu = true end
+-- end)
+-- au("InsertEnter", "*", function()
+--   if vim.o.nu then vim.o.rnu = false end
+-- end)
+
+au({ "WinEnter", "BufEnter", "BufWinEnter" }, "*", function()
+  vim.wo.statusline = [[%{%v:lua.require'util.statusline'.active()%}]]
+end)
+
+au({ "WinLeave" }, "*", function()
+  vim.wo.statusline = [[%{%v:lua.require'util.statusline'.inactive()%}]]
+end)
+
 _G.AUTOSAVE_TIMER = vim.uv.new_timer()
 au({ "InsertLeave", "TextChanged" }, "*", function()
   if vim.bo.buftype == "" then
