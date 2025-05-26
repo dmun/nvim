@@ -37,7 +37,6 @@ methods.draw = function(self, event)
     local id = component_id
     au(event, "*", function()
       component_dirty[id] = true
-      vim.cmd.redrawstatus()
     end)
   end
 
@@ -103,14 +102,17 @@ local file_fn = function()
 end
 
 local diff_fn = function() return vim.b.minidiff_summary or {} end
+
 local diff_add_fn = function(diff)
   if not diff.add or diff.add == 0 then return "" end
   return " +" .. diff.add
 end
+
 local diff_change_fn = function(diff)
   if not diff.change or diff.change == 0 then return "" end
   return " ~" .. diff.change
 end
+
 local diff_delete_fn = function(diff)
   if not diff.delete or diff.delete == 0 then return "" end
   return " -" .. diff.delete
@@ -196,11 +198,11 @@ end
 
 local setup = function()
   au({ "WinEnter", "BufEnter", "BufWinEnter" }, "*", function()
-    vim.wo.statusline = [[%{%v:lua.require'util.borderline'.active()%}]]
+    vim.wo.statusline = [[%{%v:lua.require'util.statusline'.active()%}]]
   end)
 
   au({ "WinLeave" }, "*", function()
-    vim.wo.statusline = [[%{%v:lua.require'util.borderline'.inactive()%}]]
+    vim.wo.statusline = [[%{%v:lua.require'util.statusline'.inactive()%}]]
   end)
 end
 

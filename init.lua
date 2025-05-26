@@ -16,9 +16,9 @@ now(function()
   require("autocommands")
   require("plugins.ui")
 
-  add("tpope/vim-sleuth")
+  require("util.statusline").setup()
 
-  require("util.borderline").setup()
+  add("tpope/vim-sleuth")
 end)
 
 later(function()
