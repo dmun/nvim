@@ -50,8 +50,8 @@ map("n", "<Esc>", function()
   vim.cmd.echo()
 end)
 
-map("n", "<C-n>", "<Cmd>cnext<CR>")
-map("n", "<C-p>", "<Cmd>cprev<CR>")
+-- map("n", "<C-n>", "<Cmd>cnext<CR>")
+-- map("n", "<C-p>", "<Cmd>cprev<CR>")
 
 map("n", "<C-h>", "<C-w>h")
 map("n", "<C-j>", "<C-w>j")

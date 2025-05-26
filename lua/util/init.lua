@@ -18,4 +18,11 @@ M.bootstrap = function()
   end
 end
 
+M.au = function(event, pattern, callback, buffer)
+  vim.api.nvim_create_autocmd(
+    event,
+    { pattern = pattern, callback = callback, buffer = buffer }
+  )
+end
+
 return M

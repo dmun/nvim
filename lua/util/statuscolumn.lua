@@ -3,7 +3,7 @@ local M = {}
 M.init = function()
   local wo = vim.wo[vim.g.statusline_winid]
 
-  if not wo.nu or vim.v.virtnum > 0 or vim.v.virtnum < 0 then
+  if not wo.nu  or vim.v.virtnum > 0 or vim.v.virtnum < 0 then
     return ""
   end
 

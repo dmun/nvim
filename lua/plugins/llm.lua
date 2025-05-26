@@ -1,4 +1,6 @@
-MiniDeps.add({
+local add = MiniDeps.add
+
+add({
   source = "milanglacier/minuet-ai.nvim",
   depends = { "nvim-lua/plenary.nvim" },
 })

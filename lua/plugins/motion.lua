@@ -1,10 +1,34 @@
 local map = vim.keymap.set
 local add = MiniDeps.add
 
-add("tpope/vim-rsi")
+add("cbochs/grapple.nvim")
+local grapple = require("grapple")
+grapple.setup({
+  icons = false,
+  prune = "2d",
+  win_opts = {
+    width = 56,
+    height = 8,
+    border = vim.o.winborder,
+    title_pos = "left",
+    footer = "",
+  },
+})
+map("n", "<leader>a", grapple.toggle)
+map("n", "<leader>q", grapple.toggle_tags)
+map("n", "<leader>Q", grapple.toggle_scopes)
+map("n", "<leader>1", function() grapple.select({ index = 1 }) end)
+map("n", "<leader>2", function() grapple.select({ index = 2 }) end)
+map("n", "<leader>3", function() grapple.select({ index = 3 }) end)
+map("n", "<leader>4", function() grapple.select({ index = 4 }) end)
+map("n", "<leader>5", function() grapple.select({ index = 5 }) end)
 
+add("tpope/vim-rsi")
 add("ggandor/leap.nvim")
 require("leap").set_default_mappings()
+
+-- vim.g["sneak#s_next"] = true
+-- add("dmun/vim-sneak")
 
 add("jake-stewart/multicursor.nvim")
 local mc = require("multicursor-nvim")
@@ -166,6 +190,9 @@ map({ "n", "x" }, "<C-q>", mc.toggleCursor)
 map("n", "gm", mc.restoreCursors)
 map("x", "m", mc.matchCursors)
 map("x", "S", mc.splitCursors)
+
+map({ "n", "x" }, "<C-n>", function() mc.lineAddCursor(1) end)
+map({ "n", "x" }, "<C-p>", function() mc.lineAddCursor(-1) end)
 
 map({ "n", "x" }, "L", function() matchAddCursorSelect(1) end)
 map({ "n", "x" }, "H", function() matchAddCursorSelect(-1) end)

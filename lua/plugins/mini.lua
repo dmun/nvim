@@ -43,28 +43,28 @@ mp.setup({
   window = {
     config = function()
       return {
-        width = vim.o.columns,
+        -- width = vim.o.columns,
       }
     end,
     prompt_caret = "█",
   },
 })
 
-vim.notify = require("mini.notify").make_notify()
 vim.ui.select = function(items, opts, on_choice)
-  local width, height = 36, #items
+  local w, h = 36, #items
+  local p = vim.o.winborder == "" and 0 or 2
+  local W, H = w + p, h + p
   for _, item in ipairs(items) do
-    if #item.action.title > width then
-      width = #item.action.title
+    if #item.action.title > w then
+      w = #item.action.title
     end
   end
   return MiniPick.ui_select(items, opts, on_choice, {
     window = {
       config = {
-        width = width,
-        height = height,
-        row = height + 3,
-        col = -1,
+        width = w,
+        height = h,
+        row = H + 1,
         relative = "cursor",
       },
     },
@@ -73,12 +73,16 @@ end
 
 local winopts = function()
   local w, h = 24, 12
+  local p = vim.o.winborder == "" and 0 or 2
+  local W, H = w + p, h + p
+
   return {
     width = w,
-    height = 12,
-    col = vim.o.co / 2 - w / 2,
-    row = h / 2 + h,
+    height = h,
+    col = vim.o.co / 2 - W / 2,
+    row = H / 3,
     relative = "editor",
+    anchor = "NW",
   }
 end
 
@@ -95,7 +99,7 @@ map("n", "<Leader><Leader>", mp.builtin.resume)
 map("n", "<Leader>f", mp.builtin.files)
 map("n", "<Leader>o", mx.pickers.oldfiles)
 map("n", "<Leader>h", mx.pickers.hl_groups)
-map("n", "<Leader>q", function() mx.pickers.visit_paths() end)
+-- map("n", "<Leader>q", function() mx.pickers.visit_paths() end)
 map("n", "<Leader>l", function() MiniVisits.add_path() end)
 map("n", "<M-e>", MiniFiles.open)
 map("n", "<Leader>e", function()

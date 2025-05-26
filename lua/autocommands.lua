@@ -1,13 +1,24 @@
 local map = vim.keymap.set
-local au = function(event, pattern, callback, buffer)
-  vim.api.nvim_create_autocmd(
-    event,
-    { pattern = pattern, callback = callback, buffer = buffer }
-  )
-end
+local au = require("util").au
 
 au("LspAttach", "*", function()
   map("n", "<CR>", vim.lsp.buf.code_action, { buffer = true })
+  map("n", "<C-w><C-d>", function()
+    local p = vim.o.winborder == "" and 0 or 2
+    vim.diagnostic.open_float({
+      max_width = math.floor(vim.o.columns * 0.8) - p,
+      max_height = math.floor(vim.o.lines / 2) - p - 1,
+      close_events = { "CursorMoved" },
+    })
+  end, { buffer = true })
+  map("n", "K", function()
+    local p = vim.o.winborder == "" and 0 or 2
+    vim.lsp.buf.hover({
+      max_width = math.floor(vim.o.columns * 0.8) - p,
+      max_height = math.floor(vim.o.lines / 2) - p - 1,
+      close_events = { "CursorMoved" },
+    })
+  end, { buffer = true })
 end)
 
 au("TextYankPost", "*", function()
@@ -20,14 +31,6 @@ end)
 -- au("InsertEnter", "*", function()
 --   if vim.o.nu then vim.o.rnu = false end
 -- end)
-
-au({ "WinEnter", "BufEnter", "BufWinEnter" }, "*", function()
-  vim.wo.statusline = [[%{%v:lua.require'util.statusline'.active()%}]]
-end)
-
-au({ "WinLeave" }, "*", function()
-  vim.wo.statusline = [[%{%v:lua.require'util.statusline'.inactive()%}]]
-end)
 
 _G.AUTOSAVE_TIMER = vim.uv.new_timer()
 au({ "InsertLeave", "TextChanged" }, "*", function()

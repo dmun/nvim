@@ -17,6 +17,8 @@ now(function()
   require("plugins.ui")
 
   add("tpope/vim-sleuth")
+
+  require("util.borderline").setup()
 end)
 
 later(function()
@@ -26,6 +28,8 @@ later(function()
   require("plugins.blink")
   require("plugins.lsp")
   require("plugins.llm")
+
+  add("tpope/vim-fugitive")
 
   add("stevearc/conform.nvim")
   require("conform").setup()
