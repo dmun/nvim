@@ -174,12 +174,12 @@ local build = function(active)
       :hl("RedFg")
       :text(function(diagnostics)
         if not diagnostics.error or diagnostics.error == 0 then return "" end
-        return " "
+        return " " .. diagnostics.error
       end)
       :hl("YellowFg")
       :text(function(diagnostics)
         if not diagnostics.warn or diagnostics.warn == 0 then return "" end
-        return " "
+        return "  " .. diagnostics.warn
       end)
       :pad()
       :draw("DiagnosticChanged")
@@ -198,11 +198,11 @@ end
 
 local setup = function()
   au({ "WinEnter", "BufEnter", "BufWinEnter" }, "*", function()
-    vim.wo.statusline = [[%{%v:lua.require'util.statusline'.active()%}]]
+    vim.wo.statusline = [[%!v:lua.require'util.statusline'.active()]]
   end)
 
   au({ "WinLeave" }, "*", function()
-    vim.wo.statusline = [[%{%v:lua.require'util.statusline'.inactive()%}]]
+    vim.wo.statusline = [[%!v:lua.require'util.statusline'.inactive()]]
   end)
 end
 
