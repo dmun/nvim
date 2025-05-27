@@ -14,6 +14,10 @@ require("mini.ai").setup({
 -- require("mini.cursorword").setup()
 require("mini.diff").setup({ view = { style = "sign" } })
 require("mini.files").setup({
+  mappings = {
+    go_in_plus  = "l",
+    go_out_plus = "h",
+  },
   windows = {
     max_number = 3,
     width_focus = 30,

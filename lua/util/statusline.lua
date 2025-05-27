@@ -32,6 +32,11 @@ methods.right = function(self)
   return self
 end
 
+methods.cutoff = function(self)
+  table.insert(self.segments, "%<")
+  return self
+end
+
 methods.draw = function(self, event)
   if event and component_cache[component_id] == nil then
     local id = component_id
@@ -95,10 +100,9 @@ local mode_hl = function()
 end
 
 local file_fn = function()
-  local text = F.expand("%:.")
-  if vim.o.buftype ~= "" or #text >= 40 then text = vim.o.filetype end
-  if text == "" then text = F.getcwd() end
-  return F.substitute(text, F.expand("$HOME"), "~", "")
+  local head = F.expand("%:.:h")
+  local tail = F.expand("%:.:t")
+  return { head, tail }
 end
 
 local diff_fn = function() return vim.b.minidiff_summary or {} end
@@ -151,12 +155,19 @@ local build = function(active)
       :text("(")
       :hl("Title"):text(grapple_fn)
       :hl(normal_hl):text(")")
+      :pad()
+      :cutoff()
       :draw({ "BufEnter", "BufLeave" })
 
-  component()
+  component(file_fn)
       :hl(normal_hl)
-      :pad()
-      :text(file_fn)
+      :text(function(file)
+        return file[1] .. "/"
+      end)
+      :hl("CursorLineNr")
+      :text(function(file)
+        return file[2]
+      end)
       :pad()
       :draw({ "BufEnter", "BufLeave" })
 

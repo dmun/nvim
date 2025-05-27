@@ -5,6 +5,8 @@ vim.g.maplocalleader = " m"
 
 o.ttimeout = false
 o.ttimeoutlen = 0
+o.lcs = "tab:  "
+o.list = true
 o.nu = true
 o.rnu = true
 o.so = 5
