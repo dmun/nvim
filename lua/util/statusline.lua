@@ -1,5 +1,4 @@
 local F = vim.fn
-local au = require("util").au
 local methods = {}
 local statusline = {}
 local component_cache = {}
@@ -38,7 +37,9 @@ methods.cutoff = function(self)
 end
 
 methods.draw = function(self, event)
-  if event and component_cache[component_id] == nil then
+  if type(event) == "string" then event = { event } end
+  event = vim.tbl_extend("force", { "BufEnter", "BufLeave" }, event)
+  if component_cache[component_id] == nil then
     local id = component_id
     au(event, "*", function()
       component_dirty[id] = true
@@ -142,31 +143,32 @@ local build = function(active)
 
   local normal_hl = active and "StatusLine" or "StatusLineNC"
 
-  component()
-      :hl(mode_hl)
-      :pad()
-      :text(function() return vim.fn.mode():upper() end)
-      :pad()
-      :draw("ModeChanged")
+  -- component()
+  --     :hl(mode_hl)
+  --     :pad()
+  --     :text(function() return vim.fn.mode():upper() end)
+  --     :pad()
+  --     :draw("ModeChanged")
 
-  component()
-      :hl(normal_hl)
-      :pad()
-      :text("(")
-      :hl("Title"):text(grapple_fn)
-      :hl(normal_hl):text(")")
-      :pad()
-      :cutoff()
-      :draw({ "BufEnter", "BufLeave" })
+  -- component()
+  --     :pad()
+  --     :hl("LineNr"):text("<")
+  --     :hl(normal_hl):text(grapple_fn)
+  --     :hl("LineNr"):text(">")
+  --     :hl(normal_hl)
+  --     :pad()
+  --     :cutoff()
+  --     :draw({ "BufEnter", "BufLeave" })
 
   component(file_fn)
-      :hl(normal_hl)
-      :text(function(file)
-        return file[1] .. "/"
-      end)
-      :hl("CursorLineNr")
+      :hl("Title")
+      :pad()
       :text(function(file)
         return file[2]
+      end)
+      :hl("Comment")
+      :text(function(file)
+        return " 󰁔 " .. file[1]
       end)
       :pad()
       :draw({ "BufEnter", "BufLeave" })

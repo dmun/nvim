@@ -1,6 +1,3 @@
-local map = vim.keymap.set
-local add = MiniDeps.add
-
 add("cbochs/grapple.nvim")
 local grapple = require("grapple")
 grapple.setup({
@@ -14,14 +11,14 @@ grapple.setup({
     footer = "",
   },
 })
-map("n", "<leader>a", grapple.toggle)
-map("n", "<leader>q", grapple.toggle_tags)
-map("n", "<leader>Q", grapple.toggle_scopes)
-map("n", "<leader>1", function() grapple.select({ index = 1 }) end)
-map("n", "<leader>2", function() grapple.select({ index = 2 }) end)
-map("n", "<leader>3", function() grapple.select({ index = 3 }) end)
-map("n", "<leader>4", function() grapple.select({ index = 4 }) end)
-map("n", "<leader>5", function() grapple.select({ index = 5 }) end)
+nmap("<leader>a", grapple.toggle)
+nmap("<leader>q", grapple.toggle_tags)
+nmap("<leader>Q", grapple.toggle_scopes)
+nmap("<leader>1", function() grapple.select({ index = 1 }) end)
+nmap("<leader>2", function() grapple.select({ index = 2 }) end)
+nmap("<leader>3", function() grapple.select({ index = 3 }) end)
+nmap("<leader>4", function() grapple.select({ index = 4 }) end)
+nmap("<leader>5", function() grapple.select({ index = 5 }) end)
 
 add("tpope/vim-rsi")
 add("ggandor/leap.nvim")
@@ -180,16 +177,16 @@ local function clearCursors()
   _G.MC_WORD = false
 end
 
-map("x", "q", mc.visualToCursors)
-map("x", "ga", function() mc.matchAllAddCursors() end)
-map("n", "ga", function()
+xmap("q", mc.visualToCursors)
+xmap("ga", function() mc.matchAllAddCursors() end)
+nmap("ga", function()
   mc.matchAllAddCursors()
   mc.feedkeys("viw")
 end)
 map({ "n", "x" }, "<C-q>", mc.toggleCursor)
-map("n", "gm", mc.restoreCursors)
-map("x", "m", mc.matchCursors)
-map("x", "S", mc.splitCursors)
+nmap("gm", mc.restoreCursors)
+xmap("m", mc.matchCursors)
+xmap("S", mc.splitCursors)
 
 map({ "n", "x" }, "<C-n>", function() mc.lineAddCursor(1) end)
 map({ "n", "x" }, "<C-p>", function() mc.lineAddCursor(-1) end)
@@ -232,11 +229,11 @@ require("dial.config").augends:register_group {
   },
 }
 
-map("n", "<C-a>", function() dial.manipulate("increment", "normal") end)
-map("n", "<C-x>", function() dial.manipulate("decrement", "normal") end)
-map("n", "g<C-a>", function() dial.manipulate("increment", "gnormal") end)
-map("n", "g<C-x>", function() dial.manipulate("decrement", "gnormal") end)
-map("v", "<C-a>", function() dial.manipulate("increment", "visual") end)
-map("v", "<C-x>", function() dial.manipulate("decrement", "visual") end)
-map("v", "g<C-a>", function() dial.manipulate("increment", "gvisual") end)
-map("v", "g<C-x>", function() dial.manipulate("decrement", "gvisual") end)
+nmap("<C-a>", function() dial.manipulate("increment", "normal") end)
+nmap("<C-x>", function() dial.manipulate("decrement", "normal") end)
+nmap("g<C-a>", function() dial.manipulate("increment", "gnormal") end)
+nmap("g<C-x>", function() dial.manipulate("decrement", "gnormal") end)
+xmap("<C-a>", function() dial.manipulate("increment", "visual") end)
+xmap("<C-x>", function() dial.manipulate("decrement", "visual") end)
+xmap("g<C-a>", function() dial.manipulate("increment", "gvisual") end)
+xmap("g<C-x>", function() dial.manipulate("decrement", "gvisual") end)

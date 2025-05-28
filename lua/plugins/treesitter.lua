@@ -1,14 +1,15 @@
-local add = MiniDeps.add
-local map = vim.keymap.set
-
-add({
-  source = "nvim-treesitter/nvim-treesitter",
-})
+add("nvim-treesitter/nvim-treesitter")
 
 add({
   source = "nvim-treesitter/nvim-treesitter-textobjects",
   depends = { "nvim-treesitter/nvim-treesitter" },
 })
+
+add({
+  source = "windwp/nvim-ts-autotag",
+  depends = { "nvim-treesitter/nvim-treesitter" },
+})
+require("nvim-ts-autotag").setup()
 
 require("nvim-treesitter.configs").setup({
   ensure_installed = { "lua", "vim", "vimdoc", "query" },
@@ -43,5 +44,5 @@ add({
 local tj = require("treesj")
 tj.setup({ use_default_keymaps = false })
 
-map("n", "gS", tj.split)
-map("n", "gJ", tj.join)
+nmap("gS", tj.split)
+nmap("gJ", tj.join)

@@ -1,9 +1,6 @@
-local map = vim.keymap.set
-local au = require("util").au
-
 au("LspAttach", "*", function()
-  map("n", "<CR>", vim.lsp.buf.code_action, { buffer = true })
-  map("n", "<C-w><C-d>", function()
+  nmap("<CR>", vim.lsp.buf.code_action, { buffer = true })
+  nmap("<C-w><C-d>", function()
     local p = vim.o.winborder == "" and 0 or 2
     vim.diagnostic.open_float({
       max_width = math.floor(vim.o.columns * 0.8) - p,
@@ -11,7 +8,7 @@ au("LspAttach", "*", function()
       close_events = { "CursorMoved" },
     })
   end, { buffer = true })
-  map("n", "K", function()
+  nmap("K", function()
     local p = vim.o.winborder == "" and 0 or 2
     vim.lsp.buf.hover({
       max_width = math.floor(vim.o.columns * 0.8) - p,
@@ -32,9 +29,12 @@ end)
 --   if vim.o.nu then vim.o.rnu = false end
 -- end)
 
+local autosave_filter = {
+  "sql",
+}
 _G.AUTOSAVE_TIMER = vim.uv.new_timer()
 au({ "InsertLeave", "TextChanged" }, "*", function()
-  if vim.bo.buftype == "" then
+  if vim.bo.buftype == "" and not vim.tbl_contains(autosave_filter, vim.bo.filetype) then
     if _G.AUTOSAVE_TIMER then
       vim.uv.timer_stop(_G.AUTOSAVE_TIMER)
     else

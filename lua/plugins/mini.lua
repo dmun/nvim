@@ -1,5 +1,3 @@
-local map = vim.keymap.set
-
 local gen_ai_spec = require("mini.extra").gen_ai_spec
 require("mini.ai").setup({
   custom_textobjects = {
@@ -41,13 +39,26 @@ local mx = require("mini.extra")
 
 mx.setup()
 mp.setup({
+  source = {
+    _show = function(buf_id, items_arr, query)
+      local fn = function(x)
+        local w = vim.fn.strdisplaywidth(x)
+        if w > 48 then
+          return vim.fn.strcharpart(x, 0, 22) .. "… " .. vim.fn.strcharpart(x, w - 23, 23)
+        end
+        return x
+      end
+      local lines = vim.tbl_map(fn, items_arr)
+      MiniPick.default_show(buf_id, lines, query)
+    end,
+  },
   options = {
     use_cache = true,
   },
   window = {
     config = function()
       return {
-        -- width = vim.o.columns,
+        width = vim.o.co,
       }
     end,
     prompt_caret = "█",
@@ -90,23 +101,29 @@ local winopts = function()
   }
 end
 
-map("n", "g/", mp.builtin.grep)
-map("n", "g?", mp.builtin.help)
-map("n", "gs", function()
+nmap("<Leader>th", MiniDiff.toggle_overlay)
+nmap("g/", mp.builtin.grep)
+nmap("g?", mp.builtin.help)
+nmap("gs", function()
   mx.pickers.lsp({ scope = "document_symbol" }, {
     window = {
       config = winopts,
     },
   })
 end)
-map("n", "<Leader><Leader>", mp.builtin.resume)
-map("n", "<Leader>f", mp.builtin.files)
-map("n", "<Leader>o", mx.pickers.oldfiles)
-map("n", "<Leader>h", mx.pickers.hl_groups)
--- map("n", "<Leader>q", function() mx.pickers.visit_paths() end)
-map("n", "<Leader>l", function() MiniVisits.add_path() end)
-map("n", "<M-e>", MiniFiles.open)
-map("n", "<Leader>e", function()
+nmap("<Leader><Leader>", mp.builtin.resume)
+nmap("<Leader>f", mp.builtin.files)
+nmap("<Leader>g", mx.pickers.git_files)
+nmap("<Leader>o", mx.pickers.oldfiles)
+nmap("<Leader>f", function()
+  mx.pickers.visit_paths({
+    preserve_order = true,
+  })
+end)
+nmap("<Leader>h", mx.pickers.hl_groups)
+-- nmap("<Leader>q", function() mx.pickers.visit_paths() end)
+nmap("<M-e>", MiniFiles.open)
+nmap("<Leader>e", function()
   MiniFiles.open(vim.api.nvim_buf_get_name(0))
   MiniFiles.reveal_cwd()
 end)

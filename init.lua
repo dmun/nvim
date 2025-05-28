@@ -1,24 +1,14 @@
 require("util").bootstrap()
 require("mini.deps").setup()
-
-local add, now, later = MiniDeps.add, MiniDeps.now, MiniDeps.later
-local map = vim.keymap.set
+require("globals")
 
 now(function()
-  add({
-    source = "dmun/boomer.nvim",
-    depends = { "rktjmp/lush.nvim" },
-  })
-  vim.cmd.color("boomer")
-  add("echasnovski/mini.nvim")
-
+  add({ source = "dmun/boomer.nvim", depends = { "rktjmp/lush.nvim" } })
+  vim.cmd("color boomer")
   require("defaults")
   require("autocommands")
   require("plugins.ui")
-
   require("util.statusline").setup()
-
-  add("tpope/vim-sleuth")
 end)
 
 later(function()
@@ -28,19 +18,6 @@ later(function()
   require("plugins.blink")
   require("plugins.lsp")
   require("plugins.llm")
-
-  add("tpope/vim-fugitive")
-
-  add("stevearc/conform.nvim")
-  require("conform").setup()
-  map("n", "<M-f>", function()
-    require("conform").format({ lsp_format = "fallback" })
-  end)
-
-  add("stevearc/quicker.nvim")
-  require("quicker").setup({
-    opts = {
-      signcolumn = "no",
-    },
-  })
+  require("plugins.editor")
+  require("plugins.sql")
 end)

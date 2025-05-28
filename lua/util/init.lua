@@ -1,6 +1,4 @@
-local M = {}
-
-M.bootstrap = function()
+local bootstrap = function()
   local path_package = vim.fn.stdpath("data") .. "/site/"
   local mini_path = path_package .. "pack/deps/start/mini.nvim"
   if not vim.uv.fs_stat(mini_path) then
@@ -18,11 +16,4 @@ M.bootstrap = function()
   end
 end
 
-M.au = function(event, pattern, callback, buffer)
-  vim.api.nvim_create_autocmd(
-    event,
-    { pattern = pattern, callback = callback, buffer = buffer }
-  )
-end
-
-return M
+return { bootstrap = bootstrap }

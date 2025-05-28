@@ -1,5 +1,4 @@
-local map, lsp = vim.keymap.set, vim.lsp
-local add = MiniDeps.add
+local lsp = vim.lsp
 
 add("folke/lazydev.nvim")
 require("lazydev").setup({
@@ -8,7 +7,7 @@ require("lazydev").setup({
   },
 })
 
-lsp.config.lua_ls = {
+lsp.config("lua_ls", {
   cmd = { "lua-language-server" },
   filetypes = { "lua" },
   root_markers = { "init.lua", ".luarc.json" },
@@ -19,7 +18,7 @@ lsp.config.lua_ls = {
       },
     },
   },
-}
+})
 lsp.enable("lua_ls")
 
 lsp.config("*", {
@@ -56,6 +55,13 @@ lsp.config("rust-analyzer", {
 })
 lsp.enable("rust-analyzer")
 
+lsp.config("tailwindcss", {
+  cmd = { "tailwindcss-language-server", "--stdio" },
+  filetypes = { "html", "svelte", "postcss" },
+  root_markers = { "package.json" },
+})
+lsp.enable("tailwindcss")
+
 lsp.config("ts_ls", {
   cmd = { "typescript-language-server", "--stdio" },
   filetypes = { "typescript", "typescriptreact", "javascript", "javascriptreact" },
@@ -70,6 +76,6 @@ lsp.config("svelte_ls", {
 })
 lsp.enable("svelte_ls")
 
-map("n", "grr", lsp.buf.references)
-map("n", "gD", lsp.buf.declaration)
-map("n", "gd", lsp.buf.definition)
+nmap("grr", lsp.buf.references)
+nmap("gD", lsp.buf.declaration)
+nmap("gd", lsp.buf.definition)

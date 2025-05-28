@@ -1,5 +1,3 @@
-local add = MiniDeps.add
-
 add({
   source = "milanglacier/minuet-ai.nvim",
   depends = { "nvim-lua/plenary.nvim" },
@@ -7,11 +5,11 @@ add({
 
 require("minuet").setup({
   provider = "codestral",
-  n_completions = 1,
+  n_completions = 3,
   provider_options = {
     codestral = {
       optional = {
-        max_tokens = 256,
+        max_tokens = 512,
         stop = { "\n\n" },
       },
     },
@@ -19,7 +17,7 @@ require("minuet").setup({
   virtualtext = {
     auto_trigger_ft = { "*" },
     keymap = {
-      accept = "<M-i>",
+      accept = "<Tab>",
       accept_line = "<M-l>",
       prev = "<M-[>",
       next = "<M-]>",
