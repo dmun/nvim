@@ -171,6 +171,7 @@ local build = function(active)
         return " 󰁔 " .. file[1]
       end)
       :pad()
+      :cutoff()
       :draw({ "BufEnter", "BufLeave" })
 
   component(diff_fn)

@@ -101,9 +101,20 @@ local winopts = function()
   }
 end
 
+nmap("gl", function()
+  mp.start({
+    source = {
+      name = "MiniDeps",
+      choose = cmd,
+      items = { "DepsUpdate", "DepsClean", "DepsSnapSave" },
+    },
+    window = { config = winopts },
+  })
+end)
+
 nmap("<Leader>th", MiniDiff.toggle_overlay)
-nmap("g/", mp.builtin.grep)
-nmap("g?", mp.builtin.help)
+nmap("g/",         mp.builtin.grep)
+nmap("g?",         mp.builtin.help)
 nmap("gs", function()
   mx.pickers.lsp({ scope = "document_symbol" }, {
     window = {
@@ -112,9 +123,9 @@ nmap("gs", function()
   })
 end)
 nmap("<Leader><Leader>", mp.builtin.resume)
-nmap("<Leader>f", mp.builtin.files)
-nmap("<Leader>g", mx.pickers.git_files)
-nmap("<Leader>o", mx.pickers.oldfiles)
+nmap("<Leader>f",        mp.builtin.files)
+nmap("<Leader>g",        mx.pickers.git_files)
+nmap("<Leader>o",        mx.pickers.oldfiles)
 nmap("<Leader>f", function()
   mx.pickers.visit_paths({
     preserve_order = true,

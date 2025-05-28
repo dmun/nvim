@@ -1,9 +1,7 @@
--- MiniDeps
 _G.add = MiniDeps.add
 _G.now = MiniDeps.now
 _G.later = MiniDeps.later
 
--- Utility
 _G.au = function(event, pattern, callback, buffer)
   vim.api.nvim_create_autocmd(
     event,
@@ -14,9 +12,15 @@ end
 _G.bind = function(fn, ...)
   local args = { ... }
   return function(...)
-    fn(unpack(args), ...)
+    if select("#", ...) > 0 then
+      fn(unpack(args), ...)
+    else
+      fn(unpack(args))
+    end
   end
 end
+
+_G.cmd = vim.cmd
 
 _G.map = function(mode, lhs, rhs, opts)
   local options = { noremap = true, silent = true }

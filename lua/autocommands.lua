@@ -29,9 +29,7 @@ end)
 --   if vim.o.nu then vim.o.rnu = false end
 -- end)
 
-local autosave_filter = {
-  "sql",
-}
+local autosave_filter = { "sql" }
 _G.AUTOSAVE_TIMER = vim.uv.new_timer()
 au({ "InsertLeave", "TextChanged" }, "*", function()
   if vim.bo.buftype == "" and not vim.tbl_contains(autosave_filter, vim.bo.filetype) then
@@ -43,7 +41,7 @@ au({ "InsertLeave", "TextChanged" }, "*", function()
 
     vim.uv.timer_start(_G.AUTOSAVE_TIMER, 200, 0, function()
       vim.schedule(function()
-        vim.cmd("silent! update")
+        cmd("silent! update")
       end)
       vim.uv.timer_stop(_G.AUTOSAVE_TIMER)
       _G.AUTOSAVE_TIMER = nil

@@ -1,6 +1,6 @@
 add("cbochs/grapple.nvim")
-local grapple = require("grapple")
-grapple.setup({
+local Grapple = require("grapple")
+Grapple.setup({
   icons = false,
   prune = "2d",
   win_opts = {
@@ -11,21 +11,23 @@ grapple.setup({
     footer = "",
   },
 })
-nmap("<leader>a", grapple.toggle)
-nmap("<leader>q", grapple.toggle_tags)
-nmap("<leader>Q", grapple.toggle_scopes)
-nmap("<leader>1", function() grapple.select({ index = 1 }) end)
-nmap("<leader>2", function() grapple.select({ index = 2 }) end)
-nmap("<leader>3", function() grapple.select({ index = 3 }) end)
-nmap("<leader>4", function() grapple.select({ index = 4 }) end)
-nmap("<leader>5", function() grapple.select({ index = 5 }) end)
+nmap("<leader>a", Grapple.toggle)
+nmap("<leader>q", Grapple.toggle_tags)
+nmap("<leader>Q", Grapple.toggle_scopes)
+nmap("<leader>1", bind(Grapple.select, { index = 1 }))
+nmap("<leader>2", bind(Grapple.select, { index = 2 }))
+nmap("<leader>3", bind(Grapple.select, { index = 3 }))
+nmap("<leader>4", bind(Grapple.select, { index = 4 }))
+nmap("<leader>5", bind(Grapple.select, { index = 5 }))
 
 add("tpope/vim-rsi")
-add("ggandor/leap.nvim")
-require("leap").set_default_mappings()
 
--- vim.g["sneak#s_next"] = true
--- add("dmun/vim-sneak")
+-- add("ggandor/leap.nvim")
+-- require("leap").set_default_mappings()
+
+vim.g["sneak#s_next"] = true
+vim.g["sneak#use_ic_scs"] = 1
+add("justinmk/vim-sneak")
 
 add("jake-stewart/multicursor.nvim")
 local mc = require("multicursor-nvim")
@@ -177,7 +179,7 @@ local function clearCursors()
   _G.MC_WORD = false
 end
 
-xmap("q", mc.visualToCursors)
+xmap("q",  mc.visualToCursors)
 xmap("ga", function() mc.matchAllAddCursors() end)
 nmap("ga", function()
   mc.matchAllAddCursors()
@@ -185,28 +187,28 @@ nmap("ga", function()
 end)
 map({ "n", "x" }, "<C-q>", mc.toggleCursor)
 nmap("gm", mc.restoreCursors)
-xmap("m", mc.matchCursors)
-xmap("S", mc.splitCursors)
+xmap("m",  mc.matchCursors)
+xmap("S",  mc.splitCursors)
 
-map({ "n", "x" }, "<C-n>", function() mc.lineAddCursor(1) end)
-map({ "n", "x" }, "<C-p>", function() mc.lineAddCursor(-1) end)
+map({ "n", "x" }, "<C-=>", bind(mc.lineAddCursor, 1))
+map({ "n", "x" }, "<C-->", bind(mc.lineAddCursor, -1))
 
-map({ "n", "x" }, "L", function() matchAddCursorSelect(1) end)
-map({ "n", "x" }, "H", function() matchAddCursorSelect(-1) end)
-map({ "n", "x" }, "M", function() matchSkipCursorSelect(1) end)
+map({ "n", "x" }, "L", bind(matchAddCursorSelect, 1))
+map({ "n", "x" }, "H", bind(matchAddCursorSelect, -1))
+map({ "n", "x" }, "M", bind(matchSkipCursorSelect, 1))
 
 mc.addKeymapLayer(function(layermap)
   layermap({ "n", "x" }, "<C-o>", mc.prevCursor)
   layermap({ "n", "x" }, "<C-i>", mc.nextCursor)
   layermap({ "n", "x" }, "<C-h>", mc.deleteCursor)
-  layermap({ "n", "x" }, "=", mc.alignCursors)
-  layermap({ "n", "x" }, "u", "u")
+  layermap({ "n", "x" }, "=",     mc.alignCursors)
+  layermap({ "n", "x" }, "u",     "u")
   layermap({ "n", "x" }, "<C-r>", "<C-r>")
-  layermap("n", "q", clearCursors)
   layermap("x", "q", function()
     clearCursors()
     mc.feedkeys("<Esc>", { keycodes = true })
   end)
+  layermap("n", "q", clearCursors)
   layermap("n", "<Esc>", function()
     if not mc.cursorsEnabled() then
       mc.enableCursors()
@@ -218,22 +220,22 @@ end)
 
 add("monaqa/dial.nvim")
 local augend = require("dial.augend")
-local dial = require("dial.map")
+local dial = require("dial.map").manipulate
 
-require("dial.config").augends:register_group {
+require("dial.config").augends:register_group({
   default = {
     augend.integer.alias.decimal,
     augend.integer.alias.hex,
     augend.constant.alias.bool,
     augend.date.alias["%Y/%m/%d"],
   },
-}
+})
 
-nmap("<C-a>", function() dial.manipulate("increment", "normal") end)
-nmap("<C-x>", function() dial.manipulate("decrement", "normal") end)
-nmap("g<C-a>", function() dial.manipulate("increment", "gnormal") end)
-nmap("g<C-x>", function() dial.manipulate("decrement", "gnormal") end)
-xmap("<C-a>", function() dial.manipulate("increment", "visual") end)
-xmap("<C-x>", function() dial.manipulate("decrement", "visual") end)
-xmap("g<C-a>", function() dial.manipulate("increment", "gvisual") end)
-xmap("g<C-x>", function() dial.manipulate("decrement", "gvisual") end)
+nmap("<C-a>",  bind(dial, "increment", "normal"))
+nmap("<C-x>",  bind(dial, "decrement", "normal"))
+nmap("g<C-a>", bind(dial, "increment", "gnormal"))
+nmap("g<C-x>", bind(dial, "decrement", "gnormal"))
+xmap("<C-a>",  bind(dial, "increment", "visual"))
+xmap("<C-x>",  bind(dial, "decrement", "visual"))
+xmap("g<C-a>", bind(dial, "increment", "gvisual"))
+xmap("g<C-x>", bind(dial, "decrement", "gvisual"))

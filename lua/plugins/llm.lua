@@ -5,11 +5,11 @@ add({
 
 require("minuet").setup({
   provider = "codestral",
-  n_completions = 3,
+  n_completions = 2,
   provider_options = {
     codestral = {
       optional = {
-        max_tokens = 512,
+        max_tokens = 384,
         stop = { "\n\n" },
       },
     },

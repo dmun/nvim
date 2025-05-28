@@ -7,11 +7,10 @@ return {
   ["friendly-snippets"] = "572f5660cf05f8cd8834e096d7b4c921ba18e175",
   ["grapple.nvim"] = "b41ddfc1c39f87f3d1799b99c2f0f1daa524c5f7",
   ["lazydev.nvim"] = "2367a6c0a01eb9edb0464731cc0fb61ed9ab9d2c",
-  ["leap.nvim"] = "189102b07cdd24de3bd7132e57da8c9614c385fc",
   ["lush.nvim"] = "45a79ec4acb5af783a6a29673a999ce37f00497e",
-  ["mini.nvim"] = "9688298860d8ac7d334139c5fd599edbedeff3c0",
-  ["minuet-ai.nvim"] = "39acad1be80d004f4430f87e3cddb07a3e2561f6",
-  ["multicursor.nvim"] = "ff252798c054c29a652ff729e48694fbb98542da",
+  ["mini.nvim"] = "ecbb9b1e2223a04171388887765e7695f5a0c132",
+  ["minuet-ai.nvim"] = "094a23ed3b0c679b73181087d0ad8a3451411e09",
+  ["multicursor.nvim"] = "9eedebdd395bbbc4711081e33b0606c079e054c3",
   ["nvim-treesitter"] = "42fc28ba918343ebfd5565147a42a26580579482",
   ["nvim-treesitter-textobjects"] = "0f051e9813a36481f48ca1f833897210dbcfffde",
   ["nvim-ts-autotag"] = "a1d526af391f6aebb25a8795cbc05351ed3620b5",
@@ -23,5 +22,6 @@ return {
   ["vim-dadbod-ui"] = "460432301a5cb280ea265ddfa15c9f3dcd1d26b7",
   ["vim-fugitive"] = "4a745ea72fa93bb15dd077109afbb3d1809383f2",
   ["vim-rsi"] = "45540637ead22f011e8215f1c90142e49d946a54",
-  ["vim-sleuth"] = "be69bff86754b1aa5adcbb527d7fcd1635a84080"
+  ["vim-sleuth"] = "be69bff86754b1aa5adcbb527d7fcd1635a84080",
+  ["vim-sneak"] = "18b1faf020e6a66c1ce09b3ff5e6b6feb182973b"
 }
