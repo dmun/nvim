@@ -38,7 +38,13 @@ end
 
 methods.draw = function(self, event)
   if type(event) == "string" then event = { event } end
-  event = vim.tbl_extend("force", { "BufEnter", "BufLeave" }, event)
+  event = vim.tbl_extend("force", {
+    "BufEnter",
+    "BufLeave",
+    "WinLeave",
+    "WinEnter",
+    "BufWinEnter",
+  }, event)
   if component_cache[component_id] == nil then
     local id = component_id
     au(event, "*", function()
@@ -161,12 +167,12 @@ local build = function(active)
   --     :draw({ "BufEnter", "BufLeave" })
 
   component(file_fn)
-      :hl("Title")
+      :hl(active and "Title" or "Comment")
       :pad()
       :text(function(file)
         return file[2]
       end)
-      :hl("Comment")
+      :hl(normal_hl)
       :text(function(file)
         return " 󰁔 " .. file[1]
       end)
@@ -198,6 +204,10 @@ local build = function(active)
       :pad()
       :draw("DiagnosticChanged")
 
+  component()
+      :hl(normal_hl)
+      :text(" %l/%L  %c ")
+      :draw({ "CursorMoved", "CursorMovedI" })
 
   return table.concat(statusline)
 end

@@ -9,7 +9,7 @@ require("mini.ai").setup({
   },
 })
 
--- require("mini.cursorword").setup()
+require("mini.cursorword").setup()
 require("mini.diff").setup({ view = { style = "sign" } })
 require("mini.files").setup({
   mappings = {
@@ -30,41 +30,22 @@ require("mini.move").setup()
 require("mini.pairs").setup()
 -- require("mini.surround").setup()
 require("mini.visits").setup()
+require("mini.extra").setup()
 
 MiniMisc.setup_auto_root()
 MiniMisc.setup_restore_cursor()
 
-local mp = require("mini.pick")
-local mx = require("mini.extra")
-
-mx.setup()
-mp.setup({
-  source = {
-    _show = function(buf_id, items_arr, query)
-      local fn = function(x)
-        local w = vim.fn.strdisplaywidth(x)
-        if w > 48 then
-          return vim.fn.strcharpart(x, 0, 22) .. "… " .. vim.fn.strcharpart(x, w - 23, 23)
-        end
-        return x
-      end
-      local lines = vim.tbl_map(fn, items_arr)
-      MiniPick.default_show(buf_id, lines, query)
-    end,
-  },
-  options = {
-    use_cache = true,
-  },
+require("mini.pick").setup({
+  options = { use_cache = true },
   window = {
     config = function()
-      return {
-        width = vim.o.co,
-      }
+      return { width = vim.o.co }
     end,
     prompt_caret = "█",
   },
 })
 
+---@diagnostic disable-next-line: duplicate-set-field
 vim.ui.select = function(items, opts, on_choice)
   local w, h = 36, #items
   local p = vim.o.winborder == "" and 0 or 2
@@ -101,8 +82,8 @@ local winopts = function()
   }
 end
 
-nmap("gl", function()
-  mp.start({
+local deps_action = function()
+  MiniPick.start({
     source = {
       name = "MiniDeps",
       choose = cmd,
@@ -110,30 +91,26 @@ nmap("gl", function()
     },
     window = { config = winopts },
   })
-end)
+end
 
-nmap("<Leader>th", MiniDiff.toggle_overlay)
-nmap("g/",         mp.builtin.grep)
-nmap("g?",         mp.builtin.help)
+nmap("<Leader>td", deps_action)
+nmap("<Leader>to", MiniDiff.toggle_overlay)
+nmap("g/",         MiniPick.builtin.grep)
+nmap("g?",         MiniPick.builtin.help)
 nmap("gs", function()
-  mx.pickers.lsp({ scope = "document_symbol" }, {
+  MiniExtra.pickers.lsp({ scope = "document_symbol" }, {
     window = {
       config = winopts,
     },
   })
 end)
-nmap("<Leader><Leader>", mp.builtin.resume)
-nmap("<Leader>f",        mp.builtin.files)
-nmap("<Leader>g",        mx.pickers.git_files)
-nmap("<Leader>o",        mx.pickers.oldfiles)
-nmap("<Leader>f", function()
-  mx.pickers.visit_paths({
-    preserve_order = true,
-  })
-end)
-nmap("<Leader>h", mx.pickers.hl_groups)
--- nmap("<Leader>q", function() mx.pickers.visit_paths() end)
-nmap("<M-e>", MiniFiles.open)
+
+nmap("<Leader><Leader>", MiniPick.builtin.resume)
+nmap("<Leader>g",        MiniExtra.pickers.git_files)
+nmap("<Leader>o",        MiniExtra.pickers.oldfiles)
+nmap("<Leader>h",        MiniExtra.pickers.hl_groups)
+nmap("<M-e>",            MiniFiles.open)
+nmap("<Leader>f",        bind(MiniExtra.pickers.visit_paths, { preserve_order = true }))
 nmap("<Leader>e", function()
   MiniFiles.open(vim.api.nvim_buf_get_name(0))
   MiniFiles.reveal_cwd()
