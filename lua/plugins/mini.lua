@@ -40,7 +40,9 @@ require("mini.pick").setup({
   options = { use_cache = true },
   window = {
     config = function()
-      return { width = vim.o.co }
+      return {
+        -- width = vim.o.co,
+      }
     end,
     prompt_caret = "█",
   },
@@ -129,17 +131,27 @@ nmap("<Leader>f", function()
           local sort_frecency = MiniVisits.gen_sort.default({ recency_weight = 0.5 })
           local filter_cwd = function(path_data)
             local path = path_data.path
-            return vim.startswith(path, vim.fn.getcwd()) and not vim.fn.isdirectory(path)
+            return vim.startswith(path, vim.fn.getcwd()) and vim.fn.isdirectory(path) == 0
           end
+
           local visits = MiniVisits.list_paths(vim.fn.getcwd(), {
             sort = sort_frecency,
             filter = filter_cwd,
           })
-          visits = vim.tbl_extend("force", items, visits)
+          vim.list_extend(visits, items)
+
+          local hash = {}
+          local res = {}
+
+          for _, v in ipairs(visits) do
+            v = vim.fn.fnamemodify(v, ":~:.")
+            if (not hash[v]) then
+              res[#res + 1] = v
+              hash[v] = true
+            end
+          end
 
           local fn = function(item)
-            item = item:replace(vim.fn.getcwd() .. "/", "")
-            item = item:replace(vim.env.HOME, "~")
             local file = vim.fs.basename(item)
             local path = vim.fs.dirname(item)
             return {
@@ -148,7 +160,7 @@ nmap("<Leader>f", function()
             }
           end
 
-          return vim.tbl_map(fn, visits)
+          return vim.tbl_map(fn, res)
         end
 
         MiniPick.set_picker_items_from_cli(
