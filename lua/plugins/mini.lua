@@ -31,6 +31,7 @@ require("mini.pairs").setup()
 -- require("mini.surround").setup()
 require("mini.visits").setup()
 require("mini.extra").setup()
+require("mini.icons").setup()
 
 MiniMisc.setup_auto_root()
 MiniMisc.setup_restore_cursor()
@@ -68,7 +69,7 @@ vim.ui.select = function(items, opts, on_choice)
 end
 
 local winopts = function()
-  local w, h = 24, 12
+  local w, h = 48, 12
   local p = vim.o.winborder == "" and 0 or 2
   local W, H = w + p, h + p
 
@@ -110,7 +111,72 @@ nmap("<Leader>g",        MiniExtra.pickers.git_files)
 nmap("<Leader>o",        MiniExtra.pickers.oldfiles)
 nmap("<Leader>h",        MiniExtra.pickers.hl_groups)
 nmap("<M-e>",            MiniFiles.open)
-nmap("<Leader>f",        bind(MiniExtra.pickers.visit_paths, { preserve_order = true }))
+
+local function regexEscape(str)
+  return str:gsub("[%(%)%.%%%+%-%*%?%[%^%$%]]", "%%%1")
+end
+
+string.replace = function(str, this, that)
+  return str:gsub(regexEscape(this), that)
+end
+
+nmap("<Leader>f", function()
+  MiniPick.start({
+    source = {
+      name = "Files (frecency)",
+      items = function()
+        local postprocess = function(items)
+          local sort_frecency = MiniVisits.gen_sort.default({ recency_weight = 0.5 })
+          local filter_cwd = function(path_data)
+            local path = path_data.path
+            return vim.startswith(path, vim.fn.getcwd()) and not vim.fn.isdirectory(path)
+          end
+          local visits = MiniVisits.list_paths(vim.fn.getcwd(), {
+            sort = sort_frecency,
+            filter = filter_cwd,
+          })
+          visits = vim.tbl_extend("force", items, visits)
+
+          local fn = function(item)
+            item = item:replace(vim.fn.getcwd() .. "/", "")
+            item = item:replace(vim.env.HOME, "~")
+            local file = vim.fs.basename(item)
+            local path = vim.fs.dirname(item)
+            return {
+              text = file .. "  " .. path .. "/",
+              path = item,
+            }
+          end
+
+          return vim.tbl_map(fn, visits)
+        end
+
+        MiniPick.set_picker_items_from_cli(
+          { "rg", "--files", "--no-follow", "--color=never" },
+          { postprocess = postprocess }
+        )
+      end,
+      show = function(buf_id, items, query, opts)
+        MiniPick.default_show(buf_id, items, query, { show_icons = true })
+        local ns_id = vim.api.nvim_get_namespaces()["MiniPickRanges"]
+        for row, item in ipairs(items) do
+          if not item.path then return end
+          local offset_start = string.find(item.text, "  .*")
+          local p = #MiniIcons.get("file", item.path)
+          if not offset_start then return end
+          pcall(vim.api.nvim_buf_set_extmark, buf_id, ns_id, row - 1, offset_start + p, {
+            end_col = item.text:len() + p + 1,
+            hl_group = "Comment",
+            hl_mode = "combine",
+            priority = 200,
+          })
+        end
+      end,
+    },
+    -- window = { config = winopts },
+  })
+end)
+
 nmap("<Leader>e", function()
   MiniFiles.open(vim.api.nvim_buf_get_name(0))
   MiniFiles.reveal_cwd()
