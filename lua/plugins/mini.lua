@@ -124,7 +124,7 @@ nmap("<Leader>f", function()
       name = "Files (frecency)",
       items = function()
         local postprocess = function(items)
-          local sort_frecency = MiniVisits.gen_sort.default({ recency_weight = 0.5 })
+          local sort_frecency = MiniVisits.gen_sort.default({ recency_weight = 0.8 })
           local filter_cwd = function(path_data)
             local path = path_data.path
             return vim.startswith(path, vim.fn.getcwd()) and vim.fn.isdirectory(path) == 0
