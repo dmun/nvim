@@ -13,6 +13,8 @@ require("blink.cmp").setup({
     ["<C-Space>"] = { "show", "show_documentation", "hide_documentation" },
     ["<C-y>"] = { "accept" },
 
+    ["<C-e>"] = { "hide", "fallback" },
+
     ["<C-p>"] = { "select_prev", "fallback" },
     ["<C-n>"] = { "select_next", "fallback" },
 
@@ -27,12 +29,11 @@ require("blink.cmp").setup({
   },
   completion = {
     documentation = { auto_show = false },
-    list = {
-      max_items = 50,
-    },
+    list = { max_items = 50 },
     menu = {
+      auto_show = true,
       border = "none",
-      max_height = 6,
+      max_height = vim.o.ph,
       scrollbar = false,
       draw = {
         treesitter = { "lsp" },

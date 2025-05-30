@@ -2,6 +2,8 @@ _G.add = MiniDeps.add
 _G.now = MiniDeps.now
 _G.later = MiniDeps.later
 
+_G.db = function(...) vim.notify(vim.inspect(...)) end
+
 _G.au = function(event, pattern, callback, buffer)
   vim.api.nvim_create_autocmd(
     event,

@@ -10,6 +10,10 @@ require("mini.ai").setup({
 })
 
 require("mini.cursorword").setup()
+au("ModeChanged", "*", function()
+  vim.b.minicursorword_disable = vim.fn.mode() ~= "n"
+end)
+
 require("mini.diff").setup({ view = { style = "sign" } })
 require("mini.files").setup({
   mappings = {
@@ -37,7 +41,7 @@ MiniMisc.setup_auto_root()
 MiniMisc.setup_restore_cursor()
 
 require("mini.pick").setup({
-  options = { use_cache = true },
+  options = { use_cache = false },
   window = {
     config = function()
       return {
@@ -98,7 +102,7 @@ end
 
 nmap("<Leader>td", deps_action)
 nmap("<Leader>to", MiniDiff.toggle_overlay)
-nmap("g/",         MiniPick.builtin.grep)
+nmap("g/",         MiniPick.builtin.grep_live)
 nmap("g?",         MiniPick.builtin.help)
 nmap("gs", function()
   MiniExtra.pickers.lsp({ scope = "document_symbol" }, {
@@ -113,14 +117,6 @@ nmap("<Leader>g",        MiniExtra.pickers.git_files)
 nmap("<Leader>o",        MiniExtra.pickers.oldfiles)
 nmap("<Leader>h",        MiniExtra.pickers.hl_groups)
 nmap("<M-e>",            MiniFiles.open)
-
-local function regexEscape(str)
-  return str:gsub("[%(%)%.%%%+%-%*%?%[%^%$%]]", "%%%1")
-end
-
-string.replace = function(str, this, that)
-  return str:gsub(regexEscape(this), that)
-end
 
 nmap("<Leader>f", function()
   MiniPick.start({
@@ -154,8 +150,9 @@ nmap("<Leader>f", function()
           local fn = function(item)
             local file = vim.fs.basename(item)
             local path = vim.fs.dirname(item)
+            path = path == "." and "" or "  " .. path .. "/"
             return {
-              text = file .. "  " .. path .. "/",
+              text = file .. path,
               path = item,
             }
           end
@@ -173,15 +170,16 @@ nmap("<Leader>f", function()
         local ns_id = vim.api.nvim_get_namespaces()["MiniPickRanges"]
         for row, item in ipairs(items) do
           if not item.path then return end
-          local offset_start = string.find(item.text, "  .*")
-          local p = #MiniIcons.get("file", item.path)
-          if not offset_start then return end
-          pcall(vim.api.nvim_buf_set_extmark, buf_id, ns_id, row - 1, offset_start + p, {
-            end_col = item.text:len() + p + 1,
-            hl_group = "Comment",
-            hl_mode = "combine",
-            priority = 200,
-          })
+          local offset_start = string.find(item.text, "  .*$")
+          if offset_start then
+            local p = #MiniIcons.get("file", item.path)
+            pcall(vim.api.nvim_buf_set_extmark, buf_id, ns_id, row - 1, offset_start + p, {
+              end_col = item.text:len() + p + 1,
+              hl_group = "Comment",
+              hl_mode = "combine",
+              priority = 200,
+            })
+          end
         end
       end,
     },

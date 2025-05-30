@@ -22,7 +22,9 @@ methods.pad = function(self, pad)
 end
 
 methods.text = function(self, segment)
-  table.insert(self.segments, segment)
+  if segment then
+    table.insert(self.segments, segment)
+  end
   return self
 end
 
@@ -107,7 +109,7 @@ local mode_hl = function()
 end
 
 local file_fn = function()
-  local head = F.expand("%:.:h")
+  local head = F.expand("%:~:.:h")
   local tail = F.expand("%:.:t")
   return { head, tail }
 end
@@ -167,23 +169,23 @@ local build = function(active)
   --     :draw({ "BufEnter", "BufLeave" })
 
   component(file_fn)
-      :hl(active and "Title" or "Comment")
+      :hl(active and "WhiteFg" or "Comment")
       :pad()
       :text(function(file)
         return file[2]
       end)
       :hl(normal_hl)
-      :text(function(file)
-        return " 󰁔 " .. file[1]
-      end)
       :pad()
+      :text(function(file)
+        return file[1] == "." and "" or " " .. file[1] .. "/ "
+      end)
       :cutoff()
-      :draw({ "BufEnter", "BufLeave" })
+      :draw({ "DirChanged", "BufEnter", "BufLeave" })
 
   component(diff_fn)
       :hl("GreenFg")
       :text(diff_add_fn)
-      :hl("OrangeFg")
+      :hl("YellowFg")
       :text(diff_change_fn)
       :hl("RedFg")
       :text(diff_delete_fn)
