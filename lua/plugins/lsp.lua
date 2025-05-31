@@ -13,6 +13,12 @@ lsp.config("lua_ls", {
   root_markers = { "init.lua", ".luarc.json" },
   settings = {
     Lua = {
+      definition = {
+        showWord = false,
+      },
+      runtime = {
+        version = "LuaJIT",
+      },
       telemetry = {
         enable = false,
       },
@@ -77,5 +83,5 @@ lsp.config("svelte_ls", {
 lsp.enable("svelte_ls")
 
 nmap("grr", lsp.buf.references)
-nmap("gD", lsp.buf.declaration)
-nmap("gd", lsp.buf.definition)
+nmap("gD",  lsp.buf.declaration)
+nmap("gd",  lsp.buf.definition)

@@ -9,12 +9,18 @@ require("mini.ai").setup({
   },
 })
 
-require("mini.cursorword").setup()
-au("ModeChanged", "*", function()
-  vim.b.minicursorword_disable = vim.fn.mode() ~= "n"
-end)
-
-require("mini.diff").setup({ view = { style = "sign" } })
+require("mini.diff").setup({
+  mappings = {
+    apply = "gh",
+    reset = "gH",
+    textobject = "gh",
+    goto_first = "[H",
+    goto_prev = "[h",
+    goto_next = "]h",
+    goto_last = "]H",
+  },
+  view = { style = "sign" },
+})
 require("mini.files").setup({
   mappings = {
     go_in_plus  = "l",
@@ -32,16 +38,39 @@ require("mini.hipatterns").setup()
 require("mini.misc").setup()
 require("mini.move").setup()
 require("mini.pairs").setup()
--- require("mini.surround").setup()
+require("mini.jump").setup({
+  mappings = {
+    forward = "f",
+    backward = "F",
+    forward_till = "t",
+    backward_till = "T",
+    repeat_jump = "",
+  },
+})
 require("mini.visits").setup()
 require("mini.extra").setup()
 require("mini.icons").setup()
+require("mini.surround").setup({
+  mappings = {
+    add = "gx",
+    delete = "",
+    find = "",
+    find_left = "",
+    highlight = "",
+    replace = "",
+    update_n_lines = "",
+
+    suffix_last = "",
+    suffix_next = "",
+  },
+})
+nmap("X", "gxaq", { remap = true })
 
 MiniMisc.setup_auto_root()
 MiniMisc.setup_restore_cursor()
 
 require("mini.pick").setup({
-  options = { use_cache = false },
+  options = { use_cache = true },
   window = {
     config = function()
       return {

@@ -25,9 +25,14 @@ add("tpope/vim-rsi")
 -- add("ggandor/leap.nvim")
 -- require("leap").set_default_mappings()
 
-vim.g["sneak#s_next"] = true
-vim.g["sneak#use_ic_scs"] = 1
-add("justinmk/vim-sneak")
+-- vim.g["sneak#s_next"] = true
+-- vim.g["sneak#use_ic_scs"] = 1
+-- add("justinmk/vim-sneak")
+-- map({"n", "x", "o" }, "f", "<Plug>Sneak_f")
+-- map({"n", "x", "o" }, "F", "<Plug>Sneak_F")
+-- map({"n", "x", "o" }, "t", "<Plug>Sneak_t")
+-- map({"n", "x", "o" }, "T", "<Plug>Sneak_T")
+
 
 add("jake-stewart/multicursor.nvim")
 local mc = require("multicursor-nvim")
@@ -193,23 +198,32 @@ xmap("S",  mc.splitCursors)
 map({ "n", "x" }, "<C-=>", bind(mc.lineAddCursor, 1))
 map({ "n", "x" }, "<C-->", bind(mc.lineAddCursor, -1))
 
-map({ "n", "x" }, "L", bind(matchAddCursorSelect, 1))
-map({ "n", "x" }, "H", bind(matchAddCursorSelect, -1))
-map({ "n", "x" }, "M", bind(matchSkipCursorSelect, 1))
+map({ "n", "x" }, "<C-f>", bind(matchAddCursorSelect, 1))
+map({ "n", "x" }, "<C-b>", bind(matchAddCursorSelect, -1))
+map({ "n", "x" }, "<C-s>", bind(matchSkipCursorSelect, 1))
 
-mc.addKeymapLayer(function(layermap)
-  layermap({ "n", "x" }, "<C-o>", mc.prevCursor)
-  layermap({ "n", "x" }, "<C-i>", mc.nextCursor)
-  layermap({ "n", "x" }, "<C-h>", mc.deleteCursor)
-  layermap({ "n", "x" }, "=",     mc.alignCursors)
-  layermap({ "n", "x" }, "u",     "u")
-  layermap({ "n", "x" }, "<C-r>", "<C-r>")
-  layermap("x", "q", function()
+mc.onModeChanged(function(cursor, old, new)
+  if cursor:isMainCursor() then return end
+  if old == "i" and new == "n" then
+    if cursor:getPos()[2] ~= 1 then
+      cursor:feedkeys("l")
+    end
+  end
+end)
+
+mc.addKeymapLayer(function(lmap)
+  lmap({ "n", "x" }, "<C-o>", mc.prevCursor)
+  lmap({ "n", "x" }, "<C-i>", mc.nextCursor)
+  lmap({ "n", "x" }, "<C-h>", mc.deleteCursor)
+  lmap({ "n", "x" }, "=",     mc.alignCursors)
+  lmap({ "n", "x" }, "u",     "u")
+  lmap({ "n", "x" }, "<C-r>", "<C-r>")
+  lmap("x", "q", function()
     clearCursors()
     mc.feedkeys("<Esc>", { keycodes = true })
   end)
-  layermap("n", "q", clearCursors)
-  layermap("n", "<Esc>", function()
+  lmap("n", "q", clearCursors)
+  lmap("n", "<Esc>", function()
     if not mc.cursorsEnabled() then
       mc.enableCursors()
     else

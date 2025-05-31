@@ -1,8 +1,5 @@
 local o = vim.o
 
-vim.g.mapleader = " "
-vim.g.maplocalleader = " m"
-
 o.ttimeout = false
 o.ttimeoutlen = 0
 o.lcs = "tab:  "

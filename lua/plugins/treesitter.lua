@@ -34,6 +34,13 @@ require("nvim-treesitter.configs").setup({
       },
     },
   },
+  incremental_selection = {
+    enable = true,
+    keymaps = {
+      node_incremental = "v",
+      node_decremental = "V",
+    },
+  },
 })
 
 add({
@@ -44,5 +51,5 @@ add({
 local tj = require("treesj")
 tj.setup({ use_default_keymaps = false })
 
-nmap("gS", tj.split)
-nmap("gJ", tj.join)
+-- nmap("gS", tj.split)
+nmap("gJ", tj.toggle)

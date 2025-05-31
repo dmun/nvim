@@ -3,7 +3,7 @@ local M = {}
 M.init = function()
   local wo = vim.wo[vim.g.statusline_winid]
 
-  if not wo.nu  or vim.v.virtnum > 0 or vim.v.virtnum < 0 then
+  if not wo.nu or vim.v.virtnum > 0 or vim.v.virtnum < 0 then
     return ""
   end
 
@@ -11,8 +11,10 @@ M.init = function()
 
   if vim.v.relnum == 0 then
     text = "%#CursorLineNr#" .. text .. vim.v.lnum
-  else
+  elseif wo.rnu then
     text = text .. vim.v.relnum
+  else
+    text = text .. vim.v.lnum
   end
 
   return text .. " "
