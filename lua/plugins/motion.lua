@@ -22,18 +22,6 @@ nmap("<leader>5", bind(Grapple.select, { index = 5 }))
 
 add("tpope/vim-rsi")
 
--- add("ggandor/leap.nvim")
--- require("leap").set_default_mappings()
-
--- vim.g["sneak#s_next"] = true
--- vim.g["sneak#use_ic_scs"] = 1
--- add("justinmk/vim-sneak")
--- map({"n", "x", "o" }, "f", "<Plug>Sneak_f")
--- map({"n", "x", "o" }, "F", "<Plug>Sneak_F")
--- map({"n", "x", "o" }, "t", "<Plug>Sneak_t")
--- map({"n", "x", "o" }, "T", "<Plug>Sneak_T")
-
-
 add("jake-stewart/multicursor.nvim")
 local mc = require("multicursor-nvim")
 mc.setup()
@@ -231,6 +219,9 @@ mc.addKeymapLayer(function(lmap)
     end
   end)
 end)
+
+add("svban/YankAssassin.vim")
+vim.g.yankassissin_use_mappings = 1
 
 add("monaqa/dial.nvim")
 local augend = require("dial.augend")

@@ -12,8 +12,9 @@ require("blink.cmp").setup({
     preset = "none",
     ["<C-Space>"] = { "show", "show_documentation", "hide_documentation" },
     ["<C-y>"] = { "accept" },
+    ["<Tab>"] = { "accept", "fallback" },
 
-    ["<C-e>"] = { "hide", "fallback" },
+    -- ["<C-e>"] = { "hide", "fallback" },
 
     ["<C-p>"] = { "select_prev", "fallback" },
     ["<C-n>"] = { "select_next", "fallback" },
@@ -29,6 +30,7 @@ require("blink.cmp").setup({
   },
   completion = {
     documentation = { auto_show = false },
+    accept = { dot_repeat = false },
     list = { max_items = 50 },
     menu = {
       auto_show = true,

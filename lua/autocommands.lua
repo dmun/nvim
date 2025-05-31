@@ -18,6 +18,12 @@ au("LspAttach", "*", function()
   end, { buffer = true })
 end)
 
+-- au("ModeChanged", "i:n", function(ev)
+--   if vim.fn.col(".") ~= 1 then
+--     vim.fn.feedkeys("l")
+--   end
+-- end)
+
 au("TextYankPost", "*", function()
   vim.hl.on_yank({ higroup = "Visual", timeout = 300 })
 end)
@@ -28,19 +34,6 @@ end)
 au("InsertEnter", "*", function()
   if vim.o.nu then vim.o.rnu = false end
 end)
-
--- local CursorColumnI = 0
--- au("InsertEnter", "*", function()
---   CursorColumnI = vim.fn.col(".")
--- end)
--- au("CursorMovedI", "*", function()
---   CursorColumnI = vim.fn.col(".")
--- end)
--- au("InsertLeave", "*", function()
---   if vim.fn.col(".") ~= CursorColumnI then
---     vim.fn.cursor(0, vim.fn.col(".") + 1)
---   end
--- end)
 
 local autosave_filter = { "sql" }
 _G.AUTOSAVE_TIMER = vim.uv.new_timer()

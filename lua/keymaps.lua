@@ -5,25 +5,36 @@ vim.o.langmap = "qb,bq,QB,BQ"
 vim.o.langremap = true
 vim.o.virtualedit = "onemore"
 
-au("ModeChanged", "i:n", function()
-  if vim.fn.col(".") ~= 1 then
-    vim.fn.feedkeys("l")
-  end
+imap("<Esc>", function()
+  local keys = vim.fn.col(".") ~= 1 and "l" or ""
+  vim.fn.feedkeys(keys)
 end)
 
 local jump = require("util.jump").jump
-map("s", bind(jump, 1, 2, false))
-map("S", bind(jump, -1, 2, false))
+map("s", bind(jump, false, 2))
+map("S", bind(jump, true, 2))
 
-map(";", ":")
-map(":", ";")
+nmap("f", bind(jump, false, 1))
+nmap("F", bind(jump, true, 1))
+xmap("f", bind(jump, false, 1))
+xmap("F", bind(jump, true, 1))
+omap("f", bind(jump, false, 1, false, true))
+omap("F", bind(jump, true, 1, false, true))
+
+nmap("t", bind(jump, false, 1, true))
+nmap("T", bind(jump, true, 1, true))
+xmap("t", bind(jump, false, 1, true))
+xmap("T", bind(jump, true, 1, true))
+omap("t", bind(jump, false, 1, true, true))
+omap("T", bind(jump, true, 1, true, true))
 
 nmap("gq",    cmd.copen)
 nmap("<C-n>", cmd.cnext)
 nmap("<C-p>", cmd.cprev)
 
-nmap("H", "^")
-nmap("L", "$")
+map("H", "^")
+map("L", "$")
+map("M", "%")
 
 nmap("<C-d>", "<C-d>zz")
 nmap("<C-u>", "<C-u>zz")
@@ -43,7 +54,7 @@ nmap("<C-r>",     "<Cmd>silent red<CR>")
 
 nmap("<Leader>tw", function() vim.o.wrap = not vim.o.wrap end)
 
--- nmap("<Esc>", bind(cmd, "nohl | echo"))
+nmap("<Esc>", bind(cmd, "nohl | echo"))
 
 nmap("<C-h>", "<C-w>h")
 nmap("<C-j>", "<C-w>j")

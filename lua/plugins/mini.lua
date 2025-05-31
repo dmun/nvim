@@ -38,33 +38,9 @@ require("mini.hipatterns").setup()
 require("mini.misc").setup()
 require("mini.move").setup()
 require("mini.pairs").setup()
-require("mini.jump").setup({
-  mappings = {
-    forward = "f",
-    backward = "F",
-    forward_till = "t",
-    backward_till = "T",
-    repeat_jump = "",
-  },
-})
 require("mini.visits").setup()
 require("mini.extra").setup()
 require("mini.icons").setup()
-require("mini.surround").setup({
-  mappings = {
-    add = "gx",
-    delete = "",
-    find = "",
-    find_left = "",
-    highlight = "",
-    replace = "",
-    update_n_lines = "",
-
-    suffix_last = "",
-    suffix_next = "",
-  },
-})
-nmap("X", "gxaq", { remap = true })
 
 MiniMisc.setup_auto_root()
 MiniMisc.setup_restore_cursor()

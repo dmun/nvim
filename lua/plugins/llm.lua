@@ -3,6 +3,12 @@ add({
   depends = { "nvim-lua/plenary.nvim" },
 })
 
+add({
+  source = "azorng/goose.nvim",
+  depends = { "nvim-lua/plenary.nvim" },
+})
+require("goose").setup()
+
 require("minuet").setup({
   provider = "codestral",
   n_completions = 2,
@@ -17,7 +23,7 @@ require("minuet").setup({
   virtualtext = {
     auto_trigger_ft = { "*" },
     keymap = {
-      accept = "<Tab>",
+      accept = "<M-i>",
       accept_line = "<M-l>",
       prev = "<M-[>",
       next = "<M-]>",
