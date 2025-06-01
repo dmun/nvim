@@ -11,22 +11,27 @@ imap("<Esc>", function()
 end)
 
 local jump = require("util.jump").jump
-map("s", bind(jump, false, 2))
-map("S", bind(jump, true, 2))
+local operatorfunc = require("util.jump").operatorfunc
+nmap("s", bind(jump, false, 2))
+nmap("S", bind(jump, true, 2))
+xmap("s", bind(jump, false, 2))
+xmap("S", bind(jump, true, 2))
+omap("s", operatorfunc(false, 2, true))
+omap("S", operatorfunc(true, 2, true))
 
 nmap("f", bind(jump, false, 1))
 nmap("F", bind(jump, true, 1))
 xmap("f", bind(jump, false, 1))
 xmap("F", bind(jump, true, 1))
-omap("f", bind(jump, false, 1, false, true))
-omap("F", bind(jump, true, 1, false, true))
+omap("f", operatorfunc(false, 1))
+omap("F", operatorfunc(true, 1))
 
 nmap("t", bind(jump, false, 1, true))
 nmap("T", bind(jump, true, 1, true))
 xmap("t", bind(jump, false, 1, true))
 xmap("T", bind(jump, true, 1, true))
-omap("t", bind(jump, false, 1, true, true))
-omap("T", bind(jump, true, 1, true, true))
+omap("t", operatorfunc(false, 1, true))
+omap("T", operatorfunc(true, 1, true))
 
 nmap("gq",    cmd.copen)
 nmap("<C-n>", cmd.cnext)

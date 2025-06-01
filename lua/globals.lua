@@ -51,6 +51,8 @@ _G.vmap = bind(map, "v")
 _G.xmap = bind(map, "x")
 _G.imap = bind(map, "i")
 _G.tmap = bind(map, "t")
-_G.omap = bind(map, "o")
+_G.omap = function(lhs, rhs)
+  map("o", lhs, rhs, { expr = true })
+end
 
 _G.iremap = bind(remap, "i")

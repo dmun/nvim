@@ -6,7 +6,6 @@ local state = {
   backward = false,
   match_id = nil,
   au_id = nil,
-  ve = vim.o.ve,
   eiw = vim.o.eiw,
 }
 
@@ -19,21 +18,19 @@ local au = function(event, pattern, callback)
   })
 end
 
-local format_query = function(query, backward, till, operator)
+local format_query = function(query, backward, till)
   query = [[\V]] .. F.escape(query, [[\]])
 
-  if till and not operator and not backward then
+  if till and not backward then
     return [[\_.\ze]] .. query
-  end
-
-  if (till and backward) or (not till and operator and not backward) then
+  elseif till then
     return query .. [[\zs\_.]]
   end
 
   return query
 end
 
-local jump_fn = function(backward, n, till, operator)
+local jump = function(backward, n, till)
   local flags = (state.backward ~= backward) and "Wb" or "W"
   if not state.query then
     state.backward = backward
@@ -53,11 +50,8 @@ local jump_fn = function(backward, n, till, operator)
       chars[i] = char
     end
 
-    local query = format_query(table.concat(chars), backward, till, operator)
-
-    vim.wo.ve = "onemore"
+    local query = format_query(table.concat(chars), backward, till)
     F.search(query, flags)
-    vim.wo.ve = state.ve
 
     local ok, match_id = pcall(F.matchadd, group, query, -1, state.match_id or -1)
     if ok then state.match_id = match_id end
@@ -79,12 +73,11 @@ end
 
 ---@param backward boolean
 ---@param n number
----@param operator boolean
----@param till boolean
-local jump = function(backward, n, operator, till)
-  for _ = 1, vim.v.count1 do
-    jump_fn(backward, n, operator, till)
+---@param till? boolean
+local operatorfunc = function(backward, n, till)
+  return function()
+    return string.format("v<Cmd>lua require'util.jump'.jump(%s, %d, %s)<CR>", backward, n, till, false)
   end
 end
 
-return { jump = jump }
+return { jump = jump, operatorfunc = operatorfunc }
