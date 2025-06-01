@@ -1,5 +1,6 @@
 local o = vim.o
 
+o.sd = o.sd .. ",f1000"
 o.ttimeout = false
 o.ttimeoutlen = 0
 o.lcs = "tab:  "
