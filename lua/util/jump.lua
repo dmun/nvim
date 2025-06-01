@@ -32,9 +32,6 @@ end
 
 local jump = function(backward, n, till)
   local flags = (state.backward ~= backward) and "Wb" or "W"
-  if not state.query then
-    state.backward = backward
-  end
   n = n or 2
 
   if state.query then
@@ -59,6 +56,7 @@ local jump = function(backward, n, till)
     vim.schedule(function()
       if state.au_id then return end
       state.query = query
+      state.backward = backward
       state.au_id = au({ "CursorMoved", "CursorMovedI", "ModeChanged" }, "*", function(ev)
         pcall(F.matchdelete, match_id)
         vim.api.nvim_del_autocmd(ev.id)
@@ -76,7 +74,7 @@ end
 ---@param till? boolean
 local operatorfunc = function(backward, n, till)
   return function()
-    return string.format("v<Cmd>lua require'util.jump'.jump(%s, %d, %s)<CR>", backward, n, till, false)
+    return string.format("v<Cmd>lua require'util.jump'.jump(%s, %d, %s)<CR>", backward, n, till)
   end
 end
 
