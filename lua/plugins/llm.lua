@@ -3,12 +3,6 @@ add({
   depends = { "nvim-lua/plenary.nvim" },
 })
 
-add({
-  source = "azorng/goose.nvim",
-  depends = { "nvim-lua/plenary.nvim" },
-})
-require("goose").setup()
-
 require("minuet").setup({
   provider = "codestral",
   n_completions = 2,

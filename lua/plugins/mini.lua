@@ -9,18 +9,45 @@ require("mini.ai").setup({
   },
 })
 
-require("mini.diff").setup({
-  mappings = {
-    apply = "gh",
-    reset = "gH",
-    textobject = "gh",
-    goto_first = "[H",
-    goto_prev = "[h",
-    goto_next = "]h",
-    goto_last = "]H",
-  },
-  view = { style = "sign" },
-})
+local format_path = function(item)
+  local file = vim.fs.basename(item)
+  local path = vim.fs.dirname(item)
+  path = path == "." and "" or "  " .. path .. "/"
+  return {
+    text = file .. path,
+    path = item,
+  }
+end
+
+local path_show = function(buf_id, items, query, opts)
+      MiniPick.default_show(buf_id, items, query, { show_icons = true })
+      local ns_id = vim.api.nvim_get_namespaces()["MiniPickRanges"]
+      for row, item in ipairs(items) do
+        if not item.path then return end
+        local offset_start = string.find(item.text, "  .*$")
+        if offset_start then
+          local p = #MiniIcons.get("file", item.path)
+          pcall(vim.api.nvim_buf_set_extmark, buf_id, ns_id, row - 1, offset_start + p, {
+            end_col = item.text:len() + p + 1,
+            hl_group = "Comment",
+            hl_mode = "combine",
+            priority = 200,
+          })
+        end
+      end
+    end,
+    require("mini.diff").setup({
+      mappings = {
+        apply = "gh",
+        reset = "gH",
+        textobject = "gh",
+        goto_first = "[H",
+        goto_prev = "[h",
+        goto_next = "]h",
+        goto_last = "]H",
+      },
+      view = { style = "sign" },
+    })
 require("mini.files").setup({
   mappings = {
     go_in_plus  = "l",
