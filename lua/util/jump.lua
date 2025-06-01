@@ -19,15 +19,22 @@ local au = function(event, pattern, callback)
 end
 
 local format_query = function(query, backward, till)
-  query = [[\V]] .. F.escape(query, [[\]])
+  local prefix = [[\V]]
+  local suffix = ""
 
   if till and not backward then
-    return [[\_.\ze]] .. query
+    prefix = prefix .. [[\_.\ze]]
   elseif till then
-    return query .. [[\zs\_.]]
+    suffix = suffix .. [[\zs\_.]]
   end
 
-  return query
+  if vim.o.ignorecase and vim.o.smartcase and string.match(query, "%u") then
+    suffix = suffix .. [[\C]]
+  elseif vim.o.ignorecase then
+    suffix = suffix .. [[\c]]
+  end
+
+  return prefix .. F.escape(query, [[\]]) .. suffix
 end
 
 local jump = function(backward, n, till)

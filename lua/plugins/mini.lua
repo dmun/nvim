@@ -158,7 +158,7 @@ nmap("<Leader>o", function()
           end
         end
         local fn = function(item)
-          return format_path(vim.fn.fnamemodify(item, ":~:."))
+          return format_path(item)
         end
         return vim.tbl_map(fn, items)
       end,
