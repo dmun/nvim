@@ -146,9 +146,29 @@ end)
 
 nmap("<Leader><Leader>", MiniPick.builtin.resume)
 nmap("<Leader>g",        MiniExtra.pickers.git_files)
-nmap("<Leader>o",        MiniExtra.pickers.oldfiles)
-nmap("<Leader>h",        MiniExtra.pickers.hl_groups)
-nmap("<M-e>",            MiniFiles.open)
+nmap("<Leader>o", function()
+  MiniPick.start({
+    source = {
+      name = "Oldfiles",
+      items = function()
+        local items = {}
+        for _, item in ipairs(vim.v.oldfiles) do
+          if vim.fn.filereadable(item) == 1 then
+            table.insert(items, item)
+          end
+        end
+        local fn = function(item)
+          return format_path(vim.fn.fnamemodify(item, ":~:."))
+        end
+        return vim.tbl_map(fn, items)
+      end,
+      show = path_show,
+    },
+  })
+end)
+nmap("<Leader>h", MiniExtra.pickers.hl_groups)
+nmap("<M-e>",     MiniFiles.open)
+nmap("<M-x>",     MiniExtra.pickers.keymaps)
 
 nmap("<Leader>f", function()
   MiniPick.start({
@@ -179,17 +199,7 @@ nmap("<Leader>f", function()
             end
           end
 
-          local fn = function(item)
-            local file = vim.fs.basename(item)
-            local path = vim.fs.dirname(item)
-            path = path == "." and "" or "  " .. path .. "/"
-            return {
-              text = file .. path,
-              path = item,
-            }
-          end
-
-          return vim.tbl_map(fn, res)
+          return vim.tbl_map(format_path, res)
         end
 
         MiniPick.set_picker_items_from_cli(
@@ -197,23 +207,7 @@ nmap("<Leader>f", function()
           { postprocess = postprocess }
         )
       end,
-      show = function(buf_id, items, query, opts)
-        MiniPick.default_show(buf_id, items, query, { show_icons = true })
-        local ns_id = vim.api.nvim_get_namespaces()["MiniPickRanges"]
-        for row, item in ipairs(items) do
-          if not item.path then return end
-          local offset_start = string.find(item.text, "  .*$")
-          if offset_start then
-            local p = #MiniIcons.get("file", item.path)
-            pcall(vim.api.nvim_buf_set_extmark, buf_id, ns_id, row - 1, offset_start + p, {
-              end_col = item.text:len() + p + 1,
-              hl_group = "Comment",
-              hl_mode = "combine",
-              priority = 200,
-            })
-          end
-        end
-      end,
+      show = path_show,
     },
     -- window = { config = winopts },
   })
