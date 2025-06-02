@@ -186,9 +186,10 @@ xmap("S",  mc.splitCursors)
 map({ "n", "x" }, "<C-=>", bind(mc.lineAddCursor, 1))
 map({ "n", "x" }, "<C-->", bind(mc.lineAddCursor, -1))
 
-map({ "n", "x" }, "<C-f>", bind(matchAddCursorSelect, 1))
-map({ "n", "x" }, "<C-b>", bind(matchAddCursorSelect, -1))
-map({ "n", "x" }, "<C-s>", bind(matchSkipCursorSelect, 1))
+map({ "n", "x" }, "L", bind(matchAddCursorSelect, 1))
+map({ "n", "x" }, "H", bind(matchAddCursorSelect, -1))
+map({ "n", "x" }, "gL", bind(matchSkipCursorSelect, 1))
+map({ "n", "x" }, "gH", bind(matchSkipCursorSelect, -1))
 
 mc.onModeChanged(function(cursor, old, new)
   if cursor:isMainCursor() then return end

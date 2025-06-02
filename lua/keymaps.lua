@@ -5,41 +5,44 @@ vim.o.langmap = "qb,bq,QB,BQ"
 vim.o.langremap = true
 vim.o.virtualedit = "onemore"
 
+nmap("<Leader>i", cmd.Inspect)
+
 imap("<Esc>", function()
   local keys = vim.fn.col(".") ~= 1 and "l" or ""
   vim.fn.feedkeys(keys)
 end)
 
-local jump = require("util.jump").jump
-local operatorfunc = require("util.jump").operatorfunc
-nmap("s", bind(jump, false, 2))
-nmap("S", bind(jump, true, 2))
-xmap("s", bind(jump, false, 2))
-xmap("S", bind(jump, true, 2))
-omap("s", operatorfunc(false, 2, true))
-omap("S", operatorfunc(true, 2, true))
+require("util.jump")
+nmap("s", bind(Patrick.jump, 2, false))
+nmap("S", bind(Patrick.jump, 2, true))
+xmap("s", bind(Patrick.jump, 2, false))
+xmap("S", bind(Patrick.jump, 2, true))
+omap("s", Patrick.jump_op(2, false, true))
+omap("S", Patrick.jump_op(2, true, true))
 
-nmap("f", bind(jump, false, 1))
-nmap("F", bind(jump, true, 1))
-xmap("f", bind(jump, false, 1))
-xmap("F", bind(jump, true, 1))
-omap("f", operatorfunc(false, 1))
-omap("F", operatorfunc(true, 1))
+nmap("f", bind(Patrick.jump, 1, false))
+nmap("F", bind(Patrick.jump, 1, true))
+xmap("f", bind(Patrick.jump, 1, false))
+xmap("F", bind(Patrick.jump, 1, true))
+omap("f", Patrick.jump_op(1, false))
+omap("F", Patrick.jump_op(1, true))
 
-nmap("t", bind(jump, false, 1, true))
-nmap("T", bind(jump, true, 1, true))
-xmap("t", bind(jump, false, 1, true))
-xmap("T", bind(jump, true, 1, true))
-omap("t", operatorfunc(false, 1, true))
-omap("T", operatorfunc(true, 1, true))
+nmap("t", bind(Patrick.jump, 1, false, true))
+nmap("T", bind(Patrick.jump, 1, true, true))
+xmap("t", bind(Patrick.jump, 1, false, true))
+xmap("T", bind(Patrick.jump, 1, true, true))
+omap("t", Patrick.jump_op(1, false, true))
+omap("T", Patrick.jump_op(1, true, true))
 
-nmap("gq",    cmd.copen)
+nmap("<C-t>",    cmd.copen)
 nmap("<C-n>", cmd.cnext)
 nmap("<C-p>", cmd.cprev)
 
-map("H", "^")
-map("L", "$")
-map("M", "%")
+nmap("<M-o>", "<Cmd>!open .<CR>")
+
+map("gh", "^")
+map("gl", "$")
+map("M",  "%")
 
 nmap("<C-d>", "<C-d>zz")
 nmap("<C-u>", "<C-u>zz")
