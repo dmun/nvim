@@ -15,7 +15,7 @@ require("minuet").setup({
     },
   },
   virtualtext = {
-    auto_trigger_ft = { "*" },
+    -- auto_trigger_ft = { "*" },
     keymap = {
       accept = "<M-i>",
       accept_line = "<M-l>",

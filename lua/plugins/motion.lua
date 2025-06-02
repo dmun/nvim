@@ -183,8 +183,8 @@ nmap("gm", mc.restoreCursors)
 xmap("m",  mc.matchCursors)
 xmap("S",  mc.splitCursors)
 
-map({ "n", "x" }, "<C-=>", bind(mc.lineAddCursor, 1))
-map({ "n", "x" }, "<C-->", bind(mc.lineAddCursor, -1))
+map({ "n", "x" }, "<C-n>", bind(mc.lineAddCursor, 1))
+map({ "n", "x" }, "<C-p>", bind(mc.lineAddCursor, -1))
 
 map({ "n", "x" }, "L", bind(matchAddCursorSelect, 1))
 map({ "n", "x" }, "H", bind(matchAddCursorSelect, -1))

@@ -35,13 +35,13 @@ omap("t", Patrick.jump_op(1, false, true))
 omap("T", Patrick.jump_op(1, true, true))
 
 nmap("<C-t>",    cmd.copen)
-nmap("<C-n>", cmd.cnext)
-nmap("<C-p>", cmd.cprev)
+nmap("<M-n>", cmd.cnext)
+nmap("<M-p>", cmd.cprev)
 
 nmap("<M-o>", "<Cmd>!open .<CR>")
 
-map("gh", "^")
-map("gl", "$")
+map("H", "^")
+map("L", "$")
 map("M",  "%")
 
 nmap("<C-d>", "<C-d>zz")
