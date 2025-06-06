@@ -45,6 +45,7 @@ lsp.config("ty", {
     },
   },
 })
+-- lsp.enable("ty")
 
 lsp.config("pyrefly", {
   cmd = { "pyrefly", "lsp" },

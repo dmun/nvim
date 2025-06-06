@@ -38,9 +38,9 @@ local path_show = function(buf_id, items, query, opts)
 end
 require("mini.diff").setup({
   mappings = {
-    apply = "gr",
-    reset = "gR",
-    textobject = "gr",
+    apply = "mg",
+    reset = "mG",
+    textobject = "mg",
     goto_first = "[c",
     goto_prev = "[c",
     goto_next = "]c",
@@ -133,7 +133,7 @@ local deps_action = function()
 end
 
 nmap("<Leader>td", deps_action)
-nmap("<Leader>to", MiniDiff.toggle_overlay)
+nmap("md",         MiniDiff.toggle_overlay)
 nmap("g/",         MiniPick.builtin.grep_live)
 nmap("g?",         MiniPick.builtin.help)
 nmap("gs", function()

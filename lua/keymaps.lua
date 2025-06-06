@@ -1,5 +1,7 @@
 vim.g.mapleader = " "
-vim.g.maplocalleader = " m"
+vim.g.maplocalleader = "m"
+
+nmap("<Leader>m", "m")
 
 vim.o.langmap = "qb,bq,QB,BQ"
 vim.o.langremap = true
@@ -7,7 +9,7 @@ vim.o.virtualedit = "onemore"
 
 nmap("<Leader>i", cmd.Inspect)
 
-imap("<Esc>", function()
+imap("<C-j>", function()
   local keys = vim.fn.col(".") ~= 1 and "l" or ""
   vim.fn.feedkeys(keys)
 end)
@@ -69,10 +71,10 @@ nmap("<C-j>", "<C-w>j")
 nmap("<C-k>", "<C-w>k")
 nmap("<C-l>", "<C-w>l")
 
-imap("<C-h>", "<Esc><C-w>h")
-imap("<C-j>", "<Esc><C-w>j")
-imap("<C-k>", "<Esc><C-w>k")
-imap("<C-l>", "<Esc><C-w>l")
+-- imap("<C-h>", "<Esc><C-w>h")
+-- imap("<C-j>", "<Esc><C-w>j")
+-- imap("<C-k>", "<Esc><C-w>k")
+-- imap("<C-l>", "<Esc><C-w>l")
 
 tmap("<C-h>", "<C-\\><C-n><C-w>h")
 tmap("<C-j>", "<C-\\><C-n><C-w>j")

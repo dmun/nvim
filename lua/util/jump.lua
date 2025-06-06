@@ -23,6 +23,7 @@ local au = function(event, pattern, callback)
 end
 
 local format_query = function(query, backward, till)
+  if not query then return end
   local prefix = [[\V]]
   local suffix = ""
 
@@ -53,10 +54,9 @@ Patrick.get_query = function(n)
   return table.concat(chars)
 end
 
-
 Patrick.watch_stop = function()
   if Patrick.state.au_id then return end
-  Patrick.state.au_id = au({ "CursorMoved", "CursorMovedI" }, "*", function(ev)
+  Patrick.state.au_id = au({ "CursorMoved", "CursorMovedI", "ModeChanged" }, "*", function(ev)
     Patrick.state.n_moves = Patrick.state.n_moves + 1
     if Patrick.state.n_moves < 2 then return end
     pcall(F.matchdelete, Patrick.state.match_id)
@@ -86,7 +86,8 @@ end
 
 Patrick.update = function(n, backward, till)
   if not Patrick.state.active then
-    Patrick.state.pattern = format_query(Patrick.get_query(n), backward, till)
+    local pattern = Patrick.get_query(n)
+    Patrick.state.pattern = format_query(pattern, backward, till)
     Patrick.state.till = till
     Patrick.state.backward = backward
   else

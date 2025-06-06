@@ -11,14 +11,14 @@ Grapple.setup({
     footer = "",
   },
 })
-nmap("<leader>a", Grapple.toggle)
-nmap("<leader>q", Grapple.toggle_tags)
-nmap("<leader>Q", Grapple.toggle_scopes)
-nmap("<leader>1", bind(Grapple.select, { index = 1 }))
-nmap("<leader>2", bind(Grapple.select, { index = 2 }))
-nmap("<leader>3", bind(Grapple.select, { index = 3 }))
-nmap("<leader>4", bind(Grapple.select, { index = 4 }))
-nmap("<leader>5", bind(Grapple.select, { index = 5 }))
+nmap("<Leader>a", Grapple.toggle)
+nmap("<Leader>q", Grapple.toggle_tags)
+nmap("<Leader>Q", Grapple.toggle_scopes)
+nmap("<Leader>1", bind(Grapple.select, { index = 1 }))
+nmap("<Leader>2", bind(Grapple.select, { index = 2 }))
+nmap("<Leader>3", bind(Grapple.select, { index = 3 }))
+nmap("<Leader>4", bind(Grapple.select, { index = 4 }))
+nmap("<Leader>5", bind(Grapple.select, { index = 5 }))
 
 add("tpope/vim-rsi")
 
@@ -186,20 +186,12 @@ xmap("S",  mc.splitCursors)
 map({ "n", "x" }, "<C-n>", bind(mc.lineAddCursor, 1))
 map({ "n", "x" }, "<C-p>", bind(mc.lineAddCursor, -1))
 
-map({ "n", "x" }, "L", bind(matchAddCursorSelect, 1))
-map({ "n", "x" }, "H", bind(matchAddCursorSelect, -1))
+map({ "n", "x" }, "gl", bind(matchAddCursorSelect, 1))
+map({ "n", "x" }, "gh", bind(matchAddCursorSelect, -1))
 map({ "n", "x" }, "gL", bind(matchSkipCursorSelect, 1))
 map({ "n", "x" }, "gH", bind(matchSkipCursorSelect, -1))
 
-mc.onModeChanged(function(cursor, old, new)
-  if cursor:isMainCursor() then return end
-  if old == "i" and new == "n" then
-    if cursor:getPos()[2] ~= 1 then
-      cursor:feedkeys("l")
-    end
-  end
-end)
-
+local last_left = false
 mc.addKeymapLayer(function(lmap)
   lmap({ "n", "x" }, "<C-o>", mc.prevCursor)
   lmap({ "n", "x" }, "<C-i>", mc.nextCursor)
@@ -207,6 +199,10 @@ mc.addKeymapLayer(function(lmap)
   lmap({ "n", "x" }, "=",     mc.alignCursors)
   lmap({ "n", "x" }, "u",     "u")
   lmap({ "n", "x" }, "<C-r>", "<C-r>")
+  lmap("i", "<C-j>", function ()
+    mc.feedkeys("")
+    mc.feedkeys("l")
+  end)
   lmap("x", "q", function()
     clearCursors()
     mc.feedkeys("<Esc>", { keycodes = true })
