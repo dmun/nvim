@@ -9,10 +9,7 @@ vim.o.virtualedit = "onemore"
 
 nmap("<Leader>i", cmd.Inspect)
 
-imap("<C-j>", function()
-  local keys = vim.fn.col(".") ~= 1 and "l" or ""
-  vim.fn.feedkeys(keys)
-end)
+imap("<Esc>", "<Esc>`^")
 
 require("util.jump")
 nmap("s", bind(Patrick.jump, 2, false))
@@ -59,8 +56,6 @@ map({ "n", "x" }, "<Leader>p", '"+p')
 map({ "n", "x" }, "<Leader>y", '"+y')
 
 nmap("gr<Space>", ":grep ")
-nmap("u",         "<Cmd>silent u<CR>")
-nmap("<C-r>",     "<Cmd>silent red<CR>")
 
 nmap("<Leader>tw", function() vim.o.wrap = not vim.o.wrap end)
 

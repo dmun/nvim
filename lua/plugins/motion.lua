@@ -191,7 +191,14 @@ map({ "n", "x" }, "gh", bind(matchAddCursorSelect, -1))
 map({ "n", "x" }, "gL", bind(matchSkipCursorSelect, 1))
 map({ "n", "x" }, "gH", bind(matchSkipCursorSelect, -1))
 
-local last_left = false
+mc.onModeChanged(function(cur, old, new)
+  if old == "i" then
+    if cur:col() > 1 and not cur:isMainCursor() then
+      cur:feedkeys("`^")
+    end
+  end
+end)
+
 mc.addKeymapLayer(function(lmap)
   lmap({ "n", "x" }, "<C-o>", mc.prevCursor)
   lmap({ "n", "x" }, "<C-i>", mc.nextCursor)
@@ -199,10 +206,6 @@ mc.addKeymapLayer(function(lmap)
   lmap({ "n", "x" }, "=",     mc.alignCursors)
   lmap({ "n", "x" }, "u",     "u")
   lmap({ "n", "x" }, "<C-r>", "<C-r>")
-  lmap("i", "<C-j>", function ()
-    mc.feedkeys("")
-    mc.feedkeys("l")
-  end)
   lmap("x", "q", function()
     clearCursors()
     mc.feedkeys("<Esc>", { keycodes = true })
