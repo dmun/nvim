@@ -1,3 +1,4 @@
+local loader = require("util.animation")
 local F = vim.fn
 local methods = {}
 local statusline = {}
@@ -38,7 +39,7 @@ methods.cutoff = function(self)
   return self
 end
 
-methods.draw = function(self, event)
+methods.draw = function(self, event, pattern)
   if type(event) == "string" then event = { event } end
   event = vim.tbl_extend("force", {
     "BufEnter",
@@ -49,7 +50,7 @@ methods.draw = function(self, event)
   }, event)
   if component_cache[component_id] == nil then
     local id = component_id
-    au(event, "*", function()
+    au(event, pattern or "*", function()
       component_dirty[id] = true
     end)
   end
@@ -145,28 +146,15 @@ local diagnostics_fn = function()
   return { error = error, warn = warn, info = info, hint = hint }
 end
 
+local stab_fn = function()
+  return vim.b.stabbing or false
+end
+
 local build = function(active)
   statusline = {}
   component_id = 0
 
   local normal_hl = active and "StatusLine" or "StatusLineNC"
-
-  -- component()
-  --     :hl(mode_hl)
-  --     :pad()
-  --     :text(function() return vim.fn.mode():upper() end)
-  --     :pad()
-  --     :draw("ModeChanged")
-
-  -- component()
-  --     :pad()
-  --     :hl("LineNr"):text("<")
-  --     :hl(normal_hl):text(grapple_fn)
-  --     :hl("LineNr"):text(">")
-  --     :hl(normal_hl)
-  --     :pad()
-  --     :cutoff()
-  --     :draw({ "BufEnter", "BufLeave" })
 
   component(file_fn)
       :hl(active and "WhiteFg" or "Comment")
@@ -191,8 +179,22 @@ local build = function(active)
       :text(diff_delete_fn)
       :draw({ "BufWinEnter", "BufWritePost", "TextChanged" })
 
-  component(diagnostics_fn)
+  component(stab_fn)
       :right()
+      :hl("OrangeFg")
+      :pad()
+      :text(function(stabbing)
+        if stabbing then
+          loader.start()
+          return loader.current_frame
+        else
+          loader.stop()
+          return " "
+        end
+      end)
+      :draw("User", "StabStateChanged")
+
+  component(diagnostics_fn)
       :hl("RedFg")
       :text(function(diagnostics)
         if not diagnostics.error or diagnostics.error == 0 then return "" end
@@ -223,7 +225,7 @@ local inactive = function()
 end
 
 local setup = function()
-  au({ "WinEnter", "BufEnter", "BufWinEnter" }, "*", function()
+  au({ "WinEnter", "BufEnter", "BufWinEnter", "User" }, "*", function()
     vim.wo.statusline = [[%!v:lua.require'util.statusline'.active()]]
   end)
 

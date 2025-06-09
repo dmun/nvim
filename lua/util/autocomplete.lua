@@ -25,6 +25,9 @@ end
 H.error = function(msg)
   vim.notify(vim.inspect(msg), vim.log.levels.ERROR)
 end
+H.trigger_event = function()
+  vim.cmd.doautocmd("User StabStateChanged")
+end
 
 vim.api.nvim_create_augroup(group, { clear = true })
 local au = function(event, pattern, callback)
@@ -108,6 +111,9 @@ H.debounce = function(delay, fn)
 end
 
 H.send_request = function(prompt, suffix)
+  vim.b.stabbing = true
+  H.trigger_event()
+
   cache.dirty = true
   curl.request({
     method = "post",
@@ -118,7 +124,7 @@ H.send_request = function(prompt, suffix)
       prompt = prompt,
       suffix = suffix,
       stop = { "\n\n" },
-      max_tokens = 64,
+      max_tokens = 256,
       temperature = 0,
     }),
     callback = function(response)
@@ -149,13 +155,16 @@ H.send_request = function(prompt, suffix)
         cache.output = content
         cache.display = content
         H.display(content)
+
+        vim.b.stabbing = false
+        H.trigger_event()
       end)
     end,
   })
 end
 
 H.get_context = function(max_lines)
-  max_lines = max_lines or 10
+  max_lines = max_lines or 100
   local all_lines = H.get_lines(0, -1)
   local pos = vim.fn.getpos(".")
   local row, col = pos[2], pos[3]
@@ -168,6 +177,7 @@ H.get_context = function(max_lines)
     if #lines <= max_count then return lines end
     local half = math.floor(max_count / 2)
     local start_chunk = vim.list_slice(lines, 1, half)
+    start_chunk[#start_chunk] = start_chunk[#start_chunk] .. "\n\n" .. vim.bo.commentstring:format("truncated...") .. "\n"
     local end_chunk = vim.list_slice(lines, #lines - half + 1, #lines)
     return vim.list_extend(start_chunk, end_chunk)
   end
@@ -203,7 +213,7 @@ H.debounced_complete = nil
 
 M.setup = function(opts)
   opts = opts or {}
-  opts.debounce = opts.debounce or 250
+  opts.debounce = opts.debounce or 400
 
   H.debounced_complete = H.debounce(opts.debounce, H.trigger)
   au("InsertLeave", "*", H.clear)

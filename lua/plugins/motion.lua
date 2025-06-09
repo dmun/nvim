@@ -191,14 +191,6 @@ map({ "n", "x" }, "gh", bind(matchAddCursorSelect, -1))
 map({ "n", "x" }, "gL", bind(matchSkipCursorSelect, 1))
 map({ "n", "x" }, "gH", bind(matchSkipCursorSelect, -1))
 
--- mc.onModeChanged(function(cur, old, new)
---   if old == "i" then
---     if not cur:isMainCursor() then
---       cur:feedkeys("`^")
---     end
---   end
--- end)
-
 mc.addKeymapLayer(function(lmap)
   lmap({ "n", "x" }, "<C-o>", mc.prevCursor)
   lmap({ "n", "x" }, "<C-i>", mc.nextCursor)
