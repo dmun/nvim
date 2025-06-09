@@ -128,6 +128,11 @@ H.send_request = function(prompt, suffix)
       temperature = 0,
     }),
     callback = function(response)
+      vim.schedule(function()
+        vim.b.stabbing = false
+        H.trigger_event()
+      end)
+
       if response.status ~= 200 then
         -- vim.notify("API Error (Status " .. response.status .. ")", vim.log.levels.ERROR)
         H.state.retries = H.state.retries + 1
@@ -155,9 +160,6 @@ H.send_request = function(prompt, suffix)
         cache.output = content
         cache.display = content
         H.display(content)
-
-        vim.b.stabbing = false
-        H.trigger_event()
       end)
     end,
   })
@@ -177,7 +179,8 @@ H.get_context = function(max_lines)
     if #lines <= max_count then return lines end
     local half = math.floor(max_count / 2)
     local start_chunk = vim.list_slice(lines, 1, half)
-    start_chunk[#start_chunk] = start_chunk[#start_chunk] .. "\n\n" .. vim.bo.commentstring:format("truncated...") .. "\n"
+    start_chunk[#start_chunk] = start_chunk[#start_chunk] ..
+        "\n\n" .. vim.bo.commentstring:format("truncated...") .. "\n"
     local end_chunk = vim.list_slice(lines, #lines - half + 1, #lines)
     return vim.list_extend(start_chunk, end_chunk)
   end
