@@ -1,3 +1,9 @@
+add("nvim-lua/plenary.nvim")
+
+local stab = require("util.autocomplete")
+stab.setup()
+imap("<S-Tab>", stab.complete)
+
 add({
   source = "milanglacier/minuet-ai.nvim",
   depends = { "nvim-lua/plenary.nvim" },

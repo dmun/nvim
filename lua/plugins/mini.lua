@@ -217,3 +217,8 @@ nmap("<Leader>e", function()
   MiniFiles.open(vim.api.nvim_buf_get_name(0))
   MiniFiles.reveal_cwd()
 end)
+
+nmap("<Leader>tp", function()
+  local path = "~/.local/share/nvim/site/pack/deps/opt/"
+  MiniFiles.open(path)
+end)

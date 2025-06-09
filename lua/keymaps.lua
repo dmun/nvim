@@ -3,13 +3,13 @@ vim.g.maplocalleader = "m"
 
 nmap("<Leader>m", "m")
 
-vim.o.langmap = "qb,bq,QB,BQ"
-vim.o.langremap = true
-vim.o.virtualedit = "onemore"
+-- vim.o.langmap = "qb,bq,QB,BQ"
+-- vim.o.langremap = true
+-- vim.o.virtualedit = "onemore"
 
 nmap("<Leader>i", cmd.Inspect)
 
-imap("<Esc>", "<Esc>`^")
+-- imap("<Esc>", "<Esc>`^")
 
 require("util.jump")
 nmap("s", bind(Patrick.jump, 2, false))

@@ -1,13 +1,14 @@
 add("tpope/vim-sleuth")
 add("stevearc/conform.nvim")
 add("stevearc/quicker.nvim")
-add("jpalardy/vim-slime")
-vim.g.slime_target = "tmux"
-vim.g.slime_bracketed_paste = 1
 
-nmap("ms", "<Plug>SlimeParagraphSend")
-nmap("mR", "<Plug>SlimeLineSend")
-map("mr", "<Plug>SlimeLineSend")
+-- add("jpalardy/vim-slime")
+-- vim.g.slime_target = "tmux"
+-- vim.g.slime_bracketed_paste = 1
+
+-- nmap("ms", "<Plug>SlimeParagraphSend")
+-- nmap("mR", "<Plug>SlimeLineSend")
+-- map("mr", "<Plug>SlimeLineSend")
 
 vim.g.nvim_ghost_autostart = 0
 add("subnut/nvim-ghost.nvim")
