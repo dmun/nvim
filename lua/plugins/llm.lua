@@ -2,6 +2,7 @@ add("nvim-lua/plenary.nvim")
 
 local stab = require("util.autocomplete")
 stab.setup()
+nmap("<S-Tab>", stab.complete)
 imap("<S-Tab>", stab.complete)
 
 add({
