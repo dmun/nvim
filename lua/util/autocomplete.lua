@@ -14,6 +14,7 @@ local S = {
   retries = 0,
   max_retries = 3,
   next_edit = {
+    range = {},
     content = nil,
     available = false,
     ext_id = nil,
@@ -37,27 +38,6 @@ au("ModeChanged", "*", function(ev)
     last_diffs:add(vim.diff(last_buf_state, cur_buf_state))
   end
 end)
-
-S.next_edit._diff = [[
---- a/init.lua
-+++ b/init.lua
-@@ -6,8 +6,11 @@
- require("globals")
-
- now(function()
--  require("options")
--  require("keymaps")
--  require("autocommands")
--  require("plugins.ui")
-+  add({ source = "dmun/boomer.nvim", depends = { "rktjmp/lush.nvim" } })
-+  cmd("color boomer")
-+  require("options")
-+  require("keymaps")
-+  require("autocommands")
-+  require("plugins.ui")
-+  require("util.statusline").setup()
- end)
-]]
 
 H.ternary = function(cond, T, F)
   if cond then
@@ -148,17 +128,32 @@ local au = function(event, pattern, callback)
   })
 end
 
-local fim_url = "https://codestral.mistral.ai/v1/fim/completions"
--- local zeta_url = "http://127.0.0.1:7000/v1/completions"
-local zeta_url = "http://192.168.2.31:1234/v1/completions"
+local zeta_url = "http://127.0.0.1:7000/v1/completions"
+-- local zeta_url = "http://192.168.2.31:1234/v1/completions"
 local chat_url = "https://codestral.mistral.ai/v1/chat/completions"
-local headers = {
-  content_type = "application/json",
-  accept = "application/json",
-  authorization = os.getenv("CODESTRAL_API_KEY"),
-}
 
 H.presets = {}
+H.presets.codestral = {
+  url = "https://codestral.mistral.ai/v1/fim/completions",
+  headers = {
+    content_type = "application/json",
+    accept = "application/json",
+    authorization = os.getenv("CODESTRAL_API_KEY"),
+  },
+  handle_prompt = function()
+    local prefix, suffix = H.get_context()
+    return {
+      model = "codestral-latest",
+      prompt = prefix,
+      suffix = suffix,
+      stop = { "\n>>" },
+      max_tokens = 256,
+    }
+  end,
+  handle_response = function(data)
+    return data.choices[1].message.content
+  end
+}
 H.presets.gemini = {
   url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=" ..
       os.getenv("GEMINI_API_KEY"),
@@ -166,16 +161,20 @@ H.presets.gemini = {
     content_type = "application/json",
     accept = "application/json",
   },
-  handle_prompt = function(prompt)
+  handle_prompt = function()
+    local prefix, suffix = H.get_context()
+    local prompt = prefix .. suffix
     return {
       contents = {
-        { parts = { { text = prompt } } }
+        {
+          parts = {
+            { text = prompt }
+          }
+        }
       }
     }
   end,
   handle_response = function(data)
-    -- return data.choices[1].message.content
-    -- return data.choices[1].text
     return data.candidates[1].content.parts[1].text
   end
 }
@@ -185,6 +184,10 @@ H.clear = function()
     for _, id in ipairs(ext_ids) do
       H.del_extmark(id)
     end
+    if S.next_edit.buf_id then
+      H.buf_delete(S.next_edit.buf_id, { force = true })
+      S.next_edit.buf_id = nil
+    end
     cache = {}
   end
 end
@@ -192,8 +195,13 @@ end
 H.display = function(content)
   if F.mode() ~= "i" then return end
 
-  S.next_edit.content = content
   local diff = dmp.diff_main(S.next_edit.prompt, content)
+  if #diff == 1 and diff[1][1] == 0 then
+    H.clear()
+    return
+  end
+
+  S.next_edit.content = content
   dmp.diff_cleanupEfficiency(diff)
 
   local additions = {}
@@ -216,15 +224,6 @@ H.display = function(content)
 
   local is_change = #deletions > 0
 
-  for _, addition in ipairs(additions) do
-    local text, line, col = unpack(addition)
-    local ext_id = H.set_extmark(line, col, {
-      virt_text = { { text, is_change and "DiffAdd" or "Comment" } },
-      virt_text_pos = is_change and "eol" or "inline",
-    })
-    table.insert(ext_ids, ext_id)
-  end
-
   for _, deletion in ipairs(deletions) do
     local text, line, col = unpack(deletion)
     local ext_id = H.set_extmark(line, col, {
@@ -233,26 +232,45 @@ H.display = function(content)
     })
     table.insert(ext_ids, ext_id)
   end
-end
 
-H.on_text = function()
-  if not cache.display then
-    H.clear()
+  if is_change then
+    local buf = H.create_buf()
+    S.next_edit.buf_id = buf
+    local lines = vim.split(content, "\n")
+    H.open_win(buf, false, {
+      relative = "win",
+      col = #S.next_edit.prompt + 5,
+      row = F.line(".") - 2,
+      width = #content,
+      height = #lines,
+      style = "minimal",
+      anchor = "NW",
+      border = "none",
+    })
+    H.buf_set_lines(buf, 0, -1, true, lines)
+    H.buf_set_option(buf, "filetype", vim.bo.filetype)
+
+    for _, addition in ipairs(additions) do
+      local text, line, col = unpack(addition)
+      local ext_id = vim.api.nvim_buf_set_extmark(buf, ns_id, line - cur_line, col, {
+        virt_text = { { text, "DiffAdd" } },
+        virt_text_pos = "overlay",
+      })
+      S.next_edit.loc = { line + 1, col + #text + 1 }
+      table.insert(ext_ids, ext_id)
+    end
     return
   end
-  local line = vim.api.nvim_get_current_line()
-  local _prompt = vim.split(cache.prompt, "\n", { plain = true })
-  local prompt = _prompt[#_prompt]
 
-  local delta = string.gsub(line, H.escape(prompt), "")
-
-  local display, count = string.gsub(cache.output, "^" .. H.escape(delta), "")
-  cache.display = display
-
-  if count > 0 then
-    H.display(cache.display)
-  else
-    H.clear()
+  for _, addition in ipairs(additions) do
+    local text, line, col = unpack(addition)
+    local ext_id = H.set_extmark(line, col, {
+      virt_text = { { text, "Comment" } },
+      virt_text_pos = "inline",
+      virt_text_repeat_linebreak = false,
+    })
+    S.next_edit.loc = { line + 1, col + #text + 1 }
+    table.insert(ext_ids, ext_id)
   end
 end
 
@@ -277,53 +295,11 @@ H.send_request = function(prompt, suffix)
   H.trigger_event()
 
   cache.dirty = true
-  curl.request({
-    method = "post",
-    url = fim_url,
-    headers = headers,
-    body = vim.json.encode({
-      model = "codestral-latest",
-      prompt = prompt,
-      suffix = suffix,
-      stop = { ">>" },
-      max_tokens = 128,
-      temperature = 0,
-    }),
-    callback = function(response)
-      vim.schedule(function()
-        vim.b.stabbing = false
-        H.trigger_event()
-      end)
-
-      if response.status ~= 200 then
-        S.retries = S.retries + 1
-        if S.retries < S.max_retries then
-          H.debounced_complete()
-        end
-        H.error("Stab: Max retries reached")
-        return
-      end
-
-      local ok, data = pcall(vim.json.decode, response.body)
-      if not ok then
-        vim.notify("Failed to parse response", vim.log.levels.ERROR)
-        return
-      end
-
-      if data.error then
-        vim.notify("API Error: " .. data.error.message, vim.log.levels.ERROR)
-        return
-      end
-
-      vim.schedule(function()
-        local content = data.choices[1].message.content
-        cache.prompt = prompt
-        cache.output = content
-        cache.display = content
-        H.display(content)
-      end)
-    end,
-  })
+  H.request(prompt, H.presets.codestral, function(content)
+    cache.output = content
+    cache.display = content
+    H.display(content)
+  end)
 end
 
 H.open_win = function(bufnr, enter, opts)
@@ -331,58 +307,6 @@ H.open_win = function(bufnr, enter, opts)
   opts.row = opts.row and opts.row + 1 or nil
   opts.col = opts.col and opts.col + 1 or nil
   return vim.api.nvim_open_win(bufnr, enter, opts)
-end
-
-H.create_diff_buf = function(diff)
-  local buf_id = H.create_buf(false, true)
-  H.buf_set_option(buf_id, "filetype", "diff")
-  H.buf_set_lines(buf_id, 0, -1, false, vim.split(diff, "\n"))
-  return buf_id
-end
-
-H.create_diff_win = function(buf_id)
-  return H.open_win(buf_id, false, {
-    relative = "editor",
-    width = 80,
-    height = 12,
-    row = S.next_edit.line,
-    col = 40,
-    style = "minimal",
-    focusable = false,
-  })
-end
-
-H.format_prompt = function(prefix, suffix)
-  local ft = vim.bo.filetype
-  local filename = vim.api.nvim_buf_get_name(0)
-
-  local template = [[
-### Instruction:
-
-You are a code completion assistant and your task is to analyze user edits and then rewrite an excerpt that the user provides, suggesting the appropriate edits within the excerpt, taking into account the cursor location. Only provide the code, no diff syntax.
-
-### User Edits:
-
-%s
-
-### User Excerpt:
-
-%s
-
-### Response:
-]]
-
-  local edits = vim.iter(last_diffs:get_all()):map(function(diff)
-    return string.format('User edited "%s":\n```diff\n%s```\n', filename, diff)
-  end):join("\n")
-
-  local excerpt = ([[
-```
-%s<|user_cursor_is_here|>%s
-```
-]]):format(prefix, suffix)
-
-  return template:format(edits, excerpt)
 end
 
 H.request = function(prompt, provider, callback)
@@ -405,7 +329,6 @@ H.request = function(prompt, provider, callback)
         if S.retries < S.max_retries then
           -- H.debounced_complete()
         end
-        -- vim.print(response)
         H.error("Stab: Max retries reached")
         return
       end
@@ -424,37 +347,6 @@ H.request = function(prompt, provider, callback)
       vim.schedule_wrap(callback)(provider.handle_response(data))
     end,
   })
-end
-
-H.predict_edit = function(prefix, suffix)
-  vim.b.stabbing = true
-  H.trigger_event()
-
-  local prompt = H.format_prompt(prefix, suffix)
-
-  H.request(prompt, H.presets.gemini, function(content)
-    content = content:match("<|editable_region_start|>\n(.+)\n<|editable_region_end|>")
-        or content:match("```\n(.+)\n```")
-        or content
-    vim.print(content)
-
-    local ctxlen = 3
-    content = vim.diff(prefix .. suffix, content, {
-      ctxlen = ctxlen,
-      ignore_whitespace = true,
-      ignore_whitespace_change = true,
-    })
-
-    local filename = vim.api.nvim_buf_get_name(0)
-    content = "+++ " .. filename .. "\n" .. content
-    content = "--- " .. filename .. "\n" .. content
-    S.next_edit.diff = content
-    S.next_edit.available = true
-
-    local line = string.match(content, "@@ %-(%d+),%d+ %+%d+,%d+ @@")
-    S.next_edit.line = tonumber(line)
-    H.trigger_edit()
-  end)
 end
 
 H.comment = function(text)
@@ -478,8 +370,7 @@ H.get_context = function(max_lines)
   local prefix = {
     H.concat(lines_before),
     "<<<<<<< HEAD",
-    all_lines[row],
-    -- H.concat(lines_editable),
+    H.concat(lines_editable),
     "=======\n",
   }
 
@@ -496,7 +387,6 @@ H.trigger = function()
   local prompt, suffix = H.get_context()
   -- vim.print(prompt .. "X" .. suffix)
   H.send_request(prompt, suffix)
-  -- H.predict_edit(prompt, suffix)
 end
 
 ---@param row integer
@@ -515,37 +405,6 @@ end
 H.win_close = function(win_id, force)
   if vim.api.nvim_win_is_valid(win_id) then
     vim.api.nvim_win_close(win_id, force)
-  end
-end
-
-H.trigger_edit = function()
-  -- if not S.next_edit.available then return end
-  if not S.next_edit.line then return end
-
-  if not H.cursor_on(S.next_edit.line) then
-    S.next_edit.ext_id = H.set_extmark(S.next_edit.line, 0, {
-      id = S.next_edit.ext_id,
-      virt_text = { { " S-TAB ", "LspInlayHint" } },
-    })
-
-    if S.next_edit.win_id and S.next_edit.buf_id then
-      H.win_close(S.next_edit.win_id, true)
-      H.buf_delete(S.next_edit.buf_id, { force = true })
-      S.next_edit.buf_id = nil
-      S.next_edit.win_id = nil
-    end
-  else
-    if S.next_edit.ext_id then
-      H.del_extmark(S.next_edit.ext_id)
-      S.next_edit.ext_id = nil
-    end
-
-    if S.next_edit.buf_id and S.next_edit.win_id then
-      H.win_set_buf(S.next_edit.win_id, S.next_edit.buf_id)
-    else
-      S.next_edit.buf_id = H.create_diff_buf(S.next_edit.diff)
-      S.next_edit.win_id = H.create_diff_win(S.next_edit.buf_id)
-    end
   end
 end
 
@@ -571,10 +430,8 @@ M.setup = function(opts)
   opts = opts or {}
   opts.debounce = opts.debounce or 400
 
-  H.debounced_complete_edit = H.debounce(opts.debounce, H.trigger_edit)
   H.debounced_complete = H.debounce(opts.debounce, H.trigger)
   au("InsertLeave", "*", H.clear)
-  au("TextChangedI", "*", H.on_text)
   au({ "TextChangedI", "InsertEnter" }, "*", function()
     -- H.trigger_edit()
     if H.is_ready() then
@@ -610,31 +467,10 @@ end
 
 M.complete = function()
   if ext_ids and S.next_edit.content and not S.next_edit.available then
-    -- H.insert(cache.display)
     H.buf_set_lines(0, F.line(".") - 1, F.line("."), true, vim.split(S.next_edit.content, "\n", { plain = true }))
+    F.cursor(S.next_edit.loc)
     H.clear()
   end
-
-  -- if not S.next_edit.available or not S.next_edit.line then
-  --   local prompt, suffix = H.get_context()
-  --   H.predict_edit(prompt, suffix)
-  -- else
-  --   if not H.cursor_on(S.next_edit.line) then
-  --     F.cursor(S.next_edit.line, F.col("."))
-  --     H.trigger_edit()
-  --   else
-  --     if S.next_edit.buf_id then
-  --       H.safe_diff_apply(S.next_edit.diff)
-  --
-  --       H.buf_delete(S.next_edit.buf_id, { force = true })
-  --       S.next_edit.available = false
-  --       S.next_edit.ext_id = nil
-  --       S.next_edit.line = nil
-  --       S.next_edit.buf_id = nil
-  --       S.next_edit.diff = nil
-  --     end
-  --   end
-  -- end
 end
 
 return M

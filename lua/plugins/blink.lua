@@ -33,7 +33,7 @@ require("blink.cmp").setup({
     accept = { dot_repeat = false },
     list = { max_items = 50 },
     menu = {
-      auto_show = false,
+      auto_show = true,
       border = "none",
       max_height = vim.o.ph,
       scrollbar = false,
