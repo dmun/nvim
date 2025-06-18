@@ -2,8 +2,20 @@ add("nvim-lua/plenary.nvim")
 
 local stab = require("util.autocomplete")
 stab.setup()
-nmap("<S-Tab>", stab.complete)
-imap("<S-Tab>", stab.complete)
+nmap("<Tab>", stab.complete)
+imap("<Tab>", stab.complete)
+
+-- add("zbirenbaum/copilot.lua")
+-- require("copilot").setup({
+--   suggestion = {
+--     enabled = true,
+--     auto_trigger = true,
+--     debounce = 75,
+--     keymap = {
+--       accept = "<Tab>",
+--     },
+--   },
+-- })
 
 add({
   source = "milanglacier/minuet-ai.nvim",

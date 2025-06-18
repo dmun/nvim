@@ -1,6 +1,3 @@
-add("jake-stewart/auto-cmdheight.nvim")
-require("auto-cmdheight").setup()
-
 require("mini.icons").setup()
 require("mini.notify").setup({
   content = {
@@ -14,4 +11,4 @@ require("mini.notify").setup({
     },
   },
 })
-vim.notify = require("mini.notify").make_notify()
+-- vim.notify = require("mini.notify").make_notify()

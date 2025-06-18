@@ -4,6 +4,7 @@ vim.g.maplocalleader = "m"
 nmap("<Leader>m", "m")
 
 nmap("<Leader>i", cmd.Inspect)
+imap("<C-x>i", cmd.Inspect)
 
 require("util.jump")
 nmap("s", bind(Patrick.jump, 2, false))

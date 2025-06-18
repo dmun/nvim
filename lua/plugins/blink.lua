@@ -14,7 +14,7 @@ require("blink.cmp").setup({
     ["<C-y>"] = { "accept" },
     ["<Tab>"] = { "accept", "fallback" },
 
-    -- ["<C-e>"] = { "hide", "fallback" },
+    ["<C-c>"] = { "hide", "fallback" },
 
     ["<C-p>"] = { "select_prev", "fallback" },
     ["<C-n>"] = { "select_next", "fallback" },
@@ -33,7 +33,7 @@ require("blink.cmp").setup({
     accept = { dot_repeat = false },
     list = { max_items = 50 },
     menu = {
-      auto_show = true,
+      auto_show = false,
       border = "none",
       max_height = vim.o.ph,
       scrollbar = false,

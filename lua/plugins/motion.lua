@@ -1,3 +1,6 @@
+-- add("jake-stewart/auto-cmdheight.nvim")
+-- require("auto-cmdheight").setup()
+
 add("cbochs/grapple.nvim")
 local Grapple = require("grapple")
 Grapple.setup({
