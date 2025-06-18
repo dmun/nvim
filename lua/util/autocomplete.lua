@@ -24,18 +24,40 @@ local S = {
   }
 }
 
+local CONFLICT_START = "<<<<<<< HEAD"
+local CONFLICT_SEP = "======="
+local CONFLICT_END = ">>>>>>>"
+
 local cbuf = require("util.cbuf")
-local last_buf_state = ""
-local last_diffs = cbuf:new(4)
+local last_buf_state = {}
+local edit_history = cbuf:new(2)
 
 au("ModeChanged", "*", function(ev)
   local old, new = unpack(vim.split(ev.match, ":"))
-  local cur_buf_state = table.concat(H.get_lines(), "\n")
+  local cur_buf_state = H.get_lines()
+  logger.debug("Current buf:", cur_buf_state)
+  logger.debug("Last buf:", last_buf_state)
 
   if old == "n" then
     last_buf_state = cur_buf_state
   elseif new == "n" then
-    last_diffs:add(vim.diff(last_buf_state, cur_buf_state))
+    -- replace unified diff with git conflict markup
+    local idx = vim.diff(H.concat(last_buf_state), H.concat(cur_buf_state), { result_type = "indices" })[1]
+    logger.trace("Indices:", idx)
+    if not idx then return end
+
+    local old_lines = vim.list_slice(last_buf_state, idx[1], idx[1] + idx[2] - 1)
+    local new_lines = vim.list_slice(cur_buf_state, idx[3], idx[3] + idx[4] - 1)
+
+    local diff = {
+      CONFLICT_START,
+      H.concat(old_lines),
+      CONFLICT_SEP,
+      H.concat(new_lines),
+      CONFLICT_END,
+    }
+
+    edit_history:add({ H.concat(diff), idx })
   end
 end)
 
@@ -293,11 +315,21 @@ H.display = function(content, diff)
     logger.debug("Creating buf:", buf, bufpos)
     local lines = vim.split(content, "\n")
     logger.debug("Buf lines:", lines)
+
+    local width = vim.api.nvim_win_get_width(0)
+    local win_width = F.strdisplaywidth(lines[1])
+    local col, row = 0, -1
+    if win_width < width / 2 then
+      col = F.strdisplaywidth(vim.api.nvim_get_current_line()) + 4
+      row = 0
+    end
+
     H.open_win(buf, false, {
       relative = "win",
-      col = F.strdisplaywidth(vim.api.nvim_get_current_line()) + 4,
+      col = col,
+      row = row,
       bufpos = bufpos,
-      width = F.strdisplaywidth(lines[1]),
+      width = win_width,
       -- height = #lines,
       height = 1,
       style = "minimal",
@@ -440,12 +472,20 @@ H.comment = function(text)
 end
 
 H.get_context = function(max_lines)
-  max_lines = max_lines or 10
+  max_lines = max_lines or 30
   local max_editable = 0
   local all_lines = H.get_lines(0, -1)
   local pos = F.getpos(".")
   local row, col = pos[2], pos[3]
   S.suggestion.line = row - max_editable
+
+  for _, edit in ipairs(edit_history:get_all()) do
+    local text, idx = edit[1], edit[2]
+    all_lines[idx[1]] = text
+    for i = idx[3] + 1, idx[3] + idx[4] - 1 do
+      all_lines[i] = ""
+    end
+  end
 
   local lines_before = vim.list_slice(all_lines, row - max_lines, row - max_editable - 1)
   local lines_after = vim.list_slice(all_lines, row + max_editable + 1, row + max_lines)
@@ -492,7 +532,7 @@ M.setup = function(opts)
 
   dmp.settings({
     Match_Threshold = 0.1,
-    -- Match_Distance = 100,
+    Match_Distance = 1000,
   })
 
   local hl = vim.api.nvim_get_hl(0, { name = "DiffDelete" })
