@@ -153,11 +153,13 @@ vim.g.total_tokens = 0
 
 H.presets = {}
 H.presets.codestral = {
-  url = "https://codestral.mistral.ai/v1/fim/completions",
+  -- url = "https://codestral.mistral.ai/v1/fim/completions",
+  url = "https://api.mistral.ai/v1/fim/completions",
   headers = {
     content_type = "application/json",
     accept = "application/json",
-    authorization = os.getenv("CODESTRAL_API_KEY"),
+    -- authorization = os.getenv("CODESTRAL_API_KEY"),
+    authorization = "Bearer " .. os.getenv("MISTRAL_API_KEY"),
   },
   handle_prompt = function()
     local prefix, suffix = H.get_context()
@@ -166,7 +168,7 @@ H.presets.codestral = {
       prompt = prefix,
       suffix = suffix,
       stop = { "\n>>", ">>>>" },
-      max_tokens = 256,
+      max_tokens = 128,
     }
   end,
   handle_response = function(data)
@@ -372,6 +374,11 @@ H.send_request = function(prompt, suffix)
   logger.debug("Creating end:", S.suggestion.ext_end)
 
   H.request(prompt, H.presets.codestral, function(content)
+    logger.debug("Content:", content)
+    local lines = vim.split(content, "\n", { plain = true, trimempty = true })
+    logger.debug("Lines:", lines)
+    content = lines[1]
+
     cache.output = content
     cache.display = content
     local diff = H.calc_diff(content)
@@ -408,12 +415,7 @@ H.request = function(prompt, provider, callback)
       end)
 
       if response.status ~= 200 then
-        -- vim.notify("API Error (Status " .. response.status .. ")", vim.log.levels.ERROR)
-        S.retries = S.retries + 1
-        if S.retries < S.max_retries then
-          -- H.debounced_complete()
-        end
-        logger.error("Max retries reached")
+        logger.error(response.status, response.body)
         return
       end
 
@@ -438,7 +440,7 @@ H.comment = function(text)
 end
 
 H.get_context = function(max_lines)
-  max_lines = max_lines or 100
+  max_lines = max_lines or 10
   local max_editable = 0
   local all_lines = H.get_lines(0, -1)
   local pos = F.getpos(".")
