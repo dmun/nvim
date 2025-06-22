@@ -1,5 +1,7 @@
 add("cbochs/grapple.nvim")
 local grapple = require("grapple")
+
+---@diagnostic disable-next-line: missing-fields
 grapple.setup({
   icons = false,
   prune = "2d",
@@ -27,19 +29,12 @@ add("jake-stewart/multicursor.nvim")
 local mc = require("multicursor-nvim")
 mc.setup()
 
-xmap("q",  mc.visualToCursors)
-xmap("ga", function() mc.matchAllAddCursors() end)
-nmap("ga", function()
-  mc.matchAllAddCursors()
-  mc.feedkeys("viw")
-end)
+xmap("q", mc.visualToCursors)
+map("ga", mc.matchAllAddCursors)
 map({ "n", "x" }, "<C-q>", mc.toggleCursor)
 nmap("gm", mc.restoreCursors)
-xmap("m",  mc.matchCursors)
-xmap("S",  mc.splitCursors)
-
-map({ "n", "x" }, "<C-n>", bind(mc.lineAddCursor, 1))
-map({ "n", "x" }, "<C-p>", bind(mc.lineAddCursor, -1))
+xmap("m", mc.matchCursors)
+xmap("S", mc.splitCursors)
 
 map({ "n", "x" }, "<C-n>", bind(mc.matchAddCursor, 1))
 map({ "n", "x" }, "<C-p>", bind(mc.matchAddCursor, -1))
@@ -50,8 +45,8 @@ mc.addKeymapLayer(function(lmap)
   lmap({ "n", "x" }, "<C-o>", mc.prevCursor)
   lmap({ "n", "x" }, "<C-i>", mc.nextCursor)
   lmap({ "n", "x" }, "<C-h>", mc.deleteCursor)
-  lmap({ "n", "x" }, "=",     mc.alignCursors)
-  lmap({ "n", "x" }, "u",     "u")
+  lmap({ "n", "x" }, "=", mc.alignCursors)
+  lmap({ "n", "x" }, "u", "u")
   lmap({ "n", "x" }, "<C-r>", "<C-r>")
   lmap("x", "q", function()
     mc.clearCursors()
@@ -80,11 +75,11 @@ require("dial.config").augends:register_group({
   },
 })
 
-nmap("<C-a>",  bind(dial, "increment", "normal"))
-nmap("<C-x>",  bind(dial, "decrement", "normal"))
+nmap("<C-a>", bind(dial, "increment", "normal"))
+nmap("<C-x>", bind(dial, "decrement", "normal"))
 nmap("g<C-a>", bind(dial, "increment", "gnormal"))
 nmap("g<C-x>", bind(dial, "decrement", "gnormal"))
-xmap("<C-a>",  bind(dial, "increment", "visual"))
-xmap("<C-x>",  bind(dial, "decrement", "visual"))
+xmap("<C-a>", bind(dial, "increment", "visual"))
+xmap("<C-x>", bind(dial, "decrement", "visual"))
 xmap("g<C-a>", bind(dial, "increment", "gvisual"))
 xmap("g<C-x>", bind(dial, "decrement", "gvisual"))
