@@ -215,9 +215,6 @@ mc.addKeymapLayer(function(lmap)
   end)
 end)
 
-add("svban/YankAssassin.vim")
-vim.g.yankassissin_use_mappings = 1
-
 add("monaqa/dial.nvim")
 local augend = require("dial.augend")
 local dial = require("dial.map").manipulate

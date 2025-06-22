@@ -1,6 +1,6 @@
 local M = {}
 
-local log_file = vim.fn.stdpath("data") .. "/stab.log"
+local log_file = vim.fn.stdpath("state") .. "/stab.log"
 
 local function write_log(level, ...)
   local args = { ... }
@@ -11,19 +11,22 @@ local function write_log(level, ...)
   end
 
   local msg = table.concat(args, " ")
-  local timestamp = os.date("%Y-%m-%d %H:%M:%S")
-  local log_entry = string.format(
-    "[%s] [%s]: %s\n",
-    timestamp,
-    level,
-    msg
-  )
+  local timestamp = os.date("!%Y-%m-%dT%H:%M:%SZ")
 
-  local file = io.open(log_file, "a")
-  if file then
-    file:write(log_entry)
-    file:close()
-  end
+  local log_entry = {
+    time = timestamp,
+    level = level,
+    message = msg,
+  }
+
+  vim.schedule(function()
+    local json = vim.fn.json_encode(log_entry) .. "\n"
+    local file = io.open(log_file, "a")
+    if file then
+      file:write(json)
+      file:close()
+    end
+  end)
 end
 
 M.debug = function(...)

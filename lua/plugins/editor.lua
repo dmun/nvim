@@ -28,6 +28,7 @@ require("conform").setup({
     svelte = { "prettier" },
     javascript = { "prettier" },
     typescript = { "prettier" },
+    lua = { "stylua" },
   },
 })
 

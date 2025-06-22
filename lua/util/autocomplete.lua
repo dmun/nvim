@@ -1,16 +1,16 @@
-local dmp = require("util.diff")
-local group = "Stab"
-local curl = require("plenary.curl")
-local logger = require("util.logger")
-local F = vim.fn
+local dmp                  = require("util.diff")
+local group                = "Stab"
+local curl                 = require("plenary.curl")
+local logger               = require("util.logger")
+local F                    = vim.fn
 
-local ns_id = vim.api.nvim_create_namespace("Stab")
-local ext_ids = {}
-local cache = {}
+local ns_id                = vim.api.nvim_create_namespace("Stab")
+local ext_ids              = {}
+local cache                = {}
 
-local H = {}
-local M = {}
-local S = {
+local H                    = {}
+local M                    = {}
+local S                    = {
   retries = 0,
   max_retries = 3,
   suggestion = {
@@ -24,41 +24,61 @@ local S = {
   }
 }
 
-local CONFLICT_START = "<<<<<<< HEAD"
-local CONFLICT_SEP = "======="
-local CONFLICT_END = ">>>>>>>"
+local HL_GROUP = "NonText"
 
-local cbuf = require("util.cbuf")
-local last_buf_state = {}
-local edit_history = cbuf:new(2)
-
-au("ModeChanged", "*", function(ev)
-  local old, new = unpack(vim.split(ev.match, ":"))
-  local cur_buf_state = H.get_lines()
-  logger.debug("Current buf:", cur_buf_state)
-  logger.debug("Last buf:", last_buf_state)
-
-  if old == "n" then
-    last_buf_state = cur_buf_state
-  elseif new == "n" then
-    -- replace unified diff with git conflict markup
-    local idx = vim.diff(H.concat(last_buf_state), H.concat(cur_buf_state), { result_type = "indices" })[1]
-    logger.trace("Indices:", idx)
-    if not idx then return end
-
-    local old_lines = vim.list_slice(last_buf_state, idx[1], idx[1] + idx[2] - 1)
-    local new_lines = vim.list_slice(cur_buf_state, idx[3], idx[3] + idx[4] - 1)
-
-    local diff = {
-      CONFLICT_START,
-      H.concat(old_lines),
-      CONFLICT_SEP,
-      H.concat(new_lines),
-      CONFLICT_END,
-    }
-
-    edit_history:add({ H.concat(diff), idx })
+H.debounce                 = function(delay, fn)
+  local timer = nil
+  return function(...)
+    local args = { ... }
+    if timer then
+      timer:stop()
+      timer:close()
+    end
+    timer = vim.uv.new_timer()
+    assert(timer, "Failed to create timer")
+    timer:start(delay, 0, vim.schedule_wrap(function()
+      fn(unpack(args))
+    end))
   end
+end
+
+local CONFLICT_START       = "<<<<<<<< HEAD"
+local CONFLICT_SEP         = "========"
+local CONFLICT_END         = ">>>>>>>>"
+
+local cbuf                 = require("util.cbuf")
+local last_buf_state       = nil
+local edit_history         = cbuf:new(3)
+
+H.debounced_update_history = H.debounce(1000, function(cur_buf_state)
+  local idx = vim.diff(H.concat(last_buf_state), H.concat(cur_buf_state), { result_type = "indices" })[1]
+  logger.trace("Indices:", idx)
+  if not idx then return end
+
+  local old_lines = vim.list_slice(last_buf_state, idx[1], idx[1] + idx[2] - 1)
+  local new_lines = vim.list_slice(cur_buf_state, idx[3], idx[3] + idx[4] - 1)
+
+
+  local diff = {
+    CONFLICT_START,
+    H.concat(old_lines),
+    CONFLICT_SEP,
+    H.concat(new_lines),
+    CONFLICT_END .. "\n",
+  }
+
+  -- edit_history:add({ H.concat(diff), idx })
+  edit_history:add(vim.diff(H.concat(last_buf_state), H.concat(cur_buf_state)) .. "\n")
+  last_buf_state = nil
+end)
+
+au({ "TextChanged", "TextChangedI" }, "*", function(ev)
+  local cur_buf_state = H.get_lines()
+  if not last_buf_state then
+    last_buf_state = cur_buf_state
+  end
+
+  H.debounced_update_history(cur_buf_state)
 end)
 
 H.ternary = function(cond, T, F)
@@ -84,7 +104,7 @@ end
 H.get_lines = function(start, end_)
   start = start or 0
   end_ = end_ or -1
-  return vim.api.nvim_buf_get_lines(0, start, end_, true)
+  return vim.api.nvim_buf_get_lines(0, start, end_, false)
 end
 
 H.concat = function(lines, i, j)
@@ -144,8 +164,8 @@ end
 
 H.trigger = function()
   -- if not H.is_ready() then return end
-  local prompt, suffix = H.get_context()
-  H.send_request(prompt, suffix)
+  -- local prompt, suffix = H.get_context()
+  H.send_request()
 end
 
 ---@param row integer
@@ -183,14 +203,14 @@ H.presets.codestral = {
     -- authorization = os.getenv("CODESTRAL_API_KEY"),
     authorization = "Bearer " .. os.getenv("MISTRAL_API_KEY"),
   },
-  handle_prompt = function()
-    local prefix, suffix = H.get_context()
+  handle_prompt = function(prefix, suffix)
     return {
       model = "codestral-latest",
       prompt = prefix,
       suffix = suffix,
-      stop = { "\n>>", ">>>>" },
-      max_tokens = 128,
+      temperature = 0.1,
+      stop = { "\n>>", ">>>>", "\n\n" },
+      max_tokens = 196,
     }
   end,
   handle_response = function(data)
@@ -200,7 +220,8 @@ H.presets.codestral = {
     local cost = (data.usage.prompt_tokens * input_cost + data.usage.completion_tokens * output_cost) / 1000000
     logger.info("Session tokens: ", vim.g.total_tokens)
     logger.info("Session cost: $", string.format("%.6f", cost))
-    return data.choices[1].message.content
+
+    return data.choices[1].message.content:gsub("█", "")
   end
 }
 H.presets.gemini = {
@@ -251,10 +272,12 @@ H.calc_diff = function(content)
   local start = H.get_extmark(S.suggestion.ext_start)
   local end_ = H.get_extmark(S.suggestion.ext_end)
 
-  local cursor_line = H.get_lines(start[1], end_[1] + 1)[1]
-  local diff = dmp.diff_main(cursor_line, content)
+  logger.trace("Start:", start)
+  logger.trace("End:", end_)
 
-  logger.trace("Cursorline:", cursor_line)
+  local original = H.get_lines(start[1], end_[1] + 1)
+  logger.trace("Original:", original)
+  local diff = dmp.diff_main(H.concat(original), content)
 
   if #diff == 1 and diff[1][1] == 0 then
     H.clear()
@@ -268,118 +291,138 @@ H.calc_diff = function(content)
   return diff
 end
 
-H.display = function(content, diff)
+function H.count(base, pattern)
+  return select(2, string.gsub(base, pattern, ""))
+end
+
+H.display = function(content, diffs)
   if F.mode() ~= "i" then return end
   H.clear()
 
-  local additions = {}
-  local deletions = {}
+  local content_lines = vim.split(content, "\n")
 
-  local cur_line = S.suggestion.line - 1
-  local cur_col = 0
-
-  for i = 1, #diff do
-    local width = #diff[i][2]
-    local lines = vim.split(diff[i][2], "\n", { plain = false })
-    logger.trace("Lines:", lines)
-    if diff[i][1] == 0 then
-      cur_line = cur_line + #lines - 1
-      cur_col = cur_col + width
-    elseif diff[i][1] == 1 then
-      table.insert(additions, { lines[1], cur_line, cur_col })
-    elseif diff[i][1] == -1 then
-      table.insert(deletions, { lines[1], cur_line, cur_col })
+  local n_deletions = 0
+  local n_insertions = 0
+  vim.iter(diffs):each(function(item)
+    logger.trace("Item:", item)
+    if item[1] == -1 then
+      n_deletions = n_deletions + 1
+    elseif item[1] == 1 then
+      n_insertions = n_insertions + 1
     end
-  end
+  end)
+  logger.trace("n_deletions", n_deletions)
+  logger.trace("n_insertions", n_insertions)
 
-  local is_change = #deletions > 0 and #additions > 0
+  local insertions_only = n_deletions == 0 and n_insertions > 0
+  local show_popup      = n_deletions > 0 and n_insertions > 0
 
-  local col_offset = 0
-  for _, deletion in ipairs(deletions) do
-    logger.trace("Deletion:", deletion)
-    local text, line, col = unpack(deletion)
-    col = col + col_offset
-    col_offset = col_offset + #text
-    local ext_id = vim.api.nvim_buf_set_extmark(0, ns_id, line, col, {
-      hl_group = "DiffDeleteBg",
-      end_col = col + #text,
-    })
-    S.suggestion.loc = { line + 1, col + #text + 1 }
-    table.insert(ext_ids, ext_id)
-  end
+  if insertions_only then
+    local cursor = { S.suggestion.line - 1, 0 }
 
-  if is_change then
-    local buf = H.create_buf()
-    S.suggestion.buf_id = buf
-    local bufpos = { S.suggestion.line, 0 }
-    logger.debug("Creating buf:", buf, bufpos)
-    local lines = vim.split(content, "\n")
-    logger.debug("Buf lines:", lines)
+    vim.iter(diffs):each(function(diff)
+      logger.trace("Diff:", diff)
+      local lines = vim.split(diff[2], "\n", { plain = true })
+      if diff[1] == 0 then
+        cursor[1] = cursor[1] + H.count(diff[2], "\n")
+        for _, line in ipairs(lines) do
+          cursor[2] = cursor[2] + #line
+        end
+      elseif diff[1] == 1 then
+        local virt_lines = vim.iter(lines):slice(2, #lines):map(function(line)
+          return { { line, HL_GROUP } }
+        end):totable()
 
-    local width = vim.api.nvim_win_get_width(0)
-    local win_width = F.strdisplaywidth(lines[1])
-    local col, row = 0, -1
-    if win_width < width / 2 then
-      col = F.strdisplaywidth(vim.api.nvim_get_current_line()) + 4
-      row = 0
-    end
+        logger.trace("virt_lines:", virt_lines)
 
-    H.open_win(buf, false, {
-      relative = "win",
-      col = col,
-      row = row,
-      bufpos = bufpos,
-      width = win_width,
-      -- height = #lines,
-      height = 1,
-      style = "minimal",
-      anchor = "SW",
-      border = "none",
-    })
-    H.buf_set_lines(buf, 0, -1, true, { lines[1] })
-    H.buf_set_option(buf, "filetype", vim.bo.filetype)
-
-    col_offset = 0
-    for _, addition in ipairs(additions) do
-      logger.trace("Addition:", addition)
-      local text, line, col = unpack(addition)
-      col = col + col_offset
-      col_offset = col_offset + #text
-      local ext_id = vim.api.nvim_buf_set_extmark(buf, ns_id, line - cur_line, col, {
-        hl_group = "DiffAddBg",
-        end_col = col + #text,
-      })
-      S.suggestion.loc = { line + 1, col + #text + 1 }
-      table.insert(ext_ids, ext_id)
-    end
+        local ext_id = vim.api.nvim_buf_set_extmark(0, ns_id, cursor[1], cursor[2], {
+          virt_text     = { { lines[1], HL_GROUP } },
+          virt_lines    = virt_lines,
+          virt_text_pos = "inline",
+        })
+        table.insert(ext_ids, ext_id)
+      end
+    end)
     return
   end
 
-  logger.debug("Setting extmarks")
-  for _, addition in ipairs(additions) do
-    local text, line, col = unpack(addition)
-    local ext_id = H.set_extmark(line, col, {
-      virt_text = { { text, "Comment" } },
-      virt_text_pos = "inline",
-    })
-    S.suggestion.loc = { line + 1, col + #text + 1 }
-    table.insert(ext_ids, ext_id)
-  end
-end
+  local cursor = { S.suggestion.line - 1, 0 }
+  vim.iter(diffs):each(function(diff)
+    -- advance cursor by this diff, placing a delete‐highlight extmark on deletions
+    local kind, text = diff[1], diff[2]
+    local start_row, start_col = cursor[1], cursor[2]
 
-H.debounce = function(delay, fn)
-  local timer = nil
-  return function(...)
-    local args = { ... }
-    if timer then
-      timer:stop()
-      timer:close()
+    -- walk all the lines in text to update cursor
+    local nl_count = H.count(text, "\n")
+    if nl_count > 0 then
+      -- if text contains newlines, the last line's length is the new column
+      local parts = vim.split(text, "\n", { plain = true })
+      cursor[1] = cursor[1] + nl_count
+      cursor[2] = #parts[#parts]
+    else
+      -- single‐line chunk: just advance by the length
+      cursor[2] = cursor[2] + #text
     end
-    timer = vim.uv.new_timer()
-    assert(timer, "Failed to create timer")
-    timer:start(delay, 0, vim.schedule_wrap(function()
-      fn(unpack(args))
-    end))
+
+    if kind == -1 then
+      -- for deletions, mark from the start to the updated cursor
+      local ext_id = vim.api.nvim_buf_set_extmark(0, ns_id, start_row, start_col, {
+        hl_group = "DiffDeleteBg",
+        end_row  = cursor[1],
+        end_col  = cursor[2],
+        strict   = false,
+      })
+      table.insert(ext_ids, ext_id)
+    end
+  end)
+  S.suggestion.loc = { cursor[1], cursor[2] }
+
+  if show_popup then
+    local buf = vim.api.nvim_create_buf(true, true)
+    S.suggestion.buf_id = buf
+    H.buf_set_option(buf, "filetype", vim.bo.filetype)
+    vim.api.nvim_open_win(buf, false, {
+      relative = "win",
+      col      = #vim.api.nvim_get_current_line() + 4,
+      row      = -1,
+      bufpos   = { S.suggestion.line, 0 },
+      width    = 40,
+      height   = #content_lines,
+      style    = "minimal",
+      anchor   = "NW",
+      border   = "none",
+    })
+    vim.api.nvim_buf_set_lines(buf, 0, -1, false, vim.split(content, "\n"))
+
+    cursor = { 0, 0 }
+    vim.iter(diffs):each(function(diff)
+      -- advance cursor by this diff, placing a delete‐highlight extmark on deletions
+      local kind, text = diff[1], diff[2]
+      local start_row, start_col = cursor[1], cursor[2]
+
+      -- walk all the lines in text to update cursor
+      local nl_count = H.count(text, "\n")
+      if nl_count > 0 then
+        -- if text contains newlines, the last line's length is the new column
+        local parts = vim.split(text, "\n", { plain = true })
+        cursor[1] = cursor[1] + nl_count
+        cursor[2] = #parts[#parts]
+      else
+        -- single‐line chunk: just advance by the length
+        cursor[2] = cursor[2] + #text
+      end
+
+      if kind == 1 then
+        -- for deletions, mark from the start to the updated cursor
+        local ext_id = vim.api.nvim_buf_set_extmark(buf, ns_id, start_row, start_col, {
+          hl_group = "DiffAddBg",
+          end_row  = cursor[1],
+          end_col  = cursor[2],
+          strict   = false,
+        })
+        table.insert(ext_ids, ext_id)
+      end
+    end)
   end
 end
 
@@ -388,32 +431,11 @@ H.send_request = function(prompt, suffix)
   H.trigger_event()
   cache.dirty = true
 
-  S.suggestion.ext_start = H.set_extmark(S.suggestion.line - 1, 0, {
-    id = S.suggestion.ext_start or 99,
-    right_gravity = false,
-  })
-  S.suggestion.ext_end = H.set_extmark(S.suggestion.line - 1, #vim.api.nvim_get_current_line(), {
-    id = S.suggestion.ext_end or 100,
-  })
-  local id = H.set_extmark(S.suggestion.line - 1, 0, {
-    end_row = S.suggestion.line - 1,
-    end_col = #vim.api.nvim_get_current_line(),
-    -- hl_group = "Underlined",
-  })
-  table.insert(ext_ids, id)
-
-  logger.debug("Creating start:", S.suggestion.ext_start)
-  logger.debug("Creating end:", S.suggestion.ext_end)
-
   H.request(prompt, H.presets.codestral, function(content)
     logger.debug("Content:", content)
-    local lines = vim.split(content, "\n", { plain = true, trimempty = true })
-    logger.debug("Lines:", lines)
-    content = lines[1]
-
-    cache.output = content
-    cache.display = content
+    content = F.trim(content, "\n")
     local diff = H.calc_diff(content)
+    logger.debug("Diff:", diff)
     if not diff then
       logger.debug("No diff found")
       return
@@ -433,12 +455,13 @@ end
 H.request = function(prompt, provider, callback)
   logger.debug("Sending request...", prompt, provider)
   provider = provider or {}
+  local prefix, suffix = H.get_context()
 
   curl.request({
     method = "post",
     url = provider.url,
     headers = provider.headers,
-    body = vim.json.encode(provider.handle_prompt(prompt)),
+    body = vim.json.encode(provider.handle_prompt(prefix, suffix)),
     callback = function(response)
       logger.debug("Response:", response)
       vim.schedule(function()
@@ -468,42 +491,74 @@ H.request = function(prompt, provider, callback)
 end
 
 H.comment = function(text)
-  return vim.bo.commentstring:format(text) .. "\n"
+  return vim.bo.commentstring:format(text)
+end
+
+math.clamp = function(value, min, max)
+  return math.min(math.max(value, min), max)
 end
 
 H.get_context = function(max_lines)
-  max_lines = max_lines or 30
+  max_lines = max_lines or 4
   local max_editable = 0
-  local all_lines = H.get_lines(0, -1)
+  local all_lines = H.get_lines()
   local pos = F.getpos(".")
   local row, col = pos[2], pos[3]
-  S.suggestion.line = row - max_editable
+  S.suggestion.line = row
 
-  for _, edit in ipairs(edit_history:get_all()) do
-    local text, idx = edit[1], edit[2]
-    all_lines[idx[1]] = text
-    for i = idx[3] + 1, idx[3] + idx[4] - 1 do
-      all_lines[i] = ""
-    end
-  end
+  local edit_range = {
+    start = {
+      row = math.clamp(row, 0, #all_lines),
+      col = 0,
+    },
+    end_ = {
+      row = math.clamp(row + max_editable, 0, #all_lines),
+      col = 0,
+    }
+  }
 
-  local lines_before = vim.list_slice(all_lines, row - max_lines, row - max_editable - 1)
-  local lines_after = vim.list_slice(all_lines, row + max_editable + 1, row + max_lines)
-  local lines_editable = vim.list_slice(all_lines, row - max_editable, row + max_editable)
+  edit_range.end_.col = #all_lines[edit_range.end_.row]
+
+  logger.trace("edit_range", edit_range)
+
+  S.suggestion.ext_start = H.set_extmark(edit_range.start.row - 1, edit_range.start.col, {
+    id = S.suggestion.ext_start or 99,
+    right_gravity = false,
+  })
+  S.suggestion.ext_end = H.set_extmark(edit_range.end_.row - 1, edit_range.end_.col, {
+    id = S.suggestion.ext_end or 100,
+  })
+  local id = H.set_extmark(edit_range.start.row - 1, edit_range.start.col, {
+    end_row = edit_range.end_.row - 1,
+    end_col = edit_range.end_.col,
+    -- hl_group = "Visual",
+  })
+  table.insert(ext_ids, id)
+
+  local lines_before = vim.list_slice(all_lines, row - max_lines, edit_range.start.row - 1)
+  local lines_editable = vim.list_slice(all_lines, edit_range.start.row, edit_range.end_.row)
+  local lines_after = vim.list_slice(all_lines, edit_range.end_.row + 1, row + max_lines)
 
   S.suggestion.prompt = H.concat(lines_editable)
 
-  local prefix = {
-    H.concat(lines_before),
-    "<<<<<<< HEAD",
-    H.concat(lines_editable),
-    "=======\n",
-  }
+  local cursor_line = string.sub(vim.api.nvim_get_current_line(), 1, F.col(".") - 1) ..
+      "█" .. string.sub(vim.api.nvim_get_current_line(), F.col("."))
 
+  -- logger.debug("ts_context: ", ts_context)
+  local prefix = {
+    -- H.concat(edit_history:get_all()),
+    H.concat(lines_before),
+    CONFLICT_START,
+    cursor_line,
+    -- H.concat(lines_editable, 2),
+    CONFLICT_SEP .. "\n",
+  }
   local suffix = {
-    "\n>>>>>>>",
+    "\n" .. CONFLICT_END,
     H.concat(lines_after),
   }
+
+  logger.trace(H.concat(prefix), H.concat(suffix))
 
   return H.concat(prefix), H.concat(suffix)
 end
@@ -520,7 +575,7 @@ H.is_ready = function()
   if F.pumvisible() == 1 then return false end
   if F.reg_recording() ~= "" then return false end
   if require("blink-cmp").is_menu_visible() then return false end
-  if cache.output or cache.dirty then return false end
+  if cache.dirty then return false end
   return true
 end
 
@@ -531,8 +586,8 @@ M.setup = function(opts)
   opts.debounce = opts.debounce or 200
 
   dmp.settings({
-    Match_Threshold = 0.1,
-    Match_Distance = 1000,
+    Match_Threshold = 0.20,
+    Match_Distance = 100,
   })
 
   local hl = vim.api.nvim_get_hl(0, { name = "DiffDelete" })
@@ -579,8 +634,9 @@ M.setup = function(opts)
     local bitap = dmp.match_bitap(query.text, query.pattern, query.loc)
 
     if bitap == -1 then
+      H.clear()
+      S.suggestion.content = nil
       trigger_debounced()
-      logger.debug("No match found")
     end
   end)
 
@@ -588,6 +644,7 @@ M.setup = function(opts)
   logger.info("Initialized")
 end
 
+S.next_edit = false
 M.complete = function()
   if ext_ids and S.suggestion.content and not S.suggestion.available then
     logger.trace(S.suggestion)
@@ -603,8 +660,53 @@ M.complete = function()
     } }, S.suggestion.buf, "utf-8")
     -- H.buf_set_lines(0, F.line(".") - 1, F.line("."), true, vim.split(S.suggestion.content, "\n", { plain = true }))
     H.clear()
-    F.cursor(S.suggestion.loc)
+    -- M.try_next()
+    -- F.cursor(S.suggestion.loc)
   end
+end
+
+M.try_next = function()
+  dmp.settings({
+    Match_Threshold = 0.8,
+    Match_Distance = 1000,
+  })
+
+  if ext_ids and S.suggestion.content and not S.suggestion.available then
+    local lines = H.concat(H.get_lines(F.line(".")))
+    local diffs = vim.iter(S.suggestion.diff):filter(function(diff)
+      if diff[1] == 1 then
+        return false
+      end
+      return diff
+    end):map(function(diff)
+      return diff[2]
+    end):join("")
+
+    logger.debug("Matching:", lines, "vs", diffs)
+    local idx = dmp.match_bitap(lines, string.sub(diffs, 1, 10), 0)
+    if idx == -1 then
+      return
+    end
+
+    logger.debug("Match index:", idx)
+    local match = string.sub(lines, idx, idx + 10)
+    local pos = F.searchpos(match, "W")
+    S.pos = pos
+    logger.debug("Match:", match)
+    logger.debug("Match in:", pos)
+    local ext_id = vim.api.nvim_buf_set_extmark(0, ns_id, pos[1] - 1, 0, {
+      virt_text = { { " TAB ", "LspInlayHint" } },
+      virt_text_pos = "eol",
+      -- virt_text_win_col = 100,
+    })
+    S.next_edit = true
+  end
+end
+
+function M.jump()
+  F.cursor(S.pos[1], 0)
+  H.trigger()
+  S.next_edit = false
 end
 
 return M

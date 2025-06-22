@@ -23,12 +23,14 @@ local path_show = function(buf_id, items, query, opts)
   MiniPick.default_show(buf_id, items, query, { show_icons = true })
   local ns_id = vim.api.nvim_get_namespaces()["MiniPickRanges"]
   for row, item in ipairs(items) do
-    if not item.path then return end
+    if not item.path then
+      return
+    end
     local offset_start = string.find(item.text, "  .*$")
     if offset_start then
       local p = #MiniIcons.get("file", item.path)
       pcall(vim.api.nvim_buf_set_extmark, buf_id, ns_id, row - 1, offset_start + p, {
-        end_col = item.text:len() + p + 1,
+        end_col = vim.fn.strdisplaywidth(item.text) + p + 1,
         hl_group = "Comment",
         hl_mode = "combine",
         priority = 200,
@@ -50,7 +52,7 @@ require("mini.diff").setup({
 })
 require("mini.files").setup({
   mappings = {
-    go_in_plus  = "l",
+    go_in_plus = "l",
     go_out_plus = "h",
   },
   windows = {
@@ -64,7 +66,23 @@ require("mini.files").setup({
 require("mini.hipatterns").setup()
 require("mini.misc").setup()
 require("mini.move").setup()
-require("mini.pairs").setup()
+local open_chars = [[%(%[%{"']]
+local close_chars = [[%)%]%}"']]
+require("mini.pairs").setup({
+  mappings = {
+    ["("] = { neigh_pattern = "[^\\" .. close_chars .. "][^" .. open_chars .. "]" },
+    ["["] = { neigh_pattern = "[^\\" .. close_chars .. "][^" .. open_chars .. "]" },
+    ["{"] = { neigh_pattern = "[^\\" .. close_chars .. "][^" .. open_chars .. "]" },
+
+    [")"] = { neigh_pattern = "[^\\" .. close_chars .. "][^" .. open_chars .. "]" },
+    ["]"] = { neigh_pattern = "[^\\" .. close_chars .. "][^" .. open_chars .. "]" },
+    ["}"] = { neigh_pattern = "[^\\" .. close_chars .. "][^" .. open_chars .. "]" },
+
+    ['"'] = { neigh_pattern = "[^%a\\" .. close_chars .. "][^" .. open_chars .. "]" },
+    ["'"] = { neigh_pattern = "[^%a\\" .. close_chars .. "][^" .. open_chars .. "]" },
+    ["`"] = { neigh_pattern = "[^\\`" .. close_chars .. "][^" .. open_chars .. "]" },
+  },
+})
 require("mini.visits").setup()
 require("mini.extra").setup()
 require("mini.icons").setup()
@@ -77,10 +95,16 @@ require("mini.pick").setup({
   window = {
     config = function()
       return {
-        -- width = vim.o.co,
+        border = "none",
+        col = 0,
+        row = vim.o.lines - 1,
+        height = math.floor(vim.o.lines / 3),
+        width = vim.o.columns,
+        relative = "editor",
       }
     end,
     prompt_caret = "█",
+    prompt_prefix = "> ",
   },
 })
 
@@ -133,9 +157,9 @@ local deps_action = function()
 end
 
 nmap("<Leader>td", deps_action)
-nmap("md",         MiniDiff.toggle_overlay)
-nmap("g/",         MiniPick.builtin.grep_live)
-nmap("g?",         MiniPick.builtin.help)
+nmap("md", MiniDiff.toggle_overlay)
+nmap("g/", MiniPick.builtin.grep_live)
+nmap("g?", MiniPick.builtin.help)
 nmap("gs", function()
   MiniExtra.pickers.lsp({ scope = "document_symbol" }, {
     window = {
@@ -145,7 +169,7 @@ nmap("gs", function()
 end)
 
 nmap("<Leader><Leader>", MiniPick.builtin.resume)
-nmap("<Leader>g",        MiniExtra.pickers.git_files)
+nmap("<Leader>g", MiniExtra.pickers.git_files)
 nmap("<Leader>o", function()
   MiniPick.start({
     source = {
@@ -167,8 +191,8 @@ nmap("<Leader>o", function()
   })
 end)
 nmap("<Leader>h", MiniExtra.pickers.hl_groups)
-nmap("<M-e>",     MiniFiles.open)
-nmap("<M-x>",     MiniExtra.pickers.keymaps)
+nmap("<M-e>", MiniFiles.open)
+nmap("<M-x>", MiniExtra.pickers.keymaps)
 
 nmap("<Leader>f", function()
   MiniPick.start({
@@ -193,7 +217,7 @@ nmap("<Leader>f", function()
 
           for _, v in ipairs(visits) do
             v = vim.fn.fnamemodify(v, ":~:.")
-            if (not hash[v]) then
+            if not hash[v] then
               res[#res + 1] = v
               hash[v] = true
             end

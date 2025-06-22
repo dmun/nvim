@@ -1,10 +1,18 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = "m"
 
-nmap("<Leader>m", "m")
+local function toggle(...)
+  local options = { ... }
+  for _, option in ipairs(options) do
+    vim.o[option] = not vim.o[option]
+  end
+end
+
+nmap("<Leader>m",  "m")
+nmap("d<Tab>", require("util").pcommands)
 
 nmap("<Leader>i", cmd.Inspect)
-imap("<C-x>i", cmd.Inspect)
+imap("<C-x>i",    cmd.Inspect)
 
 require("util.jump")
 nmap("s", bind(Patrick.jump, 2, false))
@@ -14,35 +22,31 @@ xmap("S", bind(Patrick.jump, 2, true))
 omap("s", Patrick.jump_op(2, false, true))
 omap("S", Patrick.jump_op(2, true, true))
 
-nmap("f", bind(Patrick.jump, 1, false))
-nmap("F", bind(Patrick.jump, 1, true))
-xmap("f", bind(Patrick.jump, 1, false))
-xmap("F", bind(Patrick.jump, 1, true))
-omap("f", Patrick.jump_op(1, false))
-omap("F", Patrick.jump_op(1, true))
+-- nmap("f", bind(Patrick.jump, 1, false))
+-- nmap("F", bind(Patrick.jump, 1, true))
+-- xmap("f", bind(Patrick.jump, 1, false))
+-- xmap("F", bind(Patrick.jump, 1, true))
+-- omap("f", Patrick.jump_op(1, false))
+-- omap("F", Patrick.jump_op(1, true))
+--
+-- nmap("t", bind(Patrick.jump, 1, false, true))
+-- nmap("T", bind(Patrick.jump, 1, true, true))
+-- xmap("t", bind(Patrick.jump, 1, false, true))
+-- xmap("T", bind(Patrick.jump, 1, true, true))
+-- omap("t", Patrick.jump_op(1, false, true))
+-- omap("T", Patrick.jump_op(1, true, true))
 
-nmap("t", bind(Patrick.jump, 1, false, true))
-nmap("T", bind(Patrick.jump, 1, true, true))
-xmap("t", bind(Patrick.jump, 1, false, true))
-xmap("T", bind(Patrick.jump, 1, true, true))
-omap("t", Patrick.jump_op(1, false, true))
-omap("T", Patrick.jump_op(1, true, true))
-
-nmap("<C-t>",    cmd.copen)
+nmap("<C-t>", cmd.copen)
 nmap("<M-n>", cmd.cnext)
 nmap("<M-p>", cmd.cprev)
 
 nmap("<M-o>", "<Cmd>!open .<CR>")
 
-map("H", "^")
-map("L", "$")
-map("M",  "%")
+-- nmap("<C-d>", "<C-d>zz")
+-- nmap("<C-u>", "<C-u>zz")
 
-nmap("<C-d>", "<C-d>zz")
-nmap("<C-u>", "<C-u>zz")
-
-nmap("n", "nzz")
-nmap("N", "Nzz")
+-- nmap("n", "nzz")
+-- nmap("N", "Nzz")
 
 map({ "n", "x" }, "k", "v:count == 0 ? 'gk' : 'k'", { expr = true })
 map({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { expr = true })
@@ -52,7 +56,15 @@ map({ "n", "x" }, "<Leader>y", '"+y')
 
 nmap("gr<Space>", ":grep ")
 
-nmap("<Leader>tw", function() vim.o.wrap = not vim.o.wrap end)
+nmap("cow", bind(toggle, "wrap"))
+nmap("con", bind(toggle, "nu", "rnu"))
+nmap("cos", function()
+  if vim.wo.scl ~= "no" then
+    vim.wo.scl = "no"
+  else
+    vim.wo.scl = "yes"
+  end
+end)
 
 nmap("<Esc>", bind(cmd, "nohl | echo"))
 

@@ -112,7 +112,7 @@ end
 local file_fn = function()
   local head = F.expand("%:~:.:h")
   local tail = F.expand("%:.:t")
-  return { head, tail }
+  return { "<" .. head .. ">", tail }
 end
 
 local diff_fn = function() return vim.b.minidiff_summary or {} end
@@ -157,31 +157,33 @@ local build = function(active)
   local normal_hl = active and "StatusLine" or "StatusLineNC"
 
   component(file_fn)
-      :hl(active and "WhiteFg" or "Comment")
       :pad()
       :text(function(file)
         return file[2]
       end)
-      :hl(normal_hl)
       :pad()
       :text(function(file)
-        return file[1] == "." and "" or " " .. file[1] .. "/ "
+        return file[1]
       end)
       :cutoff()
       :draw({ "DirChanged", "BufEnter", "BufLeave" })
 
   component(diff_fn)
-      :hl("GreenFg")
       :text(diff_add_fn)
-      :hl("YellowFg")
       :text(diff_change_fn)
-      :hl("RedFg")
       :text(diff_delete_fn)
       :draw({ "BufWinEnter", "BufWritePost", "TextChanged" })
 
-  component(stab_fn)
+  component()
       :right()
-      :hl("OrangeFg")
+      :pad()
+      :text(function()
+        return "[" .. (vim.g.total_tokens or 0) .. " tokens]"
+      end)
+      :pad()
+      :draw("User", "StabStateChanged")
+
+  component(stab_fn)
       :pad()
       :text(function(stabbing)
         if stabbing then
@@ -192,15 +194,14 @@ local build = function(active)
           return " "
         end
       end)
+      :pad()
       :draw("User", "StabStateChanged")
 
   component(diagnostics_fn)
-      :hl("RedFg")
       :text(function(diagnostics)
         if not diagnostics.error or diagnostics.error == 0 then return "" end
         return " " .. diagnostics.error
       end)
-      :hl("YellowFg")
       :text(function(diagnostics)
         if not diagnostics.warn or diagnostics.warn == 0 then return "" end
         return "  " .. diagnostics.warn
@@ -209,7 +210,6 @@ local build = function(active)
       :draw("DiagnosticChanged")
 
   component()
-      :hl(normal_hl)
       :text(" %l/%L  %c ")
       :draw({ "CursorMoved", "CursorMovedI" })
 
