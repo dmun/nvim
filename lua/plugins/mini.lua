@@ -66,7 +66,7 @@ require("mini.files").setup({
 require("mini.hipatterns").setup()
 require("mini.misc").setup()
 require("mini.move").setup()
-local open_chars = [[%(%[%{"']]
+local open_chars = [[%a%(%[%{"']]
 local close_chars = [[%)%]%}"']]
 require("mini.pairs").setup({
   mappings = {
@@ -237,10 +237,10 @@ nmap("<Leader>f", function()
   })
 end)
 
-nmap("<Leader>e", function()
-  MiniFiles.open(vim.api.nvim_buf_get_name(0))
-  MiniFiles.reveal_cwd()
-end)
+-- nmap("<Leader>e", function()
+--   MiniFiles.open(vim.api.nvim_buf_get_name(0))
+--   MiniFiles.reveal_cwd()
+-- end)
 
 nmap("<Leader>tp", function()
   local path = "~/.local/share/nvim/site/pack/deps/opt/"
