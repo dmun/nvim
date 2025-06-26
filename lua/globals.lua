@@ -1,14 +1,25 @@
-_G.add = MiniDeps.add
+_G.add = function(opts)
+  if type(opts) == "table" then
+    local args = vim.tbl_get(opts, "hooks", "post_checkout")
+    if type(args) == "string" then
+      local shell = vim.env.SHELL or vim.o.sh
+      local command = { shell, "-c", args }
+      opts.hooks.post_checkout = function(data)
+        vim.system(command, { cwd = data.path }):wait()
+      end
+    end
+  end
+  MiniDeps.add(opts)
+end
 _G.now = MiniDeps.now
 _G.later = MiniDeps.later
 
-_G.db = function(...) vim.notify(vim.inspect(...)) end
+_G.db = function(...)
+  vim.notify(vim.inspect(...))
+end
 
 _G.au = function(event, pattern, callback, group, buffer)
-  return vim.api.nvim_create_autocmd(
-    event,
-    { pattern = pattern, callback = callback, buffer = buffer, group = group }
-  )
+  return vim.api.nvim_create_autocmd(event, { pattern = pattern, callback = callback, buffer = buffer, group = group })
 end
 
 _G.bind = function(fn, ...)

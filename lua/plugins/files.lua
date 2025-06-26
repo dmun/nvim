@@ -3,10 +3,11 @@ add({
   depends = { "echasnovski/mini.icons" },
 })
 local oil = require("oil")
-oil.setup()
+oil.setup({
+  preview_win = {},
+  keymaps = {
+    ["<Tab>"] = "actions.select",
+  },
+})
 
-nmap("-", function()
-  oil.open(nil, {
-    horizontal = true,
-  })
-end)
+nmap("-", oil.open)

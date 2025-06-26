@@ -37,3 +37,7 @@ o.acd = true
 o.bri = true
 o.ch = 1
 o.stc = [[%!v:lua.require'util.statuscolumn'.init()]]
+
+vim.diagnostic.config({
+  signs = false,
+})

@@ -44,7 +44,7 @@ function M.pcommands()
     end
   end
 
-  vim.keymap.set("n", "<CR>", function() run_command(false) end, {
+  vim.keymap.set("n", "<Tab>", function() run_command(false) end, {
     buffer = bufnr,
     desc = "Run current line as shell command"
   })
