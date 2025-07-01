@@ -54,6 +54,7 @@ methods.draw = function(self, event, pattern)
     local id = component_id
     au(event, pattern or "*", function()
       component_dirty[id] = true
+      vim.fn["tpipeline#update"]()
     end)
   end
 
@@ -183,7 +184,7 @@ local build = function(active)
       return file[1]
     end)
     :cutoff()
-    :draw({ "DirChanged", "BufEnter", "BufLeave", "BufWritePost" })
+    :draw({ "BufWritePost", "DirChanged", "BufEnter", "BufLeave" })
 
   component(diff_fn)
     :pad()

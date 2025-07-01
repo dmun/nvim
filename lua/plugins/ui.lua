@@ -1,3 +1,7 @@
+vim.g.tpipeline_split = 1
+vim.g.tpipeline_autoembed = 0
+add("vimpostor/vim-tpipeline")
+
 add("jake-stewart/auto-cmdheight.nvim")
 require("auto-cmdheight").setup()
 
@@ -15,7 +19,3 @@ require("mini.notify").setup({
   },
 })
 -- vim.notify = require("mini.notify").make_notify()
-
-vim.g.tpipeline_split = 1
-vim.g.tpipeline_autoembed = 0
-add("vimpostor/vim-tpipeline")
