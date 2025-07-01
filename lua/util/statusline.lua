@@ -115,7 +115,7 @@ end
 
 local file_fn = function()
   local head = F.expand("%:~:.:h")
-  local tail = "%t"
+  local tail = "%t %m"
   return {
     F.empty(head) == 1 and "" or ("(" .. head .. ")"),
     tail,
@@ -174,7 +174,6 @@ local build = function(active)
   local normal_hl = active and "StatusLine" or "StatusLineNC"
 
   component(file_fn)
-    -- :right()
     :pad()
     :text(function(file)
       return file[2]
@@ -184,30 +183,17 @@ local build = function(active)
       return file[1]
     end)
     :cutoff()
-    :draw({ "DirChanged", "BufEnter", "BufLeave" })
+    :draw({ "DirChanged", "BufEnter", "BufLeave", "BufWritePost" })
 
   component(diff_fn)
-    :right()
+    :pad()
     :text(diff_add_fn)
     :text(diff_change_fn)
     :text(diff_delete_fn)
     :draw({ "BufWinEnter", "BufWritePost", "TextChanged" })
 
-  component(stab_fn)
-    :pad()
-    :text(function(stabbing)
-      if stabbing then
-        loader.start()
-        return loader.current_frame
-      else
-        loader.stop()
-        return " "
-      end
-    end)
-    :pad()
-    :draw("User", "StabStateChanged")
-
   component(diagnostics_fn)
+    :right()
     :text(function(diagnostics)
       if not diagnostics.error or diagnostics.error == 0 then
         return ""
