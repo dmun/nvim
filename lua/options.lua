@@ -13,7 +13,7 @@ o.cul = true
 o.culopt = "number"
 o.sms = true
 o.shm = "IcFsCW"
-o.winborder = "double"
+o.winborder = "single"
 o.wop = "fuzzy"
 o.cot = "menuone"
 o.scl = "no"
@@ -35,7 +35,7 @@ o.spk = "screen"
 -- o.fcs = "eob: "
 o.acd = true
 o.bri = true
-o.ch = 1
+o.ch = 0
 o.stc = [[%!v:lua.require'util.statuscolumn'.init()]]
 
 vim.diagnostic.config({

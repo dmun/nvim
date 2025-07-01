@@ -40,7 +40,9 @@ methods.cutoff = function(self)
 end
 
 methods.draw = function(self, event, pattern)
-  if type(event) == "string" then event = { event } end
+  if type(event) == "string" then
+    event = { event }
+  end
   event = vim.tbl_extend("force", {
     "BufEnter",
     "BufLeave",
@@ -89,7 +91,9 @@ end
 
 local grapple_fn = function()
   local ok, grapple = pcall(require, "grapple")
-  if not ok then return "?" end
+  if not ok then
+    return "?"
+  end
   return grapple.name_or_index() or "?"
 end
 
@@ -111,30 +115,43 @@ end
 
 local file_fn = function()
   local head = F.expand("%:~:.:h")
-  local tail = F.expand("%:.:t")
-  return { "<" .. head .. ">", tail }
+  local tail = "%t"
+  return {
+    F.empty(head) == 1 and "" or ("(" .. head .. ")"),
+    tail,
+  }
 end
 
-local diff_fn = function() return vim.b.minidiff_summary or {} end
+local diff_fn = function()
+  return vim.b.minidiff_summary or {}
+end
 
 local diff_add_fn = function(diff)
-  if not diff.add or diff.add == 0 then return "" end
+  if not diff.add or diff.add == 0 then
+    return ""
+  end
   return " +" .. diff.add
 end
 
 local diff_change_fn = function(diff)
-  if not diff.change or diff.change == 0 then return "" end
+  if not diff.change or diff.change == 0 then
+    return ""
+  end
   return " ~" .. diff.change
 end
 
 local diff_delete_fn = function(diff)
-  if not diff.delete or diff.delete == 0 then return "" end
+  if not diff.delete or diff.delete == 0 then
+    return ""
+  end
   return " -" .. diff.delete
 end
 
 local diagnostics_fn = function()
   local diagnostics = vim.diagnostic.get(0)
-  if #diagnostics == 0 then return {} end
+  if #diagnostics == 0 then
+    return {}
+  end
   local counts = vim.iter(diagnostics):fold({}, function(acc, diagnostic)
     acc[diagnostic.severity] = (acc[diagnostic.severity] or 0) + 1
     return acc
@@ -157,61 +174,56 @@ local build = function(active)
   local normal_hl = active and "StatusLine" or "StatusLineNC"
 
   component(file_fn)
-      :pad()
-      :text(function(file)
-        return file[2]
-      end)
-      :pad()
-      :text(function(file)
-        return file[1]
-      end)
-      :cutoff()
-      :draw({ "DirChanged", "BufEnter", "BufLeave" })
+    -- :right()
+    :pad()
+    :text(function(file)
+      return file[2]
+    end)
+    :pad()
+    :text(function(file)
+      return file[1]
+    end)
+    :cutoff()
+    :draw({ "DirChanged", "BufEnter", "BufLeave" })
 
   component(diff_fn)
-      :text(diff_add_fn)
-      :text(diff_change_fn)
-      :text(diff_delete_fn)
-      :draw({ "BufWinEnter", "BufWritePost", "TextChanged" })
-
-  component()
-      :right()
-      :pad()
-      :text(function()
-        return "[" .. (vim.g.total_tokens or 0) .. " tokens]"
-      end)
-      :pad()
-      :draw("User", "StabStateChanged")
+    :right()
+    :text(diff_add_fn)
+    :text(diff_change_fn)
+    :text(diff_delete_fn)
+    :draw({ "BufWinEnter", "BufWritePost", "TextChanged" })
 
   component(stab_fn)
-      :pad()
-      :text(function(stabbing)
-        if stabbing then
-          loader.start()
-          return loader.current_frame
-        else
-          loader.stop()
-          return " "
-        end
-      end)
-      :pad()
-      :draw("User", "StabStateChanged")
+    :pad()
+    :text(function(stabbing)
+      if stabbing then
+        loader.start()
+        return loader.current_frame
+      else
+        loader.stop()
+        return " "
+      end
+    end)
+    :pad()
+    :draw("User", "StabStateChanged")
 
   component(diagnostics_fn)
-      :text(function(diagnostics)
-        if not diagnostics.error or diagnostics.error == 0 then return "" end
-        return " " .. diagnostics.error
-      end)
-      :text(function(diagnostics)
-        if not diagnostics.warn or diagnostics.warn == 0 then return "" end
-        return "  " .. diagnostics.warn
-      end)
-      :pad()
-      :draw("DiagnosticChanged")
+    :text(function(diagnostics)
+      if not diagnostics.error or diagnostics.error == 0 then
+        return ""
+      end
+      return " " .. diagnostics.error
+    end)
+    :text(function(diagnostics)
+      if not diagnostics.warn or diagnostics.warn == 0 then
+        return ""
+      end
+      return "  " .. diagnostics.warn
+    end)
+    :pad()
+    :draw("DiagnosticChanged")
 
-  component()
-      :text(" %l/%L  %c ")
-      :draw({ "CursorMoved", "CursorMovedI" })
+  component():text(" %l/%L  %c "):draw({ "CursorMoved", "CursorMovedI" })
 
   return table.concat(statusline)
 end

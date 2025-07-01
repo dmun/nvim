@@ -15,12 +15,12 @@
 --   },
 -- })
 
-add("supermaven-inc/supermaven-nvim")
-require("supermaven-nvim").setup({
-  keymaps = {
-    accept_suggestion = "<S-Tab>",
-  },
-})
+-- add("supermaven-inc/supermaven-nvim")
+-- require("supermaven-nvim").setup({
+--   keymaps = {
+--     accept_suggestion = "<Tab>",
+--   },
+-- })
 
 -- add("copilotlsp-nvim/copilot-lsp")
 -- vim.g.copilot_nes_debounce = 500

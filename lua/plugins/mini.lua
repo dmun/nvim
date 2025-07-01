@@ -31,7 +31,7 @@ local path_show = function(buf_id, items, query, opts)
       local p = #MiniIcons.get("file", item.path)
       pcall(vim.api.nvim_buf_set_extmark, buf_id, ns_id, row - 1, offset_start + p, {
         end_col = vim.fn.strdisplaywidth(item.text) + p + 1,
-        hl_group = "Comment",
+        hl_group = "NonText",
         hl_mode = "combine",
         priority = 200,
       })
@@ -95,9 +95,9 @@ require("mini.pick").setup({
   window = {
     config = function()
       return {
-        border = "none",
+        border = { "", " ", "", "", "", "", "", "" },
         col = 0,
-        row = vim.o.lines - 1,
+        row = vim.o.lines,
         height = math.floor(vim.o.lines / 3),
         width = vim.o.columns,
         relative = "editor",
@@ -152,7 +152,7 @@ local deps_action = function()
       choose = cmd,
       items = { "DepsUpdate", "DepsClean", "DepsSnapSave" },
     },
-    window = { config = winopts },
+    -- window = { config = winopts },
   })
 end
 
@@ -163,7 +163,7 @@ nmap("g?", MiniPick.builtin.help)
 nmap("gs", function()
   MiniExtra.pickers.lsp({ scope = "document_symbol" }, {
     window = {
-      config = winopts,
+      -- config = winopts,
     },
   })
 end)

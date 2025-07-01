@@ -8,6 +8,8 @@ local function toggle(...)
   end
 end
 
+map("!", "<C-Enter>", "<Esc>:vimgrep // % | copen<CR>")
+
 nmap("<Leader>m",  "m")
 nmap("d<Tab>", require("util").pcommands)
 
@@ -78,7 +80,7 @@ nmap("<C-l>", "<C-w>l")
 -- imap("<C-k>", "<Esc><C-w>k")
 -- imap("<C-l>", "<Esc><C-w>l")
 
-tmap("<C-h>", "<C-\\><C-n><C-w>h")
-tmap("<C-j>", "<C-\\><C-n><C-w>j")
-tmap("<C-k>", "<C-\\><C-n><C-w>k")
-tmap("<C-l>", "<C-\\><C-n><C-w>l")
+-- tmap("<C-h>", "<C-\\><C-n><C-w>h")
+-- tmap("<C-j>", "<C-\\><C-n><C-w>j")
+-- tmap("<C-k>", "<C-\\><C-n><C-w>k")
+-- tmap("<C-l>", "<C-\\><C-n><C-w>l")

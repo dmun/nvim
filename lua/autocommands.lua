@@ -35,7 +35,17 @@ end)
 --   if vim.o.nu then vim.o.rnu = false end
 -- end)
 
-local autosave_filter = { "sql" }
+vim.api.nvim_create_autocmd("BufWritePost", {
+  pattern = "gtk.css",
+  callback = function()
+    local theme = vim.fn.fnamemodify(vim.fn.getcwd(), ":t")
+    vim.fn.system("gsettings set org.gnome.desktop.interface gtk-theme ''")
+    vim.fn.system("gsettings set org.gnome.desktop.interface gtk-theme '" .. theme .. "'")
+    vim.notify("reloaded gtk-theme: " .. theme)
+  end,
+})
+
+local autosave_filter = { "sql", "hyprlang" }
 _G.AUTOSAVE_TIMER = vim.uv.new_timer()
 au({ "InsertLeave", "TextChanged" }, "*", function()
   if vim.bo.buftype == "" and not vim.tbl_contains(autosave_filter, vim.bo.filetype) then

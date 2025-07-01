@@ -25,6 +25,8 @@ end, "nvim_ghost_user_autocommands")
 
 require("conform").setup({
   formatters_by_ft = {
+    jsonc = { "prettier" },
+    css = { "prettier" },
     svelte = { "prettier" },
     javascript = { "prettier" },
     typescript = { "prettier" },
