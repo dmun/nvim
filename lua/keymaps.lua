@@ -8,13 +8,14 @@ local function toggle(...)
   end
 end
 
+nmap("yc", "yygccp", { remap = true })
 map("!", "<C-Enter>", "<Esc>:vimgrep // % | copen<CR>")
 
-nmap("<Leader>m",  "m")
+nmap("<Leader>m", "m")
 nmap("d<Tab>", require("util").pcommands)
 
 nmap("<Leader>i", cmd.Inspect)
-imap("<C-x>i",    cmd.Inspect)
+imap("<C-x>i", cmd.Inspect)
 
 require("util.jump")
 nmap("s", bind(Patrick.jump, 2, false))
@@ -47,8 +48,8 @@ nmap("<M-o>", "<Cmd>!open .<CR>")
 -- nmap("<C-d>", "<C-d>zz")
 -- nmap("<C-u>", "<C-u>zz")
 
--- nmap("n", "nzz")
--- nmap("N", "Nzz")
+nmap("n", "nzz")
+nmap("N", "Nzz")
 
 map({ "n", "x" }, "k", "v:count == 0 ? 'gk' : 'k'", { expr = true })
 map({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { expr = true })

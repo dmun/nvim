@@ -25,12 +25,18 @@ end, "nvim_ghost_user_autocommands")
 
 require("conform").setup({
   formatters_by_ft = {
+    -- qml = { "qmlformat" },
     jsonc = { "prettier" },
     css = { "prettier" },
     svelte = { "prettier" },
     javascript = { "prettier" },
     typescript = { "prettier" },
     lua = { "stylua" },
+  },
+  formatters = {
+    qmlformat = {
+      command = "qmlformat",
+    },
   },
 })
 
@@ -40,6 +46,6 @@ require("quicker").setup({
   },
 })
 
-nmap("<M-f>", function()
+nmap("mf", function()
   require("conform").format({ lsp_format = "fallback" })
 end)

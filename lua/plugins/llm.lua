@@ -3,17 +3,17 @@
 -- nmap("<S-Tab>", stab.complete)
 -- imap("<Tab>",   stab.complete)
 
--- add("zbirenbaum/copilot.lua")
--- require("copilot").setup({
---   suggestion = {
---     enabled = true,
---     auto_trigger = true,
---     debounce = 75,
---     keymap = {
---       accept = "<S-Tab>",
---     },
---   },
--- })
+add("zbirenbaum/copilot.lua")
+require("copilot").setup({
+  suggestion = {
+    enabled = true,
+    auto_trigger = true,
+    debounce = 75,
+    keymap = {
+      accept = "<S-Tab>",
+    },
+  },
+})
 
 -- add("supermaven-inc/supermaven-nvim")
 -- require("supermaven-nvim").setup({

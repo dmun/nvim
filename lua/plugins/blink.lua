@@ -19,6 +19,8 @@ config.keymap = {
 
   ["<C-p>"] = { "select_prev", "fallback" },
   ["<C-n>"] = { "show", "select_next", "fallback" },
+  ["<C-k>"] = { "select_prev", "fallback" },
+  ["<C-j>"] = { "show", "select_next", "fallback" },
 
   ["<C-u>"] = { "scroll_documentation_up", "fallback" },
   ["<C-d>"] = { "scroll_documentation_down", "fallback" },
@@ -36,7 +38,7 @@ config.completion = {
   accept = { dot_repeat = false },
   list = { max_items = 50 },
   menu = {
-    auto_show = false,
+    auto_show = true,
     border = "none",
     max_height = vim.o.ph,
     scrollbar = false,
@@ -138,9 +140,5 @@ config.sources = {
 }
 
 config.fuzzy = { implementation = "prefer_rust_with_warning" }
-
-config.cmdline = {
-  enabled = false,
-}
 
 require("blink.cmp").setup(config)

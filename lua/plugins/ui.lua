@@ -1,6 +1,8 @@
-vim.g.tpipeline_split = 1
-vim.g.tpipeline_autoembed = 0
-add("vimpostor/vim-tpipeline")
+if TMUX then
+  vim.g.tpipeline_split = 1
+  vim.g.tpipeline_autoembed = 0
+  add("vimpostor/vim-tpipeline")
+end
 
 add("jake-stewart/auto-cmdheight.nvim")
 require("auto-cmdheight").setup()

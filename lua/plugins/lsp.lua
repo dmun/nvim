@@ -90,9 +90,15 @@ lsp.config("svelte_ls", {
 })
 lsp.enable("svelte_ls")
 
+lsp.config("qmlls", {
+  cmd = { "qmlls6", "-E" },
+  root_markers = { "shell.qml" },
+})
+lsp.enable("qmlls")
+
 nmap("grr", lsp.buf.references)
-nmap("gD",  lsp.buf.declaration)
-nmap("gd",  lsp.buf.definition)
+nmap("gD", lsp.buf.declaration)
+nmap("gd", lsp.buf.definition)
 
 local locations_to_items = vim.lsp.util.locations_to_items
 vim.lsp.util.locations_to_items = function(locations, offset_encoding)
@@ -102,7 +108,7 @@ vim.lsp.util.locations_to_items = function(locations, offset_encoding)
     local uri = loc.uri or loc.targetUri
     local range = loc.range or loc.targetSelectionRange
     if lines[uri .. range.start.line] then -- already have a location on this line
-      table.remove(locations, loc_i)       -- remove from the original list
+      table.remove(locations, loc_i) -- remove from the original list
     else
       loc_i = loc_i + 1
     end
