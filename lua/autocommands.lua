@@ -24,6 +24,13 @@ end)
 --   end
 -- end)
 
+au("CmdlineEnter", "*", function()
+  vim.o.ch = 1
+end)
+au("CmdlineLeave", "*", function()
+  vim.o.ch = 0
+end)
+
 au("TextYankPost", "*", function()
   vim.hl.on_yank({ higroup = "Visual", timeout = 300 })
 end)

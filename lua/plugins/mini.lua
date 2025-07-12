@@ -67,23 +67,6 @@ require("mini.files").setup({
 require("mini.hipatterns").setup()
 require("mini.misc").setup()
 require("mini.move").setup()
-local open_chars = [[%a%(%[%{"']]
-local close_chars = [[%)%]%}"']]
-require("mini.pairs").setup({
-  mappings = {
-    ["("] = { neigh_pattern = "[^\\" .. close_chars .. "][^" .. open_chars .. "]" },
-    ["["] = { neigh_pattern = "[^\\" .. close_chars .. "][^" .. open_chars .. "]" },
-    ["{"] = { neigh_pattern = "[^\\" .. close_chars .. "][^" .. open_chars .. "]" },
-
-    [")"] = { neigh_pattern = "[^\\" .. close_chars .. "][^" .. open_chars .. "]" },
-    ["]"] = { neigh_pattern = "[^\\" .. close_chars .. "][^" .. open_chars .. "]" },
-    ["}"] = { neigh_pattern = "[^\\" .. close_chars .. "][^" .. open_chars .. "]" },
-
-    ['"'] = { neigh_pattern = "[^%a\\" .. close_chars .. "][^" .. open_chars .. "]" },
-    ["'"] = { neigh_pattern = "[^%a\\" .. close_chars .. "][^" .. open_chars .. "]" },
-    ["`"] = { neigh_pattern = "[^\\`" .. close_chars .. "][^" .. open_chars .. "]" },
-  },
-})
 require("mini.visits").setup()
 require("mini.extra").setup()
 require("mini.icons").setup()
@@ -123,16 +106,7 @@ vim.ui.select = function(items, opts, on_choice)
       w = #item.action.title
     end
   end
-  return MiniPick.ui_select(items, opts, on_choice, {
-    window = {
-      config = {
-        width = w,
-        height = h,
-        row = H + 1,
-        relative = "cursor",
-      },
-    },
-  })
+  return MiniPick.ui_select(items, opts, on_choice)
 end
 
 local winopts = function()
@@ -241,11 +215,6 @@ nmap("<Leader>f", function()
     -- window = { config = winopts },
   })
 end)
-
--- nmap("<Leader>e", function()
---   MiniFiles.open(vim.api.nvim_buf_get_name(0))
---   MiniFiles.reveal_cwd()
--- end)
 
 nmap("<Leader>tp", function()
   local path = "~/.local/share/nvim/site/pack/deps/opt/"

@@ -10,6 +10,9 @@ add("stevearc/quicker.nvim")
 -- nmap("mR", "<Plug>SlimeLineSend")
 -- map("mr", "<Plug>SlimeLineSend")
 
+add('windwp/nvim-autopairs')
+require("nvim-autopairs").setup({})
+
 vim.g.nvim_ghost_autostart = 0
 add("subnut/nvim-ghost.nvim")
 nmap("mg", cmd.GhostTextStart)
