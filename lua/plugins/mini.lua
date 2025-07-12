@@ -20,7 +20,7 @@ local format_path = function(item)
 end
 
 local path_show = function(buf_id, items, query, opts)
-  MiniPick.default_show(buf_id, items, query, { show_icons = true })
+  MiniPick.default_show(buf_id, items, query, { show_icons = false })
   local ns_id = vim.api.nvim_get_namespaces()["MiniPickRanges"]
   for row, item in ipairs(items) do
     if not item.path then
@@ -28,7 +28,8 @@ local path_show = function(buf_id, items, query, opts)
     end
     local offset_start = string.find(item.text, "  .*$")
     if offset_start then
-      local p = #MiniIcons.get("file", item.path)
+      -- local p = #MiniIcons.get("file", item.path)
+      local p = -1
       pcall(vim.api.nvim_buf_set_extmark, buf_id, ns_id, row - 1, offset_start + p, {
         end_col = vim.fn.strdisplaywidth(item.text) + p + 1,
         hl_group = "NonText",
@@ -101,8 +102,8 @@ require("mini.pick").setup({
       return {
         border = { "", " ", "", "", "", "", "", "" },
         col = 0,
-        row = vim.o.lines,
-        height = math.floor(vim.o.lines / 3),
+        row = vim.o.lines - 1 - vim.o.ch,
+        height = math.floor(vim.o.lines - vim.o.lines / 1.615),
         width = vim.o.columns,
         relative = "editor",
       }

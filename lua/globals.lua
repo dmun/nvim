@@ -1,5 +1,3 @@
-_G.TMUX = os.getenv("TMUX")
-
 _G.add = function(opts)
   if type(opts) == "table" then
     local args = vim.tbl_get(opts, "hooks", "post_checkout")

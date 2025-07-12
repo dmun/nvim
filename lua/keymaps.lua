@@ -8,6 +8,7 @@ local function toggle(...)
   end
 end
 
+nmap("yr", [[ggVG"+y<C-o>]])
 nmap("yc", "yygccp", { remap = true })
 map("!", "<C-Enter>", "<Esc>:vimgrep // % | copen<CR>")
 

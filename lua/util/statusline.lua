@@ -54,9 +54,6 @@ methods.draw = function(self, event, pattern)
     local id = component_id
     au(event, pattern or "*", function()
       component_dirty[id] = true
-      if TMUX then
-        vim.fn["tpipeline#update"]()
-      end
     end)
   end
 
