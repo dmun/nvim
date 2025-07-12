@@ -193,7 +193,7 @@ local build = function(active)
     :text(diff_delete_fn)
     :draw({ "BufWinEnter", "BufWritePost", "TextChanged" })
 
-  component():hl("StatusLineHidden"):text(""):draw()
+  component():hl("StatusLineHidden"):text(""):hl("StatusLine"):draw()
 
   component(diagnostics_fn)
     :right()
