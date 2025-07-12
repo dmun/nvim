@@ -40,6 +40,7 @@ methods.cutoff = function(self)
 end
 
 methods.draw = function(self, event, pattern)
+  event = event or {}
   if type(event) == "string" then
     event = { event }
   end
@@ -191,6 +192,8 @@ local build = function(active)
     :text(diff_change_fn)
     :text(diff_delete_fn)
     :draw({ "BufWinEnter", "BufWritePost", "TextChanged" })
+
+  component():hl("StatusLineHidden"):text(""):draw()
 
   component(diagnostics_fn)
     :right()
