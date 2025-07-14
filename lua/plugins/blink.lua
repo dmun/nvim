@@ -93,18 +93,16 @@ config.completion = {
             }
 
             if
-                vim.tbl_contains({ "Method", "Function" }, ctx.kind)
-                and vim.tbl_contains(ts_filetypes, vim.o.filetype)
+              vim.tbl_contains({ "Method", "Function" }, ctx.kind)
+              and vim.tbl_contains(ts_filetypes, vim.o.filetype)
             then
-              local ts =
-                  require("blink.cmp.completion.windows.render.treesitter")
+              local ts = require("blink.cmp.completion.windows.render.treesitter")
               highlights = ts.highlight(ctx)
             else
               table.insert(highlights, {
                 0,
                 #ctx.label,
-                group = ctx.deprecated and "BlinkCmpLabelDeprecated"
-                    or (kind_hl_map[ctx.kind] or "BlinkCmpKind"),
+                group = ctx.deprecated and "BlinkCmpLabelDeprecated" or (kind_hl_map[ctx.kind] or "BlinkCmpKind"),
               })
             end
 
