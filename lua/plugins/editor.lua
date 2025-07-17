@@ -1,3 +1,29 @@
+-- local function _3_()
+-- 	local filter = { "sql" }
+-- 	if (vim.bo.buftype == "") and not vim.tbl_contains(filter, vim.bo.filetype) then
+-- 		if AutosaveTimer then
+-- 			AutosaveTimer:stop()
+-- 		else
+-- 			AutosaveTimer = vim.uv.new_timer()
+-- 		end
+--
+-- 		local function _5_()
+-- 			local function _6_()
+-- 				return vim.cmd("silent! update")
+-- 			end
+-- 			vim.schedule(_6_)
+-- 			AutosaveTimer:stop()
+-- 			AutosaveTimer:close()
+--
+-- 			AutosaveTimer = nil
+-- 		end
+-- 		return AutosaveTimer:start(250, 0, _5_)
+-- 	else
+-- 		return nil
+-- 	end
+-- end
+-- vim.api.nvim_create_autocmd({ "TextChanged", "InsertLeave" }, { callback = _3_, pattern = "*" })
+
 add("tpope/vim-sleuth")
 add("stevearc/conform.nvim")
 add("stevearc/quicker.nvim")
@@ -10,7 +36,9 @@ add("stevearc/quicker.nvim")
 -- nmap("mR", "<Plug>SlimeLineSend")
 -- map("mr", "<Plug>SlimeLineSend")
 
-add('windwp/nvim-autopairs')
+add("eraserhd/parinfer-rust")
+
+add("windwp/nvim-autopairs")
 require("nvim-autopairs").setup({})
 
 vim.g.nvim_ghost_autostart = 0
@@ -31,6 +59,7 @@ require("conform").setup({
     -- qml = { "qmlformat" },
     jsonc = { "prettier" },
     css = { "prettier" },
+    fennel = { "fnlfmt" },
     svelte = { "prettier" },
     javascript = { "prettier" },
     typescript = { "prettier" },

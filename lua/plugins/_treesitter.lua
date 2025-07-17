@@ -16,7 +16,7 @@ require("nvim-treesitter.configs").setup({
   sync_install = false,
   auto_install = true,
   ignore_install = {},
-  indent = { enable = false },
+  indent = { enable = true },
   highlight = {
     enable = true,
     additional_vim_regex_highlighting = false,

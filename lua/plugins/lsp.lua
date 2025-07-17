@@ -96,6 +96,18 @@ lsp.config("qmlls", {
 })
 lsp.enable("qmlls")
 
+lsp.config("fennel_ls", {
+  cmd = { "fennel-ls" },
+  settings = {
+    Fnl = {
+      libraries = {
+        nvim = true,
+      },
+    },
+  },
+})
+-- lsp.enable("fennel_ls")
+
 nmap("grr", lsp.buf.references)
 nmap("gD", lsp.buf.declaration)
 nmap("gd", lsp.buf.definition)
