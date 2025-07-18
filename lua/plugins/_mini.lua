@@ -64,9 +64,7 @@ require("mini.files").setup({
     preview = false,
   },
 })
-require("mini.hipatterns").setup()
 require("mini.misc").setup()
-require("mini.move").setup()
 require("mini.visits").setup()
 require("mini.extra").setup()
 require("mini.icons").setup()
@@ -214,9 +212,4 @@ nmap("<Leader>f", function()
     },
     -- window = { config = winopts },
   })
-end)
-
-nmap("<Leader>tp", function()
-  local path = "~/.local/share/nvim/site/pack/deps/opt/"
-  MiniFiles.open(path)
 end)

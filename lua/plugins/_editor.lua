@@ -1,29 +1,3 @@
--- local function _3_()
--- 	local filter = { "sql" }
--- 	if (vim.bo.buftype == "") and not vim.tbl_contains(filter, vim.bo.filetype) then
--- 		if AutosaveTimer then
--- 			AutosaveTimer:stop()
--- 		else
--- 			AutosaveTimer = vim.uv.new_timer()
--- 		end
---
--- 		local function _5_()
--- 			local function _6_()
--- 				return vim.cmd("silent! update")
--- 			end
--- 			vim.schedule(_6_)
--- 			AutosaveTimer:stop()
--- 			AutosaveTimer:close()
---
--- 			AutosaveTimer = nil
--- 		end
--- 		return AutosaveTimer:start(250, 0, _5_)
--- 	else
--- 		return nil
--- 	end
--- end
--- vim.api.nvim_create_autocmd({ "TextChanged", "InsertLeave" }, { callback = _3_, pattern = "*" })
-
 add("tpope/vim-sleuth")
 add("stevearc/conform.nvim")
 add("stevearc/quicker.nvim")

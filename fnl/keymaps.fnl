@@ -7,6 +7,8 @@
            (each [_ option (ipairs options)]
              (set (. vim.o option) (not (. vim.o option)))))))
 
+(map :K #(vim.cmd.help (vim.fn.expand :<cword>)))
+
 (nmap :yr "ggVG\"+y<C-o>")
 (nmap :yc :yygccp {:remap true})
 (map "!" :<C-Enter> "<Esc>:vimgrep // % | copen<CR>")

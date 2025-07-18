@@ -3,6 +3,20 @@
 (add {:source :dmun/boomer.nvim :depends [:rktjmp/lush.nvim]})
 (vim.cmd.color :boomer)
 
+(set vim.g.conjure#mapping#doc_word :gk)
+(set vim.g.conjure#filetypes [:clojure
+                              ; :fennel
+                              :janet
+                              :hy
+                              :julia
+                              :racket
+                              :scheme
+                              :lua
+                              :lisp
+                              :python
+                              :rust
+                              :sql])
+
 (fn _G.Fd [pattern]
   (vim.fn.systemlist (.. "fd --color=never --full-path --type file --hidden "
                          "--exclude='.git' --exclude='deps' '" pattern "'")))
@@ -20,7 +34,7 @@
 (set o.culopt :number)
 (set o.sms true)
 (set o.shm :IcFsCW)
-(set o.winborder :none)
+(set o.winborder :solid)
 (set o.cot :menuone)
 (set o.scl :no)
 (set o.swf false)
