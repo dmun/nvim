@@ -3,7 +3,6 @@
 
 (add :Olical/conjure)
 (map :me vim.cmd.ConjureEval)
-(map :- vim.cmd.Oil)
 
 (now :options
      :keymaps

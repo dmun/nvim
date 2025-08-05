@@ -1,6 +1,6 @@
 (add {:source :saghen/blink.cmp
       :depends [:rafamadriz/friendly-snippets :folke/lazydev.nvim]
-      :checkout :v1.4.1})
+      :checkout :v1.6.0})
 
 (local kind_hl_map {:Method "@function.method"
                     :Variable "@variable"

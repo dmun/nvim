@@ -73,16 +73,16 @@
 (let [pick (require :mini.pick)
       extra (require :mini.extra)]
   (pick.setup {:options {:use_cache true}
-               :mappings {:move_down :<C-j> :move_up :<C-k>}
+               ; :mappings {:move_down :<C-j> :move_up :<C-k>}
                :window {:prompt_caret "█"
                         :prompt_prefix ">"
-                        :config {:relative :editor
-                                 :border ["" " " "" "" "" "" "" ""]
-                                 :col 0
-                                 :row (- vim.o.lines vim.o.ch 1)
-                                 :width vim.o.columns
-                                 :height (math.floor (- vim.o.lines
-                                                        (/ vim.o.lines 1.615)))}}})
+                        :config #{:relative :editor
+                                  :border ["" " " "" "" "" "" "" ""]
+                                  :col 0
+                                  :row (- vim.o.lines vim.o.ch 1)
+                                  :width vim.o.columns
+                                  :height (math.floor (- vim.o.lines
+                                                         (/ vim.o.lines 1.615)))}}})
   (set vim.ui.select pick.ui_select)
   (nmap :g/ pick.builtin.grep_live)
   (nmap :g? pick.builtin.help)

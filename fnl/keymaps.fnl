@@ -8,6 +8,8 @@
              (set (. vim.o option) (not (. vim.o option)))))))
 
 (map :K #(vim.cmd.help (vim.fn.expand :<cword>)))
+(imap :jk :<Esc>)
+(imap :kj :<Esc>)
 
 (nmap :yr "ggVG\"+y<C-o>")
 (nmap :yc :yygccp {:remap true})
