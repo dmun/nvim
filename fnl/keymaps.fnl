@@ -1,5 +1,5 @@
 (set vim.g.mapleader " ")
-(set vim.g.maplocalleader :m)
+(set vim.g.maplocalleader " m")
 
 (local toggle
        (fn [...]
@@ -7,7 +7,10 @@
            (each [_ option (ipairs options)]
              (set (. vim.o option) (not (. vim.o option)))))))
 
-(map :K #(vim.cmd.help (vim.fn.expand :<cword>)))
+(nmap "<C-;>" :gcc {:remap true})
+(xmap "<C-;>" :gc {:remap true})
+
+(nmap :K #(vim.cmd.help (vim.fn.expand :<cword>)))
 (imap :jk :<Esc>)
 (imap :kj :<Esc>)
 

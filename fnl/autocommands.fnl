@@ -41,3 +41,6 @@
        (vim.fn.system (.. basecmd "'" theme "'"))
        (vim.notify (.. "reloaded gtk-theme: " theme))))
 
+(au [:BufRead] "*" #(when (not= vim.bo.buftype "")
+                      (nmap :q :<C-w>q)))
+

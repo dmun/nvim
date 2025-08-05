@@ -27,5 +27,5 @@
                         :javascript [:prettier]
                         :typescript [:prettier]}]
   (conform.setup {: formatters_by_ft : formatters})
-  (map :mf #(conform.format {:lsp_format :fallback})))
+  (map :<LocalLeader>f #(conform.format {:lsp_format :fallback})))
 

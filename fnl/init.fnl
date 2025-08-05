@@ -1,9 +1,6 @@
 (require :globals)
 (import-macros {: now : later} :macros)
 
-(add :Olical/conjure)
-(map :me vim.cmd.ConjureEval)
-
 (now :options
      :keymaps
      :plugins.ui)
@@ -14,6 +11,7 @@
        :plugins.mini
        :plugins.files
        :plugins.blink
+       :plugins.repl
        :plugins.lsp
        :plugins.llm
        :plugins.editor

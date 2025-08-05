@@ -75,7 +75,7 @@
   (pick.setup {:options {:use_cache true}
                ; :mappings {:move_down :<C-j> :move_up :<C-k>}
                :window {:prompt_caret "█"
-                        :prompt_prefix ">"
+                        :prompt_prefix "> "
                         :config #{:relative :editor
                                   :border ["" " " "" "" "" "" "" ""]
                                   :col 0

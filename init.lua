@@ -27,7 +27,7 @@ local function ensure_installed(plugin, branch)
   end
 end
 
-ensure_installed("echasnovski/mini.nvim", "stable")
+ensure_installed("echasnovski/mini.nvim", "main")
 ensure_installed("rktjmp/hotpot.nvim", "v0.14.8")
 
 require("hotpot").setup({
@@ -45,7 +45,7 @@ require("hotpot").setup({
 })
 
 require("mini.deps").setup({ path = { package = path_package } })
-MiniDeps.add({ source = "echasnovski/mini.nvim", checkout = "stable" })
+MiniDeps.add({ source = "echasnovski/mini.nvim" })
 MiniDeps.add({ source = "rktjmp/hotpot.nvim", checkout = "v0.14.8" })
 
 _G.bind = function(fn, ...)
