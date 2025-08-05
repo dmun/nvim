@@ -18,7 +18,7 @@
        (if AutosaveTimer
            (AutosaveTimer:stop)
            (global AutosaveTimer (vim.uv.new_timer)))
-       (AutosaveTimer:start 250 0
+       (AutosaveTimer:start 150 0
                             #(do
                                (vim.schedule #(vim.cmd "silent! update"))
                                (AutosaveTimer:stop)
