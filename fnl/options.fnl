@@ -80,7 +80,7 @@
 (set o.fcs "eob: ")
 (set o.acd true)
 (set o.bri true)
-(set o.ch 1)
+(set o.ch 0)
 (set o.stc "%!v:lua.require'util.statuscolumn'.init()")
 
 (vim.diagnostic.config {:signs false})

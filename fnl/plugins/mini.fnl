@@ -88,6 +88,7 @@
   (nmap :g? pick.builtin.help)
   (nmap :<Leader><Leader> pick.builtin.resume)
   (nmap :<Leader>g extra.pickers.git_files)
+  (nmap :<Leader>h extra.pickers.hl_groups)
   (nmap :<Leader>f #(pick.start file-picker))
   (nmap :gs #(extra.pickers.lsp {:scope :document_symbol}))
   (nmap :<Leader>o
