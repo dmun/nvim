@@ -38,7 +38,7 @@
                        (lmap [:n :x] "=" mc.alignCursors)
                        (lmap [:n :x] :u :u)
                        (lmap [:n :x] :<C-r> :<C-r>)
-                       (lmap :n :<Esc>
+                       (lmap :n :q
                              #(if (not (mc.cursorsEnabled))
                                   (mc.enableCursors)
                                   (mc.clearCursors))))))
