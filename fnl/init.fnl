@@ -15,5 +15,6 @@
        :plugins.lsp
        :plugins.llm
        :plugins.editor
+       :plugins.tex
        :plugins.sql)
 

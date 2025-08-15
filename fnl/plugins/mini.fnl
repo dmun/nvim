@@ -53,7 +53,7 @@
     (each [row item (ipairs items)]
       (when item.path
         (let [offset_start (string.find item.text "  .*$")
-              p -1]
+              p 0]
           (when offset_start
             (pcall vim.api.nvim_buf_set_extmark buf_id ns_id (- row 1)
                    (+ offset_start p)
