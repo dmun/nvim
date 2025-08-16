@@ -175,10 +175,12 @@ local build = function(active)
   local normal_hl = active and "StatusLine" or "StatusLineNC"
 
   component(file_fn)
-    :pad()
+    :pad(2)
+    :hl("StatusLineBold")
     :text(function(file)
       return file[2]
     end)
+    :hl("StatusLine")
     :pad()
     :text(function(file)
       return file[1]
@@ -197,12 +199,14 @@ local build = function(active)
 
   component(diagnostics_fn)
     :right()
+    :hl("RedFg")
     :text(function(diagnostics)
       if not diagnostics.error or diagnostics.error == 0 then
         return ""
       end
       return " " .. diagnostics.error
     end)
+    :hl("YellowFg")
     :text(function(diagnostics)
       if not diagnostics.warn or diagnostics.warn == 0 then
         return ""
@@ -210,6 +214,7 @@ local build = function(active)
       return "  " .. diagnostics.warn
     end)
     :pad()
+    :hl("StatusLine")
     :draw("DiagnosticChanged")
 
   component():text(" %l/%L  %c "):draw({ "CursorMoved", "CursorMovedI" })

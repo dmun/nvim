@@ -1,3 +1,3 @@
 (add :Olical/conjure)
-(nmap :<LocalLeader>e vim.cmd.ConjureEval)
+; (nmap :<LocalLeader>e vim.cmd.ConjureEval)
 
