@@ -78,3 +78,9 @@ au("LspAttach", "*", function(args)
     client.server_capabilities.semanticTokensProvider = nil
   end
 end)
+
+au("BufRead", "*", function()
+  if not vim.tbl_contains({ "", "acwrite" }, vim.bo.buftype) then
+    nmap("q", "<C-w>q", { buffer = true })
+  end
+end)

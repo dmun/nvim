@@ -11,3 +11,4 @@ oil.setup({
 })
 
 nmap("-", oil.open)
+nmap("q", oil.close)
