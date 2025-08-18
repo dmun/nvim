@@ -24,13 +24,15 @@
                            (math.floor (* 255 (. rgb 3))))]
     hex))
 
+(hsluv 0 70 50)
+
 (add {:source :dmun/boomer.nvim :depends [:rktjmp/lush.nvim]})
 (vim.cmd.color :boomer)
-(vim.cmd.hi (.. "@table.key guifg=" (hsluv 250 20 85)))
+(vim.cmd.hi (.. "Cursor guifg=" (hsluv 250 20 85)))
 
 (set vim.g.conjure#mapping#doc_word :gk)
 (set vim.g.conjure#filetypes [:clojure
-                              ; :fennel
+                              :fennel
                               :janet
                               :hy
                               :julia
@@ -80,7 +82,7 @@
 (set o.fcs "eob: ")
 (set o.acd true)
 (set o.bri true)
-(set o.ch 0)
+(set o.ch 1)
 (set o.stc "%!v:lua.require'util.statuscolumn'.init()")
 
 (vim.diagnostic.config {:signs false})

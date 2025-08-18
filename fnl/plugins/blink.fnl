@@ -70,7 +70,7 @@
                          :draw {:treesitter [:lsp]
                                 :columns [[:label]]
                                 :components {:label {: text : highlight}}}}}
-      sources {:default [:lazydev :lsp :path :snippets :buffer]
+      sources {:default [:lazydev :lsp :path :snippets] ; :buffer]
                :per_filetype {:sql [:snippets :dadbod :buffer]}
                :providers {:dadbod {:name :Dadbod
                                     :module :vim_dadbod_completion.blink}

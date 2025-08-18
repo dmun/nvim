@@ -1,5 +1,5 @@
 (set vim.g.mapleader " ")
-(set vim.g.maplocalleader " m")
+(set vim.g.maplocalleader "m")
 
 (local toggle
        (fn [...]

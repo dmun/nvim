@@ -1,7 +1,7 @@
 (import-macros {: au} :macros)
 
-(au :CmdlineEnter "*" #(set vim.o.ch 1))
-(au :CmdlineLeave "*" #(set vim.o.ch 0))
+; (au :CmdlineEnter "*" #(set vim.o.ch 1))
+; (au :CmdlineLeave "*" #(set vim.o.ch 0))
 (au :TextYankPost "*" #(vim.hl.on_yank {:higroup :Search :timeout 200}))
 
 (au :LspAttach "*" (fn [args]
@@ -41,6 +41,7 @@
        (vim.fn.system (.. basecmd "'" theme "'"))
        (vim.notify (.. "reloaded gtk-theme: " theme))))
 
-(au [:BufRead] "*" #(when (not= vim.bo.buftype "")
-                      (nmap :q :<C-w>q)))
+(au [:BufReadPost] "*"
+    #(when (not (vim.tbl_contains ["" :acwrite] vim.bo.buftype))
+       (nmap :q :<C-w>q {:buffer true})))
 
