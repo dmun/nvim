@@ -76,10 +76,6 @@ MiniMisc.setup_restore_cursor()
 
 require("mini.pick").setup({
   options = { use_cache = true },
-  mappings = {
-    move_down = "<C-j>",
-    move_up = "<C-k>",
-  },
   window = {
     config = function()
       return {

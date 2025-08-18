@@ -36,7 +36,7 @@ o.spk = "screen"
 o.fcs = "eob: "
 o.acd = true
 o.bri = true
-o.ch = 0
+o.ch = 1
 o.stc = [[%!v:lua.require'util.statuscolumn'.init()]]
 
 vim.diagnostic.config({
