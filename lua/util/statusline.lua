@@ -1,4 +1,3 @@
-local loader = require("util.animation")
 local F = vim.fn
 local methods = {}
 local statusline = {}

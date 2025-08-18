@@ -1,3 +1,6 @@
+(global setup (fn [plugin opts]
+                (: (require plugin) :setup opts)))
+
 (global add (fn [opts]
               (when (= (type opts) :table)
                 (let [args (vim.tbl_get opts :hooks :post_checkout)]
