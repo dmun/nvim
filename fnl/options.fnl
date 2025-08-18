@@ -1,34 +1,7 @@
 (local o vim.o)
 
-(fn hsluv->rgb [h s l]
-  (let [h (/ h 360)
-        s (/ s 100)
-        l (/ l 99)
-        maxLightness 0.9999999
-        minLightness 1e-07
-        h (% h 1)
-        s (math.min (math.max s 0) 1)
-        l (math.min (math.max l 0) 1)]
-    (let [c (* (- 1 (math.abs (- (* 2 l) 1))) s)
-          x (* c (- 1 (math.abs (- (* 3 h) 1))))
-          m (- l (/ c 2))
-          r (if (< h (/ 1 3)) c x)
-          g (if (< h (/ 2 3)) c (if (< h (/ 1 3)) x 0))
-          b (if (< h (/ 2 3)) x c)]
-      [(+ r m) (+ g m) (+ b m)])))
-
-(fn hsluv [h s l]
-  (let [rgb (hsluv->rgb h s l)
-        hex (string.format "#%02x%02x%02x" (math.floor (* 255 (. rgb 1)))
-                           (math.floor (* 255 (. rgb 2)))
-                           (math.floor (* 255 (. rgb 3))))]
-    hex))
-
-(hsluv 0 70 50)
-
 (add {:source :dmun/boomer.nvim :depends [:rktjmp/lush.nvim]})
 (vim.cmd.color :boomer)
-(vim.cmd.hi (.. "Cursor guifg=" (hsluv 250 20 85)))
 
 (set vim.g.conjure#mapping#doc_word :gk)
 (set vim.g.conjure#filetypes [:clojure

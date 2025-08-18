@@ -90,30 +90,6 @@ local component = function(...)
   return setmetatable(obj, mt)
 end
 
-local grapple_fn = function()
-  local ok, grapple = pcall(require, "grapple")
-  if not ok then
-    return "?"
-  end
-  return grapple.name_or_index() or "?"
-end
-
-local mode_hl = function()
-  local m = vim.fn.mode()
-
-  if m == "n" then
-    return "GreenBg"
-  elseif m == "i" then
-    return "YellowBg"
-  elseif m == "c" then
-    return "RedBg"
-  elseif m == "R" then
-    return "OrangeBg"
-  else
-    return "BlueBg"
-  end
-end
-
 local file_fn = function()
   local head = F.expand("%:~:.:h")
   local tail = "%t %m"
