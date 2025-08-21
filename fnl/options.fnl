@@ -11,10 +11,10 @@
                               :julia
                               :racket
                               :scheme
-                              :lua
+                              ; :lua
                               :lisp
                               :python
-                              :rust
+                              ; :rust
                               :sql])
 
 (fn _G.Fd [pattern]
@@ -26,15 +26,15 @@
 (set o.ttimeoutlen 0)
 (set o.lcs "tab:  ")
 (set o.list true)
-(set o.nu false)
-(set o.rnu false)
+(set o.nu true)
+(set o.rnu true)
 (set o.so 0)
 (set o.gcr "")
 (set o.cul true)
 (set o.culopt :number)
 (set o.sms true)
 (set o.shm :IcFsCW)
-(set o.winborder :solid)
+(set o.winborder :single)
 (set o.cot :menuone)
 (set o.scl :no)
 (set o.swf false)
@@ -59,4 +59,5 @@
 (set o.stc "%!v:lua.require'util.statuscolumn'.init()")
 
 (vim.diagnostic.config {:signs false})
+(set vim.highlight.priorities.semantic_tokens 95)
 

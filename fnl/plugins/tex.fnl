@@ -2,4 +2,4 @@
       :depends [:nvim-treesitter/nvim-treesitter]})
 
 (setup :mdmath {:hide_on_insert false
-                :dynamic_scale 0.67})
+                :dynamic_scale 0.5})

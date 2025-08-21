@@ -6,15 +6,15 @@
                                         :L (gen_ai_spec.line)
                                         :N (gen_ai_spec.number)}}))
 
-(setup :mini.diff {:view {:style :sign}
-                   :mappings {:apply :mg
-                              :reset :mG
-                              :textobject :mg
-                              :goto_first "[c"
-                              :goto_prev "[c"
-                              :goto_next "]c"
-                              :goto_last "]c"}})
-(nmap :md MiniDiff.toggle_overlay)
+; (setup :mini.diff {:view {:style :sign}
+;                    :mappings {:apply :mg
+;                               :reset :mG
+;                               :textobject :mg
+;                               :goto_first "[c"
+;                               :goto_prev "[c"
+;                               :goto_next "]c"
+;                               :goto_last "]c"}})
+; (nmap :md MiniDiff.toggle_overlay)
 
 (setup :mini.files {:mappings {:go_in_plus :l :go_out_plus :h}
                     :windows {:max_number 3
@@ -62,31 +62,31 @@
                                                               :--no-follow
                                                               :--color=never])}})
 
-(let [pick (require :mini.pick)
-      extra (require :mini.extra)]
-  (pick.setup {:options {:use_cache true}
-               ; :mappings {:move_down :<C-j> :move_up :<C-k>}
-               :window {:prompt_caret "█"
-                        :prompt_prefix "> "
-                        :config #{:relative :editor
-                                  :border ["" " " "" "" "" "" "" ""]
-                                  :col 0
-                                  :row (- vim.o.lines vim.o.ch 1)
-                                  :width vim.o.columns
-                                  :height (math.floor (- vim.o.lines
-                                                         (/ vim.o.lines 1.615)))}}})
-  (set vim.ui.select pick.ui_select)
-  (nmap :g/ pick.builtin.grep_live)
-  (nmap :g? pick.builtin.help)
-  (nmap :<Leader><Leader> pick.builtin.resume)
-  (nmap :<Leader>g extra.pickers.git_files)
-  (nmap :<Leader>h extra.pickers.hl_groups)
-  (nmap :<Leader>f #(pick.start file-picker))
-  (nmap :gs #(extra.pickers.lsp {:scope :document_symbol}))
-  (nmap :<Leader>o
-        #(pick.start {:source {:name :Oldfiles
-                               :show show-path
-                               :items #(icollect [_ item (ipairs vim.v.oldfiles)]
-                                         (if (= (vim.fn.filereadable item) 1)
-                                             (format-path item)))}})))
+; (let [pick (require :mini.pick)
+;       extra (require :mini.extra)]
+;   (pick.setup {:options {:use_cache true}
+;                ; :mappings {:move_down :<C-j> :move_up :<C-k>}
+;                :window {:prompt_caret "█"
+;                         :prompt_prefix "> "
+;                         :config #{:relative :editor
+;                                   :border ["" " " "" "" "" "" "" ""]
+;                                   :col 0
+;                                   :row (- vim.o.lines vim.o.ch 1)
+;                                   :width vim.o.columns
+;                                   :height (math.floor (- vim.o.lines
+;                                                          (/ vim.o.lines 1.615)))}}})
+;   (set vim.ui.select pick.ui_select)
+;   (nmap :g/ pick.builtin.grep_live)
+;   (nmap :g? pick.builtin.help)
+;   (nmap :<Leader><Leader> pick.builtin.resume)
+;   (nmap :<Leader>g extra.pickers.git_files)
+;   (nmap :<Leader>h extra.pickers.hl_groups)
+;   (nmap :<Leader>f #(pick.start file-picker))
+;   (nmap :gs #(extra.pickers.lsp {:scope :document_symbol}))
+;   (nmap :<Leader>o
+;         #(pick.start {:source {:name :Oldfiles
+;                                :show show-path
+;                                :items #(icollect [_ item (ipairs vim.v.oldfiles)]
+;                                          (if (= (vim.fn.filereadable item) 1)
+;                                              (format-path item)))}})))
 

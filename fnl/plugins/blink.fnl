@@ -27,7 +27,7 @@
                     :Reference :CmpItemKindReference
                     :Folder :CmpItemKindFolder
                     :Event :CmpItemKindEvent
-                    :Snippet "@character"})
+                    :Snippet "Comment"})
 
 (fn text [ctx]
   (let [paren (ctx.label:find "%(")]
@@ -70,8 +70,11 @@
                          :draw {:treesitter [:lsp]
                                 :columns [[:label]]
                                 :components {:label {: text : highlight}}}}}
-      sources {:default [:lazydev :lsp :path :snippets] ; :buffer]
-               :per_filetype {:sql [:snippets :dadbod :buffer]}
+      sources {:default [:lsp :path :snippets]
+               :min_keyword_length 2
+               :per_filetype {:sql [:dadbod :buffer]
+                              :fennel [:buffer]
+                              :lua [:lazydev]}
                :providers {:dadbod {:name :Dadbod
                                     :module :vim_dadbod_completion.blink}
                            :lazydev {:name :LazyDev

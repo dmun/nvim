@@ -11,6 +11,7 @@
        :plugins.mini
        :plugins.files
        :plugins.blink
+       :plugins.godot
        :plugins.repl
        :plugins.lsp
        :plugins.llm
