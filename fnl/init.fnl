@@ -3,7 +3,8 @@
 
 (now :options
      :keymaps
-     :plugins.ui)
+     :plugins.ui
+     :plugins.beepboop)
 
 (later :autocommands
        :plugins.motion
@@ -11,7 +12,7 @@
        :plugins.mini
        :plugins.files
        :plugins.blink
-       :plugins.godot
+       :plugins.misc
        :plugins.repl
        :plugins.lsp
        :plugins.llm

@@ -11,8 +11,8 @@
 (xmap "<C-;>" :gc {:remap true})
 
 (nmap :K #(vim.cmd.help (vim.fn.expand :<cword>)))
-(imap :jk :<Esc>)
-(imap :kj :<Esc>)
+; (imap :jk :<Esc>)
+; (imap :kj :<Esc>)
 
 (nmap :yr "ggVG\"+y<C-o>")
 (nmap :yc :yygccp {:remap true})
