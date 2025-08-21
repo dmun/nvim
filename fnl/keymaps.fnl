@@ -7,6 +7,8 @@
            (each [_ option (ipairs options)]
              (set (. vim.o option) (not (. vim.o option)))))))
 
+(nmap "g/" (.. ":grep  | copen" (vim.fn.repeat :<Left> 8)))
+
 (nmap "<C-;>" :gcc {:remap true})
 (xmap "<C-;>" :gc {:remap true})
 
@@ -32,17 +34,17 @@
 (omap :s (Patrick.jump_op 2 false true))
 (omap :S (Patrick.jump_op 2 true true))
 
-;; (nmap :f (bind Patrick.jump 1 false))
-;; (nmap :F (bind Patrick.jump 1 true))
-;; (xmap :f (bind Patrick.jump 1 false))
-;; (xmap :F (bind Patrick.jump 1 true))
+;; (nmap :f #(Patrick.jump 1 false))
+;; (nmap :F #(Patrick.jump 1 true))
+;; (xmap :f #(Patrick.jump 1 false))
+;; (xmap :F #(Patrick.jump 1 true))
 ;; (omap :f (Patrick.jump_op 1 false))
 ;; (omap :F (Patrick.jump_op 1 true))
 ;;
-;; (nmap :t (bind Patrick.jump 1 false true))
-;; (nmap :T (bind Patrick.jump 1 true true))
-;; (xmap :t (bind Patrick.jump 1 false true))
-;; (xmap :T (bind Patrick.jump 1 true true))
+;; (nmap :t #(Patrick.jump 1 false true))
+;; (nmap :T #(Patrick.jump 1 true true))
+;; (xmap :t #(Patrick.jump 1 false true))
+;; (xmap :T #(Patrick.jump 1 true true))
 ;; (omap :t (Patrick.jump_op 1 false true))
 ;; (omap :T (Patrick.jump_op 1 true true))
 
@@ -81,14 +83,4 @@
 (nmap :<C-l> :<C-w>l)
 
 (nmap :<Leader>f ":find ")
-
-;; (imap :<C-h> "<Esc><C-w>h")
-;; (imap :<C-j> "<Esc><C-w>j")
-;; (imap :<C-k> "<Esc><C-w>k")
-;; (imap :<C-l> "<Esc><C-w>l")
-
-;; (tmap :<C-h> "<C-\\><C-n><C-w>h")
-;; (tmap :<C-j> "<C-\\><C-n><C-w>j")
-;; (tmap :<C-k> "<C-\\><C-n><C-w>k")
-;; (tmap :<C-l> "<C-\\><C-n><C-w>l")
 

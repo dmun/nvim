@@ -1,5 +1,6 @@
-(global setup (fn [plugin opts]
-                (: (require plugin) :setup opts)))
+(global setup (fn [name opts]
+                (let [plugin (require name)]
+                  (plugin.setup opts))))
 
 (global add (fn [opts]
               (when (= (type opts) :table)

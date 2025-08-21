@@ -34,5 +34,5 @@
                  ; {:auto_command :InsertEnter :sounds amethyst_break}
                  ; {:auto_command :InsertLeave :sounds amethyst_break}
                  ; {:key_map {:mode :n :key_chord :p} :sounds amethyst_cluster_break}]]
-  (beepboop.setup {:audio_player :paplay :max_sounds 20 : sound_map}))
+  (setup :beepboop {:audio_player :paplay :max_sounds 20 : sound_map}))
 

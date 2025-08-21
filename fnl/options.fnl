@@ -21,7 +21,8 @@
   (vim.fn.systemlist (.. "fd --color=never --full-path --type file --hidden "
                          "--exclude='.git' --exclude='deps' '" pattern "'")))
 
-(set vim.o.ffu "v:lua.Fd")
+(set o.ffu "v:lua.Fd")
+(set o.gp "rg --vimgrep --smart-case")
 (set o.sd (.. o.sd ",f1000"))
 (set o.ttimeoutlen 0)
 (set o.lcs "tab:  ")
