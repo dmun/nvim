@@ -1,4 +1,3 @@
-local loader = require("util.animation")
 local F = vim.fn
 local methods = {}
 local statusline = {}
@@ -90,30 +89,6 @@ local component = function(...)
   return setmetatable(obj, mt)
 end
 
-local grapple_fn = function()
-  local ok, grapple = pcall(require, "grapple")
-  if not ok then
-    return "?"
-  end
-  return grapple.name_or_index() or "?"
-end
-
-local mode_hl = function()
-  local m = vim.fn.mode()
-
-  if m == "n" then
-    return "GreenBg"
-  elseif m == "i" then
-    return "YellowBg"
-  elseif m == "c" then
-    return "RedBg"
-  elseif m == "R" then
-    return "OrangeBg"
-  else
-    return "BlueBg"
-  end
-end
-
 local file_fn = function()
   local head = F.expand("%:~:.:h")
   local tail = "%t %m"
@@ -175,10 +150,12 @@ local build = function(active)
   local normal_hl = active and "StatusLine" or "StatusLineNC"
 
   component(file_fn)
-    :pad()
+    :pad(2)
+    :hl("StatusLineBold")
     :text(function(file)
       return file[2]
     end)
+    :hl("StatusLine")
     :pad()
     :text(function(file)
       return file[1]
@@ -197,12 +174,14 @@ local build = function(active)
 
   component(diagnostics_fn)
     :right()
+    :hl("RedFg")
     :text(function(diagnostics)
       if not diagnostics.error or diagnostics.error == 0 then
         return ""
       end
       return " " .. diagnostics.error
     end)
+    :hl("YellowFg")
     :text(function(diagnostics)
       if not diagnostics.warn or diagnostics.warn == 0 then
         return ""
@@ -210,6 +189,7 @@ local build = function(active)
       return "  " .. diagnostics.warn
     end)
     :pad()
+    :hl("StatusLine")
     :draw("DiagnosticChanged")
 
   component():text(" %l/%L  %c "):draw({ "CursorMoved", "CursorMovedI" })
