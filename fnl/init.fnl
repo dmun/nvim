@@ -3,8 +3,7 @@
 
 (now :options
      :keymaps
-     :plugins.ui
-     :plugins.beepboop)
+     :plugins.ui)
 
 (later :autocommands
        :plugins.motion
