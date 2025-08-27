@@ -11,7 +11,7 @@
                              (set client.server_capabilities.semanticTokensProvider
                                   nil))))))
 
-(local filter [:sql :gdscript])
+(local filter [:sql :gdscript :hyprlang])
 (au [:TextChanged :InsertLeave] "*"
     #(when (and (= vim.bo.buftype "")
                 (not (vim.tbl_contains filter vim.bo.filetype)))

@@ -9,7 +9,7 @@
 
 (nmap "g/" (.. ":grep  | copen" (vim.fn.repeat :<Left> 8)))
 
-(nmap "<C-;>" :gcc {:remap true})
+(nmap "<C-;>" :gccj {:remap true})
 (xmap "<C-;>" :gc {:remap true})
 
 (nmap :K #(vim.cmd.help (vim.fn.expand :<cword>)))
