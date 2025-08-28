@@ -44,4 +44,3 @@
 (au [:BufReadPost] "*"
     #(when (not (vim.tbl_contains ["" :acwrite] vim.bo.buftype))
        (nmap :q :<C-w>q {:buffer true})))
-

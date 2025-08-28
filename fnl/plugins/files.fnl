@@ -4,9 +4,6 @@
 
 (let [oil (require :oil)]
   (oil.setup {:preview_win {}
-              :win_options {:signcolumn :yes
-                            :number false
-                            :relativenumber false}
               :keymaps {:<Tab> :actions.select
                         :q :actions.close}})
   (nmap "-" oil.open))
