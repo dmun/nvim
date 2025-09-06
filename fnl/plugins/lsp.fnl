@@ -56,6 +56,8 @@
 (lsp.config :godot {:cmd (vim.lsp.rpc.connect :127.0.0.1 (or (os.getenv :GDScript_Port) 6005))
                     :filetypes [:gdscript]})
 
+(lsp.config :nixd {:cmd [:nixd] :filetypes [:nix]})
+
 (lsp.config :qmlls {:cmd [:qmlls6 :-E] :root_markers [:shell.qml]})
 
 (lsp.enable :lua_ls)
@@ -67,6 +69,7 @@
 (lsp.enable :svelte_ls)
 (lsp.enable :qmlls)
 (lsp.enable :godot)
+(lsp.enable :nixd)
 
 (nmap :grr lsp.buf.references)
 (nmap :gD lsp.buf.declaration)

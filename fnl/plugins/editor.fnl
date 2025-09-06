@@ -21,6 +21,7 @@
       formatters {:qmlformat {:command :qmlformat}}
       formatters_by_ft {:lua [:stylua]
                         :jsonc [:prettier]
+                        :nix [:alejandra]
                         :css [:prettier]
                         :fennel [:fnlfmt]
                         :svelte [:prettier]

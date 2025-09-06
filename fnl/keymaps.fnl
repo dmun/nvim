@@ -7,6 +7,9 @@
            (each [_ option (ipairs options)]
              (set (. vim.o option) (not (. vim.o option)))))))
 
+(imap "<C-n>" "<Down>")
+(imap "<C-p>" "<Up>")
+
 (nmap "g/" (.. ":grep  | copen" (vim.fn.repeat :<Left> 8)))
 
 (nmap "<C-;>" :gccj {:remap true})

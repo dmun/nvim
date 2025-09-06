@@ -29,7 +29,7 @@
 (set o.list true)
 (set o.nu true)
 (set o.rnu true)
-(set o.so 0)
+(set o.so 5)
 (set o.gcr "")
 (set o.cul true)
 (set o.culopt :number)

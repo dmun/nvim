@@ -53,7 +53,7 @@
               :<Tab> [:accept :fallback]
               :<C-c> [:hide :fallback]
               :<C-p> [:select_prev :fallback]
-              :<C-n> [:show :select_next :fallback]
+              :<C-n> [:select_next :fallback]
               :<C-k> [:select_prev :fallback]
               :<C-j> [:show :select_next :fallback]
               :<C-u> [:scroll_documentation_up :fallback]
