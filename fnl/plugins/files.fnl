@@ -8,3 +8,14 @@
                         :q :actions.close}})
   (nmap "-" oil.open))
 
+(add {:source :ibhagwan/fzf-lua})
+(let [fzf (require :fzf-lua)]
+  (fzf.setup {:defaults {:previewer false
+                         :file_icons false}
+              :winopts {:split "belowright new"
+                        :title false}})
+  (nmap :<Leader>f fzf.files)
+  (nmap :<Leader>o fzf.oldfiles)
+  (nmap :<Leader>/ fzf.live_grep)
+  (nmap :<Leader>h fzf.higroups)
+  (nmap :<Leader><Leader> "<Cmd>FzfLua<CR>"))

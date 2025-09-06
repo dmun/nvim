@@ -4,6 +4,8 @@
 ; (au :CmdlineLeave "*" #(set vim.o.ch 0))
 (au :TextYankPost "*" #(vim.hl.on_yank {:higroup :Search :timeout 200}))
 
+(au :Filetype :help #(vim.cmd "wincmd T"))
+
 (au :LspAttach "*" (fn [args]
                      (if (?. args :data :client_id)
                          (let [client (vim.lsp.get_client_by_id args.data.client_id)]
