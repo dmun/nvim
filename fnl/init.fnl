@@ -18,4 +18,3 @@
        :plugins.editor
        :plugins.tex
        :plugins.sql)
-
