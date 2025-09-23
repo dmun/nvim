@@ -15,10 +15,13 @@
 (let [fzf (require :fzf-lua)]
   (fzf.setup {:defaults {:previewer false
                          :file_icons false}
+              ; :hls {:cursorline :Visual}
+              :fzf_colors {"bg+" [:bg :Visual]
+                           "fg+" [:fg :Normal]}
               :winopts {:split "belowright new"
                         :title false}})
   (nmap :<Leader>f fzf.files)
-  (nmap :<Leader>o fzf.oldfiles)
+  (nmap :<Leader>j fzf.oldfiles)
   (nmap :<Leader>/ fzf.live_grep)
-  (nmap :<Leader>h fzf.higroups)
+  (nmap :<Leader>h fzf.highlights)
   (nmap :<Leader><Leader> "<Cmd>FzfLua<CR>"))

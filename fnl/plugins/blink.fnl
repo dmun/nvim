@@ -73,8 +73,8 @@
       sources {:default [:lsp :path :snippets]
                :min_keyword_length 2
                :per_filetype {:sql [:dadbod :buffer]
-                              :fennel [:buffer]
-                              :lua [:lazydev]}
+                              :fennel [:buffer]}
+                              ; :lua [:lazydev]}
                :providers {:dadbod {:name :Dadbod
                                     :module :vim_dadbod_completion.blink}
                            :lazydev {:name :LazyDev

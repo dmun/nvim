@@ -60,8 +60,8 @@
 ;; (nmap :<C-d> "<C-d>zz")
 ;; (nmap :<C-u> "<C-u>zz")
 
-(nmap :n :nzz)
-(nmap :N :Nzz)
+; (nmap :n :nzz)
+; (nmap :N :Nzz)
 
 (map [:n :x] :k "v:count == 0 ? 'gk' : 'k'" {:expr true})
 (map [:n :x] :j "v:count == 0 ? 'gj' : 'j'" {:expr true})

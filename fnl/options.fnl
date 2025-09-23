@@ -30,7 +30,7 @@
 (set o.nu true)
 (set o.rnu true)
 (set o.so 5)
-(set o.gcr "")
+(set o.gcr "a:Cursor-block")
 (set o.cul true)
 (set o.culopt :number)
 (set o.sms true)

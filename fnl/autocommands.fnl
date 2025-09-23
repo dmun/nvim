@@ -46,3 +46,15 @@
 (au [:BufReadPost] "*"
     #(when (not (vim.tbl_contains ["" :acwrite] vim.bo.buftype))
        (nmap :q :<C-w>q {:buffer true})))
+
+(let [gui_fn #(set vim.opt_local.winhl "Normal:MsgArea")]
+    (au [:BufReadPost] "*"
+        #(when (or (not (vim.tbl_contains [""] vim.bo.buftype)))
+           (gui_fn)))
+    (au :FileType [:orgagenda] gui_fn))
+
+(au :FileType [:org :orgagenda :fugitive]
+    (fn []
+      (set vim.opt_local.number false)
+      (set vim.opt_local.conceallevel 3)
+      (set vim.opt_local.relativenumber false)))

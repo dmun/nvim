@@ -6,8 +6,9 @@
 (add :nvim-orgmode/orgmode)
 (let [orgmode (require :orgmode)]
   (orgmode.setup {:org_agenda_files "~/orgfiles/**/*"
-                  :org_default_notes_file "~/orgfiles/refile.org"})
-  (au :FileType :org (fn []
-                       (set vim.opt_local.number false)
-                       (set vim.opt_local.relativenumber false)
-                       (vim.cmd "Org indent_mode"))))
+                  :org_default_notes_file "~/orgfiles/refile.org"
+                  :mappings {:disable_all false
+                             :org {:org_cycle [:<S-Tab>]
+                                   :org_global_cycle false
+                                   :org_todo [:<CR>]}}})
+  (au :FileType [:org :orgagenda] #(vim.cmd "Org indent_mode")))

@@ -91,10 +91,11 @@ end
 
 local file_fn = function()
   local head = F.expand("%:~:.:h")
-  local tail = "%t %m"
+  local not_file = vim.bo.buftype ~= ""
+  local tail = "%t"
   return {
-    F.empty(head) == 1 and "" or ("(" .. head .. ")"),
-    tail,
+    (F.empty(head) == 1 or not_file) and "" or ("(" .. head .. ")"),
+    not_file and vim.bo.filetype or tail,
   }
 end
 
