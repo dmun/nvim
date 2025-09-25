@@ -49,11 +49,11 @@
 
 (let [gui_fn #(set vim.opt_local.winhl "Normal:MsgArea")]
     (au [:BufReadPost] "*"
-        #(when (or (not (vim.tbl_contains [""] vim.bo.buftype)))
+        #(when (or (not (vim.tbl_contains ["" :acwrite] vim.bo.buftype)))
            (gui_fn)))
-    (au :FileType [:orgagenda] gui_fn))
+    (au :FileType [:orgagenda :oil] gui_fn))
 
-(au :FileType [:org :orgagenda :fugitive]
+(au :FileType [:org :orgagenda :fugitive :oil]
     (fn []
       (set vim.opt_local.number false)
       (set vim.opt_local.conceallevel 3)
