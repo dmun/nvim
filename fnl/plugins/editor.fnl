@@ -9,9 +9,9 @@
 (let [paredit (require :nvim-paredit)]
   (paredit.setup {:indent {:enabled true}}))
 
-(add :windwp/nvim-autopairs)
-(let [aup (require :nvim-autopairs)]
-  (aup.setup {}))
+; (add :windwp/nvim-autopairs)
+; (let [aup (require :nvim-autopairs)]
+;   (aup.setup {}))
 
 (set vim.g.nvim_ghost_autostart 0)
 (add :subnut/nvim-ghost.nvim)
