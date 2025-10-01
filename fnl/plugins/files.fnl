@@ -16,7 +16,7 @@
   (fzf.setup {:defaults {:previewer false
                          :file_icons false}
               ; :hls {:cursorline :Visual}
-              :fzf_colors {"bg+" [:bg :Visual]
+              :fzf_colors {"bg+" [:bg :CursorLine]
                            "fg+" [:fg :Normal]}
               :winopts {:split "belowright new"
                         :title false}})
