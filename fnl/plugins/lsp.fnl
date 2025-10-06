@@ -62,7 +62,7 @@
 
 (lsp.enable :lua_ls)
 ; (lsp.enable :ty)
-(lsp.enable :pyrefly)
+; (lsp.enable :pyrefly)
 (lsp.enable :rust-analyzer)
 (lsp.enable :tailwindcss)
 (lsp.enable :ts_ls)

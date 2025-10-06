@@ -63,7 +63,7 @@
       completion {:documentation {:auto_show false}
                   :accept {:dot_repeat false}
                   :list {:max_items 50}
-                  :menu {:auto_show true
+                  :menu {:auto_show false
                          :border :none
                          :max_height vim.o.ph
                          :scrollbar false
