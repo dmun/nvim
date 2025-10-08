@@ -1,7 +1,5 @@
 (import-macros {: au} :macros)
 
-; (au :CmdlineEnter "*" #(set vim.o.ch 1))
-; (au :CmdlineLeave "*" #(set vim.o.ch 0))
 (au :TextYankPost "*" #(vim.hl.on_yank {:higroup :Search :timeout 200}))
 
 (au :Filetype :help #(vim.cmd "wincmd T"))
@@ -36,22 +34,15 @@
        (nmap :<C-w><C-d> #(vim.diagnostic.open_float winopts))
        (nmap :K #(vim.lsp.buf.hover winopts))))
 
-(au :BufWritePost :gtk.css
-    #(let [theme (vim.fn.fnamemodify (vim.fn.getcwd) ":t")
-           basecmd "gsettings set org.gnome.desktop.interface gtk-theme "]
-       (vim.fn.system (.. basecmd "''"))
-       (vim.fn.system (.. basecmd "'" theme "'"))
-       (vim.notify (.. "reloaded gtk-theme: " theme))))
-
 (au [:BufReadPost] "*"
     #(when (not (vim.tbl_contains ["" :acwrite] vim.bo.buftype))
        (nmap :q :<C-w>q {:buffer true})))
 
 (let [gui_fn #(set vim.opt_local.winhl "Normal:MsgArea")]
-    (au [:BufReadPost] "*"
-        #(when (or (not (vim.tbl_contains ["" :acwrite] vim.bo.buftype)))
-           (gui_fn)))
-    (au :FileType [:orgagenda :oil] gui_fn))
+  (au [:BufReadPost] "*" #(when (or (not (vim.tbl_contains ["" :acwrite]
+                                                           vim.bo.buftype)))
+                            (gui_fn)))
+  (au :FileType [:orgagenda :oil] gui_fn))
 
 (au :FileType [:org :orgagenda :fugitive :oil]
     (fn []
