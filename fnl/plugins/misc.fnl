@@ -15,8 +15,7 @@
                                    :org_todo [:<CR>]}}})
   (au :FileType [:org :orgagenda] #(vim.cmd "Org indent_mode")))
 
-(add {:source :saghen/blink.pairs
-      :checkout :v0.3.0
-      :depends [:saghen/blink.download]})
-(let [pairs (require :blink.pairs)]
-  (pairs.setup {}))
+;; GhostText
+(set vim.g.nvim_ghost_autostart 0)
+(add :subnut/nvim-ghost.nvim)
+(map :mg vim.cmd.GhostTextStart)

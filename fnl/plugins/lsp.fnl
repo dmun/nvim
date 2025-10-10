@@ -53,7 +53,9 @@
                         :filetypes [:svelte]
                         :root_markers [:package.json]})
 
-(lsp.config :godot {:cmd (vim.lsp.rpc.connect :127.0.0.1 (or (os.getenv :GDScript_Port) 6005))
+(lsp.config :godot {:cmd (vim.lsp.rpc.connect :127.0.0.1
+                                              (or (os.getenv :GDScript_Port)
+                                                  6005))
                     :filetypes [:gdscript]})
 
 (lsp.config :nixd {:cmd [:nixd] :filetypes [:nix]})
@@ -74,5 +76,3 @@
 (nmap :grr lsp.buf.references)
 (nmap :gD lsp.buf.declaration)
 (nmap :gd lsp.buf.definition)
-
-

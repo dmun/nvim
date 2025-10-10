@@ -2,5 +2,3 @@
 (setup :auto-cmdheight)
 
 (setup :mini.icons)
-(setup :util.statusline)
-

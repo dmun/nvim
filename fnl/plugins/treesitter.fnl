@@ -28,4 +28,3 @@
 (let [tj (require :treesj)]
   (tj.setup {:use_default_keymaps false})
   (nmap :gJ tj.toggle))
-

@@ -1,6 +1,6 @@
 (add {:source :saghen/blink.cmp
       :depends [:rafamadriz/friendly-snippets :folke/lazydev.nvim]
-      :checkout :v1.6.0})
+      :checkout :v1.7.0})
 
 (local kind_hl_map {:Method "@function.method"
                     :Variable "@variable"
@@ -27,7 +27,7 @@
                     :Reference :CmpItemKindReference
                     :Folder :CmpItemKindFolder
                     :Event :CmpItemKindEvent
-                    :Snippet "Comment"})
+                    :Snippet :Comment})
 
 (fn text [ctx]
   (let [paren (ctx.label:find "%(")]
@@ -72,9 +72,8 @@
                                 :components {:label {: text : highlight}}}}}
       sources {:default [:lsp :path :snippets]
                :min_keyword_length 2
-               :per_filetype {:sql [:dadbod :buffer]
-                              :fennel [:buffer]}
-                              ; :lua [:lazydev]}
+               :per_filetype {:sql [:dadbod :buffer] :fennel [:buffer]}
+               ; :lua [:lazydev]}
                :providers {:dadbod {:name :Dadbod
                                     :module :vim_dadbod_completion.blink}
                            :lazydev {:name :LazyDev
@@ -83,4 +82,3 @@
       fuzzy {:implementation :prefer_rust_with_warning}
       blink (require :blink.cmp)]
   (blink.setup {: appearance : keymap : completion : sources : fuzzy}))
-

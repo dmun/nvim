@@ -1,64 +1,50 @@
 (local o vim.o)
 
+;;; Theme
 (add {:source :dmun/boomer.nvim :depends [:rktjmp/lush.nvim]})
 (vim.cmd.color :boomer)
 
-(set vim.g.conjure#mapping#doc_word :gk)
-(set vim.g.conjure#filetypes [:clojure
-                              :fennel
-                              :janet
-                              :hy
-                              :julia
-                              :racket
-                              :scheme
-                              ; :lua
-                              :lisp
-                              :python
-                              ; :rust
-                              :sql])
-
-(fn _G.Fd [pattern]
-  (vim.fn.systemlist (.. "fd --color=never --full-path --type file --hidden "
-                         "--exclude='.git' --exclude='deps' '" pattern "'")))
-
-(set o.ffu "v:lua.Fd")
-(set o.gp "rg --vimgrep --smart-case")
-(set o.sd (.. o.sd ",f1000"))
-(set o.ttimeoutlen 0)
-(set o.lcs "tab:  ")
+;;; UI
+(set o.breakindent true)
+(set o.cmdheight 1)
+(set o.cursorlineopt :number)
+(set o.cursorline true)
+(set o.fillchars "eob: ")
+(set o.guicursor "a:Cursor-block")
+(set o.listchars "tab:  ")
 (set o.list true)
-(set o.nu true)
-(set o.rnu true)
-(set o.so 5)
-(set o.gcr "a:Cursor-block")
-(set o.cul true)
-(set o.culopt :number)
-(set o.sms true)
-(set o.shm :IcFsCW)
+(set o.number true)
+(set o.pumheight 6)
+(set o.relativenumber true)
+(set o.ruler false)
+(set o.scrolloff 5)
+(set o.showcmd false)
+(set o.shortmess :IcFsCW)
+(set o.showmode false)
+(set o.sidescrolloff 4)
+(set o.signcolumn :no)
+(set o.smoothscroll true)
+(set o.splitkeep :screen)
+(set o.statuscolumn "%!v:lua.require'util.statuscolumn'()")
+(set o.statusline " %f %m %r %= %l/%L  %c ")
 (set o.winborder :single)
-(set o.cot :menuone)
-(set o.scl :no)
-(set o.swf false)
-(set o.ignorecase true)
-(set o.scs true)
-(set o.undofile true)
-(set o.et true)
-(set o.ts 4)
-(set o.sw 4)
-(set o.siso 4)
-(set o.si true)
-(set o.smd false)
-(set o.ru false)
-(set o.sc false)
-(set o.ph 6)
 (set o.wrap false)
-(set o.spk :screen)
-(set o.fcs "eob: ")
-(set o.acd true)
-(set o.bri true)
-(set o.ch 1)
-(set o.stc "%!v:lua.require'util.statuscolumn'.init()")
 
+;;; Other
+(set o.grepprg "rg --vimgrep --smart-case")
+(set o.shada (.. o.sd ",f1000"))
+(set o.ttimeoutlen 0)
+(set o.completeopt :menuone)
+(set o.swapfile false)
+(set o.ignorecase true)
+(set o.smartcase true)
+(set o.undofile true)
+(set o.expandtab true)
+(set o.tabstop 4)
+(set o.shiftwidth 4)
+(set o.smartindent true)
+(set o.autochdir true)
+
+;;; Lsp
 (vim.diagnostic.config {:signs false})
 (set vim.highlight.priorities.semantic_tokens 95)
-

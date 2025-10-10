@@ -1,5 +1,5 @@
 (set vim.g.mapleader " ")
-(set vim.g.maplocalleader "m")
+(set vim.g.maplocalleader :m)
 
 (local toggle
        (fn [...]
@@ -7,83 +7,43 @@
            (each [_ option (ipairs options)]
              (set (. vim.o option) (not (. vim.o option)))))))
 
-(imap "<C-n>" "<Down>")
-(imap "<C-p>" "<Up>")
+;;; General
 
-(nmap "g/" (.. ":grep  | copen" (vim.fn.repeat :<Left> 8)))
+(nmap :<Esc> #(cmd "nohl | echo"))
+
+(nmap :K #(vim.cmd.help (vim.fn.expand :<cword>)))
+
+(imap :<C-n> :<Down>)
+(imap :<C-p> :<Up>)
+
+(nmap :<Leader>m :m)
+(nmap :<Leader>i cmd.Inspect)
+
+;; j/k movement when hard-wrapping
+(map [:n :x] :k "v:count == 0 ? 'gk' : 'k'" {:expr true})
+(map [:n :x] :j "v:count == 0 ? 'gj' : 'j'" {:expr true})
 
 (nmap "<C-;>" :gccj {:remap true})
 (xmap "<C-;>" :gc {:remap true})
 
-(nmap :K #(vim.cmd.help (vim.fn.expand :<cword>)))
-; (imap :jk :<Esc>)
-; (imap :kj :<Esc>)
+;;; Files
 
-(nmap :yr "ggVG\"+y<C-o>")
-(nmap :yc :yygccp {:remap true})
+;; Finders
+(nmap :<Leader>f ":find ")
+(nmap :g/ (.. ":grep  | copen" (vim.fn.repeat :<Left> 8)))
 (map "!" :<C-Enter> "<Esc>:vimgrep // % | copen<CR>")
 
-(nmap :<Leader>m :m)
-(nmap :d<Tab> (. (require :util) :pcommands))
+;; Yanking
+(nmap :yr "ggVG\"+y<C-o>")
+(nmap :yc :yygccp {:remap true})
 
-(nmap :<Leader>i cmd.Inspect)
-(imap :<C-x>i cmd.Inspect)
-
-; (require :util.jump)
-; (nmap :s #(Patrick.jump 2 false))
-; (nmap :S #(Patrick.jump 2 true))
-; (xmap :s #(Patrick.jump 2 false))
-; (xmap :S #(Patrick.jump 2 true))
-; (omap :s (Patrick.jump_op 2 false true))
-; (omap :S (Patrick.jump_op 2 true true))
-
-;; (nmap :f #(Patrick.jump 1 false))
-;; (nmap :F #(Patrick.jump 1 true))
-;; (xmap :f #(Patrick.jump 1 false))
-;; (xmap :F #(Patrick.jump 1 true))
-;; (omap :f (Patrick.jump_op 1 false))
-;; (omap :F (Patrick.jump_op 1 true))
-;;
-;; (nmap :t #(Patrick.jump 1 false true))
-;; (nmap :T #(Patrick.jump 1 true true))
-;; (xmap :t #(Patrick.jump 1 false true))
-;; (xmap :T #(Patrick.jump 1 true true))
-;; (omap :t (Patrick.jump_op 1 false true))
-;; (omap :T (Patrick.jump_op 1 true true))
-
-(nmap :<C-t> cmd.copen)
-(nmap :<M-n> cmd.cnext)
-(nmap :<M-p> cmd.cprev)
-
-(nmap :<M-o> "<Cmd>!open .<CR>")
-
-;; (nmap :<C-d> "<C-d>zz")
-;; (nmap :<C-u> "<C-u>zz")
-
-; (nmap :n :nzz)
-; (nmap :N :Nzz)
-
-(map [:n :x] :k "v:count == 0 ? 'gk' : 'k'" {:expr true})
-(map [:n :x] :j "v:count == 0 ? 'gj' : 'j'" {:expr true})
-
+;; Copy to system clipboard
 (map [:n :x] :<Leader>p "\"+p")
 (map [:n :x] :<Leader>y "\"+y")
 
-(nmap :gr<Space> ":grep ")
-
+;; (c)hange (o)ption
 (nmap :cow #(toggle :wrap))
 (nmap :con #(toggle :nu :rnu))
-(nmap :cos (fn []
-             (if (not= vim.wo.scl :no)
-                 (set vim.wo.scl :no)
-                 (set vim.wo.scl :yes))))
-
-(nmap :<Esc> #(cmd "nohl | echo"))
-
-(nmap :<C-h> :<C-w>h)
-(nmap :<C-j> :<C-w>j)
-(nmap :<C-k> :<C-w>k)
-(nmap :<C-l> :<C-w>l)
-
-(nmap :<Leader>f ":find ")
-
+(nmap :cos #(if (not= vim.wo.scl :no)
+                (set vim.wo.scl :no)
+                (set vim.wo.scl :yes)))
