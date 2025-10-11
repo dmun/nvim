@@ -37,4 +37,3 @@
 (global tmap (partial map :t))
 (global omap (fn [lhs rhs]
                (map :o lhs rhs {:expr true})))
-
