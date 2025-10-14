@@ -63,13 +63,14 @@
       completion {:documentation {:auto_show false}
                   :accept {:dot_repeat false}
                   :list {:max_items 50}
-                  :menu {:auto_show false
+                  :menu {:auto_show true
                          :border :none
                          :max_height vim.o.ph
                          :scrollbar false
                          :draw {:treesitter [:lsp]
                                 :columns [[:label]]
-                                :components {:label {: text : highlight}}}}}
+                                :components {:label {: text
+                                                     : highlight}}}}}
       sources {:default [:lsp :path :snippets]
                :min_keyword_length 2
                :per_filetype {:sql [:dadbod :buffer] :fennel [:buffer]}

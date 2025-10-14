@@ -9,7 +9,7 @@
       formatters {:qmlformat {:command :qmlformat}}
       formatters_by_ft {:lua [:stylua]
                         :jsonc [:prettier]
-                        :nix [:alejandra]
+                        :nix [:nixfmt]
                         :css [:prettier]
                         :fennel [:fnlfmt]
                         :svelte [:prettier]
@@ -30,4 +30,9 @@
       :depends [:saghen/blink.download]})
 
 (let [pairs (require :blink.pairs)]
-  (pairs.setup {}))
+  (pairs.setup {})
+  (au :BufReadPost "*"
+      #(if (not (vim.tbl_contains [:tsx] vim.bo.filetype))
+           (set vim.opt_local.winhl
+                (.. "BlinkPairsOrange:Delimiter," "BlinkPairsPurple:Delimiter,"
+                    "BlinkPairsBlue:Delimiter")))))

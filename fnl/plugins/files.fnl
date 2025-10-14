@@ -3,9 +3,9 @@
 ;; Oil
 (add {:source :stevearc/oil.nvim :depends [:echasnovski/mini.icons]})
 (let [oil (require :oil)]
-  (oil.setup {:win_options {:signcolumn "yes:1"
-                            :number false
-                            :relativenumber false}
+  (oil.setup {; :win_options {:signcolumn "yes:1"
+              ;               :number false
+              ;               :relativenumber false
               :preview_win {}
               :keymaps {:<Tab> :actions.select :q :actions.close}})
   (nmap "-" oil.open))

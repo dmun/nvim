@@ -11,6 +11,8 @@
 (setup :lazydev)
 (setup :lazydev {:library {:path "${3rd}/luv/library" :words ["vim%.uv"]}})
 
+;;; Language server configurations
+
 (lsp.config "*" {:root_markers [:.git]})
 
 (lsp.config :lua_ls
@@ -62,6 +64,8 @@
 
 (lsp.config :qmlls {:cmd [:qmlls6 :-E] :root_markers [:shell.qml]})
 
+;;; Enable language servers
+
 (lsp.enable :lua_ls)
 ; (lsp.enable :ty)
 ; (lsp.enable :pyrefly)
@@ -72,6 +76,8 @@
 (lsp.enable :qmlls)
 (lsp.enable :godot)
 (lsp.enable :nixd)
+
+;;; Keymaps
 
 (nmap :grr lsp.buf.references)
 (nmap :gD lsp.buf.declaration)

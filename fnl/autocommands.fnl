@@ -58,7 +58,7 @@
                             (gui_fn))))
 
 ;; Hide line numbers
-(au :FileType [:org :orgagenda :fugitive :oil]
+(au :FileType [:org :orgagenda :fugitive]
     (fn []
       (set vim.opt_local.number false)
       (set vim.opt_local.conceallevel 3)
