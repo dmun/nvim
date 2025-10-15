@@ -2,6 +2,9 @@
                 (let [plugin (require name)]
                   (plugin.setup opts))))
 
+(global now MiniDeps.now)
+(global later MiniDeps.later)
+
 (global add (fn [opts]
               (when (= (type opts) :table)
                 (let [args (vim.tbl_get opts :hooks :post_checkout)]

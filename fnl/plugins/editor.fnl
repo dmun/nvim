@@ -25,12 +25,15 @@
   (paredit.setup {:indent {:enabled true}}))
 
 ;; Pairs
+(add :windwp/nvim-autopairs)
 (add {:source :saghen/blink.pairs
       :checkout :v0.3.0
       :depends [:saghen/blink.download]})
 
-(let [pairs (require :blink.pairs)]
-  (pairs.setup {})
+(let [pairs (require :blink.pairs)
+      aup (require :nvim-autopairs)]
+  (aup.setup {})
+  (pairs.setup {:mappings {:enabled false}})
   (au :BufReadPost "*"
       #(if (not (vim.tbl_contains [:tsx] vim.bo.filetype))
            (set vim.opt_local.winhl

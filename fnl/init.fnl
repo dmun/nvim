@@ -1,20 +1,21 @@
 (require :globals)
-(import-macros {: now : later} :macros)
 
-(now :options
-     :keymaps
-     :plugins.ui)
+(now (fn []
+       (require :options)
+       (require :keymaps)
+       (require :plugins.ui)))
 
-(later :autocommands
-       :plugins.motion
-       :plugins.treesitter
-       :plugins.mini
-       :plugins.files
-       :plugins.blink
-       :plugins.misc
-       :plugins.repl
-       :plugins.lsp
-       :plugins.llm
-       :plugins.editor
-       :plugins.tex
-       :plugins.sql)
+(later (fn []
+         (require :autocommands)
+         (require :plugins.motion)
+         (require :plugins.treesitter)
+         (require :plugins.mini)
+         (require :plugins.files)
+         (require :plugins.blink)
+         (require :plugins.misc)
+         (require :plugins.repl)
+         (require :plugins.lsp)
+         (require :plugins.llm)
+         (require :plugins.editor)
+         (require :plugins.tex)
+         (require :plugins.sql)))

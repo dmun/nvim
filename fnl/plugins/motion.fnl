@@ -59,4 +59,3 @@
   (xmap :<C-x> #(dial :decrement :visual))
   (xmap :g<C-a> #(dial :increment :gvisual))
   (xmap :g<C-x> #(dial :decrement :gvisual)))
-
