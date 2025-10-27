@@ -57,9 +57,9 @@
                                                            vim.bo.buftype)))
                             (gui_fn))))
 
-;; Hide line numbers
-(au :FileType [:org :orgagenda :fugitive]
-    (fn []
-      (set vim.opt_local.number false)
-      (set vim.opt_local.conceallevel 3)
-      (set vim.opt_local.relativenumber false)))
+; ;; Hide line numbers
+; (au :FileType [:org :orgagenda :fugitive]
+;     (fn []
+;       (set vim.opt_local.number false)
+;       (set vim.opt_local.conceallevel 3)
+;       (set vim.opt_local.relativenumber false)))

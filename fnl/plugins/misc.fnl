@@ -5,8 +5,8 @@
 
 (add :nvim-orgmode/orgmode)
 (let [orgmode (require :orgmode)]
-  (orgmode.setup {:org_agenda_files "~/Personal/Notes/**/*"
-                  :org_default_notes_file "~/Personal/Notes/refile.org"
+  (orgmode.setup {:org_agenda_files "~/orgfiles/**/*"
+                  :org_default_notes_file "~/orgfiles/refile.org"
                   :org_startup_folded :showeverything
                   :win_split_mode :horizontal
                   :mappings {:disable_all false
