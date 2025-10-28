@@ -10,7 +10,7 @@
 (set o.cursorlineopt :number)
 (set o.cursorline true)
 (set o.fillchars "eob: ")
-; (set o.guicursor "a:Cursor-block")
+(set o.guicursor "a:Cursor-block")
 (set o.listchars "tab:  ")
 (set o.list true)
 (set o.number true)

@@ -52,7 +52,7 @@
 
 ;; Change background color
 (let [gui_fn #(set vim.opt_local.winhl "Normal:MsgArea")]
-  (au :FileType [:orgagenda :oil] gui_fn)
+  (au :FileType [:orgagenda :oil :vim] gui_fn)
   (au [:BufReadPost] "*" #(when (or (not (vim.tbl_contains ["" :acwrite]
                                                            vim.bo.buftype)))
                             (gui_fn))))
