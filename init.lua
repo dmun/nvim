@@ -1,62 +1,73 @@
-local path_package = vim.fn.stdpath("data") .. "/site/"
-local function ensure_installed(plugin, branch)
-  local user, repo = string.match(plugin, "(.+)/(.+)")
-  local repo_path = path_package .. "pack/deps/start/" .. repo
-  if not (vim.uv or vim.loop).fs_stat(repo_path) then
-    vim.notify("Installing " .. plugin .. " " .. branch)
-    local repo_url = "https://github.com/" .. plugin
-    local out = vim.fn.system({
-      "git",
-      "clone",
-      "--filter=blob:none",
-      "--branch=" .. branch,
-      repo_url,
-      repo_path,
-    })
-    if vim.v.shell_error ~= 0 then
-      vim.api.nvim_echo({
-        { "Failed to clone " .. plugin .. ":\n", "ErrorMsg" },
-        { out, "WarningMsg" },
-        { "\nPress any key to exit..." },
-      }, true, {})
-      vim.fn.getchar()
-      os.exit(1)
+local plugins = {
+  -- ui
+  "jake-stewart/auto-cmdheight.nvim",
+  "rkjtmp/lush.nvim",
+  "dmun/boomer.nvim",
+
+  -- editor
+  { "saghen/blink.cmp", version = "v1.7.0" },
+  "rafamadriz/friendly-snippets",
+  "folke/lazydev.nvim",
+  "windwp/nvim-autopairs",
+  { "saghen/blink.pairs", version = "v0.3.0" },
+  "saghen/blink.download",
+
+  -- files
+  "cbochs/grapple.nvim",
+  "tpope/vim-sleuth",
+  "stevearc/conform.nvim",
+  "stevearc/quicker.nvim",
+  "stevearc/oil.nvim",
+  "ibhagwan/fzf-lua",
+
+  -- lsp
+  "mason-org/mason-lspconfig.nvim",
+  "mason-org/mason.nvim",
+  "neovim/nvim-lspconfig",
+  "folke/lazydev.nvim",
+
+  -- llm
+  "zbirenbaum/copilot.lua",
+
+  -- motion
+  "tpope/vim-rsi",
+  "jake-stewart/multicursor.nvim",
+  "monaqa/dial.nvim",
+
+  -- treesitter
+  "nvim-treesitter/nvim-treesitter",
+  "nvim-treesitter/nvim-treesitter-textobjects",
+  "windwp/nvim-ts-autotag",
+  "Wansmer/treesj",
+
+  -- sql
+  "tpope/vim-fugitive",
+  "tpope/vim-dadbod",
+  "kristijanhusak/vim-dadbod-ui",
+  "kristijanhusak/vim-dadbod-completion",
+
+  -- misc
+  "habamax/vim-godot",
+  "nvim-orgmode/orgmode",
+  "Thiago4532/mdmath.nvim",
+  "nvim-mini/mini.extra",
+  "nvim-mini/mini.ai",
+  "nvim-mini/mini.misc",
+  "nvim-mini/mini.visits",
+  "nvim-mini/mini.icons",
+}
+
+vim.pack.add(
+  vim.tbl_map(function(spec)
+    local git = "https://github.com/"
+    if type(spec) == "table" then
+      spec.src = git .. (spec[1] or spec.src)
+      return spec
     end
-    vim.cmd("packadd " .. repo .. " | helptags ALL")
-    vim.cmd('echo "Installed `' .. repo .. '`" | redraw')
-  end
-end
+    return { src = git .. spec }
+  end, plugins),
+  { confirm = true }
+)
 
-ensure_installed("echasnovski/mini.nvim", "main")
-ensure_installed("rktjmp/hotpot.nvim", "v0.14.8")
-
-require("hotpot").setup({
-  enable_hotpot_diagnostics = false,
-  compiler = {
-    modules = {
-      correlate = true,
-    },
-    macros = {
-      env = "_COMPILER",
-      compilerEnv = _G,
-      allowGlobals = true,
-    },
-  },
-})
-
-require("mini.deps").setup({ path = { package = path_package } })
-MiniDeps.add({ source = "echasnovski/mini.nvim" })
-MiniDeps.add({ source = "rktjmp/hotpot.nvim", checkout = "v0.14.8" })
-
-_G.bind = function(fn, ...)
-  local args = { ... }
-  return function(...)
-    if select("#", ...) > 0 then
-      fn(unpack(args), ...)
-    else
-      fn(unpack(args))
-    end
-  end
-end
-
+require("globals")
 require("init")
