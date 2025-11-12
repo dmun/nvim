@@ -1,8 +1,3 @@
--- add("nvim-treesitter/nvim-treesitter")
--- add("nvim-treesitter/nvim-treesitter-textobjects")
--- add("windwp/nvim-ts-autotag")
--- add("Wansmer/treesj")
-
 require("nvim-ts-autotag").setup()
 
 require("nvim-treesitter.configs").setup({

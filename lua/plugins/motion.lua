@@ -1,4 +1,3 @@
--- add("cbochs/grapple.nvim")
 local grapple = require("grapple")
 grapple.setup({
   icons = false,
@@ -20,8 +19,6 @@ for i = 1, 5 do
   end)
 end
 
--- add("tpope/vim-rsi")
--- add("jake-stewart/multicursor.nvim")
 local mc = require("multicursor-nvim")
 mc.setup()
 vim.keymap.set({ "n", "x" }, "<C-q>", mc.toggleCursor)
@@ -64,7 +61,6 @@ mc.addKeymapLayer(function(lmap)
   end)
 end)
 
--- add("monaqa/dial.nvim")
 local augend = require("dial.augend")
 local dial = require("dial.map").manipulate
 require("dial.config").augends:register_group({

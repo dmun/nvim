@@ -68,7 +68,7 @@ au("LspAttach", {
       max_height = max_height,
       close_events = close_events,
     }
-    nmap("<CR>", vim.lsp.buf.code_action)
+    nmap("<Leader>a", vim.lsp.buf.code_action)
     nmap("<C-w><C-d>", function()
       vim.diagnostic.open_float(winopts)
     end)

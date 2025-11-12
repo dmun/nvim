@@ -1,5 +1,4 @@
 -- Oil
--- add({ source = "stevearc/oil.nvim", depends = { "echasnovski/mini.icons" } })
 local oil = require("oil")
 oil.setup({
   -- win_options = {
@@ -15,7 +14,6 @@ oil.setup({
 nmap("-", oil.open)
 
 -- Fzf
--- add({ source = "ibhagwan/fzf-lua" })
 local fzf = require("fzf-lua")
 fzf.setup({
   defaults = { previewer = false, file_icons = false },

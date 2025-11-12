@@ -1,9 +1,3 @@
--- add("nvim-mini/mini.extra")
--- add("nvim-mini/mini.ai")
--- add("nvim-mini/mini.misc")
--- add("nvim-mini/mini.visits")
--- add("nvim-mini/mini.icons")
-
 local extra = require("mini.extra")
 local gen_ai_spec = extra.gen_ai_spec
 

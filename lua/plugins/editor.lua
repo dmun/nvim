@@ -1,7 +1,3 @@
--- add("tpope/vim-sleuth")
--- add("stevearc/conform.nvim")
--- add("stevearc/quicker.nvim")
-
 require("quicker").setup({
   opts = { signcolumn = "no" },
 })
@@ -27,13 +23,6 @@ vim.keymap.set("", "<LocalLeader>f", function()
 end)
 
 -- Pairs
--- add("windwp/nvim-autopairs")
--- add({
---   source = "saghen/blink.pairs",
---   checkout = "v0.3.0",
---   depends = { "saghen/blink.download" },
--- })
-
 require("nvim-autopairs").setup({})
 require("blink.pairs").setup({
   mappings = { enabled = false },

@@ -1,8 +1,3 @@
--- add("saghen/blink.cmp", {
---   -- depends = { "rafamadriz/friendly-snippets", "folke/lazydev.nvim" },
---   version = "v1.7.0",
--- })
-
 local kind_hl_map = {
   Method = "@function.method",
   Variable = "@variable",

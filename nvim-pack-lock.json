@@ -30,7 +30,10 @@
       "rev": "5bde2cf",
       "src": "https://github.com/zbirenbaum/copilot.lua"
     },
-    "dial.nvim": [],
+    "dial.nvim": {
+      "rev": "f0404ec",
+      "src": "https://github.com/monaqa/dial.nvim"
+    },
     "friendly-snippets": {
       "rev": "572f566",
       "src": "https://github.com/rafamadriz/friendly-snippets"

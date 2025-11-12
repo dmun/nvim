@@ -1,7 +1,9 @@
-local plugins = {
+require("globals")
+
+install({
   -- ui
   "jake-stewart/auto-cmdheight.nvim",
-  "rkjtmp/lush.nvim",
+  "rktjmp/lush.nvim",
   "dmun/boomer.nvim",
 
   -- editor
@@ -55,19 +57,21 @@ local plugins = {
   "nvim-mini/mini.misc",
   "nvim-mini/mini.visits",
   "nvim-mini/mini.icons",
-}
+})
 
-vim.pack.add(
-  vim.tbl_map(function(spec)
-    local git = "https://github.com/"
-    if type(spec) == "table" then
-      spec.src = git .. (spec[1] or spec.src)
-      return spec
-    end
-    return { src = git .. spec }
-  end, plugins),
-  { confirm = true }
-)
+require("options")
+require("keymaps")
+require("plugins.ui")
 
-require("globals")
-require("init")
+vim.schedule(function()
+  require("autocommands")
+  require("plugins.motion")
+  require("plugins.treesitter")
+  require("plugins.mini")
+  require("plugins.files")
+  require("plugins.blink")
+  require("plugins.misc")
+  require("plugins.lsp")
+  require("plugins.llm")
+  require("plugins.editor")
+end)
