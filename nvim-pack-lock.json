@@ -157,6 +157,10 @@
     "vim-sleuth": {
       "rev": "be69bff",
       "src": "https://github.com/tpope/vim-sleuth"
+    },
+    "vim-sneak": {
+      "rev": "18b1faf",
+      "src": "https://github.com/justinmk/vim-sneak"
     }
   }
 }

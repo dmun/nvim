@@ -1,5 +1,8 @@
 local o = vim.o
 
+-- Global
+vim.g["sneak#s_next"] = 1
+
 -- Theme
 vim.cmd.color("boomer")
 

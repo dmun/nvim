@@ -32,6 +32,7 @@ install({
   "zbirenbaum/copilot.lua",
 
   -- motion
+  "justinmk/vim-sneak",
   "tpope/vim-rsi",
   "jake-stewart/multicursor.nvim",
   "monaqa/dial.nvim",

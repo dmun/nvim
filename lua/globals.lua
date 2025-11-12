@@ -20,6 +20,6 @@ _G.install = function (plugins)
       end
       return { src = git .. spec }
     end, plugins),
-    { confirm = true }
+    { confirm = false }
   )
 end
