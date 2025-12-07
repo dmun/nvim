@@ -34,9 +34,17 @@
       "rev": "f0404ec",
       "src": "https://github.com/monaqa/dial.nvim"
     },
+    "flash.nvim": {
+      "rev": "fcea7ff",
+      "src": "https://github.com/folke/flash.nvim"
+    },
     "friendly-snippets": {
       "rev": "572f566",
       "src": "https://github.com/rafamadriz/friendly-snippets"
+    },
+    "fyler.nvim": {
+      "rev": "fd89f75",
+      "src": "https://github.com/A7Lavinraj/fyler.nvim"
     },
     "fzf-lua": {
       "rev": "a8458b7",
@@ -49,6 +57,10 @@
     "lazydev.nvim": {
       "rev": "5231c62",
       "src": "https://github.com/folke/lazydev.nvim"
+    },
+    "leap.nvim": {
+      "rev": "1fc7f38",
+      "src": "https://github.com/ggandor/leap.nvim"
     },
     "lualine.nvim": {
       "rev": "3946f01",
@@ -77,6 +89,10 @@
     "mini.extra": {
       "rev": "7a5231f",
       "src": "https://github.com/nvim-mini/mini.extra"
+    },
+    "mini.hipatterns": {
+      "rev": "add8d8a",
+      "src": "https://github.com/nvim-mini/mini.hipatterns"
     },
     "mini.icons": {
       "rev": "ff2e4f1",

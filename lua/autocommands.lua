@@ -19,7 +19,7 @@ au("Filetype", {
 })
 
 -- Autosave with filter
-local ft_filter = { "sql", "gdscript", "hyprlang" }
+local ft_filter = { "sql", "gdscript", "hyprlang", "typescriptreact" }
 au({ "TextChanged", "InsertLeave" }, {
   pattern = "*",
   callback = function()
@@ -68,7 +68,7 @@ au("LspAttach", {
       max_height = max_height,
       close_events = close_events,
     }
-    nmap("<Leader>a", vim.lsp.buf.code_action)
+    nmap("<Leader>ca", vim.lsp.buf.code_action)
     nmap("<C-w><C-d>", function()
       vim.diagnostic.open_float(winopts)
     end)

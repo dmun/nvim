@@ -43,7 +43,7 @@ end
 local function highlight(ctx)
   return {
     {
-      1,
+      0,
       #ctx.label,
       group = ctx.deprecated and "BlinkCmpLabelDeprecated" or kind_hl_map[ctx.kind] or "BlinkCmpKind",
     },

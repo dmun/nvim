@@ -81,3 +81,14 @@ xmap("<C-a>", function() dial("increment", "visual") end)
 xmap("<C-x>", function() dial("decrement", "visual") end)
 xmap("g<C-a>", function() dial("increment", "gvisual") end)
 xmap("g<C-x>", function() dial("decrement", "gvisual") end)
+
+-- require("flash").setup({
+--   highlight = {
+--     backdrop = false,
+--   }
+-- })
+-- map({"n", "x", "o"}, "s", function() require("flash").jump() end)
+-- map({"n", "x", "o"}, "S", function() require("flash").treesitter() end)
+
+map({'n', 'x', 'o'}, 's', '<Plug>(leap)')
+nmap('S', '<Plug>(leap-from-window)')

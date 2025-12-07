@@ -1,3 +1,26 @@
+-- Fyler
+local fyler = require("fyler")
+fyler.setup({
+  views = {
+    ---@diagnostic disable: missing-fields
+    finder = {
+      indentscope = {
+        enabled = false,
+      },
+      win = {
+        -- kind = "split_right",
+        win_opts = {
+          signcolumn = "yes:1",
+        },
+      },
+      mappings = {
+        ["<Tab>"] = "Select",
+      },
+    },
+  },
+})
+nmap("<Leader>e", fyler.focus)
+
 -- Oil
 local oil = require("oil")
 oil.setup({

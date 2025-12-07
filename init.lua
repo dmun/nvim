@@ -21,6 +21,7 @@ install({
   "stevearc/quicker.nvim",
   "stevearc/oil.nvim",
   "ibhagwan/fzf-lua",
+  "A7Lavinraj/fyler.nvim",
 
   -- lsp
   "mason-org/mason-lspconfig.nvim",
@@ -32,10 +33,12 @@ install({
   "zbirenbaum/copilot.lua",
 
   -- motion
-  "justinmk/vim-sneak",
+  -- "justinmk/vim-sneak",
   "tpope/vim-rsi",
   "jake-stewart/multicursor.nvim",
   "monaqa/dial.nvim",
+  "folke/flash.nvim",
+  "ggandor/leap.nvim",
 
   -- treesitter
   "nvim-treesitter/nvim-treesitter",
@@ -58,6 +61,7 @@ install({
   "nvim-mini/mini.misc",
   "nvim-mini/mini.visits",
   "nvim-mini/mini.icons",
+  "nvim-mini/mini.hipatterns",
 })
 
 require("options")

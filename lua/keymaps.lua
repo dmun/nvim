@@ -13,7 +13,7 @@ end
 --
 
 nmap("<Esc>", function()
-  vim.cmd("nohl | echo")
+  vim.cmd("silent update | nohl | echo")
 end)
 
 nmap("K", function()
