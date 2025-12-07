@@ -37,7 +37,6 @@ install({
   "tpope/vim-rsi",
   "jake-stewart/multicursor.nvim",
   "monaqa/dial.nvim",
-  "folke/flash.nvim",
   "ggandor/leap.nvim",
 
   -- treesitter
