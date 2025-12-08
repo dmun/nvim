@@ -7,11 +7,11 @@ install({
   "dmun/boomer.nvim",
 
   -- editor
-  { "saghen/blink.cmp", version = "v1.7.0" },
+  { "saghen/blink.cmp", version = "v1.8.0" },
   "rafamadriz/friendly-snippets",
   "folke/lazydev.nvim",
   "windwp/nvim-autopairs",
-  { "saghen/blink.pairs", version = "v0.3.0" },
+  { "saghen/blink.pairs", version = "v0.4.1" },
   "saghen/blink.download",
 
   -- files

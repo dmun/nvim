@@ -7,7 +7,7 @@
     "blink.cmp": {
       "rev": "327fff9",
       "src": "https://github.com/saghen/blink.cmp",
-      "version": "'v1.7.0'"
+      "version": "'v1.8.0'"
     },
     "blink.download": {
       "rev": "86361b9",
@@ -16,7 +16,7 @@
     "blink.pairs": {
       "rev": "d8bf802",
       "src": "https://github.com/saghen/blink.pairs",
-      "version": "'v0.3.0'"
+      "version": "'v0.4.1'"
     },
     "boomer.nvim": {
       "rev": "7319f4f",
