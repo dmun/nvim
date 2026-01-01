@@ -19,6 +19,16 @@ misc.setup_restore_cursor()
 require("mini.visits").setup()
 require("mini.extra").setup()
 require("mini.icons").setup()
+require("mini.diff").setup({
+  view = {
+    style = "sign",
+  },
+  mappings = {
+    goto_next = "]c",
+    goto_prev = "[c",
+  },
+})
+nmap("coh", MiniDiff.toggle_overlay)
 
 local hipatterns = require("mini.hipatterns")
 hipatterns.setup({

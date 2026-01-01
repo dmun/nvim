@@ -61,6 +61,7 @@ install({
   "nvim-mini/mini.visits",
   "nvim-mini/mini.icons",
   "nvim-mini/mini.hipatterns",
+  "nvim-mini/mini.diff",
 })
 
 require("options")
