@@ -19,7 +19,7 @@ fyler.setup({
     },
   },
 })
-nmap("<Leader>e", fyler.focus)
+nmap("<Leader>e", fyler.open)
 
 -- Oil
 local oil = require("oil")
