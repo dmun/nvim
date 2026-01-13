@@ -27,7 +27,7 @@
       "src": "https://github.com/stevearc/conform.nvim"
     },
     "copilot.lua": {
-      "rev": "5ace9ecd0db9a7a6c14064e4ce4ede5b800325f3",
+      "rev": "9688ca7ad7583c659979591d006e5ff0b0b0da07",
       "src": "https://github.com/zbirenbaum/copilot.lua"
     },
     "dial.nvim": {
@@ -47,7 +47,7 @@
       "src": "https://github.com/A7Lavinraj/fyler.nvim"
     },
     "fzf-lua": {
-      "rev": "e7773d0c863a31bfc8ab72dd1adbec4611a35409",
+      "rev": "578a11f9f7c5f4436b833731ccceeda9479562f0",
       "src": "https://github.com/ibhagwan/fzf-lua"
     },
     "grapple.nvim": {
@@ -69,6 +69,10 @@
     "lush.nvim": {
       "rev": "9c60ec2",
       "src": "https://github.com/rktjmp/lush.nvim"
+    },
+    "magenta.nvim": {
+      "rev": "f7ed15d129b8c9df65c71aee9b464f34bde447ad",
+      "src": "https://github.com/dlants/magenta.nvim"
     },
     "mason-lspconfig.nvim": {
       "rev": "fe661093f4b05136437b531e7f959af2a2ae66c8",
@@ -135,7 +139,7 @@
       "src": "https://github.com/windwp/nvim-ts-autotag"
     },
     "oil.nvim": {
-      "rev": "d278dc40f9de9980868a0a55fa666fba5e6aeacb",
+      "rev": "fbbb2a98721da86f46b06994fd3b4833b04c6e9b",
       "src": "https://github.com/stevearc/oil.nvim"
     },
     "orgmode": {
@@ -143,7 +147,7 @@
       "src": "https://github.com/nvim-orgmode/orgmode"
     },
     "quicker.nvim": {
-      "rev": "771437c3e3672dba9233156e1c2e2fc1888a5fff",
+      "rev": "fc041830fa7cf093786b0d5990d99cf3c7b0c129",
       "src": "https://github.com/stevearc/quicker.nvim"
     },
     "treesj": {
