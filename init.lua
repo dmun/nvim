@@ -37,7 +37,7 @@ install({
   "tpope/vim-rsi",
   "jake-stewart/multicursor.nvim",
   "monaqa/dial.nvim",
-  "ggandor/leap.nvim",
+  { src = "https://codeberg.org/andyg/leap.nvim" },
 
   -- treesitter
   "nvim-treesitter/nvim-treesitter",

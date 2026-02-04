@@ -14,11 +14,17 @@ _G.install = function (plugins)
   vim.pack.add(
     vim.tbl_map(function(spec)
       local git = "https://github.com/"
+
+      if type(spec) == "string" then
+        return { src = git .. spec }
+      end
+
       if type(spec) == "table" then
-        spec.src = git .. (spec[1] or spec.src)
+        if spec[1] then
+          spec.src = git .. spec[1]
+        end
         return spec
       end
-      return { src = git .. spec }
     end, plugins),
     { confirm = false }
   )
