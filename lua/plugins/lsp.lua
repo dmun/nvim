@@ -83,6 +83,12 @@ lsp.config("qmlls", {
   root_markers = { "shell.qml" },
 })
 
+lsp.config("sourcekit", {
+  cmd = { "sourcekit-lsp" },
+  filetypes = { "swift" },
+  root_markers = { "*.xcodeproj" },
+})
+
 -- Enable language servers
 
 lsp.enable("lua_ls")
@@ -95,6 +101,7 @@ lsp.enable("svelte_ls")
 lsp.enable("qmlls")
 lsp.enable("godot")
 lsp.enable("nixd")
+lsp.enable("sourcekit")
 
 -- Keymaps
 
