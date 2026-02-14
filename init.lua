@@ -31,7 +31,7 @@ install({
 
   -- llm
   "zbirenbaum/copilot.lua",
-  "dmun/llemper.nvim",
+  { dev = "dmun/llemper.nvim" },
 
   -- motion
   -- "justinmk/vim-sneak",

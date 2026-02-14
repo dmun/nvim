@@ -12,7 +12,19 @@ _G.omap = function(lhs, rhs) map("o", lhs, rhs, { expr = true }) end
 
 _G.install = function (plugins)
   vim.pack.add(
-    vim.tbl_map(function(spec)
+    vim.iter(plugins)
+    :filter(function(spec)
+      if type(spec) ~= "table" then
+        return true
+      end
+
+      if not spec.dev then
+        return true
+      end
+
+      vim.opt.runtimepath:append("~/dev/" .. string.gsub(spec.dev, "^.*%/", ""))
+    end)
+    :map(function(spec)
       local git = "https://github.com/"
 
       if type(spec) == "string" then
@@ -25,7 +37,7 @@ _G.install = function (plugins)
         end
         return spec
       end
-    end, plugins),
+    end):totable(),
     { confirm = false }
   )
 end
