@@ -22,7 +22,13 @@ _G.install = function (plugins)
         return true
       end
 
-      vim.opt.runtimepath:append("~/dev/" .. string.gsub(spec.dev, "^.*%/", ""))
+      local path = vim.fn.expand("~/dev/" .. string.gsub(spec.dev, "^.*%/", ""))
+      if not vim.fn.filereadable(path) then
+        return true
+      end
+
+      vim.opt.runtimepath:append(path)
+      return false
     end)
     :map(function(spec)
       local git = "https://github.com/"
