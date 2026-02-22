@@ -82,5 +82,10 @@ xmap("<C-x>", function() dial("decrement", "visual") end)
 xmap("g<C-a>", function() dial("increment", "gvisual") end)
 xmap("g<C-x>", function() dial("decrement", "gvisual") end)
 
-map({'n', 'x', 'o'}, 's', '<Plug>(leap)')
-nmap('S', '<Plug>(leap-from-window)')
+-- map({'n', 'x', 'o'}, 's', '<Plug>(leap)')
+-- nmap('S', '<Plug>(leap-from-window)')
+
+map("w", "<cmd>lua require('spider').motion('w')<CR>")
+map("e", "<cmd>lua require('spider').motion('e')<CR>")
+map("b", "<cmd>lua require('spider').motion('b')<CR>")
+map("ge", "<cmd>lua require('spider').motion('ge')<CR>")

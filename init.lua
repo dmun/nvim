@@ -4,7 +4,7 @@ install({
   -- ui
   "jake-stewart/auto-cmdheight.nvim",
   "rktjmp/lush.nvim",
-  "dmun/boomer.nvim",
+  { dev = "dmun/boomer.nvim" },
 
   -- editor
   { "saghen/blink.cmp", version = "v1.8.0" },
@@ -38,7 +38,8 @@ install({
   "tpope/vim-rsi",
   "jake-stewart/multicursor.nvim",
   "monaqa/dial.nvim",
-  { src = "https://codeberg.org/andyg/leap.nvim" },
+  "chrisgrieser/nvim-spider",
+  -- { src = "https://codeberg.org/andyg/leap.nvim" },
 
   -- treesitter
   "nvim-treesitter/nvim-treesitter",

@@ -24,9 +24,9 @@ end)
 
 -- Pairs
 require("nvim-autopairs").setup({})
-require("blink.pairs").setup({
-  mappings = { enabled = false },
-})
+-- require("blink.pairs").setup({
+--   mappings = { enabled = false },
+-- })
 vim.api.nvim_create_autocmd("BufReadPost", {
   pattern = "*",
   callback = function()

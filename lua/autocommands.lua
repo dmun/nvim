@@ -11,7 +11,7 @@ au("TextYankPost", {
 })
 
 -- Open help in new tab
-au("Filetype", {
+au("FileType", {
   pattern = "help",
   callback = function()
     vim.cmd("wincmd T")
@@ -106,6 +106,12 @@ au("BufReadPost", {
     if not vim.tbl_contains({ "", "acwrite" }, vim.bo.buftype) then
       gui_fn()
     end
+  end,
+})
+
+au("BufEnter", {
+  callback = function()
+    vim.opt.formatoptions:remove("o")
   end,
 })
 
