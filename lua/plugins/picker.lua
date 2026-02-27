@@ -4,36 +4,60 @@ M.state = {}
 
 local ns_id = vim.api.nvim_create_namespace("custom_select")
 
+function math.clamp(x, min, max)
+  return math.min(math.max(x, min), max)
+end
+
 function M.render()
   local lines = {}
   local widest = 20
   for _, item in ipairs(M.state.filtered) do
     table.insert(lines, " " .. item.text .. " ")
+    widest = math.max(widest, #item.text)
   end
   if #lines == 0 then
     lines = { " No match found " }
     widest = #lines[1]
-  else
-    local visible_count = math.min(#lines, 8)
-    for i = 1, visible_count do
-      widest = math.min(math.max(widest, #lines[i]), 50)
-    end
   end
 
   vim.api.nvim_buf_set_lines(M.state.items_buf, 0, -1, false, lines)
 
   vim.api.nvim_buf_clear_namespace(M.state.items_buf, ns_id, 0, -1)
   if #M.state.filtered > 0 then
-    vim.api.nvim_buf_set_extmark(M.state.items_buf, ns_id, M.state.selected - 1, 0, {
-      line_hl_group = "PmenuSel",
-    })
+    -- vim.api.nvim_buf_set_extmark(M.state.items_buf, ns_id, M.state.selected - 1, 0, {
+    --   line_hl_group = "PmenuSel",
+    -- })
     vim.api.nvim_win_set_cursor(M.state.items_win, { M.state.selected, 0 })
+  end
+
+  if M.state.query and M.state.query ~= "" then
+    local _query = M.state.query:lower()
+
+    for line_idx, line in ipairs(lines) do
+      local lower_line = line:lower()
+      local start_col = 1
+
+      while true do
+        local match_start, match_end = lower_line:find(_query, start_col, true)
+
+        if not match_start then
+          break
+        end
+
+        vim.api.nvim_buf_set_extmark(M.state.items_buf, ns_id, line_idx - 1, match_start - 1, {
+          end_col = match_end,
+          hl_group = "Search",
+        })
+
+        start_col = match_end + 1
+      end
+    end
   end
 
   if vim.api.nvim_win_is_valid(M.state.items_win) then
     vim.api.nvim_win_set_config(M.state.items_win, {
-      height = math.min(math.max(#lines, 1), 8),
-      width = widest,
+      height = math.clamp(#lines, 1, vim.o.pumheight),
+      width = math.clamp(widest, 28, 48),
     })
   end
 end
@@ -58,7 +82,7 @@ function M.select_last()
   M.render()
 end
 
-local function cleanup(choice_raw, choice_idx)
+local function cleanup()
   if M.state.is_closing then
     return
   end
@@ -86,6 +110,7 @@ function M.ui_select(items, opts, on_choice)
     filtered = formatted,
     selected = 1,
     is_closing = false,
+    query = "",
   }
 
   M.state.prompt_buf = vim.api.nvim_create_buf(false, true)
@@ -113,23 +138,25 @@ function M.ui_select(items, opts, on_choice)
     style = "minimal",
     border = "none",
   })
-  vim.wo[M.state.items_win].winhl = "NormalFloat:Pmenu"
+  vim.wo[M.state.items_win].winhl = "NormalFloat:Pmenu,CursorLine:PmenuSel"
   vim.wo[M.state.items_win].scrolloff = 2
+  vim.wo[M.state.items_win].cursorline = true
+  vim.wo[M.state.items_win].cursorlineopt = "both"
 
   vim.api.nvim_create_autocmd("TextChangedI", {
     buffer = M.state.prompt_buf,
     callback = function()
       M.state.selected = 1
       local line = vim.api.nvim_buf_get_lines(M.state.prompt_buf, 0, 1, false)[1] or ""
-      local query = line
+      M.state.query = line
 
-      if query == "" then
+      if M.state.query == "" then
         M.state.filtered = formatted
       else
         local texts = vim.tbl_map(function(item)
           return item.text
         end, formatted)
-        local matched = vim.fn.matchfuzzy(texts, query)
+        local matched = vim.fn.matchfuzzy(texts, M.state.query)
         M.state.filtered = {}
         for _, m_text in ipairs(matched) do
           for _, item in ipairs(formatted) do
@@ -140,7 +167,7 @@ function M.ui_select(items, opts, on_choice)
           end
         end
       end
-      M.state.selected = math.min(M.state.selected, math.max(1, #M.state.filtered))
+      M.state.selected = math.clamp(M.state.selected, 1, #M.state.filtered)
       M.render()
     end,
   })
