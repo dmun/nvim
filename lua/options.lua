@@ -33,6 +33,8 @@ o.statusline = " %f %m %r %= %l/%L  %c "
 o.winborder = "single"
 o.wrap = false
 
+vim.ui.select = require("plugins.picker").ui_select
+
 -- Other
 o.grepprg = "rg --vimgrep --smart-case"
 o.shada = o.shada .. ",f1000"

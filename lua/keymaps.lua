@@ -13,7 +13,10 @@ end
 --
 
 nmap("<Esc>", function()
-  vim.cmd("silent update | nohl | echo")
+  if vim.fn.filereadable(vim.api.nvim_buf_get_name(0)) == 1 then
+    vim.cmd("silent update")
+  end
+  vim.cmd("nohl | echo")
 end)
 
 nmap("K", function()

@@ -36,18 +36,34 @@ oil.setup({
 })
 nmap("-", oil.open)
 
--- Fzf
-local fzf = require("fzf-lua")
-fzf.setup({
-  defaults = { previewer = false, file_icons = false },
-  fzf_colors = {
-    ["bg+"] = { "bg", "CursorLine" },
-    ["fg+"] = { "fg", "Normal" },
-  },
-  winopts = { split = "belowright new", title = false },
-})
-nmap("<Leader>f", fzf.files)
-nmap("<Leader>j", fzf.oldfiles)
-nmap("<Leader>/", fzf.live_grep)
-nmap("<Leader>h", fzf.highlights)
-nmap("<Leader><Leader>", "<Cmd>FzfLua<CR>")
+nmap("<Leader>j", function()
+  local files = vim
+    .iter(vim.v.oldfiles)
+    :filter(function(path)
+      if path:find("%w://") then
+        return false
+      end
+      if not vim.uv.fs_stat(path) then
+        return false
+      end
+      return true
+    end)
+    :map(function(path)
+      return vim.fn.fnamemodify(path, ":~")
+    end)
+    :totable()
+  vim.ui.select(files, { prompt = "oldfiles" }, function(choice)
+    if choice then
+      vim.cmd("edit " .. choice)
+    end
+  end)
+end)
+
+nmap("<Leader>f", function()
+  local files = vim.fn.systemlist("fd -H --color=never --exclude=.git .")
+  vim.ui.select(files, { prompt = "find" }, function(choice)
+    if choice then
+      vim.cmd("find " .. choice)
+    end
+  end)
+end)
