@@ -46,7 +46,7 @@ function M.render()
 
         vim.api.nvim_buf_set_extmark(M.state.items_buf, ns_id, line_idx - 1, match_start - 1, {
           end_col = match_end,
-          hl_group = "Search",
+          hl_group = "PmenuMatch",
         })
 
         start_col = match_end + 1
