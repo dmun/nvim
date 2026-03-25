@@ -61,7 +61,8 @@ end)
 
 nmap("<Leader>f", function()
   local files = vim.fn.systemlist("fd -H --color=never --exclude=.git .")
-  vim.ui.select(files, { prompt = "find" }, function(choice)
+  local prompt = vim.fn.fnamemodify(vim.fn.getcwd(), ":~")
+  vim.ui.select(files, { prompt = prompt }, function(choice)
     if choice then
       vim.cmd("find " .. choice)
     end

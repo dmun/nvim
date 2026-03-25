@@ -9,6 +9,7 @@ function math.clamp(x, min, max)
 end
 
 function M.render()
+  vim.o.cmdheight = vim.o.pumheight
   local lines = {}
   local widest = 20
   for _, item in ipairs(M.state.filtered) do
@@ -16,8 +17,8 @@ function M.render()
     widest = math.max(widest, #item.text)
   end
   if #lines == 0 then
-    lines = { " No match found " }
-    widest = #lines[1]
+    -- lines = { " No match found " }
+    -- widest = #lines[1]
   end
 
   vim.api.nvim_buf_set_lines(M.state.items_buf, 0, -1, false, lines)
@@ -47,6 +48,7 @@ function M.render()
         vim.api.nvim_buf_set_extmark(M.state.items_buf, ns_id, line_idx - 1, match_start - 1, {
           end_col = match_end,
           hl_group = "PmenuMatch",
+          -- hl_group = "Search",
         })
 
         start_col = match_end + 1
@@ -55,10 +57,13 @@ function M.render()
   end
 
   if vim.api.nvim_win_is_valid(M.state.items_win) then
+    -- local height = math.clamp(#lines, 1, vim.o.pumheight)
     vim.api.nvim_win_set_config(M.state.items_win, {
-      height = math.clamp(#lines, 1, vim.o.pumheight),
-      width = math.clamp(widest, 28, 48),
+      hide = not lines,
+      -- height = height,
+      -- width = math.clamp(widest, 28, 48),
     })
+    vim.wo[M.state.items_win].cursorline = not vim.tbl_isempty(lines)
   end
 end
 
@@ -94,9 +99,11 @@ local function cleanup()
     vim.api.nvim_win_close(M.state.items_win, true)
   end
   vim.cmd("stopinsert")
+  vim.o.cmdheight = 1
 end
 
 function M.ui_select(items, opts, on_choice)
+  local current_win = vim.api.nvim_get_current_win()
   opts = opts or {}
   -- local prompt_str = " "
   local formatted = {}
@@ -117,28 +124,42 @@ function M.ui_select(items, opts, on_choice)
   vim.b[M.state.prompt_buf].completion = false
   M.state.prompt_win = vim.api.nvim_open_win(M.state.prompt_buf, true, {
     relative = "editor",
-    width = math.floor(vim.o.columns * 2 / 3),
+    -- width = math.floor(vim.o.columns * 2 / 3),
+    width = vim.o.columns,
     height = 1,
-    row = vim.o.lines - 1,
+    row = vim.o.lines - vim.o.pumheight,
     col = 0,
     style = "minimal",
     border = { "", "", "", " ", "", "", "", " " },
+    -- border = "none",
+    zindex = 250,
   })
   -- vim.api.nvim_win_set_cursor(M.state.prompt_win, { 1, #prompt_str })
-  vim.wo[M.state.prompt_win].winhl = "NormalFloat:StatusLine,FloatBorder:StatusLine"
+  -- vim.wo[M.state.prompt_win].winhl = "NormalFloat:StatusLine,FloatBorder:StatusLine"
+  vim.wo[M.state.prompt_win].winhl = "NormalFloat:Normal,FloatBorder:Normal"
+  vim.api.nvim_buf_set_extmark(M.state.prompt_buf, ns_id, 0, 0, {
+    virt_text_pos = "inline",
+    virt_text = { { opts.prompt .. "> ", "Function" } },
+    right_gravity = false,
+  })
 
   M.state.items_buf = vim.api.nvim_create_buf(false, true)
   M.state.items_win = vim.api.nvim_open_win(M.state.items_buf, false, {
     relative = "editor",
-    width = width,
-    height = 1,
-    row = vim.o.lines - 2,
+    -- width = width,
+    width = vim.o.columns,
+    height = vim.o.pumheight - 1,
+    -- row = vim.o.lines - 1,
+    row = vim.o.lines - vim.o.pumheight + 1,
     col = 0,
-    anchor = "SW",
+    -- anchor = "SW",
+    anchor = "NW",
     style = "minimal",
     border = "none",
+    zindex = 250,
   })
-  vim.wo[M.state.items_win].winhl = "NormalFloat:Pmenu,CursorLine:PmenuSel"
+  -- vim.wo[M.state.items_win].winhl = "NormalFloat:Pmenu,CursorLine:PmenuSel"
+  vim.wo[M.state.items_win].winhl = "NormalFloat:Normal"
   vim.wo[M.state.items_win].scrolloff = 2
   vim.wo[M.state.items_win].cursorline = true
   vim.wo[M.state.items_win].cursorlineopt = "both"
