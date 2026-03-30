@@ -49,6 +49,7 @@ o.tabstop = 4
 o.shiftwidth = 4
 o.smartindent = true
 o.autochdir = true
+o.clipboard = "unnamedplus"
 
 -- Lsp
 vim.diagnostic.config({ signs = false })

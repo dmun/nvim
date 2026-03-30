@@ -1,6 +1,7 @@
 local M = {}
 
 M.state = {}
+local picker_height = 8
 
 local ns_id = vim.api.nvim_create_namespace("custom_select")
 
@@ -9,7 +10,7 @@ function math.clamp(x, min, max)
 end
 
 function M.render()
-  vim.o.cmdheight = vim.o.pumheight
+  vim.o.cmdheight = picker_height
   local lines = {}
   local widest = 20
   for _, item in ipairs(M.state.filtered) do
@@ -127,7 +128,7 @@ function M.ui_select(items, opts, on_choice)
     -- width = math.floor(vim.o.columns * 2 / 3),
     width = vim.o.columns,
     height = 1,
-    row = vim.o.lines - vim.o.pumheight,
+    row = vim.o.lines - picker_height,
     col = 0,
     style = "minimal",
     border = { "", "", "", " ", "", "", "", " " },
@@ -148,9 +149,9 @@ function M.ui_select(items, opts, on_choice)
     relative = "editor",
     -- width = width,
     width = vim.o.columns,
-    height = vim.o.pumheight - 1,
+    height = picker_height - 1,
     -- row = vim.o.lines - 1,
-    row = vim.o.lines - vim.o.pumheight + 1,
+    row = vim.o.lines - picker_height + 1,
     col = 0,
     -- anchor = "SW",
     anchor = "NW",
