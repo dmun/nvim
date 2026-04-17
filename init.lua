@@ -39,10 +39,11 @@ install({
   "jake-stewart/multicursor.nvim",
   "monaqa/dial.nvim",
   "chrisgrieser/nvim-spider",
+  "yorickpeterse/nvim-jump",
   -- { src = "https://codeberg.org/andyg/leap.nvim" },
 
   -- treesitter
-  "nvim-treesitter/nvim-treesitter",
+  { "nvim-treesitter/nvim-treesitter", version = "main" },
   "nvim-treesitter/nvim-treesitter-textobjects",
   "windwp/nvim-ts-autotag",
   "Wansmer/treesj",

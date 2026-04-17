@@ -11,7 +11,7 @@ require("nvim-treesitter.config").setup({
   sync_install = false,
 })
 
-local ensure_installed = { "lua", "vim", "vimdoc", "query" }
+local ensure_installed = { "lua", "vim", "vimdoc", "query", "svelte" }
 ts.install(ensure_installed)
 
 local ignore_filetype = {}
@@ -79,18 +79,18 @@ for k, v in pairs(keymaps) do
   end)
 end
 
-vim.keymap.set({ "n", "x" }, "s", function()
-  move.goto_next_start({
-    "@assignment.rhs",
-    "@parameter.inner",
-    "@statement.inner",
-  }, "textobjects")
-end)
-
-vim.keymap.set({ "n", "x", "o" }, "S", function()
-  move.goto_previous_start({
-    "@assignment.inner",
-    "@parameter.inner",
-    "@statement.inner",
-  }, "textobjects")
-end)
+-- vim.keymap.set({ "n", "x" }, "s", function()
+--   move.goto_next_start({
+--     "@assignment.rhs",
+--     "@parameter.inner",
+--     "@statement.inner",
+--   }, "textobjects")
+-- end)
+--
+-- vim.keymap.set({ "n", "x", "o" }, "S", function()
+--   move.goto_previous_start({
+--     "@assignment.inner",
+--     "@parameter.inner",
+--     "@statement.inner",
+--   }, "textobjects")
+-- end)

@@ -59,10 +59,23 @@ nmap("<Leader>j", function()
   end)
 end)
 
+-- nmap("<Leader>f", function()
+--   local files = vim.fn.systemlist("fd -H --color=never --exclude=.git .")
+--   local prompt = vim.fn.fnamemodify(vim.fn.getcwd(), ":~")
+--   vim.ui.select(files, { prompt = prompt }, function(choice)
+--     if choice then
+--       vim.cmd("find " .. choice)
+--     end
+--   end)
+-- end)
+
 nmap("<Leader>f", function()
-  local files = vim.fn.systemlist("fd -H --color=never --exclude=.git .")
   local prompt = vim.fn.fnamemodify(vim.fn.getcwd(), ":~")
-  vim.ui.select(files, { prompt = prompt }, function(choice)
+  vim.ui.select(function(callback)
+    vim.system({ "fd", "-H", "--color=never", "--exclude=.git", "--type=file", "." }, { text = true }, function(result)
+      callback(vim.split(result.stdout, "\n", { trimempty = true }))
+    end)
+  end, { prompt = prompt }, function(choice)
     if choice then
       vim.cmd("find " .. choice)
     end

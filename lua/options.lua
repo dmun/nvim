@@ -32,6 +32,7 @@ o.statuscolumn = "%!v:lua.require'util.statuscolumn'()"
 o.statusline = " %f %m %r %= %l/%L  %c "
 o.winborder = "single"
 o.wrap = false
+o.linebreak = true
 
 vim.ui.select = require("plugins.picker").ui_select
 
