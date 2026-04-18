@@ -142,6 +142,11 @@ local function update()
 
   vim.api.nvim_win_set_config(M.state.items_win, { hide = not lines })
   vim.wo[M.state.items_win].cursorline = not vim.tbl_isempty(lines)
+
+  vim.fn.clearmatches(M.state.items_win)
+  vim.fn.matchadd("PmenuMatch", M.state.query, nil, -1, {
+    window = M.state.items_win,
+  })
 end
 
 function M.select_next()
