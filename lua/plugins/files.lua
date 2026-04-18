@@ -52,7 +52,7 @@ nmap("<Leader>j", function()
       return vim.fn.fnamemodify(path, ":~")
     end)
     :totable()
-  vim.ui.select(files, { prompt = "oldfiles" }, function(choice)
+  vim.ui.select(files, { prompt = "oldfiles>" }, function(choice)
     if choice then
       vim.cmd("edit " .. choice)
     end
@@ -69,9 +69,11 @@ end)
 --   end)
 -- end)
 
+local picker = require("plugins.picker")
+
 nmap("<Leader>f", function()
-  local prompt = vim.fn.fnamemodify(vim.fn.getcwd(), ":~")
-  vim.ui.select(function(callback)
+  local prompt = vim.fn.fnamemodify(vim.fn.getcwd(), ":~") .. ">"
+  picker.pick(function(callback)
     vim.system({ "fd", "-H", "--color=never", "--exclude=.git", "--type=file", "." }, { text = true }, function(result)
       callback(vim.split(result.stdout, "\n", { trimempty = true }))
     end)

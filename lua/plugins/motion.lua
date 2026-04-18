@@ -84,7 +84,9 @@ xmap("g<C-x>", function() dial("decrement", "gvisual") end)
 
 local jump = require("jump")
 jump.setup({
-  label = "DiffText",
+  label = "Visual",
+  -- labels = "fdsaghjklrewqtyuiopvcxzbnm",
+  labels = 'hjklgfdsarewqtyuiopvcxzbnm',
 })
 map({"n", "x", "o"}, "s", jump.start)
 
