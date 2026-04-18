@@ -56,6 +56,8 @@ local function create_prompt_buf_win(prompt_text, on_choice)
   vim.b[buf].completion = false
   vim.b[buf].buftype = "nofile"
 
+  vim.cmd.startinsert()
+
   local win = vim.api.nvim_open_win(buf, true, {
     relative = "editor",
     width = vim.o.columns,
@@ -71,7 +73,7 @@ local function create_prompt_buf_win(prompt_text, on_choice)
   -- add prompt text
   vim.api.nvim_buf_set_extmark(buf, NS_ID, 0, 0, {
     virt_text_pos = "inline",
-    virt_text = { { prompt_text .. " ", "Function" } },
+    virt_text = { { prompt_text .. " ", "PickerPrompt" } },
     right_gravity = false,
   })
 
@@ -101,15 +103,17 @@ local function create_items_buf_win()
   return buf, win
 end
 
-function M.render()
+local function update()
   vim.o.cmdheight = HEIGHT
   local lines = {}
 
   if M.state.loading then
-    vim.api.nvim_buf_set_lines(M.state.items_buf, 0, -1, false, { "  Loading…" })
     vim.api.nvim_win_set_config(M.state.items_win, { hide = false })
     vim.wo[M.state.items_win].cursorline = false
+    vim.wo[M.state.prompt_win].winhl = WINHL .. ",PickerPrompt:WarningMsg"
     return
+  else
+    vim.wo[M.state.prompt_win].winhl = WINHL .. ",PickerPrompt:Function"
   end
 
   for _, item in ipairs(M.state.results) do
@@ -122,42 +126,40 @@ function M.render()
     vim.api.nvim_win_set_cursor(M.state.items_win, { M.state.selected, 0 })
   end
 
-  vim.api.nvim_win_set_config(M.state.items_win, {
-    hide = not lines,
-  })
+  vim.api.nvim_win_set_config(M.state.items_win, { hide = not lines })
   vim.wo[M.state.items_win].cursorline = not vim.tbl_isempty(lines)
 end
 
 function M.select_next()
   M.state.selected = math.min(M.state.selected + 1, #M.state.results)
-  M.render()
+  update()
 end
 
 function M.select_prev()
   M.state.selected = math.max(M.state.selected - 1, 1)
-  M.render()
+  update()
 end
 
 function M.select_first()
   M.state.selected = 1
-  M.render()
+  update()
 end
 
 function M.select_last()
   M.state.selected = #M.state.results
-  M.render()
+  update()
 end
 
-local function refilter()
+local function filter()
   M.state.results = {}
-  local pat = vim.fn.escape(M.state.query, "\\~$.[]*^")
+  local pattern = string.gsub(M.state.query, " ", ".*")
   for _, item in ipairs(M.state.formatted) do
-    if M.state.query == "" or vim.fn.match(item.text, pat) >= 0 then
+    if M.state.query == "" or vim.fn.match(item.text, pattern) >= 0 then
       table.insert(M.state.results, item)
     end
   end
   M.state.selected = math.clamp(M.state.selected, 1, math.max(1, #M.state.results))
-  M.render()
+  update()
 end
 
 local function load_items(items, opts)
@@ -166,7 +168,7 @@ local function load_items(items, opts)
     table.insert(M.state.formatted, { text = (opts.format_item or tostring)(item), raw = item, idx = i })
   end
   M.state.loading = false
-  refilter()
+  filter()
 end
 
 function M.ui_select(items, opts, on_choice)
@@ -189,12 +191,11 @@ function M.ui_select(items, opts, on_choice)
       M.state.selected = 1
       local line = vim.api.nvim_buf_get_lines(M.state.prompt_buf, 0, 1, false)[1] or ""
       M.state.query = line
-      refilter()
+      filter()
     end,
   })
 
-  M.render()
-  vim.cmd("startinsert")
+  update()
 
   load_items(items, opts)
 end
@@ -220,18 +221,37 @@ function M.pick(search, opts, on_choice)
       local line = vim.api.nvim_buf_get_lines(M.state.prompt_buf, 0, 1, false)[1] or ""
       M.state.query = line
       if not M.state.loading then
-        refilter()
+        filter()
       end
     end,
   })
 
-  M.render()
-  vim.cmd("startinsert")
+  vim.api.nvim_create_autocmd("VimResized", {
+    buffer = M.state.prompt_buf,
+    callback = function()
+      vim.api.nvim_win_set_width(M.state.prompt_win, vim.o.columns)
+      vim.api.nvim_win_set_config(M.state.prompt_win, {
+        relative = "editor",
+        row = vim.o.lines - HEIGHT,
+        col = 0,
+      })
+
+      vim.api.nvim_win_set_width(M.state.items_win, vim.o.columns)
+      vim.api.nvim_win_set_config(M.state.items_win, {
+        relative = "editor",
+        row = vim.o.lines - HEIGHT + 1,
+        col = 0,
+      })
+    end,
+  })
 
   search(function(items)
     vim.schedule(function()
       load_items(items, opts)
     end)
   end)
+
+  update()
 end
+
 return M
