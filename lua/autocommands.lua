@@ -67,6 +67,8 @@ au("LspAttach", {
       max_width = max_width,
       max_height = max_height,
       close_events = close_events,
+      style = "minimal",
+      border = "none",
     }
     nmap("<Leader>ca", vim.lsp.buf.code_action)
     nmap("<C-w><C-d>", function()
