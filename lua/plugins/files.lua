@@ -83,3 +83,7 @@ nmap("<Leader>f", function()
     end
   end)
 end)
+
+nmap("<Leader>/", function()
+  picker.live_grep(vim.fn.getcwd())
+end)

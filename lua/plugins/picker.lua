@@ -10,7 +10,19 @@ function math.clamp(x, min, max)
   return math.min(math.max(x, min), max)
 end
 
+local fg = vim.api.nvim_get_hl(0, { name = "Comment" })
+local bg = vim.api.nvim_get_hl(0, { name = "MsgArea" })
+vim.api.nvim_set_hl(0, "PickerItemsLoading", { fg = fg.fg, bg = bg.bg })
+
+local function kill_job()
+  if M.state.job then
+    M.state.job:kill(9)
+    M.state.job = nil
+  end
+end
+
 local function cleanup()
+  kill_job()
   if vim.api.nvim_win_is_valid(M.state.prompt_win) then
     vim.api.nvim_win_close(M.state.prompt_win, true)
   end
@@ -110,9 +122,11 @@ local function update()
   if M.state.loading then
     vim.api.nvim_win_set_config(M.state.items_win, { hide = false })
     vim.wo[M.state.items_win].cursorline = false
+    vim.wo[M.state.items_win].winhl = WINHL .. ",NormalFloat:PickerItemsLoading"
     vim.wo[M.state.prompt_win].winhl = WINHL .. ",PickerPrompt:WarningMsg"
     return
   else
+    vim.wo[M.state.items_win].winhl = WINHL
     vim.wo[M.state.prompt_win].winhl = WINHL .. ",PickerPrompt:Function"
   end
 
@@ -208,7 +222,8 @@ function M.pick(search, opts, on_choice)
     results = {},
     selected = 1,
     query = "",
-    loading = true,
+    loading = not opts.live,
+    job = nil,
   }
 
   M.state.prompt_buf, M.state.prompt_win = create_prompt_buf_win(opts.prompt or "", on_choice)
@@ -220,7 +235,22 @@ function M.pick(search, opts, on_choice)
       M.state.selected = 1
       local line = vim.api.nvim_buf_get_lines(M.state.prompt_buf, 0, 1, false)[1] or ""
       M.state.query = line
-      if not M.state.loading then
+
+      if opts.live then
+        M.state.loading = true
+        update()
+        kill_job()
+        M.state.results = {}
+        update()
+        search(M.state.query, function(items)
+          vim.schedule(function()
+            M.state.loading = false
+            M.state.results = items
+            M.state.selected = math.clamp(M.state.selected, 1, math.max(1, #M.state.results))
+            update()
+          end)
+        end)
+      elseif not M.state.loading then
         filter()
       end
     end,
@@ -245,13 +275,52 @@ function M.pick(search, opts, on_choice)
     end,
   })
 
-  search(function(items)
-    vim.schedule(function()
-      load_items(items, opts)
+  if opts.live then
+    update()
+  else
+    search(function(items)
+      vim.schedule(function()
+        load_items(items, opts)
+      end)
     end)
-  end)
+    update()
+  end
+end
 
-  update()
+function M.live_grep(cwd)
+  M.pick(function(query, on_results)
+    if query == "" then
+      on_results({})
+      return
+    end
+    M.state.job = vim.system(
+      { "rg", "--no-heading", "--line-number", "--column", "--color=never", "--", query },
+      { text = true, cwd = cwd or vim.fn.getcwd() },
+      function(result)
+        vim.schedule(function()
+          local items = {}
+          for _, line in ipairs(vim.split(result.stdout or "", "\n", { trimempty = true })) do
+            local file, lnum, col, text = line:match("^(.+):(%d+):(%d+):(.*)$")
+            if file then
+              table.insert(items, {
+                text = vim.fn.fnamemodify(file, ":.") .. ":" .. lnum .. ": " .. text,
+                raw = { file = file, lnum = tonumber(lnum), col = tonumber(col) },
+              })
+            end
+          end
+          on_results(items)
+        end)
+      end
+    )
+  end, {
+    prompt = "grep>",
+    live = true,
+  }, function(item)
+    if item then
+      vim.cmd("edit " .. vim.fn.fnameescape(item.file))
+      vim.api.nvim_win_set_cursor(0, { item.lnum, item.col })
+    end
+  end)
 end
 
 return M
