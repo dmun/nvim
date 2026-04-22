@@ -70,7 +70,7 @@ au("LspAttach", {
       style = "minimal",
       border = "none",
     }
-    nmap("<Leader>ca", vim.lsp.buf.code_action)
+    nmap("g<Enter>", vim.lsp.buf.code_action)
     nmap("<C-w><C-d>", function()
       vim.diagnostic.open_float(winopts)
     end)
