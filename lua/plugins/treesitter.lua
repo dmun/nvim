@@ -11,7 +11,7 @@ require("nvim-treesitter.config").setup({
   sync_install = false,
 })
 
-local ensure_installed = { "lua", "vim", "vimdoc", "query", "svelte" }
+local ensure_installed = { "lua", "vim", "vimdoc", "query", "svelte", "python" }
 ts.install(ensure_installed)
 
 local ignore_filetype = {}

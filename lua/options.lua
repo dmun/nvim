@@ -4,6 +4,9 @@ local o = vim.o
 vim.g["sneak#s_next"] = 1
 vim.g["sneak#use_ic_scs"] = 1
 
+vim.g.python_host_prog = "/usr/bin/python2"
+vim.g.python3_host_prog = "/usr/bin/python3"
+
 -- Theme
 vim.cmd.color("boomer")
 
