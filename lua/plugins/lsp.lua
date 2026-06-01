@@ -89,8 +89,28 @@ lsp.config("sourcekit", {
   root_markers = { "*.xcodeproj" },
 })
 
--- Enable language servers
+lsp.config("nixd", {
+  cmd = { "nixd" },
+  filetypes = { "nix" },
+  root_markers = { "flake.nix", ".git" },
+  settings = {
+    nixd = {
+      nixpkgs = {
+        expr = "import <nixpkgs> { }",
+      },
+      formatting = {
+        command = { "nixfmt" },
+      },
+      options = {
+        nixos = {
+          expr = '(builtins.getFlake (toString ./.)).nixosConfigurations.<hostname>.options',
+        },
+      },
+    },
+  },
+})
 
+-- Enable language servers
 lsp.enable("lua_ls")
 -- lsp.enable("ty")
 -- lsp.enable("pyrefly")

@@ -1,26 +1,3 @@
--- Fyler
-local fyler = require("fyler")
-fyler.setup({
-  views = {
-    ---@diagnostic disable: missing-fields
-    finder = {
-      indentscope = {
-        enabled = false,
-      },
-      win = {
-        -- kind = "split_right",
-        win_opts = {
-          signcolumn = "yes:1",
-        },
-      },
-      mappings = {
-        ["<Tab>"] = "Select",
-      },
-    },
-  },
-})
-nmap("<Leader>e", fyler.open)
-
 -- Oil
 local oil = require("oil")
 oil.setup({
@@ -87,3 +64,24 @@ end)
 nmap("<Leader>/", function()
   picker.live_grep(vim.fn.getcwd())
 end)
+
+local grapple = require("grapple")
+grapple.setup({
+  icons = false,
+  prune = "2d",
+  win_opts = {
+    width = 56,
+    height = 8,
+    border = vim.o.winborder,
+    title_pos = "left",
+    footer = "",
+  },
+})
+nmap("<Leader>a", grapple.tag)
+nmap("<Leader>q", grapple.toggle_tags)
+nmap("<Leader>Q", grapple.toggle_scopes)
+for i = 1, 5 do
+  nmap("<Leader>" .. i, function()
+    grapple.select({ index = i })
+  end)
+end

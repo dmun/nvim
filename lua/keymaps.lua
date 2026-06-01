@@ -23,6 +23,8 @@ nmap("K", function()
   vim.cmd.help(vim.fn.expand("<cword>"))
 end)
 
+imap("<C-o>", "<C-o>O")
+
 imap("<C-n>", "<Down>")
 imap("<C-p>", "<Up>")
 

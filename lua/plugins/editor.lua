@@ -24,14 +24,3 @@ end)
 
 -- Pairs
 require("nvim-autopairs").setup({})
--- require("blink.pairs").setup({
---   mappings = { enabled = false },
--- })
-vim.api.nvim_create_autocmd("BufReadPost", {
-  pattern = "*",
-  callback = function()
-    if not vim.tbl_contains({ "typescriptreact" }, vim.bo.filetype) then
-      vim.opt_local.winhl = "BlinkPairsOrange:Delimiter,BlinkPairsPurple:Delimiter,BlinkPairsBlue:Delimiter"
-    end
-  end,
-})
