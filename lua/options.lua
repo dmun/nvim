@@ -37,8 +37,8 @@ o.winborder = "single"
 o.wrap = false
 o.linebreak = true
 
-o.virtualedit = "onemore"
-vim.cmd("autocmd InsertLeave * :normal! `^")
+-- o.virtualedit = "onemore"
+-- vim.cmd("autocmd InsertLeave * :normal! `^")
 
 vim.ui.select = require("plugins.picker").ui_select
 

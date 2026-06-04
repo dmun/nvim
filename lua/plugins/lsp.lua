@@ -78,6 +78,12 @@ lsp.config("nixd", {
   filetypes = { "nix" },
 })
 
+lsp.config("tofu-ls", {
+  cmd = { "tofu-ls", "serve" },
+  filetypes = { "terraform" },
+})
+
+
 lsp.config("qmlls", {
   cmd = { "qmlls6", "-E" },
   root_markers = { "shell.qml" },
@@ -112,7 +118,8 @@ lsp.config("nixd", {
 
 -- Enable language servers
 lsp.enable("lua_ls")
--- lsp.enable("ty")
+lsp.enable("ty")
+lsp.enable("tofu-ls")
 -- lsp.enable("pyrefly")
 lsp.enable("rust-analyzer")
 lsp.enable("tailwindcss")

@@ -28,6 +28,8 @@ imap("<C-o>", "<C-o>O")
 imap("<C-n>", "<Down>")
 imap("<C-p>", "<Up>")
 
+nmap("cs", "ci\"")
+
 nmap("<Leader>m", "m")
 nmap("<Leader>i", vim.cmd.Inspect)
 
